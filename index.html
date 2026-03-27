@@ -162,6 +162,13 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 .riddle-input{flex:1;padding:11px 14px;background:rgba(3,20,37,.6);border:1px solid var(--border);border-radius:var(--r-sm);font-size:.95rem;outline:none;color:var(--text);font-family:var(--font-m);letter-spacing:.05em}
 .riddle-input:focus{border-color:var(--accent)}
 .riddle-input:disabled,.riddle-submit:disabled{opacity:.5;cursor:not-allowed}
+.riddle-choices{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+.riddle-choice{padding:12px 16px;background:rgba(3,20,37,.6);border:1px solid var(--border);border-radius:var(--r-sm);font-size:.9rem;color:var(--text);font-family:var(--font-m);text-align:left;cursor:pointer;transition:border-color .2s,background .2s}
+.riddle-choice:hover{border-color:var(--accent);background:rgba(243,99,45,.08)}
+.riddle-choice.selected{border-color:var(--accent);background:rgba(243,99,45,.15)}
+.riddle-choice:disabled{opacity:.5;cursor:not-allowed}
+.riddle-choice.correct-choice{border-color:var(--success);background:rgba(74,222,128,.15);color:var(--success)}
+.riddle-choice.wrong-choice{border-color:var(--error);background:rgba(248,113,113,.1)}
 .riddle-submit{padding:11px 18px;background:var(--accent);color:#fff;font-family:var(--font-h);font-weight:700;border-radius:var(--r-sm);font-size:.85rem;text-transform:uppercase;letter-spacing:.05em}
 .riddle-fb{margin-top:10px;font-size:.85rem;padding:10px 14px;border-radius:var(--r-sm)}
 .riddle-fb.correct{background:rgba(74,222,128,.1);color:var(--success);border:1px solid rgba(74,222,128,.2)}
@@ -540,14 +547,15 @@ const stations=[
 },
 {
   lat:48.520002,lng:9.055678,name:'Stiftskirche',ambientIdx:4,xp:80,
-  answer:['1470','15. jahrhundert','1490','spätgotik','gotisch','15'],
+  answer:['56'],
+  choices:['45 Meter','56 Meter','68 Meter','74 Meter'],
   story:'Die Stiftskirche St. Georg – das spirituelle Herz der Altstadt. Heinrich erreichte die Kirche atemlos. Der alte Mesner, ein Freund seiner Studentenzeit, ließ ihn durch den Seiteneingang.\n\n„Fünf Minuten", flüsterte Heinrich. Der Mesner nickte. In einem Beichtstuhl in der hinteren linken Ecke gibt es einen losen Stein. Heinrich schob das zweite Fragment dahinter.\n\nDie Stiftskirche mit ihren zwei ungleichen Türmen ist eines der bedeutendsten Bauwerke der Spätgotik in Württemberg. In der Fürstengruft im Chorbereich sind württembergische Herzöge und Universitätsprofessoren begraben – die Gelehrten, die im Leben so viel stritten, ruhen im Tod friedlich nebeneinander.',
   diary:'Der Mesner hat mich erkannt und nichts gefragt. Es gibt noch gute Menschen in dieser Stadt. Ich habe das Fragment hinter dem dritten Stein links im hinteren Beichtstuhl versteckt. Möge es dort lange sicher sein.',
-  riddle:'Die Stiftskirche wurde im spätgotischen Stil erbaut. In welchem Jahrhundert begann der Hauptbau? (z.B. „15" oder eine Jahreszahl)',
-  hint:'Die Kirche stammt aus dem 15. Jahrhundert – schau auf die gotischen Fenster und das Portal.',
-  fact:'Die Stiftskirche St. Georg ist die Hauptkirche Tübingens. Der Bau begann um 1470 und wurde im frühen 16. Jahrhundert vollendet. Besonders sehenswert: die Fürstengruft mit Württemberger Herzögen und das astronomische Fenster an der Nordwand.',
-  factBullets:['Baubeginn um 1470, Vollendung frühes 16. Jh.','Zwei bewusst ungleiche Türme','Fürstengruft mit Württemberger Herzögen','War auch Universitätskirche'],
-  aiHints:['Die Kirche ist aus dem 15. Jahrhundert.','Schau auf den gotischen Baustil.','1470er Jahre ist ein guter Ausgangspunkt.']
+  riddle:'Schau dir den Kirchturm der Stiftskirche genau an. Wie hoch ist er? Beim Bau ging das Geld aus – der Turm blieb kleiner als geplant!',
+  hint:'Der Turm hat 169 Stufen und eine Aussichtsplattform auf 45 Metern. Aber der Turm geht noch etwas weiter nach oben …',
+  fact:'Die Stiftskirche St. Georg ist die Hauptkirche Tübingens. Der Kirchturm ist 56 Meter hoch – eigentlich sollte er höher werden, aber 1529 ging das Geld aus. Die Aussichtsgalerie liegt auf 45 Metern Höhe (169 Stufen). Im steinernen Spitzhelm war früher die Turmwächterwohnung.',
+  factBullets:['Turmhöhe: 56 Meter (niedriger als geplant – Geld ging aus)','169 Stufen bis zur Aussichtsgalerie auf 45 m','Baubeginn 1470, Turmhelm erst 1529 fertig','Fürstengruft mit Württemberger Herzögen'],
+  aiHints:['Der Turm ist höher als 45 Meter, denn die Aussichtsplattform liegt auf 45 m.','Es ist keine runde Zahl, aber nah dran.','Der Turm ist 56 Meter hoch.']
 },
 {
   lat:48.520403,lng:9.055689,name:'Holzmarkt & Georgsbrunnen',ambientIdx:5,xp:25,anecdote:true,
@@ -879,10 +887,10 @@ function renderStation(){
       <div class="riddle-label"><span class="material-symbols-outlined">search</span> Rätsel</div>
       <div class="riddle-q">${s.riddle}</div>
       ${debugMode?`<div style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);border-radius:var(--r-sm);padding:8px 12px;margin-bottom:10px;font-size:.78rem;color:var(--error)">DEBUG: <strong>${s.answer.join(' / ')}</strong></div>`:''}
-      <div class="riddle-input-row">
+      ${s.choices?`<div class="riddle-choices">${s.choices.map((c,ci)=>`<button class="riddle-choice${solved?' correct-choice':''}" data-choice="${ci}" onclick="checkChoice(this)" ${solved?'disabled':''}>${solved?'✓ ':''} ${esc(c)}</button>`).join('')}</div>`:`<div class="riddle-input-row">
         <input class="riddle-input" id="riddleAnswer" placeholder="Deine Antwort..." autocomplete="off" ${solved?'disabled value="Gelöst ✓"':''}>
         <button class="riddle-submit" onclick="checkAnswer()" ${solved?'disabled':''}>Prüfen</button>
-      </div>
+      </div>`}
       ${debugMode&&!solved?`<button onclick="skipStation()" style="width:100%;margin-top:8px;padding:10px;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);border-radius:var(--r-sm);color:var(--error);font-size:.78rem;font-weight:600">Skip (+${s.xp} Traces)</button>`:''}
       <div id="riddleFb"></div>
     </div>
@@ -1055,6 +1063,40 @@ function stopAmbient(){
 }
 
 // ====== RIDDLE ======
+function checkChoice(btn){
+  const idx=currentStation,s=stations[idx];
+  if(solvedStations[idx])return;
+  const chosen=btn.textContent.trim();
+  const fb=document.getElementById('riddleFb');
+  const correct=s.answer.some(a=>chosen.toLowerCase().includes(a.toLowerCase()));
+  const allBtns=document.querySelectorAll('.riddle-choice');
+  if(correct){
+    playSfx('correct');
+    allBtns.forEach(b=>{
+      b.disabled=true;
+      if(s.answer.some(a=>b.textContent.trim().toLowerCase().includes(a.toLowerCase()))){
+        b.classList.add('correct-choice');b.textContent='✓ '+b.textContent.trim();
+      }
+    });
+    fb.className='riddle-fb correct';
+    fb.innerHTML=`Richtig! +${s.xp} Traces`;
+    solvedStations[idx]=true;unlockFactAudio();totalXp+=s.xp;updateXp();
+    if(maxUnlockedStation===currentStation&&currentStation<stations.length-1)maxUnlockedStation++;
+    const nbtn=document.createElement('button');nbtn.className='btn-primary';nbtn.style.marginTop='10px';
+    nbtn.textContent=idx===stations.length-1?'Fall abschließen':'Zur nächsten Station →';
+    nbtn.onclick=()=>{if(idx===stations.length-1){currentStation++;renderStation()}else navStation(1)};
+    fb.appendChild(nbtn);
+    document.getElementById('navNext').disabled=false;
+    saveGame();showToast('Fortschritt gespeichert');
+    setTimeout(()=>renderStation(),100);
+  }else{
+    playSfx('wrong');
+    btn.classList.add('wrong-choice');
+    btn.disabled=true;
+    fb.className='riddle-fb wrong';
+    fb.textContent='Nicht ganz – versuch eine andere Antwort!';
+  }
+}
 function checkAnswer(){
   const idx=currentStation,s=stations[idx];
   if(solvedStations[idx])return;
