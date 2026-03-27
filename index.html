@@ -435,23 +435,27 @@ function playSfx(type){
     const play=()=>{
       const now=ctx.currentTime;
       if(type==='correct'){
-        [523.25,659.25,783.99].forEach((f,i)=>{
+        // Bright ascending chime C5-E5-G5-C6
+        [523.25,659.25,783.99,1046.5].forEach((f,i)=>{
           const o=ctx.createOscillator(),g=ctx.createGain();
           o.type='sine';o.frequency.value=f;
-          g.gain.setValueAtTime(0,now+i*0.12);
-          g.gain.linearRampToValueAtTime(0.35,now+i*0.12+0.05);
-          g.gain.exponentialRampToValueAtTime(0.001,now+i*0.12+0.4);
+          g.gain.setValueAtTime(0,now+i*0.1);
+          g.gain.linearRampToValueAtTime(0.6,now+i*0.1+0.03);
+          g.gain.exponentialRampToValueAtTime(0.001,now+i*0.1+0.5);
           o.connect(g);g.connect(ctx.destination);
-          o.start(now+i*0.12);o.stop(now+i*0.12+0.5);
+          o.start(now+i*0.1);o.stop(now+i*0.1+0.6);
         });
       }else if(type==='wrong'){
-        const o=ctx.createOscillator(),g=ctx.createGain();
-        o.type='sawtooth';o.frequency.value=180;
-        o.frequency.linearRampToValueAtTime(100,now+0.3);
-        g.gain.setValueAtTime(0.2,now);
-        g.gain.exponentialRampToValueAtTime(0.001,now+0.4);
-        o.connect(g);g.connect(ctx.destination);
-        o.start(now);o.stop(now+0.5);
+        // Two descending buzzy tones
+        [280,180].forEach((f,i)=>{
+          const o=ctx.createOscillator(),g=ctx.createGain();
+          o.type='sawtooth';o.frequency.value=f;
+          o.frequency.linearRampToValueAtTime(f*0.6,now+i*0.15+0.25);
+          g.gain.setValueAtTime(0.5,now+i*0.15);
+          g.gain.exponentialRampToValueAtTime(0.001,now+i*0.15+0.35);
+          o.connect(g);g.connect(ctx.destination);
+          o.start(now+i*0.15);o.stop(now+i*0.15+0.4);
+        });
       }
     };
     if(ctx.state==='suspended'){

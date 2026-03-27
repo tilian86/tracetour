@@ -37,9 +37,9 @@ except ImportError:
 
 API_KEY = os.environ.get("ELEVENLABS_API_KEY", "sk_b3fb3495ab6b2c2a3a9959d20e6a4ae0a29dce88a442c410")
 
-NARRATOR_VOICE = "WHaUUVTDq47Yqc9aDbkH"   # Story-Stimme
-HEINRICH_VOICE = "2OcnG4mH3jIMtWz3vKus"   # Tagebuch-Stimme
-FACT_VOICE     = "PhufIH7nYh2Up1uej6aY"   # Stadtfuehrer-Stimme
+NARRATOR_VOICE = "WHaUUVTDq47Yqc9aDbkH"   # Story-Stimme (gleich wie vorher)
+HEINRICH_VOICE = "2OcnG4mH3jIMtWz3vKus"   # Tagebuch-Stimme (gleich wie vorher)
+FACT_VOICE     = "PhufIH7nYh2Up1uej6aY"   # Stadtfuehrer-Stimme (gleich wie vorher)
 
 MODEL_ID = "eleven_multilingual_v2"
 OUTPUT_DIR = Path(__file__).parent / "audio"
