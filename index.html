@@ -1136,10 +1136,20 @@ function solveAnecdote(){
   playSfx('correct');
   solvedStations[idx]=true;totalXp+=stations[idx].xp;updateXp();
   if(maxUnlockedStation===currentStation&&currentStation<stations.length-1)maxUnlockedStation++;
-  saveGame();
+  document.getElementById('navNext').disabled=false;
+  saveGame();showToast('Fortschritt gespeichert');
   const btn=document.getElementById('anecdoteBtn');
-  if(btn){btn.disabled=true;btn.innerHTML='<span class="material-symbols-outlined">check_circle</span> Gesehen! Weiter →';
-  setTimeout(()=>navStation(1),800);}
+  if(btn){
+    btn.disabled=true;
+    btn.innerHTML='<span class="material-symbols-outlined">check_circle</span> Gesehen! +'+stations[idx].xp+' Traces';
+  }
+  const box=document.querySelector('.anecdote-box');
+  if(box){
+    const nbtn=document.createElement('button');nbtn.className='btn-primary';nbtn.style.marginTop='10px';nbtn.style.width='100%';
+    nbtn.textContent=idx===stations.length-1?'Fall abschließen':'Zur nächsten Station →';
+    nbtn.onclick=()=>{if(idx===stations.length-1){currentStation++;renderStation()}else navStation(1)};
+    box.appendChild(nbtn);
+  }
 }
 function updateXp(){
   const max=stations.reduce((a,b)=>a+b.xp,0);
