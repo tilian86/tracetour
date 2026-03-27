@@ -162,7 +162,7 @@ STATIONS = [
             "'Fünf Minuten', flüsterte Heinrich. Der Mesner nickte. In einem Beichtstuhl in der "
             "hinteren linken Ecke gibt es einen losen Stein. Heinrich schob das zweite Fragment "
             "dahinter.\n\n"
-            "Die Stiftskirche mit ihren zwei ungleichen Türmen ist eines der bedeutendsten Bauwerke "
+            "Die Stiftskirche mit ihrem markanten Kirchturm ist eines der bedeutendsten Bauwerke "
             "der Spätgotik in Württemberg. In der Fürstengruft im Chorbereich sind württembergische "
             "Herzöge und Universitätsprofessoren begraben - die Gelehrten, die im Leben so viel "
             "stritten, ruhen im Tod friedlich nebeneinander."
@@ -226,12 +226,14 @@ STATIONS = [
             "Stumm, wie immer. Weiter. Ich muss den Neckar erreichen."
         ),
         "fact": (
-            "Die astronomische Uhr am Tübinger Rathaus stammt aus dem Jahr 1511 und gehört zu den "
-            "ältesten funktionierenden astronomischen Uhren in Deutschland. Sie wurde vom Astronomen "
-            "Johannes Stöffler entworfen.\n\n"
-            "Der 'Drachenzeiger' markiert die Mondknoten - Punkte, an denen Sonnen- und Mondbahn "
-            "sich kreuzen. Der Neptunbrunnen auf dem Marktplatz und die schiefe Treppe, die einem "
-            "alten Abwasserkanal folgt, gehören ebenfalls zu den Besonderheiten des Platzes."
+            "Die astronomische Uhr am Tübinger Rathaus stammt aus dem Jahr 1511 und wurde vom "
+            "Astronomen Johannes Stöffler entworfen. Der berühmte Drachenzeiger markiert die "
+            "Mondknoten und sagt Finsternisse voraus.\n\n"
+            "Die sieben Namen an der Fassade ehren bedeutende Persönlichkeiten der Stadtgeschichte. "
+            "Graf Eberhard im Bart, der Universitätsgründer, thront ganz oben am Giebel - "
+            "leicht zu übersehen, aber der wichtigste von allen.\n\n"
+            "Der Neptunbrunnen auf dem Marktplatz und die schiefe Treppe, die einem alten "
+            "Abwasserkanal folgt, gehören ebenfalls zu den Besonderheiten des Platzes."
         ),
     },
 
@@ -247,8 +249,6 @@ STATIONS = [
             "Wilhelm Schickards mechanischem Rechner von 1623 - die erste Rechenmaschine der Welt, "
             "Jahrzehnte vor Pascals berühmtem Modell. Rekonstruiert zwischen 1957 und 1960. "
             "Und sie rechnet tatsächlich noch.\n\n"
-            "Außerdem: eine Ausstellung über Lotte Reiniger, die Pionierin des Silhouettenfilms - "
-            "in Tübingen geboren, lange bevor Disney an Schneewittchen dachte.\n\n"
             "Der Eintritt ist seit April 2018 frei. Sonntags um 15 Uhr gibt es eine Führung - "
             "5 Euro für Erwachsene, Kinder kostenlos.\n\n"
             "Heinrich hatte keine Zeit für Museen. Er bog in die Kornhausstraße ein und eilte "
@@ -385,9 +385,10 @@ STATIONS = [
             "Später wohnte hier der Botaniker Leonhard Fuchs, nach dem die Fuchsie benannt ist. "
             "Heinrich versteckte sein vorletztes Fragment im Nonnenhaus - in einem Hohlraum hinter "
             "der alten Holzverkleidung.\n\n"
-            "Und dann ist da die Rückseite des Hauses. Im ersten Stock hängt ein hölzerner Erker "
-            "frei über dem Ammerkanal. Was war das wohl? Die Antwort ist praktisch, mittelalterlich "
-            "effizient - und ziemlich lustig."
+            "Und dann ist da die Rückseite des Hauses. Im ersten Stock ragt ein hölzerner Erker "
+            "weit über den Ammerkanal hinaus - über die Gasse hinweg bis direkt übers Wasser gebaut. "
+            "Warum dieser aufwändige Bau? Die Antwort ist praktisch, mittelalterlich effizient - "
+            "und ziemlich lustig."
         ),
         "diary": (
             "Das Nonnenhaus. 1488. Die Balken knarren unter meinen Schritten, als wollten sie "
