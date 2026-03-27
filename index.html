@@ -410,19 +410,23 @@ function getAudioCtx(){
   if(sharedAudioCtx.state==='suspended')sharedAudioCtx.resume().catch(()=>{});
   return sharedAudioCtx;
 }
-// Unlock audio on first touch (iOS requirement)
+// Unlock audio on user gesture (iOS/mobile requirement)
+// Keep trying until context is running, since first click may be on login screen
+let audioUnlocked=false;
 function unlockAudio(){
   try{
     const ctx=getAudioCtx();
-    const buf=ctx.createBuffer(1,1,22050);
-    const src=ctx.createBufferSource();
-    src.buffer=buf;src.connect(ctx.destination);src.start(0);
+    if(ctx.state==='running'){audioUnlocked=true;return;}
+    ctx.resume().then(()=>{
+      const buf=ctx.createBuffer(1,1,22050);
+      const src=ctx.createBufferSource();
+      src.buffer=buf;src.connect(ctx.destination);src.start(0);
+      audioUnlocked=true;
+    }).catch(()=>{});
   }catch(e){}
-  document.removeEventListener('touchstart',unlockAudio);
-  document.removeEventListener('click',unlockAudio);
 }
-document.addEventListener('touchstart',unlockAudio,{once:true});
-document.addEventListener('click',unlockAudio,{once:true});
+document.addEventListener('touchstart',unlockAudio);
+document.addEventListener('click',unlockAudio);
 
 // Sound effects
 function playSfx(type){
