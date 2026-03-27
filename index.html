@@ -1277,6 +1277,9 @@ function downloadBlob(blob){
   const saved=loadGame();
   if(saved&&userName){
     document.getElementById('loginName').value=userName;
+    document.getElementById('userNameDisplay').textContent=userName;
+    document.getElementById('userAvatar').textContent=userName[0].toUpperCase();
+    showScreen('tourSelect');
   }
 })();
 </script>
