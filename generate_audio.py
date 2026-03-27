@@ -76,12 +76,11 @@ STATIONS = [
             "für den Fall, dass jemand Würdiges sie findet. Der erste Hinweis bleibt hier, am Tor."
         ),
         "fact": (
-            "Schloss Hohentübingen thront seit über 900 Jahren über der Stadt. In den Kellergewölben "
-            "lagern die ältesten figürlichen Kunstwerke der Menschheit - Elfenbeinfiguren aus der "
-            "Eiszeit, über 35.000 Jahre alt.\n\n"
-            "Das Renaissance-Portal wurde von Heinrich Schickhardt entworfen, dem 'schwäbischen Leonardo'. "
-            "Im Keller steht das älteste Riesenfass der Welt von 1549 mit 85.000 Litern Fassungsvermögen. "
-            "Herzöge beschäftigten hier tatsächlich Chemiker und Alchemisten - keiner hat je Gold hergestellt."
+            "Wusstest du? Im Keller des Schlosses befindet sich das aelteste Weinfass der Welt von "
+            "1549 mit 84.000 Litern Fassungsvermoegen. Die Universitaet nutzte das Schloss bis ins "
+            "20. Jahrhundert als Laborgebaeude - Friedrich Miescher entdeckte hier 1869 die DNA! "
+            "Ausserdem fand man in den Gewoelben die Vogelherd-Figuren: 40.000 Jahre alte "
+            "Elfenbeinschnitzereien, die aeltesten bekannten Kunstwerke der Menschheit."
         ),
     },
 
@@ -126,10 +125,11 @@ STATIONS = [
             "eigenes Werk an diesem Ort. Ich hoffe, es hat mehr Glück als ich."
         ),
         "fact": (
-            "Die Universität Tübingen, offiziell Eberhard Karls Universität, wurde 1477 von "
-            "Herzog Eberhard im Bart gegründet und ist eine der ältesten Universitäten Deutschlands.\n\n"
-            "Hier studierten unter anderem Kepler, Hegel, Hölderlin, Schelling und Melanchthon. "
-            "Die Alte Aula, heute Festsaal, war Schauplatz unzähliger akademischer Feiern und Debatten."
+            "Die Universitaet Tuebingen ist die fuenftaelteste im deutschen Sprachraum. In der "
+            "Alten Aula haengt noch heute das Portraet von Herzog Eberhard im Bart, der 1477 die "
+            "Uni gruendete - mit nur 11 Professoren und 300 Studenten.\n\n"
+            "Philipp Melanchthon lehrte hier griechische Grammatik - mit nur 21 Jahren! Und der "
+            "junge Kepler wurde hier fuer seine astronomischen Ideen fast von der Uni geworfen."
         ),
     },
 
@@ -173,9 +173,11 @@ STATIONS = [
             "versteckt. Möge es dort lange sicher sein."
         ),
         "fact": (
-            "Die Stiftskirche Sankt Georg ist die Hauptkirche Tübingens. Der Bau begann um 1470 "
-            "und wurde im frühen 16. Jahrhundert vollendet. Besonders sehenswert: die Fürstengruft "
-            "mit Württemberger Herzögen und das astronomische Fenster an der Nordwand."
+            "In der Fuerstengruft der Stiftskirche liegen 15 Mitglieder des Hauses Wuerttemberg "
+            "begraben - darunter der Universitaetsgruender Eberhard im Bart. Seine Grabplatte zeigt "
+            "ihn betend mit seinem Lieblingsspruch: 'Attempto' (Ich wag's).\n\n"
+            "Der Turm hat eine Besonderheit: Die Turmwaechterwohnung auf halber Hoehe war bis 1948 "
+            "bewohnt! Der letzte Turmwaechter hiess Karl Weihenmaier und lebte dort mit seiner Familie."
         ),
     },
 
@@ -299,11 +301,11 @@ STATIONS = [
             "werden. Unsichtbar, aber nicht verloren."
         ),
         "fact": (
-            "Das Haagtor war eines von fünf Stadttoren der mittelalterlichen Stadtmauer Tübingens. "
-            "Es führte westwärts Richtung Herrenberg entlang der Ammer. Der Name leitet sich von "
-            "'Haag', also Schutzhecke, ab.\n\n"
-            "Das Tor wurde 1831 abgerissen. Die Pflasterung am Haagtorplatz zeigt heute noch die "
-            "Umrisse der alten Fundamente. Eine Gedenktafel wurde im Juni 2009 angebracht."
+            "Tuebingens fuenf Stadttore hiessen: Lustnauer Tor (Osten), Haagtor (Westen), "
+            "Schmiedtor (Norden), Neckartor (Sueden) und das Wurmlinger Tor. Sie wurden alle "
+            "zwischen 1804 und 1831 abgerissen.\n\n"
+            "Fun Fact: Als das Haagtor 1831 fiel, protestierten Buerger - nicht wegen der Geschichte, "
+            "sondern weil der Torwaechter seinen Job verlor. Er bekam eine Abfindung von 50 Gulden."
         ),
     },
 
@@ -327,11 +329,11 @@ STATIONS = [
             "gleichmäßig, ohne sich um Gendarmen oder Formeln zu scheren. Ich beneide den Bach."
         ),
         "fact": (
-            "Der 'Affenfelsen' ist der volkstümliche Name für einen Stadtmauerrest am Rand der "
-            "Tübinger Altstadt. Hier fließt der Ammerkanal durch einen kleinen Bogen unter der "
-            "alten Stadtmauer hindurch.\n\n"
-            "Der Name kommt vermutlich von Kindern, die auf den Ruinen kletterten. Der Ort markiert "
-            "die Grenze zwischen der historischen Altstadt und den neueren Vierteln."
+            "Die Tuebinger Stadtmauer wurde im 13. Jahrhundert errichtet und war etwa 1,5 Kilometer "
+            "lang. Am Affenfelsen sieht man besonders gut, wie dick die Mauern waren - ueber einen Meter.\n\n"
+            "Der Ammerkanal, der hier durchfliesst, trieb frueher mehrere Muehlen in der Altstadt an. "
+            "Das Wasser wurde so geschickt gelenkt, dass Gerber, Faerber und Mueller es nacheinander "
+            "nutzen konnten - ein mittelalterliches Recyclingsystem."
         ),
     },
 
@@ -397,11 +399,12 @@ STATIONS = [
             "Niemand sucht an solchen Orten."
         ),
         "fact": (
-            "Das Nonnenhaus ist ein einzigartiges Zeugnis spätmittelalterlicher Architektur. "
-            "Der hängende Erker war der historische Abort - direkt über dem Ammerkanal, der als "
-            "Abwasserentsorgung diente.\n\n"
-            "Leonhard Fuchs, der spätere Bewohner und Namensgeber der Fuchsie, von 1501 bis 1566, "
-            "lebte und forschte hier."
+            "Der Erker-Abort des Nonnenhauses ist eines der besterhaltenen Beispiele mittelalterlicher "
+            "Sanitaeranlagen in Sueddeutschland. Das Prinzip war einfach: Die Schwerkraft erledigte "
+            "den Rest, der Ammerkanal spuelte alles weg.\n\n"
+            "Leonhard Fuchs (1501-1566), der hier lebte, beschrieb ueber 400 Pflanzen in seinem "
+            "'New Kreuterbuch' von 1543 - mit handkolorierten Holzschnitten. Das Buch war so "
+            "erfolgreich, dass die Fuchsie nach ihm benannt wurde, obwohl er die Pflanze nie gesehen hat."
         ),
     },
 
@@ -454,12 +457,13 @@ STATIONS = [
             "Lebe wohl, Tübingen."
         ),
         "fact": (
-            "Der Indianersteg ist die vierte Brücke an dieser Stelle. Die erste Holzbrücke von "
-            "1863 wurde nach spielenden Kindern benannt. Es folgten: eine Eisenträgerbrücke um 1900, "
-            "eine Betonbogenbrücke 1911, die im Zweiten Weltkrieg zerstört wurde, und der heutige "
-            "Wiederaufbau mit smaragdgrünen Geländern.\n\n"
-            "Eine geplante Sanierung mit einem Budget von etwa 375.000 Euro soll 2026 bis 2027 "
-            "durchgeführt werden."
+            "1869 waren jenseits des Stegs nur nasse Wiesen und Felder - die Neckarauen. Die "
+            "Suedstadt entstand erst ab den 1880er Jahren, nachdem der Neckar reguliert wurde.\n\n"
+            "Der Hauptbahnhof stand seit 1861 als einsames Gebaeude in der Ebene. Die Kaserne kam "
+            "erst 1873. Wer 1869 ueber den Steg ging, verschwand buchstaeblich in der Dunkelheit - "
+            "genau wie Heinrich.\n\n"
+            "Fun Fact: Der Name 'Indianersteg' taucht erstmals 1871 in einem Unfallbericht auf. "
+            "Kinder spielten auf der wackeligen Bruecke Karl-May-Spiele."
         ),
     },
 ]
