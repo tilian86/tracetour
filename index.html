@@ -828,7 +828,7 @@ function renderStation(){
     distHtml=`<div class="distance-bar"><span class="material-symbols-outlined">near_me</span> ${d<50?'Du bist da!':d<200?'Fast da – ~'+Math.round(d)+' m':'~'+Math.round(d)+' m entfernt'}</div>`;
   }
 
-  const amb=AMBIENT_CONFIGS[s.ambientIdx],photo=STATION_PHOTOS[currentStation];
+  const photo=STATION_PHOTOS[currentStation];
   const solved=!!solvedStations[currentStation],ai=currentStation;
 
   const mapsLink=`<a class="maps-link" href="${mapsUrl(s.lat,s.lng,s.name)}" target="_blank" rel="noopener">
@@ -848,17 +848,12 @@ function renderStation(){
       <img src="${photo}" alt="${s.name}" onerror="this.parentElement.style.display='none'">
       <div class="photo-overlay"></div>
     </div>
-    <button class="ambient-toggle" id="ambientBtn" onclick="toggleAmbient(${s.ambientIdx})">
-      <span class="ambient-dot"></span><span class="material-symbols-outlined" style="font-size:18px">graphic_eq</span> ${amb.name}
-    </button>
-    <div class="audio-section">
-      <div class="audio-row" id="audioAnecdote" onclick="playAudio('anecdote_${ai}','audioAnecdote','anecdote')">
+    <div class="audio-row" id="audioAnecdote" onclick="playAudio('anecdote_${ai}','audioAnecdote','anecdote')">
         <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
         <div><div class="audio-label">Stadtführer anhören</div><div class="audio-sublabel">Erzähler</div></div>
         <div class="audio-time" id="timeAnecdote">--:--</div>
       </div>
       <div class="audio-progress" data-type="anecdote" onclick="seekAudio(event,'anecdote')"><div class="audio-progress-fill" id="progFillAnecdote"></div></div>
-    </div>
     <div class="story-block" style="border-color:rgba(79,195,247,.2)">
       <div class="story-block-header" style="color:#4fc3f7"><span class="material-symbols-outlined">menu_book</span> Stadtführer-Info</div>
       <div class="story-text" id="storyText">${wordSpans(s.story,'sw')}</div>
@@ -878,9 +873,6 @@ function renderStation(){
       <img src="${photo}" alt="${s.name}" onerror="this.parentElement.style.display='none'">
       <div class="photo-overlay"></div>
     </div>
-    <button class="ambient-toggle" id="ambientBtn" onclick="toggleAmbient(${s.ambientIdx})">
-      <span class="ambient-dot"></span><span class="material-symbols-outlined" style="font-size:18px">graphic_eq</span> ${amb.name}
-    </button>
     <div class="audio-row" id="audioStory" onclick="playAudio('story_${ai}','audioStory','story')">
       <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
       <div><div class="audio-label">Story anhören</div><div class="audio-sublabel">Erzähler</div></div>
