@@ -520,7 +520,7 @@ const stations=[
   aiHints:['Schau auf das Wappen über dem Eingangstor.','Das größte Tier trägt ein Geweih.','Es ist DAS Wappentier Württembergs.']
 },
 {
-  lat:48.519758,lng:9.054487,name:'Studentenkarzer',ambientIdx:1,xp:25,anecdote:true,
+  lat:48.5198596,lng:9.0549385,name:'Studentenkarzer',ambientIdx:1,xp:25,anecdote:true,
   story:'Auf dem Weg bergab passierst du den Studentenkarzer in der Münzgasse 20 – das Universitätsgefängnis, in das Tübinger Studenten seit 1515 gesperrt wurden. Der älteste erhaltene Uni-Karzer Deutschlands.\n\nHeinrich kannte den Karzer gut. Als Student saß er hier zwei Nächte wegen „Nachtwandeln" – er war nachts heimlich im Labor geblieben. Die Zellen sind winzig: zwei verbundene Räume mit zusammen 15 Quadratmetern und kleinen Fensteröffnungen. Die Wände sind übersät mit Inschriften und Zeichnungen der Insassen seit dem 16. Jahrhundert.\n\nVergehen, die zum Karzer führten: Nachtwandeln, das Tragen „absichtlich neumodisch geschlitzter Kleidung", unautorisierte Eheschließungen und Glücksspiel. Der Karzer war bis 1845 in Betrieb – also gerade noch zu Heinrichs Studentenzeit.\n\nHeinrich eilte hier vorbei, ohne stehenzubleiben. Die Gendarmen würden zuerst am Schloss suchen, dann die Münzgasse hinunter. Er hatte vielleicht noch zwanzig Minuten.'
 },
 {
@@ -753,6 +753,7 @@ function navStation(dir){
   const next=currentStation+dir;
   if(next>=0&&next<=maxUnlockedStation&&next<stations.length){
     stopAudio(true);stopAmbient();closeAi();currentStation=next;saveGame();renderStation();
+    window.scrollTo({top:0,behavior:'smooth'});
   }
 }
 
@@ -763,6 +764,7 @@ function mapsUrl(lat,lng,name){return `https://maps.apple.com/?ll=${lat},${lng}&
 
 // ====== RENDER ======
 function renderStation(){
+  window.scrollTo({top:0,behavior:'smooth'});
   if(currentStation>=stations.length){
     stopAudio(true);stopAmbient();
     document.getElementById('finalXp').textContent=totalXp;
