@@ -108,7 +108,7 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 .fab-toggle:active{transform:scale(.95)}
 .fab-toggle .material-symbols-outlined{font-size:18px}
 
-.game-panel{position:fixed;bottom:0;left:0;right:0;z-index:900;background:var(--bg-panel);border-top:1px solid var(--border);border-radius:var(--r-lg) var(--r-lg) 0 0;height:85vh;overflow-y:auto;-webkit-overflow-scrolling:touch;transition:transform .35s cubic-bezier(.4,0,.2,1);padding:0 1.25rem calc(var(--safe-bottom) + 80px)}
+.game-panel{position:fixed;bottom:0;left:0;right:0;z-index:900;background:var(--bg-panel);border-top:1px solid var(--border);border-radius:var(--r-lg) var(--r-lg) 0 0;height:85vh;overflow-y:auto;-webkit-overflow-scrolling:touch;transition:transform .35s cubic-bezier(.4,0,.2,1);padding:0 1.25rem calc(var(--safe-bottom) + 120px)}
 .game-panel.collapsed{transform:translateY(calc(100% - 52px))}
 .panel-handle-row{display:flex;align-items:center;justify-content:center;padding:14px 4px 10px;cursor:pointer;position:sticky;top:0;background:var(--bg-panel);z-index:2;min-height:52px;user-select:none;-webkit-user-select:none}
 .panel-handle{width:40px;height:4px;background:var(--text-3);border-radius:3px;opacity:.5}
@@ -547,8 +547,8 @@ const stations=[
   diary:'Dies ist mein letzter Eintrag in diesem Labor. Der Geruch verbrannten Papiers hängt noch in der Luft. Drei Jahre Forschung – und alles, was bleibt, ist ein einziges Manuskript unter meinem Mantel.\n\nDas Ministerium will meine Formel für Waffen. Ich habe drei Jahre gelogen, verzögert, abgelenkt. Jetzt ist die Zeit abgelaufen. Die Gendarmen sind unterwegs. Ich werde Fragmente meiner Forschung an verschiedenen Orten der Stadt verstecken – für den Fall, dass jemand Würdiges sie findet. Der erste Hinweis bleibt hier, am Tor.',
   riddle:'Am Eingangstor des Schlosses siehst du das württembergische Wappen in Stein gemeißelt. Welches Tier ist das größte und auffälligste auf dem Wappen? (Ein Wort)',
   hint:'Das Wappen zeigt mehrere Tiere. Das größte trägt ein Geweih.',
-  fact:'Schloss Hohentübingen thront seit über 900 Jahren über der Stadt. In den Kellergewölben lagern die ältesten figürlichen Kunstwerke der Menschheit – Elfenbeinfiguren aus der Eiszeit, über 35.000 Jahre alt.\n\nDas Renaissance-Portal wurde von Heinrich Schickhardt entworfen, dem „schwäbischen Leonardo". Im Keller steht das älteste Riesenfass der Welt (1549, 85.000 Liter). Herzöge beschäftigten hier tatsächlich Chemiker und Alchemisten – keiner hat je Gold hergestellt.',
-  factBullets:['Älteste Kunstwerke der Menschheit: Eiszeitfiguren (35.000 Jahre)','Renaissance-Portal von Heinrich Schickhardt','Ältestes Riesenfass der Welt im Keller (1549, 85.000 Liter)','Bester Panoramablick über die gesamte Altstadt'],
+  fact:'Wusstest du? Im Keller des Schlosses befindet sich das älteste Weinfass der Welt von 1549 mit 84.000 Litern Fassungsvermögen. Die Universität nutzte das Schloss bis ins 20. Jahrhundert als Laborgebäude – Friedrich Miescher entdeckte hier 1869 die DNA! Außerdem fand man in den Gewölben die Vogelherd-Figuren: 40.000 Jahre alte Elfenbeinschnitzereien, die ältesten bekannten Kunstwerke der Menschheit.',
+  factBullets:['Friedrich Miescher entdeckte hier 1869 die DNA','Vogelherd-Figuren: 40.000 Jahre alte Elfenbeinkunst','Ältestes Weinfass der Welt (1549, 84.000 Liter)','Heinrich Schickhardt entwarf das Renaissance-Portal'],
   aiHints:['Schau auf das Wappen über dem Eingangstor.','Das größte Tier trägt ein Geweih.','Es ist DAS Wappentier Württembergs.']
 },
 {
@@ -562,8 +562,8 @@ const stations=[
   diary:'In der Bibliothek der Alten Aula, hinter den theologischen Abhandlungen, fand ich damals das arabische Manuskript, das alles veränderte. Heute verstecke ich mein eigenes Werk an diesem Ort. Ich hoffe, es hat mehr Glück als ich.',
   riddle:'Auf der Infotafel der Alten Aula stehen zwei Jahreszahlen: das Baujahr und das Jahr des Umbaus zum 300-jährigen Uni-Jubiläum. Ziehe 300 vom Umbaujahr ab – in welchem Jahr wurde die Universität Tübingen gegründet?',
   hint:'Lies die Infotafel: Die Aula wurde 1777 zum 300-jährigen Jubiläum umgebaut. 1777 minus 300 ergibt …?',
-  fact:'Die Universität Tübingen, offiziell Eberhard Karls Universität, wurde 1477 von Herzog Eberhard im Bart gegründet und ist eine der ältesten Universitäten Deutschlands.\n\nHier studierten u.a. Kepler, Hegel, Hölderlin, Schelling und Melanchthon. Die Alte Aula (heute Festsaal) war Schauplatz unzähliger akademischer Feiern und Debatten.',
-  factBullets:['Gegründet 1477 von Herzog Eberhard im Bart','Eine der ältesten Universitäten Deutschlands','Studenten: Kepler, Hegel, Hölderlin, Schelling, Melanchthon','Eberhard Karls Universität – nach zwei Herzögen benannt'],
+  fact:'Die Universität Tübingen ist die fünftälteste im deutschen Sprachraum. In der Alten Aula hängt noch heute das Porträt von Herzog Eberhard im Bart, der 1477 die Uni gründete – mit nur 11 Professoren und 300 Studenten.\n\nPhilipp Melanchthon lehrte hier griechische Grammatik – mit nur 21 Jahren! Und der junge Kepler wurde hier für seine astronomischen Ideen fast von der Uni geworfen.',
+  factBullets:['Fünftälteste Universität im deutschen Sprachraum','Gegründet 1477 mit nur 11 Professoren','Melanchthon lehrte hier mit 21 Jahren Griechisch','Kepler wurde fast rausgeworfen wegen seiner Ideen'],
   aiHints:['Lies die Infotafel neben dem Eingang – dort stehen zwei Jahreszahlen.','Das Umbaujahr ist 1777, zum 300-jährigen Jubiläum.','Rechne: 1777 minus 300 – das ist das Gründungsjahr der Universität.']
 },
 {
@@ -578,8 +578,8 @@ const stations=[
   diary:'Der Mesner hat mich erkannt und nichts gefragt. Es gibt noch gute Menschen in dieser Stadt. Ich habe das Fragment hinter dem dritten Stein links im hinteren Beichtstuhl versteckt. Möge es dort lange sicher sein.',
   riddle:'Schau dir den Kirchturm der Stiftskirche genau an. Wie hoch ist er? Beim Bau ging das Geld aus – der Turm blieb kleiner als geplant!',
   hint:'Der Turm hat 169 Stufen und eine Aussichtsplattform auf 45 Metern. Aber der Turm geht noch etwas weiter nach oben …',
-  fact:'Die Stiftskirche St. Georg ist die Hauptkirche Tübingens. Der Kirchturm ist 56 Meter hoch – eigentlich sollte er höher werden, aber 1529 ging das Geld aus. Die Aussichtsgalerie liegt auf 45 Metern Höhe (169 Stufen). Im steinernen Spitzhelm war früher die Turmwächterwohnung.',
-  factBullets:['Turmhöhe: 56 Meter (niedriger als geplant – Geld ging aus)','169 Stufen bis zur Aussichtsgalerie auf 45 m','Baubeginn 1470, Turmhelm erst 1529 fertig','Fürstengruft mit Württemberger Herzögen'],
+  fact:'In der Fürstengruft der Stiftskirche liegen 15 Mitglieder des Hauses Württemberg begraben – darunter der Universitätsgründer Eberhard im Bart. Seine Grabplatte zeigt ihn betend mit seinem Lieblingsspruch: „Attempto" (Ich wag\'s).\n\nDer Turm hat eine Besonderheit: Die Turmwächterwohnung auf halber Höhe war bis 1948 bewohnt! Der letzte Turmwächter hieß Karl Weihenmaier und lebte dort mit seiner Familie.',
+  factBullets:['15 Württemberger in der Fürstengruft begraben','Eberhard im Bart: Motto „Attempto" (Ich wag\'s)','Turmwächterwohnung bis 1948 bewohnt','Letzter Turmwächter: Karl Weihenmaier'],
   aiHints:['Der Turm ist höher als 45 Meter, denn die Aussichtsplattform liegt auf 45 m.','Es ist keine runde Zahl, aber nah dran.','Der Turm ist 56 Meter hoch.']
 },
 {
@@ -612,8 +612,8 @@ const stations=[
   diary:'Das Haagtor ist weg. Abgerissen. 1831, sagen sie. Aber die Fundamente sind noch da, unter dem Pflaster. Genau wie meine Formeln bald unter dem Staub dieser Stadt liegen werden. Unsichtbar, aber nicht verloren.',
   riddle:'Das Haagtor war eines von wie vielen Stadttoren der mittelalterlichen Befestigung Tübingens? (Eine Zahl) Oder: In welchem Jahr wurde es abgerissen? (Steht auf der Gedenktafel)',
   hint:'Tübingen hatte mehrere Stadttore. Die Gedenktafel am Haagtorplatz nennt das Abrissjahr.',
-  fact:'Das Haagtor war eines von fünf Stadttoren der mittelalterlichen Stadtmauer Tübingens. Es führte westwärts Richtung Herrenberg entlang der Ammer. Der Name leitet sich von „Haag" (Schutzhecke) ab.\n\nDas Tor wurde 1831 abgerissen. Die Pflasterung am Haagtorplatz zeigt heute noch die Umrisse der alten Fundamente. Eine Gedenktafel wurde im Juni 2009 angebracht.',
-  factBullets:['Eines von 5 Stadttoren der mittelalterlichen Befestigung','Name von „Haag" = Schutzhecke am Schlossberg','Abgerissen 1831','Pflasterung zeigt Umrisse der alten Fundamente','Gedenktafel seit Juni 2009'],
+  fact:'Tübingens fünf Stadttore hießen: Lustnauer Tor (Osten), Haagtor (Westen), Schmiedtor (Norden), Neckartor (Süden) und das Wurmlinger Tor. Sie wurden alle zwischen 1804 und 1831 abgerissen.\n\nFun Fact: Als das Haagtor 1831 fiel, protestierten Bürger – nicht wegen der Geschichte, sondern weil der Torwächter seinen Job verlor. Er bekam eine Abfindung von 50 Gulden.',
+  factBullets:['5 Stadttore: Lustnauer, Haag-, Schmied-, Neckar- und Wurmlinger Tor','Alle zwischen 1804 und 1831 abgerissen','Torwächter erhielt 50 Gulden Abfindung','Fundamente im Pflaster noch sichtbar, Gedenktafel seit 2009'],
   aiHints:['Schau auf die Gedenktafel am Platz.','Tübingen hatte insgesamt 5 Stadttore.','Das Abrissjahr liegt im frühen 19. Jahrhundert.']
 },
 {
@@ -623,8 +623,8 @@ const stations=[
   diary:'Am Affenfelsen. Das Wasser der Ammer fließt unter der alten Mauer hindurch – ruhig, gleichmäßig, ohne sich um Gendarmen oder Formeln zu scheren. Ich beneide den Bach.',
   riddle:'Welches Tier gibt diesem alten Stadtmauerrest seinen volkstümlichen Namen? (Ein Wort)',
   hint:'Der Name kommt von Kindern, die auf den Mauerresten herumkletterten wie...',
-  fact:'Der „Affenfelsen" ist der volkstümliche Name für einen Stadtmauerrest am Rand der Tübinger Altstadt. Hier fließt der Ammerkanal durch einen kleinen Bogen unter der alten Stadtmauer hindurch.\n\nDer Name kommt vermutlich von Kindern, die auf den Ruinen kletterten. Der Ort markiert die Grenze zwischen der historischen Altstadt und den neueren Vierteln.',
-  factBullets:['Stadtmauerrest mit Durchlass für den Ammerkanal','Name von kletternden Kindern (\"Affen\")','Grenze zwischen Altstadt und neueren Vierteln','Ammerkanal fließt durch mittelalterlichen Mauerbogen'],
+  fact:'Die Tübinger Stadtmauer wurde im 13. Jahrhundert errichtet und war etwa 1,5 km lang. Am Affenfelsen sieht man besonders gut, wie dick die Mauern waren – über einen Meter.\n\nDer Ammerkanal, der hier durchfließt, trieb früher mehrere Mühlen in der Altstadt an. Das Wasser wurde so geschickt gelenkt, dass Gerber, Färber und Müller es nacheinander nutzen konnten – ein mittelalterliches Recyclingsystem.',
+  factBullets:['Stadtmauer aus dem 13. Jh., ca. 1,5 km lang','Mauern über 1 Meter dick','Ammerkanal trieb mehrere Mühlen an','Mittelalterliches Wasser-Recyclingsystem für Gerber, Färber, Müller'],
   aiHints:['Der Name kommt von einem Tier.','Kinder klettern gerne auf Felsen...','Es ist ein Primat, der auch im Zoo lebt.']
 },
 {
@@ -642,8 +642,8 @@ const stations=[
   diary:'Das Nonnenhaus. 1488. Die Balken knarren unter meinen Schritten, als wollten sie protestieren. Ich habe mein vorletztes Fragment hier versteckt – dort, wo die Beginen einst ihre irdischen Bedürfnisse direkt dem Wasser überantworteten. Niemand sucht an solchen Orten.',
   riddle:'Schau dir die Rückseite des Nonnenhauses an. Im ersten Stock ragt ein hölzerner Erker über die Gasse hinweg bis über den Ammerkanal. Warum wurde er so weit übers Wasser gebaut? Was war seine Funktion? (Ein Wort)',
   hint:'Es hängt über dem Wasser und war praktischerweise direkt mit dem Abwasser verbunden.',
-  fact:'Das Nonnenhaus ist ein einzigartiges Zeugnis spätmittelalterlicher Architektur. Der hängende Erker war der historische Abort – direkt über dem Ammerkanal, der als Abwasserentsorgung diente.\n\nLeonhard Fuchs (1501-1566), der spätere Bewohner und Namensgeber der Fuchsie, lebte und forschte hier.',
-  factBullets:['Erbaut 1488 – über 530 Jahre alt','Bewohnt von Botaniker Leonhard Fuchs (Namensgeber der Fuchsie)','Erker = historischer Abort über dem Ammerkanal','Beginenhaus: christliche Laiengemeinschaft ohne Klostergelübde'],
+  fact:'Der Erker-Abort des Nonnenhauses ist eines der besterhaltenen Beispiele mittelalterlicher Sanitäranlagen in Süddeutschland. Das Prinzip war einfach: Die Schwerkraft erledigte den Rest, der Ammerkanal spülte alles weg.\n\nLeonhard Fuchs (1501-1566), der hier lebte, beschrieb über 400 Pflanzen in seinem „New Kreüterbuch" von 1543 – mit handkolorierten Holzschnitten. Das Buch war so erfolgreich, dass die Fuchsie nach ihm benannt wurde, obwohl er die Pflanze nie gesehen hat.',
+  factBullets:['Besterhaltener mittelalterlicher Abort in Süddeutschland','Leonhard Fuchs beschrieb 400+ Pflanzen (1543)','Die Fuchsie wurde nach ihm benannt – er sah sie nie','New Kreüterbuch: handkolorierte Holzschnitte'],
   aiHints:['Schau an die Rückseite des Hauses über dem Kanal.','Es ist ein sanitäres \"Gebäude\" ohne Spülung.','Die Menschen des Mittelalters mussten ihre Notdurft irgendwie verrichten.']
 },
 {
@@ -657,8 +657,8 @@ const stations=[
   diary:'Der Steg wackelt unter meinen Schritten. Der Neckar ist schwarz und still. Auf der anderen Seite beginnt die Nacht, in der ich verschwinden werde. Über Rottenburg nach Süden. Die Schweizer Grenze.\n\nMeine Formel ist verteilt – sechzehn Fragmente an sechzehn Orten. Wer sie alle findet, wird verstehen: Die gefährlichste Waffe ist nicht die Formel selbst. Es ist die Angst der Mächtigen vor dem freien Wissen.\n\nLebe wohl, Tübingen.',
   riddle:'Die erste Holzbrücke wurde 1863 errichtet. Welches Kinderspiel gab der Brücke ihren Namen? (Ein Wort)',
   hint:'Kinder spielten auf der wackeligen Holzbrücke ein Spiel mit Federschmuck und Kriegsbemalung.',
-  fact:'Der Indianersteg ist die vierte Brücke an dieser Stelle. Die erste Holzbrücke (1863) wurde nach spielenden Kindern benannt. Es folgten: eine Eisenträgerbrücke (ca. 1900), eine Betonbogenbrücke (1911, im WW2 zerstört) und der heutige Wiederaufbau mit smaragdgrünen Geländern.\n\nEine geplante Sanierung (Budget: ca. 375.000 €) soll 2026-2027 durchgeführt werden.',
-  factBullets:['Erste Holzbrücke 1863 – Name von spielenden Kindern','Unfallbericht von 1871 erwähnt den Namen erstmals','Vierte Brücke an dieser Stelle','Betonbogenbrücke 1911, im WW2 zerstört','Sanierung geplant 2026-2027 (ca. 375.000 €)'],
+  fact:'1869 waren jenseits des Stegs nur nasse Wiesen und Felder – die Neckarauen. Die Südstadt entstand erst ab den 1880er Jahren, nachdem der Neckar reguliert wurde.\n\nDer Hauptbahnhof stand seit 1861 als einsames Gebäude in der Ebene. Die Kaserne kam erst 1873. Wer 1869 über den Steg ging, verschwand buchstäblich in der Dunkelheit – genau wie Heinrich.\n\nFun Fact: Der Name „Indianersteg" taucht erstmals 1871 in einem Unfallbericht auf. Kinder spielten auf der wackeligen Brücke Karl-May-Spiele.',
+  factBullets:['1869: Südseite war Felder und Neckarauen','Südstadt erst ab 1880er bebaut','Hauptbahnhof stand ab 1861 einsam in der Ebene','Name erstmals 1871 in einem Unfallbericht dokumentiert'],
   aiHints:['Kinder spielten auf der Brücke ein beliebtes Spiel.','Denk an Karl May und den Wilden Westen.','Winnetou war einer davon.']
 }
 ];
@@ -1001,6 +1001,7 @@ function playAudio(fileKey,rowId,type){
     currentAudio=null;clearHighlight();
   });
   audio.play().catch(()=>stopAudio());
+  if(type === 'fact') factListened[currentStation] = true;
 }
 function seekAudio(e,type){
   if(!currentAudio||!currentAudio.duration||currentAudio._type!==type)return;
@@ -1094,6 +1095,24 @@ function stopAmbient(){
 }
 
 // ====== RIDDLE ======
+let factListened = {};
+function goToNext(idx) {
+  if(!factListened[idx] && stations[idx] && !stations[idx].anecdote) {
+    const fb = document.getElementById('riddleFb');
+    if(fb && !fb.querySelector('.fact-reminder')) {
+      const rem = document.createElement('div');
+      rem.className = 'fact-reminder';
+      rem.style.cssText = 'margin-top:8px;padding:10px 14px;background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.25);border-radius:var(--r-sm);font-size:.82rem;color:var(--gold);display:flex;align-items:center;gap:8px';
+      rem.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px">headphones</span> Tipp: Hör dir den freigeschalteten Fakten-Track an – da stecken spannende Bonus-Infos drin!';
+      fb.appendChild(rem);
+    }
+    // Still allow navigation on second click
+    factListened[idx] = true;
+    return;
+  }
+  if(idx === stations.length - 1) { currentStation++; renderStation(); }
+  else navStation(1);
+}
 function checkChoice(btn){
   const idx=currentStation,s=stations[idx];
   if(solvedStations[idx])return;
@@ -1115,8 +1134,9 @@ function checkChoice(btn){
     if(maxUnlockedStation===currentStation&&currentStation<stations.length-1)maxUnlockedStation++;
     const nbtn=document.createElement('button');nbtn.className='btn-primary';nbtn.style.marginTop='10px';
     nbtn.textContent=idx===stations.length-1?'Fall abschließen':'Zur nächsten Station →';
-    nbtn.onclick=()=>{if(idx===stations.length-1){currentStation++;renderStation()}else navStation(1)};
+    nbtn.onclick=()=>goToNext(idx);
     fb.appendChild(nbtn);
+    setTimeout(() => nbtn.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
     if(idx < stations.length - 1) {
       const next = stations[idx + 1];
       const navDiv = document.createElement('a');
@@ -1155,8 +1175,9 @@ function checkAnswer(){
     if(inp)inp.disabled=true;if(sub)sub.disabled=true;
     const btn=document.createElement('button');btn.className='btn-primary';btn.style.marginTop='10px';
     btn.textContent=idx===stations.length-1?'Fall abschließen':'Zur nächsten Station →';
-    btn.onclick=()=>{if(idx===stations.length-1){currentStation++;renderStation()}else navStation(1)};
+    btn.onclick=()=>goToNext(idx);
     fb.appendChild(btn);
+    setTimeout(() => btn.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
     if(idx < stations.length - 1) {
       const next = stations[idx + 1];
       const navDiv = document.createElement('a');
@@ -1197,6 +1218,7 @@ function solveAnecdote(){
     nbtn.textContent=idx===stations.length-1?'Fall abschließen':'Zur nächsten Station →';
     nbtn.onclick=()=>{if(idx===stations.length-1){currentStation++;renderStation()}else navStation(1)};
     box.appendChild(nbtn);
+    setTimeout(() => nbtn.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
     if(idx < stations.length - 1) {
       const next = stations[idx + 1];
       const navDiv = document.createElement('a');

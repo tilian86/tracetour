@@ -6,7 +6,7 @@ Status: ✅ = aktuell, 🔄 = Text geändert, muss neu generiert werden
 ## Station 0 - Schloss (Rätsel)
 - story_0.mp3: ✅
 - diary_0.mp3: ✅
-- fact_0.mp3: ✅
+- fact_0.mp3: 🔄 Neuer Fakten-Text (Miescher DNA, Vogelherd-Figuren, 84.000 Liter Weinfass) - muss neu generiert werden
 
 ## Station 1 - Karzer (Anekdote)
 - anecdote_1.mp3: ✅
@@ -14,7 +14,7 @@ Status: ✅ = aktuell, 🔄 = Text geändert, muss neu generiert werden
 ## Station 2 - Alte Aula (Rätsel)
 - story_2.mp3: ✅
 - diary_2.mp3: ✅
-- fact_2.mp3: ✅
+- fact_2.mp3: 🔄 Neuer Fakten-Text (fünftälteste Uni, 11 Professoren, Melanchthon 21J, Kepler) - muss neu generiert werden
 
 ## Station 3 - Martinianum (Anekdote)
 - anecdote_3.mp3: ✅
@@ -22,7 +22,7 @@ Status: ✅ = aktuell, 🔄 = Text geändert, muss neu generiert werden
 ## Station 4 - Stiftskirche (Rätsel)
 - story_4.mp3: 🔄 "zwei ungleiche Türme" → "markanter Kirchturm" (korrigiert in Code, Audio noch nicht)
 - diary_4.mp3: ✅
-- fact_4.mp3: ✅ (Text war korrekt)
+- fact_4.mp3: 🔄 Neuer Fakten-Text (15 Württemberger Fürstengruft, Attempto, Turmwächter Weihenmaier) - muss neu generiert werden
 
 ## Station 5 - Holzmarkt (Anekdote)
 - anecdote_5.mp3: ✅
@@ -41,12 +41,12 @@ Status: ✅ = aktuell, 🔄 = Text geändert, muss neu generiert werden
 ## Station 9 - Haagtorplatz (Rätsel)
 - story_9.mp3: ✅
 - diary_9.mp3: ✅
-- fact_9.mp3: ✅
+- fact_9.mp3: 🔄 Neuer Fakten-Text (5 Stadttore mit Namen, Torwächter 50 Gulden Abfindung) - muss neu generiert werden
 
 ## Station 10 - Affenfelsen (Rätsel)
 - story_10.mp3: ✅
 - diary_10.mp3: ✅
-- fact_10.mp3: ✅
+- fact_10.mp3: 🔄 Neuer Fakten-Text (Stadtmauer 13. Jh. 1,5km, Ammerkanal Mühlen, Recyclingsystem) - muss neu generiert werden
 
 ## Station 11 - Alter Bot. Garten (Anekdote)
 - anecdote_11.mp3: ✅
