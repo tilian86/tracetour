@@ -143,8 +143,8 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 .audio-label{flex:1;font-size:.8rem;font-weight:500}
 .audio-sublabel{font-size:.68rem;color:var(--text-3);font-weight:400}
 .audio-time{font-size:.68rem;color:var(--text-3);font-family:var(--font-m)}
-.audio-progress{width:100%;height:10px;background:var(--border);border-radius:5px;margin-top:5px;overflow:hidden;cursor:pointer;position:relative}
-.audio-progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-soft));width:0%;transition:width .1s linear;pointer-events:none}
+.audio-progress{width:100%;height:16px;background:var(--border);border-radius:8px;margin-top:5px;overflow:hidden;cursor:pointer;position:relative;touch-action:none}
+.audio-progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-soft));width:0%;transition:width .05s linear;pointer-events:none}
 
 .ambient-toggle{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);margin-bottom:1rem;font-size:.8rem;color:var(--text-2);width:100%;cursor:pointer;transition:border .2s,color .2s}
 .ambient-toggle.active{border-color:var(--border-accent);color:var(--accent)}
@@ -813,7 +813,7 @@ function renderStation(){
         <div><div class="audio-label">Stadtführer anhören</div><div class="audio-sublabel">Erzähler</div></div>
         <div class="audio-time" id="timeAnecdote">--:--</div>
       </div>
-      <div class="audio-progress" onclick="seekAudio(event,'anecdote')"><div class="audio-progress-fill" id="progFillAnecdote"></div></div>
+      <div class="audio-progress" data-type="anecdote" onclick="seekAudio(event,'anecdote')"><div class="audio-progress-fill" id="progFillAnecdote"></div></div>
     </div>
     <div class="story-block" style="border-color:rgba(79,195,247,.2)">
       <div class="story-block-header" style="color:#4fc3f7"><span class="material-symbols-outlined">menu_book</span> Stadtführer-Info</div>
@@ -843,19 +843,19 @@ function renderStation(){
         <div><div class="audio-label">Story anhören</div><div class="audio-sublabel">Erzähler</div></div>
         <div class="audio-time" id="timeStory">--:--</div>
       </div>
-      <div class="audio-progress" onclick="seekAudio(event,'story')"><div class="audio-progress-fill" id="progFillStory"></div></div>
+      <div class="audio-progress" data-type="story" onclick="seekAudio(event,'story')"><div class="audio-progress-fill" id="progFillStory"></div></div>
       <div class="audio-row" id="audioDiary" onclick="playAudio('diary_${ai}','audioDiary','diary')">
         <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
         <div><div class="audio-label">Heinrichs Notizbuch</div><div class="audio-sublabel">Heinrichs Stimme</div></div>
         <div class="audio-time" id="timeDiary">--:--</div>
       </div>
-      <div class="audio-progress" onclick="seekAudio(event,'diary')"><div class="audio-progress-fill" id="progFillDiary"></div></div>
+      <div class="audio-progress" data-type="diary" onclick="seekAudio(event,'diary')"><div class="audio-progress-fill" id="progFillDiary"></div></div>
       <div class="audio-row${solved?'':' locked'}" id="audioFact" data-locked="${solved?'false':'true'}" onclick="playAudio('fact_${ai}','audioFact','fact')">
         <div class="audio-icon"><span class="material-symbols-outlined">${solved?'play_arrow':'lock'}</span></div>
         <div><div class="audio-label">Ort-Fakt</div><div class="audio-sublabel">${solved?'Historischer Kontext':'Nach Lösung freigeschaltet'}</div></div>
         <div class="audio-time" id="timeFact">--:--</div>
       </div>
-      <div class="audio-progress" onclick="seekAudio(event,'fact')"><div class="audio-progress-fill" id="progFillFact"></div></div>
+      <div class="audio-progress" data-type="fact" onclick="seekAudio(event,'fact')"><div class="audio-progress-fill" id="progFillFact"></div></div>
     </div>
     <div class="story-block">
       <div class="story-block-header"><span class="material-symbols-outlined">auto_stories</span> Geschichte</div>
@@ -892,6 +892,7 @@ function renderStation(){
       btn.textContent='Zur nächsten Station →';btn.onclick=()=>navStation(1);fb.appendChild(btn);
     }
   }
+  initSeekBars();
 }
 
 // ====== AUDIO ======
@@ -941,7 +942,7 @@ function playAudio(fileKey,rowId,type){
   audio._fileKey=fileKey;audio._type=type;currentAudio=audio;
   row.classList.add('playing');
   row.querySelector('.audio-icon .material-symbols-outlined').textContent='pause';
-  audio.addEventListener('loadedmetadata',()=>{if(textId)startHighlight(audio,textId)});
+  audio.addEventListener('loadedmetadata',()=>{});
   audio.addEventListener('timeupdate',()=>{
     if(!audio.duration)return;
     const pf=document.getElementById(progId);if(pf)pf.style.width=(audio.currentTime/audio.duration*100)+'%';
@@ -956,8 +957,19 @@ function playAudio(fileKey,rowId,type){
 function seekAudio(e,type){
   if(!currentAudio||!currentAudio.duration||currentAudio._type!==type)return;
   const rect=e.currentTarget.getBoundingClientRect();
-  const pct=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width));
+  const x=e.touches?e.touches[0].clientX:e.clientX;
+  const pct=Math.max(0,Math.min(1,(x-rect.left)/rect.width));
   currentAudio.currentTime=pct*currentAudio.duration;
+}
+function initSeekBars(){
+  document.querySelectorAll('.audio-progress').forEach(bar=>{
+    const type=bar.dataset.type;if(!type)return;
+    let dragging=false;
+    const doSeek=(e)=>{e.preventDefault();seekAudio(e,type)};
+    bar.addEventListener('touchstart',(e)=>{dragging=true;doSeek(e)},{passive:false});
+    bar.addEventListener('touchmove',(e)=>{if(dragging)doSeek(e)},{passive:false});
+    bar.addEventListener('touchend',()=>{dragging=false});
+  });
 }
 function startHighlight(audio,textId){
   clearHighlight();
