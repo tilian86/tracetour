@@ -772,6 +772,7 @@ function mapsUrl(lat,lng,name){return `https://maps.apple.com/?ll=${lat},${lng}&
 
 // ====== RENDER ======
 function renderStation(){
+  const gp=document.getElementById('gamePanel');if(gp)gp.scrollTop=0;
   window.scrollTo({top:0,behavior:'smooth'});
   if(currentStation>=stations.length){
     stopAudio(true);stopAmbient();
