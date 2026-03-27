@@ -302,6 +302,16 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <p>Du folgst Heinrichs Fluchtweg vom Schloss bergab, durch die Altstadt, bis zum Neckar. An <strong>16 Orten</strong> hat er Spuren hinterlassen. Löse seine Rätsel, entschlüssle seine Hinweise – und finde heraus, was mit dem Forscher geschah.</p>
 <p><strong>Deine Ermittlung beginnt oben am Schloss Hohentübingen.</strong></p>
 </div>
+<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1.5rem;max-width:480px;width:100%">
+<div style="font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:.75rem">So funktioniert's</div>
+<div style="font-size:.85rem;line-height:1.7;color:var(--text-2)">
+<p style="margin-bottom:.75rem">📍 <strong>Folge der Route</strong> – Die App führt dich von Station zu Station. Jede Station hat einen Maps-Link zur Navigation.</p>
+<p style="margin-bottom:.75rem">🎧 <strong>Höre zu</strong> – Jede Station hat Audio: Story, Tagebuch und nach dem Lösen einen Fakten-Track. An Info-Stationen gibt es einen Stadtführer-Track. Du kannst alles auch lesen.</p>
+<p style="margin-bottom:.75rem">🔍 <strong>Löse Rätsel</strong> – An Rätsel-Stationen musst du vor Ort etwas finden oder beobachten. Nach richtiger Antwort wird der Fakten-Track freigeschaltet.</p>
+<p style="margin-bottom:.75rem">⭐ <strong>Sammle Traces</strong> – Für jede gelöste Station bekommst du Erfahrungspunkte. Am Ende wartet deine Urkunde.</p>
+<p>💡 <strong>Tipp</strong> – Der Ermittler-Assistent hilft dir, wenn du nicht weiterkommst.</p>
+</div>
+</div>
 <button class="btn-primary" style="max-width:400px;margin:0 auto" onclick="startTour()">Mission starten</button>
 <div style="height:2rem"></div>
 </div>
@@ -376,7 +386,14 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <div style="margin-top:1rem;font-size:.75rem;color:var(--accent);font-weight:600">TraceTour by Florian S. Thiel · tracetour.de</div>
 </div>
 
+<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1.5rem;max-width:480px;width:100%">
+<div style="font-size:.65rem;letter-spacing:.2em;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:.75rem">Was kommt als Nächstes?</div>
+<p style="font-size:.85rem;line-height:1.7;color:var(--text-2);margin-bottom:.75rem">Es kommen fortlaufend neue Touren und Städte dazu. Heute Tübingen, morgen Stuttgart, München – und wer weiß wohin die Reise noch geht.</p>
+<p style="font-size:.85rem;line-height:1.7;color:var(--text-2)">Es freut uns, wenn wir uns irgendwo auf der Welt beim Erkunden wiederbegegnen. Bis dahin – fare well, Ermittler.</p>
+</div>
+
 <button class="share-btn" style="max-width:300px" onclick="generateShareCard()"><span class="material-symbols-outlined">share</span> Urkunde teilen</button>
+<button class="share-btn" style="max-width:300px" onclick="window.open('mailto:hello@tracetour.de?subject=TraceTour Feedback&body=Hey! Ich habe gerade die Tour in Tübingen gemacht und wollte euch sagen:')"><span class="material-symbols-outlined">mail</span> Feedback senden</button>
 <button class="btn-primary" style="max-width:300px;margin-top:.5rem" onclick="clearSave();showScreen('tourSelect')">Zurück zur Übersicht</button>
 </div>
 </div>
@@ -557,7 +574,7 @@ const stations=[
   lat:48.520002,lng:9.055678,name:'Stiftskirche',ambientIdx:4,xp:80,
   answer:['56'],
   choices:['45 Meter','56 Meter','68 Meter','74 Meter'],
-  story:'Die Stiftskirche St. Georg – das spirituelle Herz der Altstadt. Heinrich erreichte die Kirche atemlos. Der alte Mesner, ein Freund seiner Studentenzeit, ließ ihn durch den Seiteneingang.\n\n„Fünf Minuten", flüsterte Heinrich. Der Mesner nickte. In einem Beichtstuhl in der hinteren linken Ecke gibt es einen losen Stein. Heinrich schob das zweite Fragment dahinter.\n\nDie Stiftskirche mit ihren zwei ungleichen Türmen ist eines der bedeutendsten Bauwerke der Spätgotik in Württemberg. In der Fürstengruft im Chorbereich sind württembergische Herzöge und Universitätsprofessoren begraben – die Gelehrten, die im Leben so viel stritten, ruhen im Tod friedlich nebeneinander.',
+  story:'Die Stiftskirche St. Georg – das spirituelle Herz der Altstadt. Heinrich erreichte die Kirche atemlos. Der alte Mesner, ein Freund seiner Studentenzeit, ließ ihn durch den Seiteneingang.\n\n„Fünf Minuten", flüsterte Heinrich. Der Mesner nickte. In einem Beichtstuhl in der hinteren linken Ecke gibt es einen losen Stein. Heinrich schob das zweite Fragment dahinter.\n\nDie Stiftskirche mit ihrem markanten Kirchturm ist eines der bedeutendsten Bauwerke der Spätgotik in Württemberg. In der Fürstengruft im Chorbereich sind württembergische Herzöge und Universitätsprofessoren begraben – die Gelehrten, die im Leben so viel stritten, ruhen im Tod friedlich nebeneinander.',
   diary:'Der Mesner hat mich erkannt und nichts gefragt. Es gibt noch gute Menschen in dieser Stadt. Ich habe das Fragment hinter dem dritten Stein links im hinteren Beichtstuhl versteckt. Möge es dort lange sicher sein.',
   riddle:'Schau dir den Kirchturm der Stiftskirche genau an. Wie hoch ist er? Beim Bau ging das Geld aus – der Turm blieb kleiner als geplant!',
   hint:'Der Turm hat 169 Stufen und eine Aussichtsplattform auf 45 Metern. Aber der Turm geht noch etwas weiter nach oben …',
@@ -571,18 +588,18 @@ const stations=[
 },
 {
   lat:48.520261,lng:9.053388,name:'Rathaus & Astronomische Uhr',ambientIdx:6,xp:100,
-  answer:['drache','drachen','drachenkopf'],
+  answer:['7','sieben'],
   story:'Der Marktplatz – das Herz der Stadt. Das prächtige Rathaus thront vor dir, seine Fassade reich bemalt. Die große astronomische Uhr an der Seite zeigt nicht nur die Zeit, sondern auch Mondphasen, Tierkreiszeichen und den Lauf der Planeten.\n\nHeinrich mischte sich unter die letzten Marktbesucher. Der Neptunbrunnen auf dem Platz plätscherte leise. Die Treppe neben dem Rathaus ist übrigens absichtlich schief gebaut – sie folgt dem alten Abwasserkanal, der einst mitten durch den Marktplatz floss. Elegante Lösung eines uneleganten Problems.\n\nUnter dem Rathaus, in einer Mauernische, versteckte Heinrich das dritte Fragment. Der Telegrafenbote hatte gerade das Amt verlassen – Heinrich wusste, dass sein Telegramm aus Stuttgart längst angekommen war. Die Gendarmen konnten jeden Moment erscheinen.',
   diary:'Die Uhr am Rathaus fasziniert mich noch immer. 1511 gebaut, von Professor Stöffler entworfen – und sie läuft noch. Der Drachenzeiger sagt Finsternisse voraus. Manchmal wünschte ich, er könnte auch meine Zukunft vorhersagen.\n\nIch habe das Fragment unter dem Rathaus versteckt. Der Neptunbrunnen hat zugesehen. Stumm, wie immer. Weiter. Ich muss den Neckar erreichen.',
-  riddle:'Stell dich vor die astronomische Uhr am Rathaus. Neben Sonne und Mond gibt es einen besonderen Zeiger in Form eines Fabelwesens. Welches Tier ist dargestellt? (Ein Wort)',
-  hint:'Es ist ein Fabelwesen mit Kopf und Schwanz auf dem Ziffernblatt – verbunden mit Finsternissen.',
-  fact:'Die astronomische Uhr am Tübinger Rathaus stammt aus dem Jahr 1511 und gehört zu den ältesten funktionierenden astronomischen Uhren in Deutschland. Sie wurde vom Astronomen Johannes Stöffler entworfen.\n\nDer „Drachenzeiger" markiert die Mondknoten – Punkte, an denen Sonnen- und Mondbahn sich kreuzen. Der Neptunbrunnen auf dem Marktplatz und die schiefe Treppe (die einem alten Abwasserkanal folgt) gehören ebenfalls zu den Besonderheiten des Platzes.',
-  factBullets:['Erbaut 1511 von Prof. Johannes Stöffler','Der Drachenzeiger sagt Finsternisse voraus','Stöffler prophezeite 1524 eine Sintflut – Europa geriet in Panik','Neptunbrunnen auf dem Marktplatz','Schiefe Treppe folgt altem Abwasserkanal'],
-  aiHints:['Schau auf das Ziffernblatt – neben Sonne und Mond gibt es ein Fabelwesen.','Es hat einen Kopf und einen Schwanz auf gegenüberliegenden Seiten.','Denk an ein mythisches Reptil mit Flügeln und Feuer.']
+  riddle:'Stell dich vor die Rathaus-Fassade und zähle die gemalten Namen berühmter Persönlichkeiten. Wie viele sind es? Tipp: Einer versteckt sich ganz oben – leicht zu übersehen!',
+  hint:'Zähle alle Namen auf der bemalten Fassade. Die meisten sind auf Augenhöhe, aber einer ist ganz oben am Giebel.',
+  fact:'Die astronomische Uhr am Tübinger Rathaus stammt aus dem Jahr 1511 und wurde vom Astronomen Johannes Stöffler entworfen. Der berühmte „Drachenzeiger" markiert die Mondknoten und sagt Finsternisse voraus.\n\nDie sieben Namen an der Fassade ehren bedeutende Persönlichkeiten der Stadtgeschichte. Graf Eberhard im Bart, der Universitätsgründer, thront ganz oben am Giebel – leicht zu übersehen, aber der wichtigste von allen.\n\nDer Neptunbrunnen auf dem Marktplatz und die schiefe Treppe (die einem alten Abwasserkanal folgt) gehören ebenfalls zu den Besonderheiten des Platzes.',
+  factBullets:['Astronomische Uhr von 1511 (Prof. Johannes Stöffler)','Drachenzeiger sagt Finsternisse voraus','7 Namen an der Fassade – Graf Eberhard ganz oben','Neptunbrunnen auf dem Marktplatz','Schiefe Treppe folgt altem Abwasserkanal'],
+  aiHints:['Zähle die Namen auf der bemalten Fassade genau.','Die meisten sind leicht zu finden – aber einer versteckt sich oben am Giebel.','Es sind mehr als 6 – schau ganz nach oben!']
 },
 {
   lat:48.521113,lng:9.053337,name:'Stadtmuseum im Kornhaus',ambientIdx:7,xp:25,anecdote:true,
-  story:'Vom Marktplatz aus passierte Heinrich das Kornhaus – das Gebäude, das heute das Stadtmuseum beherbergt. Erbaut 1453 als überdachter Getreidemarkt, zwischen 1512 und 1564 erweitert und aufgestockt.\n\nWas dich drinnen erwartet, falls du reingehst: eine funktionierende Nachbildung von Wilhelm Schickards mechanischem Rechner von 1623 – die erste Rechenmaschine der Welt, Jahrzehnte vor Pascals berühmtem Modell. Rekonstruiert zwischen 1957 und 1960. Und sie rechnet tatsächlich noch.\n\nAußerdem: eine Ausstellung über Lotte Reiniger, die Pionierin des Silhouettenfilms – in Tübingen geboren, lange bevor Disney an Schneewittchen dachte.\n\nDer Eintritt ist seit April 2018 frei. Sonntags um 15 Uhr gibt es eine Führung (5 € für Erwachsene, Kinder kostenlos).\n\nHeinrich hatte keine Zeit für Museen. Er bog in die Kornhausstraße ein und eilte bergab Richtung Ammergasse.'
+  story:'Vom Marktplatz aus passierte Heinrich das Kornhaus – das Gebäude, das heute das Stadtmuseum beherbergt. Erbaut 1453 als überdachter Getreidemarkt, zwischen 1512 und 1564 erweitert und aufgestockt.\n\nWas dich drinnen erwartet, falls du reingehst: eine funktionierende Nachbildung von Wilhelm Schickards mechanischem Rechner von 1623 – die erste Rechenmaschine der Welt, Jahrzehnte vor Pascals berühmtem Modell. Rekonstruiert zwischen 1957 und 1960. Und sie rechnet tatsächlich noch.\n\nDer Eintritt ist seit April 2018 frei. Sonntags um 15 Uhr gibt es eine Führung (5 € für Erwachsene, Kinder kostenlos).\n\nHeinrich hatte keine Zeit für Museen. Er bog in die Kornhausstraße ein und eilte bergab Richtung Ammergasse.'
 },
 {
   lat:48.520887,lng:9.050648,name:'Ammerschlag',ambientIdx:8,xp:25,anecdote:true,
@@ -621,9 +638,9 @@ const stations=[
 {
   lat:48.521913,lng:9.057653,name:'Nonnenhaus',ambientIdx:13,xp:100,
   answer:['abort','plumpsklo','klo','toilette','klosett'],
-  story:'Das Nonnenhaus – eines der ältesten Fachwerkhäuser der Altstadt, erbaut 1488. Der Name täuscht: Hier lebten keine Nonnen, sondern Beginen – Frauen einer christlichen Laiengemeinschaft ohne Klostergelübde.\n\nSpäter wohnte hier der Botaniker Leonhard Fuchs, nach dem die Fuchsie benannt ist. Heinrich versteckte sein vorletztes Fragment im Nonnenhaus – in einem Hohlraum hinter der alten Holzverkleidung.\n\nUnd dann ist da die Rückseite des Hauses. Im ersten Stock hängt ein hölzerner Erker frei über dem Ammerkanal. Was war das wohl? Die Antwort ist praktisch, mittelalterlich effizient – und ziemlich lustig.',
+  story:'Das Nonnenhaus – eines der ältesten Fachwerkhäuser der Altstadt, erbaut 1488. Der Name täuscht: Hier lebten keine Nonnen, sondern Beginen – Frauen einer christlichen Laiengemeinschaft ohne Klostergelübde.\n\nSpäter wohnte hier der Botaniker Leonhard Fuchs, nach dem die Fuchsie benannt ist. Heinrich versteckte sein vorletztes Fragment im Nonnenhaus – in einem Hohlraum hinter der alten Holzverkleidung.\n\nUnd dann ist da die Rückseite des Hauses. Im ersten Stock ragt ein hölzerner Erker weit über den Ammerkanal hinaus – über die Gasse hinweg bis direkt übers Wasser gebaut. Warum dieser aufwändige Bau? Die Antwort ist praktisch, mittelalterlich effizient – und ziemlich lustig.',
   diary:'Das Nonnenhaus. 1488. Die Balken knarren unter meinen Schritten, als wollten sie protestieren. Ich habe mein vorletztes Fragment hier versteckt – dort, wo die Beginen einst ihre irdischen Bedürfnisse direkt dem Wasser überantworteten. Niemand sucht an solchen Orten.',
-  riddle:'Schau dir die Rückseite des Nonnenhauses an. Im ersten Stock hängt ein hölzerner Erker über dem Ammerkanal. Was war das historisch? (Ein Wort)',
+  riddle:'Schau dir die Rückseite des Nonnenhauses an. Im ersten Stock ragt ein hölzerner Erker über die Gasse hinweg bis über den Ammerkanal. Warum wurde er so weit übers Wasser gebaut? Was war seine Funktion? (Ein Wort)',
   hint:'Es hängt über dem Wasser und war praktischerweise direkt mit dem Abwasser verbunden.',
   fact:'Das Nonnenhaus ist ein einzigartiges Zeugnis spätmittelalterlicher Architektur. Der hängende Erker war der historische Abort – direkt über dem Ammerkanal, der als Abwasserentsorgung diente.\n\nLeonhard Fuchs (1501-1566), der spätere Bewohner und Namensgeber der Fuchsie, lebte und forschte hier.',
   factBullets:['Erbaut 1488 – über 530 Jahre alt','Bewohnt von Botaniker Leonhard Fuchs (Namensgeber der Fuchsie)','Erker = historischer Abort über dem Ammerkanal','Beginenhaus: christliche Laiengemeinschaft ohne Klostergelübde'],
@@ -863,35 +880,40 @@ function renderStation(){
     <button class="ambient-toggle" id="ambientBtn" onclick="toggleAmbient(${s.ambientIdx})">
       <span class="ambient-dot"></span><span class="material-symbols-outlined" style="font-size:18px">graphic_eq</span> ${amb.name}
     </button>
-    <div class="audio-section">
-      <div class="audio-row" id="audioStory" onclick="playAudio('story_${ai}','audioStory','story')">
-        <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
-        <div><div class="audio-label">Story anhören</div><div class="audio-sublabel">Erzähler</div></div>
-        <div class="audio-time" id="timeStory">--:--</div>
-      </div>
-      <div class="audio-progress" data-type="story" onclick="seekAudio(event,'story')"><div class="audio-progress-fill" id="progFillStory"></div></div>
-      <div class="audio-row" id="audioDiary" onclick="playAudio('diary_${ai}','audioDiary','diary')">
-        <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
-        <div><div class="audio-label">Heinrichs Notizbuch</div><div class="audio-sublabel">Heinrichs Stimme</div></div>
-        <div class="audio-time" id="timeDiary">--:--</div>
-      </div>
-      <div class="audio-progress" data-type="diary" onclick="seekAudio(event,'diary')"><div class="audio-progress-fill" id="progFillDiary"></div></div>
-      <div class="audio-row${solved?'':' locked'}" id="audioFact" data-locked="${solved?'false':'true'}" onclick="playAudio('fact_${ai}','audioFact','fact')">
-        <div class="audio-icon"><span class="material-symbols-outlined">${solved?'play_arrow':'lock'}</span></div>
-        <div><div class="audio-label">Ort-Fakt</div><div class="audio-sublabel">${solved?'Historischer Kontext':'Nach Lösung freigeschaltet'}</div></div>
-        <div class="audio-time" id="timeFact">--:--</div>
-      </div>
-      <div class="audio-progress" data-type="fact" onclick="seekAudio(event,'fact')"><div class="audio-progress-fill" id="progFillFact"></div></div>
+    <div class="audio-row" id="audioStory" onclick="playAudio('story_${ai}','audioStory','story')">
+      <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
+      <div><div class="audio-label">Story anhören</div><div class="audio-sublabel">Erzähler</div></div>
+      <div class="audio-time" id="timeStory">--:--</div>
     </div>
+    <div class="audio-progress" data-type="story" onclick="seekAudio(event,'story')"><div class="audio-progress-fill" id="progFillStory"></div></div>
     <div class="story-block">
       <div class="story-block-header"><span class="material-symbols-outlined">auto_stories</span> Geschichte</div>
       <div class="story-text" id="storyText">${wordSpans(s.story,'sw')}</div>
     </div>
+    <div class="audio-row" id="audioDiary" onclick="playAudio('diary_${ai}','audioDiary','diary')">
+      <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
+      <div><div class="audio-label">Heinrichs Notizbuch</div><div class="audio-sublabel">Heinrichs Stimme</div></div>
+      <div class="audio-time" id="timeDiary">--:--</div>
+    </div>
+    <div class="audio-progress" data-type="diary" onclick="seekAudio(event,'diary')"><div class="audio-progress-fill" id="progFillDiary"></div></div>
     <div class="story-block diary">
       <div class="story-block-header"><span class="material-symbols-outlined">history_edu</span> Heinrichs Notizbuch</div>
       <div class="story-text" id="diaryText">${wordSpans(s.diary,'dw')}</div>
     </div>
-    ${solved&&s.factBullets?`<div class="story-block"><div class="story-block-header"><span class="material-symbols-outlined">school</span> Wusstest du?</div><div class="story-text">${s.fact}</div><ul class="fact-bullets">${s.factBullets.map(b=>'<li>'+b+'</li>').join('')}</ul></div>`:''}
+    ${solved&&s.factBullets?`
+    <div class="audio-row" id="audioFact" data-locked="false" onclick="playAudio('fact_${ai}','audioFact','fact')">
+      <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
+      <div><div class="audio-label">Ort-Fakt</div><div class="audio-sublabel">Historischer Kontext</div></div>
+      <div class="audio-time" id="timeFact">--:--</div>
+    </div>
+    <div class="audio-progress" data-type="fact" onclick="seekAudio(event,'fact')"><div class="audio-progress-fill" id="progFillFact"></div></div>
+    <div class="story-block"><div class="story-block-header"><span class="material-symbols-outlined">school</span> Wusstest du?</div><div class="story-text">${s.fact}</div><ul class="fact-bullets">${s.factBullets.map(b=>'<li>'+b+'</li>').join('')}</ul></div>`:`
+    <div class="audio-row locked" id="audioFact" data-locked="true" onclick="playAudio('fact_${ai}','audioFact','fact')">
+      <div class="audio-icon"><span class="material-symbols-outlined">lock</span></div>
+      <div><div class="audio-label">Ort-Fakt</div><div class="audio-sublabel">Nach Lösung freigeschaltet</div></div>
+      <div class="audio-time" id="timeFact">--:--</div>
+    </div>
+    <div class="audio-progress" data-type="fact" onclick="seekAudio(event,'fact')"><div class="audio-progress-fill" id="progFillFact"></div></div>`}
     <div class="riddle-box">
       <div class="riddle-label"><span class="material-symbols-outlined">search</span> Rätsel</div>
       <div class="riddle-q">${s.riddle}</div>
@@ -1095,6 +1117,17 @@ function checkChoice(btn){
     nbtn.textContent=idx===stations.length-1?'Fall abschließen':'Zur nächsten Station →';
     nbtn.onclick=()=>{if(idx===stations.length-1){currentStation++;renderStation()}else navStation(1)};
     fb.appendChild(nbtn);
+    if(idx < stations.length - 1) {
+      const next = stations[idx + 1];
+      const navDiv = document.createElement('a');
+      navDiv.className = 'maps-link';
+      navDiv.style.marginTop = '8px';
+      navDiv.href = mapsUrl(next.lat, next.lng, next.name);
+      navDiv.target = '_blank';
+      navDiv.rel = 'noopener';
+      navDiv.innerHTML = `<span class="material-symbols-outlined">navigation</span> Nächstes Ziel: ${next.name}<span class="coords">${next.lat.toFixed(4)}, ${next.lng.toFixed(4)}</span>`;
+      fb.appendChild(navDiv);
+    }
     document.getElementById('navNext').disabled=false;
     saveGame();showToast('Fortschritt gespeichert');
     setTimeout(()=>renderStation(),100);
@@ -1124,6 +1157,17 @@ function checkAnswer(){
     btn.textContent=idx===stations.length-1?'Fall abschließen':'Zur nächsten Station →';
     btn.onclick=()=>{if(idx===stations.length-1){currentStation++;renderStation()}else navStation(1)};
     fb.appendChild(btn);
+    if(idx < stations.length - 1) {
+      const next = stations[idx + 1];
+      const navDiv = document.createElement('a');
+      navDiv.className = 'maps-link';
+      navDiv.style.marginTop = '8px';
+      navDiv.href = mapsUrl(next.lat, next.lng, next.name);
+      navDiv.target = '_blank';
+      navDiv.rel = 'noopener';
+      navDiv.innerHTML = `<span class="material-symbols-outlined">navigation</span> Nächstes Ziel: ${next.name}<span class="coords">${next.lat.toFixed(4)}, ${next.lng.toFixed(4)}</span>`;
+      fb.appendChild(navDiv);
+    }
     document.getElementById('navNext').disabled=false;
     saveGame();showToast('Fortschritt gespeichert');
     setTimeout(()=>renderStation(),100);
@@ -1153,6 +1197,17 @@ function solveAnecdote(){
     nbtn.textContent=idx===stations.length-1?'Fall abschließen':'Zur nächsten Station →';
     nbtn.onclick=()=>{if(idx===stations.length-1){currentStation++;renderStation()}else navStation(1)};
     box.appendChild(nbtn);
+    if(idx < stations.length - 1) {
+      const next = stations[idx + 1];
+      const navDiv = document.createElement('a');
+      navDiv.className = 'maps-link';
+      navDiv.style.marginTop = '8px';
+      navDiv.href = mapsUrl(next.lat, next.lng, next.name);
+      navDiv.target = '_blank';
+      navDiv.rel = 'noopener';
+      navDiv.innerHTML = `<span class="material-symbols-outlined">navigation</span> Nächstes Ziel: ${next.name}<span class="coords">${next.lat.toFixed(4)}, ${next.lng.toFixed(4)}</span>`;
+      box.appendChild(navDiv);
+    }
   }
 }
 function updateXp(){
