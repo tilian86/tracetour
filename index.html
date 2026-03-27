@@ -385,7 +385,7 @@ let userName='',currentStation=0,maxUnlockedStation=0,totalXp=0,map,userMarker,s
 let panelCollapsed=false,watchId=null,userPos=null;
 let aiQuestionsLeft=5,debugMode=false;
 const MAX_AI_QUESTIONS=5;
-let currentAudio=null,currentAmbient=null,ambientCtx=null;
+let currentAudio=null,currentAmbient=null,ambientCtx=null,ambientMaster=null;
 let solvedStations=[];
 let highlightWords=[],highlightIdx=-1,highlightTimer=null;
 let ambientTimers=[];
@@ -1004,10 +1004,10 @@ function toggleAmbient(idx){
 function startAmbient(type){
   stopAmbient();
   try{
-    ambientCtx=new(window.AudioContext||window.webkitAudioContext)();
-    if(ambientCtx.state==='suspended')ambientCtx.resume();
+    ambientCtx=getAudioCtx();
   }catch(e){return}
   const master=ambientCtx.createGain();master.gain.value=0.18;master.connect(ambientCtx.destination);
+  ambientMaster=master;
   const alive=()=>!!ambientCtx&&ambientCtx.state!=='closed';
   if(type==='church'){
     const bell=()=>{if(!alive())return;const now=ambientCtx.currentTime;[220,440,660].forEach((f,i)=>{const o=ambientCtx.createOscillator(),g=ambientCtx.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(0.08/(i+1),now+0.08);g.gain.exponentialRampToValueAtTime(0.001,now+5);o.connect(g);g.connect(master);o.start(now);o.stop(now+5.5)})};
@@ -1040,8 +1040,8 @@ function addNoise(ctx,dest,vol,filterType,filterFreq){
 }
 function stopAmbient(){
   ambientTimers.forEach(id=>{clearTimeout(id);clearInterval(id)});ambientTimers=[];
-  if(ambientCtx){try{ambientCtx.close()}catch(e){}}
-  ambientCtx=null;currentAmbient=null;
+  if(ambientMaster){try{ambientMaster.disconnect()}catch(e){}}
+  ambientMaster=null;ambientCtx=null;currentAmbient=null;
   const btn=document.getElementById('ambientBtn');if(btn)btn.classList.remove('active');
 }
 
