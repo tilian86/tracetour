@@ -57,7 +57,7 @@ Status: ✅ = aktuell, 🔄 = Text geändert, muss neu generiert werden
 ## Station 13 - Nonnenhaus (Rätsel)
 - story_13.mp3: 🔄 Erker-Text umgeschrieben (ragt über Gasse hinweg) - muss neu generiert werden
 - diary_13.mp3: ✅
-- fact_13.mp3: ✅ (Text war korrekt)
+- fact_13.mp3: 🔄 Neuer Fakten-Text (besterhaltener Abort Süddeutschland, Fuchs 400 Pflanzen, New Kreüterbuch 1543) - muss neu generiert werden
 
 ## Station 14 - Neckarinsel (Anekdote)
 - anecdote_14.mp3: ✅
@@ -65,7 +65,7 @@ Status: ✅ = aktuell, 🔄 = Text geändert, muss neu generiert werden
 ## Station 15 - Indianersteg (Rätsel)
 - story_15.mp3: ✅ (Recherche bestätigt: 1869 waren Felder/Neckarauen auf der Südseite – Flucht-Szenario stimmt!)
 - diary_15.mp3: ✅
-- fact_15.mp3: ✅
+- fact_15.mp3: 🔄 Neuer Fakten-Text (1869 Neckarauen, Südstadt ab 1880er, Bahnhof 1861, Karl-May-Spiele) - muss neu generiert werden
 
 ## Zusätzliche Audio-Dateien (NEU zu erstellen):
 - intro.mp3: 🆕 Anleitungs-Audio (wie funktioniert die App, Spielmechanik erklären)

@@ -256,17 +256,18 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <p>Du bist Teil einer Geschichte geworden. Löse Rätsel vor Ort, entdecke verborgene Winkel, höre die Stimmen der Vergangenheit – und sammle Erfahrungspunkte.</p>
 </div>
 <div class="tour-card" onclick="showScreen('prologue')">
-<img class="tour-card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/T%C3%BCbingen_-_Altstadt_-_Neckarfront_-_Ansicht_von_Neckarinsel_mit_Stocherkahn.jpg/1280px-T%C3%BCbingen_-_Altstadt_-_Neckarfront_-_Ansicht_von_Neckarinsel_mit_Stocherkahn.jpg" alt="Tübingen Neckarfront" onerror="this.style.display='none'">
+<img class="tour-card-img" src="images/city_tuebingen2.jpg" alt="Tübingen Neckarfront" onerror="this.style.display='none'">
 <div class="tour-card-body">
 <span class="badge badge-live">Verfügbar</span>
 <h3>Die Formel des Forschers</h3>
 <p>1869 – Ein brillanter Wissenschaftler flieht vor dem Königlichen Ministerium. Vom Schloss bergab durch die Gassen der Altstadt bis zum Neckar. Folge seiner Spur, entschlüssle seine Hinweise.</p>
-<div class="tour-card-meta"><span>📍 16 Stops</span><span>⏱ ca. 160 Min</span><span>🎧 Audio</span><span>🏆 1090 Traces</span></div>
+<div class="tour-card-meta"><span>📍 17 Stops</span><span>⏱ ca. 160 Min</span><span>🎧 Audio</span><span>🏆 1115 Traces</span></div>
 </div>
 </div>
 <div id="continueBox" style="display:none">
 <button class="btn-primary" onclick="continueTour()" id="continueBtn">Fortsetzen</button>
 <button class="btn-secondary" onclick="showScreen('prologue')">Neu starten</button>
+<button class="btn-secondary" style="margin-top:.5rem;font-size:.75rem;opacity:.6" onclick="confirmReset()">🗑️ Fortschritt komplett löschen</button>
 </div>
 <div class="tour-card" style="opacity:.35;pointer-events:none">
 <div class="tour-card-body">
@@ -281,7 +282,7 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <!-- PROLOGUE -->
 <div id="prologue" class="screen">
 <div class="prologue-hero">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/T%C3%BCbingen_-_Altstadt_-_Neckarfront_-_Ansicht_von_Neckarinsel_in_blauer_Stunde_%281%29.jpg/1280px-T%C3%BCbingen_-_Altstadt_-_Neckarfront_-_Ansicht_von_Neckarinsel_in_blauer_Stunde_%281%29.jpg" alt="Tübingen bei Nacht">
+<img src="images/city_tuebingen2.jpg" alt="Tübingen bei Nacht">
 <div class="prologue-hero-overlay">
 <h1>Die Formel des <span>Forschers</span></h1>
 </div>
@@ -299,7 +300,7 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <cite>— Heinrich von Calw, Notizbuch, November 1869</cite>
 </div>
 <div class="prologue-text">
-<p>Du folgst Heinrichs Fluchtweg vom Schloss bergab, durch die Altstadt, bis zum Neckar. An <strong>16 Orten</strong> hat er Spuren hinterlassen. Löse seine Rätsel, entschlüssle seine Hinweise – und finde heraus, was mit dem Forscher geschah.</p>
+<p>Du folgst Heinrichs Fluchtweg vom Schloss bergab, durch die Altstadt, bis zum Neckar. An <strong>17 Orten</strong> hat er Spuren hinterlassen. Löse seine Rätsel, entschlüssle seine Hinweise – und finde heraus, was mit dem Forscher geschah.</p>
 <p><strong>Deine Ermittlung beginnt oben am Schloss Hohentübingen.</strong></p>
 </div>
 <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1.5rem;max-width:480px;width:100%">
@@ -310,7 +311,12 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <p style="margin-bottom:.75rem">🔍 <strong>Löse Rätsel</strong> – An Rätsel-Stationen musst du vor Ort etwas finden oder beobachten. Nach richtiger Antwort wird der Fakten-Track freigeschaltet.</p>
 <p style="margin-bottom:.75rem">⭐ <strong>Sammle Traces</strong> – Für jede gelöste Station bekommst du Erfahrungspunkte. Am Ende wartet deine Urkunde.</p>
 <p style="margin-bottom:.75rem">💡 <strong>Tipp</strong> – Der Ermittler-Assistent hilft dir, wenn du nicht weiterkommst.</p>
-<p>🔊 <strong>In der Gruppe?</strong> – Nehmt einen Bluetooth-Lautsprecher mit! So hören alle entspannt die Geschichten und ihr könnt gemeinsam rätseln.</p>
+<p style="margin-bottom:.75rem">🔊 <strong>In der Gruppe?</strong> – Nehmt einen Bluetooth-Lautsprecher mit! So hören alle entspannt die Geschichten und ihr könnt gemeinsam rätseln.</p>
+<p style="margin-bottom:.75rem">📱 <strong>Standort erlauben</strong> – Die App braucht Zugriff auf deinen Standort, damit die Karte funktioniert. Wenn dein Browser fragt, tippe auf „Erlauben".<br>
+<span style="font-size:.8rem;opacity:.7">Falls du die Berechtigung verweigert hast:<br>
+<strong>iPhone:</strong> Einstellungen → Safari → Standort → Erlauben (oder suche: <em>„iPhone Safari Standort erlauben"</em>)<br>
+<strong>Android:</strong> Einstellungen → Apps → Chrome → Berechtigungen → Standort (oder suche: <em>„Android Chrome Standort Berechtigung"</em>)</span></p>
+<p>🔄 <strong>Fortschritt wird automatisch gespeichert.</strong> Du kannst jederzeit pausieren und später weitermachen.</p>
 </div>
 </div>
 <button class="btn-primary" style="max-width:400px;margin:0 auto" onclick="startTour()">Mission starten</button>
@@ -404,7 +410,7 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 
 <script>
 // ========================================================================
-// TRACETOUR ENGINE v5 – 16 Stationen, 1869 Story, Vollvertonung
+// TRACETOUR ENGINE v5 – 17 Stationen, 1869 Story, Vollvertonung
 // ========================================================================
 let userName='',currentStation=0,maxUnlockedStation=0,totalXp=0,map,userMarker,stationMarkers=[],routeLine;
 let panelCollapsed=false,watchId=null,userPos=null;
@@ -495,50 +501,53 @@ const AMBIENT_CONFIGS=[
 {name:'Kornhaus-Stille',type:'cellar'},            // 7 Stadtmuseum
 {name:'Kneipen-Atmosphäre',type:'city'},           // 8 Ammerschlag
 {name:'Torwind & Schritte',type:'wind'},           // 9 Haagtorplatz
-{name:'Ammer-Plätschern',type:'water'},            // 10 Affenfelsen
-{name:'Vögel & Blätterrauschen',type:'nature'},    // 11 Alter Bot. Garten
-{name:'Stadtgeräusche',type:'city'},               // 12 Neue Aula
-{name:'Fachwerk-Knarren',type:'cellar'},           // 13 Nonnenhaus
-{name:'Neckar-Rauschen',type:'nature'},            // 14 Neckarinsel
-{name:'Wasser & Wind',type:'water'}               // 15 Indianersteg
+{name:'Altstadt-Brunnen',type:'city'},             // 10 Froschkönig-Brunnen
+{name:'Ammer-Plätschern',type:'water'},            // 11 Affenfelsen
+{name:'Vögel & Blätterrauschen',type:'nature'},    // 12 Alter Bot. Garten
+{name:'Stadtgeräusche',type:'city'},               // 13 Neue Aula
+{name:'Fachwerk-Knarren',type:'cellar'},           // 14 Nonnenhaus
+{name:'Neckar-Rauschen',type:'nature'},            // 15 Neckarinsel
+{name:'Wasser & Wind',type:'water'}               // 16 Indianersteg
 ];
 
 const STATION_PHOTOS=[
 // 0 Schloss
-'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Schloss_Hohentuebingen.jpg/960px-Schloss_Hohentuebingen.jpg',
+'images/station_0.jpg',
 // 1 Studentenkarzer
-'https://www.tuepedia.de/images/7/71/Karzer.JPG',
+'images/station_1.jpg',
 // 2 Alte Aula
-'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Alte_Aula_der_Universit%C3%A4t_T%C3%BCbingen%2C_2024.jpg/960px-Alte_Aula_der_Universit%C3%A4t_T%C3%BCbingen%2C_2024.jpg',
+'images/station_2.jpg',
 // 3 Martinianum
-'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Hier_kotzte_Goethe_Martinianum_T%C3%BCbingen_M%C3%A4rz_2016.jpg/960px-Hier_kotzte_Goethe_Martinianum_T%C3%BCbingen_M%C3%A4rz_2016.jpg',
+'images/station_3.jpg',
 // 4 Stiftskirche
-'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Stiftskirche_T%C3%BCbingen.jpg/960px-Stiftskirche_T%C3%BCbingen.jpg',
+'images/station_4.jpg',
 // 5 Holzmarkt
-'https://www.tuepedia.de/images/3/33/Holzmarkt_Panorama.jpg',
+'images/station_5.jpg',
 // 6 Rathaus
-'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/T%C3%BCbingen_-_Altstadt_-_Marktplatz_-_Ansicht_nach_NW_-_Rathaus_und_Umgebung_in_blauer_Stunde.jpg/960px-T%C3%BCbingen_-_Altstadt_-_Marktplatz_-_Ansicht_nach_NW_-_Rathaus_und_Umgebung_in_blauer_Stunde.jpg',
+'images/station_6.jpg',
 // 7 Stadtmuseum
-'https://www.tuepedia.de/images/d/da/Kornhaus_von_hinten.JPG',
+'images/station_7.jpg',
 // 8 Ammerschlag
-'https://www.tuepedia.de/images/5/59/Ammerschlag_2.jpg',
+'images/station_8.jpg',
 // 9 Haagtorplatz
-'https://www.tuepedia.de/images/d/da/Haagtor.JPG',
-// 10 Affenfelsen
-'https://www.tuepedia.de/images/f/fd/Beim_Nonnenhaus_b.JPG',
-// 11 Alter Bot. Garten
-'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/T%C3%BCbingen_-_Neckarinsel_-_Platanenallee_im_Oktober_%281%29.jpg/1280px-T%C3%BCbingen_-_Neckarinsel_-_Platanenallee_im_Oktober_%281%29.jpg',
-// 12 Neue Aula
-'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Alte_Aula_der_Universit%C3%A4t_T%C3%BCbingen%2C_2024.jpg/960px-Alte_Aula_der_Universit%C3%A4t_T%C3%BCbingen%2C_2024.jpg',
-// 13 Nonnenhaus
-'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Nonnenhaus_T%C3%BCbingen_03.jpg/960px-Nonnenhaus_T%C3%BCbingen_03.jpg',
-// 14 Neckarinsel
-'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/T%C3%BCbingen_-_Neckarinsel_-_Platanenallee_im_Oktober_%281%29.jpg/1280px-T%C3%BCbingen_-_Neckarinsel_-_Platanenallee_im_Oktober_%281%29.jpg',
-// 15 Indianersteg
-'https://www.tuepedia.de/images/2/21/Indianersteg.png'
+'images/station_9.jpg',
+// 10 Froschkönig-Brunnen
+'images/station_10.jpg',
+// 11 Affenfelsen
+'images/station_11.jpg',
+// 12 Alter Bot. Garten
+'images/station_12.jpg',
+// 13 Neue Aula
+'images/station_13.jpg',
+// 14 Nonnenhaus
+'images/station_14.jpg',
+// 15 Neckarinsel
+'images/station_15.jpg',
+// 16 Indianersteg
+'images/station_16.jpg'
 ];
 
-// ====== 16 STOPS – Schloss (START) → Indianersteg (FINALE) ======
+// ====== 17 STOPS – Schloss (START) → Indianersteg (FINALE) ======
 // Route bergab durch die Altstadt, 1869
 const stations=[
 {
@@ -569,23 +578,23 @@ const stations=[
 },
 {
   lat:48.520001,lng:9.055591,name:'Martinianum – Münzgasse 13',ambientIdx:3,xp:30,anecdote:true,
-  story:'Heinrich hastete die Münzgasse hinunter. Im Vorbeigehen streifte sein Blick ein kleines Schild an der Hauswand – das berühmteste Schild Tübingens. „Hier kotzte Goethe."\n\nJohann Wolfgang von Goethe besuchte Tübingen 1797 auf seiner Schweizerreise und war offenbar nicht begeistert – vom Wein, vom Essen, oder von der Gesellschaft. Das Martinianum (Münzgasse 13) ist eines der ältesten Privathäuser der Stadt. Das Schild wurde auf Betreiben des Tübinger Verschönerungsvereins angebracht.\n\nHeinrich hatte hier zeitweise gewohnt, bevor er sein Labor im Schloss bezog. Das Zimmer im zweiten Stock, karg aber ruhig. Von seinem Fenster aus konnte er den Eingang des Collegiums sehen – und jeden, der die Münzgasse heraufkam. Eine nützliche Eigenschaft, die er heute hätte gebrauchen können.'
+  story:'Heinrich hastete die Münzgasse hinunter. Im Vorbeigehen streifte sein Blick ein kleines Schild an der Hauswand – das berühmteste Schild Tübingens. „Hier kotzte Goethe."\n\nJohann Wolfgang von Goethe besuchte Tübingen 1797 auf seiner Schweizerreise und wohnte nebenan in der Münzgasse 15 bei seinem Verleger Cotta. Sein Urteil: „Die Stadt selbst ist abscheulich, allein man darf nur wenige Schritte tun, um die schönste Gegend zu sehen." Die Stadt fand er also hässlich – die Landschaft drumherum aber wunderschön. Das Schild „Hier kotzte Goethe" am Martinianum ist ein satirischer Kommentar auf den übertriebenen Goethe-Kult – kein historisches Ereignis.\n\nHeinrich hatte hier zeitweise gewohnt, bevor er sein Labor im Schloss bezog. Das Zimmer im zweiten Stock, karg aber ruhig. Von seinem Fenster aus konnte er die enge Münzgasse überblicken – und jeden sehen, der heraufkam. Eine nützliche Eigenschaft, die er heute hätte gebrauchen können.'
 },
 {
   lat:48.520002,lng:9.055678,name:'Stiftskirche',ambientIdx:4,xp:80,
   answer:['56'],
   choices:['45 Meter','56 Meter','68 Meter','74 Meter'],
-  story:'Die Stiftskirche St. Georg – das spirituelle Herz der Altstadt. Heinrich erreichte die Kirche atemlos. Der alte Mesner, ein Freund seiner Studentenzeit, ließ ihn durch den Seiteneingang.\n\n„Fünf Minuten", flüsterte Heinrich. Der Mesner nickte. In einem Beichtstuhl in der hinteren linken Ecke gibt es einen losen Stein. Heinrich schob das zweite Fragment dahinter.\n\nDie Stiftskirche mit ihrem markanten Kirchturm ist eines der bedeutendsten Bauwerke der Spätgotik in Württemberg. In der Fürstengruft im Chorbereich sind württembergische Herzöge und Universitätsprofessoren begraben – die Gelehrten, die im Leben so viel stritten, ruhen im Tod friedlich nebeneinander.',
+  story:'Die Stiftskirche St. Georg – das spirituelle Herz der Altstadt. Heinrich erreichte die Kirche atemlos. Der alte Mesner, ein Freund seiner Studentenzeit, ließ ihn durch den Seiteneingang.\n\n„Fünf Minuten", flüsterte Heinrich. Der Mesner nickte. In einem Beichtstuhl in der hinteren linken Ecke gibt es einen losen Stein. Heinrich schob das zweite Fragment dahinter.\n\nDie Stiftskirche mit ihrem markanten Kirchturm ist eines der bedeutendsten Bauwerke der Spätgotik in Württemberg. Im Chorbereich befinden sich 14 steinerne Grabmale württembergischer Herrscher und ihrer Angehörigen – darunter Herzog Eberhard im Bart, der Universitätsgründer.',
   diary:'Der Mesner hat mich erkannt und nichts gefragt. Es gibt noch gute Menschen in dieser Stadt. Ich habe das Fragment hinter dem dritten Stein links im hinteren Beichtstuhl versteckt. Möge es dort lange sicher sein.',
   riddle:'Schau dir den Kirchturm der Stiftskirche genau an. Wie hoch ist er? Beim Bau ging das Geld aus – der Turm blieb kleiner als geplant!',
   hint:'Der Turm hat 169 Stufen und eine Aussichtsplattform auf 45 Metern. Aber der Turm geht noch etwas weiter nach oben …',
-  fact:'In der Fürstengruft der Stiftskirche liegen 15 Mitglieder des Hauses Württemberg begraben – darunter der Universitätsgründer Eberhard im Bart. Seine Grabplatte zeigt ihn betend mit seinem Lieblingsspruch: „Attempto" (Ich wag\'s).\n\nDer Turm hat eine Besonderheit: Die Turmwächterwohnung auf halber Höhe war bis 1948 bewohnt! Der letzte Turmwächter hieß Karl Weihenmaier und lebte dort mit seiner Familie.',
-  factBullets:['15 Württemberger in der Fürstengruft begraben','Eberhard im Bart: Motto „Attempto" (Ich wag\'s)','Turmwächterwohnung bis 1948 bewohnt','Letzter Turmwächter: Karl Weihenmaier'],
+  fact:'Im Chor der Stiftskirche befinden sich 14 Grabmale württembergischer Herrscher und ihrer Angehörigen. Eberhard im Bart, der Universitätsgründer, wurde zunächst woanders beigesetzt und erst um 1535 in die Stiftskirche überführt. Sein Grabmal zeigt ihn betend mit seinem Lieblingsspruch: „Attempto" (Ich wag\'s).\n\nDer Chor blieb mitsamt dem mittelalterlichen Lettner nur deshalb erhalten, weil Herzog Ulrich 1534 die Grablege dorthin verlegte – ein Glücksfall für die Kunst. Insgesamt gibt es in und um die Kirche 124 Grabmale.\n\nDer Turm hat eine Besonderheit: Die Turmwächterwohnung auf halber Höhe war bis 1948 bewohnt! Der letzte Turmwächter hieß Karl Weihenmaier und lebte dort mit seiner Familie.',
+  factBullets:['14 Grabmale im Chor – Herrscher und Angehörige','Eberhard im Bart: Motto „Attempto" (Ich wag\'s)','Mittelalterlicher Lettner nur wegen der Grablege erhalten','124 Grabmale insgesamt in und um die Kirche','Turmwächterwohnung bis 1948 bewohnt'],
   aiHints:['Der Turm ist höher als 45 Meter, denn die Aussichtsplattform liegt auf 45 m.','Es ist keine runde Zahl, aber nah dran.','Der Turm ist 56 Meter hoch.']
 },
 {
   lat:48.520403,lng:9.055689,name:'Holzmarkt & Georgsbrunnen',ambientIdx:5,xp:25,anecdote:true,
-  story:'Heinrich verließ die Stiftskirche durch den Nordausgang und stand auf dem Holzmarkt – dem langgezogenen Platz nördlich der Kirche. Früher hieß er „Hafenmarkt" (so steht es noch auf der Katasterkarte von 1819).\n\nDer Georgsbrunnen in der Mitte zeigt den Heiligen Georg beim Drachentöten – den Schutzpatron der Stiftskirche. Das Original wurde 1523 vom Steinmetz Andreas Lang geschaffen. Es wurde 1841 abgebaut, 1842 durch eine neugotische Gusseisen-Version ersetzt – und die wurde 1961 entfernt. Für Parkplätze. Ernsthaft. 1976 kam der Brunnen zurück, als der Holzmarkt Fußgängerzone wurde.\n\nEin paar Schritte weiter, vor dem Café Hirsch, gibt es einen weiteren Brunnen mit einer besonderen Geschichte: Den Froschkönigbrunnen. Der Brunnen war jahrelang vermüllt – ein Meter Müll in sieben Metern Tiefe. 2024 initiierte eine engagierte Bürgerin die Reinigung, und 2025 wurde ein handgefertigter Froschkönig aus Ton als neue Figur eingesetzt. Er schaut direkt auf die Tübinger Froschgasse und wird nachts von einer Solarlampe angestrahlt.\n\nHeinrich überquerte den Holzmarkt hastig. Unter den Gaslaternen waren noch einige Bürger unterwegs. Er senkte den Kopf und ging weiter.'
+  story:'Heinrich verließ die Stiftskirche durch den Nordausgang und stand auf dem Holzmarkt – dem langgezogenen Platz nördlich der Kirche. Früher hieß er „Hafenmarkt" (so steht es noch auf der Katasterkarte von 1819).\n\nDer Georgsbrunnen in der Mitte zeigt den Heiligen Georg beim Drachentöten – den Schutzpatron der Stiftskirche. Das Original wurde 1523 vom Steinmetz Andreas Lang geschaffen. Es wurde 1841 abgebaut, 1842 durch eine neugotische Gusseisen-Version ersetzt – und die wurde 1961 entfernt. Für Parkplätze. Ernsthaft. 1976 kam der Brunnen zurück, als der Holzmarkt Fußgängerzone wurde.\n\nHeinrich überquerte den Holzmarkt hastig. Unter den Gaslaternen waren noch einige Bürger unterwegs. Er senkte den Kopf und ging weiter.'
 },
 {
   lat:48.520261,lng:9.053388,name:'Rathaus & Astronomische Uhr',ambientIdx:6,xp:100,
@@ -600,7 +609,7 @@ const stations=[
 },
 {
   lat:48.521113,lng:9.053337,name:'Stadtmuseum im Kornhaus',ambientIdx:7,xp:25,anecdote:true,
-  story:'Vom Marktplatz aus passierte Heinrich das Kornhaus – das Gebäude, das heute das Stadtmuseum beherbergt. Erbaut 1453 als überdachter Getreidemarkt, zwischen 1512 und 1564 erweitert und aufgestockt.\n\nWas dich drinnen erwartet, falls du reingehst: eine funktionierende Nachbildung von Wilhelm Schickards mechanischem Rechner von 1623 – die erste Rechenmaschine der Welt, Jahrzehnte vor Pascals berühmtem Modell. Rekonstruiert zwischen 1957 und 1960. Und sie rechnet tatsächlich noch.\n\nDer Eintritt ist seit April 2018 frei. Sonntags um 15 Uhr gibt es eine Führung (5 € für Erwachsene, Kinder kostenlos).\n\nHeinrich hatte keine Zeit für Museen. Er bog in die Kornhausstraße ein und eilte bergab Richtung Ammergasse.'
+  story:'Vom Marktplatz aus passierte Heinrich das Kornhaus – das Gebäude, das heute das Stadtmuseum beherbergt. Erbaut 1453 als überdachter Getreidemarkt, war es über die Jahrhunderte schon alles: Festsaal für Tanz und Theater, Knaben- und Mädchenschule, Feuerwache und Rotes-Kreuz-Station – bevor es 1991 als Stadtmuseum eröffnete.\n\nWas dich drinnen erwartet: eine funktionierende Nachbildung von Wilhelm Schickards mechanischem Rechner von 1623 – die erste Rechenmaschine der Welt, Jahrzehnte vor Pascals berühmtem Modell. Rekonstruiert zwischen 1957 und 1960 vom Tübinger Professor Bruno von Freytag-Löringhoff anhand von Schickards Briefwechsel mit Kepler. Und sie rechnet tatsächlich noch!\n\nAußerdem sehenswert: die ständige Ausstellung zu Lotte Reiniger, der Pionierin des Silhouetten-Animationsfilms. Das Fachwerk des Kornhauses ist freigelegt und prägt die Räume – allerdings wurde bei der Sanierung in den 1980ern zementhaltiger Mörtel verwendet, der eigentlich Fachwerkhölzer zerstört. Ein Tübinger Zimmermeister: „Hier wurde mehr kaputt gemacht als in den letzten 100 Jahren durch Wind und Wetter."\n\nKuriose Geschichte: 2002 stellte sich heraus, dass ein Museumsmitarbeiter 113 Objekte gestohlen hatte. 103 davon konnten sichergestellt werden.\n\nDer Eintritt ist seit April 2018 frei. Sonntags um 15 Uhr gibt es eine Führung (5 €, Kinder kostenlos).\n\nHeinrich hatte keine Zeit für Museen. Er bog in die Kornhausstraße ein und eilte bergab Richtung Ammergasse.'
 },
 {
   lat:48.520887,lng:9.050648,name:'Ammerschlag',ambientIdx:8,xp:25,anecdote:true,
@@ -618,44 +627,48 @@ const stations=[
   aiHints:['Schau auf die Gedenktafel am Platz.','Tübingen hatte insgesamt 5 Stadttore.','Das Abrissjahr liegt im frühen 19. Jahrhundert.']
 },
 {
-  lat:48.521978,lng:9.056889,name:'Affenfelsen',ambientIdx:10,xp:90,
-  answer:['affe','affen','affenfelsen'],
-  story:'Vom Haagtorplatz ging Heinrich weiter zum Affenfelsen – einem Stadtmauerrest am Rand der Altstadt, wo der Ammerkanal durch ein Tor unter der alten Mauer hindurchfließt.\n\nDer Name klingt seltsam: „Affenfelsen". Er kommt wahrscheinlich daher, dass Kinder auf den Mauerresten herumkletterten wie kleine Affen. Andere sagen, es liegt daran, dass sich hier im Sommer junge Leute trafen – und benahmen sich dabei, nun ja, affig.\n\nDer Ammerkanal fließt hier durch einen kleinen Bogen in der Stadtmauer – ein faszinierendes Bild: mittelalterliche Steine über lebendigem Wasser. Heinrich beobachtete das Wasser und überlegte kurz, ob er dem Kanal folgen sollte. Aber nein – sein Weg führte weiter.',
-  diary:'Am Affenfelsen. Das Wasser der Ammer fließt unter der alten Mauer hindurch – ruhig, gleichmäßig, ohne sich um Gendarmen oder Formeln zu scheren. Ich beneide den Bach.',
-  riddle:'Welches Tier gibt diesem alten Stadtmauerrest seinen volkstümlichen Namen? (Ein Wort)',
-  hint:'Der Name kommt von Kindern, die auf den Mauerresten herumkletterten wie...',
-  fact:'Die Tübinger Stadtmauer wurde im 13. Jahrhundert errichtet und war etwa 1,5 km lang. Am Affenfelsen sieht man besonders gut, wie dick die Mauern waren – über einen Meter.\n\nDer Ammerkanal, der hier durchfließt, trieb früher mehrere Mühlen in der Altstadt an. Das Wasser wurde so geschickt gelenkt, dass Gerber, Färber und Müller es nacheinander nutzen konnten – ein mittelalterliches Recyclingsystem.',
-  factBullets:['Stadtmauer aus dem 13. Jh., ca. 1,5 km lang','Mauern über 1 Meter dick','Ammerkanal trieb mehrere Mühlen an','Mittelalterliches Wasser-Recyclingsystem für Gerber, Färber, Müller'],
-  aiHints:['Der Name kommt von einem Tier.','Kinder klettern gerne auf Felsen...','Es ist ein Primat, der auch im Zoo lebt.']
+  lat:48.52100,lng:9.05410,name:'Froschkönig-Brunnen',ambientIdx:10,xp:25,anecdote:true,
+  story:'Auf dem Weg vom Haagtorplatz zum Affenfelsen kam Heinrich am Brunnen vor dem Café Hirsch vorbei. Ein unscheinbarer Brunnenschacht, sieben Meter tief.\n\nHeute hat dieser Brunnen eine besondere Geschichte: Jahrelang war er mit einem Meter Müll vollgestopft. Schulkinder, die ihn beim Stadtquiz besuchten, schauten angeekelt hinein. 2024 nahm sich Petra Wenzel, eine engagierte Bürgerin aus dem Café Hirsch, der Sache an. Die Stadt half mit schwerem Gerät – Gasmasken, Industrieschläuche, der volle Einsatz.\n\nIm Frühling 2025 wurde ein handgefertigter Froschkönig aus Ton eingesetzt – 40 mal 40 Zentimeter, bunt bemalt und nachts von einer Solarlampe angestrahlt. Er guckt direkt auf die Tübinger Froschgasse. Eine Glasplatte schützte ihn vor der Witterung.\n\nDoch im Oktober 2025 wurde der Froschkönig gestohlen – jemand schob die Glasplatte zur Seite und hievte ihn heraus. „Das ist so schade für all die Kinder", sagte Wenzel. Sie bestellte sofort einen neuen. Schau mal, ob er schon wieder da ist!\n\nHeinrich bemerkte den Brunnen nicht. Er hatte andere Sorgen.'
 },
 {
-  lat:48.522908,lng:9.057404,name:'Alter Botanischer Garten',ambientIdx:11,xp:25,anecdote:true,
+  lat:48.521978,lng:9.056889,name:'Affenfelsen',ambientIdx:11,xp:90,
+  answer:['piccolo'],
+  story:'Vom Haagtorplatz ging Heinrich weiter zum Affenfelsen – einem Stadtmauerrest am Rand der Altstadt, wo der Ammerkanal durch ein Tor unter der alten Mauer hindurchfließt.\n\nDer Name klingt seltsam: „Affenfelsen". Er kommt wahrscheinlich daher, dass Kinder auf den Mauerresten herumkletterten wie kleine Affen. Andere sagen, es liegt daran, dass sich hier im Sommer junge Leute trafen – und benahmen sich dabei, nun ja, affig.\n\nDer Ammerkanal fließt hier durch einen kleinen Bogen in der Stadtmauer – ein faszinierendes Bild: mittelalterliche Steine über lebendigem Wasser. Heinrich beobachtete das Wasser und überlegte kurz, ob er dem Kanal folgen sollte. Aber nein – sein Weg führte weiter.',
+  diary:'Am Affenfelsen. Das Wasser der Ammer fließt unter der alten Mauer hindurch – ruhig, gleichmäßig, ohne sich um Gendarmen oder Formeln zu scheren. Ich beneide den Bach.',
+  riddle:'Welche Bar in der Nähe des Affenfelsens trägt den Namen eines alkoholischen Getränks? (Ein Wort)',
+  hint:'Es ist eine kleine Bar ganz in der Nähe – und der Name ist auch ein Schaumwein...',
+  fact:'Die Tübinger Stadtmauer wurde im 13. Jahrhundert errichtet und war etwa 1,5 km lang. Am Affenfelsen sieht man besonders gut, wie dick die Mauern waren – über einen Meter.\n\nDer Ammerkanal, der hier durchfließt, trieb früher mehrere Mühlen in der Altstadt an. Das Wasser wurde so geschickt gelenkt, dass Gerber, Färber und Müller es nacheinander nutzen konnten – ein mittelalterliches Recyclingsystem.',
+  factBullets:['Stadtmauer aus dem 13. Jh., ca. 1,5 km lang','Mauern über 1 Meter dick','Ammerkanal trieb mehrere Mühlen an','Mittelalterliches Wasser-Recyclingsystem für Gerber, Färber, Müller'],
+  aiHints:['Schau dich in der Nähe des Affenfelsens um – es gibt eine kleine Bar.','Der Name ist auch ein alkoholisches Getränk – ein kleiner Schaumwein.','Es ist ein italienisches Wort für etwas Kleines und Prickelndes.']
+},
+{
+  lat:48.522908,lng:9.057404,name:'Alter Botanischer Garten',ambientIdx:12,xp:25,anecdote:true,
   story:'Heinrich schlug einen Bogen nach Osten und schnitt durch den Alten Botanischen Garten – eine grüne Oase inmitten der Stadt. Der Garten wurde 1535 als einer der ersten botanischen Gärten Deutschlands angelegt.\n\nHier wuchsen exotische Pflanzen aus aller Welt – Geschenke von Forschungsreisenden, Botanikern und Missionaren. Riesige Mammutbäume, die heute noch stehen. Im Gewächshaus tropische Palmen und Orchideen.\n\nFür Heinrich war der Garten ein vertrauter Ort. Er hatte hier oft Proben gesammelt für seine Experimente. Jetzt, in der Novemberdunkelheit, waren die Wege leer. Die kahlen Äste der Platanen warfen bizarre Schatten im Licht der fernen Gaslaternen.\n\nEr durchquerte den Garten in wenigen Minuten und kam an der Wilhelmstraße heraus – direkt gegenüber der Neuen Aula.'
 },
 {
-  lat:48.524463,lng:9.059717,name:'Neue Aula',ambientIdx:12,xp:25,anecdote:true,
+  lat:48.524463,lng:9.059717,name:'Neue Aula',ambientIdx:13,xp:25,anecdote:true,
   story:'Die Neue Aula – das imposante Hauptgebäude der Universität, 1845 im klassizistischen Stil erbaut. Hier hielt Heinrich seine letzten Vorlesungen, bevor das Ministerium ihn unter Beobachtung stellte.\n\nDie Neue Aula war ein Statement: Tübingen als moderne, weltoffene Universität. Große Fenster, helle Säle, ein Hauch von Aufklärung in Stein. Für Heinrich war sie ein Symbol dessen, was die Universität sein könnte – und was sie unter dem Druck der Politik nicht sein durfte.\n\nEr blickte kurz auf die erleuchteten Fenster des Erdgeschosses. Irgendwo da drin saß vielleicht noch ein Student über seinen Büchern, nichts ahnend von der Jagd, die sich gerade durch die Stadt wand.\n\n„Leb wohl, Universität", murmelte Heinrich. Dann wandte er sich ab und ging bergab Richtung Ammerviertel.'
 },
 {
-  lat:48.521913,lng:9.057653,name:'Nonnenhaus',ambientIdx:13,xp:100,
+  lat:48.521913,lng:9.057653,name:'Nonnenhaus',ambientIdx:14,xp:100,
   answer:['abort','plumpsklo','klo','toilette','klosett'],
-  story:'Das Nonnenhaus – eines der ältesten Fachwerkhäuser der Altstadt, erbaut 1488. Der Name täuscht: Hier lebten keine Nonnen, sondern Beginen – Frauen einer christlichen Laiengemeinschaft ohne Klostergelübde.\n\nSpäter wohnte hier der Botaniker Leonhard Fuchs, nach dem die Fuchsie benannt ist. Heinrich versteckte sein vorletztes Fragment im Nonnenhaus – in einem Hohlraum hinter der alten Holzverkleidung.\n\nUnd dann ist da die Rückseite des Hauses. Im ersten Stock ragt ein hölzerner Erker weit über den Ammerkanal hinaus – über die Gasse hinweg bis direkt übers Wasser gebaut. Warum dieser aufwändige Bau? Die Antwort ist praktisch, mittelalterlich effizient – und ziemlich lustig.',
+  story:'Das Nonnenhaus – mit 30 Metern Länge eines der größten Fachwerkhäuser der Tübinger Altstadt, erbaut 1488. Der Name täuscht: Hier lebten zunächst Dominikanerinnen, dann Beginen – Frauen einer christlichen Laiengemeinschaft ohne Klostergelübde. Nach der Reformation 1534 wurde das Kloster aufgelöst.\n\nDanach zog der Medizinprofessor und Botaniker Leonhard Fuchs (1501–1566) ein – mit seiner Frau und 10 Kindern! Er legte neben dem Haus einen der ältesten botanischen Gärten Europas an und schrieb hier 1543 sein berühmtes „New Kreüterbuch". Die Fuchsie wurde nach ihm benannt, obwohl er die Pflanze nie gesehen hat. Vor dem Haus gibt es heute einen kleinen Erinnerungsgarten mit Pflanzen aus seinem Buch.\n\nHeinrich versteckte sein vorletztes Fragment im Nonnenhaus – in einem Hohlraum hinter der alten Holzverkleidung.\n\nUnd dann ist da die Rückseite des Hauses. Im ersten Stock ragt ein hölzerner Vorbau – das „Sprachhaus" – weit über den Ammerkanal hinaus. Warum dieser aufwändige Bau direkt übers Wasser? Die Antwort ist praktisch, mittelalterlich effizient – und ziemlich lustig.',
   diary:'Das Nonnenhaus. 1488. Die Balken knarren unter meinen Schritten, als wollten sie protestieren. Ich habe mein vorletztes Fragment hier versteckt – dort, wo die Beginen einst ihre irdischen Bedürfnisse direkt dem Wasser überantworteten. Niemand sucht an solchen Orten.',
   riddle:'Schau dir die Rückseite des Nonnenhauses an. Im ersten Stock ragt ein hölzerner Erker über die Gasse hinweg bis über den Ammerkanal. Warum wurde er so weit übers Wasser gebaut? Was war seine Funktion? (Ein Wort)',
   hint:'Es hängt über dem Wasser und war praktischerweise direkt mit dem Abwasser verbunden.',
-  fact:'Der Erker-Abort des Nonnenhauses ist eines der besterhaltenen Beispiele mittelalterlicher Sanitäranlagen in Süddeutschland. Das Prinzip war einfach: Die Schwerkraft erledigte den Rest, der Ammerkanal spülte alles weg.\n\nLeonhard Fuchs (1501-1566), der hier lebte, beschrieb über 400 Pflanzen in seinem „New Kreüterbuch" von 1543 – mit handkolorierten Holzschnitten. Das Buch war so erfolgreich, dass die Fuchsie nach ihm benannt wurde, obwohl er die Pflanze nie gesehen hat.',
-  factBullets:['Besterhaltener mittelalterlicher Abort in Süddeutschland','Leonhard Fuchs beschrieb 400+ Pflanzen (1543)','Die Fuchsie wurde nach ihm benannt – er sah sie nie','New Kreüterbuch: handkolorierte Holzschnitte'],
+  fact:'Das „Sprachhaus" am Nonnenhaus ist eines der besterhaltenen Beispiele mittelalterlicher Sanitäranlagen in Süddeutschland. Das Prinzip war einfach: Die Schwerkraft erledigte den Rest, der Ammerkanal spülte alles weg.\n\nDas Gebäude wurde 2007/08 vorbildlich saniert und erhielt 2008 den Denkmalschutzpreis Baden-Württemberg. Im Erdgeschoss der heutigen Buchhandlung ist im Boden ein Sichtfenster eingelassen – es zeigt den originalen Ziegel-Estrich von 1488!\n\nLeonhard Fuchs beschrieb über 400 Pflanzen in seinem „New Kreüterbuch" von 1543 – mit handkolorierten Holzschnitten. Sein botanischer Garten neben dem Haus war einer der ältesten in ganz Europa.',
+  factBullets:['„Sprachhaus": besterhaltener mittelalterlicher Abort Süddeutschlands','Denkmalschutzpreis Baden-Württemberg 2008','Originaler Ziegel-Estrich von 1488 unter Sichtfenster im Boden','Leonhard Fuchs: 400+ Pflanzen im New Kreüterbuch (1543)','Einer der ältesten botanischen Gärten Europas neben dem Haus'],
   aiHints:['Schau an die Rückseite des Hauses über dem Kanal.','Es ist ein sanitäres \"Gebäude\" ohne Spülung.','Die Menschen des Mittelalters mussten ihre Notdurft irgendwie verrichten.']
 },
 {
-  lat:48.519017,lng:9.057506,name:'Neckarinsel & Platanenallee',ambientIdx:14,xp:30,anecdote:true,
+  lat:48.519017,lng:9.057506,name:'Neckarinsel & Platanenallee',ambientIdx:15,xp:30,anecdote:true,
   story:'Heinrich erreichte die Neckarinsel – das schmale Eiland mitten im Fluss, verbunden durch zwei Brücken mit der Stadt. Er war jetzt fast am Ziel.\n\nDie Platanenallee auf der Insel wurde in den 1820er Jahren angelegt. Die mächtigen Bäume sind heute über 190 Jahre alt und Naturdenkmäler. In den Zweigen über dir verschränken sich die Äste zu einem natürlichen Gewölbe.\n\nVon der Insel aus siehst du auch den Indianersteg – eine schmale Fußgängerbrücke, die die Insel mit dem anderen Ufer verbindet. Sie wurde 1863 als Holzbrücke gebaut. Ihren Namen verdankt sie spielenden Kindern, die auf der wackeligen Holzbrücke „Indianer" spielten.\n\nHeinrich stand einen Moment still unter den kahlen Platanen. Der Neckar rauschte auf beiden Seiten. Stocherkähne lagen vertäut am Ufer. Noch ein paar hundert Meter. Noch eine Brücke.'
 },
 {
-  lat:48.518324,lng:9.055226,name:'Indianersteg',ambientIdx:15,xp:200,
+  lat:48.518324,lng:9.055226,name:'Indianersteg',ambientIdx:16,xp:200,
   answer:['indianer','indianersteg','cowboy'],
   story:'Der Indianersteg – eine schmale Fußgängerbrücke über den Neckar. Heinrichs letzte Hürde.\n\nDie erste Holzbrücke wurde hier 1863 errichtet. Ihren Namen verdankt sie spielenden Kindern, die auf der wackeligen Konstruktion „Indianer" spielten – ein Unfallbericht von 1871 ist das erste dokumentierte Zeugnis des Namens.\n\nDie Holzbrücke wurde um 1900 durch eine Eisenträgerbrücke ersetzt, dann 1911 durch eine Betonbogenbrücke – die gegen Ende des Zweiten Weltkriegs zerstört und danach einfacher wiederaufgebaut wurde. Heute hat sie smaragdgrüne Geländer.\n\nHeinrich überquerte die wackelige Holzbrücke in jener Novembernacht 1869. Auf der anderen Seite: Dunkelheit, Felder, Freiheit. Er hörte noch die Rufe der Gendarmen vom anderen Ufer. Aber es war zu spät. Der Forscher war verschwunden.\n\nDas letzte Fragment seiner Formel versteckte er unter einem losen Stein am Brückengeländer. Du stehst jetzt dort, wo Heinrich von Calw in die Freiheit ging.',
-  diary:'Der Steg wackelt unter meinen Schritten. Der Neckar ist schwarz und still. Auf der anderen Seite beginnt die Nacht, in der ich verschwinden werde. Über Rottenburg nach Süden. Die Schweizer Grenze.\n\nMeine Formel ist verteilt – sechzehn Fragmente an sechzehn Orten. Wer sie alle findet, wird verstehen: Die gefährlichste Waffe ist nicht die Formel selbst. Es ist die Angst der Mächtigen vor dem freien Wissen.\n\nLebe wohl, Tübingen.',
+  diary:'Der Steg wackelt unter meinen Schritten. Der Neckar ist schwarz und still. Auf der anderen Seite beginnt die Nacht, in der ich verschwinden werde. Über Rottenburg nach Süden. Die Schweizer Grenze.\n\nMeine Formel ist verteilt – siebzehn Fragmente an siebzehn Orten. Wer sie alle findet, wird verstehen: Die gefährlichste Waffe ist nicht die Formel selbst. Es ist die Angst der Mächtigen vor dem freien Wissen.\n\nLebe wohl, Tübingen.',
   riddle:'Die erste Holzbrücke wurde 1863 errichtet. Welches Kinderspiel gab der Brücke ihren Namen? (Ein Wort)',
   hint:'Kinder spielten auf der wackeligen Holzbrücke ein Spiel mit Federschmuck und Kriegsbemalung.',
   fact:'1869 waren jenseits des Stegs nur nasse Wiesen und Felder – die Neckarauen. Die Südstadt entstand erst ab den 1880er Jahren, nachdem der Neckar reguliert wurde.\n\nDer Hauptbahnhof stand seit 1861 als einsames Gebäude in der Ebene. Die Kaserne kam erst 1873. Wer 1869 über den Steg ging, verschwand buchstäblich in der Dunkelheit – genau wie Heinrich.\n\nFun Fact: Der Name „Indianersteg" taucht erstmals 1871 in einem Unfallbericht auf. Kinder spielten auf der wackeligen Brücke Karl-May-Spiele.',
@@ -682,6 +695,17 @@ function loadGame(){
   }catch(e){return false}
 }
 function clearSave(){localStorage.removeItem(SAVE_KEY)}
+function confirmReset(){
+  if(confirm('Wirklich alles löschen? Dein gesamter Fortschritt (gelöste Rätsel, Punkte, freigeschaltete Stationen) geht unwiderruflich verloren!')){
+    if(confirm('Bist du sicher? Das kann nicht rückgängig gemacht werden.')){
+      clearSave();
+      userName='';currentStation=0;maxUnlockedStation=0;totalXp=0;
+      solvedStations=stations.map(()=>false);
+      showToast('Fortschritt gelöscht');
+      setTimeout(()=>showScreen('tourSelect'),500);
+    }
+  }
+}
 function showToast(msg){
   const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),2000);
@@ -794,7 +818,7 @@ function navStation(dir){
 function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c])}
 function wordSpans(text,prefix){return text.replace(/\n/g,' ').split(/\s+/).filter(Boolean).map((w,i)=>`<span class="word" id="${prefix}${i}">${esc(w)}</span>`).join(' ')}
 
-function mapsUrl(lat,lng,name){return `https://maps.apple.com/?ll=${lat},${lng}&q=${encodeURIComponent(name)}`}
+function mapsUrl(lat,lng,name){return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}&query_place_id=${encodeURIComponent(name)}`}
 
 // ====== RENDER ======
 function renderStation(){
@@ -1152,12 +1176,21 @@ function checkChoice(btn){
     fb.textContent='Nicht ganz – versuch eine andere Antwort!';
   }
 }
+function normalizeUmlauts(s){return s.replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss')}
+function levenshtein(a,b){const m=a.length,n=b.length;const d=Array.from({length:m+1},()=>new Array(n+1));for(let i=0;i<=m;i++)d[i][0]=i;for(let j=0;j<=n;j++)d[0][j]=j;for(let i=1;i<=m;i++)for(let j=1;j<=n;j++){const cost=a[i-1]===b[j-1]?0:1;d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+cost)}return d[m][n]}
+function fuzzyMatch(input,target){
+  const a=normalizeUmlauts(input.toLowerCase().trim());
+  const b=normalizeUmlauts(target.toLowerCase().trim());
+  if(a===b)return true;
+  const maxDist=b.length<=6?2:3;
+  return levenshtein(a,b)<=maxDist;
+}
 function checkAnswer(){
   const idx=currentStation,s=stations[idx];
   if(solvedStations[idx])return;
   const val=document.getElementById('riddleAnswer').value.trim().toLowerCase().replace(/[.,!?]/g,'');
   const fb=document.getElementById('riddleFb');
-  const correct=s.answer.some(a=>val===a.toLowerCase()||val.split(' ').includes(a.toLowerCase()));
+  const correct=s.answer.some(a=>fuzzyMatch(val,a)||val.split(' ').some(w=>fuzzyMatch(w,a)));
   if(correct){
     playSfx('correct');
     fb.className='riddle-fb correct';
