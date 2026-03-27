@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html class="dark" lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TraceTour by Florian S. Thiel – Die Stadt ist dein Spielfeld</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Inter:wght@300;400;500;600&family=Epilogue:wght@700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-tint": "#ffb59d",
+        "surface-container-high": "#1a2b3c",
+        "outline-variant": "#44474c",
+        "on-secondary-container": "#a8b6cd",
+        "on-primary-container": "#f3632d",
+        "surface-container": "#0f2131",
+        "background": "#031425",
+        "surface-container-low": "#0b1d2d",
+        "surface-bright": "#2a3b4c",
+        "primary-container": "#511500",
+        "surface-container-lowest": "#000f1f",
+        "secondary": "#bac7df",
+        "on-surface-variant": "#c4c6cd",
+        "tertiary-container": "#1a2b3c",
+        "primary": "#ffb59d",
+        "on-background": "#d2e4fb",
+        "surface-container-highest": "#253648",
+        "error-container": "#93000a",
+        "outline": "#8e9197",
+        "on-surface": "#d2e4fb",
+        "surface-dim": "#031425",
+      },
+      fontFamily: {
+        "headline": ["Epilogue", "sans-serif"],
+        "body": ["Inter", "sans-serif"],
+        "brand": ["Montserrat", "sans-serif"],
+      },
+    },
+  },
+}
+</script>
+<style>
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  line-height: 1;
+}
+.glass-effect {
+  background: rgba(37, 54, 72, 0.6);
+  backdrop-filter: blur(12px);
+}
+.text-glow {
+  text-shadow: 0 0 20px rgba(243, 99, 45, 0.4);
+}
+body {
+  background-color: #031425;
+  color: #d2e4fb;
+}
+.accent-line {
+  width: 48px;
+  height: 3px;
+  background: #f3632d;
+}
+.city-card {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #1a2b3c;
+  cursor: default;
+}
+.city-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) brightness(0.6);
+  transform: scale(1.05);
+  transition: filter 0.5s ease, transform 0.6s ease;
+}
+.city-card:hover img {
+  filter: grayscale(0) brightness(0.75);
+  transform: scale(1.0);
+}
+.city-card .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(2,10,20,0.85) 0%, transparent 60%);
+  z-index: 2;
+}
+.city-card .label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  z-index: 3;
+}
+.city-card .label span.name {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  color: #fff;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.city-card .label span.status {
+  display: block;
+  font-size: 0.6rem;
+  color: rgba(243,99,45,0.7);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+</style>
+</head>
+<body class="font-body selection:bg-on-primary-container selection:text-white">
+
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-md shadow-[0_20px_40px_rgba(0,15,31,0.4)]">
+  <div class="flex justify-between items-center max-w-7xl mx-auto px-6 py-4">
+    <div class="text-xl font-black tracking-tighter text-orange-400 font-brand">
+      TRACETOUR
+      <span class="text-xs font-normal text-slate-500 ml-1 tracking-normal">by Florian S. Thiel</span>
+    </div>
+    <div class="hidden md:flex items-center space-x-8">
+      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-orange-400 border-b-2 border-orange-500 pb-1" href="#">Touren</a>
+      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#">So funktioniert's</a>
+      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#">Städte</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="font-brand uppercase tracking-[0.05em] text-xs font-bold text-slate-400 hover:text-orange-200 transition-all">Login</a>
+      <a href="index.html" class="bg-orange-600 text-white px-5 py-2 rounded-md font-brand uppercase tracking-[0.05em] text-sm font-bold hover:bg-orange-500 transition-all active:scale-95">STARTEN</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img class="w-full h-full object-cover opacity-45" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/T%C3%BCbingen_-_Altstadt_-_Neckarfront_-_Ansicht_von_Neckarinsel_mit_Stocherkahn.jpg/1280px-T%C3%BCbingen_-_Altstadt_-_Neckarfront_-_Ansicht_von_Neckarinsel_mit_Stocherkahn.jpg" alt="Tübingen Neckarfront">
+    <div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
+  </div>
+  <div class="relative z-10 max-w-5xl px-6 text-center">
+    <span class="inline-block font-brand font-bold text-orange-400 tracking-[0.3em] uppercase mb-6 text-sm opacity-90">TraceTour by Florian S. Thiel</span>
+    <h1 class="font-headline text-5xl md:text-8xl font-black text-on-background leading-tight tracking-tighter mb-8 text-glow">
+      DIE STADT IST DEIN<br/>
+      <span class="text-primary">SPIELFELD.</span>
+    </h1>
+    <p class="font-body text-lg md:text-xl text-secondary max-w-3xl mx-auto mb-10 leading-relaxed">
+      Entdecke Tübingen in einem völlig neuen Licht. Kriminalfälle, Rätsel und echte Geschichte vereint in einer gamifizierten Audio-Experience für die Hosentasche.
+    </p>
+    <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+      <a href="index.html" class="bg-orange-600 text-white px-10 py-5 rounded-lg font-brand font-black text-lg tracking-widest hover:scale-105 transition-transform shadow-[0_0_30px_rgba(243,99,45,0.35)]">
+        TOUR STARTEN
+      </a>
+      <a href="#how-it-works" class="glass-effect border border-on-secondary-container/20 text-on-background px-10 py-5 rounded-lg font-brand font-black text-lg tracking-widest hover:bg-surface-container-highest transition-colors">
+        SO FUNKTIONIERT'S
+      </a>
+    </div>
+  </div>
+  <!-- HUD Decoratives -->
+  <div class="absolute bottom-12 left-6 hidden lg:block border-l-2 border-primary/40 pl-4 py-2 opacity-60">
+    <p class="font-body text-[10px] tracking-[0.2em] uppercase text-secondary">System Status: Active</p>
+    <p class="font-body text-[10px] tracking-[0.2em] uppercase text-secondary">48.5216° N, 9.0576° E</p>
+  </div>
+  <div class="absolute bottom-12 right-6 hidden lg:block border-r-2 border-primary/40 pr-4 py-2 opacity-60 text-right">
+    <p class="font-body text-[10px] tracking-[0.2em] uppercase text-secondary">Case File: 1598</p>
+    <p class="font-body text-[10px] tracking-[0.2em] uppercase text-secondary">Der verschwundene Alchemist</p>
+  </div>
+</header>
+
+<!-- Featured Tour Section -->
+<section class="py-24 px-6 bg-surface-container-low">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+      <div>
+        <h2 class="font-headline text-4xl font-extrabold text-on-background tracking-tight mb-2 uppercase">Aktuelle Mission</h2>
+        <div class="accent-line"></div>
+      </div>
+      <p class="font-body text-secondary max-w-md text-sm leading-relaxed">Deine erste Aufgabe führt dich ins Herz von Tübingen. Verfolge die Spuren eines Mannes, der 1598 spurlos verschwand – und ein Geheimnis hinterließ, das die Welt verändern sollte.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- Main Card -->
+      <div class="lg:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-high shadow-2xl">
+        <img class="w-full h-full min-h-[460px] object-cover transition-transform duration-700 group-hover:scale-105"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/H%C3%B6lderlinturmT%C3%BCbingen.jpg/960px-H%C3%B6lderlinturmT%C3%BCbingen.jpg"
+          alt="Hölderlinturm Tübingen">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-8 w-full">
+          <div class="flex items-center gap-4 mb-4">
+            <span class="bg-orange-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Verfügbar</span>
+            <span class="text-on-surface-variant font-body text-xs uppercase tracking-widest">Tübingen, 1598</span>
+          </div>
+          <h3 class="font-headline text-4xl md:text-5xl font-black text-white mb-6 tracking-tighter">Der verschwundene Alchemist</h3>
+          <div class="flex flex-wrap gap-6">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-lg">location_on</span>
+              <span class="font-body text-sm uppercase tracking-widest text-slate-300">10 Stationen</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-lg">schedule</span>
+              <span class="font-body text-sm uppercase tracking-widest text-slate-300">ca. 120 Min</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-lg">record_voice_over</span>
+              <span class="font-body text-sm uppercase tracking-widest text-slate-300">Audio-Experience</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-lg">trophy</span>
+              <span class="font-body text-sm uppercase tracking-widest text-slate-300">1000 Traces</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Info Cards -->
+      <div class="lg:col-span-4 flex flex-col gap-6">
+        <div class="glass-effect p-8 rounded-xl border-l-4 border-orange-500 flex-1">
+          <h4 class="font-brand font-bold text-primary uppercase text-sm mb-4 tracking-widest">Die Story</h4>
+          <p class="font-body text-on-surface leading-relaxed italic text-sm">
+            "Ein Experiment, das die Grenzen der Wissenschaft sprengte. Ein Mann, der spurlos verschwand. Tübingen bewahrt sein Geheimnis seit 1598 – bist du bereit, es zu lüften?"
+          </p>
+        </div>
+        <div class="bg-surface-container-highest p-8 rounded-xl flex flex-col justify-between">
+          <div>
+            <h4 class="font-brand font-bold text-secondary uppercase text-sm mb-4 tracking-widest">Was dich erwartet</h4>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3 font-body text-sm">
+                <span class="material-symbols-outlined text-orange-500 text-lg">check_circle</span>
+                Spannende Erzählung & Tagebücher
+              </li>
+              <li class="flex items-center gap-3 font-body text-sm">
+                <span class="material-symbols-outlined text-orange-500 text-lg">check_circle</span>
+                GPS-Rätsel vor Ort
+              </li>
+              <li class="flex items-center gap-3 font-body text-sm">
+                <span class="material-symbols-outlined text-orange-500 text-lg">check_circle</span>
+                KI-Ermittler-Assistent
+              </li>
+              <li class="flex items-center gap-3 font-body text-sm">
+                <span class="material-symbols-outlined text-orange-500 text-lg">check_circle</span>
+                Teilnehmer-Urkunde am Ende
+              </li>
+              <li class="flex items-center gap-3 font-body text-sm">
+                <span class="material-symbols-outlined text-orange-500 text-lg">check_circle</span>
+                Kein App-Download nötig
+              </li>
+            </ul>
+          </div>
+          <a href="index.html" class="mt-8 block w-full bg-orange-600 text-white py-4 rounded-lg font-brand font-bold uppercase tracking-widest hover:bg-orange-500 transition-all text-center text-sm">
+            JETZT STARTEN
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section id="how-it-works" class="py-24 px-6">
+  <div class="max-w-5xl mx-auto text-center mb-20">
+    <h2 class="font-headline text-4xl font-extrabold text-on-background tracking-tight mb-4 uppercase">Einsatzprotokoll</h2>
+    <p class="font-body text-secondary uppercase tracking-[0.2em] text-xs">In drei Schritten zum Ermittler</p>
+  </div>
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+    <div class="hidden md:block absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-orange-600/30 to-transparent -translate-y-1/2"></div>
+    <!-- Step 1 -->
+    <div class="relative z-10 text-center group">
+      <div class="w-20 h-20 mx-auto bg-surface-container-highest rounded-full flex items-center justify-center mb-6 border-2 border-on-secondary-container/10 group-hover:border-orange-500 transition-colors">
+        <span class="material-symbols-outlined text-3xl text-primary">vpn_key</span>
+      </div>
+      <h3 class="font-headline text-xl font-bold mb-3">1. Code erhalten</h3>
+      <p class="font-body text-on-surface-variant text-sm px-4">Kaufe einen Zugangscode oder starte direkt mit dem Demo-Code. Kein Download, kein App Store.</p>
+    </div>
+    <!-- Step 2 -->
+    <div class="relative z-10 text-center group">
+      <div class="w-20 h-20 mx-auto bg-surface-container-highest rounded-full flex items-center justify-center mb-6 border-2 border-on-secondary-container/10 group-hover:border-orange-500 transition-colors">
+        <span class="material-symbols-outlined text-3xl text-primary">explore</span>
+      </div>
+      <h3 class="font-headline text-xl font-bold mb-3">2. Stadt erkunden</h3>
+      <p class="font-body text-on-surface-variant text-sm px-4">Geh zum Startpunkt und tauche in die Geschichte ein. GPS führt dich von Station zu Station.</p>
+    </div>
+    <!-- Step 3 -->
+    <div class="relative z-10 text-center group">
+      <div class="w-20 h-20 mx-auto bg-surface-container-highest rounded-full flex items-center justify-center mb-6 border-2 border-on-secondary-container/10 group-hover:border-orange-500 transition-colors">
+        <span class="material-symbols-outlined text-3xl text-primary">emoji_events</span>
+      </div>
+      <h3 class="font-headline text-xl font-bold mb-3">3. Urkunde sichern</h3>
+      <p class="font-body text-on-surface-variant text-sm px-4">Löse alle Rätsel, sammle Traces und erhalte deine persönliche Teilnehmer-Urkunde zum Teilen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<section class="py-12 px-6 bg-surface-container-low border-y border-slate-800/40">
+  <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <div>
+      <div class="font-headline text-3xl font-black text-orange-400">10</div>
+      <div class="font-body text-xs text-secondary uppercase tracking-widest mt-1">Stationen</div>
+    </div>
+    <div>
+      <div class="font-headline text-3xl font-black text-orange-400">120</div>
+      <div class="font-body text-xs text-secondary uppercase tracking-widest mt-1">Min. Spielzeit</div>
+    </div>
+    <div>
+      <div class="font-headline text-3xl font-black text-orange-400">1598</div>
+      <div class="font-body text-xs text-secondary uppercase tracking-widest mt-1">Das Jahr des Rätsels</div>
+    </div>
+    <div>
+      <div class="font-headline text-3xl font-black text-orange-400">1000</div>
+      <div class="font-body text-xs text-secondary uppercase tracking-widest mt-1">Traces zu sammeln</div>
+    </div>
+  </div>
+</section>
+
+<!-- Expansion Section -->
+<section class="py-24 px-6 bg-surface-container-lowest overflow-hidden">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-16">
+      <h2 class="font-headline text-4xl font-extrabold text-on-background tracking-tight mb-2 uppercase">Expansion</h2>
+      <p class="font-body text-secondary text-sm">Weitere Städte & Touren in Vorbereitung</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <!-- Tübingen 2 -->
+      <div class="city-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Schloss_Hohentuebingen.jpg/960px-Schloss_Hohentuebingen.jpg" alt="Tübingen II" style="filter:grayscale(0) brightness(0.65)">
+        <div class="overlay"></div>
+        <div class="label">
+          <span class="name">Tübingen II</span>
+          <span class="status">In Vorbereitung</span>
+        </div>
+      </div>
+      <!-- München -->
+      <div class="city-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Munich_New_Town_Hall_at_night.jpg/800px-Munich_New_Town_Hall_at_night.jpg" alt="München">
+        <div class="overlay"></div>
+        <div class="label">
+          <span class="name">München</span>
+          <span class="status">In Vorbereitung</span>
+        </div>
+      </div>
+      <!-- Berlin -->
+      <div class="city-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Berliner_Fernsehturm_Nacht.JPG/800px-Berliner_Fernsehturm_Nacht.JPG" alt="Berlin">
+        <div class="overlay"></div>
+        <div class="label">
+          <span class="name">Berlin</span>
+          <span class="status">In Vorbereitung</span>
+        </div>
+      </div>
+      <!-- Stuttgart -->
+      <div class="city-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Stuttgart-Schlossplatz-at-night.jpg/800px-Stuttgart-Schlossplatz-at-night.jpg" alt="Stuttgart">
+        <div class="overlay"></div>
+        <div class="label">
+          <span class="name">Stuttgart</span>
+          <span class="status">In Vorbereitung</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="py-20 px-6 relative overflow-hidden">
+  <div class="absolute inset-0 bg-orange-700/90"></div>
+  <div class="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+    <div>
+      <h2 class="font-headline text-4xl md:text-5xl font-black text-white tracking-tighter leading-none mb-2">BEREIT FÜR DIE<br/>ERSTE MISSION?</h2>
+      <p class="text-orange-100 text-sm font-body">Kein App-Download. Kein Gerät nötig außer deinem Smartphone.</p>
+    </div>
+    <a href="index.html" class="bg-slate-950 text-white px-12 py-5 rounded-lg font-brand font-black text-lg tracking-widest hover:bg-slate-900 transition-all shadow-xl whitespace-nowrap">
+      JETZT STARTEN
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-slate-950 w-full py-12 px-6 border-t border-slate-800/30">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
+    <div>
+      <div class="font-brand font-bold text-slate-400 text-sm">TRACETOUR BY FLORIAN S. THIEL</div>
+      <div class="font-body text-xs text-slate-600 mt-1">Gamifizierte Stadtouren für neugierige Köpfe</div>
+    </div>
+    <div class="font-body text-xs tracking-widest uppercase text-slate-600 text-center">
+      © 2025 TraceTour by Florian S. Thiel
+    </div>
+    <div class="flex gap-6">
+      <a class="font-body text-xs tracking-widest uppercase text-slate-500 hover:text-orange-400 transition-colors" href="#">Impressum</a>
+      <a class="font-body text-xs tracking-widest uppercase text-slate-500 hover:text-orange-400 transition-colors" href="#">Datenschutz</a>
+      <a class="font-body text-xs tracking-widest uppercase text-slate-500 hover:text-orange-400 transition-colors" href="index.html">Zur App</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
