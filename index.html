@@ -173,6 +173,20 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 .riddle-submit{padding:11px 18px;background:var(--accent);color:#fff;font-family:var(--font-h);font-weight:700;border-radius:var(--r-sm);font-size:.85rem;text-transform:uppercase;letter-spacing:.05em}.riddle-fb{margin-top:10px;font-size:.85rem;padding:10px 14px;border-radius:var(--r-sm)}
 .riddle-fb.correct{background:rgba(74,222,128,.1);color:var(--success);border:1px solid rgba(74,222,128,.2)}
 .riddle-fb.wrong{background:rgba(248,113,113,.1);color:var(--error);border:1px solid rgba(248,113,113,.2)}
+.fragment-reveal{background:linear-gradient(135deg,rgba(243,99,45,.12),rgba(255,181,157,.08));border:1px solid rgba(243,99,45,.3);border-radius:var(--r);padding:1.2rem;margin:1rem 0;text-align:center;animation:fragmentIn .6s ease}
+.fragment-reveal .frag-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.fragment-reveal .frag-word{font-family:var(--font-h);font-size:1.8rem;font-weight:900;color:#ffb59d;letter-spacing:.08em}
+.fragment-reveal .frag-count{font-size:.7rem;color:var(--text-2);margin-top:.5rem}
+.formula-bar{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:8px 12px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);margin-bottom:1rem;min-height:28px}
+.formula-bar .fw{font-family:var(--font-h);font-size:.7rem;font-weight:700;padding:2px 6px;border-radius:4px;letter-spacing:.04em}
+.formula-bar .fw.found{background:rgba(243,99,45,.15);color:#ffb59d}
+.formula-bar .fw.missing{background:rgba(255,255,255,.04);color:rgba(255,255,255,.15)}
+@keyframes fragmentIn{0%{opacity:0;transform:scale(.9)}100%{opacity:1;transform:scale(1)}}
+.finale-formula{text-align:center;padding:2rem 1.5rem;margin:1rem 0}
+.finale-formula .ff-label{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.finale-formula .ff-text{font-family:var(--font-h);font-size:1.4rem;font-weight:900;color:#ffb59d;line-height:1.5;margin-bottom:1.5rem;letter-spacing:.02em}
+.finale-formula .ff-author{font-size:.8rem;color:var(--text-2);font-style:italic;margin-bottom:1rem}
+.finale-formula .ff-explain{font-size:.82rem;color:var(--text-2);line-height:1.7;text-align:left}
 .distance-bar{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--accent-bg);border:1px solid var(--border-accent);border-radius:var(--r-sm);margin-bottom:1rem;font-size:.8rem;color:var(--accent)}
 .distance-bar .material-symbols-outlined{font-size:18px}
 .hint-btn{width:100%;padding:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);font-size:.82rem;color:var(--text-2);display:flex;align-items:center;justify-content:center;gap:8px;transition:border .2s;margin-bottom:.5rem}
@@ -372,12 +386,15 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <div style="font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:.75rem">Epilog · Zürich, Dezember 1869</div>
 <p style="font-size:.88rem;line-height:1.8;color:var(--text-2);margin-bottom:.75rem">Du hast es geschafft. Alle Fragmente von Heinrichs Forschung liegen vor dir – zusammengesetzt wie die Teile eines Puzzles, das über 150 Jahre auf seine Lösung gewartet hat.</p>
 <p style="font-size:.88rem;line-height:1.8;color:var(--text-2);margin-bottom:.75rem">Heinrich von Calw überquerte in jener Novembernacht 1869 den wackeligen Indianersteg und verschwand in der Dunkelheit jenseits des Neckars. Über Rottenburg erreichte er die Schweizer Grenze und ließ sich in Zürich nieder, wo er unter dem Pseudonym „Dr. H. Calwensis" an der ETH lehrte.</p>
-<p style="font-size:.88rem;line-height:1.8;color:var(--text-2)">Seine Energie-Formel wurde nie für Waffen genutzt. Stattdessen veröffentlichte er sie 1871 in einer Zürcher Fachzeitschrift – frei zugänglich für alle. Das Königliche Ministerium in Stuttgart tobte. Aber es war zu spät. Das Wissen gehörte der Welt.</p>
+<p style="font-size:.88rem;line-height:1.8;color:var(--text-2)">Seine Formel wurde nie für Waffen genutzt. Stattdessen veröffentlichte er sie 1871 in einer Zürcher Fachzeitschrift – frei zugänglich für alle. Das Königliche Ministerium in Stuttgart tobte. Aber es war zu spät. Das Wissen gehörte der Welt.</p>
+<p style="font-size:.88rem;line-height:1.8;color:var(--text-2);margin-top:.75rem">Doch die Formel war nie das, was das Ministerium vermutete. Keine physikalische Gleichung. Keine chemische Reaktion. Was Heinrich über die halbe Stadt verteilt hatte, war eine Erkenntnis – inspiriert von einem Dichter, der jahrzehntelang im Turm am Neckar lebte.</p>
 </div>
 
-<div style="background:var(--bg-card);border-left:3px solid var(--accent);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:1rem 1.25rem;margin-bottom:1.5rem;max-width:480px;width:100%;text-align:left">
-<div style="font-style:italic;color:var(--accent-soft);font-size:.9rem;line-height:1.7">"Die gefährlichste Waffe ist nicht die Formel – es ist die Angst der Mächtigen vor dem freien Wissen. Ich habe mich entschieden: Lieber ein Flüchtling mit reinem Gewissen als ein Hofgelehrter in goldenen Ketten."</div>
-<div style="font-size:.72rem;color:var(--text-3);margin-top:.5rem;font-style:normal">— Heinrich von Calw, Zürich 1870</div>
+<div class="finale-formula" style="max-width:480px;width:100%;background:var(--bg-card);border:1px solid var(--border-accent);border-radius:var(--r)">
+<div class="ff-label">Heinrichs Formel</div>
+<div class="ff-text">„Wo aber Gefahr ist, wächst das Rettende auch."</div>
+<div class="ff-author">— Friedrich Hölderlin, „Patmos" (1803)</div>
+<div class="ff-explain">Hölderlin lebte 36 Jahre im Turm am Neckar – nur wenige hundert Meter von deiner letzten Station entfernt. Heinrich kannte seine Verse und verstand: Die wahre Formel war nie eine Waffe. Sie war ein Versprechen. Wo Wissen unterdrückt wird, wächst der Mut, es zu teilen.</div>
 </div>
 
 <div style="margin-bottom:1.5rem">
@@ -552,6 +569,7 @@ const STATION_PHOTOS=[
 const stations=[
 {
   lat:48.519513,lng:9.051072,name:'Schloss Hohentübingen',ambientIdx:0,xp:150,
+  fragment:'WO',
   answer:['hirsch','hirsche'],
   story:'Das Schloss Hohentübingen – dein Ausgangspunkt. Von hier oben überblickst du die gesamte Altstadt. Gaslaternen flackern in den Gassen unter dir. Es ist November 1869, kurz vor Einbruch der Nacht.\n\nIn den Kellergewölben des Schlosses hatte Professor Heinrich von Calw sein Labor. Drei Jahre lang forschte er hier offiziell an „chemischen Grundlagen" für das Königliche Ministerium unter König Karl I. In Wahrheit arbeitete er an einer Energie-Formel, die alles verändern könnte – Industrie, Kriegsführung, die gesamte Ordnung der Macht.\n\nVor einer Stunde erreichte ihn ein Telegramm: „Gendarmen unterwegs. Verlassen Sie das Labor. Sofort." Heinrich zündete seine Notizen an, stopfte das Manuskript in seinen Mantel und floh die steile Burgsteige hinab. Du stehst jetzt dort, wo alles begann.',
   diary:'Dies ist mein letzter Eintrag in diesem Labor. Der Geruch verbrannten Papiers hängt noch in der Luft. Drei Jahre Forschung – und alles, was bleibt, ist ein einziges Manuskript unter meinem Mantel.\n\nDas Ministerium will meine Formel für Waffen. Ich habe drei Jahre gelogen, verzögert, abgelenkt. Jetzt ist die Zeit abgelaufen. Die Gendarmen sind unterwegs. Ich werde Fragmente meiner Forschung an verschiedenen Orten der Stadt verstecken – für den Fall, dass jemand Würdiges sie findet. Der erste Hinweis bleibt hier, am Tor.',
@@ -567,6 +585,7 @@ const stations=[
 },
 {
   lat:48.519911,lng:9.055589,name:'Alte Aula der Universität',ambientIdx:2,xp:80,
+  fragment:'ABER',
   answer:['1477','vierzehnhundertsiebenundsiebzig','eberhard'],
   story:'Die Alte Aula – das Festgebäude der Universität Tübingen. Heinrich duckte sich durch den Seiteneingang, den er als Professor kannte. Der Hausmeister schlief um diese Zeit.\n\nIm großen Saal, hinter dem Rednerpult, gibt es eine lose Holzvertäfelung. Heinrich schob das erste codierte Fragment seiner Forschung dahinter. Wenn jemand diese Tafel jemals abheben sollte, würde er einen Zettel mit einer kryptischen Formel finden – nutzlos ohne die anderen Fragmente.\n\nDie Alte Aula war der Ort, an dem Heinrich vor drei Jahren seine Antrittsvorlesung gehalten hatte. „Über die unsichtbaren Kräfte der Materie." Der Dekan hatte skeptisch gelächelt. Das Ministerium hatte aufmerksam zugehört.',
   diary:'In der Bibliothek der Alten Aula, hinter den theologischen Abhandlungen, fand ich damals das arabische Manuskript, das alles veränderte. Heute verstecke ich mein eigenes Werk an diesem Ort. Ich hoffe, es hat mehr Glück als ich.',
@@ -582,6 +601,7 @@ const stations=[
 },
 {
   lat:48.520002,lng:9.055678,name:'Stiftskirche',ambientIdx:4,xp:80,
+  fragment:'GEFAHR',
   answer:['56'],
   choices:['45 Meter','56 Meter','68 Meter','74 Meter'],
   story:'Die Stiftskirche St. Georg – das spirituelle Herz der Altstadt. Heinrich erreichte die Kirche atemlos. Der alte Mesner, ein Freund seiner Studentenzeit, ließ ihn durch den Seiteneingang.\n\n„Fünf Minuten", flüsterte Heinrich. Der Mesner nickte. In einem Beichtstuhl in der hinteren linken Ecke gibt es einen losen Stein. Heinrich schob das zweite Fragment dahinter.\n\nDie Stiftskirche mit ihrem markanten Kirchturm ist eines der bedeutendsten Bauwerke der Spätgotik in Württemberg. Im Chorbereich befinden sich 14 steinerne Grabmale württembergischer Herrscher und ihrer Angehörigen – darunter Herzog Eberhard im Bart, der Universitätsgründer.',
@@ -598,6 +618,7 @@ const stations=[
 },
 {
   lat:48.520261,lng:9.053388,name:'Rathaus & Astronomische Uhr',ambientIdx:6,xp:100,
+  fragment:'IST',
   answer:['7','sieben'],
   story:'Der Marktplatz – das Herz der Stadt. Das prächtige Rathaus thront vor dir, seine Fassade reich bemalt. Die große astronomische Uhr an der Seite zeigt nicht nur die Zeit, sondern auch Mondphasen, Tierkreiszeichen und den Lauf der Planeten.\n\nHeinrich mischte sich unter die letzten Marktbesucher. Der Neptunbrunnen auf dem Platz plätscherte leise. Die Treppe neben dem Rathaus ist übrigens absichtlich schief gebaut – sie folgt dem alten Abwasserkanal, der einst mitten durch den Marktplatz floss. Elegante Lösung eines uneleganten Problems.\n\nUnter dem Rathaus, in einer Mauernische, versteckte Heinrich das dritte Fragment. Der Telegrafenbote hatte gerade das Amt verlassen – Heinrich wusste, dass sein Telegramm aus Stuttgart längst angekommen war. Die Gendarmen konnten jeden Moment erscheinen.',
   diary:'Die Uhr am Rathaus fasziniert mich noch immer. 1511 gebaut, von Professor Stöffler entworfen – und sie läuft noch. Der Drachenzeiger sagt Finsternisse voraus. Manchmal wünschte ich, er könnte auch meine Zukunft vorhersagen.\n\nIch habe das Fragment unter dem Rathaus versteckt. Der Neptunbrunnen hat zugesehen. Stumm, wie immer. Weiter. Ich muss den Neckar erreichen.',
@@ -617,6 +638,7 @@ const stations=[
 },
 {
   lat:48.520548,lng:9.049518,name:'Haagtorplatz',ambientIdx:9,xp:80,
+  fragment:'WÄCHST',
   answer:['1831','achtzehnhunderteinunddreißig','5','fünf'],
   story:'Heinrich eilte westwärts durch die Ammergasse und erreichte den Haagtorplatz. Hier stand einmal das Haagtor – eines von fünf Stadttoren der mittelalterlichen Befestigung.\n\nDer Name kommt von „Haag" – der Schutzhecke am Nordhang des Schlossbergs. Das Tor führte nach Westen Richtung Herrenberg, entlang der Ammer. Es wurde 1831 abgerissen, als die Stadt sich ausdehnte und die alten Mauern hinderlich wurden.\n\nSchau auf den Boden: Die Pflasterung zeigt noch die Umrisse der alten Fundamente. Eine Gedenktafel wurde 2009 angebracht. Heinrich kannte das Tor noch aus Zeichnungen seines Großvaters – für ihn war es ein Symbol dafür, wie schnell eine Stadt ihre Geschichte vergisst.\n\nEr versteckte ein Fragment in einer Mauernische nahe der alten Fundamente und ging weiter.',
   diary:'Das Haagtor ist weg. Abgerissen. 1831, sagen sie. Aber die Fundamente sind noch da, unter dem Pflaster. Genau wie meine Formeln bald unter dem Staub dieser Stadt liegen werden. Unsichtbar, aber nicht verloren.',
@@ -632,6 +654,7 @@ const stations=[
 },
 {
   lat:48.521978,lng:9.056889,name:'Affenfelsen',ambientIdx:11,xp:90,
+  fragment:'DAS',
   answer:['piccolo'],
   story:'Vom Haagtorplatz ging Heinrich weiter zum Affenfelsen – einem Stadtmauerrest am Rand der Altstadt, wo der Ammerkanal durch ein Tor unter der alten Mauer hindurchfließt.\n\nDer Name klingt seltsam: „Affenfelsen". Er kommt wahrscheinlich daher, dass Kinder auf den Mauerresten herumkletterten wie kleine Affen. Andere sagen, es liegt daran, dass sich hier im Sommer junge Leute trafen – und benahmen sich dabei, nun ja, affig.\n\nDer Ammerkanal fließt hier durch einen kleinen Bogen in der Stadtmauer – ein faszinierendes Bild: mittelalterliche Steine über lebendigem Wasser. Heinrich beobachtete das Wasser und überlegte kurz, ob er dem Kanal folgen sollte. Aber nein – sein Weg führte weiter.',
   diary:'Am Affenfelsen. Das Wasser der Ammer fließt unter der alten Mauer hindurch – ruhig, gleichmäßig, ohne sich um Gendarmen oder Formeln zu scheren. Ich beneide den Bach.',
@@ -651,6 +674,7 @@ const stations=[
 },
 {
   lat:48.521913,lng:9.057653,name:'Nonnenhaus',ambientIdx:14,xp:100,
+  fragment:'RETTENDE',
   answer:['abort','plumpsklo','klo','toilette','klosett'],
   story:'Das Nonnenhaus – mit 30 Metern Länge eines der größten Fachwerkhäuser der Tübinger Altstadt, erbaut 1488. Der Name täuscht: Hier lebten zunächst Dominikanerinnen, dann Beginen – Frauen einer christlichen Laiengemeinschaft ohne Klostergelübde. Nach der Reformation 1534 wurde das Kloster aufgelöst.\n\nDanach zog der Medizinprofessor und Botaniker Leonhard Fuchs (1501–1566) ein – mit seiner Frau und 10 Kindern! Er legte neben dem Haus einen der ältesten botanischen Gärten Europas an und schrieb hier 1543 sein berühmtes „New Kreüterbuch". Die Fuchsie wurde nach ihm benannt, obwohl er die Pflanze nie gesehen hat. Vor dem Haus gibt es heute einen kleinen Erinnerungsgarten mit Pflanzen aus seinem Buch.\n\nHeinrich versteckte sein vorletztes Fragment im Nonnenhaus – in einem Hohlraum hinter der alten Holzverkleidung.\n\nUnd dann ist da die Rückseite des Hauses. Im ersten Stock ragt ein hölzerner Vorbau – das „Sprachhaus" – weit über den Ammerkanal hinaus. Warum dieser aufwändige Bau direkt übers Wasser? Die Antwort ist praktisch, mittelalterlich effizient – und ziemlich lustig.',
   diary:'Das Nonnenhaus. 1488. Die Balken knarren unter meinen Schritten, als wollten sie protestieren. Ich habe mein vorletztes Fragment hier versteckt – dort, wo die Beginen einst ihre irdischen Bedürfnisse direkt dem Wasser überantworteten. Niemand sucht an solchen Orten.',
@@ -666,6 +690,7 @@ const stations=[
 },
 {
   lat:48.518324,lng:9.055226,name:'Indianersteg',ambientIdx:16,xp:200,
+  fragment:'AUCH',
   answer:['indianer','indianersteg','cowboy'],
   story:'Der Indianersteg – eine schmale Fußgängerbrücke über den Neckar. Heinrichs letzte Hürde.\n\nDie erste Holzbrücke wurde hier 1863 errichtet. Ihren Namen verdankt sie spielenden Kindern, die auf der wackeligen Konstruktion „Indianer" spielten – ein Unfallbericht von 1871 ist das erste dokumentierte Zeugnis des Namens.\n\nDie Holzbrücke wurde um 1900 durch eine Eisenträgerbrücke ersetzt, dann 1911 durch eine Betonbogenbrücke – die gegen Ende des Zweiten Weltkriegs zerstört und danach einfacher wiederaufgebaut wurde. Heute hat sie smaragdgrüne Geländer.\n\nHeinrich überquerte die wackelige Holzbrücke in jener Novembernacht 1869. Auf der anderen Seite: Dunkelheit, Felder, Freiheit. Er hörte noch die Rufe der Gendarmen vom anderen Ufer. Aber es war zu spät. Der Forscher war verschwunden.\n\nDas letzte Fragment seiner Formel versteckte er unter einem losen Stein am Brückengeländer. Du stehst jetzt dort, wo Heinrich von Calw in die Freiheit ging.',
   diary:'Der Steg wackelt unter meinen Schritten. Der Neckar ist schwarz und still. Auf der anderen Seite beginnt die Nacht, in der ich verschwinden werde. Über Rottenburg nach Süden. Die Schweizer Grenze.\n\nMeine Formel ist verteilt – Fragmente an verschiedenen Orten dieser Stadt, versteckt in Mauernischen, hinter losen Steinen, unter altem Holz. Wer sie alle findet, wird verstehen: Die gefährlichste Waffe ist nicht die Formel selbst. Es ist die Angst der Mächtigen vor dem freien Wissen.\n\nLebe wohl, Tübingen.',
@@ -892,6 +917,7 @@ function renderStation(){
     el.innerHTML=`
     <div class="station-label"><span class="material-symbols-outlined">radar</span> Rätsel ${riddleNum} von ${riddleTotal} · Stop ${currentStation+1}</div>
     <div class="station-name">${s.name}</div>
+    ${renderFormulaBar()}
     ${mapsLink}${distHtml}
     <div class="station-photo-wrapper">
       <img src="${photo}" alt="${s.name}" onerror="this.parentElement.style.display='none'">
@@ -1169,7 +1195,7 @@ function checkChoice(btn){
       }
     });
     fb.className='riddle-fb correct';
-    fb.innerHTML=`Richtig! +${s.xp} Traces`;
+    fb.innerHTML=`Richtig! +${s.xp} Traces`+renderFragmentReveal(s);
     solvedStations[idx]=true;unlockFactAudio();totalXp+=s.xp;updateXp();
     if(maxUnlockedStation===currentStation&&currentStation<stations.length-1)maxUnlockedStation++;
     const nbtn=document.createElement('button');nbtn.className='btn-primary';nbtn.style.marginTop='10px';
@@ -1217,7 +1243,7 @@ function checkAnswer(){
   if(correct){
     playSfx('correct');
     fb.className='riddle-fb correct';
-    fb.innerHTML=`Richtig! +${s.xp} Traces`;
+    fb.innerHTML=`Richtig! +${s.xp} Traces`+renderFragmentReveal(s);
     solvedStations[idx]=true;unlockFactAudio();totalXp+=s.xp;updateXp();
     if(maxUnlockedStation===currentStation&&currentStation<stations.length-1)maxUnlockedStation++;
     const inp=document.getElementById('riddleAnswer'),sub=document.querySelector('.riddle-submit');
@@ -1280,6 +1306,26 @@ function solveAnecdote(){
       box.appendChild(navDiv);
     }
   }
+}
+function getFragments(){
+  const all=stations.filter(s=>s.fragment);
+  const found=all.filter((s,i)=>{const idx=stations.indexOf(s);return solvedStations[idx]});
+  return{all,found,total:all.length,solved:found.length};
+}
+function renderFragmentReveal(s){
+  if(!s.fragment)return'';
+  const f=getFragments();
+  return`<div class="fragment-reveal"><div class="frag-label">Fragment der Formel gefunden</div><div class="frag-word">${s.fragment}</div><div class="frag-count">${f.solved} von ${f.total} Fragmenten</div></div>`;
+}
+function renderFormulaBar(){
+  const words=['WO','ABER','GEFAHR','IST','WÄCHST','DAS','RETTENDE','AUCH'];
+  const riddleStations=stations.filter(s=>s.fragment);
+  const html=words.map((w,i)=>{
+    const st=riddleStations[i];const idx=stations.indexOf(st);
+    const found=solvedStations[idx];
+    return`<span class="fw ${found?'found':'missing'}">${found?w:'???'}</span>`;
+  }).join('');
+  return`<div class="formula-bar">${html}</div>`;
 }
 function updateXp(){
   const max=stations.reduce((a,b)=>a+b.xp,0);
@@ -1445,12 +1491,13 @@ function generateShareCard(){
   ctx.beginPath();
   ctx.roundRect?ctx.roundRect(80,980,920,180,12):ctx.rect(80,980,920,180);
   ctx.stroke();
-  ctx.font='italic 500 20px Georgia,serif';ctx.fillStyle='#ffb59d';
-  ctx.fillText('"Die gefährlichste Waffe ist die Angst vor dem freien Wissen."',540,1038);
+  ctx.font='italic 600 24px Georgia,serif';ctx.fillStyle='#ffb59d';
+  ctx.fillText('"Wo aber Gefahr ist, wächst',540,1030);
+  ctx.fillText('das Rettende auch."',540,1062);
   ctx.font='italic 500 18px Georgia,serif';ctx.fillStyle='#8192a7';
-  ctx.fillText('— Heinrich von Calw, Zürich 1870',540,1070);
-  ctx.font='400 16px Inter,Arial,sans-serif';ctx.fillStyle='rgba(243,99,45,.7)';
-  ctx.fillText('Trage das Wissen dieser Stadt mit dir – wohin du auch gehst.',540,1110);
+  ctx.fillText('— Friedrich Hölderlin, Patmos (1803)',540,1098);
+  ctx.font='400 15px Inter,Arial,sans-serif';ctx.fillStyle='rgba(243,99,45,.6)';
+  ctx.fillText('Die Formel des Forschers · entschlüsselt in Tübingen',540,1130);
   ctx.font='700 26px Arial,sans-serif';ctx.fillStyle='#f3632d';
   ctx.fillText('#TraceTourTuebingen',540,1210);
   ctx.font='400 18px Inter,Arial,sans-serif';ctx.fillStyle='#4a5d73';
