@@ -46,7 +46,7 @@ MODEL_ID = "eleven_multilingual_v2"
 OUTPUT_DIR = Path(__file__).parent / "audio"
 
 # ============================================================
-# ALLE TEXTE DER 16 STATIONEN
+# ALLE TEXTE DER 17 STATIONEN
 # ============================================================
 
 STATIONS = [
@@ -57,7 +57,7 @@ STATIONS = [
         "story": (
             "Das Schloss Hohentübingen - dein Ausgangspunkt. Von hier oben überblickst du "
             "die gesamte Altstadt. Gaslaternen flackern in den Gassen unter dir. "
-            "Es ist November 1869, kurz vor Einbruch der Nacht.\n\n"
+            "Es ist November achtzehnhundertneunundsechzig, kurz vor Einbruch der Nacht.\n\n"
             "In den Kellergewölben des Schlosses hatte Professor Heinrich von Calw sein Labor. "
             "Drei Jahre lang forschte er hier offiziell an 'chemischen Grundlagen' für das "
             "Königliche Ministerium unter König Karl dem Ersten. In Wahrheit arbeitete er an einer "
@@ -78,9 +78,9 @@ STATIONS = [
         ),
         "fact": (
             "Wusstest du? Im Keller des Schlosses befindet sich das aelteste Weinfass der Welt von "
-            "1549 mit 84.000 Litern Fassungsvermoegen. Die Universitaet nutzte das Schloss bis ins "
-            "20. Jahrhundert als Laborgebaeude - Friedrich Miescher entdeckte hier 1869 die DNA! "
-            "Ausserdem fand man in den Gewoelben die Vogelherd-Figuren: 40.000 Jahre alte "
+            "fünfzehnhundertneunundvierzig mit vierundachtzigtausend Litern Fassungsvermoegen. Die Universitaet nutzte das Schloss bis ins "
+            "zwanzigste Jahrhundert als Laborgebaeude - Friedrich Miescher entdeckte hier achtzehnhundertneunundsechzig die DNA! "
+            "Ausserdem fand man in den Gewoelben die Vogelherd-Figuren: vierzigtausend Jahre alte "
             "Elfenbeinschnitzereien, die aeltesten bekannten Kunstwerke der Menschheit."
         ),
         "riddle": (
@@ -94,16 +94,16 @@ STATIONS = [
         "name": "Station 1 - Studentenkarzer",
         "type": "anekdote",
         "anecdote": (
-            "Auf dem Weg bergab passierst du den Studentenkarzer in der Münzgasse 20 - "
-            "das Universitätsgefängnis, in das Tübinger Studenten seit 1515 gesperrt wurden. "
+            "Auf dem Weg bergab passierst du den Studentenkarzer in der Münzgasse zwanzig - "
+            "das Universitätsgefängnis, in das Tübinger Studenten seit fünfzehnhundertfünfzehn gesperrt wurden. "
             "Der älteste erhaltene Uni-Karzer Deutschlands.\n\n"
             "Heinrich kannte den Karzer gut. Als Student saß er hier zwei Nächte wegen 'Nachtwandeln' - "
             "er war nachts heimlich im Labor geblieben. Die Zellen sind winzig: zwei verbundene Räume "
-            "mit zusammen 15 Quadratmetern und kleinen Fensteröffnungen. Die Wände sind übersät "
-            "mit Inschriften und Zeichnungen der Insassen seit dem 16. Jahrhundert.\n\n"
+            "mit zusammen fünfzehn Quadratmetern und kleinen Fensteröffnungen. Die Wände sind übersät "
+            "mit Inschriften und Zeichnungen der Insassen seit dem sechzehnten Jahrhundert.\n\n"
             "Vergehen, die zum Karzer führten: Nachtwandeln, das Tragen 'absichtlich neumodisch "
             "geschlitzter Kleidung', unautorisierte Eheschließungen und Glücksspiel. Der Karzer "
-            "war bis 1845 in Betrieb - also gerade noch zu Heinrichs Studentenzeit.\n\n"
+            "war bis achtzehnhundertfünfundvierzig in Betrieb - also gerade noch zu Heinrichs Studentenzeit.\n\n"
             "Heinrich eilte hier vorbei, ohne stehenzubleiben. Die Gendarmen würden zuerst am "
             "Schloss suchen, dann die Münzgasse hinunter. Er hatte vielleicht noch zwanzig Minuten."
         ),
@@ -131,14 +131,14 @@ STATIONS = [
         ),
         "fact": (
             "Die Universitaet Tuebingen ist die fuenftaelteste im deutschen Sprachraum. In der "
-            "Alten Aula haengt noch heute das Portraet von Herzog Eberhard im Bart, der 1477 die "
-            "Uni gruendete - mit nur 11 Professoren und 300 Studenten.\n\n"
-            "Philipp Melanchthon lehrte hier griechische Grammatik - mit nur 21 Jahren! Und der "
+            "Alten Aula haengt noch heute das Portraet von Herzog Eberhard im Bart, der vierzehnhundertsiebenundsiebzig die "
+            "Uni gruendete - mit nur elf Professoren und dreihundert Studenten.\n\n"
+            "Philipp Melanchthon lehrte hier griechische Grammatik - mit nur einundzwanzig Jahren! Und der "
             "junge Kepler wurde hier fuer seine astronomischen Ideen fast von der Uni geworfen."
         ),
         "riddle": (
             "Auf der Infotafel der Alten Aula stehen zwei Jahreszahlen: das Baujahr und das Jahr "
-            "des Umbaus zum 300-jährigen Uni-Jubiläum. Ziehe 300 vom Umbaujahr ab - in welchem "
+            "des Umbaus zum dreihundertjährigen Uni-Jubiläum. Ziehe dreihundert vom Umbaujahr ab - in welchem "
             "Jahr wurde die Universität Tübingen gegründet?"
         ),
     },
@@ -150,9 +150,9 @@ STATIONS = [
         "anecdote": (
             "Heinrich hastete die Münzgasse hinunter. Im Vorbeigehen streifte sein Blick ein kleines "
             "Schild an der Hauswand - das berühmteste Schild Tübingens. 'Hier kotzte Goethe.'\n\n"
-            "Johann Wolfgang von Goethe besuchte Tübingen 1797 auf seiner Schweizerreise und war "
+            "Johann Wolfgang von Goethe besuchte Tübingen siebzehnhundertsiebenundneunzig auf seiner Schweizerreise und war "
             "offenbar nicht begeistert - vom Wein, vom Essen, oder von der Gesellschaft. "
-            "Das Martinianum in der Münzgasse 13 ist eines der ältesten Privathäuser der Stadt. "
+            "Das Martinianum in der Münzgasse dreizehn ist eines der ältesten Privathäuser der Stadt. "
             "Das Schild wurde auf Betreiben des Tübinger Verschönerungsvereins angebracht.\n\n"
             "Heinrich hatte hier zeitweise gewohnt, bevor er sein Labor im Schloss bezog. "
             "Das Zimmer im zweiten Stock, karg aber ruhig. Von seinem Fenster aus konnte er den "
@@ -183,10 +183,10 @@ STATIONS = [
             "versteckt. Möge es dort lange sicher sein."
         ),
         "fact": (
-            "In der Fuerstengruft der Stiftskirche liegen 15 Mitglieder des Hauses Wuerttemberg "
+            "In der Fuerstengruft der Stiftskirche liegen fünfzehn Mitglieder des Hauses Wuerttemberg "
             "begraben - darunter der Universitaetsgruender Eberhard im Bart. Seine Grabplatte zeigt "
             "ihn betend mit seinem Lieblingsspruch: 'Attempto' (Ich wag's).\n\n"
-            "Der Turm hat eine Besonderheit: Die Turmwaechterwohnung auf halber Hoehe war bis 1948 "
+            "Der Turm hat eine Besonderheit: Die Turmwaechterwohnung auf halber Hoehe war bis neunzehnhundertachtundvierzig "
             "bewohnt! Der letzte Turmwaechter hiess Karl Weihenmaier und lebte dort mit seiner Familie."
         ),
         "riddle": (
@@ -202,15 +202,15 @@ STATIONS = [
         "anecdote": (
             "Heinrich verließ die Stiftskirche durch den Nordausgang und stand auf dem Holzmarkt - "
             "dem langgezogenen Platz nördlich der Kirche. Früher hieß er 'Hafenmarkt', so steht es "
-            "noch auf der Katasterkarte von 1819.\n\n"
+            "noch auf der Katasterkarte von achtzehnhundertneunzehn.\n\n"
             "Der Georgsbrunnen in der Mitte zeigt den Heiligen Georg beim Drachentöten - "
-            "den Schutzpatron der Stiftskirche. Das Original wurde 1523 vom Steinmetz Andreas Lang "
-            "geschaffen. Es wurde 1841 abgebaut, 1842 durch eine neugotische Gusseisen-Version "
-            "ersetzt - und die wurde 1961 entfernt. Für Parkplätze. Ernsthaft. 1976 kam der "
+            "den Schutzpatron der Stiftskirche. Das Original wurde fünfzehnhundertdreiundzwanzig vom Steinmetz Andreas Lang "
+            "geschaffen. Es wurde achtzehnhunderteinundvierzig abgebaut, achtzehnhundertzweiundvierzig durch eine neugotische Gusseisen-Version "
+            "ersetzt - und die wurde neunzehnhunderteinundsechzig entfernt. Für Parkplätze. Ernsthaft. Neunzehnhundertsechsundsiebzig kam der "
             "Brunnen zurück, als der Holzmarkt Fußgängerzone wurde.\n\n"
             "Ein paar Schritte weiter, vor dem Café Hirsch, gibt es den Froschkönigbrunnen. "
             "Der Brunnen war jahrelang vermüllt - ein Meter Müll in sieben Metern Tiefe. "
-            "2024 initiierte eine engagierte Bürgerin die Reinigung, und 2025 wurde ein "
+            "Zweitausendvierundzwanzig initiierte eine engagierte Bürgerin die Reinigung, und zweitausendundfünfundzwanzig wurde ein "
             "handgefertigter Froschkönig aus Ton als neue Figur eingesetzt. Er schaut direkt "
             "auf die Tübinger Froschgasse und wird nachts von einer Solarlampe angestrahlt.\n\n"
             "Heinrich überquerte den Holzmarkt hastig. Unter den Gaslaternen waren noch einige "
@@ -235,14 +235,14 @@ STATIONS = [
             "aus Stuttgart längst angekommen war. Die Gendarmen konnten jeden Moment erscheinen."
         ),
         "diary": (
-            "Die Uhr am Rathaus fasziniert mich noch immer. 1511 gebaut, von Professor Stöffler "
+            "Die Uhr am Rathaus fasziniert mich noch immer. Fünfzehnhundertelf gebaut, von Professor Stöffler "
             "entworfen - und sie läuft noch. Der Drachenzeiger sagt Finsternisse voraus. Manchmal "
             "wünschte ich, er könnte auch meine Zukunft vorhersagen.\n\n"
             "Ich habe das Fragment unter dem Rathaus versteckt. Der Neptunbrunnen hat zugesehen. "
             "Stumm, wie immer. Weiter. Ich muss den Neckar erreichen."
         ),
         "fact": (
-            "Die astronomische Uhr am Tübinger Rathaus stammt aus dem Jahr 1511 und wurde vom "
+            "Die astronomische Uhr am Tübinger Rathaus stammt aus dem Jahr fünfzehnhundertelf und wurde vom "
             "Astronomen Johannes Stöffler entworfen. Der berühmte Drachenzeiger markiert die "
             "Mondknoten und sagt Finsternisse voraus.\n\n"
             "Die sieben Namen an der Fassade ehren bedeutende Persönlichkeiten der Stadtgeschichte. "
@@ -264,14 +264,14 @@ STATIONS = [
         "type": "anekdote",
         "anecdote": (
             "Vom Marktplatz aus passierte Heinrich das Kornhaus - das Gebäude, das heute das "
-            "Stadtmuseum beherbergt. Erbaut 1453 als überdachter Getreidemarkt, zwischen 1512 und "
-            "1564 erweitert und aufgestockt.\n\n"
+            "Stadtmuseum beherbergt. Erbaut vierzehnhundertdreiundfünfzig als überdachter Getreidemarkt, zwischen fünfzehnhundertzwölf und "
+            "fünfzehnhundertvierundsechzig erweitert und aufgestockt.\n\n"
             "Was dich drinnen erwartet, falls du reingehst: eine funktionierende Nachbildung von "
-            "Wilhelm Schickards mechanischem Rechner von 1623 - die erste Rechenmaschine der Welt, "
-            "Jahrzehnte vor Pascals berühmtem Modell. Rekonstruiert zwischen 1957 und 1960. "
+            "Wilhelm Schickards mechanischem Rechner von sechzehnhundertdreiundzwanzig - die erste Rechenmaschine der Welt, "
+            "Jahrzehnte vor Pascals berühmtem Modell. Rekonstruiert zwischen neunzehnhundertsiebenundfünfzig und neunzehnhundertsechzig. "
             "Und sie rechnet tatsächlich noch.\n\n"
-            "Der Eintritt ist seit April 2018 frei. Sonntags um 15 Uhr gibt es eine Führung - "
-            "5 Euro für Erwachsene, Kinder kostenlos.\n\n"
+            "Der Eintritt ist seit April zweitausendachtzehn frei. Sonntags um fünfzehn Uhr gibt es eine Führung - "
+            "fünf Euro für Erwachsene, Kinder kostenlos.\n\n"
             "Heinrich hatte keine Zeit für Museen. Er bog in die Kornhausstraße ein und eilte "
             "bergab Richtung Ammergasse."
         ),
@@ -283,7 +283,7 @@ STATIONS = [
         "type": "anekdote",
         "anecdote": (
             "Heinrich brauchte eine Pause. Und einen Plan. Er duckte sich in den Ammerschlag - "
-            "eine der ältesten Kneipen Tübingens in der Ammergasse 13.\n\n"
+            "eine der ältesten Kneipen Tübingens in der Ammergasse dreizehn.\n\n"
             "Der Legende nach geht der Ammerschlag auf einen Ziegenhirten zurück, der hier sein "
             "Haus baute, noch bevor das Schloss stand. Aus dem 'Ziegenschlag' wurde über die "
             "Jahrhunderte der 'Ammerschlag'. Napoleon soll auf seinen Feldzügen hier eingekehrt "
@@ -293,7 +293,7 @@ STATIONS = [
             "Heinrich bestellte einen Viertele Trollinger, trank ihn in einem Zug, legte zwei "
             "Kreuzer auf den Tresen und verschwand durch die Hintertür. Der Wirt zuckte mit den "
             "Schultern. In dieser Kneipe stellte man keine Fragen.\n\n"
-            "Geöffnet: Sonntag bis Donnerstag 15 bis 1 Uhr, Freitag und Samstag 10 bis 3 Uhr."
+            "Geöffnet: Sonntag bis Donnerstag fünfzehn bis ein Uhr, Freitag und Samstag zehn bis drei Uhr."
         ),
     },
 
@@ -306,25 +306,25 @@ STATIONS = [
             "Hier stand einmal das Haagtor - eines von fünf Stadttoren der mittelalterlichen "
             "Befestigung.\n\n"
             "Der Name kommt von 'Haag' - der Schutzhecke am Nordhang des Schlossbergs. "
-            "Das Tor führte nach Westen Richtung Herrenberg, entlang der Ammer. Es wurde 1831 "
+            "Das Tor führte nach Westen Richtung Herrenberg, entlang der Ammer. Es wurde achtzehnhunderteinunddreißig "
             "abgerissen, als die Stadt sich ausdehnte und die alten Mauern hinderlich wurden.\n\n"
             "Schau auf den Boden: Die Pflasterung zeigt noch die Umrisse der alten Fundamente. "
-            "Eine Gedenktafel wurde 2009 angebracht. Heinrich kannte das Tor noch aus Zeichnungen "
+            "Eine Gedenktafel wurde zweitausendneun angebracht. Heinrich kannte das Tor noch aus Zeichnungen "
             "seines Großvaters - für ihn war es ein Symbol dafür, wie schnell eine Stadt ihre "
             "Geschichte vergisst.\n\n"
             "Er versteckte ein Fragment in einer Mauernische nahe der alten Fundamente und ging weiter."
         ),
         "diary": (
-            "Das Haagtor ist weg. Abgerissen. 1831, sagen sie. Aber die Fundamente sind noch da, "
+            "Das Haagtor ist weg. Abgerissen. Achtzehnhunderteinunddreißig, sagen sie. Aber die Fundamente sind noch da, "
             "unter dem Pflaster. Genau wie meine Formeln bald unter dem Staub dieser Stadt liegen "
             "werden. Unsichtbar, aber nicht verloren."
         ),
         "fact": (
             "Tuebingens fuenf Stadttore hiessen: Lustnauer Tor (Osten), Haagtor (Westen), "
             "Schmiedtor (Norden), Neckartor (Sueden) und das Wurmlinger Tor. Sie wurden alle "
-            "zwischen 1804 und 1831 abgerissen.\n\n"
-            "Fun Fact: Als das Haagtor 1831 fiel, protestierten Buerger - nicht wegen der Geschichte, "
-            "sondern weil der Torwaechter seinen Job verlor. Er bekam eine Abfindung von 50 Gulden."
+            "zwischen achtzehnhundertvier und achtzehnhunderteinunddreißig abgerissen.\n\n"
+            "Fun Fact: Als das Haagtor achtzehnhunderteinunddreißig fiel, protestierten Buerger - nicht wegen der Geschichte, "
+            "sondern weil der Torwaechter seinen Job verlor. Er bekam eine Abfindung von fünfzig Gulden."
         ),
         "riddle": (
             "Das Haagtor war eines von wie vielen Stadttoren der mittelalterlichen Befestigung "
@@ -341,14 +341,14 @@ STATIONS = [
             "Café Hirsch vorbei. Ein unscheinbarer Brunnenschacht, sieben Meter tief.\n\n"
             "Heute hat dieser Brunnen eine besondere Geschichte: Jahrelang war er mit einem "
             "Meter Müll vollgestopft. Schulkinder, die ihn beim Stadtquiz besuchten, schauten "
-            "angeekelt hinein. 2024 nahm sich Petra Wenzel, eine engagierte Bürgerin aus dem "
+            "angeekelt hinein. Zweitausendvierundzwanzig nahm sich Petra Wenzel, eine engagierte Bürgerin aus dem "
             "Café Hirsch, der Sache an. Die Stadt half mit schwerem Gerät - Gasmasken, "
             "Industrieschläuche, der volle Einsatz.\n\n"
-            "Im Frühling 2025 wurde ein handgefertigter Froschkönig aus Ton eingesetzt - "
-            "40 mal 40 Zentimeter, bunt bemalt und nachts von einer Solarlampe angestrahlt. "
+            "Im Frühling zweitausendundfünfundzwanzig wurde ein handgefertigter Froschkönig aus Ton eingesetzt - "
+            "vierzig mal vierzig Zentimeter, bunt bemalt und nachts von einer Solarlampe angestrahlt. "
             "Er guckt direkt auf die Tübinger Froschgasse. Eine Glasplatte schützte ihn "
             "vor der Witterung.\n\n"
-            "Doch im Oktober 2025 wurde der Froschkönig gestohlen - jemand schob die "
+            "Doch im Oktober zweitausendundfünfundzwanzig wurde der Froschkönig gestohlen - jemand schob die "
             "Glasplatte zur Seite und hievte ihn heraus. 'Das ist so schade für all die "
             "Kinder', sagte Wenzel. Sie bestellte sofort einen neuen. Schau mal, ob er "
             "schon wieder da ist!\n\n"
@@ -376,7 +376,7 @@ STATIONS = [
             "gleichmäßig, ohne sich um Gendarmen oder Formeln zu scheren. Ich beneide den Bach."
         ),
         "fact": (
-            "Die Tuebinger Stadtmauer wurde im 13. Jahrhundert errichtet und war etwa 1,5 Kilometer "
+            "Die Tuebinger Stadtmauer wurde im dreizehnten Jahrhundert errichtet und war etwa eineinhalb Kilometer "
             "lang. Am Affenfelsen sieht man besonders gut, wie dick die Mauern waren - ueber einen Meter.\n\n"
             "Der Ammerkanal, der hier durchfliesst, trieb frueher mehrere Muehlen in der Altstadt an. "
             "Das Wasser wurde so geschickt gelenkt, dass Gerber, Faerber und Mueller es nacheinander "
@@ -393,7 +393,7 @@ STATIONS = [
         "type": "anekdote",
         "anecdote": (
             "Heinrich schlug einen Bogen nach Osten und schnitt durch den Alten Botanischen Garten - "
-            "eine grüne Oase inmitten der Stadt. Der Garten wurde 1535 als einer der ersten "
+            "eine grüne Oase inmitten der Stadt. Der Garten wurde fünfzehnhundertfünfunddreißig als einer der ersten "
             "botanischen Gärten Deutschlands angelegt.\n\n"
             "Hier wuchsen exotische Pflanzen aus aller Welt - Geschenke von Forschungsreisenden, "
             "Botanikern und Missionaren. Riesige Mammutbäume, die heute noch stehen. Im Gewächshaus "
@@ -411,7 +411,7 @@ STATIONS = [
         "name": "Station 13 - Neue Aula",
         "type": "anekdote",
         "anecdote": (
-            "Die Neue Aula - das imposante Hauptgebäude der Universität, 1845 im klassizistischen "
+            "Die Neue Aula - das imposante Hauptgebäude der Universität, achtzehnhundertfünfundvierzig im klassizistischen "
             "Stil erbaut. Hier hielt Heinrich seine letzten Vorlesungen, bevor das Ministerium ihn "
             "unter Beobachtung stellte.\n\n"
             "Die Neue Aula war ein Statement: Tübingen als moderne, weltoffene Universität. "
@@ -431,7 +431,7 @@ STATIONS = [
         "name": "Station 14 - Nonnenhaus",
         "type": "raetsel",
         "story": (
-            "Das Nonnenhaus - eines der ältesten Fachwerkhäuser der Altstadt, erbaut 1488. "
+            "Das Nonnenhaus - eines der ältesten Fachwerkhäuser der Altstadt, erbaut vierzehnhundertachtundachtzig. "
             "Der Name täuscht: Hier lebten keine Nonnen, sondern Beginen - Frauen einer "
             "christlichen Laiengemeinschaft ohne Klostergelübde.\n\n"
             "Später wohnte hier der Botaniker Leonhard Fuchs, nach dem die Fuchsie benannt ist. "
@@ -443,7 +443,7 @@ STATIONS = [
             "und ziemlich lustig."
         ),
         "diary": (
-            "Das Nonnenhaus. 1488. Die Balken knarren unter meinen Schritten, als wollten sie "
+            "Das Nonnenhaus. Vierzehnhundertachtundachtzig. Die Balken knarren unter meinen Schritten, als wollten sie "
             "protestieren. Ich habe mein vorletztes Fragment hier versteckt - dort, wo die Beginen "
             "einst ihre irdischen Bedürfnisse direkt dem Wasser überantworteten. "
             "Niemand sucht an solchen Orten."
@@ -452,8 +452,8 @@ STATIONS = [
             "Der Erker-Abort des Nonnenhauses ist eines der besterhaltenen Beispiele mittelalterlicher "
             "Sanitaeranlagen in Sueddeutschland. Das Prinzip war einfach: Die Schwerkraft erledigte "
             "den Rest, der Ammerkanal spuelte alles weg.\n\n"
-            "Leonhard Fuchs (1501-1566), der hier lebte, beschrieb ueber 400 Pflanzen in seinem "
-            "'New Kreuterbuch' von 1543 - mit handkolorierten Holzschnitten. Das Buch war so "
+            "Leonhard Fuchs (fünfzehnhunderteins bis fünfzehnhundertsechsundsechzig), der hier lebte, beschrieb ueber vierhundert Pflanzen in seinem "
+            "'New Kreuterbuch' von fünfzehnhundertdreiundvierzig - mit handkolorierten Holzschnitten. Das Buch war so "
             "erfolgreich, dass die Fuchsie nach ihm benannt wurde, obwohl er die Pflanze nie gesehen hat."
         ),
         "riddle": (
@@ -470,11 +470,11 @@ STATIONS = [
         "anecdote": (
             "Heinrich erreichte die Neckarinsel - das schmale Eiland mitten im Fluss, verbunden "
             "durch zwei Brücken mit der Stadt. Er war jetzt fast am Ziel.\n\n"
-            "Die Platanenallee auf der Insel wurde in den 1820er Jahren angelegt. Die mächtigen "
-            "Bäume sind heute über 190 Jahre alt und Naturdenkmäler. In den Zweigen über dir "
+            "Die Platanenallee auf der Insel wurde in den achtzehnhundertzwanziger Jahren angelegt. Die mächtigen "
+            "Bäume sind heute über hundertneunzig Jahre alt und Naturdenkmäler. In den Zweigen über dir "
             "verschränken sich die Äste zu einem natürlichen Gewölbe.\n\n"
             "Von der Insel aus siehst du auch den Indianersteg - eine schmale Fußgängerbrücke, "
-            "die die Insel mit dem anderen Ufer verbindet. Sie wurde 1863 als Holzbrücke gebaut. "
+            "die die Insel mit dem anderen Ufer verbindet. Sie wurde achtzehnhundertdreiundsechzig als Holzbrücke gebaut. "
             "Ihren Namen verdankt sie spielenden Kindern, die auf der wackeligen Holzbrücke "
             "'Indianer' spielten.\n\n"
             "Heinrich stand einen Moment still unter den kahlen Platanen. Der Neckar rauschte "
@@ -490,13 +490,13 @@ STATIONS = [
         "story": (
             "Der Indianersteg - eine schmale Fußgängerbrücke über den Neckar. "
             "Heinrichs letzte Hürde.\n\n"
-            "Die erste Holzbrücke wurde hier 1863 errichtet. Ihren Namen verdankt sie spielenden "
+            "Die erste Holzbrücke wurde hier achtzehnhundertdreiundsechzig errichtet. Ihren Namen verdankt sie spielenden "
             "Kindern, die auf der wackeligen Konstruktion 'Indianer' spielten - ein Unfallbericht "
-            "von 1871 ist das erste dokumentierte Zeugnis des Namens.\n\n"
-            "Die Holzbrücke wurde um 1900 durch eine Eisenträgerbrücke ersetzt, dann 1911 durch "
+            "von achtzehnhunderteinundsiebzig ist das erste dokumentierte Zeugnis des Namens.\n\n"
+            "Die Holzbrücke wurde um neunzehnhundert durch eine Eisenträgerbrücke ersetzt, dann neunzehnhundertelf durch "
             "eine Betonbogenbrücke - die gegen Ende des Zweiten Weltkriegs zerstört und danach "
             "einfacher wiederaufgebaut wurde. Heute hat sie smaragdgrüne Geländer.\n\n"
-            "Heinrich überquerte die wackelige Holzbrücke in jener Novembernacht 1869. "
+            "Heinrich überquerte die wackelige Holzbrücke in jener Novembernacht achtzehnhundertneunundsechzig. "
             "Auf der anderen Seite: Dunkelheit, Felder, Freiheit. Er hörte noch die Rufe der "
             "Gendarmen vom anderen Ufer. Aber es war zu spät. Der Forscher war verschwunden.\n\n"
             "Das letzte Fragment seiner Formel versteckte er unter einem losen Stein am "
@@ -513,20 +513,78 @@ STATIONS = [
             "Lebe wohl, Tübingen."
         ),
         "fact": (
-            "1869 waren jenseits des Stegs nur nasse Wiesen und Felder - die Neckarauen. Die "
-            "Suedstadt entstand erst ab den 1880er Jahren, nachdem der Neckar reguliert wurde.\n\n"
-            "Der Hauptbahnhof stand seit 1861 als einsames Gebaeude in der Ebene. Die Kaserne kam "
-            "erst 1873. Wer 1869 ueber den Steg ging, verschwand buchstaeblich in der Dunkelheit - "
+            "Achtzehnhundertneunundsechzig waren jenseits des Stegs nur nasse Wiesen und Felder - die Neckarauen. Die "
+            "Suedstadt entstand erst ab den achtzehnhundertachtziger Jahren, nachdem der Neckar reguliert wurde.\n\n"
+            "Der Hauptbahnhof stand seit achtzehnhunderteinundsechzig als einsames Gebaeude in der Ebene. Die Kaserne kam "
+            "erst achtzehnhundertdreiundsiebzig. Wer achtzehnhundertneunundsechzig ueber den Steg ging, verschwand buchstaeblich in der Dunkelheit - "
             "genau wie Heinrich.\n\n"
-            "Fun Fact: Der Name 'Indianersteg' taucht erstmals 1871 in einem Unfallbericht auf. "
+            "Fun Fact: Der Name 'Indianersteg' taucht erstmals achtzehnhunderteinundsiebzig in einem Unfallbericht auf. "
             "Kinder spielten auf der wackeligen Bruecke Karl-May-Spiele."
         ),
         "riddle": (
-            "Die erste Holzbrücke wurde 1863 errichtet. Welches Kinderspiel gab der Brücke "
+            "Die erste Holzbrücke wurde achtzehnhundertdreiundsechzig errichtet. Welches Kinderspiel gab der Brücke "
             "ihren Namen? Ein Wort."
         ),
     },
 ]
+
+# ============================================================
+# SPEZIAL-AUDIO (Prolog + Anleitung)
+# ============================================================
+
+SPECIAL_AUDIO = {
+    "prologue": {
+        "voice": NARRATOR_VOICE,
+        "text": (
+            "Tübingen, im November des Jahres achtzehnhundertneunundsechzig. "
+            "Das Königreich Württemberg unter König Karl dem Ersten erlebt turbulente Zeiten. "
+            "Preußen rüstet auf, Europa balanciert am Rand eines Krieges, und in den Laboren "
+            "der Universität wird an Entdeckungen gearbeitet, die alles verändern könnten.\n\n"
+            "Professor Heinrich von Calw, ein brillanter Naturwissenschaftler, forscht in seinem "
+            "Labor im Schloss Hohentübingen an einer revolutionären Energie-Formel. Offiziell "
+            "arbeitet er an 'chemischen Grundlagen' für das Königliche Ministerium. In Wahrheit "
+            "hat er etwas entdeckt, das die Kriegsführung und die Welt für immer verändern würde.\n\n"
+            "Doch das Ministerium hat Wind bekommen. Gendarmen sind unterwegs, um sein Labor zu "
+            "versiegeln und seine Aufzeichnungen zu konfiszieren. Heinrich hat vielleicht eine "
+            "Stunde Vorsprung. Er greift sein Manuskript, zündet den Rest seiner Notizen an – "
+            "und flieht vom Schloss bergab durch die Gassen der Altstadt.\n\n"
+            "Sein Plan: den Neckar erreichen und über die Brücke am Stadtrand in die Dunkelheit "
+            "verschwinden. Unterwegs versteckt er codierte Fragmente seines Werks an verschiedenen "
+            "Orten – für den Fall, dass jemand Würdiges seine Spur findet.\n\n"
+            "Dieser Jemand bist du.\n\n"
+            "Du folgst Heinrichs Fluchtweg vom Schloss bergab, durch die Altstadt, bis zum Neckar. "
+            "An siebzehn Orten hat er Spuren hinterlassen. An jeder Rätsel-Station findest du ein "
+            "Fragment seiner Formel – acht Bruchstücke, die sich am Ende zu etwas Unerwartetem "
+            "zusammensetzen.\n\n"
+            "Deine Ermittlung beginnt oben am Schloss Hohentübingen."
+        ),
+    },
+    "guide": {
+        "voice": NARRATOR_VOICE,
+        "text": (
+            "So funktioniert's.\n\n"
+            "Folge der Route. Die App führt dich von Station zu Station. Jede Station hat einen "
+            "Maps-Link zur Navigation.\n\n"
+            "Höre zu. Jede Station hat Audio: Story, Tagebuch, und nach dem Lösen einen "
+            "Fakten-Track. An Info-Stationen gibt es einen Stadtführer-Track. Du kannst alles "
+            "auch lesen.\n\n"
+            "Löse Rätsel. An Rätsel-Stationen musst du vor Ort etwas finden oder beobachten. "
+            "Nach richtiger Antwort wird der Fakten-Track freigeschaltet – und ein Fragment "
+            "von Heinrichs geheimer Formel enthüllt.\n\n"
+            "Entschlüssle die Formel. Acht Fragmente, verteilt über die ganze Route. Erst am "
+            "Ende fügt sich alles zusammen. Was hat Heinrich wirklich versteckt?\n\n"
+            "Sammle Traces. Für jede gelöste Station bekommst du Erfahrungspunkte. Am Ende "
+            "wartet deine Urkunde.\n\n"
+            "Der Ermittler-Assistent. Dein KI-Stadtführer kennt sich in Tübingen aus! Frag ihn "
+            "nach Hinweisen zum Rätsel, aber auch nach Geschichte, Sehenswürdigkeiten oder allem, "
+            "was du bei einer Stadtführung wissen willst. Er verrät nur nicht die Lösung.\n\n"
+            "In der Gruppe? Nehmt einen Bluetooth-Lautsprecher mit! So hören alle entspannt die "
+            "Geschichten und ihr könnt gemeinsam rätseln.\n\n"
+            "Dein Fortschritt wird automatisch gespeichert. Du kannst jederzeit pausieren und "
+            "später weitermachen."
+        ),
+    },
+}
 
 # ============================================================
 # AUDIO-GENERIERUNG
@@ -586,7 +644,7 @@ def main():
     else:
         station_nums = list(range(17))
 
-    all_types = ["story", "diary", "fact", "riddle", "anecdote"]
+    all_types = ["story", "diary", "fact", "riddle", "anecdote", "prologue", "guide"]
     if "--only" in sys.argv:
         idx = sys.argv.index("--only")
         types_to_gen = sys.argv[idx + 1].split(",")
@@ -609,6 +667,7 @@ def main():
         for audio_type in types_to_gen:
             if audio_type in station:
                 total += 1
+    total += len([t for t in types_to_gen if t in SPECIAL_AUDIO])
 
     done = 0
     errors = 0
@@ -641,6 +700,19 @@ def main():
                 errors += 1
 
             time.sleep(0.5)
+
+    # Generate special audio (prologue, guide)
+    special_types = [t for t in types_to_gen if t in SPECIAL_AUDIO]
+    for stype in special_types:
+        spec = SPECIAL_AUDIO[stype]
+        filename = f"{stype}.mp3"
+        output_path = OUTPUT_DIR / filename
+        print(f"\nSpezial: {stype}")
+        success = generate_audio(client, spec["text"], spec["voice"], output_path)
+        done += 1
+        if not success:
+            errors += 1
+        time.sleep(0.5)
 
     print("\n" + "=" * 60)
     print(f"Fertig! {done - errors}/{total} Dateien generiert.")

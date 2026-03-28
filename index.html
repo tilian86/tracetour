@@ -302,6 +302,12 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 </div>
 </div>
 <div class="prologue-label"><span class="dot"></span> Geheime Akte // November 1869</div>
+<div class="audio-row" id="audioPrologue" onclick="playAudio('prologue','audioPrologue','prologue')" style="max-width:480px;margin:0 auto 1rem">
+  <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
+  <div><div class="audio-label">Vorgeschichte anhören</div><div class="audio-sublabel">Erzähler</div></div>
+  <div class="audio-time" id="timePrologue">--:--</div>
+</div>
+<div class="audio-progress" data-type="prologue" onclick="seekAudio(event,'prologue')" style="max-width:480px;margin:0 auto .5rem"><div class="audio-progress-fill" id="progFillPrologue"></div></div>
 <div class="prologue-text">
 <p>Tübingen, im November des Jahres 1869. Das Königreich Württemberg unter König Karl I. erlebt turbulente Zeiten. Preußen rüstet auf, Europa balanciert am Rand eines Krieges, und in den Laboren der Universität wird an Entdeckungen gearbeitet, die alles verändern könnten.</p>
 <p><strong>Professor Heinrich von Calw</strong>, ein brillanter Naturwissenschaftler, forscht in seinem Labor im Schloss Hohentübingen an einer revolutionären Energie-Formel. Offiziell arbeitet er an „chemischen Grundlagen" für das Königliche Ministerium. In Wahrheit hat er etwas entdeckt, das die Kriegsführung – und die Welt – für immer verändern würde.</p>
@@ -314,15 +320,22 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <cite>— Heinrich von Calw, Notizbuch, November 1869</cite>
 </div>
 <div class="prologue-text">
-<p>Du folgst Heinrichs Fluchtweg vom Schloss bergab, durch die Altstadt, bis zum Neckar. An <strong>17 Orten</strong> hat er Spuren hinterlassen. Löse seine Rätsel, entschlüssle seine Hinweise – und finde heraus, was mit dem Forscher geschah.</p>
+<p>Du folgst Heinrichs Fluchtweg vom Schloss bergab, durch die Altstadt, bis zum Neckar. An <strong>17 Orten</strong> hat er Spuren hinterlassen. An jeder Rätsel-Station findest du ein <strong>Fragment seiner Formel</strong> – acht Bruchstücke, die sich am Ende zu etwas Unerwartetem zusammensetzen.</p>
 <p><strong>Deine Ermittlung beginnt oben am Schloss Hohentübingen.</strong></p>
 </div>
 <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1.5rem;max-width:480px;width:100%">
 <div style="font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:.75rem">So funktioniert's</div>
+<div class="audio-row" id="audioGuide" onclick="playAudio('guide','audioGuide','guide')" style="margin-bottom:.75rem">
+  <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
+  <div><div class="audio-label">Anleitung anhören</div><div class="audio-sublabel">Erzähler</div></div>
+  <div class="audio-time" id="timeGuide">--:--</div>
+</div>
+<div class="audio-progress" data-type="guide" onclick="seekAudio(event,'guide')" style="margin-bottom:.75rem"><div class="audio-progress-fill" id="progFillGuide"></div></div>
 <div style="font-size:.85rem;line-height:1.7;color:var(--text-2)">
 <p style="margin-bottom:.75rem">📍 <strong>Folge der Route</strong> – Die App führt dich von Station zu Station. Jede Station hat einen Maps-Link zur Navigation.</p>
 <p style="margin-bottom:.75rem">🎧 <strong>Höre zu</strong> – Jede Station hat Audio: Story, Tagebuch und nach dem Lösen einen Fakten-Track. An Info-Stationen gibt es einen Stadtführer-Track. Du kannst alles auch lesen.</p>
-<p style="margin-bottom:.75rem">🔍 <strong>Löse Rätsel</strong> – An Rätsel-Stationen musst du vor Ort etwas finden oder beobachten. Nach richtiger Antwort wird der Fakten-Track freigeschaltet.</p>
+<p style="margin-bottom:.75rem">🔍 <strong>Löse Rätsel</strong> – An Rätsel-Stationen musst du vor Ort etwas finden oder beobachten. Nach richtiger Antwort wird der Fakten-Track freigeschaltet – und ein Fragment von Heinrichs geheimer Formel enthüllt.</p>
+<p style="margin-bottom:.75rem">🧩 <strong>Entschlüssle die Formel</strong> – Acht Fragmente, verteilt über die ganze Route. Erst am Ende fügt sich alles zusammen. Was hat Heinrich wirklich versteckt?</p>
 <p style="margin-bottom:.75rem">⭐ <strong>Sammle Traces</strong> – Für jede gelöste Station bekommst du Erfahrungspunkte. Am Ende wartet deine Urkunde.</p>
 <p style="margin-bottom:.75rem">💡 <strong>Ermittler-Assistent</strong> – Dein KI-Stadtführer kennt sich in Tübingen aus! Frag ihn nach Hinweisen zum Rätsel, aber auch nach Geschichte, Sehenswürdigkeiten oder allem, was du bei einer Stadtführung wissen willst. Er verrät nur nicht die Lösung.</p>
 <p style="margin-bottom:.75rem">🔊 <strong>In der Gruppe?</strong> – Nehmt einen Bluetooth-Lautsprecher mit! So hören alle entspannt die Geschichten und ihr könnt gemeinsam rätseln.</p>
@@ -1032,8 +1045,10 @@ function unlockFactAudio(){
 function playAudio(fileKey,rowId,type){
   const row=document.getElementById(rowId);
   if(!row||row.dataset.locked==='true')return;
-  const progId=type==='story'?'progFillStory':type==='diary'?'progFillDiary':type==='anecdote'?'progFillAnecdote':type==='riddle'?'progFillRiddle':'progFillFact';
-  const timeId=type==='story'?'timeStory':type==='diary'?'timeDiary':type==='anecdote'?'timeAnecdote':type==='riddle'?'timeRiddle':'timeFact';
+  const progMap={story:'progFillStory',diary:'progFillDiary',anecdote:'progFillAnecdote',riddle:'progFillRiddle',fact:'progFillFact',prologue:'progFillPrologue',guide:'progFillGuide'};
+  const timeMap={story:'timeStory',diary:'timeDiary',anecdote:'timeAnecdote',riddle:'timeRiddle',fact:'timeFact',prologue:'timePrologue',guide:'timeGuide'};
+  const progId=progMap[type]||'progFillFact';
+  const timeId=timeMap[type]||'timeFact';
   const textId=type==='story'||type==='anecdote'?'storyText':type==='diary'?'diaryText':null;
   const isPaused=!!(currentAudio&&currentAudio._fileKey===fileKey&&currentAudio.paused);
   const same=!!(currentAudio&&currentAudio._fileKey===fileKey);
