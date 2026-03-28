@@ -695,8 +695,9 @@ SPECIAL_AUDIO = {
     "epilog": {
         "voice": "cgSgspJ2msm6clMCkdW9",  # Jessica - Playful, Bright, Warm
         "text": (
-            "Herzlichen Glückwunsch! Du hast es geschafft – alle Fragmente gefunden und "
-            "Heinrichs Geheimnis gelüftet!\n\n"
+            "Unglaublich, Ermittler! Du hast es tatsächlich geschafft – siebzehn Stationen, "
+            "acht Rätsel, und Heinrichs Geheimnis nach über hundertfünfzig Jahren gelüftet. "
+            "Das schaffen nicht viele.\n\n"
             "Die Formel, die Heinrich von Calw über die halbe Stadt verteilt hat, war nie eine "
             "physikalische Gleichung. Es war eine Erkenntnis – inspiriert von Friedrich Hölderlin, "
             "dem Dichter, der sechsunddreißig Jahre lang im Turm am Neckar lebte. Nur wenige "
@@ -706,8 +707,9 @@ SPECIAL_AUDIO = {
             "Heinrich kannte seine Verse und verstand: Wo Wissen unterdrückt wird, wächst "
             "der Mut, es zu teilen.\n\n"
             "Vielen herzlichen Dank, dass du mit uns unterwegs warst! Wir hoffen, Tübingen "
-            "hat dir gefallen. Teile deine Urkunde mit Freunden – und vielleicht sehen wir "
-            "uns bald bei einer neuen Tour wieder."
+            "hat dir so viel Freude gemacht wie uns. Teile deine Urkunde mit Freunden – und "
+            "vielleicht sehen wir uns bald bei einer neuen Tour wieder. Bis dahin: fare well, "
+            "Ermittler."
         ),
     },
 }
