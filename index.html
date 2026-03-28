@@ -1230,7 +1230,9 @@ function fuzzyMatch(input,target){
   const a=normalizeUmlauts(input.toLowerCase().trim());
   const b=normalizeUmlauts(target.toLowerCase().trim());
   if(a===b)return true;
-  const maxDist=b.length<=6?2:3;
+  // Numbers must match exactly — no fuzzy tolerance
+  if(/^\d+$/.test(b))return false;
+  const maxDist=b.length<=4?1:b.length<=8?2:3;
   return levenshtein(a,b)<=maxDist;
 }
 function checkAnswer(){
