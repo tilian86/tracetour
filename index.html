@@ -194,6 +194,20 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 .hint-btn:active{border-color:var(--accent)}
 .hint-btn .material-symbols-outlined{font-size:18px;color:var(--accent)}
 
+/* PUZZLE & QUIZ */
+.puzzle-word{padding:8px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);font-family:var(--font-h);font-size:.85rem;font-weight:700;color:var(--accent-soft);cursor:pointer;transition:all .15s;user-select:none;-webkit-user-select:none}
+.puzzle-word:active{transform:scale(.95)}
+.puzzle-word.placed{opacity:.3;pointer-events:none}
+.puzzle-slot{padding:6px 12px;background:rgba(243,99,45,.1);border:1px solid var(--border-accent);border-radius:var(--r-sm);font-family:var(--font-h);font-size:.85rem;font-weight:700;color:#ffb59d;cursor:pointer;animation:fragmentIn .3s ease}
+.quiz-q{text-align:left;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem}
+.quiz-q-text{font-size:.9rem;font-weight:600;margin-bottom:.75rem;color:var(--text-1)}
+.quiz-q-num{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:.5rem}
+.quiz-opt{display:block;width:100%;text-align:left;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--r-sm);font-size:.82rem;color:var(--text-2);margin-bottom:6px;cursor:pointer;transition:border .15s}
+.quiz-opt:active{transform:scale(.98)}
+.quiz-opt.correct{border-color:var(--success);background:rgba(74,222,128,.1);color:var(--success)}
+.quiz-opt.wrong{border-color:var(--error);background:rgba(248,113,113,.08);color:var(--error)}
+.quiz-opt:disabled{cursor:not-allowed;opacity:.6}
+
 /* AI */
 .ai-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center}
 .ai-overlay.active{display:flex}
@@ -338,7 +352,7 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <p style="margin-bottom:.75rem">🔍 <strong>Löse Rätsel</strong> – An Rätsel-Stationen musst du vor Ort etwas finden oder beobachten. Nach richtiger Antwort wird der Fakten-Track freigeschaltet – und ein Fragment von Heinrichs geheimer Formel enthüllt. Keine Sorge: Wenn du mal auf dem Schlauch stehst, zeigen wir dir nach ein paar Versuchen die Lösung – niemand bleibt stecken.</p>
 <p style="margin-bottom:.75rem">🧩 <strong>Entschlüssle die Formel</strong> – Acht Fragmente, verteilt über die ganze Route. Erst am Ende fügt sich alles zusammen. Was hat Heinrich wirklich versteckt?</p>
 <p style="margin-bottom:.75rem">⭐ <strong>Sammle Traces</strong> – Für jede gelöste Station bekommst du Erfahrungspunkte. Am Ende wartet deine Urkunde.</p>
-<p style="margin-bottom:.75rem">💡 <strong>Frag Trace!</strong> – Dein KI-Begleiter Trace kennt sich in Tübingen aus! Frag nach Hinweisen zum Rätsel, aber auch nach Geschichte, Sehenswürdigkeiten oder allem, was du bei einer Stadtführung wissen willst. Trace verrät nur nicht die Lösung.</p>
+<p style="margin-bottom:.75rem">💡 <strong>Frag Trace!</strong> – Dein digitaler Begleiter Trace kennt sich in Tübingen aus! Frag nach Hinweisen zum Rätsel, aber auch nach Geschichte, Sehenswürdigkeiten oder allem, was du bei einer Stadtführung wissen willst. Trace verrät nur nicht die Lösung.</p>
 <p style="margin-bottom:.75rem">🔊 <strong>In der Gruppe?</strong> – Nehmt einen Bluetooth-Lautsprecher mit! So hören alle entspannt die Geschichten und ihr könnt gemeinsam rätseln.</p>
 <p style="margin-bottom:.75rem">📱 <strong>Standort erlauben</strong> – Die App braucht Zugriff auf deinen Standort, damit die Karte funktioniert. Wenn dein Browser fragt, tippe auf „Erlauben".<br>
 <span style="font-size:.8rem;opacity:.7">Falls du die Berechtigung verweigert hast:<br>
@@ -387,6 +401,29 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <input class="ai-input" id="aiInput" placeholder="Frag mich etwas..." autocomplete="off">
 <button class="ai-send" onclick="sendAi()"><span class="material-symbols-outlined">send</span></button>
 </div>
+</div>
+</div>
+
+<!-- FORMULA PUZZLE -->
+<div id="formulaPuzzle" class="screen" style="padding:0;overflow-y:auto">
+<div style="background:linear-gradient(180deg,rgba(243,99,45,.08) 0%,transparent 60%),var(--bg);padding:calc(var(--safe-top) + 2rem) 1.5rem calc(var(--safe-bottom) + 2rem);display:flex;flex-direction:column;align-items:center;text-align:center;min-height:100vh">
+<div style="font-size:2.5rem;margin-bottom:.5rem">🧩</div>
+<h1 style="font-family:var(--font-h);font-size:1.6rem;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:.5rem;line-height:1.2">Alle Fragmente<br><span style="color:var(--accent)">gesammelt!</span></h1>
+<p style="font-size:.85rem;color:var(--text-2);margin-bottom:1.5rem;max-width:400px">Du hast alle acht Bruchstücke gefunden. Jetzt bringe sie in die richtige Reihenfolge – und entschlüssle Heinrichs Formel.</p>
+<div id="puzzleSlots" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:400px;margin-bottom:1rem;min-height:44px;padding:12px;background:var(--bg-card);border:2px dashed var(--border-accent);border-radius:var(--r)"></div>
+<div id="puzzleBank" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:400px;margin-bottom:1.5rem"></div>
+<div id="puzzleFb" style="font-size:.85rem;margin-bottom:1rem"></div>
+<button id="puzzleCheck" class="btn-primary" style="max-width:300px;display:none" onclick="checkPuzzle()">Formel prüfen</button>
+</div>
+</div>
+
+<!-- QUIZ -->
+<div id="quizScreen" class="screen" style="padding:0;overflow-y:auto">
+<div style="background:linear-gradient(180deg,rgba(243,99,45,.08) 0%,transparent 60%),var(--bg);padding:calc(var(--safe-top) + 2rem) 1.5rem calc(var(--safe-bottom) + 2rem);display:flex;flex-direction:column;align-items:center;text-align:center;min-height:100vh">
+<div style="font-size:2.5rem;margin-bottom:.5rem">🎓</div>
+<h1 style="font-family:var(--font-h);font-size:1.6rem;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:.5rem;line-height:1.2">Bonus-Runde:<br><span style="color:var(--accent)">Wie gut hast du aufgepasst?</span></h1>
+<p style="font-size:.85rem;color:var(--text-2);margin-bottom:1.5rem;max-width:400px">Fünf Fragen aus der Tour. Jede richtige Antwort bringt 50 Bonus-Traces.</p>
+<div id="quizContent" style="max-width:480px;width:100%"></div>
 </div>
 </div>
 
@@ -910,14 +947,7 @@ function renderStation(){
   window.scrollTo({top:0,behavior:'smooth'});
   if(currentStation>=stations.length){
     stopAudio(true);stopAmbient();
-    document.getElementById('finalXp').textContent=totalXp;
-    const sc=document.getElementById('solvedCount');
-    if(sc){
-      const ridSolved=stations.filter((st,i)=>!st.anecdote&&solvedStations[i]).length;
-      const ridTotal=stations.filter(st=>!st.anecdote).length;
-      sc.textContent=ridSolved+' von '+ridTotal+' Rätseln gelöst · alle Stops erkundet';
-    }
-    showScreen('success');playSfx('applause');setTimeout(renderCertificate,300);return;
+    showScreen('formulaPuzzle');initPuzzle();return;
   }
   const s=stations[currentStation],el=document.getElementById('stationContent');
   document.getElementById('topTitle').textContent=s.name;
@@ -1499,7 +1529,7 @@ function openAi(){
 }
 function closeAi(){document.getElementById('aiOverlay').classList.remove('active')}
 function buildPrompt(s){
-  return `Du bist Trace, der KI-Begleiter der TraceTour Tübingen.
+  return `Du bist Trace, der digitale Begleiter der TraceTour Tübingen.
 
 DEINE ROLLE: Du hilfst Spielern, die Station zu erkunden und beantwortest Fragen zur Stadt Tübingen, zur Geschichte und zu Sehenswürdigkeiten. Du gibst dezente Hinweise zum Rätsel, verrätst aber NIEMALS die Lösung.
 
@@ -1696,6 +1726,132 @@ function downloadForOffline(){
     const btn=document.getElementById('offlineBtn');
     if(btn)btn.textContent='Wird heruntergeladen... 0%';
   }else{showToast('Bitte Seite einmal neu laden')}
+}
+
+// ====== FORMULA PUZZLE ======
+let puzzleOrder=[];
+function initPuzzle(){
+  const sentence=['WO','ABER','GEFAHR','IST','WÄCHST','DAS','RETTENDE','AUCH'];
+  const shuffled=[...sentence].sort(()=>Math.random()-.5);
+  // Make sure it's not accidentally in order
+  while(shuffled.join('')===sentence.join(''))shuffled.sort(()=>Math.random()-.5);
+  puzzleOrder=[];
+  const bank=document.getElementById('puzzleBank');
+  const slots=document.getElementById('puzzleSlots');
+  const fb=document.getElementById('puzzleFb');
+  const btn=document.getElementById('puzzleCheck');
+  bank.innerHTML='';slots.innerHTML='';fb.innerHTML='';btn.style.display='none';
+  shuffled.forEach((w,i)=>{
+    const el=document.createElement('div');el.className='puzzle-word';el.textContent=w;
+    el.dataset.word=w;el.dataset.idx=i;
+    el.onclick=()=>placeWord(el);
+    bank.appendChild(el);
+  });
+}
+function placeWord(el){
+  if(el.classList.contains('placed'))return;
+  el.classList.add('placed');
+  puzzleOrder.push(el.dataset.word);
+  const slots=document.getElementById('puzzleSlots');
+  const slot=document.createElement('div');slot.className='puzzle-slot';slot.textContent=el.dataset.word;
+  slot.onclick=()=>{
+    // Remove from slots, re-enable in bank
+    puzzleOrder=puzzleOrder.filter(w=>w!==el.dataset.word||puzzleOrder.indexOf(w)!==puzzleOrder.lastIndexOf(w)?true:(puzzleOrder.splice(puzzleOrder.indexOf(w),1),false));
+    puzzleOrder=[];
+    // Rebuild slots from scratch
+    document.querySelectorAll('.puzzle-slot').forEach(s=>s.remove());
+    document.querySelectorAll('.puzzle-word').forEach(w=>w.classList.remove('placed'));
+    puzzleOrder=[];
+  };
+  slots.appendChild(slot);
+  const btn=document.getElementById('puzzleCheck');
+  if(puzzleOrder.length>=8)btn.style.display='block';
+}
+function checkPuzzle(){
+  const correct=['WO','ABER','GEFAHR','IST','WÄCHST','DAS','RETTENDE','AUCH'];
+  const fb=document.getElementById('puzzleFb');
+  if(puzzleOrder.join(' ')===correct.join(' ')){
+    playSfx('correct');
+    fb.innerHTML='<div style="color:var(--success);font-weight:700;font-size:1.1rem;margin-bottom:.5rem">Richtig!</div><div class="finale-formula" style="background:var(--bg-card);border:1px solid var(--border-accent);border-radius:var(--r);margin-top:1rem"><div class="ff-label">Heinrichs Formel</div><div class="ff-text">„Wo aber Gefahr ist, wächst das Rettende auch."</div><div class="ff-author">— Friedrich Hölderlin, „Patmos" (1803)</div><div class="ff-explain">Hölderlin lebte 36 Jahre im Turm am Neckar – nur wenige hundert Meter von deiner letzten Station entfernt. Heinrich kannte seine Verse und verstand: Die wahre Formel war nie eine Waffe. Sie war ein Versprechen. Wo Wissen unterdrückt wird, wächst der Mut, es zu teilen.</div></div>';
+    document.getElementById('puzzleCheck').style.display='none';
+    document.getElementById('puzzleBank').style.display='none';
+    const btn=document.createElement('button');btn.className='btn-primary';btn.style.marginTop='1.5rem';btn.style.maxWidth='300px';
+    btn.textContent='Weiter zur Bonus-Runde →';
+    btn.onclick=()=>{showScreen('quizScreen');initQuiz()};
+    fb.appendChild(btn);
+    totalXp+=100;updateXp();saveGame();
+  }else{
+    playSfx('wrong');
+    fb.innerHTML='<div style="color:var(--error)">Noch nicht ganz – versuch es nochmal!</div>';
+    // Reset
+    puzzleOrder=[];
+    document.querySelectorAll('.puzzle-slot').forEach(s=>s.remove());
+    document.querySelectorAll('.puzzle-word').forEach(w=>w.classList.remove('placed'));
+    document.getElementById('puzzleCheck').style.display='none';
+  }
+}
+
+// ====== QUIZ ======
+const QUIZ_QUESTIONS=[
+  {q:'Was wurde 1869 im Labor des Schlosses Hohentübingen entdeckt?',
+   opts:['Penicillin','Die DNA','Radioaktivität','Vitamin C'],correct:1},
+  {q:'Was prophezeite der Astronom Stöffler für den 20. Februar 1524?',
+   opts:['Eine Sonnenfinsternis','Einen Kometeneinschlag','Eine Sintflut','Das Ende der Welt'],correct:2},
+  {q:'Woraus wurde die Neptun-Figur am Marktplatz gegossen?',
+   opts:['Kirchenglocken','Eingeschmolzene französische Waffen','Römische Münzen','Schwäbisches Eisenerz'],correct:1},
+  {q:'Wie viel zahlte die Stadt 1828 für 96 Platanen?',
+   opts:['12 Gulden','32 Gulden','96 Gulden','150 Gulden'],correct:1},
+  {q:'Was verstecken die Bildhauer in den Wasserspeiern des Neptunbrunnens?',
+   opts:['Geheime Inschriften','Kleine Frösche','Ihre Porträts mit Zigarre','Das Stadtwappen'],correct:2},
+];
+let quizIdx=0,quizScore=0;
+function initQuiz(){
+  quizIdx=0;quizScore=0;
+  renderQuizQuestion();
+}
+function renderQuizQuestion(){
+  const el=document.getElementById('quizContent');
+  if(quizIdx>=QUIZ_QUESTIONS.length){
+    // Quiz done
+    const bonus=quizScore*50;
+    totalXp+=bonus;updateXp();saveGame();
+    el.innerHTML=`
+      <div style="font-size:2.5rem;margin-bottom:.5rem">${quizScore>=4?'🌟':quizScore>=2?'👏':'💪'}</div>
+      <div style="font-size:1.3rem;font-weight:900;font-family:var(--font-h);margin-bottom:.5rem">${quizScore} von ${QUIZ_QUESTIONS.length} richtig!</div>
+      <div style="font-size:.9rem;color:var(--accent);font-weight:700;margin-bottom:1.5rem">+${bonus} Bonus-Traces</div>
+      <button class="btn-primary" style="max-width:300px" onclick="showFinale()">Zur Urkunde →</button>
+    `;
+    return;
+  }
+  const q=QUIZ_QUESTIONS[quizIdx];
+  el.innerHTML=`
+    <div class="quiz-q">
+      <div class="quiz-q-num">Frage ${quizIdx+1} von ${QUIZ_QUESTIONS.length}</div>
+      <div class="quiz-q-text">${q.q}</div>
+      ${q.opts.map((o,i)=>`<button class="quiz-opt" data-idx="${i}" onclick="answerQuiz(this,${i},${q.correct})">${o}</button>`).join('')}
+    </div>
+  `;
+}
+function answerQuiz(btn,chosen,correct){
+  const opts=document.querySelectorAll('.quiz-opt');
+  opts.forEach(o=>{
+    o.disabled=true;
+    if(parseInt(o.dataset.idx)===correct)o.classList.add('correct');
+    if(parseInt(o.dataset.idx)===chosen&&chosen!==correct)o.classList.add('wrong');
+  });
+  if(chosen===correct){playSfx('correct');quizScore++}else{playSfx('wrong')}
+  quizIdx++;
+  setTimeout(renderQuizQuestion,1200);
+}
+function showFinale(){
+  document.getElementById('finalXp').textContent=totalXp;
+  const sc=document.getElementById('solvedCount');
+  if(sc){
+    const ridSolved=stations.filter((st,i)=>!st.anecdote&&solvedStations[i]).length;
+    const ridTotal=stations.filter(st=>!st.anecdote).length;
+    sc.textContent=ridSolved+' von '+ridTotal+' Rätseln gelöst · alle Stops erkundet';
+  }
+  showScreen('success');playSfx('applause');setTimeout(renderCertificate,300);
 }
 
 // ====== INIT ======
