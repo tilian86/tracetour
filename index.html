@@ -1410,7 +1410,7 @@ function skipStation(){
   const idx=currentStation,s=stations[idx];
   if(solvedStations[idx])return;
   playSfx('correct');
-  solvedStations[idx]=true;totalXp+=Math.round(s.xp/2);updateXp();
+  solvedStations[idx]=true;updateXp();
   if(maxUnlockedStation===currentStation&&currentStation<stations.length-1)maxUnlockedStation++;
   document.getElementById('navNext').disabled=false;
   saveGame();showToast('Fortschritt gespeichert');
@@ -1419,7 +1419,7 @@ function skipStation(){
   if(fb){
     fb.className='riddle-fb correct';
     const answer=s.answer[0].charAt(0).toUpperCase()+s.answer[0].slice(1);
-    fb.innerHTML=`Übersprungen · Die Lösung war: <strong>${answer}</strong> (+${Math.round(s.xp/2)} Traces)`+renderFragmentReveal(s);
+    fb.innerHTML=`Übersprungen · Die Lösung war: <strong>${answer}</strong> <span style="color:var(--error)">−${s.xp} Traces</span>`+renderFragmentReveal(s);
     const nextName=idx<stations.length-1?stations[idx+1].name:'';
     const btn=document.createElement('button');btn.className='btn-primary';btn.style.marginTop='10px';
     btn.textContent=idx===stations.length-1?'Fall abschließen':'Weiter: '+nextName+' →';
