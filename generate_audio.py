@@ -563,7 +563,7 @@ STATIONS = [
             "Tübinger Altstadt, erbaut vierzehnhundertachtundachtzig. Der Name täuscht: Hier lebten zunächst "
             "Dominikanerinnen, dann Beginen - Frauen einer christlichen Laiengemeinschaft ohne "
             "Klostergelübde. Nach der Reformation fünfzehnhundertvierunddreißig wurde das Kloster aufgelöst.\n\n"
-            "Danach zog der Medizinprofessor und Botaniker Leonhard Fuchs ein - mit seiner Frau "
+            "Danach zog der Medizinprofessor und Botaniker Leonhard Fuchs ein, geboren fünfzehnhunderteins, gestorben fünfzehnhundertsechsundsechzig - mit seiner Frau "
             "und zehn Kindern! Er legte neben dem Haus einen der ältesten botanischen Gärten "
             "Europas an und schrieb hier fünfzehnhundertdreiundvierzig sein berühmtes 'New Kreüterbuch'. "
             "Die Fuchsie wurde nach ihm benannt, obwohl er die Pflanze nie gesehen hat. Vor dem Haus "
