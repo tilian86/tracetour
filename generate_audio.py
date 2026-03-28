@@ -384,27 +384,38 @@ STATIONS = [
         "story": (
             "Vom Haagtorplatz ging Heinrich weiter zum Affenfelsen - einem Stadtmauerrest am Rand "
             "der Altstadt, wo der Ammerkanal durch ein Tor unter der alten Mauer hindurchfließt.\n\n"
-            "Der Name klingt seltsam: 'Affenfelsen'. Er kommt wahrscheinlich daher, dass Kinder "
-            "auf den Mauerresten herumkletterten wie kleine Affen. Andere sagen, es liegt daran, "
-            "dass sich hier im Sommer junge Leute trafen - und sich dabei, nun ja, affig benahmen.\n\n"
-            "Der Ammerkanal fließt hier durch einen kleinen Bogen in der Stadtmauer - ein "
-            "faszinierendes Bild: mittelalterliche Steine über lebendigem Wasser. Heinrich "
-            "beobachtete das Wasser und überlegte kurz, ob er dem Kanal folgen sollte. "
+            "Der Name klingt seltsam: Affenfelsen. Er kommt wahrscheinlich daher, dass Kinder "
+            "auf den Mauerresten herumkletterten und im Sommer junge Leute hier herumsaßen.\n\n"
+            "Am Affenfelsen passiert etwas Besonderes: Der Ammerkanal verzweigt sich. Ein Teil "
+            "fließt eingedolt unter der Mühlstraße zum Neckar - auf dieser Gefällstrecke trieb "
+            "er früher die Mühlen an. Der andere Teil fließt unter dem Alten Botanischen Garten "
+            "zurück zur Ammer. Eine noch vorhandene Schleuse regelt bei Hochwasser den Wasserfluss. "
+            "Mittelalterliches Wassermanagement, das noch heute funktioniert.\n\n"
+            "Im Sommer verwandelt sich der Platz am Affenfelsen in eine lebendige Caféterrasse - "
+            "San Marco, Tre Pi und das Piccolo Sole d'Oro in der Metzgergasse laden zum "
+            "Verweilen ein.\n\n"
+            "Heinrich beobachtete das Wasser und überlegte kurz, ob er dem Kanal folgen sollte. "
             "Aber nein - sein Weg führte weiter."
         ),
         "diary": (
             "Am Affenfelsen. Das Wasser der Ammer fließt unter der alten Mauer hindurch - ruhig, "
-            "gleichmäßig, ohne sich um Gendarmen oder Formeln zu scheren. Ich beneide den Bach."
+            "gleichmäßig, ohne sich um Gendarmen oder Formeln zu scheren. An der Schleuse teilt "
+            "sich der Kanal in zwei Arme. Ich wünschte, ich könnte mich auch teilen - ein Heinrich, "
+            "der flieht, und einer, der bleibt."
         ),
         "fact": (
-            "Die Tuebinger Stadtmauer wurde im dreizehnten Jahrhundert errichtet und war etwa eineinhalb Kilometer "
-            "lang. Am Affenfelsen sieht man besonders gut, wie dick die Mauern waren - ueber einen Meter.\n\n"
-            "Der Ammerkanal, der hier durchfliesst, trieb frueher mehrere Muehlen in der Altstadt an. "
-            "Das Wasser wurde so geschickt gelenkt, dass Gerber, Faerber und Mueller es nacheinander "
-            "nutzen konnten - ein mittelalterliches Recyclingsystem."
+            "Die Tübinger Stadtmauer wurde im dreizehnten Jahrhundert errichtet und war etwa "
+            "eineinhalb Kilometer lang. Am Affenfelsen sieht man besonders gut, wie dick die "
+            "Mauern waren - über einen Meter.\n\n"
+            "Das Kunstwerk Radfahrerkönig stammt von der Tübinger Künstlerin Suse Müller-Diefenbach. "
+            "Am Affenfelsen verzweigt sich der Ammerkanal: Ein Arm fließt via Mühlstraße zum Neckar, "
+            "der andere zurück zur Ammer. Die historische Schleuse ist noch erhalten und funktioniert.\n\n"
+            "Die Gastronomie-Terrassen am Affenfelsen - San Marco, Tre Pi, Piccolo Sole d'Oro - "
+            "machen den Platz im Sommer zu einem der beliebtesten Treffpunkte der Altstadt."
         ),
         "riddle": (
-            "Welche Bar in der Nähe des Affenfelsens trägt den Namen eines alkoholischen Getränks? Ein Wort."
+            "Beim Affenfelsen steht ein Kunstwerk einer Tübinger Künstlerin. Es zeigt eine Figur "
+            "auf einem besonderen Gefährt. Was für ein König ist es? Ein Wort mit Gefährt."
         ),
     },
 
@@ -693,7 +704,7 @@ def main():
     else:
         station_nums = list(range(17))
 
-    all_types = ["story", "diary", "fact", "riddle", "anecdote", "prologue", "guide"]
+    all_types = ["story", "diary", "fact", "riddle", "anecdote", "prologue", "guide", "epilog"]
     if "--only" in sys.argv:
         idx = sys.argv.index("--only")
         types_to_gen = sys.argv[idx + 1].split(",")
