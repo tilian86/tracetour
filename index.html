@@ -769,7 +769,7 @@ function checkSavedGame(){
   if(raw){
     try{
       const d=JSON.parse(raw);
-      if(d.userName&&d.maxUnlockedStation>0){
+      if(d.userName){
         const solved=d.solvedStations?d.solvedStations.filter(Boolean).length:0;
         document.getElementById('saveInfoText').textContent=`${d.userName}: ${solved}/${stations.length} gelöst · ${d.totalXp} Traces`;
         info.classList.add('visible');box.style.display='block';
