@@ -710,7 +710,7 @@ const stations=[
 {
   lat:48.521978,lng:9.056889,name:'Affenfelsen',ambientIdx:11,xp:90,
   fragment:'IST',
-  answer:['radfahrerkönig','radfahrerkonig','radfahrer könig','radfahrer-könig'],
+  answer:['radfahrerkönig','radfahrerkonig','radfahrer könig','radfahrer-könig','fahrradkönig','fahrradkonig','fahrrad könig','fahrrad-könig','radfahrer'],
   story:'Vom Haagtorplatz ging Heinrich weiter zum Affenfelsen – einem Stadtmauerrest am Rand der Altstadt, wo der Ammerkanal durch ein Tor unter der alten Mauer hindurchfließt.\n\nDer Name klingt seltsam: „Affenfelsen". Er kommt wahrscheinlich daher, dass Kinder auf den Mauerresten herumkletterten und im Sommer junge Leute hier herumsaßen.\n\nAm Affenfelsen passiert etwas Besonderes: Der Ammerkanal verzweigt sich. Ein Teil fließt eingedolt unter der Mühlstraße zum Neckar – auf dieser Gefällstrecke trieb er früher die Mühlen an. Der andere Teil fließt unter dem Alten Botanischen Garten zurück zur Ammer. Eine noch vorhandene Schleuse regelt bei Hochwasser den Wasserfluss. Mittelalterliches Wassermanagement, das noch heute funktioniert.\n\nIm Sommer verwandelt sich der Platz am Affenfelsen in eine lebendige Caféterrasse – San Marco, Tre Pi und das Piccolo Sole d\'Oro in der Metzgergasse laden zum Verweilen ein.\n\nHeinrich beobachtete das Wasser und überlegte kurz, ob er dem Kanal folgen sollte. Aber nein – sein Weg führte weiter.',
   diary:'Am Affenfelsen. Das Wasser der Ammer fließt unter der alten Mauer hindurch – ruhig, gleichmäßig, ohne sich um Gendarmen oder Formeln zu scheren. An der Schleuse teilt sich der Kanal in zwei Arme. Ich wünschte, ich könnte mich auch teilen – ein Heinrich, der flieht, und einer, der bleibt.',
   riddle:'Beim Affenfelsen steht ein Kunstwerk einer Tübinger Künstlerin. Es zeigt eine Figur auf einem besonderen Gefährt. Was für ein „König" ist es? (Ein Wort mit Gefährt)',
@@ -1733,13 +1733,12 @@ function downloadForOffline(){
 }
 
 // ====== FORMULA PUZZLE ======
-let puzzleOrder=[];
+let puzzleOrder=[],puzzleAttempts=0,puzzleHintGiven=false;
+const PUZZLE_CORRECT=['WO','ABER','GEFAHR','IST','WÄCHST','DAS','RETTENDE','AUCH'];
 function initPuzzle(){
-  const sentence=['WO','ABER','GEFAHR','IST','WÄCHST','DAS','RETTENDE','AUCH'];
-  const shuffled=[...sentence].sort(()=>Math.random()-.5);
-  // Make sure it's not accidentally in order
-  while(shuffled.join('')===sentence.join(''))shuffled.sort(()=>Math.random()-.5);
-  puzzleOrder=[];
+  const shuffled=[...PUZZLE_CORRECT].sort(()=>Math.random()-.5);
+  while(shuffled.join('')===PUZZLE_CORRECT.join(''))shuffled.sort(()=>Math.random()-.5);
+  puzzleOrder=[];puzzleAttempts=0;puzzleHintGiven=false;
   const bank=document.getElementById('puzzleBank');
   const slots=document.getElementById('puzzleSlots');
   const fb=document.getElementById('puzzleFb');
@@ -1751,34 +1750,73 @@ function initPuzzle(){
     el.onclick=()=>placeWord(el);
     bank.appendChild(el);
   });
+  // Show hint button after 30 seconds
+  setTimeout(()=>{
+    if(!puzzleHintGiven&&puzzleOrder.length<8){
+      const fb=document.getElementById('puzzleFb');
+      if(fb&&!fb.querySelector('.puzzle-hint-btn')){
+        const hb=document.createElement('button');hb.className='hint-btn puzzle-hint-btn';hb.style.cssText='font-size:.75rem;opacity:.5;margin-top:.5rem';
+        hb.innerHTML='<span class="material-symbols-outlined" style="font-size:14px">lightbulb</span> Tipp: Die ersten Wörter zeigen';
+        hb.onclick=()=>givePuzzleHint();
+        fb.appendChild(hb);
+      }
+    }
+  },30000);
 }
 function placeWord(el){
   if(el.classList.contains('placed'))return;
   el.classList.add('placed');
-  puzzleOrder.push(el.dataset.word);
-  const slots=document.getElementById('puzzleSlots');
-  const slot=document.createElement('div');slot.className='puzzle-slot';slot.textContent=el.dataset.word;
-  slot.onclick=()=>{
-    // Remove from slots, re-enable in bank
-    puzzleOrder=puzzleOrder.filter(w=>w!==el.dataset.word||puzzleOrder.indexOf(w)!==puzzleOrder.lastIndexOf(w)?true:(puzzleOrder.splice(puzzleOrder.indexOf(w),1),false));
-    puzzleOrder=[];
-    // Rebuild slots from scratch
-    document.querySelectorAll('.puzzle-slot').forEach(s=>s.remove());
-    document.querySelectorAll('.puzzle-word').forEach(w=>w.classList.remove('placed'));
-    puzzleOrder=[];
-  };
-  slots.appendChild(slot);
+  puzzleOrder.push({word:el.dataset.word,bankEl:el});
+  renderSlots();
   const btn=document.getElementById('puzzleCheck');
   if(puzzleOrder.length>=8)btn.style.display='block';
+  else btn.style.display='none';
+}
+function removeSlotAt(idx){
+  const removed=puzzleOrder.splice(idx,1)[0];
+  if(removed&&removed.bankEl&&!removed.locked)removed.bankEl.classList.remove('placed');
+  renderSlots();
+  document.getElementById('puzzleCheck').style.display=puzzleOrder.length>=8?'block':'none';
+}
+function renderSlots(){
+  const slots=document.getElementById('puzzleSlots');
+  slots.innerHTML='';
+  puzzleOrder.forEach((item,i)=>{
+    const slot=document.createElement('div');slot.className='puzzle-slot';slot.textContent=item.word;
+    if(item.locked){slot.style.opacity='.6';slot.style.cursor='default';slot.style.borderStyle='solid'}
+    else{slot.onclick=()=>removeSlotAt(i)}
+    slots.appendChild(slot);
+  });
+}
+function givePuzzleHint(){
+  puzzleHintGiven=true;
+  // Pre-place "WO" and "ABER" as locked hints
+  puzzleOrder=puzzleOrder.filter(p=>!p.locked);
+  puzzleOrder.forEach(p=>{if(p.bankEl)p.bankEl.classList.remove('placed')});
+  const hintWords=['WO','ABER'];
+  const newOrder=[];
+  hintWords.forEach(w=>{
+    const bankEl=document.querySelector(`.puzzle-word[data-word="${w}"]`);
+    if(bankEl)bankEl.classList.add('placed');
+    newOrder.push({word:w,bankEl,locked:true});
+  });
+  puzzleOrder.forEach(p=>{if(!hintWords.includes(p.word))newOrder.push(p)});
+  puzzleOrder=newOrder;
+  renderSlots();
+  const fb=document.getElementById('puzzleFb');
+  const hb=fb.querySelector('.puzzle-hint-btn');if(hb)hb.remove();
+  fb.innerHTML='<div style="font-size:.8rem;color:var(--accent)">Die ersten zwei Wörter sind schon platziert!</div>';
+  document.getElementById('puzzleCheck').style.display=puzzleOrder.length>=8?'block':'none';
 }
 function checkPuzzle(){
-  const correct=['WO','ABER','GEFAHR','IST','WÄCHST','DAS','RETTENDE','AUCH'];
+  const result=puzzleOrder.map(p=>p.word);
   const fb=document.getElementById('puzzleFb');
-  if(puzzleOrder.join(' ')===correct.join(' ')){
+  if(result.join(' ')===PUZZLE_CORRECT.join(' ')){
     playSfx('fanfare');
     fb.innerHTML='<div style="color:var(--success);font-weight:700;font-size:1.1rem;margin-bottom:.5rem">Richtig!</div><div class="finale-formula" style="background:var(--bg-card);border:1px solid var(--border-accent);border-radius:var(--r);margin-top:1rem"><div class="ff-label">Heinrichs Formel</div><div class="ff-text">„Wo aber Gefahr ist, wächst das Rettende auch."</div><div class="ff-author">— Friedrich Hölderlin, „Patmos" (1803)</div><div class="ff-explain">Hölderlin lebte 36 Jahre im Turm am Neckar – nur wenige hundert Meter von deiner letzten Station entfernt. Heinrich kannte seine Verse und verstand: Die wahre Formel war nie eine Waffe. Sie war ein Versprechen. Wo Wissen unterdrückt wird, wächst der Mut, es zu teilen.</div></div>';
     document.getElementById('puzzleCheck').style.display='none';
     document.getElementById('puzzleBank').style.display='none';
+    document.getElementById('puzzleSlots').innerHTML='';
     const btn=document.createElement('button');btn.className='btn-primary';btn.style.marginTop='1.5rem';btn.style.maxWidth='300px';
     btn.textContent='Weiter zur Bonus-Runde →';
     btn.onclick=()=>{showScreen('quizScreen');initQuiz()};
@@ -1786,12 +1824,13 @@ function checkPuzzle(){
     totalXp+=100;updateXp();saveGame();
   }else{
     playSfx('wrong');
-    fb.innerHTML='<div style="color:var(--error)">Noch nicht ganz – versuch es nochmal!</div>';
-    // Reset
-    puzzleOrder=[];
-    document.querySelectorAll('.puzzle-slot').forEach(s=>s.remove());
-    document.querySelectorAll('.puzzle-word').forEach(w=>w.classList.remove('placed'));
-    document.getElementById('puzzleCheck').style.display='none';
+    puzzleAttempts++;
+    if(puzzleAttempts>=3&&!puzzleHintGiven){
+      givePuzzleHint();
+      fb.innerHTML+='<div style="font-size:.8rem;color:var(--text-2);margin-top:.5rem">Hier ein kleiner Tipp – die ersten zwei Wörter stimmen schon!</div>';
+    }else{
+      fb.innerHTML='<div style="color:var(--error)">Noch nicht ganz – tippe auf einzelne Wörter oben, um sie wieder rauszunehmen.</div>';
+    }
   }
 }
 
