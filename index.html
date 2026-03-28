@@ -894,7 +894,7 @@ function renderStation(){
   const solved=!!solvedStations[currentStation],ai=currentStation;
 
   const mapsLink=`<a class="maps-link" href="${mapsUrl(s.lat,s.lng,s.name)}" target="_blank" rel="noopener">
-    <span class="material-symbols-outlined">navigation</span> Navigation starten
+    <span class="material-symbols-outlined">navigation</span> Navigation: ${s.name}
     <span class="coords">${s.lat.toFixed(4)}, ${s.lng.toFixed(4)}</span>
   </a>`;
 
@@ -1340,7 +1340,8 @@ function renderFormulaBar(){
     const found=solvedStations[idx];
     return`<span class="fw ${found?'found':'missing'}">${found?w:'???'}</span>`;
   }).join('');
-  return`<div class="formula-bar">${html}</div>`;
+  const count=words.filter((w,i)=>{const st=riddleStations[i];const idx=stations.indexOf(st);return solvedStations[idx]}).length;
+  return`<div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px;text-align:center">Heinrichs Formel · ${count} von ${words.length}</div><div class="formula-bar">${html}</div>`;
 }
 function updateXp(){
   const max=stations.reduce((a,b)=>a+b.xp,0);
