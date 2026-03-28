@@ -303,12 +303,12 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 </div>
 </div>
 <div class="prologue-label"><span class="dot"></span> Geheime Akte // November 1869</div>
-<div class="audio-row" id="audioPrologue" onclick="playAudio('prologue','audioPrologue','prologue')" style="max-width:480px;margin:0 auto 1rem">
+<div class="audio-row" id="audioPrologue" onclick="playAudio('prologue','audioPrologue','prologue')" style="max-width:480px;margin:0 auto 4px">
   <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
   <div><div class="audio-label">Vorgeschichte anhören</div><div class="audio-sublabel">Erzähler</div></div>
   <div class="audio-time" id="timePrologue">--:--</div>
 </div>
-<div class="audio-progress" data-type="prologue" onclick="seekAudio(event,'prologue')" style="max-width:480px;margin:0 auto .5rem"><div class="audio-progress-fill" id="progFillPrologue"></div></div>
+<div class="audio-progress" data-type="prologue" onclick="seekAudio(event,'prologue')" style="max-width:480px;margin:0 auto 1rem;min-height:16px"><div class="audio-progress-fill" id="progFillPrologue"></div></div>
 <div class="prologue-text">
 <p>Tübingen, im November des Jahres 1869. Das Königreich Württemberg unter König Karl I. erlebt turbulente Zeiten. Preußen rüstet auf, Europa balanciert am Rand eines Krieges, und in den Laboren der Universität wird an Entdeckungen gearbeitet, die alles verändern könnten.</p>
 <p><strong>Professor Heinrich von Calw</strong>, ein brillanter Naturwissenschaftler, forscht in seinem Labor im Schloss Hohentübingen an einer revolutionären Energie-Formel. Offiziell arbeitet er an „chemischen Grundlagen" für das Königliche Ministerium. In Wahrheit hat er etwas entdeckt, das die Kriegsführung – und die Welt – für immer verändern würde.</p>
@@ -1028,7 +1028,7 @@ function renderStation(){
       <div class="riddle-label"><span class="material-symbols-outlined">search</span> Rätsel</div>
       <div class="riddle-q">${s.riddle}</div>
       ${s.choices?`<div class="riddle-choices">${s.choices.map((c,ci)=>`<button class="riddle-choice${solved?' correct-choice':''}" data-choice="${ci}" onclick="checkChoice(this)" ${solved?'disabled':''}>${solved?'✓ ':''} ${esc(c)}</button>`).join('')}</div>`:`<div class="riddle-input-row">
-        <input class="riddle-input" id="riddleAnswer" placeholder="Deine Antwort..." autocomplete="off" ${solved?'disabled value="Gelöst ✓"':''}>
+        <input class="riddle-input" id="riddleAnswer" placeholder="Deine Antwort..." autocomplete="off" ${solved?`disabled value="${s.answer[0].charAt(0).toUpperCase()+s.answer[0].slice(1)} ✓"`:''}>
         <button class="riddle-submit" onclick="checkAnswer()" ${solved?'disabled':''}>Prüfen</button>
       </div>`}
       <div id="riddleFb"></div>
@@ -1043,7 +1043,8 @@ function renderStation(){
 
   if(solved&&!s.anecdote){
     const fb=document.getElementById('riddleFb');fb.className='riddle-fb correct';
-    fb.innerHTML='Bereits gelöst!'+renderFragmentReveal(s);
+    const ans=s.answer[0].charAt(0).toUpperCase()+s.answer[0].slice(1);
+    fb.innerHTML=`Richtig: <strong>${ans}</strong>`+renderFragmentReveal(s);
     if(currentStation<stations.length-1){
       const btn=document.createElement('button');btn.className='btn-primary';btn.style.marginTop='10px';
       btn.textContent='Weiter: '+stations[currentStation+1].name+' →';btn.onclick=()=>navStation(1);fb.appendChild(btn);
