@@ -36,7 +36,7 @@ except ImportError:
 # KONFIGURATION
 # ============================================================
 
-API_KEY = os.environ.get("ELEVENLABS_API_KEY", "sk_005ded915f772d5798f850aaac462b572c1ea0905252f50e")
+API_KEY = os.environ.get("ELEVENLABS_API_KEY", "sk_18df17d38593a50a53362f37c86f9527c02d4c21ec495fc7")
 
 NARRATOR_VOICE = "WHaUUVTDq47Yqc9aDbkH"   # Story-Stimme (gleich wie vorher)
 HEINRICH_VOICE = "2OcnG4mH3jIMtWz3vKus"   # Tagebuch-Stimme (gleich wie vorher)
@@ -710,6 +710,9 @@ SPECIAL_AUDIO = {
             "verschwinden. Unterwegs versteckt er codierte Fragmente seines Werks an verschiedenen "
             "Orten – für den Fall, dass jemand Würdiges seine Spur findet.\n\n"
             "Dieser Jemand bist du.\n\n"
+            "Aus Heinrichs Notizbuch: 'Wer die Formel besitzt, besitzt die Macht, Städte zu "
+            "zerstören oder die Menschheit zu befreien. Ich vertraue sie keinem König an – "
+            "nur dem Wind und den Steinen dieser Stadt.'\n\n"
             "Du folgst Heinrichs Fluchtweg vom Schloss bergab, durch die Altstadt, bis zum Neckar. "
             "An siebzehn Orten hat er Spuren hinterlassen. An jeder Rätsel-Station findest du ein "
             "Fragment seiner Formel – acht Bruchstücke, die sich am Ende zu etwas Unerwartetem "
@@ -771,19 +774,31 @@ SPECIAL_AUDIO = {
 # ============================================================
 
 def generate_audio(client, text, voice_id, output_path):
-    """Generiert eine MP3-Datei aus Text via ElevenLabs API."""
+    """Generiert eine MP3-Datei aus Text via ElevenLabs REST API."""
     print(f"  Generiere: {output_path.name} ({len(text)} Zeichen)...", end=" ", flush=True)
 
     try:
-        audio = client.text_to_speech.convert(
-            voice_id=voice_id,
-            text=text,
-            model_id=MODEL_ID,
-            output_format="mp3_44100_128",
+        import requests
+        resp = requests.post(
+            f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}",
+            headers={
+                "xi-api-key": API_KEY,
+                "Content-Type": "application/json",
+                "Accept": "audio/mpeg",
+            },
+            json={
+                "text": text,
+                "model_id": MODEL_ID,
+                "voice_settings": {"stability": 0.5, "similarity_boost": 0.75},
+            },
+            stream=True,
         )
+        if resp.status_code != 200:
+            print(f"FEHLER: HTTP {resp.status_code} - {resp.text[:200]}")
+            return False
 
         with open(output_path, "wb") as f:
-            for chunk in audio:
+            for chunk in resp.iter_content(chunk_size=4096):
                 f.write(chunk)
 
         size_kb = output_path.stat().st_size / 1024
@@ -812,7 +827,7 @@ def main():
         print("   oder trage ihn direkt in generate_audio.py ein.")
         sys.exit(1)
 
-    client = ElevenLabs(api_key=API_KEY)
+    client = None  # Using REST API directly
 
     if "--list-voices" in sys.argv:
         list_voices(client)
