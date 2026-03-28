@@ -252,7 +252,7 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <input type="text" id="loginName" placeholder="Dein Ermittlername" autocomplete="off" autocapitalize="words">
 <input type="text" id="loginCode" placeholder="Zugangscode" autocomplete="off" autocapitalize="characters">
 <button class="btn-primary" onclick="doLogin()">Einloggen</button>
-<div class="login-hint">Code: <strong>TUEBINGEN2026</strong> · Debug: <strong>DEBUG</strong></div>
+<div class="login-hint">Code: <strong>TUEBINGEN2026</strong></div>
 </div>
 </div>
 
@@ -786,11 +786,11 @@ function doLogin(){
   const name=document.getElementById('loginName').value.trim();
   const code=document.getElementById('loginCode').value.trim().toUpperCase();
   if(!name){document.getElementById('loginName').focus();return}
-  if(code!=='TUEBINGEN2026'&&code!=='DEBUG'){
+  if(code!=='TUEBINGEN2026'){
     document.getElementById('loginCode').style.borderColor='var(--error)';
     setTimeout(()=>document.getElementById('loginCode').style.borderColor='',1500);return;
   }
-  debugMode=(code==='DEBUG');userName=name;
+  debugMode=false;userName=name;
   document.getElementById('userNameDisplay').textContent=name;
   document.getElementById('userAvatar').textContent=name[0].toUpperCase();
   showScreen('tourSelect');
@@ -1027,12 +1027,11 @@ function renderStation(){
     <div class="riddle-box">
       <div class="riddle-label"><span class="material-symbols-outlined">search</span> Rätsel</div>
       <div class="riddle-q">${s.riddle}</div>
-      ${debugMode?`<div style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);border-radius:var(--r-sm);padding:8px 12px;margin-bottom:10px;font-size:.78rem;color:var(--error)">DEBUG: <strong>${s.answer.join(' / ')}</strong></div>`:''}
       ${s.choices?`<div class="riddle-choices">${s.choices.map((c,ci)=>`<button class="riddle-choice${solved?' correct-choice':''}" data-choice="${ci}" onclick="checkChoice(this)" ${solved?'disabled':''}>${solved?'✓ ':''} ${esc(c)}</button>`).join('')}</div>`:`<div class="riddle-input-row">
         <input class="riddle-input" id="riddleAnswer" placeholder="Deine Antwort..." autocomplete="off" ${solved?'disabled value="Gelöst ✓"':''}>
         <button class="riddle-submit" onclick="checkAnswer()" ${solved?'disabled':''}>Prüfen</button>
       </div>`}
-      ${!solved?`<button onclick="skipStation()" class="hint-btn" style="margin-top:8px;font-size:.78rem;opacity:.6"><span class="material-symbols-outlined" style="font-size:16px">skip_next</span> Rätsel überspringen & Lösung zeigen</button>`:''}
+      ${!solved?`<button onclick="confirmSkip()" class="hint-btn" style="margin-top:8px;font-size:.72rem;opacity:.4"><span class="material-symbols-outlined" style="font-size:14px">skip_next</span> Überspringen</button>`:''}
       <div id="riddleFb"></div>
     </div>
     <button class="hint-btn" onclick="openAi()"><span class="material-symbols-outlined">psychology</span> Ermittler-Assistent fragen</button>
@@ -1405,6 +1404,9 @@ function updateXp(){
   const max=stations.reduce((a,b)=>a+b.xp,0);
   document.getElementById('xpLabel').textContent=totalXp+' Traces';
   document.getElementById('xpFill').style.width=Math.round((totalXp/max)*100)+'%';
+}
+function confirmSkip(){
+  if(confirm('Möchtest du das Rätsel wirklich überspringen? Du bekommst keine Traces dafür – aber die Lösung und den Fakten-Track.'))skipStation();
 }
 function skipStation(){
   const idx=currentStation,s=stations[idx];
