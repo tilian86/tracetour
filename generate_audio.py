@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """
 TraceTour Audio Generator -- ElevenLabs TTS
-v5 -- 16 Stationen, 1869 Story, Vollvertonung
+v6 -- 17 Stationen, 1869 Story, Vollvertonung
 
-Generiert alle Audio-Dateien fuer die 16 Stationen:
-  Raetsel-Stationen (0,2,4,6,9,10,13,15):
+Generiert alle Audio-Dateien fuer die 17 Stationen:
+  Raetsel-Stationen (0,2,4,6,9,11,14,16):
     - story_X.mp3   (Erzaehler-Stimme)
     - diary_X.mp3   (Heinrichs Stimme)
     - fact_X.mp3    (Fakten-Stimme)
-  Anekdoten-Stationen (1,3,5,7,8,11,12,14):
+    - riddle_X.mp3  (Erzaehler-Stimme, Raetseltext)
+  Anekdoten-Stationen (1,3,5,7,8,10,12,13,15):
     - anecdote_X.mp3 (Fakten-Stimme)
 
 Verwendung:
@@ -82,6 +83,10 @@ STATIONS = [
             "Ausserdem fand man in den Gewoelben die Vogelherd-Figuren: 40.000 Jahre alte "
             "Elfenbeinschnitzereien, die aeltesten bekannten Kunstwerke der Menschheit."
         ),
+        "riddle": (
+            "Am Eingangstor des Schlosses siehst du das württembergische Wappen in Stein gemeißelt. "
+            "Welches Tier ist das größte und auffälligste auf dem Wappen? Ein Wort."
+        ),
     },
 
     # 1 - Studentenkarzer (Anekdote)
@@ -131,6 +136,11 @@ STATIONS = [
             "Philipp Melanchthon lehrte hier griechische Grammatik - mit nur 21 Jahren! Und der "
             "junge Kepler wurde hier fuer seine astronomischen Ideen fast von der Uni geworfen."
         ),
+        "riddle": (
+            "Auf der Infotafel der Alten Aula stehen zwei Jahreszahlen: das Baujahr und das Jahr "
+            "des Umbaus zum 300-jährigen Uni-Jubiläum. Ziehe 300 vom Umbaujahr ab - in welchem "
+            "Jahr wurde die Universität Tübingen gegründet?"
+        ),
     },
 
     # 3 - Martinianum (Anekdote)
@@ -178,6 +188,10 @@ STATIONS = [
             "ihn betend mit seinem Lieblingsspruch: 'Attempto' (Ich wag's).\n\n"
             "Der Turm hat eine Besonderheit: Die Turmwaechterwohnung auf halber Hoehe war bis 1948 "
             "bewohnt! Der letzte Turmwaechter hiess Karl Weihenmaier und lebte dort mit seiner Familie."
+        ),
+        "riddle": (
+            "Schau dir den Kirchturm der Stiftskirche genau an. Wie hoch ist er? "
+            "Beim Bau ging das Geld aus - der Turm blieb kleiner als geplant!"
         ),
     },
 
@@ -236,6 +250,11 @@ STATIONS = [
             "leicht zu übersehen, aber der wichtigste von allen.\n\n"
             "Der Neptunbrunnen auf dem Marktplatz und die schiefe Treppe, die einem alten "
             "Abwasserkanal folgt, gehören ebenfalls zu den Besonderheiten des Platzes."
+        ),
+        "riddle": (
+            "Stell dich vor die Rathaus-Fassade und zähle die gemalten Namen berühmter "
+            "Persönlichkeiten. Wie viele sind es? Tipp: Einer versteckt sich ganz oben - "
+            "leicht zu übersehen!"
         ),
     },
 
@@ -307,11 +326,39 @@ STATIONS = [
             "Fun Fact: Als das Haagtor 1831 fiel, protestierten Buerger - nicht wegen der Geschichte, "
             "sondern weil der Torwaechter seinen Job verlor. Er bekam eine Abfindung von 50 Gulden."
         ),
+        "riddle": (
+            "Das Haagtor war eines von wie vielen Stadttoren der mittelalterlichen Befestigung "
+            "Tübingens? Eine Zahl. Oder: In welchem Jahr wurde es abgerissen? Das steht auf der Gedenktafel."
+        ),
     },
 
-    # 10 - Affenfelsen (Raetsel)
+    # 10 - Froschkoenig-Brunnen (Anekdote) [NEU]
     {
-        "name": "Station 10 - Affenfelsen",
+        "name": "Station 10 - Froschkoenig-Brunnen",
+        "type": "anekdote",
+        "anecdote": (
+            "Auf dem Weg vom Haagtorplatz zum Affenfelsen kam Heinrich am Brunnen vor dem "
+            "Café Hirsch vorbei. Ein unscheinbarer Brunnenschacht, sieben Meter tief.\n\n"
+            "Heute hat dieser Brunnen eine besondere Geschichte: Jahrelang war er mit einem "
+            "Meter Müll vollgestopft. Schulkinder, die ihn beim Stadtquiz besuchten, schauten "
+            "angeekelt hinein. 2024 nahm sich Petra Wenzel, eine engagierte Bürgerin aus dem "
+            "Café Hirsch, der Sache an. Die Stadt half mit schwerem Gerät - Gasmasken, "
+            "Industrieschläuche, der volle Einsatz.\n\n"
+            "Im Frühling 2025 wurde ein handgefertigter Froschkönig aus Ton eingesetzt - "
+            "40 mal 40 Zentimeter, bunt bemalt und nachts von einer Solarlampe angestrahlt. "
+            "Er guckt direkt auf die Tübinger Froschgasse. Eine Glasplatte schützte ihn "
+            "vor der Witterung.\n\n"
+            "Doch im Oktober 2025 wurde der Froschkönig gestohlen - jemand schob die "
+            "Glasplatte zur Seite und hievte ihn heraus. 'Das ist so schade für all die "
+            "Kinder', sagte Wenzel. Sie bestellte sofort einen neuen. Schau mal, ob er "
+            "schon wieder da ist!\n\n"
+            "Heinrich bemerkte den Brunnen nicht. Er hatte andere Sorgen."
+        ),
+    },
+
+    # 11 - Affenfelsen (Raetsel)
+    {
+        "name": "Station 11 - Affenfelsen",
         "type": "raetsel",
         "story": (
             "Vom Haagtorplatz ging Heinrich weiter zum Affenfelsen - einem Stadtmauerrest am Rand "
@@ -335,11 +382,14 @@ STATIONS = [
             "Das Wasser wurde so geschickt gelenkt, dass Gerber, Faerber und Mueller es nacheinander "
             "nutzen konnten - ein mittelalterliches Recyclingsystem."
         ),
+        "riddle": (
+            "Welche Bar in der Nähe des Affenfelsens trägt den Namen eines alkoholischen Getränks? Ein Wort."
+        ),
     },
 
-    # 11 - Alter Botanischer Garten (Anekdote)
+    # 12 - Alter Botanischer Garten (Anekdote)
     {
-        "name": "Station 11 - Alter Botanischer Garten",
+        "name": "Station 12 - Alter Botanischer Garten",
         "type": "anekdote",
         "anecdote": (
             "Heinrich schlug einen Bogen nach Osten und schnitt durch den Alten Botanischen Garten - "
@@ -356,9 +406,9 @@ STATIONS = [
         ),
     },
 
-    # 12 - Neue Aula (Anekdote)
+    # 13 - Neue Aula (Anekdote)
     {
-        "name": "Station 12 - Neue Aula",
+        "name": "Station 13 - Neue Aula",
         "type": "anekdote",
         "anecdote": (
             "Die Neue Aula - das imposante Hauptgebäude der Universität, 1845 im klassizistischen "
@@ -376,9 +426,9 @@ STATIONS = [
         ),
     },
 
-    # 13 - Nonnenhaus (Raetsel)
+    # 14 - Nonnenhaus (Raetsel)
     {
-        "name": "Station 13 - Nonnenhaus",
+        "name": "Station 14 - Nonnenhaus",
         "type": "raetsel",
         "story": (
             "Das Nonnenhaus - eines der ältesten Fachwerkhäuser der Altstadt, erbaut 1488. "
@@ -406,11 +456,16 @@ STATIONS = [
             "'New Kreuterbuch' von 1543 - mit handkolorierten Holzschnitten. Das Buch war so "
             "erfolgreich, dass die Fuchsie nach ihm benannt wurde, obwohl er die Pflanze nie gesehen hat."
         ),
+        "riddle": (
+            "Schau dir die Rückseite des Nonnenhauses an. Im ersten Stock ragt ein hölzerner Erker "
+            "über die Gasse hinweg bis über den Ammerkanal. Warum wurde er so weit übers Wasser gebaut? "
+            "Was war seine Funktion? Ein Wort."
+        ),
     },
 
-    # 14 - Neckarinsel & Platanenallee (Anekdote)
+    # 15 - Neckarinsel & Platanenallee (Anekdote)
     {
-        "name": "Station 14 - Neckarinsel & Platanenallee",
+        "name": "Station 15 - Neckarinsel & Platanenallee",
         "type": "anekdote",
         "anecdote": (
             "Heinrich erreichte die Neckarinsel - das schmale Eiland mitten im Fluss, verbunden "
@@ -428,9 +483,9 @@ STATIONS = [
         ),
     },
 
-    # 15 - Indianersteg (Raetsel / Finale)
+    # 16 - Indianersteg (Raetsel / Finale)
     {
-        "name": "Station 15 - Indianersteg (Finale)",
+        "name": "Station 16 - Indianersteg (Finale)",
         "type": "raetsel",
         "story": (
             "Der Indianersteg - eine schmale Fußgängerbrücke über den Neckar. "
@@ -451,7 +506,8 @@ STATIONS = [
             "Der Steg wackelt unter meinen Schritten. Der Neckar ist schwarz und still. "
             "Auf der anderen Seite beginnt die Nacht, in der ich verschwinden werde. "
             "Über Rottenburg nach Süden. Die Schweizer Grenze.\n\n"
-            "Meine Formel ist verteilt - sechzehn Fragmente an sechzehn Orten. "
+            "Meine Formel ist verteilt - Fragmente an verschiedenen Orten dieser Stadt, "
+            "versteckt in Mauernischen, hinter losen Steinen, unter altem Holz. "
             "Wer sie alle findet, wird verstehen: Die gefährlichste Waffe ist nicht die "
             "Formel selbst. Es ist die Angst der Mächtigen vor dem freien Wissen.\n\n"
             "Lebe wohl, Tübingen."
@@ -464,6 +520,10 @@ STATIONS = [
             "genau wie Heinrich.\n\n"
             "Fun Fact: Der Name 'Indianersteg' taucht erstmals 1871 in einem Unfallbericht auf. "
             "Kinder spielten auf der wackeligen Bruecke Karl-May-Spiele."
+        ),
+        "riddle": (
+            "Die erste Holzbrücke wurde 1863 errichtet. Welches Kinderspiel gab der Brücke "
+            "ihren Namen? Ein Wort."
         ),
     },
 ]
@@ -524,9 +584,9 @@ def main():
         idx = sys.argv.index("--station")
         station_nums = [int(x) for x in sys.argv[idx + 1].split(",")]
     else:
-        station_nums = list(range(16))
+        station_nums = list(range(17))
 
-    all_types = ["story", "diary", "fact", "anecdote"]
+    all_types = ["story", "diary", "fact", "riddle", "anecdote"]
     if "--only" in sys.argv:
         idx = sys.argv.index("--only")
         types_to_gen = sys.argv[idx + 1].split(",")
@@ -539,6 +599,7 @@ def main():
         "story": NARRATOR_VOICE,
         "diary": HEINRICH_VOICE,
         "fact": FACT_VOICE,
+        "riddle": NARRATOR_VOICE,
         "anecdote": FACT_VOICE,
     }
 
@@ -553,7 +614,7 @@ def main():
     errors = 0
 
     print("=" * 60)
-    print("TraceTour Audio Generator - v5 (16 Stationen, 1869)")
+    print("TraceTour Audio Generator - v6 (17 Stationen, 1869)")
     print("=" * 60)
     print(f"Output:    {OUTPUT_DIR}")
     print(f"Stationen: {station_nums}")
