@@ -338,7 +338,7 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <p style="margin-bottom:.75rem">🔍 <strong>Löse Rätsel</strong> – An Rätsel-Stationen musst du vor Ort etwas finden oder beobachten. Nach richtiger Antwort wird der Fakten-Track freigeschaltet – und ein Fragment von Heinrichs geheimer Formel enthüllt. Keine Sorge: Wenn du mal auf dem Schlauch stehst, zeigen wir dir nach ein paar Versuchen die Lösung – niemand bleibt stecken.</p>
 <p style="margin-bottom:.75rem">🧩 <strong>Entschlüssle die Formel</strong> – Acht Fragmente, verteilt über die ganze Route. Erst am Ende fügt sich alles zusammen. Was hat Heinrich wirklich versteckt?</p>
 <p style="margin-bottom:.75rem">⭐ <strong>Sammle Traces</strong> – Für jede gelöste Station bekommst du Erfahrungspunkte. Am Ende wartet deine Urkunde.</p>
-<p style="margin-bottom:.75rem">💡 <strong>Ermittler-Assistent</strong> – Dein KI-Stadtführer kennt sich in Tübingen aus! Frag ihn nach Hinweisen zum Rätsel, aber auch nach Geschichte, Sehenswürdigkeiten oder allem, was du bei einer Stadtführung wissen willst. Er verrät nur nicht die Lösung.</p>
+<p style="margin-bottom:.75rem">💡 <strong>Frag Trace!</strong> – Dein KI-Begleiter Trace kennt sich in Tübingen aus! Frag nach Hinweisen zum Rätsel, aber auch nach Geschichte, Sehenswürdigkeiten oder allem, was du bei einer Stadtführung wissen willst. Trace verrät nur nicht die Lösung.</p>
 <p style="margin-bottom:.75rem">🔊 <strong>In der Gruppe?</strong> – Nehmt einen Bluetooth-Lautsprecher mit! So hören alle entspannt die Geschichten und ihr könnt gemeinsam rätseln.</p>
 <p style="margin-bottom:.75rem">📱 <strong>Standort erlauben</strong> – Die App braucht Zugriff auf deinen Standort, damit die Karte funktioniert. Wenn dein Browser fragt, tippe auf „Erlauben".<br>
 <span style="font-size:.8rem;opacity:.7">Falls du die Berechtigung verweigert hast:<br>
@@ -376,11 +376,11 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <div class="ai-overlay" id="aiOverlay">
 <div class="ai-box">
 <div class="ai-header">
-<h3><span class="ai-dot"></span> Ermittler-Assistent</h3>
+<h3><span class="ai-dot"></span> Trace</h3>
 <button class="ai-close" onclick="closeAi()">×</button>
 </div>
 <div class="ai-msgs" id="aiMsgs">
-<div class="ai-msg bot">Ich bin dein Ermittler-Assistent. Ich helfe dir bei Rätseln und erzähle dir mehr über Tübingen und den Fall – aber die Lösung findest du selbst. Was willst du wissen?</div>
+<div class="ai-msg bot">Hey, ich bin Trace – dein Begleiter auf dieser Tour! Frag mich zu Rätseln, zur Stadt oder zur Geschichte. Ich helfe dir weiter – nur die Lösung musst du selbst finden. Was willst du wissen?</div>
 </div>
 <div class="ai-limit" id="aiLimit">5/5</div>
 <div class="ai-input-row">
@@ -1035,7 +1035,7 @@ function renderStation(){
       </div>`}
       <div id="riddleFb"></div>
     </div>
-    <button class="hint-btn" onclick="openAi()"><span class="material-symbols-outlined">psychology</span> Ermittler-Assistent fragen</button>
+    <button class="hint-btn" onclick="openAi()"><span class="material-symbols-outlined">psychology</span> Trace fragen</button>
     ${debugMode?`<button onclick="skipStation()" style="width:100%;margin-top:4px;padding:8px;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.15);border-radius:var(--r-sm);color:var(--error);font-size:.7rem">DEBUG: Skip</button>`:''}
   `;
   }
@@ -1499,7 +1499,7 @@ function openAi(){
 }
 function closeAi(){document.getElementById('aiOverlay').classList.remove('active')}
 function buildPrompt(s){
-  return `Du bist der Ermittler-Assistent der TraceTour Tübingen – ein mysteriöser Informant aus dem Jahr 1869.
+  return `Du bist Trace, der KI-Begleiter der TraceTour Tübingen.
 
 DEINE ROLLE: Du hilfst Spielern, die Station zu erkunden und beantwortest Fragen zur Stadt Tübingen, zur Geschichte und zu Sehenswürdigkeiten. Du gibst dezente Hinweise zum Rätsel, verrätst aber NIEMALS die Lösung.
 
