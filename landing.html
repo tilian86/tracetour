@@ -4,6 +4,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>TraceTour by Florian S. Thiel – Die Stadt ist dein Spielfeld</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Inter:wght@300;400;500;600&family=Epilogue:wght@700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
@@ -98,25 +99,34 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1.5rem;
+  padding: 0.75rem;
   z-index: 3;
+}
+@media (min-width: 640px) {
+  .city-card .label { padding: 1.5rem; }
 }
 .city-card .label span.name {
   display: block;
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 0.7rem;
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
+@media (min-width: 640px) {
+  .city-card .label span.name { font-size: 1.2rem; }
+}
 .city-card .label span.status {
   display: block;
-  font-size: 0.6rem;
+  font-size: 0.5rem;
   color: rgba(243,99,45,0.7);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-top: 4px;
+  margin-top: 2px;
+}
+@media (min-width: 640px) {
+  .city-card .label span.status { font-size: 0.6rem; letter-spacing: 0.2em; margin-top: 4px; }
 }
 </style>
 </head>
@@ -125,9 +135,9 @@ body {
 <!-- Top Navigation -->
 <nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-md shadow-[0_20px_40px_rgba(0,15,31,0.4)]">
   <div class="flex justify-between items-center max-w-7xl mx-auto px-6 py-4">
-    <div class="text-xl font-black tracking-tighter text-orange-400 font-brand">
+    <div class="font-black tracking-tighter text-orange-400 font-brand whitespace-nowrap text-base sm:text-xl">
       TRACETOUR
-      <span class="text-xs font-normal text-slate-500 ml-1 tracking-normal">by Florian S. Thiel</span>
+      <span class="text-[10px] sm:text-xs font-normal text-slate-500 ml-1 tracking-normal">by Florian S. Thiel</span>
     </div>
     <div class="hidden md:flex items-center space-x-8">
       <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-orange-400 border-b-2 border-orange-500 pb-1" href="#featured">Touren</a>
@@ -179,12 +189,12 @@ body {
 <!-- Featured Tour Section -->
 <section id="featured" class="py-24 px-6 bg-surface-container-low">
   <div class="max-w-7xl mx-auto">
-    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+    <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-4 text-center md:text-left">
       <div>
-        <h2 class="font-headline text-4xl font-extrabold text-on-background tracking-tight mb-2 uppercase">Aktuelle Mission</h2>
-        <div class="accent-line"></div>
+        <h2 class="font-headline text-3xl md:text-4xl font-extrabold text-on-background tracking-tight mb-2 uppercase">Aktuelle Mission</h2>
+        <div class="accent-line mx-auto md:mx-0"></div>
       </div>
-      <p class="font-body text-secondary max-w-md text-sm leading-relaxed">Tübingen, 1869. Ein Wissenschaftler auf der Flucht vor dem Königlichen Ministerium. Eine Formel, die zu gefährlich ist für die Mächtigen. 16 Stationen vom Schloss bis zum Neckar.</p>
+      <p class="font-body text-secondary max-w-md text-sm leading-relaxed">Tübingen, 1869. Ein Wissenschaftler auf der Flucht vor dem Königlichen Ministerium. Eine Formel, die zu gefährlich ist für die Mächtigen. 17 Stationen vom Schloss bis zum Neckar.</p>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
       <!-- Main Card -->
@@ -202,7 +212,7 @@ body {
           <div class="flex flex-wrap gap-6">
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-primary text-lg">location_on</span>
-              <span class="font-body text-sm uppercase tracking-widest text-slate-300">16 Stationen</span>
+              <span class="font-body text-sm uppercase tracking-widest text-slate-300">17 Stationen</span>
             </div>
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-primary text-lg">schedule</span>
@@ -224,7 +234,7 @@ body {
         <div class="glass-effect p-8 rounded-xl border-l-4 border-orange-500 flex-1">
           <h4 class="font-brand font-bold text-primary uppercase text-sm mb-4 tracking-widest">Die Story</h4>
           <p class="font-body text-on-surface leading-relaxed italic text-sm">
-            "Eine Formel, die die Welt verändern könnte. Ein Forscher, der vor den Gendarmen des Königs flieht. 16 Orte in Tübingen bewahren sein Geheimnis seit 1869 – findest du alle Fragmente?"
+            "Eine Formel, die die Welt verändern könnte. Ein Forscher, der vor den Gendarmen des Königs flieht. 17 Orte in Tübingen bewahren sein Geheimnis seit 1869 – findest du alle Fragmente?"
           </p>
         </div>
         <div class="bg-surface-container-highest p-8 rounded-xl flex flex-col justify-between">
@@ -301,7 +311,7 @@ body {
 <section class="py-12 px-6 bg-surface-container-low border-y border-slate-800/40">
   <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
     <div>
-      <div class="font-headline text-3xl font-black text-orange-400">16</div>
+      <div class="font-headline text-3xl font-black text-orange-400">17</div>
       <div class="font-body text-xs text-secondary uppercase tracking-widest mt-1">Stationen</div>
     </div>
     <div>
@@ -326,7 +336,7 @@ body {
       <h2 class="font-headline text-4xl font-extrabold text-on-background tracking-tight mb-2 uppercase">Expansion</h2>
       <p class="font-body text-secondary text-sm">Weitere Städte & Touren in Vorbereitung</p>
     </div>
-    <div class="grid grid-cols-3 gap-6">
+    <div class="grid grid-cols-3 gap-3 sm:gap-6">
       <!-- Tübingen 2 -->
       <div class="city-card">
         <img src="images/city_tuebingen2.jpg" alt="Tübingen II">
@@ -380,10 +390,10 @@ body {
       <div class="font-body text-xs text-slate-600 mt-1">Gamifizierte Stadtouren für neugierige Köpfe</div>
     </div>
     <div class="font-body text-xs tracking-widest uppercase text-slate-600 text-center">
-      © 2025 TraceTour by Florian S. Thiel
+      © 2026 TraceTour by Florian S. Thiel
     </div>
     <div class="flex gap-6">
-      <a class="font-body text-xs tracking-widest uppercase text-slate-500 hover:text-orange-400 transition-colors" href="#">Impressum</a>
+      <a class="font-body text-xs tracking-widest uppercase text-slate-500 hover:text-orange-400 transition-colors" href="impressum.html">Impressum</a>
       <a class="font-body text-xs tracking-widest uppercase text-slate-500 hover:text-orange-400 transition-colors" href="#">Datenschutz</a>
       <a class="font-body text-xs tracking-widest uppercase text-slate-500 hover:text-orange-400 transition-colors" href="index.html">Zur App</a>
     </div>
