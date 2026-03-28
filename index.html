@@ -553,10 +553,12 @@ document.addEventListener('touchstart',unlockAudio);
 document.addEventListener('click',unlockAudio);
 
 // Sound effects (WAV files for iOS reliability)
+const SFX_EXT={correct:'wav',wrong:'wav',fanfare:'wav',applause:'mp3'};
 function playSfx(type){
   try{
-    const a=new Audio('audio/'+type+'.wav');
-    a.volume=0.6;
+    const ext=SFX_EXT[type]||'wav';
+    const a=new Audio('audio/'+type+'.'+ext);
+    a.volume=type==='applause'?0.8:0.6;
     a.play().catch(()=>{});
   }catch(e){}
 }
