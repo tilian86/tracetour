@@ -808,11 +808,13 @@ function initMap(){
       map=L.map('map',{zoomControl:false,attributionControl:false}).setView([48.5215,9.0540],15);
       L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:19}).addTo(map);
       stations.forEach((s,i)=>{
-        const m=L.circleMarker([s.lat,s.lng],{radius:i===0?10:6,color:'#f3632d',fillColor:i===0?'#f3632d':'#4a5d73',fillOpacity:i===0?1:.5,weight:2}).addTo(map);
-        m.bindTooltip(s.name,{permanent:false,direction:'top',className:'station-tooltip'});
+        const visible=i<=maxUnlockedStation+1;
+        const m=L.circleMarker([s.lat,s.lng],{radius:i===0?10:6,color:'#f3632d',fillColor:i===0?'#f3632d':'#4a5d73',fillOpacity:visible?(i===0?1:.5):0,weight:visible?2:0,opacity:visible?1:0}).addTo(map);
+        if(visible)m.bindTooltip(s.name,{permanent:false,direction:'top',className:'station-tooltip'});
         stationMarkers.push(m);
       });
-      routeLine=L.polyline(stations.map(s=>[s.lat,s.lng]),{color:'#f3632d',weight:2,opacity:.35,dashArray:'6,8'}).addTo(map);
+      const visibleCoords=stations.slice(0,maxUnlockedStation+2).map(s=>[s.lat,s.lng]);
+      routeLine=L.polyline(visibleCoords,{color:'#f3632d',weight:2,opacity:.35,dashArray:'6,8'}).addTo(map);
       if(navigator.geolocation){
         watchId=navigator.geolocation.watchPosition(pos=>{
           userPos={lat:pos.coords.latitude,lng:pos.coords.longitude};
@@ -861,9 +863,16 @@ function renderStation(){
   document.getElementById('navNext').disabled=(currentStation>=maxUnlockedStation);
 
   stationMarkers.forEach((m,i)=>{
+    const visible=i<=maxUnlockedStation+1;
     m.setStyle({fillColor:i===currentStation?'#f3632d':i<=maxUnlockedStation?'#4ade80':'#4a5d73',
-      fillOpacity:i===currentStation?1:i<=maxUnlockedStation?.7:.4,radius:i===currentStation?10:6});
+      fillOpacity:visible?(i===currentStation?1:i<=maxUnlockedStation?.7:.4):0,
+      weight:visible?2:0,opacity:visible?1:0,radius:i===currentStation?10:6});
+    if(visible&&!m.getTooltip())m.bindTooltip(stations[i].name,{permanent:false,direction:'top',className:'station-tooltip'});
   });
+  if(routeLine){
+    const visibleCoords=stations.slice(0,maxUnlockedStation+2).map(s=>[s.lat,s.lng]);
+    routeLine.setLatLngs(visibleCoords);
+  }
   if(map)map.flyTo([s.lat,s.lng],16,{duration:1});
 
   let distHtml='';
