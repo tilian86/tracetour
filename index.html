@@ -809,7 +809,7 @@ function initMap(){
       map=L.map('map',{zoomControl:false,attributionControl:false}).setView([48.5215,9.0540],15);
       L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:19}).addTo(map);
       stations.forEach((s,i)=>{
-        const visible=i<=maxUnlockedStation+1;
+        const visible=i<=maxUnlockedStation;
         const m=L.circleMarker([s.lat,s.lng],{radius:i===0?10:6,color:'#f3632d',fillColor:i===0?'#f3632d':'#4a5d73',fillOpacity:visible?(i===0?1:.5):0,weight:visible?2:0,opacity:visible?1:0}).addTo(map);
         if(visible)m.bindTooltip(s.name,{permanent:false,direction:'top',className:'station-tooltip'});
         stationMarkers.push(m);
@@ -855,12 +855,12 @@ function updateRouteDisplay(){
   if(!routeLine)return;
   if(!fullRouteCoords){
     // Fallback: straight lines between visible stations
-    const visibleCoords=stations.slice(0,Math.min(maxUnlockedStation+2,stations.length)).map(s=>[s.lat,s.lng]);
+    const visibleCoords=stations.slice(0,Math.min(maxUnlockedStation+1,stations.length)).map(s=>[s.lat,s.lng]);
     routeLine.setLatLngs(visibleCoords);
     return;
   }
-  // Find the approximate index in the full route for maxUnlockedStation+1
-  const lastVisible=Math.min(maxUnlockedStation+1,stations.length-1);
+  // Find the approximate index in the full route for maxUnlockedStation
+  const lastVisible=Math.min(maxUnlockedStation,stations.length-1);
   const target=stations[lastVisible];
   // Find closest point in fullRouteCoords to the target station
   let bestIdx=fullRouteCoords.length-1,bestDist=Infinity;
@@ -906,7 +906,7 @@ function renderStation(){
   document.getElementById('navNext').disabled=(currentStation>=maxUnlockedStation);
 
   stationMarkers.forEach((m,i)=>{
-    const visible=i<=maxUnlockedStation+1;
+    const visible=i<=maxUnlockedStation;
     m.setStyle({fillColor:i===currentStation?'#f3632d':i<=maxUnlockedStation?'#4ade80':'#4a5d73',
       fillOpacity:visible?(i===currentStation?1:i<=maxUnlockedStation?.7:.4):0,
       weight:visible?2:0,opacity:visible?1:0,radius:i===currentStation?10:6});
