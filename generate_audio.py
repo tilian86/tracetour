@@ -114,15 +114,22 @@ STATIONS = [
         "name": "Station 2 - Alte Aula der Universitaet",
         "type": "raetsel",
         "story": (
-            "Die Alte Aula - das Festgebäude der Universität Tübingen. Heinrich duckte sich durch "
-            "den Seiteneingang, den er als Professor kannte. Der Hausmeister schlief um diese Zeit.\n\n"
-            "Im großen Saal, hinter dem Rednerpult, gibt es eine lose Holzvertäfelung. Heinrich "
-            "schob das erste codierte Fragment seiner Forschung dahinter. Wenn jemand diese Tafel "
-            "jemals abheben sollte, würde er einen Zettel mit einer kryptischen Formel finden - "
-            "nutzlos ohne die anderen Fragmente.\n\n"
-            "Die Alte Aula war der Ort, an dem Heinrich vor drei Jahren seine Antrittsvorlesung "
-            "gehalten hatte. 'Über die unsichtbaren Kräfte der Materie.' Der Dekan hatte skeptisch "
-            "gelächelt. Das Ministerium hatte aufmerksam zugehört."
+            "Die Alte Aula in der Münzgasse dreißig - direkt neben der Stiftskirche, eines der "
+            "ältesten Universitätsgebäude Deutschlands. Der Vorgängerbau wurde vierzehnhundertsiebenundsiebzig "
+            "errichtet, im selben Jahr wie die Uni-Gründung. Im Dachboden lagerte man Getreide als "
+            "Teil der Professorenbesoldung - Akademiker wurden damals in Naturalien bezahlt.\n\n"
+            "Nach dem Brand von fünfzehnhundertvierunddreißig wurde das heutige Gebäude "
+            "fünfzehnhundertsiebenundvierzig gebaut. Beim Umbau siebzehnhundertsiebenundsiebzig zum "
+            "dreihundertjährigen Uni-Jubiläum bekam die Nordseite ihre klassizistische Fassade. Durch "
+            "den Höhenunterschied zur Bursagasse hat das Haus vier Stockwerke auf der einen und sieben "
+            "auf der anderen Seite. Die Clinicumsgasse führt durch einen kleinen Tunnel mitten durch "
+            "das Gebäude hindurch.\n\n"
+            "Zweitausendzwölf wurde die Alte Aula aufwändig saniert - dabei legte man "
+            "Original-Deckenmalereien von fünfzehnhundertsiebenundvierzig frei. Sechzigtausend Bücher "
+            "der erziehungswissenschaftlichen Bibliothek zogen zurück auf vier Ebenen.\n\n"
+            "Heinrich duckte sich durch den Seiteneingang, den er als Professor kannte. Im großen "
+            "Saal, hinter dem Rednerpult, schob er das erste codierte Fragment seiner Forschung "
+            "hinter eine lose Holzvertäfelung. Nutzlos ohne die anderen Fragmente."
         ),
         "diary": (
             "In der Bibliothek der Alten Aula, hinter den theologischen Abhandlungen, fand ich "
@@ -130,11 +137,15 @@ STATIONS = [
             "eigenes Werk an diesem Ort. Ich hoffe, es hat mehr Glück als ich."
         ),
         "fact": (
-            "Die Universitaet Tuebingen ist die fuenftaelteste im deutschen Sprachraum. In der "
-            "Alten Aula haengt noch heute das Portraet von Herzog Eberhard im Bart, der vierzehnhundertsiebenundsiebzig die "
-            "Uni gruendete - mit nur elf Professoren und dreihundert Studenten.\n\n"
-            "Philipp Melanchthon lehrte hier griechische Grammatik - mit nur einundzwanzig Jahren! Und der "
-            "junge Kepler wurde hier fuer seine astronomischen Ideen fast von der Uni geworfen."
+            "Die Universität Tübingen ist die fünftälteste im deutschen Sprachraum. Eberhard im Bart "
+            "gründete sie vierzehnhundertsiebenundsiebzig mit nur elf Professoren und dreihundert "
+            "Studenten. Philipp Melanchthon lehrte hier griechische Grammatik - mit nur einundzwanzig "
+            "Jahren! Und der junge Kepler wurde fast rausgeworfen wegen seiner astronomischen Ideen.\n\n"
+            "Von sechzehnhundertdreiundsechzig bis achtzehnhundertvier lag direkt neben der Alten Aula "
+            "der Hortus Medicus - der botanische Garten der Universität, in dem der Botaniker "
+            "Camerarius seine Forschungen betrieb. Heute ist dort ein Parkplatz.\n\n"
+            "Übrigens: Erst seit dem Bau der Neuen Aula achtzehnhundertfünfundvierzig heißt dieses "
+            "Gebäude 'Alte' Aula. Vorher war es einfach die Aula."
         ),
         "riddle": (
             "Auf der Infotafel der Alten Aula stehen zwei Jahreszahlen: das Baujahr und das Jahr "
@@ -208,15 +219,24 @@ STATIONS = [
         "type": "anekdote",
         "anecdote": (
             "Heinrich verließ die Stiftskirche durch den Nordausgang und stand auf dem Holzmarkt - "
-            "dem langgezogenen Platz nördlich der Kirche. Früher hieß er 'Hafenmarkt', so steht es "
-            "noch auf der Katasterkarte von achtzehnhundertneunzehn.\n\n"
-            "Der Georgsbrunnen in der Mitte zeigt den Heiligen Georg beim Drachentöten - "
-            "den Schutzpatron der Stiftskirche. Das Original wurde fünfzehnhundertdreiundzwanzig vom Steinmetz Andreas Lang "
-            "geschaffen. Es wurde achtzehnhunderteinundvierzig abgebaut, achtzehnhundertzweiundvierzig durch eine neugotische Gusseisen-Version "
-            "ersetzt - und die wurde neunzehnhunderteinundsechzig entfernt. Für Parkplätze. Ernsthaft. Neunzehnhundertsechsundsiebzig kam der "
+            "dem langgezogenen Platz nördlich der Kirche. Früher hieß er 'Hafenmarkt', weil hier "
+            "Töpferwaren aus der nahegelegenen Hafengasse verkauft wurden - 'Hafen' ist schwäbisch "
+            "für Topf. Auf der Katasterkarte von achtzehnhundertneunzehn steht noch der alte Name.\n\n"
+            "Der Platz war früher deutlich schmäler und steiler. Erst um achtzehnhundertdreißig, als das "
+            "weit in den Platz ragende Gasthaus Adler abgerissen wurde, bekam er seine heutige Breite. "
+            "Und nach dem Stadtbrand von siebzehnhundertneunundachtzig wurde die Kuppe am östlichen Ende "
+            "deutlich abgesenkt.\n\n"
+            "Der Georgsbrunnen - eigentlich 'Jörgenbrunnen' - zeigt den Heiligen Georg beim "
+            "Drachentöten. Das Original von fünfzehnhundertdreiundzwanzig wurde achtzehnhunderteinundvierzig abgebaut, "
+            "achtzehnhundertzweiundvierzig durch eine neugotische Gusseisen-Version ersetzt - und die wurde "
+            "neunzehnhunderteinundsechzig entfernt. Für Parkplätze. Ernsthaft. Neunzehnhundertsechsundsiebzig kam der "
             "Brunnen zurück, als der Holzmarkt Fußgängerzone wurde.\n\n"
-            "Heinrich überquerte den Holzmarkt hastig. Unter den Gaslaternen waren noch einige "
-            "Bürger unterwegs. Er senkte den Kopf und ging weiter."
+            "An der Ecke zur Münzgasse liegt das Antiquariat Heckenhauer, Holzmarkt fünf - "
+            "hier arbeitete der junge Hermann Hesse als Lehrling. Im Laden gibt es ein kleines "
+            "Hermann-Hesse-Kabinett.\n\n"
+            "Heinrich überquerte den Holzmarkt hastig. Die breite Treppe vor der Stiftskirche - "
+            "die auch heute noch als Bank für Touristen, Schulklassen und Demonstranten dient - "
+            "war leer. Er senkte den Kopf und ging weiter."
         ),
     },
 
