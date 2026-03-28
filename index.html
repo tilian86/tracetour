@@ -144,7 +144,7 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 .audio-label{flex:1;font-size:.8rem;font-weight:500}
 .audio-sublabel{font-size:.68rem;color:var(--text-3);font-weight:400}
 .audio-time{font-size:.68rem;color:var(--text-3);font-family:var(--font-m)}
-.speed-btn{font-size:.6rem;color:var(--accent);background:var(--accent-bg);border:1px solid var(--border-accent);border-radius:4px;padding:2px 5px;font-weight:700;cursor:pointer;font-family:var(--font-m);min-width:32px;text-align:center}
+.speed-select{font-size:.6rem;color:var(--accent);background:var(--bg-card);border:1px solid var(--border-accent);border-radius:4px;padding:2px 2px;font-weight:700;font-family:var(--font-m);min-width:42px;text-align:center;-webkit-appearance:none;appearance:none;cursor:pointer}
 .audio-progress{width:100%;height:16px;background:var(--border);border-radius:8px;margin-top:5px;overflow:hidden;cursor:pointer;position:relative;touch-action:none}
 .audio-progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-soft));width:0%;transition:width .05s linear;pointer-events:none}
 
@@ -460,11 +460,19 @@ let aiQuestionsLeft=5,debugMode=false;
 const MAX_AI_QUESTIONS=5;
 let currentAudio=null,currentAmbient=null,ambientCtx=null,ambientMaster=null;
 let audioSpeed=1.0;
-function cycleSpeed(e){
+function onSpeedChange(e){
   e.stopPropagation();
-  audioSpeed=audioSpeed>=2.0?1.0:Math.round((audioSpeed+0.1)*10)/10;
+  audioSpeed=parseFloat(e.target.value);
   if(currentAudio)currentAudio.playbackRate=audioSpeed;
-  document.querySelectorAll('.speed-btn').forEach(b=>b.textContent=audioSpeed.toFixed(1)+'x');
+}
+function makeSpeedSelect(){
+  const sel=document.createElement('select');sel.className='speed-select';
+  sel.onclick=e=>e.stopPropagation();sel.onchange=onSpeedChange;
+  [1,1.25,1.5,1.75,2].forEach(v=>{
+    const o=document.createElement('option');o.value=v;o.textContent=v+'x';
+    if(v===audioSpeed)o.selected=true;sel.appendChild(o);
+  });
+  return sel;
 }
 let solvedStations=[];
 let highlightWords=[],highlightIdx=-1,highlightTimer=null;
@@ -750,6 +758,7 @@ function showScreen(id){
     return;
   }
   if(id==='tourSelect') checkSavedGame();
+  if(id==='prologue'||id==='success') setTimeout(initSeekBars,100);
   closeAi();stopAmbient();stopAudio(true);
 }
 
@@ -1068,7 +1077,7 @@ function renderStation(){
 function stopAudio(resetUi=false){
   if(currentAudio){currentAudio.pause();currentAudio.currentTime=0}
   currentAudio=null;clearHighlight();
-  document.querySelectorAll('.speed-btn').forEach(b=>b.remove());
+  document.querySelectorAll('.speed-select').forEach(b=>b.remove());
   document.querySelectorAll('.audio-row.playing').forEach(r=>r.classList.remove('playing'));
   document.querySelectorAll('.audio-row .audio-icon .material-symbols-outlined').forEach(icon=>{
     const row=icon.closest('.audio-row');
@@ -1110,12 +1119,12 @@ function playAudio(fileKey,rowId,type){
   }
 
   stopAudio();
-  document.querySelectorAll('.speed-btn').forEach(b=>b.remove());
+  document.querySelectorAll('.speed-select').forEach(b=>b.remove());
   const audio=new Audio(AUDIO_BASE+fileKey+'.mp3');
   audio._fileKey=fileKey;audio._type=type;audio.playbackRate=audioSpeed;currentAudio=audio;
   row.classList.add('playing');
   row.querySelector('.audio-icon .material-symbols-outlined').textContent='pause';
-  if(!row.querySelector('.speed-btn')){const sb=document.createElement('div');sb.className='speed-btn';sb.textContent=audioSpeed.toFixed(1)+'x';sb.onclick=cycleSpeed;row.appendChild(sb)}
+  if(!row.querySelector('.speed-select'))row.appendChild(makeSpeedSelect());
   audio.addEventListener('loadedmetadata',()=>{});
   audio.addEventListener('timeupdate',()=>{
     if(!audio.duration)return;
@@ -1124,7 +1133,7 @@ function playAudio(fileKey,rowId,type){
   });
   audio.addEventListener('ended',()=>{
     row.classList.remove('playing');row.querySelector('.audio-icon .material-symbols-outlined').textContent='play_arrow';
-    const sb=row.querySelector('.speed-btn');if(sb)sb.remove();
+    const sb=row.querySelector('.speed-select');if(sb)sb.remove();
     currentAudio=null;clearHighlight();
   });
   audio.play().catch(()=>stopAudio());
