@@ -741,6 +741,10 @@ SPECIAL_AUDIO = {
             "was du bei einer Stadtführung wissen willst. Er verrät nur nicht die Lösung.\n\n"
             "In der Gruppe? Nehmt einen Bluetooth-Lautsprecher mit! So hören alle entspannt die "
             "Geschichten und ihr könnt gemeinsam rätseln.\n\n"
+            "Standort erlauben. Die App braucht Zugriff auf deinen Standort, damit die Karte "
+            "funktioniert. Wenn dein Browser fragt, tippe auf Erlauben.\n\n"
+            "Offline unterwegs? Lade die Tour vorab herunter – dann funktioniert alles auch "
+            "ohne Internet. Den Button findest du in der Anleitung.\n\n"
             "Dein Fortschritt wird automatisch gespeichert. Du kannst jederzeit pausieren und "
             "später weitermachen."
         ),

@@ -344,7 +344,9 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <span style="font-size:.8rem;opacity:.7">Falls du die Berechtigung verweigert hast:<br>
 <strong>iPhone:</strong> Einstellungen → Safari → Standort → Erlauben (oder suche: <em>„iPhone Safari Standort erlauben"</em>)<br>
 <strong>Android:</strong> Einstellungen → Apps → Chrome → Berechtigungen → Standort (oder suche: <em>„Android Chrome Standort Berechtigung"</em>)</span></p>
-<p>🔄 <strong>Fortschritt wird automatisch gespeichert.</strong> Du kannst jederzeit pausieren und später weitermachen.</p>
+<p style="margin-bottom:.75rem">🔄 <strong>Fortschritt wird automatisch gespeichert.</strong> Du kannst jederzeit pausieren und später weitermachen.</p>
+<p style="margin-bottom:.75rem">📶 <strong>Offline unterwegs?</strong> Lade die Tour vorab herunter – dann funktioniert alles auch ohne Internet.</p>
+<button id="offlineBtn" onclick="downloadForOffline()" class="hint-btn" style="width:100%;margin-bottom:.5rem"><span class="material-symbols-outlined" style="font-size:16px">cloud_download</span> Tour für Offline herunterladen (~50 MB)</button>
 </div>
 </div>
 <button class="btn-primary" style="max-width:400px;margin:0 auto" onclick="startTour()">Mission starten</button>
@@ -1668,6 +1670,32 @@ function downloadBlob(blob){
   const url=URL.createObjectURL(blob),a=document.createElement('a');
   a.href=url;a.download='tracetour-ergebnis.png';a.click();
   URL.revokeObjectURL(url);showToast('Bild gespeichert!');
+}
+
+// ====== SERVICE WORKER ======
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+  navigator.serviceWorker.addEventListener('message',e=>{
+    if(e.data.type==='download-progress'){
+      const pct=Math.round(e.data.done/e.data.total*100);
+      const btn=document.getElementById('offlineBtn');
+      if(btn){
+        if(e.data.done>=e.data.total){
+          btn.innerHTML='<span class="material-symbols-outlined" style="font-size:16px">cloud_done</span> Offline verfügbar ✓';
+          btn.disabled=true;btn.style.opacity='.5';
+        }else{
+          btn.textContent='Wird heruntergeladen... '+pct+'%';
+        }
+      }
+    }
+  });
+}
+function downloadForOffline(){
+  if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+    navigator.serviceWorker.controller.postMessage('download-all');
+    const btn=document.getElementById('offlineBtn');
+    if(btn)btn.textContent='Wird heruntergeladen... 0%';
+  }else{showToast('Bitte Seite einmal neu laden')}
 }
 
 // ====== INIT ======
