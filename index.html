@@ -847,18 +847,6 @@ async function fetchWalkingRoute(){
       return;
     }
   }catch(e){}
-  // Fallback: OSRM project server (car, but better than nothing)
-  try{
-    const osrmCoords=stations.map(s=>s.lng+','+s.lat).join(';');
-    const url='https://router.project-osrm.org/route/v1/driving/'+osrmCoords+'?overview=full&geometries=geojson';
-    const resp=await fetch(url);
-    const data=await resp.json();
-    if(data.routes&&data.routes[0]){
-      fullRouteCoords=data.routes[0].geometry.coordinates.map(c=>[c[1],c[0]]);
-      updateRouteDisplay();
-      return;
-    }
-  }catch(e){}
   console.warn('Route fallback to straight lines');
   fullRouteCoords=null;
   updateRouteDisplay();
