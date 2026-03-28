@@ -199,14 +199,18 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 .puzzle-word:active{transform:scale(.95)}
 .puzzle-word.placed{opacity:.3;pointer-events:none}
 .puzzle-slot{padding:6px 12px;background:rgba(243,99,45,.1);border:1px solid var(--border-accent);border-radius:var(--r-sm);font-family:var(--font-h);font-size:.85rem;font-weight:700;color:#ffb59d;cursor:pointer;animation:fragmentIn .3s ease}
-.quiz-q{text-align:left;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem}
+.quiz-q{text-align:left;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem;animation:fragmentIn .4s ease}
 .quiz-q-text{font-size:.9rem;font-weight:600;margin-bottom:.75rem;color:var(--text-1)}
 .quiz-q-num{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:.5rem}
 .quiz-opt{display:block;width:100%;text-align:left;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--r-sm);font-size:.82rem;color:var(--text-2);margin-bottom:6px;cursor:pointer;transition:border .15s}
 .quiz-opt:active{transform:scale(.98)}
-.quiz-opt.correct{border-color:var(--success);background:rgba(74,222,128,.1);color:var(--success)}
-.quiz-opt.wrong{border-color:var(--error);background:rgba(248,113,113,.08);color:var(--error)}
-.quiz-opt:disabled{cursor:not-allowed;opacity:.6}
+.quiz-opt.correct{border-color:var(--success);background:rgba(74,222,128,.15);color:var(--success);animation:quizCorrect .4s ease}
+.quiz-opt.wrong{border-color:var(--error);background:rgba(248,113,113,.1);color:var(--error);animation:quizWrong .4s ease}
+.quiz-opt:disabled{cursor:not-allowed}
+.quiz-opt.correct::before{content:'✓ ';font-weight:700}
+.quiz-opt.wrong::before{content:'✗ ';font-weight:700}
+@keyframes quizCorrect{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+@keyframes quizWrong{0%{transform:translateX(0)}25%{transform:translateX(-4px)}50%{transform:translateX(4px)}75%{transform:translateX(-2px)}100%{transform:translateX(0)}}
 
 /* AI */
 .ai-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center}
@@ -390,7 +394,7 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <div class="ai-overlay" id="aiOverlay">
 <div class="ai-box">
 <div class="ai-header">
-<h3><span class="ai-dot"></span> Trace</h3>
+<h3><img src="images/trace-avatar.png" style="width:28px;height:28px;border-radius:50%;vertical-align:middle;margin-right:6px"> Trace</h3>
 <button class="ai-close" onclick="closeAi()">×</button>
 </div>
 <div class="ai-msgs" id="aiMsgs">
@@ -1065,7 +1069,7 @@ function renderStation(){
       </div>`}
       <div id="riddleFb"></div>
     </div>
-    <button class="hint-btn" onclick="openAi()"><span class="material-symbols-outlined">psychology</span> Trace fragen</button>
+    <button class="hint-btn" onclick="openAi()"><img src="images/trace-avatar.png" style="width:20px;height:20px;border-radius:50%"> Trace fragen</button>
     ${debugMode?`<button onclick="skipStation()" style="width:100%;margin-top:4px;padding:8px;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.15);border-radius:var(--r-sm);color:var(--error);font-size:.7rem">DEBUG: Skip</button>`:''}
   `;
   }
@@ -1771,7 +1775,7 @@ function checkPuzzle(){
   const correct=['WO','ABER','GEFAHR','IST','WÄCHST','DAS','RETTENDE','AUCH'];
   const fb=document.getElementById('puzzleFb');
   if(puzzleOrder.join(' ')===correct.join(' ')){
-    playSfx('correct');
+    playSfx('fanfare');
     fb.innerHTML='<div style="color:var(--success);font-weight:700;font-size:1.1rem;margin-bottom:.5rem">Richtig!</div><div class="finale-formula" style="background:var(--bg-card);border:1px solid var(--border-accent);border-radius:var(--r);margin-top:1rem"><div class="ff-label">Heinrichs Formel</div><div class="ff-text">„Wo aber Gefahr ist, wächst das Rettende auch."</div><div class="ff-author">— Friedrich Hölderlin, „Patmos" (1803)</div><div class="ff-explain">Hölderlin lebte 36 Jahre im Turm am Neckar – nur wenige hundert Meter von deiner letzten Station entfernt. Heinrich kannte seine Verse und verstand: Die wahre Formel war nie eine Waffe. Sie war ein Versprechen. Wo Wissen unterdrückt wird, wächst der Mut, es zu teilen.</div></div>';
     document.getElementById('puzzleCheck').style.display='none';
     document.getElementById('puzzleBank').style.display='none';
