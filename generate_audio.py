@@ -644,9 +644,6 @@ STATIONS = [
             "zurückziehenden Wehrmacht zerstört, wie alle Tübinger Neckarbrücken außer der "
             "Eberhardsbrücke. Die Wiederherstellung erfolgte in einfacherer Form. Die smaragdgrünen "
             "Geländer sind bis heute ihr Markenzeichen.\n\n"
-            "Übrigens: Zweitausendsechzehn tauchte in der TUEpedia die Meldung auf, die Brücke sei in "
-            "Pons Ilonae umbenannt worden. Die Falschmeldung stand jahrelang unbemerkt online, "
-            "bis das Stadtarchiv sie zweitausendzweiundzwanzig korrigierte.\n\n"
             "Ab zweitausendsechsundzwanzig wird der Steg für dreihundertfünfundsiebzigtausend Euro saniert.\n\n"
             "Heinrich überquerte die wackelige Holzbrücke in jener Novembernacht "
             "achtzehnhundertneunundsechzig. Auf der anderen Seite: Dunkelheit, Felder, Freiheit. "
@@ -675,7 +672,7 @@ STATIONS = [
             "von neunzehnhundertelf am Indianersteg. Wir sehen heute die vierte Brücke an "
             "dieser Stelle.\n\n"
             "Die Pons Ilonae Umbenennung von zweitausendsechzehn war übrigens eine Falschmeldung "
-            "in der TUEpedia, die jahrelang unbemerkt blieb. Und ob der Name Indianersteg "
+            "auf einem lokalen Internetportal, die jahrelang unbemerkt blieb. Und ob der Name Indianersteg "
             "selbst irgendwann zur Diskussion steht, bleibt abzuwarten - das Tagblatt nannte ihn "
             "zweitausendfünfundzwanzig vorsichtshalber den Steg, dessen Name nicht genannt werden darf."
         ),
