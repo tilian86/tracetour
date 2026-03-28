@@ -36,7 +36,7 @@ except ImportError:
 # KONFIGURATION
 # ============================================================
 
-API_KEY = os.environ.get("ELEVENLABS_API_KEY", "sk_b3fb3495ab6b2c2a3a9959d20e6a4ae0a29dce88a442c410")
+API_KEY = os.environ.get("ELEVENLABS_API_KEY", "sk_005ded915f772d5798f850aaac462b572c1ea0905252f50e")
 
 NARRATOR_VOICE = "WHaUUVTDq47Yqc9aDbkH"   # Story-Stimme (gleich wie vorher)
 HEINRICH_VOICE = "2OcnG4mH3jIMtWz3vKus"   # Tagebuch-Stimme (gleich wie vorher)
@@ -150,13 +150,15 @@ STATIONS = [
         "anecdote": (
             "Heinrich hastete die Münzgasse hinunter. Im Vorbeigehen streifte sein Blick ein kleines "
             "Schild an der Hauswand - das berühmteste Schild Tübingens. 'Hier kotzte Goethe.'\n\n"
-            "Johann Wolfgang von Goethe besuchte Tübingen siebzehnhundertsiebenundneunzig auf seiner Schweizerreise und war "
-            "offenbar nicht begeistert - vom Wein, vom Essen, oder von der Gesellschaft. "
-            "Das Martinianum in der Münzgasse dreizehn ist eines der ältesten Privathäuser der Stadt. "
-            "Das Schild wurde auf Betreiben des Tübinger Verschönerungsvereins angebracht.\n\n"
+            "Johann Wolfgang von Goethe besuchte Tübingen siebzehnhundertsiebenundneunzig auf seiner Schweizerreise und "
+            "wohnte nebenan in der Münzgasse fünfzehn bei seinem Verleger Cotta. Sein Urteil: "
+            "'Die Stadt selbst ist abscheulich, allein man darf nur wenige Schritte tun, um die "
+            "schönste Gegend zu sehen.' Die Stadt fand er also hässlich - die Landschaft drumherum "
+            "aber wunderschön. Das Schild 'Hier kotzte Goethe' am Martinianum ist ein satirischer "
+            "Kommentar auf den übertriebenen Goethe-Kult - kein historisches Ereignis.\n\n"
             "Heinrich hatte hier zeitweise gewohnt, bevor er sein Labor im Schloss bezog. "
-            "Das Zimmer im zweiten Stock, karg aber ruhig. Von seinem Fenster aus konnte er den "
-            "Eingang des Collegiums sehen - und jeden, der die Münzgasse heraufkam. "
+            "Das Zimmer im zweiten Stock, karg aber ruhig. Von seinem Fenster aus konnte er die "
+            "enge Münzgasse überblicken - und jeden sehen, der heraufkam. "
             "Eine nützliche Eigenschaft, die er heute hätte gebrauchen können."
         ),
     },
@@ -173,9 +175,9 @@ STATIONS = [
             "hinteren linken Ecke gibt es einen losen Stein. Heinrich schob das zweite Fragment "
             "dahinter.\n\n"
             "Die Stiftskirche mit ihrem markanten Kirchturm ist eines der bedeutendsten Bauwerke "
-            "der Spätgotik in Württemberg. In der Fürstengruft im Chorbereich sind württembergische "
-            "Herzöge und Universitätsprofessoren begraben - die Gelehrten, die im Leben so viel "
-            "stritten, ruhen im Tod friedlich nebeneinander."
+            "der Spätgotik in Württemberg. Im Chorbereich befinden sich vierzehn steinerne Grabmale "
+            "württembergischer Herrscher und ihrer Angehörigen - darunter Herzog Eberhard im Bart, "
+            "der Universitätsgründer."
         ),
         "diary": (
             "Der Mesner hat mich erkannt und nichts gefragt. Es gibt noch gute Menschen in dieser "
@@ -183,11 +185,16 @@ STATIONS = [
             "versteckt. Möge es dort lange sicher sein."
         ),
         "fact": (
-            "In der Fuerstengruft der Stiftskirche liegen fünfzehn Mitglieder des Hauses Wuerttemberg "
-            "begraben - darunter der Universitaetsgruender Eberhard im Bart. Seine Grabplatte zeigt "
-            "ihn betend mit seinem Lieblingsspruch: 'Attempto' (Ich wag's).\n\n"
-            "Der Turm hat eine Besonderheit: Die Turmwaechterwohnung auf halber Hoehe war bis neunzehnhundertachtundvierzig "
-            "bewohnt! Der letzte Turmwaechter hiess Karl Weihenmaier und lebte dort mit seiner Familie."
+            "Eberhard im Bart wurde zunächst woanders beigesetzt und erst um fünfzehnhundertfünfunddreißig "
+            "in die Stiftskirche überführt. Sein Grabmal zeigt ihn betend mit seinem Lieblingsspruch: "
+            "'Attempto' - Ich wag's. Dieses Motto ist heute noch das offizielle Motto der Universität "
+            "Tübingen.\n\n"
+            "Der mittelalterliche Lettner - eine kunstvolle Trennwand zwischen Chor und Kirchenschiff - "
+            "überlebte nur, weil Herzog Ulrich fünfzehnhundertvierunddreißig die Grablege in den Chor verlegte. "
+            "Ohne diese Entscheidung wäre er wie in den meisten anderen Kirchen abgerissen worden.\n\n"
+            "Die Turmwächterwohnung auf halber Höhe war bis neunzehnhundertachtundvierzig bewohnt! "
+            "Der letzte Turmwächter hieß Karl Weihenmaier und lebte dort mit seiner ganzen Familie - "
+            "hundertneunundsechzig Stufen über der Stadt."
         ),
         "riddle": (
             "Schau dir den Kirchturm der Stiftskirche genau an. Wie hoch ist er? "
@@ -208,11 +215,6 @@ STATIONS = [
             "geschaffen. Es wurde achtzehnhunderteinundvierzig abgebaut, achtzehnhundertzweiundvierzig durch eine neugotische Gusseisen-Version "
             "ersetzt - und die wurde neunzehnhunderteinundsechzig entfernt. Für Parkplätze. Ernsthaft. Neunzehnhundertsechsundsiebzig kam der "
             "Brunnen zurück, als der Holzmarkt Fußgängerzone wurde.\n\n"
-            "Ein paar Schritte weiter, vor dem Café Hirsch, gibt es den Froschkönigbrunnen. "
-            "Der Brunnen war jahrelang vermüllt - ein Meter Müll in sieben Metern Tiefe. "
-            "Zweitausendvierundzwanzig initiierte eine engagierte Bürgerin die Reinigung, und zweitausendundfünfundzwanzig wurde ein "
-            "handgefertigter Froschkönig aus Ton als neue Figur eingesetzt. Er schaut direkt "
-            "auf die Tübinger Froschgasse und wird nachts von einer Solarlampe angestrahlt.\n\n"
             "Heinrich überquerte den Holzmarkt hastig. Unter den Gaslaternen waren noch einige "
             "Bürger unterwegs. Er senkte den Kopf und ging weiter."
         ),
@@ -235,21 +237,22 @@ STATIONS = [
             "aus Stuttgart längst angekommen war. Die Gendarmen konnten jeden Moment erscheinen."
         ),
         "diary": (
-            "Die Uhr am Rathaus fasziniert mich noch immer. Fünfzehnhundertelf gebaut, von Professor Stöffler "
-            "entworfen - und sie läuft noch. Der Drachenzeiger sagt Finsternisse voraus. Manchmal "
-            "wünschte ich, er könnte auch meine Zukunft vorhersagen.\n\n"
-            "Ich habe das Fragment unter dem Rathaus versteckt. Der Neptunbrunnen hat zugesehen. "
-            "Stumm, wie immer. Weiter. Ich muss den Neckar erreichen."
+            "Der Marktplatz war noch belebt. Zu belebt. Ich duckte mich hinter den Neptunbrunnen "
+            "und wartete, bis eine Gruppe Studenten vorbeigezogen war. Mein Herz schlug bis zum Hals.\n\n"
+            "Ich habe das Fragment in einer Mauernische unter dem Rathaus versteckt. Meine Hände "
+            "zitterten. Wie viel Zeit bleibt mir noch? Die Gendarmen können nicht weit sein. "
+            "Ich muss den Neckar erreichen, bevor sie den Marktplatz absperren."
         ),
         "fact": (
-            "Die astronomische Uhr am Tübinger Rathaus stammt aus dem Jahr fünfzehnhundertelf und wurde vom "
-            "Astronomen Johannes Stöffler entworfen. Der berühmte Drachenzeiger markiert die "
-            "Mondknoten und sagt Finsternisse voraus.\n\n"
-            "Die sieben Namen an der Fassade ehren bedeutende Persönlichkeiten der Stadtgeschichte. "
-            "Graf Eberhard im Bart, der Universitätsgründer, thront ganz oben am Giebel - "
-            "leicht zu übersehen, aber der wichtigste von allen.\n\n"
-            "Der Neptunbrunnen auf dem Marktplatz und die schiefe Treppe, die einem alten "
-            "Abwasserkanal folgt, gehören ebenfalls zu den Besonderheiten des Platzes."
+            "Die astronomische Uhr wurde fünfzehnhundertelf vom Astronomen Johannes Stöffler entworfen - "
+            "einem der berühmtesten Wissenschaftler seiner Zeit. Der Drachenzeiger markiert die "
+            "Mondknoten und sagt Sonnen- und Mondfinsternisse voraus. Die Uhr blieb trotz mehrerer "
+            "Rathausbrände intakt.\n\n"
+            "Stöffler sagte übrigens für den zwanzigsten Februar fünfzehnhundertvierundzwanzig eine Sintflut voraus. "
+            "Ganz Europa geriet in Panik, Menschen bauten Archen. Es regnete an dem Tag - ein bisschen. "
+            "Stöffler starb fünfzehnhunderteinunddreißig an der Pest, nicht an einer Flut.\n\n"
+            "Das Rathaus selbst wurde erstmals vierzehnhundertfünfunddreißig erwähnt. Die kunstvolle Bemalung der "
+            "Fassade stammt von achtzehnhundertsechsundsiebzig und wurde zuletzt zweitausenddrei restauriert."
         ),
         "riddle": (
             "Stell dich vor die Rathaus-Fassade und zähle die gemalten Namen berühmter "
@@ -264,12 +267,21 @@ STATIONS = [
         "type": "anekdote",
         "anecdote": (
             "Vom Marktplatz aus passierte Heinrich das Kornhaus - das Gebäude, das heute das "
-            "Stadtmuseum beherbergt. Erbaut vierzehnhundertdreiundfünfzig als überdachter Getreidemarkt, zwischen fünfzehnhundertzwölf und "
-            "fünfzehnhundertvierundsechzig erweitert und aufgestockt.\n\n"
-            "Was dich drinnen erwartet, falls du reingehst: eine funktionierende Nachbildung von "
-            "Wilhelm Schickards mechanischem Rechner von sechzehnhundertdreiundzwanzig - die erste Rechenmaschine der Welt, "
-            "Jahrzehnte vor Pascals berühmtem Modell. Rekonstruiert zwischen neunzehnhundertsiebenundfünfzig und neunzehnhundertsechzig. "
-            "Und sie rechnet tatsächlich noch.\n\n"
+            "Stadtmuseum beherbergt. Erbaut vierzehnhundertdreiundfünfzig als überdachter Getreidemarkt, war es über die "
+            "Jahrhunderte schon alles: Festsaal für Tanz und Theater, Knaben- und Mädchenschule, "
+            "Feuerwache und Rotes-Kreuz-Station - bevor es neunzehnhunderteinundneunzig als Stadtmuseum eröffnete.\n\n"
+            "Was dich drinnen erwartet: eine funktionierende Nachbildung von Wilhelm Schickards "
+            "mechanischem Rechner von sechzehnhundertdreiundzwanzig - die erste Rechenmaschine der Welt, "
+            "Jahrzehnte vor Pascals berühmtem Modell. Rekonstruiert zwischen neunzehnhundertsiebenundfünfzig und "
+            "neunzehnhundertsechzig vom Tübinger Professor Bruno von Freytag-Löringhoff anhand von "
+            "Schickards Briefwechsel mit Kepler. Und sie rechnet tatsächlich noch!\n\n"
+            "Außerdem sehenswert: die ständige Ausstellung zu Lotte Reiniger, der Pionierin des "
+            "Silhouetten-Animationsfilms. Das Fachwerk des Kornhauses ist freigelegt und prägt die "
+            "Räume - allerdings wurde bei der Sanierung in den neunzehnhundertachtziger Jahren zementhaltiger "
+            "Mörtel verwendet, der eigentlich Fachwerkhölzer zerstört. Ein Tübinger Zimmermeister: "
+            "'Hier wurde mehr kaputt gemacht als in den letzten hundert Jahren durch Wind und Wetter.'\n\n"
+            "Kuriose Geschichte: zweitausendzwei stellte sich heraus, dass ein Museumsmitarbeiter "
+            "hundertdreizehn Objekte gestohlen hatte. Hundertdrei davon konnten sichergestellt werden.\n\n"
             "Der Eintritt ist seit April zweitausendachtzehn frei. Sonntags um fünfzehn Uhr gibt es eine Führung - "
             "fünf Euro für Erwachsene, Kinder kostenlos.\n\n"
             "Heinrich hatte keine Zeit für Museen. Er bog in die Kornhausstraße ein und eilte "
@@ -431,16 +443,20 @@ STATIONS = [
         "name": "Station 14 - Nonnenhaus",
         "type": "raetsel",
         "story": (
-            "Das Nonnenhaus - eines der ältesten Fachwerkhäuser der Altstadt, erbaut vierzehnhundertachtundachtzig. "
-            "Der Name täuscht: Hier lebten keine Nonnen, sondern Beginen - Frauen einer "
-            "christlichen Laiengemeinschaft ohne Klostergelübde.\n\n"
-            "Später wohnte hier der Botaniker Leonhard Fuchs, nach dem die Fuchsie benannt ist. "
+            "Das Nonnenhaus - mit dreißig Metern Länge eines der größten Fachwerkhäuser der "
+            "Tübinger Altstadt, erbaut vierzehnhundertachtundachtzig. Der Name täuscht: Hier lebten zunächst "
+            "Dominikanerinnen, dann Beginen - Frauen einer christlichen Laiengemeinschaft ohne "
+            "Klostergelübde. Nach der Reformation fünfzehnhundertvierunddreißig wurde das Kloster aufgelöst.\n\n"
+            "Danach zog der Medizinprofessor und Botaniker Leonhard Fuchs ein - mit seiner Frau "
+            "und zehn Kindern! Er legte neben dem Haus einen der ältesten botanischen Gärten "
+            "Europas an und schrieb hier fünfzehnhundertdreiundvierzig sein berühmtes 'New Kreüterbuch'. "
+            "Die Fuchsie wurde nach ihm benannt, obwohl er die Pflanze nie gesehen hat. Vor dem Haus "
+            "gibt es heute einen kleinen Erinnerungsgarten mit Pflanzen aus seinem Buch.\n\n"
             "Heinrich versteckte sein vorletztes Fragment im Nonnenhaus - in einem Hohlraum hinter "
             "der alten Holzverkleidung.\n\n"
-            "Und dann ist da die Rückseite des Hauses. Im ersten Stock ragt ein hölzerner Erker "
-            "weit über den Ammerkanal hinaus - über die Gasse hinweg bis direkt übers Wasser gebaut. "
-            "Warum dieser aufwändige Bau? Die Antwort ist praktisch, mittelalterlich effizient - "
-            "und ziemlich lustig."
+            "Und dann ist da die Rückseite des Hauses. Im ersten Stock ragt ein hölzerner Vorbau - "
+            "das 'Sprachhaus' - weit über den Ammerkanal hinaus. Warum dieser aufwändige Bau direkt "
+            "übers Wasser? Die Antwort ist praktisch, mittelalterlich effizient - und ziemlich lustig."
         ),
         "diary": (
             "Das Nonnenhaus. Vierzehnhundertachtundachtzig. Die Balken knarren unter meinen Schritten, als wollten sie "
@@ -449,12 +465,16 @@ STATIONS = [
             "Niemand sucht an solchen Orten."
         ),
         "fact": (
-            "Der Erker-Abort des Nonnenhauses ist eines der besterhaltenen Beispiele mittelalterlicher "
-            "Sanitaeranlagen in Sueddeutschland. Das Prinzip war einfach: Die Schwerkraft erledigte "
-            "den Rest, der Ammerkanal spuelte alles weg.\n\n"
-            "Leonhard Fuchs (fünfzehnhunderteins bis fünfzehnhundertsechsundsechzig), der hier lebte, beschrieb ueber vierhundert Pflanzen in seinem "
-            "'New Kreuterbuch' von fünfzehnhundertdreiundvierzig - mit handkolorierten Holzschnitten. Das Buch war so "
-            "erfolgreich, dass die Fuchsie nach ihm benannt wurde, obwohl er die Pflanze nie gesehen hat."
+            "Das 'Sprachhaus' am Nonnenhaus ist eines der besterhaltenen Beispiele mittelalterlicher "
+            "Sanitäranlagen in Süddeutschland. Das Prinzip war einfach: Die Schwerkraft erledigte "
+            "den Rest, der Ammerkanal spülte alles weg.\n\n"
+            "Das Gebäude wurde zweitausendsieben, zweitausendacht vorbildlich saniert und erhielt "
+            "zweitausendacht den Denkmalschutzpreis Baden-Württemberg. Im Erdgeschoss der heutigen "
+            "Buchhandlung ist im Boden ein Sichtfenster eingelassen - es zeigt den originalen "
+            "Ziegel-Estrich von vierzehnhundertachtundachtzig!\n\n"
+            "Leonhard Fuchs beschrieb über vierhundert Pflanzen in seinem 'New Kreüterbuch' von "
+            "fünfzehnhundertdreiundvierzig - mit handkolorierten Holzschnitten. Sein botanischer Garten neben "
+            "dem Haus war einer der ältesten in ganz Europa."
         ),
         "riddle": (
             "Schau dir die Rückseite des Nonnenhauses an. Im ersten Stock ragt ein hölzerner Erker "
@@ -514,12 +534,14 @@ STATIONS = [
         ),
         "fact": (
             "Achtzehnhundertneunundsechzig waren jenseits des Stegs nur nasse Wiesen und Felder - die Neckarauen. Die "
-            "Suedstadt entstand erst ab den achtzehnhundertachtziger Jahren, nachdem der Neckar reguliert wurde.\n\n"
-            "Der Hauptbahnhof stand seit achtzehnhunderteinundsechzig als einsames Gebaeude in der Ebene. Die Kaserne kam "
-            "erst achtzehnhundertdreiundsiebzig. Wer achtzehnhundertneunundsechzig ueber den Steg ging, verschwand buchstaeblich in der Dunkelheit - "
-            "genau wie Heinrich.\n\n"
-            "Fun Fact: Der Name 'Indianersteg' taucht erstmals achtzehnhunderteinundsiebzig in einem Unfallbericht auf. "
-            "Kinder spielten auf der wackeligen Bruecke Karl-May-Spiele."
+            "Südstadt entstand erst ab den achtzehnhundertachtziger Jahren, nachdem der Neckar reguliert "
+            "und begradigt wurde.\n\n"
+            "Der Hauptbahnhof stand seit achtzehnhunderteinundsechzig als einsames Gebäude in der Ebene. Die Kaserne kam "
+            "erst achtzehnhundertdreiundsiebzig. Wer achtzehnhundertneunundsechzig über den Steg ging, verschwand buchstäblich "
+            "in der Dunkelheit.\n\n"
+            "Übrigens: Die heutige Betonbrücke ist schon die vierte Version. Holz (achtzehnhundertdreiundsechzig), "
+            "Eisen (um neunzehnhundert), Betonbogen (neunzehnhundertelf, im Krieg zerstört), Wiederaufbau "
+            "(neunzehnhundertsechsundvierzig). Die smaragdgrünen Geländer sind ein Markenzeichen."
         ),
         "riddle": (
             "Die erste Holzbrücke wurde achtzehnhundertdreiundsechzig errichtet. Welches Kinderspiel gab der Brücke "
@@ -582,6 +604,24 @@ SPECIAL_AUDIO = {
             "Geschichten und ihr könnt gemeinsam rätseln.\n\n"
             "Dein Fortschritt wird automatisch gespeichert. Du kannst jederzeit pausieren und "
             "später weitermachen."
+        ),
+    },
+    "epilog": {
+        "voice": "cgSgspJ2msm6clMCkdW9",  # Jessica - Playful, Bright, Warm
+        "text": (
+            "Herzlichen Glückwunsch! Du hast es geschafft – alle Fragmente gefunden und "
+            "Heinrichs Geheimnis gelüftet!\n\n"
+            "Die Formel, die Heinrich von Calw über die halbe Stadt verteilt hat, war nie eine "
+            "physikalische Gleichung. Es war eine Erkenntnis – inspiriert von Friedrich Hölderlin, "
+            "dem Dichter, der sechsunddreißig Jahre lang im Turm am Neckar lebte. Nur wenige "
+            "hundert Meter von deiner letzten Station entfernt.\n\n"
+            "Wo aber Gefahr ist, wächst das Rettende auch.\n\n"
+            "Hölderlin schrieb diese Zeile achtzehnhundertdrei in seiner Hymne Patmos. "
+            "Heinrich kannte seine Verse und verstand: Wo Wissen unterdrückt wird, wächst "
+            "der Mut, es zu teilen.\n\n"
+            "Vielen herzlichen Dank, dass du mit uns unterwegs warst! Wir hoffen, Tübingen "
+            "hat dir gefallen. Teile deine Urkunde mit Freunden – und vielleicht sehen wir "
+            "uns bald bei einer neuen Tour wieder."
         ),
     },
 }
