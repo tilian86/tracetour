@@ -453,6 +453,7 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 // TRACETOUR ENGINE v5 – 17 Stationen, 1869 Story, Vollvertonung
 // ========================================================================
 let userName='',currentStation=0,maxUnlockedStation=0,totalXp=0,map,userMarker,stationMarkers=[],routeLine;
+let fullRouteCoords=null; // cached walking route from OSRM
 let panelCollapsed=false,watchId=null,userPos=null;
 let aiQuestionsLeft=5,debugMode=false;
 const MAX_AI_QUESTIONS=5;
@@ -813,8 +814,8 @@ function initMap(){
         if(visible)m.bindTooltip(s.name,{permanent:false,direction:'top',className:'station-tooltip'});
         stationMarkers.push(m);
       });
-      const visibleCoords=stations.slice(0,maxUnlockedStation+2).map(s=>[s.lat,s.lng]);
-      routeLine=L.polyline(visibleCoords,{color:'#f3632d',weight:2,opacity:.35,dashArray:'6,8'}).addTo(map);
+      routeLine=L.polyline([],{color:'#f3632d',weight:2,opacity:.35,dashArray:'6,8'}).addTo(map);
+      fetchWalkingRoute();
       if(navigator.geolocation){
         watchId=navigator.geolocation.watchPosition(pos=>{
           userPos={lat:pos.coords.latitude,lng:pos.coords.longitude};
@@ -826,6 +827,44 @@ function initMap(){
       setTimeout(()=>{map.invalidateSize();renderStation()},200);
     }catch(e){console.error('Map init:',e)}
   },150);
+}
+
+// ====== WALKING ROUTE (OSRM) ======
+async function fetchWalkingRoute(){
+  try{
+    const coords=stations.map(s=>s.lng+','+s.lat).join(';');
+    const url='https://router.project-osrm.org/route/v1/foot/'+coords+'?overview=full&geometries=geojson';
+    const resp=await fetch(url);
+    const data=await resp.json();
+    if(data.routes&&data.routes[0]){
+      // OSRM returns [lng,lat], Leaflet needs [lat,lng]
+      fullRouteCoords=data.routes[0].geometry.coordinates.map(c=>[c[1],c[0]]);
+      updateRouteDisplay();
+    }
+  }catch(e){
+    console.warn('OSRM route fallback to straight lines');
+    fullRouteCoords=null;
+    updateRouteDisplay();
+  }
+}
+function updateRouteDisplay(){
+  if(!routeLine)return;
+  if(!fullRouteCoords){
+    // Fallback: straight lines between visible stations
+    const visibleCoords=stations.slice(0,Math.min(maxUnlockedStation+2,stations.length)).map(s=>[s.lat,s.lng]);
+    routeLine.setLatLngs(visibleCoords);
+    return;
+  }
+  // Find the approximate index in the full route for maxUnlockedStation+1
+  const lastVisible=Math.min(maxUnlockedStation+1,stations.length-1);
+  const target=stations[lastVisible];
+  // Find closest point in fullRouteCoords to the target station
+  let bestIdx=fullRouteCoords.length-1,bestDist=Infinity;
+  fullRouteCoords.forEach((c,i)=>{
+    const d=Math.abs(c[0]-target.lat)+Math.abs(c[1]-target.lng);
+    if(d<bestDist){bestDist=d;bestIdx=i}
+  });
+  routeLine.setLatLngs(fullRouteCoords.slice(0,bestIdx+1));
 }
 
 // ====== NAVIGATION ======
@@ -869,10 +908,7 @@ function renderStation(){
       weight:visible?2:0,opacity:visible?1:0,radius:i===currentStation?10:6});
     if(visible&&!m.getTooltip())m.bindTooltip(stations[i].name,{permanent:false,direction:'top',className:'station-tooltip'});
   });
-  if(routeLine){
-    const visibleCoords=stations.slice(0,maxUnlockedStation+2).map(s=>[s.lat,s.lng]);
-    routeLine.setLatLngs(visibleCoords);
-  }
+  updateRouteDisplay();
   if(map)map.flyTo([s.lat,s.lng],16,{duration:1});
 
   let distHtml='';
