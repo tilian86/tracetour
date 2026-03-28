@@ -43,13 +43,13 @@
 <h2>5. Standortdaten</h2>
 <p>Die App fragt über deinen Browser nach deinem Standort (GPS), um deine Position auf der Karte anzuzeigen und die Entfernung zur nächsten Station zu berechnen. Die Standortdaten werden <strong>ausschließlich lokal</strong> in deinem Browser verarbeitet und <strong>nicht</strong> an unsere Server oder Dritte übertragen. Du kannst die Standortfreigabe jederzeit in deinen Browser-Einstellungen widerrufen.</p>
 
-<h2>6. KI-Ermittler-Assistent</h2>
-<p>Der optionale KI-Assistent sendet deine Frage an einen Cloudflare Worker, der die Anfrage an die Anthropic API (Claude) weiterleitet. Dabei werden übertragen:</p>
+<h2>6. Trace (digitaler Begleiter)</h2>
+<p>Der optionale Begleiter „Trace" sendet deine Frage an einen Cloudflare Worker, der die Anfrage an die Anthropic API weiterleitet. Dabei werden übertragen:</p>
 <ul>
   <li>Dein Fragetext (max. 500 Zeichen)</li>
   <li>Kontext zur aktuellen Station (Rätsel, Hinweise)</li>
 </ul>
-<p>Es werden <strong>keine</strong> personenbezogenen Daten (Name, Standort, E-Mail) an den KI-Dienst übertragen. Die Anfragen werden nicht gespeichert. Rate-Limiting erfolgt über die IP-Adresse, die im Cloudflare Worker verarbeitet, aber nicht dauerhaft gespeichert wird.</p>
+<p>Es werden <strong>keine</strong> personenbezogenen Daten (Name, Standort, E-Mail) an den Dienst übertragen. Die Anfragen werden nicht gespeichert. Rate-Limiting erfolgt über die IP-Adresse, die im Cloudflare Worker verarbeitet, aber nicht dauerhaft gespeichert wird.</p>
 <p>Weitere Informationen: <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener">Anthropic Privacy Policy</a></p>
 
 <h2>7. Externe Dienste</h2>

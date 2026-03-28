@@ -736,7 +736,7 @@ SPECIAL_AUDIO = {
             "Ende fügt sich alles zusammen. Was hat Heinrich wirklich versteckt?\n\n"
             "Sammle Traces. Für jede gelöste Station bekommst du Erfahrungspunkte. Am Ende "
             "wartet deine Urkunde.\n\n"
-            "Frag Trace! Dein KI-Begleiter Trace kennt sich in Tübingen aus. Frag nach "
+            "Frag Trace! Dein digitaler Begleiter Trace kennt sich in Tübingen aus. Frag nach "
             "Hinweisen zum Rätsel, aber auch nach Geschichte, Sehenswürdigkeiten oder allem, "
             "was du bei einer Stadtführung wissen willst. Trace verrät nur nicht die Lösung.\n\n"
             "In der Gruppe? Nehmt einen Bluetooth-Lautsprecher mit! So hören alle entspannt die "
