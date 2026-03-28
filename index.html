@@ -1032,7 +1032,7 @@ function renderStation(){
         <input class="riddle-input" id="riddleAnswer" placeholder="Deine Antwort..." autocomplete="off" ${solved?'disabled value="Gelöst ✓"':''}>
         <button class="riddle-submit" onclick="checkAnswer()" ${solved?'disabled':''}>Prüfen</button>
       </div>`}
-      ${debugMode&&!solved?`<button onclick="skipStation()" style="width:100%;margin-top:8px;padding:10px;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);border-radius:var(--r-sm);color:var(--error);font-size:.78rem;font-weight:600">Skip (+${s.xp} Traces)</button>`:''}
+      ${!solved?`<button onclick="skipStation()" class="hint-btn" style="margin-top:8px;font-size:.78rem;opacity:.6"><span class="material-symbols-outlined" style="font-size:16px">skip_next</span> Rätsel überspringen & Lösung zeigen</button>`:''}
       <div id="riddleFb"></div>
     </div>
     <button class="hint-btn" onclick="openAi()"><span class="material-symbols-outlined">psychology</span> Ermittler-Assistent fragen</button>
@@ -1407,11 +1407,38 @@ function updateXp(){
   document.getElementById('xpFill').style.width=Math.round((totalXp/max)*100)+'%';
 }
 function skipStation(){
-  if(!debugMode)return;
-  solvedStations[currentStation]=true;totalXp+=stations[currentStation].xp;updateXp();
+  const idx=currentStation,s=stations[idx];
+  if(solvedStations[idx])return;
+  playSfx('correct');
+  solvedStations[idx]=true;totalXp+=Math.round(s.xp/2);updateXp();
   if(maxUnlockedStation===currentStation&&currentStation<stations.length-1)maxUnlockedStation++;
-  saveGame();
-  if(currentStation===stations.length-1){currentStation++;renderStation()}else navStation(1);
+  document.getElementById('navNext').disabled=false;
+  saveGame();showToast('Fortschritt gespeichert');
+  // Show solution in feedback area
+  const fb=document.getElementById('riddleFb');
+  if(fb){
+    fb.className='riddle-fb correct';
+    const answer=s.answer[0].charAt(0).toUpperCase()+s.answer[0].slice(1);
+    fb.innerHTML=`Übersprungen · Die Lösung war: <strong>${answer}</strong> (+${Math.round(s.xp/2)} Traces)`+renderFragmentReveal(s);
+    const nextName=idx<stations.length-1?stations[idx+1].name:'';
+    const btn=document.createElement('button');btn.className='btn-primary';btn.style.marginTop='10px';
+    btn.textContent=idx===stations.length-1?'Fall abschließen':'Weiter: '+nextName+' →';
+    btn.onclick=()=>goToNext(idx);
+    fb.appendChild(btn);
+    if(idx<stations.length-1){
+      const next=stations[idx+1];
+      const navDiv=document.createElement('a');navDiv.className='maps-link';navDiv.style.marginTop='8px';
+      navDiv.href=mapsUrl(next.lat,next.lng,next.name);navDiv.target='_blank';navDiv.rel='noopener';
+      navDiv.innerHTML=`<span class="material-symbols-outlined">navigation</span> Navigation: ${next.name}<span class="coords">${next.lat.toFixed(4)}, ${next.lng.toFixed(4)}</span>`;
+      fb.appendChild(navDiv);
+    }
+  }
+  // Disable input/buttons
+  const inp=document.getElementById('riddleAnswer');if(inp)inp.disabled=true;
+  const sub=document.querySelector('.riddle-submit');if(sub)sub.disabled=true;
+  document.querySelectorAll('.riddle-choice').forEach(b=>b.disabled=true);
+  // Re-render to unlock fact audio
+  setTimeout(()=>renderStation(),100);
 }
 function getDistance(lat1,lon1,lat2,lon2){
   const R=6371000,dLat=(lat2-lat1)*Math.PI/180,dLon=(lon2-lon1)*Math.PI/180;
