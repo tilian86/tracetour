@@ -194,6 +194,14 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 .hint-btn:active{border-color:var(--accent)}
 .hint-btn .material-symbols-outlined{font-size:18px;color:var(--accent)}
 
+/* BOTTOM NAV */
+.bottom-nav-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;margin-top:1rem;border-top:1px solid var(--border)}
+.bottom-nav-row button{display:flex;align-items:center;gap:4px;padding:8px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);font-size:.78rem;font-weight:600;color:var(--text-2);transition:border .2s}
+.bottom-nav-row button:active{border-color:var(--accent)}
+.bottom-nav-row button:disabled{opacity:.3;pointer-events:none}
+.bottom-nav-row button .material-symbols-outlined{font-size:16px}
+.bottom-nav-label{font-size:.7rem;color:var(--text-3);font-weight:600;letter-spacing:.05em}
+
 /* PUZZLE & QUIZ */
 .puzzle-word{padding:8px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);font-family:var(--font-h);font-size:.85rem;font-weight:700;color:var(--accent-soft);cursor:pointer;transition:all .15s;user-select:none;-webkit-user-select:none}
 .puzzle-word:active{transform:scale(.95)}
@@ -1013,6 +1021,11 @@ function renderStation(){
         ${solved?'<span class="material-symbols-outlined">check_circle</span> Gesehen! +'+s.xp+' Traces':'<span class="material-symbols-outlined">visibility</span> Gesehen! +'+s.xp+' Traces'}
       </button>
     </div>
+    <div class="bottom-nav-row">
+      <button onclick="navStation(-1)" ${currentStation===0?'disabled':''}><span class="material-symbols-outlined">chevron_left</span> Zurück</button>
+      <span class="bottom-nav-label">Stop ${currentStation+1} / ${stations.length}</span>
+      <button onclick="navStation(1)" ${currentStation>=maxUnlockedStation?'disabled':''}><span class="material-symbols-outlined">chevron_right</span></button>
+    </div>
   `;
   }else{
     el.innerHTML=`
@@ -1075,6 +1088,11 @@ function renderStation(){
     </div>
     <button class="hint-btn" onclick="openAi()"><img src="images/trace-avatar.png" style="width:20px;height:20px;border-radius:50%"> Trace fragen</button>
     ${debugMode?`<button onclick="skipStation()" style="width:100%;margin-top:4px;padding:8px;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.15);border-radius:var(--r-sm);color:var(--error);font-size:.7rem">DEBUG: Skip</button>`:''}
+    <div class="bottom-nav-row">
+      <button onclick="navStation(-1)" ${currentStation===0?'disabled':''}><span class="material-symbols-outlined">chevron_left</span> Zurück</button>
+      <span class="bottom-nav-label">Stop ${currentStation+1} / ${stations.length}</span>
+      <button onclick="navStation(1)" ${currentStation>=maxUnlockedStation?'disabled':''}><span class="material-symbols-outlined">chevron_right</span></button>
+    </div>
   `;
   }
   document.getElementById('riddleAnswer')?.addEventListener('keydown',e=>{if(e.key==='Enter')checkAnswer()});
