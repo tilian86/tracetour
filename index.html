@@ -332,7 +332,7 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 </div>
 <div class="audio-progress" data-type="guide" onclick="seekAudio(event,'guide')" style="margin-bottom:.75rem"><div class="audio-progress-fill" id="progFillGuide"></div></div>
 <div style="font-size:.85rem;line-height:1.7;color:var(--text-2)">
-<p style="margin-bottom:.75rem">📍 <strong>Folge der Route</strong> – Die App führt dich von Station zu Station. Jede Station hat einen Maps-Link zur Navigation.</p>
+<p style="margin-bottom:.75rem">📍 <strong>Folge der Route</strong> – Die App hat eine eingebaute Karte mit deinem Standort und dem Weg zur nächsten Station. Tippe auf „Karte" um sie zu öffnen. Mit jeder gelösten Station offenbart sich der nächste Punkt auf der Karte. Alternativ kannst du die Navigationslinks nutzen, um Google Maps zu öffnen.</p>
 <p style="margin-bottom:.75rem">🎧 <strong>Höre zu</strong> – Jede Station hat Audio: Story, Tagebuch und nach dem Lösen einen Fakten-Track. An Info-Stationen gibt es einen Stadtführer-Track. Du kannst alles auch lesen.</p>
 <p style="margin-bottom:.75rem">🔍 <strong>Löse Rätsel</strong> – An Rätsel-Stationen musst du vor Ort etwas finden oder beobachten. Nach richtiger Antwort wird der Fakten-Track freigeschaltet – und ein Fragment von Heinrichs geheimer Formel enthüllt.</p>
 <p style="margin-bottom:.75rem">🧩 <strong>Entschlüssle die Formel</strong> – Acht Fragmente, verteilt über die ganze Route. Erst am Ende fügt sich alles zusammen. Was hat Heinrich wirklich versteckt?</p>
@@ -522,7 +522,7 @@ const AMBIENT_CONFIGS=[
 {name:'Wasser & Wind',type:'water'}               // 16 Indianersteg
 ];
 
-const PHOTO_POS={4:'top',8:'top',11:'top'};
+const PHOTO_POS={0:'top',4:'top',8:'top',11:'top'};
 const STATION_PHOTOS=[
 // 0 Schloss
 'images/station_0.jpg',
@@ -832,20 +832,36 @@ function initMap(){
 // ====== WALKING ROUTE (OSRM) ======
 async function fetchWalkingRoute(){
   try{
-    const coords=stations.map(s=>s.lng+','+s.lat).join(';');
-    const url='https://router.project-osrm.org/route/v1/foot/'+coords+'?overview=full&geometries=geojson';
+    // Use OSRM foot profile via Valhalla/ORS or fallback
+    // Try OpenRouteService first (foot-walking), then OSRM driving as fallback
+    const coords=stations.map(s=>[s.lng,s.lat]);
+    const orsCoords=coords.map(c=>c.join(',')).join('|');
+    // Use OSRM with foot profile (public demo server)
+    const osrmCoords=stations.map(s=>s.lng+','+s.lat).join(';');
+    const url='https://routing.openstreetmap.de/routed-foot/route/v1/foot/'+osrmCoords+'?overview=full&geometries=geojson';
     const resp=await fetch(url);
     const data=await resp.json();
     if(data.routes&&data.routes[0]){
-      // OSRM returns [lng,lat], Leaflet needs [lat,lng]
       fullRouteCoords=data.routes[0].geometry.coordinates.map(c=>[c[1],c[0]]);
       updateRouteDisplay();
+      return;
     }
-  }catch(e){
-    console.warn('OSRM route fallback to straight lines');
-    fullRouteCoords=null;
-    updateRouteDisplay();
-  }
+  }catch(e){}
+  // Fallback: OSRM project server (car, but better than nothing)
+  try{
+    const osrmCoords=stations.map(s=>s.lng+','+s.lat).join(';');
+    const url='https://router.project-osrm.org/route/v1/driving/'+osrmCoords+'?overview=full&geometries=geojson';
+    const resp=await fetch(url);
+    const data=await resp.json();
+    if(data.routes&&data.routes[0]){
+      fullRouteCoords=data.routes[0].geometry.coordinates.map(c=>[c[1],c[0]]);
+      updateRouteDisplay();
+      return;
+    }
+  }catch(e){}
+  console.warn('Route fallback to straight lines');
+  fullRouteCoords=null;
+  updateRouteDisplay();
 }
 function updateRouteDisplay(){
   if(!routeLine)return;

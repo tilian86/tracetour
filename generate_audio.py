@@ -721,8 +721,10 @@ SPECIAL_AUDIO = {
         "voice": NARRATOR_VOICE,
         "text": (
             "So funktioniert's.\n\n"
-            "Folge der Route. Die App führt dich von Station zu Station. Jede Station hat einen "
-            "Maps-Link zur Navigation.\n\n"
+            "Folge der Route. Die App hat eine eingebaute Karte mit deinem Standort und dem Weg "
+            "zur nächsten Station. Tippe auf Karte um sie zu öffnen. Mit jeder gelösten Station "
+            "offenbart sich der nächste Punkt auf der Karte. Alternativ kannst du die "
+            "Navigationslinks nutzen, um Google Maps zu öffnen.\n\n"
             "Höre zu. Jede Station hat Audio: Story, Tagebuch, und nach dem Lösen einen "
             "Fakten-Track. An Info-Stationen gibt es einen Stadtführer-Track. Du kannst alles "
             "auch lesen.\n\n"
