@@ -314,33 +314,42 @@ STATIONS = [
         "name": "Station 9 - Haagtorplatz",
         "type": "raetsel",
         "story": (
-            "Heinrich eilte westwärts durch die Ammergasse und erreichte den Haagtorplatz. "
-            "Hier stand einmal das Haagtor - eines von fünf Stadttoren der mittelalterlichen "
-            "Befestigung.\n\n"
-            "Der Name kommt von 'Haag' - der Schutzhecke am Nordhang des Schlossbergs. "
-            "Das Tor führte nach Westen Richtung Herrenberg, entlang der Ammer. Es wurde achtzehnhunderteinunddreißig "
-            "abgerissen, als die Stadt sich ausdehnte und die alten Mauern hinderlich wurden.\n\n"
-            "Schau auf den Boden: Die Pflasterung zeigt noch die Umrisse der alten Fundamente. "
-            "Eine Gedenktafel wurde zweitausendneun angebracht. Heinrich kannte das Tor noch aus Zeichnungen "
-            "seines Großvaters - für ihn war es ein Symbol dafür, wie schnell eine Stadt ihre "
-            "Geschichte vergisst.\n\n"
-            "Er versteckte ein Fragment in einer Mauernische nahe der alten Fundamente und ging weiter."
+            "Heinrich eilte westwärts durch die Ammergasse und erreichte den Haagtorplatz - "
+            "offiziell heißt er Vor dem Haagtor. Hier stand bis achtzehnhunderteinunddreißig "
+            "das Haagtor, eines von fünf Stadttoren der mittelalterlichen Befestigung. "
+            "Das Tor führte nach Westen Richtung Herrenberg, entlang der Ammer.\n\n"
+            "Der Platz war bis neunzehnhundertdreiundsechzig viel kleiner. Erst als die "
+            "Schweickhardtsche Mühle am Ammerkanal abgerissen wurde, entstand die heutige Fläche. "
+            "Neunzehnhundertzweiundneunzig wurde der Platz neugestaltet und der Ammerkanal freigelegt "
+            "- gefeiert mit einer Freiluft-Aufführung der Feuerzangenbowle. Seitdem ist das "
+            "Winternachtskino mit dem Filmklassiker am Freitag vor dem dritten Advent zur "
+            "Tradition geworden.\n\n"
+            "Im Sommer verwandelt sich ein Teil des Platzes in den Haagtor-Space: "
+            "Hollywoodschaukel, Sandkasten, Blumenkästen - dort wo vorher Parkplätze waren. "
+            "Ein Projekt, das zweitausendzweiundzwanzig aus einer Bürgerinitiative entstand.\n\n"
+            "Heinrich kannte den Platz noch mit dem Tor. Er versteckte ein Fragment in einer "
+            "Mauernische und ging weiter Richtung Froschgasse."
         ),
         "diary": (
-            "Das Haagtor ist weg. Abgerissen. Achtzehnhunderteinunddreißig, sagen sie. Aber die Fundamente sind noch da, "
-            "unter dem Pflaster. Genau wie meine Formeln bald unter dem Staub dieser Stadt liegen "
-            "werden. Unsichtbar, aber nicht verloren."
+            "Das Haagtor ist weg. Abgerissen. Achtzehnhunderteinunddreißig, sagen sie. "
+            "Die Fundamente sind noch da, unter dem Pflaster. Genau wie meine Formeln bald "
+            "unter dem Staub dieser Stadt liegen werden. Unsichtbar, aber nicht verloren."
         ),
         "fact": (
-            "Tuebingens fuenf Stadttore hiessen: Lustnauer Tor (Osten), Haagtor (Westen), "
-            "Schmiedtor (Norden), Neckartor (Sueden) und das Wurmlinger Tor. Sie wurden alle "
+            "Tübingens fünf Stadttore hießen: Lustnauer Tor im Osten, Haagtor im Westen, "
+            "Schmiedtor im Norden, Neckartor im Süden und das Wurmlinger Tor. Sie wurden alle "
             "zwischen achtzehnhundertvier und achtzehnhunderteinunddreißig abgerissen.\n\n"
-            "Fun Fact: Als das Haagtor achtzehnhunderteinunddreißig fiel, protestierten Buerger - nicht wegen der Geschichte, "
-            "sondern weil der Torwaechter seinen Job verlor. Er bekam eine Abfindung von fünfzig Gulden."
+            "Die Erinnerung im Pflaster neben dem Ammerkanal erinnert an die Schweickhardtsche "
+            "Mühle, ehemals Untere Haagtormühle, die neunzehnhundertdreiundsechzig abgerissen wurde. "
+            "Durch den Fahrradtunnel am Platz gelangt man direkt zum Neckar, zum Anlagensee "
+            "und zum Bahnhof.\n\n"
+            "Fun Fact: Als das Haagtor achtzehnhunderteinunddreißig fiel, protestierten Bürger "
+            "- nicht wegen der Geschichte, sondern weil der Torwächter seinen Job verlor. "
+            "Er bekam eine Abfindung von fünfzig Gulden."
         ),
         "riddle": (
-            "Das Haagtor war eines von wie vielen Stadttoren der mittelalterlichen Befestigung "
-            "Tübingens? Eine Zahl. Oder: In welchem Jahr wurde es abgerissen? Das steht auf der Gedenktafel."
+            "Schau dich am Haagtorplatz um. An einer Hauswand ist ein Vogel als Streetart "
+            "zu sehen - farbenfroh und detailliert. Welcher Vogel ist es? Ein Wort."
         ),
     },
 
