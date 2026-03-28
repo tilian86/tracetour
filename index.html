@@ -489,42 +489,13 @@ function unlockAudio(){
 document.addEventListener('touchstart',unlockAudio);
 document.addEventListener('click',unlockAudio);
 
-// Sound effects
+// Sound effects (WAV files for iOS reliability)
 function playSfx(type){
   try{
-    const ctx=getAudioCtx();
-    const play=()=>{
-      const now=ctx.currentTime;
-      if(type==='correct'){
-        // Bright ascending chime C5-E5-G5-C6
-        [523.25,659.25,783.99,1046.5].forEach((f,i)=>{
-          const o=ctx.createOscillator(),g=ctx.createGain();
-          o.type='sine';o.frequency.value=f;
-          g.gain.setValueAtTime(0,now+i*0.1);
-          g.gain.linearRampToValueAtTime(0.6,now+i*0.1+0.03);
-          g.gain.exponentialRampToValueAtTime(0.001,now+i*0.1+0.5);
-          o.connect(g);g.connect(ctx.destination);
-          o.start(now+i*0.1);o.stop(now+i*0.1+0.6);
-        });
-      }else if(type==='wrong'){
-        // Two descending buzzy tones
-        [280,180].forEach((f,i)=>{
-          const o=ctx.createOscillator(),g=ctx.createGain();
-          o.type='sawtooth';o.frequency.value=f;
-          o.frequency.linearRampToValueAtTime(f*0.6,now+i*0.15+0.25);
-          g.gain.setValueAtTime(0.5,now+i*0.15);
-          g.gain.exponentialRampToValueAtTime(0.001,now+i*0.15+0.35);
-          o.connect(g);g.connect(ctx.destination);
-          o.start(now+i*0.15);o.stop(now+i*0.15+0.4);
-        });
-      }
-    };
-    if(ctx.state==='suspended'){
-      ctx.resume().then(()=>setTimeout(play,50)).catch(()=>{});
-    }else{
-      play();
-    }
-  }catch(e){console.warn('SFX error:',e);}
+    const a=new Audio('audio/'+type+'.wav');
+    a.volume=0.6;
+    a.play().catch(()=>{});
+  }catch(e){}
 }
 
 const AMBIENT_CONFIGS=[
@@ -1004,7 +975,7 @@ function renderStation(){
 
   if(solved&&!s.anecdote){
     const fb=document.getElementById('riddleFb');fb.className='riddle-fb correct';
-    fb.innerHTML='Bereits gelöst!';
+    fb.innerHTML='Bereits gelöst!'+renderFragmentReveal(s);
     if(currentStation<stations.length-1){
       const btn=document.createElement('button');btn.className='btn-primary';btn.style.marginTop='10px';
       btn.textContent='Weiter: '+stations[currentStation+1].name+' →';btn.onclick=()=>navStation(1);fb.appendChild(btn);
@@ -1013,6 +984,9 @@ function renderStation(){
       navDiv.href=mapsUrl(next.lat,next.lng,next.name);navDiv.target='_blank';navDiv.rel='noopener';
       navDiv.innerHTML=`<span class="material-symbols-outlined">navigation</span> Navigation: ${next.name}<span class="coords">${next.lat.toFixed(4)}, ${next.lng.toFixed(4)}</span>`;
       fb.appendChild(navDiv);
+    }else if(currentStation===stations.length-1){
+      const btn=document.createElement('button');btn.className='btn-primary';btn.style.marginTop='10px';
+      btn.textContent='Fall abschließen →';btn.onclick=()=>{currentStation++;renderStation()};fb.appendChild(btn);
     }
   }
   if(solved&&s.anecdote){
