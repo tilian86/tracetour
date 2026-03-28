@@ -972,7 +972,7 @@ function renderStation(){
     <div class="audio-progress" data-type="fact" onclick="seekAudio(event,'fact')"><div class="audio-progress-fill" id="progFillFact"></div></div>`}
     <div class="audio-row" id="audioRiddle" onclick="playAudio('riddle_${ai}','audioRiddle','riddle')">
       <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
-      <div><div class="audio-label">Rätsel anhören</div><div class="audio-sublabel">Für Gruppen</div></div>
+      <div><div class="audio-label">Rätsel anhören</div><div class="audio-sublabel">Erzähler</div></div>
       <div class="audio-time" id="timeRiddle">--:--</div>
     </div>
     <div class="audio-progress" data-type="riddle" onclick="seekAudio(event,'riddle')"><div class="audio-progress-fill" id="progFillRiddle"></div></div>
@@ -1186,8 +1186,10 @@ function goToNext(idx) {
       rem.style.cssText = 'margin-top:8px;padding:10px 14px;background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.25);border-radius:var(--r-sm);font-size:.82rem;color:var(--gold);display:flex;align-items:center;gap:8px';
       rem.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px">headphones</span> Tipp: Hör dir den freigeschalteten Fakten-Track an – da stecken spannende Bonus-Infos drin!';
       fb.appendChild(rem);
+      // Update button text to show it still works
+      const btn=fb.querySelector('.btn-primary');
+      if(btn) btn.textContent=idx===stations.length-1?'Fall abschließen →':'Trotzdem weiter →';
     }
-    // Still allow navigation on second click
     factListened[idx] = true;
     return;
   }
