@@ -391,9 +391,10 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <div id="success" class="screen" style="padding:0;overflow-y:auto">
 <div style="background:linear-gradient(180deg,rgba(243,99,45,.12) 0%,transparent 60%),var(--bg);padding:calc(var(--safe-top) + 2rem) 1.5rem calc(var(--safe-bottom) + 2rem);display:flex;flex-direction:column;align-items:center;text-align:center;min-height:100vh">
 
-<div style="font-size:3.5rem;margin-bottom:.5rem;animation:bounceIn .8s ease">🏆</div>
+<div style="font-size:4rem;margin-bottom:.5rem;animation:bounceIn .8s ease">🏆</div>
 <div style="font-size:.65rem;letter-spacing:.2em;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:.5rem">Fall gelöst</div>
-<h1 style="font-family:var(--font-h);font-size:2.2rem;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:1.5rem;line-height:1.1">Die Formel des<br><span style="color:var(--accent)">Forschers</span></h1>
+<h1 style="font-family:var(--font-h);font-size:2rem;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:.5rem;line-height:1.1">Unglaublich,<br><span style="color:var(--accent)">Ermittler!</span></h1>
+<p style="font-size:.9rem;color:var(--text-2);margin-bottom:1.5rem;max-width:400px">Du hast alle 17 Stationen erkundet, 8 Rätsel gelöst und Heinrichs Formel entschlüsselt. Das schaffen nicht viele.</p>
 
 <div class="audio-row" id="audioEpilog" onclick="playAudio('epilog','audioEpilog','epilog')" style="max-width:480px;width:100%;margin-bottom:1rem">
   <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
@@ -436,7 +437,9 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <p style="font-size:.85rem;line-height:1.7;color:var(--text-2)">Es freut uns, wenn wir uns irgendwo auf der Welt beim Erkunden wiederbegegnen. Bis dahin – fare well, Ermittler.</p>
 </div>
 
-<button class="share-btn" style="max-width:300px" onclick="generateShareCard()"><span class="material-symbols-outlined">share</span> Urkunde teilen</button>
+<canvas id="certificateCanvas" style="width:100%;max-width:480px;border-radius:var(--r);border:1px solid var(--border);margin-bottom:1rem"></canvas>
+<button class="share-btn" style="max-width:300px" onclick="shareCertificate()"><span class="material-symbols-outlined">share</span> Urkunde teilen</button>
+<button class="share-btn" style="max-width:300px" onclick="saveCertificate()"><span class="material-symbols-outlined">download</span> Urkunde speichern</button>
 <button class="share-btn" style="max-width:300px" onclick="window.open('mailto:hello@tracetour.de?subject=TraceTour Feedback&body=Hey! Ich habe gerade die Tour in Tübingen gemacht und wollte euch sagen:')"><span class="material-symbols-outlined">mail</span> Feedback senden</button>
 <button class="btn-primary" style="max-width:300px;margin-top:.5rem" onclick="clearSave();showScreen('tourSelect')">Zurück zur Übersicht</button>
 </div>
@@ -850,7 +853,7 @@ function renderStation(){
       const ridTotal=stations.filter(st=>!st.anecdote).length;
       sc.textContent=ridSolved+' von '+ridTotal+' Rätseln gelöst · alle Stops erkundet';
     }
-    showScreen('success');return;
+    showScreen('success');playSfx('applause');setTimeout(renderCertificate,300);return;
   }
   const s=stations[currentStation],el=document.getElementById('stationContent');
   document.getElementById('topTitle').textContent=s.name;
@@ -1433,9 +1436,11 @@ function addAiMsg(html,type,id){
 }
 document.getElementById('aiInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendAi()});
 
-// ====== SHARE CARD ======
-function generateShareCard(){
-  const c=document.createElement('canvas');c.width=1080;c.height=1350;
+// ====== CERTIFICATE ======
+function renderCertificate(){
+  const c=document.getElementById('certificateCanvas');
+  if(!c)return;
+  c.width=1080;c.height=1350;
   const ctx=c.getContext('2d');
   const bg=ctx.createLinearGradient(0,0,0,1350);
   bg.addColorStop(0,'#031425');bg.addColorStop(.5,'#091828');bg.addColorStop(1,'#031425');
@@ -1484,35 +1489,65 @@ function generateShareCard(){
   const solved=solvedStations.filter(Boolean).length;
   ctx.font='400 18px Inter,Arial,sans-serif';ctx.fillStyle='#4a5d73';
   ctx.fillText(solved+' von '+stations.length+' Stops abgeschlossen',540,940);
-  ctx.fillStyle='rgba(37,54,72,.4)';
-  ctx.beginPath();
-  ctx.roundRect?ctx.roundRect(80,980,920,180,12):ctx.rect(80,980,920,180);
-  ctx.fill();
-  ctx.strokeStyle='rgba(243,99,45,.2)';ctx.lineWidth=1;
-  ctx.beginPath();
-  ctx.roundRect?ctx.roundRect(80,980,920,180,12):ctx.rect(80,980,920,180);
-  ctx.stroke();
-  ctx.font='italic 600 24px Georgia,serif';ctx.fillStyle='#ffb59d';
-  ctx.fillText('"Wo aber Gefahr ist, wächst',540,1030);
-  ctx.fillText('das Rettende auch."',540,1062);
-  ctx.font='italic 500 18px Georgia,serif';ctx.fillStyle='#8192a7';
-  ctx.fillText('— Friedrich Hölderlin, Patmos (1803)',540,1098);
-  ctx.font='400 15px Inter,Arial,sans-serif';ctx.fillStyle='rgba(243,99,45,.6)';
-  ctx.fillText('Die Formel des Forschers · entschlüsselt in Tübingen',540,1130);
-  ctx.font='700 26px Arial,sans-serif';ctx.fillStyle='#f3632d';
-  ctx.fillText('#TraceTourTuebingen',540,1210);
-  ctx.font='400 18px Inter,Arial,sans-serif';ctx.fillStyle='#4a5d73';
-  ctx.fillText('tracetour.de',540,1248);
+  // Neckarfront image
+  const img=new Image();
+  img.onload=()=>{
+    ctx.save();
+    ctx.globalAlpha=0.3;
+    const aspect=img.width/img.height;
+    const drawW=920,drawH=drawW/aspect;
+    if(ctx.roundRect){ctx.beginPath();ctx.roundRect(80,970,920,200,12);ctx.clip()}
+    ctx.drawImage(img,80,970,920,Math.max(200,drawH));
+    ctx.restore();
+    // Overlay gradient
+    const imgGrad=ctx.createLinearGradient(80,970,80,1170);
+    imgGrad.addColorStop(0,'rgba(3,20,37,.5)');imgGrad.addColorStop(1,'rgba(3,20,37,.8)');
+    ctx.fillStyle=imgGrad;
+    if(ctx.roundRect){ctx.beginPath();ctx.roundRect(80,970,920,200,12);ctx.fill()}else{ctx.fillRect(80,970,920,200)}
+    ctx.strokeStyle='rgba(243,99,45,.2)';ctx.lineWidth=1;
+    if(ctx.roundRect){ctx.beginPath();ctx.roundRect(80,970,920,200,12);ctx.stroke()}
+    ctx.textAlign='center';
+    ctx.font='italic 500 22px Georgia,serif';ctx.fillStyle='#ffb59d';
+    ctx.fillText('Die Formel des Forschers',540,1040);
+    ctx.font='700 18px Inter,Arial,sans-serif';ctx.fillStyle='rgba(243,99,45,.8)';
+    ctx.fillText('ENTSCHLÜSSELT IN TÜBINGEN',540,1080);
+    ctx.font='400 16px Inter,Arial,sans-serif';ctx.fillStyle='#8192a7';
+    ctx.fillText('tracetour.de · #TraceTourTuebingen',540,1120);
+    finishCertificate(c);
+  };
+  img.onerror=()=>{
+    ctx.fillStyle='rgba(37,54,72,.4)';
+    if(ctx.roundRect){ctx.beginPath();ctx.roundRect(80,970,920,180,12);ctx.fill()}else{ctx.fillRect(80,970,920,180)}
+    ctx.textAlign='center';
+    ctx.font='italic 500 22px Georgia,serif';ctx.fillStyle='#ffb59d';
+    ctx.fillText('Die Formel des Forschers',540,1040);
+    ctx.font='700 18px Inter,Arial,sans-serif';ctx.fillStyle='rgba(243,99,45,.8)';
+    ctx.fillText('ENTSCHLÜSSELT IN TÜBINGEN',540,1080);
+    ctx.font='400 16px Inter,Arial,sans-serif';ctx.fillStyle='#8192a7';
+    ctx.fillText('tracetour.de · #TraceTourTuebingen',540,1110);
+    finishCertificate(c);
+  };
+  img.src='images/hero_neckarfront.jpg';
+}
+function finishCertificate(c){
+  // Certificate is rendered, nothing else to do for inline display
+}
+function shareCertificate(){
+  const c=document.getElementById('certificateCanvas');if(!c)return;
   c.toBlob(blob=>{
     if(navigator.share&&navigator.canShare){
       const file=new File([blob],'tracetour-urkunde.png',{type:'image/png'});
       if(navigator.canShare({files:[file]})){
-        navigator.share({text:'Ich habe den Fall gelöst! #TraceTourTuebingen @tracetour',files:[file]}).catch(()=>downloadBlob(blob));
+        navigator.share({text:'Fall gelöst! 🏆 #TraceTourTuebingen',files:[file]}).catch(()=>downloadBlob(blob));
         return;
       }
     }
     downloadBlob(blob);
   },'image/png');
+}
+function saveCertificate(){
+  const c=document.getElementById('certificateCanvas');if(!c)return;
+  c.toBlob(blob=>downloadBlob(blob),'image/png');
 }
 function downloadBlob(blob){
   const url=URL.createObjectURL(blob),a=document.createElement('a');
