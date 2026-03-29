@@ -946,6 +946,7 @@ function updateRouteDisplay(){
 // ====== NAVIGATION ======
 function navStation(dir){
   const next=currentStation+dir;
+  if(next<0){stopAudio(true);stopAmbient();showScreen('prologue');return}
   if(next>=0&&next<=maxUnlockedStation&&next<stations.length){
     stopAudio(true);stopAmbient();closeAi();currentStation=next;saveGame();renderStation();
     window.scrollTo({top:0,behavior:'smooth'});
@@ -967,7 +968,7 @@ function renderStation(){
   }
   const s=stations[currentStation],el=document.getElementById('stationContent');
   document.getElementById('topTitle').textContent=s.name;
-  document.getElementById('navPrev').disabled=(currentStation===0);
+  document.getElementById('navPrev').disabled=false;
   document.getElementById('navNext').disabled=(currentStation>=maxUnlockedStation);
 
   stationMarkers.forEach((m,i)=>{
@@ -1022,7 +1023,7 @@ function renderStation(){
       </button>
     </div>
     <div class="bottom-nav-row">
-      <button onclick="navStation(-1)" ${currentStation===0?'disabled':''}><span class="material-symbols-outlined">chevron_left</span> Zurück</button>
+      <button onclick="navStation(-1)"><span class="material-symbols-outlined">chevron_left</span> ${currentStation===0?'Anleitung':'Zurück'}</button>
       <span class="bottom-nav-label">Stop ${currentStation+1} / ${stations.length}</span>
       <button onclick="navStation(1)" ${currentStation>=maxUnlockedStation?'disabled':''}><span class="material-symbols-outlined">chevron_right</span></button>
     </div>
@@ -1089,7 +1090,7 @@ function renderStation(){
     <button class="hint-btn" onclick="openAi()"><img src="images/trace-avatar.png" style="width:20px;height:20px;border-radius:50%"> Trace fragen</button>
     ${debugMode?`<button onclick="skipStation()" style="width:100%;margin-top:4px;padding:8px;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.15);border-radius:var(--r-sm);color:var(--error);font-size:.7rem">DEBUG: Skip</button>`:''}
     <div class="bottom-nav-row">
-      <button onclick="navStation(-1)" ${currentStation===0?'disabled':''}><span class="material-symbols-outlined">chevron_left</span> Zurück</button>
+      <button onclick="navStation(-1)"><span class="material-symbols-outlined">chevron_left</span> ${currentStation===0?'Anleitung':'Zurück'}</button>
       <span class="bottom-nav-label">Stop ${currentStation+1} / ${stations.length}</span>
       <button onclick="navStation(1)" ${currentStation>=maxUnlockedStation?'disabled':''}><span class="material-symbols-outlined">chevron_right</span></button>
     </div>
