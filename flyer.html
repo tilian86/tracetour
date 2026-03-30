@@ -17,7 +17,6 @@ body {
 .page {
   width: 148mm; height: 210mm;
   margin: 10mm auto;
-  background: white;
   position: relative;
   overflow: hidden;
   page-break-after: always;
@@ -30,7 +29,7 @@ body {
 }
 
 /* FRONT */
-.front { background: #031425; color: white; position: relative; }
+.front { background: #031425; color: white; }
 .front-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
 .front-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(3,20,37,0.2) 0%, rgba(3,20,37,0.5) 35%, rgba(3,20,37,0.95) 70%, rgba(3,20,37,1) 100%); }
 .front-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 8mm 9mm 7mm; }
@@ -44,64 +43,63 @@ body {
 .tagline { font-family: 'Montserrat', sans-serif; font-size: 5.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3em; color: #f3632d; margin-bottom: 2mm; }
 .front-hero h1 { font-family: 'Montserrat', sans-serif; font-size: 26pt; font-weight: 900; line-height: 1.0; text-transform: uppercase; letter-spacing: -0.03em; margin-bottom: 3mm; }
 .front-hero h1 span { color: #f3632d; }
-.front-hero .hook { font-size: 8.5pt; font-weight: 500; color: #c8d8e8; line-height: 1.5; max-width: 95%; margin: 0 auto 3mm; }
+.front-hero .hook { font-size: 8pt; font-weight: 500; color: #c8d8e8; line-height: 1.5; max-width: 95%; margin: 0 auto 3mm; }
 
-.tour-box { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 5px; padding: 3mm 4mm; text-align: left; margin-bottom: 2mm; }
-.tour-box h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 9.5pt; margin-bottom: 1mm; }
-.tour-box .story-teaser { font-size: 6.5pt; color: #8ea8c8; line-height: 1.45; font-style: italic; margin-bottom: 1.5mm; }
-.tour-meta { display: flex; gap: 2.5mm; font-size: 6pt; color: #8ea8c8; text-transform: uppercase; letter-spacing: 0.05em; flex-wrap: wrap; }
-.tour-meta span::before { content: "▸ "; color: #f3632d; }
-
-.highlights { display: flex; gap: 2mm; margin-bottom: 2mm; }
+.highlights { display: flex; gap: 2mm; margin-bottom: 3mm; justify-content: center; flex-wrap: wrap; }
 .highlight-chip { background: rgba(243,99,45,0.12); border: 1px solid rgba(243,99,45,0.2); border-radius: 3px; padding: 1.5mm 3mm; font-size: 5.5pt; color: #f3632d; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
 
-/* App Screenshot */
-.app-preview { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 5px; padding: 2.5mm; display: flex; gap: 3mm; align-items: center; }
-.app-preview .phone-frame { width: 18mm; height: 32mm; background: #0b1d2d; border-radius: 3px; border: 1px solid rgba(255,255,255,0.15); overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-.app-preview .phone-frame img { width: 100%; height: 100%; object-fit: cover; }
-.app-preview .phone-frame .placeholder { font-size: 4pt; color: #5a7a9a; text-align: center; line-height: 1.3; }
-.app-preview .preview-text { font-size: 6pt; color: #8ea8c8; line-height: 1.5; }
-.app-preview .preview-text strong { color: #d8e3fb; font-weight: 600; }
+.app-preview { display: flex; gap: 3mm; align-items: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 5px; padding: 2.5mm; }
+.phone-frame { width: 20mm; min-width: 20mm; height: 36mm; border-radius: 3px; border: 1.5px solid rgba(255,255,255,0.2); overflow: hidden; background: #0b1d2d; }
+.phone-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.preview-text { font-size: 6pt; color: #8ea8c8; line-height: 1.5; }
+.preview-text strong { color: #d8e3fb; font-weight: 600; }
 
 .front-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
 .url-block .url { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 12pt; color: #f3632d; }
 .url-block .url-hint { font-size: 5.5pt; color: #5a7a9a; margin-top: 0.5mm; }
-.qr-box { width: 18mm; height: 18mm; background: white; border-radius: 2px; display: flex; align-items: center; justify-content: center; }
+.qr-box { width: 18mm; height: 18mm; background: white; border-radius: 2px; }
+.qr-box img { width: 100%; height: 100%; object-fit: contain; padding: 0.5mm; }
 
-/* BACK */
-.back { background: white; color: #1a1a1a; display: flex; flex-direction: column; justify-content: space-between; padding: 8mm 9mm 7mm; }
-.back h2 { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 12pt; text-transform: uppercase; letter-spacing: -0.01em; color: #031425; margin-bottom: 1mm; }
+/* BACK — warm dark instead of white */
+.back { background: #1e293b; color: #d8e3fb; display: flex; flex-direction: column; justify-content: space-between; padding: 8mm 9mm 7mm; }
+.back h2 { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 12pt; text-transform: uppercase; letter-spacing: -0.01em; color: white; margin-bottom: 1mm; }
 .back h2 span { color: #f3632d; }
-.back .intro { font-size: 7pt; color: #666; line-height: 1.5; margin-bottom: 3mm; }
+.back .intro { font-size: 7pt; color: #8ea8c8; line-height: 1.5; margin-bottom: 3mm; }
 
-.steps { margin: 1mm 0 3mm; }
-.step { display: flex; gap: 3mm; margin-bottom: 3mm; align-items: flex-start; }
-.step-num { width: 6mm; height: 6mm; min-width: 6mm; background: #f3632d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 8pt; }
-.step-text h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 8pt; margin-bottom: 0.3mm; color: #1a1a1a; }
-.step-text p { font-size: 6.5pt; color: #555; line-height: 1.45; }
+.two-col { display: flex; gap: 4mm; margin-bottom: 3mm; }
+.col { flex: 1; }
 
-.features-grid { background: #f8f6f3; border-radius: 4px; padding: 3mm; margin: 2mm 0; }
-.features-grid h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 6.5pt; text-transform: uppercase; letter-spacing: 0.12em; color: #f3632d; margin-bottom: 2mm; }
-.feat-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2mm 3mm; }
-.feat-list li { font-size: 6pt; color: #333; line-height: 1.35; padding-left: 2.5mm; position: relative; }
+.steps { margin: 0; }
+.step { display: flex; gap: 2.5mm; margin-bottom: 2.5mm; align-items: flex-start; }
+.step-num { width: 5.5mm; height: 5.5mm; min-width: 5.5mm; background: #f3632d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 7.5pt; }
+.step-text h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 7pt; margin-bottom: 0.3mm; color: white; }
+.step-text p { font-size: 6pt; color: #8ea8c8; line-height: 1.4; }
+
+.section-label { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 6pt; text-transform: uppercase; letter-spacing: 0.12em; color: #f3632d; margin-bottom: 2mm; }
+
+.feat-list { list-style: none; }
+.feat-list li { font-size: 6pt; color: #b0c4de; line-height: 1.35; padding-left: 2.5mm; position: relative; margin-bottom: 1mm; }
 .feat-list li::before { content: "✓"; position: absolute; left: 0; color: #f3632d; font-weight: 700; }
 
-/* Pricing */
 .pricing-row { display: flex; gap: 2mm; margin: 3mm 0; }
-.price-card { flex: 1; border: 1px solid #e5e5e5; border-radius: 4px; padding: 3mm; text-align: center; }
-.price-card.highlight { border-color: #f3632d; background: rgba(243,99,45,0.03); }
-.price-card .label { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 6pt; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 1mm; }
+.price-card { flex: 1; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 3mm; text-align: center; background: rgba(255,255,255,0.03); }
+.price-card.highlight { border-color: #f3632d; background: rgba(243,99,45,0.08); }
+.price-card .label { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 5.5pt; text-transform: uppercase; letter-spacing: 0.08em; color: #8ea8c8; margin-bottom: 1mm; }
 .price-card.highlight .label { color: #f3632d; }
-.price-card .amount { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 14pt; color: #1a1a1a; }
-.price-card .per { font-size: 5.5pt; color: #888; margin-top: 0.5mm; }
+.price-card .amount { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 14pt; color: white; }
+.price-card .per { font-size: 5pt; color: #8ea8c8; margin-top: 0.5mm; }
 .price-card .save { font-size: 5pt; color: #f3632d; font-weight: 700; margin-top: 1mm; }
 
-.testimonial { border-left: 2px solid #f3632d; padding: 2mm 0 2mm 3mm; margin: 2mm 0; }
-.testimonial p { font-size: 6.5pt; font-style: italic; color: #444; line-height: 1.45; }
-.testimonial .author { font-size: 5.5pt; color: #999; font-style: normal; margin-top: 0.5mm; }
+.info-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 3mm; margin: 2mm 0; }
+.info-box h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 6.5pt; color: white; margin-bottom: 1.5mm; }
+.info-box p { font-size: 6pt; color: #8ea8c8; line-height: 1.45; }
 
-.back-footer { border-top: 1px solid #e5e5e5; padding-top: 2.5mm; display: flex; justify-content: space-between; align-items: center; }
-.back-footer .contact { font-size: 5.5pt; color: #888; line-height: 1.6; }
+.testimonial { border-left: 2px solid #f3632d; padding: 2mm 0 2mm 3mm; margin: 2mm 0; }
+.testimonial p { font-size: 6.5pt; font-style: italic; color: #b0c4de; line-height: 1.45; }
+.testimonial .author { font-size: 5.5pt; color: #5a7a9a; font-style: normal; margin-top: 0.5mm; }
+
+.back-footer { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2.5mm; display: flex; justify-content: space-between; align-items: center; }
+.back-footer .contact { font-size: 5.5pt; color: #5a7a9a; line-height: 1.6; }
 .back-footer .cta { background: #f3632d; color: white; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 6.5pt; text-transform: uppercase; letter-spacing: 0.1em; padding: 2.5mm 5mm; border-radius: 3px; }
 </style>
 </head>
@@ -125,36 +123,22 @@ body {
       <div class="tagline">Gamifizierte Audio-Stadttour</div>
       <h1>Die Stadt<br>ist dein<br><span>Spielfeld.</span></h1>
       <p class="hook">
-        Eine echte Stadtführung — nur spannender. Erlebe Geschichte, löse Rätsel und entdecke Orte, die du noch nie bemerkt hast. Alles per Audio auf deinem Smartphone.
+        Eine echte Stadtführung — nur spannender. Erlebe Geschichte, löse Rätsel und entdecke Orte, die du noch nie bemerkt hast.
       </p>
-
       <div class="highlights">
         <span class="highlight-chip">Audio-Krimi</span>
         <span class="highlight-chip">GPS-Rätsel</span>
         <span class="highlight-chip">Echte Geschichte</span>
         <span class="highlight-chip">KI-Begleiter</span>
       </div>
+    </div>
 
-      <div class="tour-box">
-        <h3>🔍 Die Formel des Forschers</h3>
-        <p class="story-teaser">Tübingen, 1869. Professor Heinrich von Calw flieht vor den Gendarmen des Königs. In den Gassen der Altstadt versteckt er eine Formel, die alles verändern könnte. An 17 historischen Orten erfährst du wahre Geschichten über die Stadt — und entschlüsselst das Rätsel.</p>
-        <div class="tour-meta">
-          <span>17 Stationen</span>
-          <span>ca. 2 Stunden</span>
-          <span>Professionelles Audio</span>
-          <span>Urkunde am Ende</span>
-        </div>
+    <div class="app-preview">
+      <div class="phone-frame">
+        <img src="images/app-screenshot.png" alt="TraceTour App">
       </div>
-
-      <!-- App Preview -->
-      <div class="app-preview">
-        <div class="phone-frame">
-          <!-- Replace with actual screenshot: <img src="images/app-screenshot.png" alt="App"> -->
-          <div class="placeholder">App<br>Screenshot<br>hier</div>
-        </div>
-        <div class="preview-text">
-          <strong>Läuft direkt im Browser</strong> — kein App-Download nötig. GPS führt dich, Audio erzählt die Geschichte. Du lernst die Stadt kennen wie bei einer echten Führung, nur in deinem Tempo.
-        </div>
+      <div class="preview-text">
+        <strong>Läuft direkt im Browser</strong> — kein App-Download nötig. GPS führt dich, professionelles Audio erzählt die Geschichte. An 17 Stationen erfährst du echte Geschichten über Tübingen — von der DNA-Entdeckung bis zur Sintflut-Prophezeiung.
       </div>
     </div>
 
@@ -164,54 +148,62 @@ body {
         <div class="url-hint">QR-Code scannen oder Website besuchen</div>
       </div>
       <div class="qr-box">
-        <img src="images/qr-code.svg" alt="QR tracetour.de" style="width:100%;height:100%;object-fit:contain;padding:0.5mm">
+        <img src="images/qr-code.svg" alt="QR tracetour.de">
       </div>
     </div>
   </div>
 </div>
 
-<!-- RÜCKSEITE -->
+<!-- RÜCKSEITE (dark slate) -->
 <div class="page back">
   <div>
-    <h2>Mehr als eine <span>Schnitzeljagd</span></h2>
-    <p class="intro">TraceTour ist Stadtführung, Krimi und Escape Room in einem — direkt im Browser auf deinem Smartphone. Du erfährst echte Geschichten über Tübingen, von Stöfflers Sintflut-Prophezeiung bis zu Mieschers DNA-Entdeckung.</p>
+    <h2>Mehr als eine <span>Stadtführung</span></h2>
+    <p class="intro">TraceTour verbindet echte Stadtgeschichte mit einem Krimi-Abenteuer. Du hörst professionelle Audio-Erzählungen, löst Rätsel vor Ort und lernst dabei Tübingen wirklich kennen.</p>
 
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-text">
-          <h4>Zugangscode kaufen</h4>
-          <p>Auf tracetour.de bestellen — Code kommt sofort per E-Mail.</p>
+    <div class="two-col">
+      <!-- Left: How it works -->
+      <div class="col">
+        <div class="section-label">So funktioniert's</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <h4>Code kaufen</h4>
+              <p>Auf tracetour.de bestellen. Code kommt sofort per E-Mail.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <h4>Zum Schloss & los</h4>
+              <p>Im Browser starten. GPS führt dich durch 17 Stationen.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <h4>Rätsel & Urkunde</h4>
+              <p>Entschlüssle die Formel und sichere dir deine Ermittler-Urkunde.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-text">
-          <h4>Zum Schloss gehen & loslegen</h4>
-          <p>Starte am Tübinger Schloss. GPS führt dich durch die Altstadt zum Neckar.</p>
-        </div>
+      <!-- Right: Features -->
+      <div class="col">
+        <div class="section-label">Das erwartet dich</div>
+        <ul class="feat-list">
+          <li>Professionelle Audio-Erzählung</li>
+          <li>Echte Stadtgeschichte & Anekdoten</li>
+          <li>8 Rätsel + Formel-Puzzle + Quiz</li>
+          <li>KI-Begleiter "Trace" für Tipps</li>
+          <li>Persönliche Urkunde am Ende</li>
+          <li>Kein App-Download nötig</li>
+          <li>Für 1–4 Personen</li>
+          <li>Jederzeit spielbar, in deinem Tempo</li>
+          <li>ca. 2 Stunden, 17 Stationen</li>
+          <li>Startpunkt: Schloss Hohentübingen</li>
+        </ul>
       </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-text">
-          <h4>Rätsel lösen & Urkunde holen</h4>
-          <p>Entschlüssle 8 Fragmente, löse das Formel-Puzzle und sichere dir deine Ermittler-Urkunde.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="features-grid">
-      <h3>Das erwartet dich</h3>
-      <ul class="feat-list">
-        <li>Professionelle Audio-Erzählung</li>
-        <li>Echte Stadtgeschichte lernen</li>
-        <li>GPS-gesteuerte Rätsel</li>
-        <li>KI-Begleiter für Tipps</li>
-        <li>Krimi-Story mit Tagebüchern</li>
-        <li>Persönliche Urkunde</li>
-        <li>Kein App-Download nötig</li>
-        <li>Jederzeit spielbar, in deinem Tempo</li>
-      </ul>
     </div>
 
     <!-- Pricing -->
@@ -227,6 +219,12 @@ body {
         <div class="per">pro Person · ab 3 Pers.</div>
         <div class="save">20% sparen</div>
       </div>
+    </div>
+
+    <!-- Story teaser -->
+    <div class="info-box">
+      <h4>🔍 Die Formel des Forschers — Tübingen, 1869</h4>
+      <p>Professor Heinrich von Calw flieht vor dem Königlichen Ministerium. In den Gassen der Altstadt versteckt er die Fragmente einer Formel, die zu gefährlich für die Mächtigen ist. An historischen Schauplätzen erfährst du wahre Geschichten — von Mieschers DNA-Entdeckung bis zu Stöfflers Sintflut-Prophezeiung.</p>
     </div>
 
     <div class="testimonial">
