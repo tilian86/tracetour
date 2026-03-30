@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TraceTour Flyer – Druckversion</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+@page {
+  size: A5 portrait;
+  margin: 0;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #f5f5f5;
+  color: #1a1a1a;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.page {
+  width: 148mm;
+  height: 210mm;
+  margin: 10mm auto;
+  background: white;
+  position: relative;
+  overflow: hidden;
+  page-break-after: always;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; }
+  .no-print { display: none; }
+}
+
+/* ===== FRONT ===== */
+.front {
+  background: #031425;
+  color: white;
+  position: relative;
+}
+.front-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+}
+.front-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(3,20,37,0.3) 0%, rgba(3,20,37,0.5) 40%, rgba(3,20,37,0.95) 75%, rgba(3,20,37,1) 100%);
+}
+.front-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10mm 10mm 8mm;
+}
+.front-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 13pt;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #f3632d;
+}
+.badge {
+  background: #f3632d;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 5.5pt;
+  font-weight: 700;
+  padding: 2.5px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.front-middle {
+  text-align: center;
+  padding: 0 2mm;
+}
+.tagline {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 6pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  color: #f3632d;
+  margin-bottom: 3mm;
+}
+.front-middle h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30pt;
+  font-weight: 900;
+  line-height: 1.0;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  margin-bottom: 4mm;
+}
+.front-middle h1 span { color: #f3632d; }
+.front-middle .hook {
+  font-size: 9.5pt;
+  font-weight: 500;
+  color: #c8d8e8;
+  line-height: 1.55;
+  max-width: 95%;
+  margin: 0 auto 5mm;
+}
+.tour-box {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  padding: 4mm 5mm;
+  text-align: left;
+}
+.tour-box h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 11pt;
+  margin-bottom: 1.5mm;
+  letter-spacing: -0.01em;
+}
+.tour-box .story-teaser {
+  font-size: 7pt;
+  color: #8ea8c8;
+  line-height: 1.5;
+  font-style: italic;
+  margin-bottom: 2mm;
+}
+.tour-meta {
+  display: flex;
+  gap: 3mm;
+  font-size: 6.5pt;
+  color: #8ea8c8;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  flex-wrap: wrap;
+}
+.tour-meta span { white-space: nowrap; }
+.tour-meta span::before {
+  content: "▸ ";
+  color: #f3632d;
+}
+.front-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.url-block .url {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 13pt;
+  color: #f3632d;
+}
+.url-block .url-hint {
+  font-size: 6pt;
+  color: #5a7a9a;
+  margin-top: 0.5mm;
+}
+.qr-box {
+  width: 20mm;
+  height: 20mm;
+  background: white;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4.5pt;
+  color: #999;
+  text-align: center;
+  line-height: 1.3;
+}
+.price-tag {
+  position: absolute;
+  top: 18mm;
+  right: -1mm;
+  background: #f3632d;
+  color: white;
+  padding: 2mm 4mm 2mm 5mm;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 11pt;
+  z-index: 3;
+  border-radius: 3px 0 0 3px;
+  box-shadow: 0 2px 8px rgba(243,99,45,0.4);
+}
+.price-tag .from {
+  font-size: 5pt;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: block;
+  opacity: 0.8;
+}
+
+/* ===== BACK ===== */
+.back {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10mm;
+}
+.back h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 14pt;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: #031425;
+  margin-bottom: 1mm;
+}
+.back h2 span { color: #f3632d; }
+.back .intro {
+  font-size: 7.5pt;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 4mm;
+}
+.steps { margin: 2mm 0 4mm; }
+.step {
+  display: flex;
+  gap: 3.5mm;
+  margin-bottom: 3.5mm;
+  align-items: flex-start;
+}
+.step-num {
+  width: 7mm;
+  height: 7mm;
+  min-width: 7mm;
+  background: #f3632d;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 9pt;
+}
+.step-text h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 8.5pt;
+  margin-bottom: 0.5mm;
+  color: #1a1a1a;
+}
+.step-text p {
+  font-size: 7pt;
+  color: #555;
+  line-height: 1.5;
+}
+.features-grid {
+  background: #f8f6f3;
+  border-radius: 5px;
+  padding: 4mm;
+  margin: 2mm 0;
+}
+.features-grid h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 7pt;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #f3632d;
+  margin-bottom: 2.5mm;
+}
+.feat-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5mm 4mm;
+}
+.feat-list li {
+  font-size: 6.5pt;
+  color: #333;
+  line-height: 1.4;
+  padding-left: 3mm;
+  position: relative;
+}
+.feat-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #f3632d;
+  font-weight: 700;
+}
+.testimonial {
+  border-left: 2px solid #f3632d;
+  padding: 2.5mm 0 2.5mm 3mm;
+  margin: 3mm 0;
+}
+.testimonial p {
+  font-size: 7pt;
+  font-style: italic;
+  color: #444;
+  line-height: 1.5;
+}
+.testimonial .author {
+  font-size: 6pt;
+  color: #999;
+  font-style: normal;
+  margin-top: 1mm;
+}
+.back-footer {
+  border-top: 1px solid #e5e5e5;
+  padding-top: 3mm;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.back-footer .contact {
+  font-size: 6pt;
+  color: #888;
+  line-height: 1.7;
+}
+.back-footer .cta {
+  background: #f3632d;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 7pt;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 2.5mm 5mm;
+  border-radius: 4px;
+}
+</style>
+</head>
+<body>
+
+<div class="no-print" style="text-align:center;padding:12px;background:#f3632d;color:white;font-family:'Montserrat',sans-serif;font-weight:700;font-size:11pt">
+  Druckvorlage A5 (2 Seiten) — Datei → Drucken → Als PDF speichern
+</div>
+
+<!-- ===== VORDERSEITE ===== -->
+<div class="page front">
+  <img class="front-bg" src="images/hero_neckarfront.jpg" alt="">
+  <div class="front-gradient"></div>
+  <div class="price-tag">
+    <span class="from">ab</span>
+    9,99 €
+  </div>
+  <div class="front-content">
+    <div class="front-top">
+      <div class="brand">TraceTour</div>
+      <div class="badge">Tübingen</div>
+    </div>
+
+    <div class="front-middle">
+      <div class="tagline">Gamifizierte Audio-Stadttour</div>
+      <h1>Die Stadt<br>ist dein<br><span>Spielfeld.</span></h1>
+      <p class="hook">
+        Ein Forscher auf der Flucht. Eine verbotene Formel.<br>
+        17 Orte in Tübingen bewahren sein Geheimnis seit 1869.<br>
+        <strong>Findest du alle Fragmente?</strong>
+      </p>
+      <div class="tour-box">
+        <h3>🔍 Die Formel des Forschers</h3>
+        <p class="story-teaser">"Professor Heinrich von Calw flieht vor den Gendarmen des Königs. In den Gassen Tübingens versteckt er die Teile einer Formel, die alles verändern könnte..."</p>
+        <div class="tour-meta">
+          <span>17 Stationen</span>
+          <span>ca. 120 Min</span>
+          <span>Audio-Krimi</span>
+          <span>GPS-Rätsel</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="front-bottom">
+      <div class="url-block">
+        <div class="url">tracetour.de</div>
+        <div class="url-hint">QR-Code scannen oder Website besuchen</div>
+      </div>
+      <div class="qr-box">
+        QR-Code<br>hier<br>einfügen
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RÜCKSEITE ===== -->
+<div class="page back">
+  <div>
+    <h2>Dein Abenteuer <span>wartet</span></h2>
+    <p class="intro">Kein App-Download nötig — TraceTour läuft direkt im Browser auf deinem Smartphone.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <h4>Zugangscode kaufen</h4>
+          <p>Auf tracetour.de bestellen. Code kommt sofort per E-Mail.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <h4>Zum Startpunkt gehen</h4>
+          <p>Starte am Tübinger Schloss. GPS führt dich von Station zu Station durch die Altstadt.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <h4>Rätsel lösen & Urkunde holen</h4>
+          <p>Löse 8 Rätsel, entschlüssle die Formel und sichere dir deine persönliche Ermittler-Urkunde.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="features-grid">
+      <h3>Was dich erwartet</h3>
+      <ul class="feat-list">
+        <li>Spannende Krimi-Erzählung</li>
+        <li>Professionelles Audio</li>
+        <li>GPS-gesteuerte Rätsel</li>
+        <li>KI-Begleiter für Tipps</li>
+        <li>Formel-Puzzle & Quiz</li>
+        <li>Persönliche Urkunde</li>
+        <li>Für 1–4 Personen</li>
+        <li>Jederzeit spielbar</li>
+      </ul>
+    </div>
+
+    <div class="testimonial">
+      <p>"Wie ein Escape Room, nur draußen in der echten Stadt — und man lernt dabei noch richtig viel über Tübingen!"</p>
+      <div class="author">— Perfekt für Paare, Familien, Teamevents & Touristen</div>
+    </div>
+  </div>
+
+  <div class="back-footer">
+    <div class="contact">
+      TraceTour by Florian S. Thiel<br>
+      info@tracetour.de · tracetour.de
+    </div>
+    <div class="cta">Jetzt buchen →</div>
+  </div>
+</div>
+
+</body>
+</html>
