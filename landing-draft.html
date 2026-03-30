@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TraceTour – Die Stadt ist dein Spielfeld</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Inter:wght@300;400;500;600&family=Epilogue:wght@700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        "warm": {
+          "50": "#fffaf5",
+          "100": "#fff3e8",
+          "200": "#ffe8d0",
+          "300": "#ffd4ad",
+          "400": "#ffb88a",
+          "500": "#f3632d",
+          "600": "#d94f1f",
+          "700": "#ab3500",
+          "800": "#832700",
+          "900": "#511500",
+        },
+        "stone": {
+          "50": "#faf9f7",
+          "100": "#f5f3ef",
+          "200": "#e8e5df",
+          "300": "#d4cfc7",
+          "400": "#a8a198",
+          "500": "#78716c",
+          "600": "#57534e",
+          "700": "#44403c",
+          "800": "#292524",
+          "900": "#1c1917",
+        }
+      },
+      fontFamily: {
+        "headline": ["Epilogue", "sans-serif"],
+        "body": ["Inter", "sans-serif"],
+        "brand": ["Montserrat", "sans-serif"],
+      },
+    },
+  },
+}
+</script>
+<style>
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  line-height: 1;
+}
+body {
+  background-color: #faf9f7;
+  color: #292524;
+}
+.accent-line {
+  width: 48px;
+  height: 3px;
+  background: #f3632d;
+}
+.city-card {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #e8e5df;
+  cursor: default;
+}
+.city-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.3) brightness(0.85);
+  transform: scale(1.05);
+  transition: filter 0.5s ease, transform 0.6s ease;
+}
+.city-card:hover img {
+  filter: grayscale(0) brightness(0.8);
+  transform: scale(1.0);
+}
+.city-card .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(28,25,23,0.75) 0%, transparent 60%);
+  z-index: 2;
+}
+.city-card .label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.75rem;
+  z-index: 3;
+}
+@media (min-width: 640px) {
+  .city-card .label { padding: 1.5rem; }
+}
+.city-card .label span.name {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  color: #fff;
+  font-size: 0.7rem;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+@media (min-width: 640px) {
+  .city-card .label span.name { font-size: 1.2rem; }
+}
+.city-card .label span.status {
+  display: block;
+  font-size: 0.5rem;
+  color: rgba(243,99,45,0.9);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+@media (min-width: 640px) {
+  .city-card .label span.status { font-size: 0.6rem; letter-spacing: 0.2em; margin-top: 4px; }
+}
+</style>
+</head>
+<body class="font-body selection:bg-warm-500/20 selection:text-warm-900">
+
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
+  <div class="flex justify-between items-center max-w-7xl mx-auto px-6 py-4">
+    <div class="font-black tracking-tighter text-warm-500 font-brand whitespace-nowrap text-base sm:text-xl">
+      TRACETOUR
+      <span class="text-[10px] sm:text-xs font-normal text-stone-400 ml-1 tracking-normal">by Florian S. Thiel</span>
+    </div>
+    <div class="hidden md:flex items-center space-x-8">
+      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-warm-500 border-b-2 border-warm-500 pb-1" href="#featured">Touren</a>
+      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-stone-400 hover:text-stone-700 transition-all duration-300" href="#how-it-works">So funktioniert's</a>
+      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-stone-400 hover:text-stone-700 transition-all duration-300" href="#expansion">Städte</a>
+      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-stone-400 hover:text-stone-700 transition-all duration-300" href="#about">Über mich</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="app.html" class="font-brand uppercase tracking-[0.05em] text-xs font-bold text-stone-400 hover:text-warm-500 transition-all">Login</a>
+      <a href="app.html" class="bg-warm-500 text-white px-5 py-2 rounded-lg font-brand uppercase tracking-[0.05em] text-sm font-bold hover:bg-warm-600 transition-all active:scale-95 shadow-md shadow-warm-500/20">STARTEN</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img class="w-full h-full object-cover" src="images/hero_neckarfront.jpg" alt="Tübingen Neckarfront">
+    <div class="absolute inset-0 bg-gradient-to-t from-stone-50 via-stone-50/30 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-stone-50/70 to-transparent"></div>
+  </div>
+  <div class="relative z-10 max-w-5xl px-6 text-center">
+    <span class="inline-block font-brand font-bold text-warm-500 tracking-[0.3em] uppercase mb-6 text-sm">TraceTour by Florian S. Thiel</span>
+    <h1 class="font-headline text-5xl md:text-8xl font-black text-stone-800 leading-tight tracking-tighter mb-8">
+      DIE STADT IST DEIN<br/>
+      <span class="text-warm-500">SPIELFELD.</span>
+    </h1>
+    <p class="font-body text-lg md:text-xl text-stone-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+      Kriminalfälle, Rätsel und echte Geschichte vereint in einer gamifizierten Audio-Experience für die Hosentasche. Entdecke deine Stadt in einem völlig neuen Licht.
+    </p>
+    <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+      <a href="app.html" class="bg-warm-500 text-white px-10 py-5 rounded-xl font-brand font-black text-lg tracking-widest hover:bg-warm-600 hover:scale-105 transition-all shadow-lg shadow-warm-500/25">
+        TOUR STARTEN
+      </a>
+      <a href="#how-it-works" class="bg-white/80 backdrop-blur-sm border border-stone-200 text-stone-700 px-10 py-5 rounded-xl font-brand font-black text-lg tracking-widest hover:bg-white transition-colors">
+        SO FUNKTIONIERT'S
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Featured Tour Section -->
+<section id="featured" class="py-24 px-6 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-4 text-center md:text-left">
+      <div>
+        <h2 class="font-headline text-3xl md:text-4xl font-extrabold text-stone-800 tracking-tight mb-2">Aktuelle Mission</h2>
+        <div class="accent-line mx-auto md:mx-0"></div>
+      </div>
+      <p class="font-body text-stone-500 max-w-md text-sm leading-relaxed">Tübingen, 1869. Ein Wissenschaftler auf der Flucht vor dem Königlichen Ministerium. Eine Formel, die zu gefährlich ist für die Mächtigen. 17 Stationen vom Schloss bis zum Neckar.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- Main Card -->
+      <div class="lg:col-span-8 group relative overflow-hidden rounded-2xl shadow-xl">
+        <img class="w-full h-full min-h-[460px] object-cover transition-transform duration-700 group-hover:scale-105"
+          src="images/tour_tuebingen.jpg"
+          alt="Hölderlinturm Tübingen">
+        <div class="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/40 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-8 w-full">
+          <div class="flex items-center gap-4 mb-4">
+            <span class="bg-warm-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Verfügbar</span>
+            <span class="text-stone-300 font-body text-xs uppercase tracking-widest">Tübingen, 1869</span>
+          </div>
+          <h3 class="font-headline text-4xl md:text-5xl font-black text-white mb-6 tracking-tighter">Die Formel des Forschers</h3>
+          <div class="flex flex-wrap gap-6">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-warm-400 text-lg">location_on</span>
+              <span class="font-body text-sm uppercase tracking-widest text-stone-200">17 Stationen</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-warm-400 text-lg">schedule</span>
+              <span class="font-body text-sm uppercase tracking-widest text-stone-200">ca. 120 Min</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-warm-400 text-lg">record_voice_over</span>
+              <span class="font-body text-sm uppercase tracking-widest text-stone-200">Audio-Experience</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-warm-400 text-lg">trophy</span>
+              <span class="font-body text-sm uppercase tracking-widest text-stone-200">1090 Traces</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Info Cards -->
+      <div class="lg:col-span-4 flex flex-col gap-6">
+        <div class="bg-warm-50 p-8 rounded-2xl border-l-4 border-warm-500 flex-1">
+          <h4 class="font-brand font-bold text-warm-700 uppercase text-sm mb-4 tracking-widest">Die Story</h4>
+          <p class="font-body text-stone-600 leading-relaxed italic text-sm">
+            "Eine Formel, die die Welt verändern könnte. Ein Forscher, der vor den Gendarmen des Königs flieht. 17 Orte in Tübingen bewahren sein Geheimnis seit 1869 – findest du alle Fragmente?"
+          </p>
+        </div>
+        <div class="bg-stone-100 p-8 rounded-2xl flex flex-col justify-between">
+          <div>
+            <h4 class="font-brand font-bold text-stone-600 uppercase text-sm mb-4 tracking-widest">Was dich erwartet</h4>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3 font-body text-sm text-stone-700">
+                <span class="material-symbols-outlined text-warm-500 text-lg">check_circle</span>
+                Spannende Erzählung & Tagebücher
+              </li>
+              <li class="flex items-center gap-3 font-body text-sm text-stone-700">
+                <span class="material-symbols-outlined text-warm-500 text-lg">check_circle</span>
+                GPS-Rätsel vor Ort
+              </li>
+              <li class="flex items-center gap-3 font-body text-sm text-stone-700">
+                <span class="material-symbols-outlined text-warm-500 text-lg">check_circle</span>
+                8 Formel-Fragmente entschlüsseln
+              </li>
+              <li class="flex items-center gap-3 font-body text-sm text-stone-700">
+                <span class="material-symbols-outlined text-warm-500 text-lg">check_circle</span>
+                Dein Begleiter "Trace" hilft unterwegs
+              </li>
+              <li class="flex items-center gap-3 font-body text-sm text-stone-700">
+                <span class="material-symbols-outlined text-warm-500 text-lg">check_circle</span>
+                Teilnehmer-Urkunde am Ende
+              </li>
+              <li class="flex items-center gap-3 font-body text-sm text-stone-700">
+                <span class="material-symbols-outlined text-warm-500 text-lg">check_circle</span>
+                Kein App-Download nötig
+              </li>
+            </ul>
+          </div>
+          <a href="app.html" class="mt-8 block w-full bg-warm-500 text-white py-4 rounded-xl font-brand font-bold uppercase tracking-widest hover:bg-warm-600 transition-all text-center text-sm shadow-md shadow-warm-500/20">
+            JETZT STARTEN
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section id="how-it-works" class="py-24 px-6 bg-stone-50">
+  <div class="max-w-5xl mx-auto text-center mb-20">
+    <h2 class="font-headline text-4xl font-extrabold text-stone-800 tracking-tight mb-4">So funktioniert's</h2>
+    <p class="font-body text-stone-500 text-sm">In drei Schritten zum Ermittler</p>
+  </div>
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+    <div class="hidden md:block absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-warm-500/20 to-transparent -translate-y-1/2"></div>
+    <!-- Step 1 -->
+    <div class="relative z-10 text-center group">
+      <div class="w-20 h-20 mx-auto bg-white rounded-full flex items-center justify-center mb-6 border-2 border-stone-200 group-hover:border-warm-500 transition-colors shadow-sm">
+        <span class="material-symbols-outlined text-3xl text-warm-500">vpn_key</span>
+      </div>
+      <h3 class="font-headline text-xl font-bold text-stone-800 mb-3">1. Code erhalten</h3>
+      <p class="font-body text-stone-500 text-sm px-4">Kaufe einen Zugangscode und starte sofort im Browser. Kein Download, kein App Store.</p>
+    </div>
+    <!-- Step 2 -->
+    <div class="relative z-10 text-center group">
+      <div class="w-20 h-20 mx-auto bg-white rounded-full flex items-center justify-center mb-6 border-2 border-stone-200 group-hover:border-warm-500 transition-colors shadow-sm">
+        <span class="material-symbols-outlined text-3xl text-warm-500">explore</span>
+      </div>
+      <h3 class="font-headline text-xl font-bold text-stone-800 mb-3">2. Stadt erkunden</h3>
+      <p class="font-body text-stone-500 text-sm px-4">Geh zum Startpunkt und tauche in die Geschichte ein. GPS führt dich von Station zu Station.</p>
+    </div>
+    <!-- Step 3 -->
+    <div class="relative z-10 text-center group">
+      <div class="w-20 h-20 mx-auto bg-white rounded-full flex items-center justify-center mb-6 border-2 border-stone-200 group-hover:border-warm-500 transition-colors shadow-sm">
+        <span class="material-symbols-outlined text-3xl text-warm-500">emoji_events</span>
+      </div>
+      <h3 class="font-headline text-xl font-bold text-stone-800 mb-3">3. Urkunde sichern</h3>
+      <p class="font-body text-stone-500 text-sm px-4">Löse alle Rätsel, sammle Traces und erhalte deine persönliche Teilnehmer-Urkunde zum Teilen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<section class="py-12 px-6 bg-white border-y border-stone-200">
+  <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <div>
+      <div class="font-headline text-3xl font-black text-warm-500">17</div>
+      <div class="font-body text-xs text-stone-500 uppercase tracking-widest mt-1">Stationen</div>
+    </div>
+    <div>
+      <div class="font-headline text-3xl font-black text-warm-500">120</div>
+      <div class="font-body text-xs text-stone-500 uppercase tracking-widest mt-1">Min. Spielzeit</div>
+    </div>
+    <div>
+      <div class="font-headline text-3xl font-black text-warm-500">1869</div>
+      <div class="font-body text-xs text-stone-500 uppercase tracking-widest mt-1">Das Jahr des Rätsels</div>
+    </div>
+    <div>
+      <div class="font-headline text-3xl font-black text-warm-500">1090</div>
+      <div class="font-body text-xs text-stone-500 uppercase tracking-widest mt-1">Traces zu sammeln</div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-24 px-6 bg-white">
+  <div class="max-w-4xl mx-auto">
+    <div class="flex flex-col md:flex-row items-center gap-12">
+      <!-- Placeholder for photo -->
+      <div class="w-48 h-48 md:w-56 md:h-56 flex-shrink-0 rounded-2xl bg-stone-200 flex items-center justify-center overflow-hidden shadow-lg">
+        <!-- Replace src with your photo -->
+        <span class="material-symbols-outlined text-6xl text-stone-400">person</span>
+      </div>
+      <div>
+        <h2 class="font-headline text-3xl font-extrabold text-stone-800 tracking-tight mb-2">Hinter TraceTour</h2>
+        <div class="accent-line mb-6"></div>
+        <p class="font-body text-stone-600 leading-relaxed mb-4">
+          Hi, ich bin Florian. Ich lebe in Tübingen und habe TraceTour aus einer einfachen Idee heraus gebaut: Stadtführungen müssen nicht langweilig sein.
+        </p>
+        <p class="font-body text-stone-600 leading-relaxed mb-6">
+          Als Entwickler und Geschichtenerzähler verbinde ich echte Stadtgeschichte mit Rätseln, Audio-Erzählungen und spielerischen Elementen. Jede Tour wird sorgfältig recherchiert und vor Ort getestet. TraceTour ist ein Ein-Mann-Projekt mit viel Herzblut.
+        </p>
+        <div class="flex items-center gap-4">
+          <a href="mailto:info@tracetour.de" class="inline-flex items-center gap-2 text-warm-500 font-brand font-bold text-sm hover:text-warm-700 transition-colors">
+            <span class="material-symbols-outlined text-lg">mail</span>
+            info@tracetour.de
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Expansion Section -->
+<section id="expansion" class="py-24 px-6 bg-stone-50">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-16">
+      <h2 class="font-headline text-4xl font-extrabold text-stone-800 tracking-tight mb-2">Expansion</h2>
+      <p class="font-body text-stone-500 text-sm">Weitere Städte & Touren in Vorbereitung</p>
+    </div>
+    <div class="grid grid-cols-3 gap-3 sm:gap-6">
+      <!-- Tübingen 2 -->
+      <div class="city-card">
+        <img src="images/city_tuebingen2.jpg" alt="Tübingen II">
+        <div class="overlay"></div>
+        <div class="label">
+          <span class="name">Tübingen II</span>
+          <span class="status">In Vorbereitung</span>
+        </div>
+      </div>
+      <!-- München -->
+      <div class="city-card">
+        <img src="images/city_muenchen.jpg" alt="München">
+        <div class="overlay"></div>
+        <div class="label">
+          <span class="name">München</span>
+          <span class="status">Coming Soon</span>
+        </div>
+      </div>
+      <!-- Stuttgart -->
+      <div class="city-card">
+        <img src="images/city_stuttgart.jpg" alt="Stuttgart">
+        <div class="overlay"></div>
+        <div class="label">
+          <span class="name">Stuttgart</span>
+          <span class="status">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="py-20 px-6 relative overflow-hidden">
+  <div class="absolute inset-0 bg-warm-500"></div>
+  <div class="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+    <div>
+      <h2 class="font-headline text-4xl md:text-5xl font-black text-white tracking-tighter leading-none mb-2">BEREIT FÜR DIE<br/>ERSTE MISSION?</h2>
+      <p class="text-warm-100 text-sm font-body">Kein App-Download. Kein Gerät nötig außer deinem Smartphone.</p>
+    </div>
+    <a href="app.html" class="bg-stone-900 text-white px-12 py-5 rounded-xl font-brand font-black text-lg tracking-widest hover:bg-stone-800 transition-all shadow-xl whitespace-nowrap">
+      JETZT STARTEN
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-stone-900 w-full py-12 px-6">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
+    <div>
+      <div class="font-brand font-bold text-stone-400 text-sm">TRACETOUR BY FLORIAN S. THIEL</div>
+      <div class="font-body text-xs text-stone-600 mt-1">Gamifizierte Audio-Stadttouren</div>
+    </div>
+    <div class="font-body text-xs tracking-widest uppercase text-stone-600 text-center">
+      &copy; 2026 TraceTour by Florian S. Thiel
+    </div>
+    <div class="flex gap-6">
+      <a class="font-body text-xs tracking-widest uppercase text-stone-500 hover:text-warm-400 transition-colors" href="impressum.html">Impressum</a>
+      <a class="font-body text-xs tracking-widest uppercase text-stone-500 hover:text-warm-400 transition-colors" href="datenschutz.html">Datenschutz</a>
+      <a class="font-body text-xs tracking-widest uppercase text-stone-500 hover:text-warm-400 transition-colors" href="app.html">Zur App</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
