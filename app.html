@@ -278,8 +278,23 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 <input type="text" id="loginName" placeholder="Dein Ermittlername" autocomplete="off" autocapitalize="words">
 <input type="text" id="loginCode" placeholder="Zugangscode" autocomplete="off" autocapitalize="characters">
 <button class="btn-primary" onclick="doLogin()">Einloggen</button>
-<div class="login-hint">Code: <strong>TUEBINGEN2026</strong></div>
+<div class="login-hint">Gib deinen Zugangscode ein, um zu starten.</div>
 <a href="index.html" style="display:block;margin-top:1rem;font-size:.75rem;color:var(--text-3);text-decoration:none">← Zurück zur Startseite</a>
+</div>
+</div>
+
+<!-- TESTER WELCOME -->
+<div id="testerWelcome" class="screen" style="align-items:center;justify-content:center;text-align:center;padding:2rem;background:radial-gradient(ellipse at 50% 30%,rgba(243,99,45,.06) 0%,transparent 70%),var(--bg)">
+<div style="max-width:420px">
+<div style="font-size:3rem;margin-bottom:1rem">🎉</div>
+<h1 style="font-family:var(--font-h);font-size:1.8rem;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:1rem;line-height:1.2">Willkommen, <span style="color:var(--accent)" id="testerName">Tester</span>!</h1>
+<p style="color:var(--text-2);font-size:.95rem;line-height:1.7;margin-bottom:1.5rem">
+Schön, dass du TraceTour testest! Du gehörst zu den Ersten, die "Die Formel des Forschers" erleben. Ich freue mich riesig über dein Feedback — was hat dir gefallen, was kann besser werden, wo hakt es?
+</p>
+<p style="color:var(--text-2);font-size:.85rem;line-height:1.6;margin-bottom:2rem">
+Schreib mir gerne direkt an <a href="mailto:florian@tracetour.de" style="color:var(--accent);text-decoration:none;font-weight:600">florian@tracetour.de</a> oder sprich mich einfach an. Viel Spaß beim Ermitteln! 🕵️
+</p>
+<button class="btn-primary" onclick="showScreen('tourSelect')" style="max-width:300px;margin:0 auto">LOS GEHT'S</button>
 </div>
 </div>
 
@@ -842,14 +857,19 @@ function doLogin(){
   const name=document.getElementById('loginName').value.trim();
   const code=document.getElementById('loginCode').value.trim().toUpperCase();
   if(!name){document.getElementById('loginName').focus();return}
-  if(code!=='TUEBINGEN2026'&&code!=='DEBUG'){
+  if(code!=='TUEBINGEN2026'&&code!=='TUEBINGEN2025'&&code!=='DEBUG'){
     document.getElementById('loginCode').style.borderColor='var(--error)';
     setTimeout(()=>document.getElementById('loginCode').style.borderColor='',1500);return;
   }
   debugMode=(code==='DEBUG');userName=name;
   document.getElementById('userNameDisplay').textContent=name;
   document.getElementById('userAvatar').textContent=name[0].toUpperCase();
-  showScreen('tourSelect');
+  if(code==='TUEBINGEN2025'){
+    document.getElementById('testerName').textContent=name;
+    showScreen('testerWelcome');
+  } else {
+    showScreen('tourSelect');
+  }
 }
 function continueTour(){
   if(!loadGame())return;
