@@ -28,43 +28,50 @@ body {
   .no-print { display: none; }
 }
 
-/* FRONT */
+/* ===== FRONT ===== */
 .front { background: #031425; color: white; }
-.front-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
-.front-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(3,20,37,0.2) 0%, rgba(3,20,37,0.5) 35%, rgba(3,20,37,0.95) 70%, rgba(3,20,37,1) 100%); }
+.front-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+.front-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(3,20,37,0.1) 0%, rgba(3,20,37,0.4) 30%, rgba(3,20,37,0.92) 65%, rgba(3,20,37,1) 85%); }
 .front-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 8mm 9mm 7mm; }
 .front-top { display: flex; justify-content: space-between; align-items: center; }
 .brand { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 12pt; text-transform: uppercase; letter-spacing: -0.02em; color: #f3632d; }
-.badge { background: #f3632d; color: white; font-family: 'Montserrat', sans-serif; font-size: 5pt; font-weight: 700; padding: 2px 7px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.12em; }
+.badge { background: rgba(243,99,45,0.15); border: 1px solid rgba(243,99,45,0.3); color: #f3632d; font-family: 'Montserrat', sans-serif; font-size: 5pt; font-weight: 700; padding: 2px 7px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.12em; }
 .price-tag { position: absolute; top: 16mm; right: -1mm; background: #f3632d; color: white; padding: 1.5mm 4mm 1.5mm 5mm; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 10pt; z-index: 3; border-radius: 3px 0 0 3px; box-shadow: 0 2px 8px rgba(243,99,45,0.4); }
 .price-tag .from { font-size: 5pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; display: block; opacity: 0.8; }
 
-.front-hero { text-align: center; padding: 0 1mm; }
-.tagline { font-family: 'Montserrat', sans-serif; font-size: 5.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3em; color: #f3632d; margin-bottom: 2mm; }
-.front-hero h1 { font-family: 'Montserrat', sans-serif; font-size: 26pt; font-weight: 900; line-height: 1.0; text-transform: uppercase; letter-spacing: -0.03em; margin-bottom: 3mm; }
+.front-hero { text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 2mm; }
+.tagline { font-family: 'Montserrat', sans-serif; font-size: 5.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.35em; color: #f3632d; margin-bottom: 3mm; }
+.front-hero h1 { font-family: 'Montserrat', sans-serif; font-size: 32pt; font-weight: 900; line-height: 0.95; text-transform: uppercase; letter-spacing: -0.03em; margin-bottom: 5mm; }
 .front-hero h1 span { color: #f3632d; }
-.front-hero .hook { font-size: 8pt; font-weight: 500; color: #c8d8e8; line-height: 1.5; max-width: 95%; margin: 0 auto 3mm; }
+.front-hero .hook { font-size: 9pt; font-weight: 400; color: #b0c8e0; line-height: 1.6; max-width: 92%; margin: 0 auto 5mm; }
+.front-hero .hook strong { color: white; font-weight: 600; }
+.front-hero .story-hook { font-size: 8pt; font-style: italic; color: #8ea8c8; line-height: 1.5; max-width: 90%; margin: 0 auto 5mm; border-left: 2px solid #f3632d; padding-left: 3mm; text-align: left; }
 
-.highlights { display: flex; gap: 2mm; margin-bottom: 3mm; justify-content: center; flex-wrap: wrap; }
-.highlight-chip { background: rgba(243,99,45,0.12); border: 1px solid rgba(243,99,45,0.2); border-radius: 3px; padding: 1.5mm 3mm; font-size: 5.5pt; color: #f3632d; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-
-.app-preview { display: flex; gap: 3mm; align-items: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 5px; padding: 2.5mm; }
-.phone-frame { width: 20mm; min-width: 20mm; height: 36mm; border-radius: 3px; border: 1.5px solid rgba(255,255,255,0.2); overflow: hidden; background: #0b1d2d; }
-.phone-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
-.preview-text { font-size: 6pt; color: #8ea8c8; line-height: 1.5; }
-.preview-text strong { color: #d8e3fb; font-weight: 600; }
+.usp-row { display: flex; gap: 2mm; justify-content: center; flex-wrap: wrap; margin-bottom: 3mm; }
+.usp-chip { display: flex; align-items: center; gap: 1mm; font-size: 6pt; color: #d8e3fb; font-weight: 500; }
+.usp-chip .dot { width: 1.5mm; height: 1.5mm; background: #f3632d; border-radius: 50%; }
+.usp-highlight { text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 7pt; color: #f3632d; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 2mm; }
 
 .front-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
-.url-block .url { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 12pt; color: #f3632d; }
+.url-block .url { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 13pt; color: #f3632d; }
 .url-block .url-hint { font-size: 5.5pt; color: #5a7a9a; margin-top: 0.5mm; }
-.qr-box { width: 18mm; height: 18mm; background: white; border-radius: 2px; }
+.qr-box { width: 20mm; height: 20mm; background: white; border-radius: 2px; }
 .qr-box img { width: 100%; height: 100%; object-fit: contain; padding: 0.5mm; }
 
-/* BACK — warm dark instead of white */
+/* ===== BACK (slate dark) ===== */
 .back { background: #1e293b; color: #d8e3fb; display: flex; flex-direction: column; justify-content: space-between; padding: 8mm 9mm 7mm; }
-.back h2 { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 12pt; text-transform: uppercase; letter-spacing: -0.01em; color: white; margin-bottom: 1mm; }
+.back h2 { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 13pt; text-transform: uppercase; letter-spacing: -0.01em; color: white; margin-bottom: 2mm; }
 .back h2 span { color: #f3632d; }
-.back .intro { font-size: 7pt; color: #8ea8c8; line-height: 1.5; margin-bottom: 3mm; }
+
+.app-row { display: flex; gap: 3mm; margin-bottom: 4mm; align-items: stretch; }
+.phone-frame { width: 22mm; min-width: 22mm; height: 40mm; border-radius: 3px; border: 1.5px solid rgba(255,255,255,0.2); overflow: hidden; background: #0b1d2d; }
+.phone-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.app-desc { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.app-desc p { font-size: 6.5pt; color: #8ea8c8; line-height: 1.55; margin-bottom: 1.5mm; }
+.app-desc strong { color: #d8e3fb; }
+.app-desc .audio-usp { background: rgba(243,99,45,0.1); border: 1px solid rgba(243,99,45,0.2); border-radius: 3px; padding: 1.5mm 2.5mm; font-size: 5.5pt; color: #f3632d; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; display: inline-block; margin-top: 1mm; }
+
+.section-label { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 6pt; text-transform: uppercase; letter-spacing: 0.12em; color: #f3632d; margin-bottom: 2mm; }
 
 .two-col { display: flex; gap: 4mm; margin-bottom: 3mm; }
 .col { flex: 1; }
@@ -75,13 +82,11 @@ body {
 .step-text h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 7pt; margin-bottom: 0.3mm; color: white; }
 .step-text p { font-size: 6pt; color: #8ea8c8; line-height: 1.4; }
 
-.section-label { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 6pt; text-transform: uppercase; letter-spacing: 0.12em; color: #f3632d; margin-bottom: 2mm; }
-
 .feat-list { list-style: none; }
-.feat-list li { font-size: 6pt; color: #b0c4de; line-height: 1.35; padding-left: 2.5mm; position: relative; margin-bottom: 1mm; }
+.feat-list li { font-size: 6pt; color: #b0c4de; line-height: 1.35; padding-left: 2.5mm; position: relative; margin-bottom: 1.2mm; }
 .feat-list li::before { content: "✓"; position: absolute; left: 0; color: #f3632d; font-weight: 700; }
 
-.pricing-row { display: flex; gap: 2mm; margin: 3mm 0; }
+.pricing-row { display: flex; gap: 2.5mm; margin: 3mm 0; }
 .price-card { flex: 1; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 3mm; text-align: center; background: rgba(255,255,255,0.03); }
 .price-card.highlight { border-color: #f3632d; background: rgba(243,99,45,0.08); }
 .price-card .label { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 5.5pt; text-transform: uppercase; letter-spacing: 0.08em; color: #8ea8c8; margin-bottom: 1mm; }
@@ -92,7 +97,10 @@ body {
 
 .info-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 3mm; margin: 2mm 0; }
 .info-box h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 6.5pt; color: white; margin-bottom: 1.5mm; }
-.info-box p { font-size: 6pt; color: #8ea8c8; line-height: 1.45; }
+.info-box p { font-size: 6pt; color: #8ea8c8; line-height: 1.5; }
+
+.ideal-for { display: flex; gap: 2mm; flex-wrap: wrap; margin: 2mm 0; }
+.ideal-chip { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 3px; padding: 1.5mm 3mm; font-size: 5.5pt; color: #b0c4de; }
 
 .testimonial { border-left: 2px solid #f3632d; padding: 2mm 0 2mm 3mm; margin: 2mm 0; }
 .testimonial p { font-size: 6.5pt; font-style: italic; color: #b0c4de; line-height: 1.45; }
@@ -100,7 +108,7 @@ body {
 
 .back-footer { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2.5mm; display: flex; justify-content: space-between; align-items: center; }
 .back-footer .contact { font-size: 5.5pt; color: #5a7a9a; line-height: 1.6; }
-.back-footer .cta { background: #f3632d; color: white; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 6.5pt; text-transform: uppercase; letter-spacing: 0.1em; padding: 2.5mm 5mm; border-radius: 3px; }
+.back-footer .cta { background: #f3632d; color: white; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 7pt; text-transform: uppercase; letter-spacing: 0.1em; padding: 3mm 6mm; border-radius: 3px; }
 </style>
 </head>
 <body>
@@ -108,7 +116,7 @@ body {
   Druckvorlage A5 (2 Seiten) — Datei → Drucken → Als PDF speichern
 </div>
 
-<!-- VORDERSEITE -->
+<!-- ===== VORDERSEITE — pure Emotion ===== -->
 <div class="page front">
   <img class="front-bg" src="images/hero_neckarfront.jpg" alt="">
   <div class="front-gradient"></div>
@@ -116,29 +124,31 @@ body {
   <div class="front-content">
     <div class="front-top">
       <div class="brand">TraceTour</div>
-      <div class="badge">Jetzt in Tübingen</div>
+      <div class="badge">Audio-Stadttour</div>
     </div>
 
     <div class="front-hero">
-      <div class="tagline">Gamifizierte Audio-Stadttour</div>
+      <div class="tagline">Gamifizierte Audio-Stadttour · Tübingen</div>
       <h1>Die Stadt<br>ist dein<br><span>Spielfeld.</span></h1>
-      <p class="hook">
-        Eine echte Stadtführung — nur spannender. Erlebe Geschichte, löse Rätsel und entdecke Orte, die du noch nie bemerkt hast.
-      </p>
-      <div class="highlights">
-        <span class="highlight-chip">Audio-Krimi</span>
-        <span class="highlight-chip">GPS-Rätsel</span>
-        <span class="highlight-chip">Echte Geschichte</span>
-        <span class="highlight-chip">KI-Begleiter</span>
-      </div>
-    </div>
 
-    <div class="app-preview">
-      <div class="phone-frame">
-        <img src="images/app-screenshot.png" alt="TraceTour App">
+      <p class="hook">
+        Eine <strong>echte Stadtführung</strong> — nur spannender.<br>
+        Professionelle Audio-Erzählung, GPS-Rätsel vor Ort<br>
+        und wahre Geschichten, die du nie vergisst.
+      </p>
+
+      <div class="story-hook">
+        "Tübingen, 1869. Ein Forscher auf der Flucht. Eine verbotene Formel. 17 Orte bewahren sein Geheimnis — findest du alle Fragmente?"
       </div>
-      <div class="preview-text">
-        <strong>Läuft direkt im Browser</strong> — kein App-Download nötig. GPS führt dich, professionelles Audio erzählt die Geschichte. An 17 Stationen erfährst du echte Geschichten über Tübingen — von der DNA-Entdeckung bis zur Sintflut-Prophezeiung.
+
+      <div class="usp-highlight">Tübingens erste gamifizierte Audio-Stadttour</div>
+
+      <div class="usp-row">
+        <span class="usp-chip"><span class="dot"></span>17 Stationen</span>
+        <span class="usp-chip"><span class="dot"></span>ca. 2 Std.</span>
+        <span class="usp-chip"><span class="dot"></span>Krimi-Audio</span>
+        <span class="usp-chip"><span class="dot"></span>GPS-Rätsel</span>
+        <span class="usp-chip"><span class="dot"></span>Kein Download</span>
       </div>
     </div>
 
@@ -154,14 +164,25 @@ body {
   </div>
 </div>
 
-<!-- RÜCKSEITE (dark slate) -->
+<!-- ===== RÜCKSEITE — voll gepackt, slate dark ===== -->
 <div class="page back">
   <div>
     <h2>Mehr als eine <span>Stadtführung</span></h2>
-    <p class="intro">TraceTour verbindet echte Stadtgeschichte mit einem Krimi-Abenteuer. Du hörst professionelle Audio-Erzählungen, löst Rätsel vor Ort und lernst dabei Tübingen wirklich kennen.</p>
 
+    <!-- App Preview Row -->
+    <div class="app-row">
+      <div class="phone-frame">
+        <img src="images/app-screenshot.png" alt="TraceTour App">
+      </div>
+      <div class="app-desc">
+        <p><strong>Läuft direkt im Browser</strong> — kein App-Download nötig. GPS führt dich von Station zu Station durch die Tübinger Altstadt.</p>
+        <p>Du hörst professionelle Audio-Erzählungen, löst Rätsel vor Ort und lernst dabei echte Stadtgeschichte — von Mieschers DNA-Entdeckung bis zur Sintflut-Prophezeiung.</p>
+        <span class="audio-usp">Professionelles Audio · Tübingens erste gamifizierte Audio-Tour</span>
+      </div>
+    </div>
+
+    <!-- Two columns -->
     <div class="two-col">
-      <!-- Left: How it works -->
       <div class="col">
         <div class="section-label">So funktioniert's</div>
         <div class="steps">
@@ -176,7 +197,7 @@ body {
             <div class="step-num">2</div>
             <div class="step-text">
               <h4>Zum Schloss & los</h4>
-              <p>Im Browser starten. GPS führt dich durch 17 Stationen.</p>
+              <p>Im Browser starten. GPS führt dich durch 17 Stationen der Altstadt.</p>
             </div>
           </div>
           <div class="step">
@@ -188,7 +209,6 @@ body {
           </div>
         </div>
       </div>
-      <!-- Right: Features -->
       <div class="col">
         <div class="section-label">Das erwartet dich</div>
         <ul class="feat-list">
@@ -198,10 +218,8 @@ body {
           <li>KI-Begleiter "Trace" für Tipps</li>
           <li>Persönliche Urkunde am Ende</li>
           <li>Kein App-Download nötig</li>
-          <li>Für 1–4 Personen</li>
           <li>Jederzeit spielbar, in deinem Tempo</li>
-          <li>ca. 2 Stunden, 17 Stationen</li>
-          <li>Startpunkt: Schloss Hohentübingen</li>
+          <li>Start: Schloss Hohentübingen</li>
         </ul>
       </div>
     </div>
@@ -221,15 +239,20 @@ body {
       </div>
     </div>
 
-    <!-- Story teaser -->
-    <div class="info-box">
-      <h4>🔍 Die Formel des Forschers — Tübingen, 1869</h4>
-      <p>Professor Heinrich von Calw flieht vor dem Königlichen Ministerium. In den Gassen der Altstadt versteckt er die Fragmente einer Formel, die zu gefährlich für die Mächtigen ist. An historischen Schauplätzen erfährst du wahre Geschichten — von Mieschers DNA-Entdeckung bis zu Stöfflers Sintflut-Prophezeiung.</p>
+    <!-- Ideal for -->
+    <div class="section-label" style="margin-top:2mm">Perfekt für</div>
+    <div class="ideal-for">
+      <span class="ideal-chip">Paare & Dates</span>
+      <span class="ideal-chip">Familien</span>
+      <span class="ideal-chip">Touristen</span>
+      <span class="ideal-chip">Teamevents</span>
+      <span class="ideal-chip">Geburtstage</span>
+      <span class="ideal-chip">Geschenkidee</span>
     </div>
 
+    <!-- Testimonial -->
     <div class="testimonial">
       <p>"Wie ein Escape Room, nur draußen in der echten Stadt — und man lernt dabei richtig viel über Tübingen!"</p>
-      <div class="author">— Perfekt für Paare, Familien, Teamevents & Touristen</div>
     </div>
   </div>
 

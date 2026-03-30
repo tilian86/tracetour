@@ -298,6 +298,21 @@ Schreib mir gerne direkt an <a href="mailto:florian@tracetour.de" style="color:v
 </div>
 </div>
 
+<!-- OFFICIAL TESTER WELCOME (TUEBINGEN2026) -->
+<div id="officialWelcome" class="screen" style="align-items:center;justify-content:center;text-align:center;padding:2rem;background:radial-gradient(ellipse at 50% 30%,rgba(243,99,45,.06) 0%,transparent 70%),#1e293b">
+<div style="max-width:420px">
+<div style="font-size:3rem;margin-bottom:1rem">🕵️</div>
+<h1 style="font-family:var(--font-h);font-size:1.8rem;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:1rem;line-height:1.2">Willkommen, <span style="color:var(--accent)" id="officialName">Ermittler</span>!</h1>
+<p style="color:var(--text-2);font-size:.95rem;line-height:1.7;margin-bottom:1.5rem">
+Schön, dass du TraceTour ausprobierst! Du erlebst "Die Formel des Forschers" als einer der Ersten. Wir wünschen dir viel Spaß bei deiner Ermittlung durch Tübingen!
+</p>
+<p style="color:var(--text-2);font-size:.85rem;line-height:1.6;margin-bottom:2rem">
+Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info@tracetour.de" style="color:var(--accent);text-decoration:none;font-weight:600">info@tracetour.de</a>. Wir freuen uns über jede Rückmeldung!
+</p>
+<button class="btn-primary" onclick="showScreen('tourSelect')" style="max-width:300px;margin:0 auto">ERMITTLUNG STARTEN</button>
+</div>
+</div>
+
 <!-- TOUR SELECT -->
 <div id="tourSelect" class="screen">
 <div class="tour-header">
@@ -867,6 +882,9 @@ function doLogin(){
   if(code==='TUEBINGEN2025'){
     document.getElementById('testerName').textContent=name;
     showScreen('testerWelcome');
+  } else if(code==='TUEBINGEN2026'){
+    document.getElementById('officialName').textContent=name;
+    showScreen('officialWelcome');
   } else {
     showScreen('tourSelect');
   }
