@@ -10,7 +10,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   font-family: 'Inter', -apple-system, sans-serif;
-  background: #f5f5f5;
+  background: #e8e5df;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }
@@ -20,7 +20,7 @@ body {
   position: relative;
   overflow: hidden;
   page-break-after: always;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
 @media print {
   body { background: white; }
@@ -29,94 +29,85 @@ body {
 }
 
 /* ===== FRONT ===== */
-.front { background: #031425; color: white; }
+.front { background: #0f1b2d; color: white; }
 .front-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
-.front-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(3,20,37,0.1) 0%, rgba(3,20,37,0.4) 30%, rgba(3,20,37,0.92) 65%, rgba(3,20,37,1) 85%); }
+.front-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(15,27,45,0.1) 0%, rgba(15,27,45,0.4) 30%, rgba(15,27,45,0.93) 65%, rgba(15,27,45,1) 85%); }
 .front-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 8mm 9mm 7mm; }
 .front-top { display: flex; justify-content: space-between; align-items: center; }
 .brand { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 12pt; text-transform: uppercase; letter-spacing: -0.02em; color: #f3632d; }
-.badge { background: rgba(243,99,45,0.15); border: 1px solid rgba(243,99,45,0.3); color: #f3632d; font-family: 'Montserrat', sans-serif; font-size: 5pt; font-weight: 700; padding: 2px 7px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.12em; }
+.front-badge { font-size: 5.5pt; color: rgba(255,255,255,0.5); font-weight: 500; letter-spacing: 0.08em; }
 .price-tag { position: absolute; top: 16mm; right: -1mm; background: #f3632d; color: white; padding: 1.5mm 4mm 1.5mm 5mm; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 10pt; z-index: 3; border-radius: 3px 0 0 3px; box-shadow: 0 2px 8px rgba(243,99,45,0.4); }
 .price-tag .from { font-size: 5pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; display: block; opacity: 0.8; }
 
 .front-hero { text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 2mm; }
-.tagline { font-family: 'Montserrat', sans-serif; font-size: 5.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.35em; color: #f3632d; margin-bottom: 3mm; }
+.tagline { font-family: 'Inter', sans-serif; font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.25em; color: #f3632d; margin-bottom: 3mm; }
 .front-hero h1 { font-family: 'Montserrat', sans-serif; font-size: 32pt; font-weight: 900; line-height: 0.95; text-transform: uppercase; letter-spacing: -0.03em; margin-bottom: 5mm; }
 .front-hero h1 span { color: #f3632d; }
-.front-hero .hook { font-size: 9pt; font-weight: 400; color: #b0c8e0; line-height: 1.6; max-width: 92%; margin: 0 auto 5mm; }
-.front-hero .hook strong { color: white; font-weight: 600; }
-.front-hero .story-hook { font-size: 8pt; font-style: italic; color: #8ea8c8; line-height: 1.5; max-width: 90%; margin: 0 auto 5mm; border-left: 2px solid #f3632d; padding-left: 3mm; text-align: left; }
+.front-hero .hook { font-size: 8.5pt; font-weight: 400; color: #b0c8e0; line-height: 1.6; max-width: 92%; margin: 0 auto 5mm; }
+.story-quote { font-size: 7.5pt; font-style: italic; color: rgba(255,255,255,0.6); line-height: 1.5; max-width: 88%; margin: 0 auto 5mm; border-left: 2px solid #f3632d; padding-left: 3mm; text-align: left; }
 
-.usp-row { display: flex; gap: 2mm; justify-content: center; flex-wrap: wrap; margin-bottom: 3mm; }
-.usp-chip { display: flex; align-items: center; gap: 1mm; font-size: 6pt; color: #d8e3fb; font-weight: 500; }
-.usp-chip .dot { width: 1.5mm; height: 1.5mm; background: #f3632d; border-radius: 50%; }
-.usp-highlight { text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 7pt; color: #f3632d; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 2mm; }
+.usp-row { display: flex; gap: 3mm; justify-content: center; flex-wrap: wrap; }
+.usp-chip { font-size: 5.5pt; color: rgba(255,255,255,0.55); font-weight: 500; letter-spacing: 0.03em; }
+.usp-chip::before { content: "· "; color: #f3632d; }
+.usp-chip:first-child::before { content: ""; }
 
 .front-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
 .url-block .url { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 13pt; color: #f3632d; }
-.url-block .url-hint { font-size: 5.5pt; color: #5a7a9a; margin-top: 0.5mm; }
-.qr-box { width: 20mm; height: 20mm; background: white; border-radius: 2px; }
-.qr-box img { width: 100%; height: 100%; object-fit: contain; padding: 0.5mm; }
+.url-block .url-hint { font-size: 5.5pt; color: rgba(255,255,255,0.35); margin-top: 0.5mm; }
+.qr-box { width: 20mm; height: 20mm; background: white; border-radius: 3px; padding: 0.8mm; }
+.qr-box img { width: 100%; height: 100%; object-fit: contain; }
 
-/* ===== BACK (slate dark) ===== */
-.back { background: #1e293b; color: #d8e3fb; display: flex; flex-direction: column; justify-content: space-between; padding: 8mm 9mm 7mm; }
-.back h2 { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 13pt; text-transform: uppercase; letter-spacing: -0.01em; color: white; margin-bottom: 2mm; }
+/* ===== BACK — warm dark, rounded ===== */
+.back { background: #162033; color: #c8d8ea; display: flex; flex-direction: column; justify-content: space-between; padding: 9mm; }
+.back-section { margin-bottom: 3.5mm; }
+.back h2 { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 13pt; color: white; margin-bottom: 2mm; letter-spacing: -0.01em; }
 .back h2 span { color: #f3632d; }
+.back-intro { font-size: 7pt; color: #8a9db5; line-height: 1.55; margin-bottom: 3mm; }
 
-.app-row { display: flex; gap: 3mm; margin-bottom: 4mm; align-items: stretch; }
-.phone-frame { width: 22mm; min-width: 22mm; height: 40mm; border-radius: 3px; border: 1.5px solid rgba(255,255,255,0.2); overflow: hidden; background: #0b1d2d; }
-.phone-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
-.app-desc { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-.app-desc p { font-size: 6.5pt; color: #8ea8c8; line-height: 1.55; margin-bottom: 1.5mm; }
-.app-desc strong { color: #d8e3fb; }
-.app-desc .audio-usp { background: rgba(243,99,45,0.1); border: 1px solid rgba(243,99,45,0.2); border-radius: 3px; padding: 1.5mm 2.5mm; font-size: 5.5pt; color: #f3632d; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; display: inline-block; margin-top: 1mm; }
+/* Steps — horizontal compact */
+.steps-row { display: flex; gap: 3mm; margin-bottom: 0; }
+.step-card { flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 3mm; text-align: center; }
+.step-card .num { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 11pt; color: #f3632d; margin-bottom: 1mm; }
+.step-card h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 6.5pt; color: white; margin-bottom: 1mm; }
+.step-card p { font-size: 5.5pt; color: #8a9db5; line-height: 1.4; }
 
-.section-label { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 6pt; text-transform: uppercase; letter-spacing: 0.12em; color: #f3632d; margin-bottom: 2mm; }
+/* Features — two columns, rounded cards */
+.feat-row { display: flex; gap: 2.5mm; flex-wrap: wrap; }
+.feat-item { width: calc(50% - 1.25mm); background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 2mm 2.5mm; display: flex; align-items: center; gap: 1.5mm; margin-bottom: 1.5mm; }
+.feat-dot { width: 2mm; height: 2mm; min-width: 2mm; background: #f3632d; border-radius: 50%; }
+.feat-item span { font-size: 5.5pt; color: #b0c4de; line-height: 1.3; }
 
-.two-col { display: flex; gap: 4mm; margin-bottom: 3mm; }
-.col { flex: 1; }
+/* Pricing — rounded */
+.pricing-row { display: flex; gap: 3mm; }
+.price-card { flex: 1; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 3.5mm; text-align: center; background: rgba(255,255,255,0.02); }
+.price-card.pop { border-color: rgba(243,99,45,0.4); background: rgba(243,99,45,0.06); }
+.price-card .tier { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 5.5pt; text-transform: uppercase; letter-spacing: 0.08em; color: #8a9db5; margin-bottom: 1mm; }
+.price-card.pop .tier { color: #f3632d; }
+.price-card .amt { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 16pt; color: white; line-height: 1; }
+.price-card .detail { font-size: 5pt; color: #8a9db5; margin-top: 1mm; }
+.price-card .save-badge { display: inline-block; font-size: 4.5pt; color: #f3632d; font-weight: 700; background: rgba(243,99,45,0.1); border-radius: 3px; padding: 0.8mm 2mm; margin-top: 1.5mm; text-transform: uppercase; letter-spacing: 0.06em; }
 
-.steps { margin: 0; }
-.step { display: flex; gap: 2.5mm; margin-bottom: 2.5mm; align-items: flex-start; }
-.step-num { width: 5.5mm; height: 5.5mm; min-width: 5.5mm; background: #f3632d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 7.5pt; }
-.step-text h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 7pt; margin-bottom: 0.3mm; color: white; }
-.step-text p { font-size: 6pt; color: #8ea8c8; line-height: 1.4; }
+/* Ideal for — pill chips */
+.pills { display: flex; gap: 1.5mm; flex-wrap: wrap; }
+.pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 1.5mm 3mm; font-size: 5pt; color: #8a9db5; }
 
-.feat-list { list-style: none; }
-.feat-list li { font-size: 6pt; color: #b0c4de; line-height: 1.35; padding-left: 2.5mm; position: relative; margin-bottom: 1.2mm; }
-.feat-list li::before { content: "✓"; position: absolute; left: 0; color: #f3632d; font-weight: 700; }
+/* Quote */
+.quote-box { border-left: 2px solid #f3632d; padding: 2mm 0 2mm 3mm; }
+.quote-box p { font-size: 6.5pt; font-style: italic; color: #8a9db5; line-height: 1.5; }
 
-.pricing-row { display: flex; gap: 2.5mm; margin: 3mm 0; }
-.price-card { flex: 1; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 3mm; text-align: center; background: rgba(255,255,255,0.03); }
-.price-card.highlight { border-color: #f3632d; background: rgba(243,99,45,0.08); }
-.price-card .label { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 5.5pt; text-transform: uppercase; letter-spacing: 0.08em; color: #8ea8c8; margin-bottom: 1mm; }
-.price-card.highlight .label { color: #f3632d; }
-.price-card .amount { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 14pt; color: white; }
-.price-card .per { font-size: 5pt; color: #8ea8c8; margin-top: 0.5mm; }
-.price-card .save { font-size: 5pt; color: #f3632d; font-weight: 700; margin-top: 1mm; }
+.section-label { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 5.5pt; text-transform: uppercase; letter-spacing: 0.1em; color: #f3632d; margin-bottom: 2mm; }
 
-.info-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 3mm; margin: 2mm 0; }
-.info-box h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 6.5pt; color: white; margin-bottom: 1.5mm; }
-.info-box p { font-size: 6pt; color: #8ea8c8; line-height: 1.5; }
-
-.ideal-for { display: flex; gap: 2mm; flex-wrap: wrap; margin: 2mm 0; }
-.ideal-chip { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 3px; padding: 1.5mm 3mm; font-size: 5.5pt; color: #b0c4de; }
-
-.testimonial { border-left: 2px solid #f3632d; padding: 2mm 0 2mm 3mm; margin: 2mm 0; }
-.testimonial p { font-size: 6.5pt; font-style: italic; color: #b0c4de; line-height: 1.45; }
-.testimonial .author { font-size: 5.5pt; color: #5a7a9a; font-style: normal; margin-top: 0.5mm; }
-
-.back-footer { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2.5mm; display: flex; justify-content: space-between; align-items: center; }
-.back-footer .contact { font-size: 5.5pt; color: #5a7a9a; line-height: 1.6; }
-.back-footer .cta { background: #f3632d; color: white; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 7pt; text-transform: uppercase; letter-spacing: 0.1em; padding: 3mm 6mm; border-radius: 3px; }
+.back-footer { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 2.5mm; display: flex; justify-content: space-between; align-items: center; }
+.back-footer .contact { font-size: 5pt; color: #5a7088; line-height: 1.6; }
+.back-footer .cta { background: #f3632d; color: white; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 6.5pt; text-transform: uppercase; letter-spacing: 0.08em; padding: 2.5mm 5mm; border-radius: 6px; }
 </style>
 </head>
 <body>
 <div class="no-print" style="text-align:center;padding:12px;background:#f3632d;color:white;font-family:'Montserrat',sans-serif;font-weight:700;font-size:11pt">
-  Druckvorlage A5 (2 Seiten) — Datei → Drucken → Als PDF speichern
+  A5 Druckvorlage — Datei → Drucken → Als PDF speichern
 </div>
 
-<!-- ===== VORDERSEITE — pure Emotion ===== -->
+<!-- ===== SEITE 1 — Emotion ===== -->
 <div class="page front">
   <img class="front-bg" src="images/hero_neckarfront.jpg" alt="">
   <div class="front-gradient"></div>
@@ -124,31 +115,31 @@ body {
   <div class="front-content">
     <div class="front-top">
       <div class="brand">TraceTour</div>
-      <div class="badge">Audio-Stadttour</div>
+      <div class="front-badge">Gamifizierte Audio-Stadttour</div>
     </div>
 
     <div class="front-hero">
-      <div class="tagline">Gamifizierte Audio-Stadttour · Tübingen</div>
+      <div class="tagline">🎧 Tübingens erste gamifizierte Audio-Stadttour</div>
       <h1>Die Stadt<br>ist dein<br><span>Spielfeld.</span></h1>
-
       <p class="hook">
-        Eine <strong>echte Stadtführung</strong> — nur spannender.<br>
-        Professionelle Audio-Erzählung, GPS-Rätsel vor Ort<br>
-        und wahre Geschichten, die du nie vergisst.
+        Echte Stadtführung trifft Krimi-Abenteuer. Professionelle Audio-Erzählung, GPS-Rätsel vor Ort und wahre Geschichten, die du nie vergisst.
       </p>
-
-      <div class="story-hook">
-        "Tübingen, 1869. Ein Forscher auf der Flucht. Eine verbotene Formel. 17 Orte bewahren sein Geheimnis — findest du alle Fragmente?"
+      <div class="story-quote">
+        Tübingen, 1869. Ein Forscher auf der Flucht. Eine verbotene Formel. 17 Orte bewahren sein Geheimnis — findest du alle Fragmente?
       </div>
-
-      <div class="usp-highlight">Tübingens erste gamifizierte Audio-Stadttour</div>
-
+      <div style="display:flex;gap:1.5mm;flex-wrap:wrap;justify-content:center;margin-bottom:3mm">
+        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#e8c0a8">🎯 Date-Idee</span>
+        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#e8c0a8">👨‍👩‍👧 Familien</span>
+        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#e8c0a8">🌍 Reisende</span>
+        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#e8c0a8">🎓 Studierende</span>
+        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#e8c0a8">🎉 Teamevents</span>
+      </div>
       <div class="usp-row">
-        <span class="usp-chip"><span class="dot"></span>17 Stationen</span>
-        <span class="usp-chip"><span class="dot"></span>ca. 2 Std.</span>
-        <span class="usp-chip"><span class="dot"></span>Krimi-Audio</span>
-        <span class="usp-chip"><span class="dot"></span>GPS-Rätsel</span>
-        <span class="usp-chip"><span class="dot"></span>Kein Download</span>
+        <span class="usp-chip">17 Stationen</span>
+        <span class="usp-chip">ca. 2 Stunden</span>
+        <span class="usp-chip">🎧 Audio-Krimi</span>
+        <span class="usp-chip">GPS-Rätsel</span>
+        <span class="usp-chip">Kein Download</span>
       </div>
     </div>
 
@@ -164,95 +155,81 @@ body {
   </div>
 </div>
 
-<!-- ===== RÜCKSEITE — voll gepackt, slate dark ===== -->
+<!-- ===== SEITE 2 — Info, rund, sympathisch ===== -->
 <div class="page back">
   <div>
-    <h2>Mehr als eine <span>Stadtführung</span></h2>
+    <div class="back-section">
+      <h2>Stadtführung <span>neu gedacht</span></h2>
+      <p class="back-intro">TraceTour erzählt dir echte Geschichten über Tübingen — von Mieschers DNA-Entdeckung bis zu Stöfflers Sintflut-Prophezeiung. Alles per Audio auf deinem Smartphone, in deinem Tempo.</p>
+    </div>
 
-    <!-- App Preview Row -->
-    <div class="app-row">
-      <div class="phone-frame">
-        <img src="images/app-screenshot.png" alt="TraceTour App">
-      </div>
-      <div class="app-desc">
-        <p><strong>Läuft direkt im Browser</strong> — kein App-Download nötig. GPS führt dich von Station zu Station durch die Tübinger Altstadt.</p>
-        <p>Du hörst professionelle Audio-Erzählungen, löst Rätsel vor Ort und lernst dabei echte Stadtgeschichte — von Mieschers DNA-Entdeckung bis zur Sintflut-Prophezeiung.</p>
-        <span class="audio-usp">Professionelles Audio · Tübingens erste gamifizierte Audio-Tour</span>
+    <!-- Steps -->
+    <div class="back-section">
+      <div class="section-label">So einfach geht's</div>
+      <div class="steps-row">
+        <div class="step-card">
+          <div class="num">1</div>
+          <h4>Code kaufen</h4>
+          <p>Auf tracetour.de bestellen. Kommt sofort per Mail.</p>
+        </div>
+        <div class="step-card">
+          <div class="num">2</div>
+          <h4>Losgehen</h4>
+          <p>Am Schloss starten. GPS führt dich durch die Altstadt.</p>
+        </div>
+        <div class="step-card">
+          <div class="num">3</div>
+          <h4>Rätseln</h4>
+          <p>Formel entschlüsseln und Urkunde sichern.</p>
+        </div>
       </div>
     </div>
 
-    <!-- Two columns -->
-    <div class="two-col">
-      <div class="col">
-        <div class="section-label">So funktioniert's</div>
-        <div class="steps">
-          <div class="step">
-            <div class="step-num">1</div>
-            <div class="step-text">
-              <h4>Code kaufen</h4>
-              <p>Auf tracetour.de bestellen. Code kommt sofort per E-Mail.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-num">2</div>
-            <div class="step-text">
-              <h4>Zum Schloss & los</h4>
-              <p>Im Browser starten. GPS führt dich durch 17 Stationen der Altstadt.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <div class="step-text">
-              <h4>Rätsel & Urkunde</h4>
-              <p>Entschlüssle die Formel und sichere dir deine Ermittler-Urkunde.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="section-label">Das erwartet dich</div>
-        <ul class="feat-list">
-          <li>Professionelle Audio-Erzählung</li>
-          <li>Echte Stadtgeschichte & Anekdoten</li>
-          <li>8 Rätsel + Formel-Puzzle + Quiz</li>
-          <li>KI-Begleiter "Trace" für Tipps</li>
-          <li>Persönliche Urkunde am Ende</li>
-          <li>Kein App-Download nötig</li>
-          <li>Jederzeit spielbar, in deinem Tempo</li>
-          <li>Start: Schloss Hohentübingen</li>
-        </ul>
+    <!-- Features as rounded pills -->
+    <div class="back-section">
+      <div class="section-label">Was dich erwartet</div>
+      <div class="feat-row">
+        <div class="feat-item"><div class="feat-dot"></div><span>Professionelle Audio-Erzählung</span></div>
+        <div class="feat-item"><div class="feat-dot"></div><span>Echte Stadtgeschichte</span></div>
+        <div class="feat-item"><div class="feat-dot"></div><span>8 Rätsel + Quiz</span></div>
+        <div class="feat-item"><div class="feat-dot"></div><span>Tipps wenn du nicht weiterkommst</span></div>
+        <div class="feat-item"><div class="feat-dot"></div><span>Persönliche Urkunde</span></div>
+        <div class="feat-item"><div class="feat-dot"></div><span>Kein App-Download</span></div>
+        <div class="feat-item"><div class="feat-dot"></div><span>Jederzeit spielbar</span></div>
+        <div class="feat-item"><div class="feat-dot"></div><span>Start: Schloss</span></div>
       </div>
     </div>
 
     <!-- Pricing -->
-    <div class="pricing-row">
-      <div class="price-card">
-        <div class="label">Solo-Ermittler</div>
-        <div class="amount">9,99 €</div>
-        <div class="per">pro Person</div>
-      </div>
-      <div class="price-card highlight">
-        <div class="label">Ermittler-Team</div>
-        <div class="amount">7,99 €</div>
-        <div class="per">pro Person · ab 3 Pers.</div>
-        <div class="save">20% sparen</div>
+    <div class="back-section">
+      <div class="pricing-row">
+        <div class="price-card">
+          <div class="tier">Solo</div>
+          <div class="amt">9,99 €</div>
+          <div class="detail">pro Person</div>
+        </div>
+        <div class="price-card pop">
+          <div class="tier">Team</div>
+          <div class="amt">7,99 €</div>
+          <div class="detail">pro Person · ab 3 Pers.</div>
+          <div class="save-badge">20% sparen</div>
+        </div>
       </div>
     </div>
 
-    <!-- Ideal for -->
-    <div class="section-label" style="margin-top:2mm">Perfekt für</div>
-    <div class="ideal-for">
-      <span class="ideal-chip">Paare & Dates</span>
-      <span class="ideal-chip">Familien</span>
-      <span class="ideal-chip">Touristen</span>
-      <span class="ideal-chip">Teamevents</span>
-      <span class="ideal-chip">Geburtstage</span>
-      <span class="ideal-chip">Geschenkidee</span>
+    <!-- Story teaser -->
+    <div class="back-section">
+      <div class="section-label">Die Formel des Forschers</div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:3mm">
+        <p style="font-size:6pt;color:#8a9db5;line-height:1.5;font-style:italic">Professor Heinrich von Calw flieht 1869 vor dem Königlichen Ministerium. In den Gassen der Altstadt versteckt er die Fragmente einer Formel. An 17 historischen Schauplätzen erfährst du wahre Geschichten über Tübingen — und entschlüsselst sein Geheimnis.</p>
+      </div>
     </div>
 
-    <!-- Testimonial -->
-    <div class="testimonial">
-      <p>"Wie ein Escape Room, nur draußen in der echten Stadt — und man lernt dabei richtig viel über Tübingen!"</p>
+    <!-- Quote -->
+    <div class="back-section">
+      <div class="quote-box">
+        <p>"Wie ein Escape Room, nur draußen in der echten Stadt — und man lernt dabei richtig viel über Tübingen."</p>
+      </div>
     </div>
   </div>
 
@@ -261,7 +238,7 @@ body {
       TraceTour by Florian S. Thiel<br>
       info@tracetour.de · tracetour.de
     </div>
-    <div class="cta">Jetzt buchen →</div>
+    <div class="cta">tracetour.de →</div>
   </div>
 </div>
 </body>
