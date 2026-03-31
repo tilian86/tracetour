@@ -1697,7 +1697,7 @@ function renderStation(){
     <div class="bottom-nav-row">
       <button onclick="navStation(-1)"><span class="material-symbols-outlined">chevron_left</span> ${currentStation===0?t('navBack0'):t('navBackOther')}</button>
       <span class="bottom-nav-label">${t('navLabel').replace('{x}',currentStation+1).replace('{y}',stations.length)}</span>
-      <button onclick="navStation(1)" ${currentStation>=maxUnlockedStation?'disabled':''}><span class="material-symbols-outlined">chevron_right</span></button>
+      <button onclick="navStation(1)" ${!debugMode&&currentStation>=maxUnlockedStation?'disabled':''}><span class="material-symbols-outlined">chevron_right</span></button>
     </div>
   `;
   }else{
@@ -1765,7 +1765,7 @@ function renderStation(){
     <div class="bottom-nav-row">
       <button onclick="navStation(-1)"><span class="material-symbols-outlined">chevron_left</span> ${currentStation===0?t('navBack0'):t('navBackOther')}</button>
       <span class="bottom-nav-label">${t('navLabel').replace('{x}',currentStation+1).replace('{y}',stations.length)}</span>
-      <button onclick="navStation(1)" ${currentStation>=maxUnlockedStation?'disabled':''}><span class="material-symbols-outlined">chevron_right</span></button>
+      <button onclick="navStation(1)" ${!debugMode&&currentStation>=maxUnlockedStation?'disabled':''}><span class="material-symbols-outlined">chevron_right</span></button>
     </div>
   `;
   }
