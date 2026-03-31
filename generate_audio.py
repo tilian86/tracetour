@@ -119,7 +119,7 @@ STATIONS = [
             "'Nachtwandeln' – er war nachts heimlich im Labor geblieben. Die Zellen sind winzig: "
             "zwei verbundene Gewölberäume mit zusammen fünfzehn Quadratmetern und kleinen "
             "Fensteröffnungen. Die Wände sind übersät mit Inschriften und Zeichnungen der "
-            "Insassen. Siebzehnhundertsechsunddreißig bemalte der Student Gottfried Schreiber "
+            "Insassen. Siebzehnhundertsechsunddreißig bemalte der Maler Johann Gottfried Schreiber "
             "die Wände mit religiösen und antiken Motiven – eine Art Gefängniskunst.\n\n"
             "Vergehen, die zum Karzer führten: nächtliches Herumgehen ohne Lampe, "
             "Predigtschwänzen, Glücksspiel, und das Tragen 'absichtlich neumodisch geschlitzter "
@@ -161,8 +161,8 @@ STATIONS = [
         "fact": (
             "Die Universität Tübingen ist die fünftälteste im deutschen Sprachraum. Eberhard im Bart "
             "gründete sie vierzehnhundertsiebenundsiebzig mit nur elf Professoren und dreihundert "
-            "Studenten. Philipp Melanchthon lehrte hier griechische Grammatik - mit nur einundzwanzig "
-            "Jahren! Und der junge Kepler wurde fast rausgeworfen wegen seiner astronomischen Ideen.\n\n"
+            "Studenten. Philipp Melanchthon studierte hier und verfasste seine griechische Grammatik – "
+            "mit nur siebzehn Jahren zum Magister! Mit einundzwanzig wurde er dann Professor für Griechisch in Wittenberg.\n\n"
             "Von sechzehnhundertdreiundsechzig bis achtzehnhundertvier lag direkt neben der Alten Aula "
             "der Hortus Medicus - der botanische Garten der Universität, in dem der Botaniker "
             "Camerarius seine Forschungen betrieb. Heute ist dort ein Parkplatz.\n\n"
@@ -298,9 +298,10 @@ STATIONS = [
             "Der Neptunbrunnen wurde sechzehnhundertsiebzehn von Heinrich Schickhardt entworfen - "
             "inspiriert vom berühmten Neptunbrunnen in Bologna, den Schickhardt auf seinen "
             "Italienreisen gesehen hatte. Die Neptunfigur selbst wurde von WMF gegossen - ja, die "
-            "Küchengeräte-Firma - aus eingeschmolzenen erbeuteten französischen Waffen. Wer genau "
-            "hinschaut, entdeckt in den Wasserspeiern die versteckten Silhouettenporträts der "
-            "Bildhauer - mit Zigarre im Mund.\n\n"
+            "Küchengeräte-Firma - aus eingeschmolzenen Wehrmacht-Waffen, die nach dem Krieg von der "
+            "französischen Besatzung freigegeben wurden. Wer genau hinschaut, entdeckt in den "
+            "Wasserspeiern die versteckten Silhouetten der Handwerker, die neunzehnhundertsiebenundvierzig "
+            "den Brunnen erneuerten - zwei davon mit Zigarre im Mund.\n\n"
             "Das prächtige Rathaus thront an der Stirnseite, seine Fassade reich bemalt. Die "
             "astronomische Uhr an der Seite zeigt nicht nur die Zeit, sondern auch Mondphasen, "
             "Tierkreiszeichen und den Lauf der Planeten. Die Treppe neben dem Rathaus ist absichtlich "
@@ -308,8 +309,8 @@ STATIONS = [
             "Der Platz hat eine bewegte Geschichte: Brände in den Jahren vierzehnhundertsechsundsiebzig "
             "und fünfzehnhundertvierzig zerstörten die umliegenden Häuser. Jedes Mal wurde der Platz "
             "etwas größer wieder aufgebaut - unter dem Pflaster liegen noch Reste alter Keller als "
-            "Beweis. Neunzehnhundertsechsunddreißig fuhr Ferdinand Porsche mit einem Prototypen "
-            "seines Volkswagens direkt am Neptunbrunnen vorbei - eines der frühesten Fotos des "
+            "Beweis. Neunzehnhundertsechsunddreißig fuhr Ferry Porsche mit einem Prototypen "
+            "des Volkswagens direkt am Neptunbrunnen vorbei - eines der frühesten Fotos des "
             "späteren Käfers. Und neunzehnhundertdreiundsechzig standen Zirkuselefanten mitten "
             "auf dem Platz.\n\n"
             "Heinrich mischte sich unter die letzten Besucher und versteckte ein Fragment in einer "
@@ -325,7 +326,7 @@ STATIONS = [
         "fact": (
             "Die astronomische Uhr wurde fünfzehnhundertelf vom Astronomen Johannes Stöffler "
             "entworfen. Der Drachenzeiger markiert die Mondknoten und sagt Finsternisse voraus. "
-            "Stöffler sagte für den zwanzigsten Februar fünfzehnhundertvierundzwanzig eine "
+            "Stöffler sagte für Februar fünfzehnhundertvierundzwanzig eine "
             "Sintflut voraus - ganz Europa geriet in Panik, Menschen bauten Archen. Es regnete "
             "ein bisschen. Stöffler starb fünfzehnhunderteinunddreißig an der Pest, nicht an "
             "einer Flut.\n\n"
@@ -420,8 +421,8 @@ STATIONS = [
         ),
         "fact": (
             "Tübingens fünf Stadttore hießen: Lustnauer Tor im Osten, Haagtor im Westen, "
-            "Schmiedtor im Norden, Neckartor im Süden und das Wurmlinger Tor. Sie wurden alle "
-            "zwischen achtzehnhundertvier und achtzehnhunderteinunddreißig abgerissen.\n\n"
+            "Schmiedtor im Norden, Neckartor im Süden und das Hirschauer Tor. Sie wurden alle "
+            "zwischen achtzehnhundertfünf und achtzehnhunderteinunddreißig abgerissen.\n\n"
             "Die Erinnerung im Pflaster neben dem Ammerkanal erinnert an die Schweickhardtsche "
             "Mühle, ehemals Untere Haagtormühle, die neunzehnhundertdreiundsechzig abgerissen wurde. "
             "Durch den Fahrradtunnel am Platz gelangt man direkt zum Neckar, zum Anlagensee "
@@ -926,3 +927,35 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# ============================================================
+# BONUS-FRAGEN AUDIO
+# ============================================================
+
+BONUS_AUDIO = {
+    "bonus_8": {
+        "voice": NARRATOR_VOICE,
+        "text": (
+            "Bonus-Frage! Fünfundsiebzig Traces.\n\n"
+            "Erinnerst du dich an die Stiftskirche? "
+            "Wie hieß der letzte Turmwächter der Stiftskirche?"
+        ),
+    },
+    "bonus_13": {
+        "voice": NARRATOR_VOICE,
+        "text": (
+            "Bonus-Frage! Fünfundsiebzig Traces.\n\n"
+            "Erinnerst du dich an den Affenfelsen? "
+            "Was schrieb Leonhard Fuchs fünfzehnhundertdreiundvierzig im Nonnenhaus?"
+        ),
+    },
+    "bonus_16": {
+        "voice": NARRATOR_VOICE,
+        "text": (
+            "Bonus-Frage! Fünfundsiebzig Traces.\n\n"
+            "Erinnerst du dich an die Neckarinsel und die Platanenallee? "
+            "Welches Denkmal steht am östlichen Ende der Platanenallee?"
+        ),
+    },
+}
