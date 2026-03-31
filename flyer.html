@@ -34,7 +34,9 @@ body {
 .front-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(15,27,45,0.1) 0%, rgba(15,27,45,0.4) 30%, rgba(15,27,45,0.93) 65%, rgba(15,27,45,1) 85%); }
 .front-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 8mm 9mm 7mm; }
 .front-top { display: flex; justify-content: space-between; align-items: center; }
-.brand { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 12pt; text-transform: uppercase; letter-spacing: -0.02em; color: #f3632d; }
+.brand { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 12pt; text-transform: uppercase; letter-spacing: -0.02em; }
+.brand-trace { color: #f3632d; }
+.brand-tour { color: #e8e5df; }
 .front-badge { font-size: 5.5pt; color: rgba(255,255,255,0.5); font-weight: 500; letter-spacing: 0.08em; }
 .price-tag { position: absolute; top: 16mm; right: -1mm; background: #f3632d; color: white; padding: 1.5mm 4mm 1.5mm 5mm; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 10pt; z-index: 3; border-radius: 3px 0 0 3px; box-shadow: 0 2px 8px rgba(243,99,45,0.4); }
 .price-tag .from { font-size: 5pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; display: block; opacity: 0.8; }
@@ -48,14 +50,14 @@ body {
 
 .usp-row { display: flex; gap: 3mm; justify-content: center; flex-wrap: wrap; }
 .usp-chip { font-size: 5.5pt; color: rgba(255,255,255,0.55); font-weight: 500; letter-spacing: 0.03em; }
-.usp-chip::before { content: "· "; color: #f3632d; }
-.usp-chip:first-child::before { content: "· "; color: #f3632d; }
+.usp-chip::before { content: "\00b7  "; color: #f3632d; }
 
 .front-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
 .url-block .url { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 13pt; color: #f3632d; }
 .url-block .url-hint { font-size: 5.5pt; color: rgba(255,255,255,0.35); margin-top: 0.5mm; }
 .qr-box { width: 20mm; height: 20mm; background: white; border-radius: 3px; padding: 0.8mm; }
 .qr-box img { width: 100%; height: 100%; object-fit: contain; }
+.pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 1.5mm 3mm; font-size: 5pt; color: #8a9db5; }
 
 /* ===== BACK — warm dark, rounded ===== */
 .back { background: #162033; color: #c8d8ea; display: flex; flex-direction: column; justify-content: space-between; padding: 9mm; }
@@ -78,18 +80,14 @@ body {
 .feat-item span { font-size: 5.5pt; color: #b0c4de; line-height: 1.3; }
 
 /* Pricing — rounded */
-.pricing-row { display: flex; gap: 3mm; }
-.price-card { flex: 1; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 3.5mm; text-align: center; background: rgba(255,255,255,0.02); }
+.pricing-row { display: flex; gap: 2.5mm; }
+.price-card { flex: 1; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 3mm; text-align: center; background: rgba(255,255,255,0.02); }
 .price-card.pop { border-color: rgba(243,99,45,0.4); background: rgba(243,99,45,0.06); }
 .price-card .tier { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 5.5pt; text-transform: uppercase; letter-spacing: 0.08em; color: #8a9db5; margin-bottom: 1mm; }
 .price-card.pop .tier { color: #f3632d; }
-.price-card .amt { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 16pt; color: white; line-height: 1; }
+.price-card .amt { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 14pt; color: white; line-height: 1; }
 .price-card .detail { font-size: 5pt; color: #8a9db5; margin-top: 1mm; }
 .price-card .save-badge { display: inline-block; font-size: 4.5pt; color: #f3632d; font-weight: 700; background: rgba(243,99,45,0.1); border-radius: 3px; padding: 0.8mm 2mm; margin-top: 1.5mm; text-transform: uppercase; letter-spacing: 0.06em; }
-
-/* Ideal for — pill chips */
-.pills { display: flex; gap: 1.5mm; flex-wrap: wrap; }
-.pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 1.5mm 3mm; font-size: 5pt; color: #8a9db5; }
 
 /* Quote */
 .quote-box { border-left: 2px solid #f3632d; padding: 2mm 0 2mm 3mm; }
@@ -100,53 +98,100 @@ body {
 .back-footer { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 2.5mm; display: flex; justify-content: space-between; align-items: center; }
 .back-footer .contact { font-size: 5pt; color: #5a7088; line-height: 1.6; }
 .back-footer .cta { background: #f3632d; color: white; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 6.5pt; text-transform: uppercase; letter-spacing: 0.08em; padding: 2.5mm 5mm; border-radius: 6px; }
+
+/* Language toggle */
+.lang-toggle { display: flex; gap: 1.5mm; }
+.lang-btn { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 5pt; padding: 1mm 2.5mm; border: 1px solid rgba(255,255,255,0.15); border-radius: 3px; color: rgba(255,255,255,0.4); cursor: pointer; background: transparent; text-transform: uppercase; letter-spacing: 0.05em; }
+.lang-btn.active { background: #f3632d; color: white; border-color: #f3632d; }
+@media print { .lang-toggle { display: none; } }
+
+/* Bilingual print sections */
+.lang-de, .lang-en { display: block; }
+.lang-en { display: none; }
+body.show-en .lang-en { display: block; }
+body.show-en .lang-de { display: none; }
+
+/* Print: show both languages stacked */
+@media print {
+  .lang-de, .lang-en { display: block !important; }
+  .lang-en { margin-top: 1mm; opacity: 0.65; font-style: italic; }
+}
 </style>
 </head>
 <body>
-<div class="no-print" style="text-align:center;padding:12px;background:#f3632d;color:white;font-family:'Montserrat',sans-serif;font-weight:700;font-size:11pt">
-  A5 Druckvorlage — Datei → Drucken → Als PDF speichern
+<div class="no-print" style="text-align:center;padding:12px;background:#f3632d;color:white;font-family:'Montserrat',sans-serif;font-weight:700;font-size:11pt;display:flex;justify-content:center;align-items:center;gap:16px">
+  <span>A5 Druckvorlage — Datei &rarr; Drucken &rarr; Als PDF speichern</span>
+  <span class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('de')">DE</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </span>
 </div>
 
 <!-- ===== SEITE 1 — Emotion ===== -->
 <div class="page front">
   <img class="front-bg" src="images/hero_neckarfront.jpg" alt="">
   <div class="front-gradient"></div>
-  <div class="price-tag"><span class="from">ab</span>7,99 €</div>
+  <div class="price-tag"><span class="from lang-de">ab</span><span class="from lang-en">from</span>7,99 &euro;</div>
   <div class="front-content">
     <div class="front-top">
-      <div class="brand">TraceTour</div>
-      <div class="front-badge">Gamifizierte Audio-Stadttour</div>
+      <div class="brand"><span class="brand-trace">Trace</span><span class="brand-tour">Tour</span></div>
+      <div class="front-badge">
+        <span class="lang-de">Gamifizierte Audio-Stadttour</span>
+        <span class="lang-en">Gamified Audio City Tour</span>
+      </div>
     </div>
 
     <div class="front-hero">
-      <div class="tagline">🎧 Gamifizierte Audio-Stadttour</div>
-      <h1>Die Stadt<br>ist dein<br><span>Spielfeld.</span></h1>
+      <div class="tagline">
+        <span class="lang-de">Gamifizierte Audio-Stadttour</span>
+        <span class="lang-en">Gamified Audio City Tour</span>
+      </div>
+      <h1>
+        <span class="lang-de">Die Stadt<br>ist dein<br><span>Spielfeld.</span></span>
+        <span class="lang-en">The City<br>is your<br><span>Playground.</span></span>
+      </h1>
       <p class="hook">
-        Echte Stadtführung trifft Krimi-Abenteuer. Professionelle Audio-Erzählung, GPS-Rätsel vor Ort und wahre Geschichten, die du nie vergisst.
+        <span class="lang-de">TraceTour macht Stadtgeschichte spielbar. Professionelle Audio-Erzählung mit 4 Stimmen, Rätsel an echten Schauplätzen und wahre Geschichten, die du nie vergisst.</span>
+        <span class="lang-en">TraceTour makes city history playable. Professional audio narration with 4 voice actors, puzzles at real locations, and true stories you'll never forget.</span>
       </p>
       <div class="story-quote">
-        Tübingen, 1869. Ein Forscher auf der Flucht. Eine verbotene Formel. 17 Orte bewahren sein Geheimnis — findest du alle Fragmente?
+        <span class="lang-de">Tübingen, 1869. Ein Forscher auf der Flucht. Eine verbotene Formel. 17 Orte bewahren sein Geheimnis — findest du alle Fragmente?</span>
+        <span class="lang-en">Tübingen, 1869. A scientist on the run. A forbidden formula. 17 locations guard his secret — can you find all the fragments?</span>
       </div>
       <div style="display:flex;gap:1.5mm;flex-wrap:wrap;justify-content:center;margin-bottom:3mm">
-        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#e8c0a8">👨‍👩‍👧 Familien</span>
-        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#e8c0a8">🌍 Reisende</span>
-        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#e8c0a8">🎓 Studierende</span>
-        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#e8c0a8">💘 Date-Idee</span>
-        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#e8c0a8">🎉 Teamevents</span>
+        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#e8c0a8">
+          <span class="lang-de">Familien</span><span class="lang-en">Families</span>
+        </span>
+        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#e8c0a8">
+          <span class="lang-de">Reisende</span><span class="lang-en">Travelers</span>
+        </span>
+        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#e8c0a8">
+          <span class="lang-de">Studierende</span><span class="lang-en">Students</span>
+        </span>
+        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#e8c0a8">
+          <span class="lang-de">Date-Idee</span><span class="lang-en">Date idea</span>
+        </span>
+        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#e8c0a8">
+          <span class="lang-de">Teamevents</span><span class="lang-en">Team events</span>
+        </span>
       </div>
       <div style="display:flex;gap:3mm;justify-content:center;flex-wrap:wrap;align-items:baseline">
-        <span class="usp-chip">17 Stationen</span>
-        <span class="usp-chip">ca. 2 Stunden</span>
+        <span class="usp-chip">17 <span class="lang-de">Stationen</span><span class="lang-en">Stations</span></span>
+        <span class="usp-chip"><span class="lang-de">ca. 2 Stunden</span><span class="lang-en">~2 hours</span></span>
         <span class="usp-chip">Audio-Krimi</span>
-        <span class="usp-chip">GPS-Rätsel</span>
-        <span class="usp-chip">Kein Download</span>
+        <span class="usp-chip"><span class="lang-de">GPS-Rätsel</span><span class="lang-en">GPS puzzles</span></span>
+        <span class="usp-chip"><span class="lang-de">Kein Download</span><span class="lang-en">No download</span></span>
+        <span class="usp-chip">1790 Traces</span>
       </div>
     </div>
 
     <div class="front-bottom">
       <div class="url-block">
         <div class="url">tracetour.de</div>
-        <div class="url-hint">QR-Code scannen oder Website besuchen</div>
+        <div class="url-hint">
+          <span class="lang-de">QR-Code scannen oder Website besuchen</span>
+          <span class="lang-en">Scan QR code or visit website</span>
+        </div>
       </div>
       <div class="qr-box">
         <img src="images/qr-code.svg" alt="QR tracetour.de">
@@ -159,44 +204,56 @@ body {
 <div class="page back">
   <div>
     <div class="back-section">
-      <h2>Geschichte erleben, <span>nicht nur lesen</span></h2>
-      <p class="back-intro">TraceTour erzählt dir echte Geschichten über Tübingen — von Mieschers DNA-Entdeckung bis zu Stöfflers Sintflut-Prophezeiung. Alles per Audio auf deinem Smartphone, in deinem Tempo.</p>
+      <h2>
+        <span class="lang-de">Geschichte erleben, <span>nicht nur lesen</span></span>
+        <span class="lang-en">Experience history, <span>don't just read it</span></span>
+      </h2>
+      <p class="back-intro">
+        <span class="lang-de">TraceTour macht Stadtgeschichte spielbar — von Mieschers DNA-Entdeckung bis zu Stöfflers Sintflut-Prophezeiung. Alles per Audio auf deinem Smartphone, in deinem Tempo.</span>
+        <span class="lang-en">TraceTour makes city history playable — from Miescher's DNA discovery to Stöffler's Great Flood prophecy. All via audio on your smartphone, at your own pace.</span>
+      </p>
     </div>
 
     <!-- Steps -->
     <div class="back-section">
-      <div class="section-label">So einfach geht's</div>
+      <div class="section-label">
+        <span class="lang-de">So einfach geht's</span>
+        <span class="lang-en">How it works</span>
+      </div>
       <div class="steps-row">
         <div class="step-card">
           <div class="num">1</div>
-          <h4>Code kaufen</h4>
-          <p>Auf tracetour.de bestellen. Kommt sofort per Mail.</p>
+          <h4><span class="lang-de">Code kaufen</span><span class="lang-en">Buy code</span></h4>
+          <p><span class="lang-de">Auf tracetour.de bestellen. Kommt sofort per Mail.</span><span class="lang-en">Order at tracetour.de. Delivered instantly by email.</span></p>
         </div>
         <div class="step-card">
           <div class="num">2</div>
-          <h4>Losgehen</h4>
-          <p>Am Schloss Hohentübingen starten. GPS führt dich durch die Altstadt.</p>
+          <h4><span class="lang-de">Losgehen</span><span class="lang-en">Start walking</span></h4>
+          <p><span class="lang-de">Am Schloss Hohentübingen starten. GPS führt dich durch die Altstadt.</span><span class="lang-en">Start at Hohentübingen Castle. GPS guides you through the old town.</span></p>
         </div>
         <div class="step-card">
           <div class="num">3</div>
-          <h4>Rätseln</h4>
-          <p>Formel entschlüsseln und Urkunde sichern.</p>
+          <h4><span class="lang-de">Rätseln</span><span class="lang-en">Solve</span></h4>
+          <p><span class="lang-de">Formel entschlüsseln und Urkunde sichern.</span><span class="lang-en">Decode the formula and earn your certificate.</span></p>
         </div>
       </div>
     </div>
 
-    <!-- Features as rounded pills -->
+    <!-- Features -->
     <div class="back-section">
-      <div class="section-label">Was dich erwartet</div>
+      <div class="section-label">
+        <span class="lang-de">Was dich erwartet</span>
+        <span class="lang-en">What to expect</span>
+      </div>
       <div class="feat-row">
-        <div class="feat-item"><div class="feat-dot"></div><span>Professionelle Audio-Erzählung</span></div>
-        <div class="feat-item"><div class="feat-dot"></div><span>Echte Stadtgeschichte</span></div>
-        <div class="feat-item"><div class="feat-dot"></div><span>8 Rätsel + Quiz</span></div>
-        <div class="feat-item"><div class="feat-dot"></div><span>"Trace" beantwortet deine Fragen</span></div>
-        <div class="feat-item"><div class="feat-dot"></div><span>Persönliche Urkunde</span></div>
-        <div class="feat-item"><div class="feat-dot"></div><span>Alles per Audio — einfach zuhören</span></div>
-        <div class="feat-item"><div class="feat-dot"></div><span>Jederzeit spielbar</span></div>
-        <div class="feat-item"><div class="feat-dot"></div><span>Start: Schloss Hohentübingen</span></div>
+        <div class="feat-item"><div class="feat-dot"></div><span><span class="lang-de">Professionelle Audio-Erzählung mit 4 Stimmen</span><span class="lang-en">Professional audio narration with 4 voices</span></span></div>
+        <div class="feat-item"><div class="feat-dot"></div><span><span class="lang-de">Rätsel an echten Schauplätzen</span><span class="lang-en">Puzzles at real locations</span></span></div>
+        <div class="feat-item"><div class="feat-dot"></div><span><span class="lang-de">Smarter Begleiter &bdquo;Trace&ldquo; hilft bei Rätseln</span><span class="lang-en">Smart companion "Trace" helps with puzzles</span></span></div>
+        <div class="feat-item"><div class="feat-dot"></div><span><span class="lang-de">Auf Deutsch &amp; Englisch verfügbar</span><span class="lang-en">Available in German &amp; English</span></span></div>
+        <div class="feat-item"><div class="feat-dot"></div><span><span class="lang-de">Kein App-Download nötig</span><span class="lang-en">No app download needed</span></span></div>
+        <div class="feat-item"><div class="feat-dot"></div><span><span class="lang-de">Persönliche Urkunde mit Rang</span><span class="lang-en">Personal certificate with rank</span></span></div>
+        <div class="feat-item"><div class="feat-dot"></div><span><span class="lang-de">Jederzeit spielbar</span><span class="lang-en">Playable anytime</span></span></div>
+        <div class="feat-item"><div class="feat-dot"></div><span><span class="lang-de">Start: Schloss Hohentübingen</span><span class="lang-en">Start: Hohentübingen Castle</span></span></div>
       </div>
     </div>
 
@@ -205,30 +262,44 @@ body {
       <div class="pricing-row">
         <div class="price-card">
           <div class="tier">Solo</div>
-          <div class="amt">9,99 €</div>
-          <div class="detail">pro Person</div>
+          <div class="amt">9,99 &euro;</div>
+          <div class="detail"><span class="lang-de">pro Person</span><span class="lang-en">per person</span></div>
         </div>
         <div class="price-card pop">
           <div class="tier">Team</div>
-          <div class="amt">7,99 €</div>
-          <div class="detail">pro Person · ab 3 Pers.</div>
-          <div class="save-badge">20% sparen</div>
+          <div class="amt">7,99 &euro;</div>
+          <div class="detail"><span class="lang-de">pro Person &middot; 3–7 Pers.</span><span class="lang-en">per person &middot; 3–7 people</span></div>
+          <div class="save-badge">20% <span class="lang-de">sparen</span><span class="lang-en">off</span></div>
+        </div>
+        <div class="price-card">
+          <div class="tier"><span class="lang-de">Schulklasse</span><span class="lang-en">School class</span></div>
+          <div class="amt">79,99 &euro;</div>
+          <div class="detail"><span class="lang-de">pauschal &middot; bis 30 Pers.</span><span class="lang-en">flat rate &middot; up to 30</span></div>
+          <div class="save-badge"><span class="lang-de">Beste Wahl für Gruppen</span><span class="lang-en">Best for groups</span></div>
         </div>
       </div>
     </div>
 
-    <!-- Story teaser -->
+    <!-- Ranks -->
     <div class="back-section">
-      <div class="section-label">Die Formel des Forschers</div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:3mm">
-        <p style="font-size:6pt;color:#8a9db5;line-height:1.5;font-style:italic">Professor Heinrich von Calw flieht 1869 vor dem Königlichen Ministerium. In den Gassen der Altstadt versteckt er die Fragmente einer Formel. An 17 historischen Schauplätzen erfährst du wahre Geschichten über Tübingen — und entschlüsselst sein Geheimnis.</p>
+      <div class="section-label">
+        <span class="lang-de">5 Ränge — Sammle bis zu 1790 Traces</span>
+        <span class="lang-en">5 Ranks — Collect up to 1790 Traces</span>
+      </div>
+      <div style="display:flex;gap:1.5mm;flex-wrap:wrap">
+        <span class="pill" style="border-color:rgba(243,99,45,0.2);color:#8a9db5;font-size:5pt"><span class="lang-de">Anfänger</span><span class="lang-en">Beginner</span></span>
+        <span class="pill" style="border-color:rgba(243,99,45,0.2);color:#8a9db5;font-size:5pt"><span class="lang-de">Spurenleser</span><span class="lang-en">Tracker</span></span>
+        <span class="pill" style="border-color:rgba(243,99,45,0.25);color:#b0c4de;font-size:5pt"><span class="lang-de">Ermittler</span><span class="lang-en">Investigator</span></span>
+        <span class="pill" style="border-color:rgba(243,99,45,0.3);color:#e8c0a8;font-size:5pt"><span class="lang-de">Chefermittler</span><span class="lang-en">Chief Investigator</span></span>
+        <span class="pill" style="border-color:rgba(243,99,45,0.5);color:#f3632d;font-size:5pt;font-weight:600"><span class="lang-de">Legende</span><span class="lang-en">Legend</span></span>
       </div>
     </div>
 
     <!-- Quote -->
     <div class="back-section">
       <div class="quote-box">
-        <p>"Wie ein Escape Room, nur draußen in der echten Stadt — und man lernt dabei richtig viel über Tübingen."</p>
+        <p class="lang-de">"Wie ein Escape Room, nur draußen in der echten Stadt — und man lernt dabei richtig viel über Tübingen."</p>
+        <p class="lang-en">"Like an escape room, but outdoors in the real city — and you learn so much about Tübingen."</p>
       </div>
     </div>
   </div>
@@ -236,10 +307,19 @@ body {
   <div class="back-footer">
     <div class="contact">
       TraceTour by Florian S. Thiel<br>
-      info@tracetour.de · tracetour.de
+      info@tracetour.de &middot; tracetour.de
     </div>
-    <div class="cta">tracetour.de →</div>
+    <div class="cta">tracetour.de &rarr;</div>
   </div>
 </div>
+
+<script>
+function setLang(lang) {
+  document.body.classList.toggle('show-en', lang === 'en');
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang);
+  });
+}
+</script>
 </body>
 </html>
