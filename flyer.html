@@ -49,8 +49,8 @@ body {
 .story-quote { font-size: 7.5pt; font-style: italic; color: rgba(255,255,255,0.6); line-height: 1.5; max-width: 88%; margin: 0 auto 5mm; border-left: 2px solid #f3632d; padding-left: 3mm; text-align: left; }
 
 .usp-row { display: flex; gap: 3mm; justify-content: center; flex-wrap: wrap; }
-.usp-chip { font-size: 5.5pt; color: rgba(255,255,255,0.55); font-weight: 500; letter-spacing: 0.03em; }
-.usp-chip::before { content: "\00b7  "; color: #f3632d; }
+.usp-chip { font-size: 5.5pt; color: rgba(255,255,255,0.55); font-weight: 500; letter-spacing: 0.03em; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.5mm; }
+.usp-chip::before { content: "\00b7"; color: #f3632d; font-size: 8pt; line-height: 1; }
 
 .front-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
 .url-block .url { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 13pt; color: #f3632d; }
