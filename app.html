@@ -76,7 +76,8 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 
 /* PROLOGUE */
 #prologue{background:var(--bg);padding:calc(var(--safe-top) + 1rem) 1.25rem calc(var(--safe-bottom) + 2rem)}
-@media(min-width:768px){#prologue,#tourSelect,#splash,#testerWelcome,#officialWelcome,#success,#quizScreen,#formulaPuzzle,#bonusOverlay{display:flex;flex-direction:column;align-items:center}
+@media(min-width:768px){
+.screen.active#prologue,.screen.active#tourSelect,.screen.active#splash,.screen.active#testerWelcome,.screen.active#officialWelcome,.screen.active#success,.screen.active#quizScreen,.screen.active#formulaPuzzle,.screen.active#bonusOverlay{align-items:center}
 #prologue>*,#tourSelect>*{max-width:640px;width:100%}
 .prologue-hero,.tour-card,.tour-hero{max-width:640px}
 }
