@@ -103,6 +103,15 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 
 /* GAME */
 #game{position:relative}
+/* DEBUG: mobile sim toggle */
+#debugMobileToggle{display:none;position:fixed;bottom:80px;right:12px;z-index:9999;background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.3);color:#f87171;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:var(--r-sm);cursor:pointer;line-height:1}
+@media(min-width:768px){
+body.mobile-sim #prologue>*,body.mobile-sim #tourSelect>*,body.mobile-sim #success>*{max-width:390px}
+body.mobile-sim .prologue-hero,body.mobile-sim .tour-card,body.mobile-sim .tour-hero,body.mobile-sim .login-box{max-width:390px}
+body.mobile-sim #stationContent,body.mobile-sim .game-panel>*,body.mobile-sim #gamePanel .station-photo-wrapper{max-width:390px}
+body.mobile-sim .quiz-q{max-width:340px}
+body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-width:390px}
+}
 .game-top{position:fixed;top:0;left:0;right:0;z-index:800;padding:calc(var(--safe-top) + 8px) 12px 8px;background:linear-gradient(var(--bg) 60%,transparent);display:flex;align-items:center;justify-content:space-between;pointer-events:none}
 .game-top>*{pointer-events:auto}
 .game-back{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -382,6 +391,7 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <button class="btn-secondary" onclick="showScreen('prologue')">Neu starten</button>
 <button class="btn-secondary" id="resetBtn" style="display:none;margin-top:.5rem;font-size:.75rem;opacity:.6" onclick="confirmReset()">🗑️ Fortschritt komplett löschen</button>
 </div>
+<button id="debugMobileToggle" onclick="toggleMobileView()">📱 MOBILE</button>
 <div class="tour-card" style="opacity:.35;pointer-events:none">
 <div class="tour-card-body">
 <span class="badge badge-soon">Bald verfügbar</span>
@@ -1412,6 +1422,15 @@ function loadGame(){
   }catch(e){return false}
 }
 function clearSave(){localStorage.removeItem(SAVE_KEY)}
+function toggleMobileView(){
+  document.body.classList.toggle('mobile-sim');
+  const btn=document.getElementById('debugMobileToggle');
+  if(btn)btn.textContent=document.body.classList.contains('mobile-sim')?'🖥️ DESKTOP':'📱 MOBILE';
+}
+function updateDebugToggle(){
+  const btn=document.getElementById('debugMobileToggle');
+  if(btn)btn.style.display=(debugMode&&window.innerWidth>=768)?'block':'none';
+}
 function confirmReset(){
   if(confirm(t('confirmReset1'))){
     if(confirm(t('confirmReset2'))){
@@ -1467,11 +1486,12 @@ function doLogin(){
   const name=document.getElementById('loginName').value.trim();
   const code=document.getElementById('loginCode').value.trim().toUpperCase();
   if(!name){document.getElementById('loginName').focus();return}
-  if(code!=='TUEBINGEN2026'&&code!=='TUEBINGEN2025'&&code!=='DEBUG'){
+  if(code!=='TUEBINGEN2026'&&code!=='TUEBINGEN2025'&&code!=='PRIVAT'){
     document.getElementById('loginCode').style.borderColor='var(--error)';
     setTimeout(()=>document.getElementById('loginCode').style.borderColor='',1500);return;
   }
-  debugMode=(code==='DEBUG');userName=name;groupName=document.getElementById('loginGroup').value.trim();
+  debugMode=(code==='PRIVAT');userName=name;groupName=document.getElementById('loginGroup').value.trim();
+  updateDebugToggle();
   document.getElementById('userNameDisplay').textContent=name;
   document.getElementById('userAvatar').textContent=name[0].toUpperCase();
   if(code==='TUEBINGEN2025'){
@@ -1488,6 +1508,7 @@ function continueTour(){
   if(!loadGame())return;
   document.getElementById('userNameDisplay').textContent=userName;
   document.getElementById('userAvatar').textContent=userName[0].toUpperCase();
+  updateDebugToggle();
   updateXp();showScreen('game');
 }
 document.getElementById('loginCode').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
