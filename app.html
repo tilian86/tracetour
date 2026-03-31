@@ -315,7 +315,10 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 <div class="splash-sub">by Florian S. Thiel</div>
 <div class="login-box">
 <input type="text" id="loginName" placeholder="Dein Ermittlername" autocomplete="off" autocapitalize="words">
-<input type="password" id="loginCode" placeholder="Zugangscode" autocomplete="off">
+<div style="position:relative">
+<input type="password" id="loginCode" placeholder="Zugangscode" autocomplete="off" style="padding-right:44px">
+<button type="button" onclick="const i=document.getElementById('loginCode');i.type=i.type==='password'?'text':'password';this.textContent=i.type==='password'?'👁':'🙈'" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:1rem;opacity:.5;padding:4px">👁</button>
+</div>
 <div id="loginError" style="display:none;font-size:.78rem;color:var(--error);margin:-6px 0 8px;padding:8px 12px;background:rgba(248,113,113,.08);border-radius:var(--r-sm);border:1px solid rgba(248,113,113,.2)"></div>
 <input type="text" id="loginGroup" placeholder="Teamname (optional)" autocomplete="off" autocapitalize="words">
 <button class="btn-primary" onclick="doLogin()">Einloggen</button>
