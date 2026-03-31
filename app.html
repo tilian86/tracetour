@@ -76,6 +76,10 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 
 /* PROLOGUE */
 #prologue{background:var(--bg);padding:calc(var(--safe-top) + 1rem) 1.25rem calc(var(--safe-bottom) + 2rem)}
+@media(min-width:768px){#prologue,#tourSelect,#splash,#testerWelcome,#officialWelcome,#success,#quizScreen,#formulaPuzzle,#bonusOverlay{display:flex;flex-direction:column;align-items:center}
+#prologue>*,#tourSelect>*{max-width:640px;width:100%}
+.prologue-hero,.tour-card,.tour-hero{max-width:640px}
+}
 .prologue-hero{position:relative;width:100%;height:220px;border-radius:var(--r);overflow:hidden;margin-bottom:1.5rem}
 .prologue-hero img{width:100%;height:100%;object-fit:cover;filter:brightness(.5) saturate(.6)}
 .prologue-hero-overlay{position:absolute;inset:0;background:linear-gradient(transparent 30%,var(--bg) 100%);display:flex;align-items:flex-end;padding:1.25rem}
