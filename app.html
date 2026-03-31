@@ -704,7 +704,7 @@ de:{
   btnShareCert:'Urkunde teilen',btnSaveCert:'Urkunde speichern',btnFeedback:'Feedback senden',btnBackOverview:'Zurück zur Übersicht',
   shareText:'Fall gelöst! \ud83c\udfc6 #TraceTourTuebingen',
   bonusLabel:'Bonus-Frage \u00b7 {x} Traces',bonusRemember:'Erinnerst du dich an {name}?',
-  bonusAttemptsPlural:'{x} Versuche übrig',bonusAttemptsSingular:'1 Versuch übrig',bonusSkip:'Überspringen',
+  bonusAttemptsPlural:'{x} Versuche übrig',bonusAttemptsSingular:'1 Versuch übrig',bonusSkip:'Überspringen',bonusListenLabel:'Frage anhören',narrator:'Erzähler',
   bonusCorrect:'Richtig! +{x} Bonus-Traces \ud83c\udf89',bonusWrong1:'Falsch \u2013 noch 1 Versuch!',bonusWrongAnswer:'Die richtige Antwort war: {answer}',
   ambientNames:['Wind auf dem Schlossberg','Kerkerstille','Gelehrten-Echo','Münzgassen-Stimmen','Kirchenglocken & Wind','Marktplatz-Stimmen','Marktplatz-Treiben','Kornhaus-Stille','Kneipen-Atmosphäre','Torwind & Schritte','Altstadt-Brunnen','Ammer-Plätschern','Vögel & Blätterrauschen','Stadtgeräusche','Fachwerk-Knarren','Neckar-Rauschen','Wasser & Wind'],
   feedbackMailSubject:'TraceTour Feedback',feedbackMailBody:'Hey! Ich habe gerade die Tour in Tübingen gemacht und wollte euch sagen:'
@@ -810,7 +810,7 @@ en:{
   btnShareCert:'Share certificate',btnSaveCert:'Save certificate',btnFeedback:'Send feedback',btnBackOverview:'Back to overview',
   shareText:'Case solved! \ud83c\udfc6 #TraceTourTuebingen',
   bonusLabel:'Bonus Question \u00b7 {x} Traces',bonusRemember:'Do you remember {name}?',
-  bonusAttemptsPlural:'{x} attempts remaining',bonusAttemptsSingular:'1 attempt remaining',bonusSkip:'Skip',
+  bonusAttemptsPlural:'{x} attempts remaining',bonusAttemptsSingular:'1 attempt remaining',bonusSkip:'Skip',bonusListenLabel:'Listen to question',narrator:'Narrator',
   bonusCorrect:'Correct! +{x} Bonus Traces \ud83c\udf89',bonusWrong1:'Wrong \u2014 1 attempt left!',bonusWrongAnswer:'The correct answer was: {answer}',
   ambientNames:['Wind on the castle hill','Dungeon silence','Scholars\' echo','Muenzgasse voices','Church bells & wind','Market square voices','Market square bustle','Kornhaus silence','Pub atmosphere','Gate wind & footsteps','Old town fountain','Ammer stream rippling','Birds & rustling leaves','City sounds','Timber-frame creaking','Neckar rushing','Water & wind'],
   feedbackMailSubject:'TraceTour Feedback',feedbackMailBody:'Hey! I just completed the tour in Tuebingen and wanted to tell you:'
@@ -2538,6 +2538,24 @@ function checkPuzzle(){
   }
 }
 
+// ====== BONUS AUDIO ======
+function playBonusAudio(stationIdx){
+  const row=document.getElementById('audioBonusQ');if(!row)return;
+  const icon=row.querySelector('.audio-icon .material-symbols-outlined');
+  if(currentAudio&&currentAudio._fileKey==='bonus_'+stationIdx&&!currentAudio.paused){
+    currentAudio.pause();icon.textContent='play_arrow';row.classList.remove('playing');return;
+  }
+  if(currentAudio&&currentAudio._fileKey==='bonus_'+stationIdx&&currentAudio.paused){
+    currentAudio.play();icon.textContent='pause';row.classList.add('playing');return;
+  }
+  stopAudio();
+  const audio=new Audio(getAudioBase()+'bonus_'+stationIdx+'.mp3');
+  audio._fileKey='bonus_'+stationIdx;audio._type='bonus';audio.playbackRate=audioSpeed;currentAudio=audio;
+  row.classList.add('playing');icon.textContent='pause';
+  audio.addEventListener('ended',()=>{row.classList.remove('playing');icon.textContent='play_arrow';currentAudio=null});
+  audio.play().catch(()=>{stopAudio()});
+}
+
 // ====== BONUS QUESTIONS ======
 function showBonusOverlay(stationIdx){
   const bq=getBonusQuestions()[stationIdx];
@@ -2553,6 +2571,10 @@ function showBonusOverlay(stationIdx){
     <div style="font-size:3rem;margin-bottom:1rem">🏆</div>
     <div style="font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem">${t('bonusLabel').replace('{x}',bq.xp)}</div>
     <div style="font-size:.85rem;color:var(--text-3);margin-bottom:.5rem;font-style:italic">${t('bonusRemember').replace('{name}',stationField(srcStation,'name'))}</div>
+    <div class="audio-row" id="audioBonusQ" onclick="playBonusAudio(${stationIdx})" style="max-width:400px;margin:0 auto .75rem">
+      <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
+      <div><div class="audio-label">${t('bonusListenLabel')}</div><div class="audio-sublabel">${t('narrator')}</div></div>
+    </div>
     <div style="font-family:var(--font-h);font-size:1.15rem;font-weight:700;margin-bottom:1.5rem;line-height:1.5">${bq.q}</div>
     <div class="bonus-opts" style="text-align:left;max-width:400px;margin:0 auto">
       ${bq.opts.map((o,i)=>`<button class="bonus-opt" onclick="answerBonusOverlay(${stationIdx},this,${i})">${o}</button>`).join('')}
