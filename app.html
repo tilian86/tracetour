@@ -1486,13 +1486,13 @@ function checkSavedGame(){
 function doLogin(){
   const name=document.getElementById('loginName').value.trim();
   const code=document.getElementById('loginCode').value.trim().toUpperCase();
-  if(!name){document.getElementById('loginName').focus();return}
   if(code!=='TUEBINGEN2026'&&code!=='TUEBINGEN2025'&&code!=='PRIVAT'){
     const err=document.getElementById('loginError');
     err.textContent=t('loginError');err.style.display='block';
     document.getElementById('loginCode').style.borderColor='var(--error)';
     setTimeout(()=>{document.getElementById('loginCode').style.borderColor='';err.style.display='none';},3000);return;
   }
+  if(!name){document.getElementById('loginName').focus();return}
   document.getElementById('loginError').style.display='none';
   debugMode=(code==='PRIVAT');userName=name;groupName=document.getElementById('loginGroup').value.trim();
   updateDebugToggle();
