@@ -105,6 +105,11 @@ body {
 @media (min-width: 640px) {
   .city-card .label { padding: 1.5rem; }
 }
+.lang-btn-lp.active {
+  background: #f3632d;
+  color: #fff !important;
+  border-color: #f3632d;
+}
 .city-card .label span.name {
   display: block;
   font-family: 'Montserrat', sans-serif;
@@ -140,14 +145,18 @@ body {
       <span class="text-[10px] sm:text-xs font-normal text-slate-500 ml-1 tracking-normal normal-case">by Florian S. Thiel</span>
     </div>
     <div class="hidden md:flex items-center space-x-8">
-      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-[#f3632d] border-b-2 border-[#f3632d] pb-1" href="#featured">Touren</a>
-      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#how-it-works">So funktioniert's</a>
-      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#expansion">Städte</a>
-      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#about">Über mich</a>
+      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-[#f3632d] border-b-2 border-[#f3632d] pb-1" href="#featured" data-t="nav-tours">Touren</a>
+      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#how-it-works" data-t="nav-how">So funktioniert's</a>
+      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#expansion" data-t="nav-cities">Städte</a>
+      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#about" data-t="nav-about">Über mich</a>
     </div>
     <div class="flex items-center gap-3">
-      <a href="app.html" class="font-brand uppercase tracking-[0.05em] text-xs font-bold text-slate-400 hover:text-orange-200 transition-all">Login</a>
-      <a href="app.html" class="bg-primary-container text-white px-5 py-2 rounded-lg font-brand uppercase tracking-[0.05em] text-sm font-bold hover:bg-orange-500 transition-all active:scale-95 shadow-lg shadow-primary-container/20">STARTEN</a>
+      <div class="flex gap-1 mr-2">
+        <button class="lang-btn-lp px-2.5 py-1 text-[11px] font-bold tracking-wider rounded-md border border-white/10 text-slate-400 hover:text-slate-200 transition-all cursor-pointer" onclick="setPageLang('de')">DE</button>
+        <button class="lang-btn-lp px-2.5 py-1 text-[11px] font-bold tracking-wider rounded-md border border-white/10 text-slate-400 hover:text-slate-200 transition-all cursor-pointer" onclick="setPageLang('en')">EN</button>
+      </div>
+      <a href="app.html" class="font-brand uppercase tracking-[0.05em] text-xs font-bold text-slate-400 hover:text-orange-200 transition-all" data-t="nav-login">Login</a>
+      <a href="app.html" class="bg-primary-container text-white px-5 py-2 rounded-lg font-brand uppercase tracking-[0.05em] text-sm font-bold hover:bg-orange-500 transition-all active:scale-95 shadow-lg shadow-primary-container/20" data-t="nav-start">STARTEN</a>
     </div>
   </div>
 </nav>
@@ -160,18 +169,18 @@ body {
   </div>
   <div class="relative z-10 max-w-5xl px-6 text-center">
     <span class="inline-block py-1.5 px-4 rounded-full bg-secondary-container/30 text-primary font-brand font-bold tracking-[0.2em] uppercase text-xs border border-primary/20 mb-6">TraceTour by Florian S. Thiel</span>
-    <h1 class="font-headline text-5xl md:text-8xl font-black text-on-surface leading-tight tracking-tighter mb-8">
+    <h1 class="font-headline text-5xl md:text-8xl font-black text-on-surface leading-tight tracking-tighter mb-8" data-t="hero-title" data-t-html="1">
       DIE STADT IST DEIN<br/>
       <span class="text-primary-container">SPIELFELD.</span>
     </h1>
-    <p class="font-body text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed">
+    <p class="font-body text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed" data-t="hero-subtitle">
       Kriminalfälle, Rätsel und echte Geschichte vereint in einer gamifizierten Audio-Experience für die Hosentasche. Entdecke deine Stadt in einem völlig neuen Licht.
     </p>
     <div class="flex flex-col md:flex-row items-center justify-center gap-4">
-      <a href="app.html" class="bg-primary-container text-white px-10 py-5 rounded-xl font-brand font-black text-lg tracking-widest hover:bg-orange-500 hover:-translate-y-1 transition-all shadow-lg shadow-primary-container/25">
+      <a href="app.html" class="bg-primary-container text-white px-10 py-5 rounded-xl font-brand font-black text-lg tracking-widest hover:bg-orange-500 hover:-translate-y-1 transition-all shadow-lg shadow-primary-container/25" data-t="hero-cta-start">
         TOUR STARTEN
       </a>
-      <a href="#how-it-works" class="glass-panel border border-white/10 text-white px-10 py-5 rounded-xl font-brand font-black text-lg tracking-widest hover:bg-white/10 transition-all">
+      <a href="#how-it-works" class="glass-panel border border-white/10 text-white px-10 py-5 rounded-xl font-brand font-black text-lg tracking-widest hover:bg-white/10 transition-all" data-t="hero-cta-how">
         SO FUNKTIONIERT'S
       </a>
     </div>
@@ -194,28 +203,28 @@ body {
       <span class="material-symbols-outlined text-primary-container text-3xl">location_on</span>
       <div>
         <div class="text-2xl font-black font-headline text-on-surface">17</div>
-        <div class="text-xs uppercase tracking-widest text-slate-400">Stationen</div>
+        <div class="text-xs uppercase tracking-widest text-slate-400" data-t="stat-stations">Stationen</div>
       </div>
     </div>
     <div class="flex items-center gap-4">
       <span class="material-symbols-outlined text-primary-container text-3xl">timer</span>
       <div>
         <div class="text-2xl font-black font-headline text-on-surface">120</div>
-        <div class="text-xs uppercase tracking-widest text-slate-400">Min. Spielzeit</div>
+        <div class="text-xs uppercase tracking-widest text-slate-400" data-t="stat-playtime">Min. Spielzeit</div>
       </div>
     </div>
     <div class="flex items-center gap-4">
       <span class="material-symbols-outlined text-primary-container text-3xl">history_edu</span>
       <div>
         <div class="text-2xl font-black font-headline text-on-surface">1869</div>
-        <div class="text-xs uppercase tracking-widest text-slate-400">Das Jahr des Rätsels</div>
+        <div class="text-xs uppercase tracking-widest text-slate-400" data-t="stat-year">Das Jahr des Rätsels</div>
       </div>
     </div>
     <div class="flex items-center gap-4">
       <span class="material-symbols-outlined text-primary-container text-3xl">trophy</span>
       <div>
         <div class="text-2xl font-black font-headline text-on-surface">1090</div>
-        <div class="text-xs uppercase tracking-widest text-slate-400">Traces zu sammeln</div>
+        <div class="text-xs uppercase tracking-widest text-slate-400" data-t="stat-traces">Traces zu sammeln</div>
       </div>
     </div>
   </div>
@@ -226,10 +235,10 @@ body {
   <div class="max-w-7xl mx-auto">
     <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-4 text-center md:text-left">
       <div>
-        <h2 class="font-headline text-3xl md:text-4xl font-extrabold text-on-surface tracking-tight mb-2">Aktuelle Mission</h2>
+        <h2 class="font-headline text-3xl md:text-4xl font-extrabold text-on-surface tracking-tight mb-2" data-t="tour-heading">Aktuelle Mission</h2>
         <div class="accent-line mx-auto md:mx-0"></div>
       </div>
-      <p class="font-body text-slate-400 max-w-md text-sm leading-relaxed">Tübingen, 1869. Ein Wissenschaftler auf der Flucht vor dem Königlichen Ministerium. Eine Formel, die zu gefährlich ist für die Mächtigen. 17 Stationen vom Schloss bis zum Neckar.</p>
+      <p class="font-body text-slate-400 max-w-md text-sm leading-relaxed" data-t="tour-desc">Tübingen, 1869. Ein Wissenschaftler auf der Flucht vor dem Königlichen Ministerium. Eine Formel, die zu gefährlich ist für die Mächtigen. 17 Stationen vom Schloss bis zum Neckar.</p>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
       <!-- Main Card -->
@@ -240,26 +249,26 @@ body {
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
         <div class="absolute bottom-0 left-0 p-8 w-full">
           <div class="flex items-center gap-4 mb-4">
-            <span class="bg-primary-container text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Verfügbar</span>
+            <span class="bg-primary-container text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter" data-t="tour-badge">Verfügbar</span>
             <span class="text-slate-300 font-body text-xs uppercase tracking-widest">Tübingen, 1869</span>
           </div>
           <h3 class="font-headline text-4xl md:text-5xl font-black text-white mb-6 tracking-tighter">Die Formel des Forschers</h3>
           <div class="flex flex-wrap gap-6">
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-primary text-lg">location_on</span>
-              <span class="font-body text-sm uppercase tracking-widest text-slate-300">17 Stationen</span>
+              <span class="font-body text-sm uppercase tracking-widest text-slate-300" data-t="tour-stations">17 Stationen</span>
             </div>
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-primary text-lg">schedule</span>
-              <span class="font-body text-sm uppercase tracking-widest text-slate-300">ca. 120 Min</span>
+              <span class="font-body text-sm uppercase tracking-widest text-slate-300" data-t="tour-duration">ca. 120 Min</span>
             </div>
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-primary text-lg">record_voice_over</span>
-              <span class="font-body text-sm uppercase tracking-widest text-slate-300">Audio-Experience</span>
+              <span class="font-body text-sm uppercase tracking-widest text-slate-300" data-t="tour-audio">Audio-Experience</span>
             </div>
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-primary text-lg">trophy</span>
-              <span class="font-body text-sm uppercase tracking-widest text-slate-300">1090 Traces</span>
+              <span class="font-body text-sm uppercase tracking-widest text-slate-300" data-t="tour-traces">1090 Traces</span>
             </div>
           </div>
         </div>
@@ -267,43 +276,43 @@ body {
       <!-- Info Cards -->
       <div class="lg:col-span-4 flex flex-col gap-6">
         <div class="glass-panel p-8 rounded-xl border-l-4 border-primary-container flex-1">
-          <h4 class="font-brand font-bold text-primary uppercase text-sm mb-4 tracking-widest">Die Story</h4>
-          <p class="font-body text-on-surface leading-relaxed italic text-sm">
+          <h4 class="font-brand font-bold text-primary uppercase text-sm mb-4 tracking-widest" data-t="tour-story-label">Die Story</h4>
+          <p class="font-body text-on-surface leading-relaxed italic text-sm" data-t="tour-story-text">
             "Eine Formel, die die Welt verändern könnte. Ein Forscher, der vor den Gendarmen des Königs flieht. 17 Orte in Tübingen bewahren sein Geheimnis seit 1869 – findest du alle Fragmente?"
           </p>
         </div>
         <div class="bg-surface-container-highest/80 p-8 rounded-xl flex flex-col justify-between border border-white/5">
           <div>
-            <h4 class="font-brand font-bold text-slate-400 uppercase text-sm mb-4 tracking-widest">Was dich erwartet</h4>
+            <h4 class="font-brand font-bold text-slate-400 uppercase text-sm mb-4 tracking-widest" data-t="tour-expect-label">Was dich erwartet</h4>
             <ul class="space-y-3">
               <li class="flex items-center gap-3 font-body text-sm">
                 <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-                Spannende Erzählung & Tagebücher
+                <span data-t="tour-feat-1">Spannende Erzählung & Tagebücher</span>
               </li>
               <li class="flex items-center gap-3 font-body text-sm">
                 <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-                GPS-Rätsel vor Ort
+                <span data-t="tour-feat-2">GPS-Rätsel vor Ort</span>
               </li>
               <li class="flex items-center gap-3 font-body text-sm">
                 <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-                8 Formel-Fragmente entschlüsseln
+                <span data-t="tour-feat-3">8 Formel-Fragmente entschlüsseln</span>
               </li>
               <li class="flex items-center gap-3 font-body text-sm">
                 <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-                Dein Begleiter „Trace" hilft unterwegs
+                <span data-t="tour-feat-4">Dein Begleiter „Trace" hilft unterwegs</span>
               </li>
               <li class="flex items-center gap-3 font-body text-sm">
                 <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-                Teilnehmer-Urkunde am Ende
+                <span data-t="tour-feat-5">Teilnehmer-Urkunde am Ende</span>
               </li>
               <li class="flex items-center gap-3 font-body text-sm">
                 <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-                Kein App-Download nötig
+                <span data-t="tour-feat-6">Kein App-Download nötig</span>
               </li>
             </ul>
           </div>
           <a href="app.html" class="mt-8 block w-full bg-primary-container text-white py-4 rounded-lg font-brand font-bold uppercase tracking-widest hover:bg-orange-500 transition-all text-center text-sm shadow-lg shadow-primary-container/20">
-            JETZT STARTEN
+            <span data-t="tour-cta">JETZT STARTEN</span>
           </a>
         </div>
       </div>
@@ -314,8 +323,8 @@ body {
 <!-- How It Works -->
 <section id="how-it-works" class="py-24 px-6 bg-slate-800/30">
   <div class="max-w-5xl mx-auto text-center mb-20">
-    <h2 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-4">So funktioniert's</h2>
-    <p class="font-body text-slate-400 text-sm">In drei Schritten zum Ermittler</p>
+    <h2 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-4" data-t="how-title">So funktioniert's</h2>
+    <p class="font-body text-slate-400 text-sm" data-t="how-subtitle">In drei Schritten zum Ermittler</p>
   </div>
   <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 relative">
     <div class="hidden md:block absolute top-1/2 left-0 w-full h-px step-line opacity-30 -translate-y-1/2"></div>
@@ -324,24 +333,24 @@ body {
       <div class="w-20 h-20 mx-auto glass-panel rounded-full flex items-center justify-center mb-6 border border-primary/20 group-hover:border-primary-container transition-colors shadow-xl">
         <span class="material-symbols-outlined text-3xl text-primary-container">vpn_key</span>
       </div>
-      <h3 class="font-headline text-xl font-bold mb-3">1. Code erhalten</h3>
-      <p class="font-body text-slate-400 text-sm px-4">Kaufe einen Zugangscode und starte sofort im Browser. Kein Download, kein App Store.</p>
+      <h3 class="font-headline text-xl font-bold mb-3" data-t="step1-title">1. Code erhalten</h3>
+      <p class="font-body text-slate-400 text-sm px-4" data-t="step1-desc">Kaufe einen Zugangscode und starte sofort im Browser. Kein Download, kein App Store.</p>
     </div>
     <!-- Step 2 -->
     <div class="relative z-10 text-center group">
       <div class="w-20 h-20 mx-auto glass-panel rounded-full flex items-center justify-center mb-6 border border-primary/20 group-hover:border-primary-container transition-colors shadow-xl">
         <span class="material-symbols-outlined text-3xl text-primary-container">explore</span>
       </div>
-      <h3 class="font-headline text-xl font-bold mb-3">2. Stadt erkunden</h3>
-      <p class="font-body text-slate-400 text-sm px-4">Geh zum Startpunkt und tauche in die Geschichte ein. GPS führt dich von Station zu Station.</p>
+      <h3 class="font-headline text-xl font-bold mb-3" data-t="step2-title">2. Stadt erkunden</h3>
+      <p class="font-body text-slate-400 text-sm px-4" data-t="step2-desc">Geh zum Startpunkt und tauche in die Geschichte ein. GPS führt dich von Station zu Station.</p>
     </div>
     <!-- Step 3 -->
     <div class="relative z-10 text-center group">
       <div class="w-20 h-20 mx-auto glass-panel rounded-full flex items-center justify-center mb-6 border border-primary/20 group-hover:border-primary-container transition-colors shadow-xl">
         <span class="material-symbols-outlined text-3xl text-primary-container">emoji_events</span>
       </div>
-      <h3 class="font-headline text-xl font-bold mb-3">3. Urkunde sichern</h3>
-      <p class="font-body text-slate-400 text-sm px-4">Löse alle Rätsel, sammle Traces und erhalte deine persönliche Teilnehmer-Urkunde zum Teilen.</p>
+      <h3 class="font-headline text-xl font-bold mb-3" data-t="step3-title">3. Urkunde sichern</h3>
+      <p class="font-body text-slate-400 text-sm px-4" data-t="step3-desc">Löse alle Rätsel, sammle Traces und erhalte deine persönliche Teilnehmer-Urkunde zum Teilen.</p>
     </div>
   </div>
 </section>
@@ -356,13 +365,13 @@ body {
         <span class="material-symbols-outlined text-6xl text-slate-500">group</span>
       </div>
       <div>
-        <h2 class="font-headline text-3xl font-extrabold text-on-surface tracking-tight mb-2">Das Team hinter TraceTour</h2>
+        <h2 class="font-headline text-3xl font-extrabold text-on-surface tracking-tight mb-2" data-t="about-title">Über mich</h2>
         <div class="accent-line mb-6"></div>
-        <p class="font-body text-slate-300 leading-relaxed mb-4">
-          TraceTour verbindet echte Stadtgeschichte mit Rätseln, Audio-Erzählungen und spielerischen Elementen. Jede Tour wird sorgfältig recherchiert, vor Ort getestet und mit Liebe zum Detail produziert.
+        <p class="font-body text-slate-300 leading-relaxed mb-4" data-t="about-text1">
+          Ich bin Florian, Entwickler und Gründer von TraceTour. Ich verbinde echte Stadtgeschichte mit Rätseln, Audio-Erzählungen und spielerischen Elementen. Jede Tour wird sorgfältig recherchiert, vor Ort getestet und mit Liebe zum Detail produziert.
         </p>
-        <p class="font-body text-slate-300 leading-relaxed mb-6">
-          Was als Idee in Tübingen begann, wächst zu einer Plattform für gamifizierte Audio-Stadttouren in ganz Deutschland. Unser Ziel: Jede Stadt hat Geschichten, die darauf warten, entdeckt zu werden.
+        <p class="font-body text-slate-300 leading-relaxed mb-6" data-t="about-text2">
+          Was als Idee in Tübingen begann, wächst zu einer Plattform für gamifizierte Audio-Stadttouren. Mein Ziel: Jede Stadt hat Geschichten, die darauf warten, entdeckt zu werden.
         </p>
         <a href="mailto:info@tracetour.de" class="inline-flex items-center gap-2 text-primary font-brand font-bold text-sm hover:text-primary-container transition-colors">
           <span class="material-symbols-outlined text-lg">mail</span>
@@ -376,129 +385,129 @@ body {
 <!-- Pricing Section -->
 <section id="pricing" class="py-24 px-6 bg-slate-800/30">
   <div class="max-w-5xl mx-auto text-center mb-16">
-    <h2 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-4">Dein Ticket zum Abenteuer</h2>
-    <p class="font-body text-slate-400 text-sm max-w-lg mx-auto">Einmal kaufen, sofort starten. Kein Abo, keine versteckten Kosten. Du bekommst deinen Zugangscode direkt nach der Bezahlung.</p>
+    <h2 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-4" data-t="pricing-title">Dein Ticket zum Abenteuer</h2>
+    <p class="font-body text-slate-400 text-sm max-w-lg mx-auto" data-t="pricing-subtitle">Einmal kaufen, sofort starten. Kein Abo, keine versteckten Kosten. Du bekommst deinen Zugangscode direkt nach der Bezahlung.</p>
   </div>
   <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
     <!-- Solo Ticket -->
     <div class="glass-panel rounded-2xl p-8 border border-white/10 flex flex-col hover:border-white/20 transition-colors">
       <div class="mb-6">
-        <h3 class="font-brand font-bold text-slate-400 uppercase text-xs tracking-widest mb-2">Solo-Ermittler</h3>
+        <h3 class="font-brand font-bold text-slate-400 uppercase text-xs tracking-widest mb-2" data-t="price-solo-name">Solo-Ermittler</h3>
         <div class="flex items-baseline gap-1">
           <span class="font-headline text-5xl font-black text-on-surface">9,99</span>
           <span class="text-slate-400 font-body text-lg">&euro;</span>
         </div>
-        <p class="text-slate-500 text-sm mt-2">pro Person</p>
+        <p class="text-slate-500 text-sm mt-2" data-t="price-solo-per">pro Person</p>
       </div>
       <ul class="space-y-3 mb-8 flex-1">
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          Komplette Tour (17 Stationen, ~120 Min)
+          <span data-t="price-solo-f1">Komplette Tour (17 Stationen, ~120 Min)</span>
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          Professionelle Audio-Erzählung
+          <span data-t="price-solo-f2">Professionelle Audio-Erzählung</span>
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          8 Rätsel + Formel-Puzzle + Quiz
+          <span data-t="price-solo-f3">8 Rätsel + Formel-Puzzle + Quiz</span>
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          KI-Assistent &quot;Trace&quot;
+          <span data-t="price-solo-f4">KI-Assistent "Trace"</span>
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          Persönliche Urkunde mit Rang
+          <span data-t="price-solo-f5">Persönliche Urkunde mit Rang</span>
         </li>
       </ul>
-      <a href="#" class="block w-full bg-primary-container text-white py-4 rounded-xl font-brand font-bold uppercase tracking-widest hover:bg-orange-500 transition-all text-center text-sm shadow-lg shadow-primary-container/20">
+      <a href="#" class="block w-full bg-primary-container text-white py-4 rounded-xl font-brand font-bold uppercase tracking-widest hover:bg-orange-500 transition-all text-center text-sm shadow-lg shadow-primary-container/20" data-t="price-solo-cta">
         JETZT BUCHEN
       </a>
     </div>
     <!-- Gruppe Ticket -->
     <div class="relative glass-panel rounded-2xl p-8 border-2 border-primary-container/40 flex flex-col hover:border-primary-container/60 transition-colors">
-      <div class="absolute -top-3 right-6 bg-primary-container text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-lg shadow-primary-container/30">Beliebt</div>
+      <div class="absolute -top-3 right-6 bg-primary-container text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-lg shadow-primary-container/30" data-t="price-team-badge">Beliebt</div>
       <div class="mb-6">
-        <h3 class="font-brand font-bold text-primary-container uppercase text-xs tracking-widest mb-2">Ermittler-Team</h3>
+        <h3 class="font-brand font-bold text-primary-container uppercase text-xs tracking-widest mb-2" data-t="price-team-name">Ermittler-Team</h3>
         <div class="flex items-baseline gap-1">
           <span class="font-headline text-5xl font-black text-on-surface">7,99</span>
           <span class="text-slate-400 font-body text-lg">&euro;</span>
         </div>
-        <p class="text-slate-500 text-sm mt-2">pro Person &middot; 3–7 Personen</p>
+        <p class="text-slate-500 text-sm mt-2" data-t="price-team-per">pro Person &middot; 3–7 Personen</p>
       </div>
       <ul class="space-y-3 mb-8 flex-1">
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          Alles aus dem Solo-Ticket
+          <span data-t="price-team-f1">Alles aus dem Solo-Ticket</span>
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          Gemeinsam rätseln, zusammen punkten
+          <span data-t="price-team-f2">Gemeinsam rätseln, zusammen punkten</span>
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          Perfekt für Paare, Familien & Freunde
+          <span data-t="price-team-f3">Perfekt für Paare, Familien & Freunde</span>
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          20% Ersparnis pro Person
+          <span data-t="price-team-f4">20% Ersparnis pro Person</span>
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          Ideal als Geschenk oder Teambuilding
+          <span data-t="price-team-f5">Ideal als Geschenk oder Teambuilding</span>
         </li>
       </ul>
-      <a href="#" class="block w-full bg-primary-container text-white py-4 rounded-xl font-brand font-bold uppercase tracking-widest hover:bg-orange-500 transition-all text-center text-sm shadow-lg shadow-primary-container/20">
+      <a href="#" class="block w-full bg-primary-container text-white py-4 rounded-xl font-brand font-bold uppercase tracking-widest hover:bg-orange-500 transition-all text-center text-sm shadow-lg shadow-primary-container/20" data-t="price-team-cta">
         TEAM BUCHEN
       </a>
     </div>
     <!-- Schulklasse Ticket -->
     <div class="glass-panel rounded-2xl p-8 border border-white/10 flex flex-col hover:border-white/20 transition-colors">
       <div class="mb-6">
-        <h3 class="font-brand font-bold text-slate-400 uppercase text-xs tracking-widest mb-2">Schulklasse</h3>
+        <h3 class="font-brand font-bold text-slate-400 uppercase text-xs tracking-widest mb-2" data-t="price-class-name">Schulklasse</h3>
         <div class="flex items-baseline gap-1">
           <span class="font-headline text-5xl font-black text-on-surface">79,99</span>
           <span class="text-slate-400 font-body text-lg">&euro;</span>
         </div>
-        <p class="text-slate-500 text-sm mt-2">pauschal &middot; bis 30 Personen</p>
+        <p class="text-slate-500 text-sm mt-2" data-t="price-class-per">pauschal &middot; bis 30 Personen</p>
       </div>
       <ul class="space-y-3 mb-8 flex-1">
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          Alles aus dem Solo-Ticket
+          <span data-t="price-class-f1">Alles aus dem Solo-Ticket</span>
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          Bis zu 30 Schüler mit einem Code
+          <span data-t="price-class-f2">Bis zu 30 Schüler mit einem Code</span>
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          Lehrplanbezug: Stadtgeschichte erleben
+          <span data-t="price-class-f3">Lehrplanbezug: Stadtgeschichte erleben</span>
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          Ab 2,67 &euro; pro Schüler
+          <span data-t="price-class-f4">Ab 2,67 &euro; pro Schüler</span>
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          Perfekt für Wandertag oder Projekttag
+          <span data-t="price-class-f5">Perfekt für Wandertag oder Projekttag</span>
         </li>
       </ul>
-      <a href="#" class="block w-full bg-primary-container text-white py-4 rounded-xl font-brand font-bold uppercase tracking-widest hover:bg-orange-500 transition-all text-center text-sm shadow-lg shadow-primary-container/20">
+      <a href="#" class="block w-full bg-primary-container text-white py-4 rounded-xl font-brand font-bold uppercase tracking-widest hover:bg-orange-500 transition-all text-center text-sm shadow-lg shadow-primary-container/20" data-t="price-class-cta">
         KLASSE BUCHEN
       </a>
     </div>
   </div>
-  <p class="text-center text-slate-500 text-xs mt-8 font-body">Sichere Bezahlung via Stripe. Kreditkarte, Apple Pay & Google Pay. Zugangscode kommt sofort per E-Mail.</p>
+  <p class="text-center text-slate-500 text-xs mt-8 font-body" data-t="pricing-footer">Sichere Bezahlung via Stripe. Kreditkarte, Apple Pay & Google Pay. Zugangscode kommt sofort per E-Mail.</p>
 </section>
 
 <!-- Expansion Section -->
 <section id="expansion" class="py-24 px-6 bg-slate-800/30">
   <div class="max-w-7xl mx-auto">
     <div class="mb-16">
-      <h2 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-2">Expansion</h2>
-      <p class="font-body text-slate-400 text-sm">Weitere Städte & Touren in Vorbereitung</p>
+      <h2 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-2" data-t="expansion-title">Expansion</h2>
+      <p class="font-body text-slate-400 text-sm" data-t="expansion-subtitle">Weitere Städte & Touren in Vorbereitung</p>
     </div>
     <div class="grid grid-cols-3 gap-3 sm:gap-6">
       <div class="city-card">
@@ -506,7 +515,7 @@ body {
         <div class="overlay"></div>
         <div class="label">
           <span class="name">Tübingen II</span>
-          <span class="status">In Vorbereitung</span>
+          <span class="status" data-t="city-prep">In Vorbereitung</span>
         </div>
       </div>
       <div class="city-card">
@@ -534,10 +543,10 @@ body {
   <div class="max-w-7xl mx-auto rounded-xl bg-primary-container p-12 md:p-20 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
     <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
     <div class="relative z-10">
-      <h2 class="font-headline text-4xl md:text-5xl font-black text-white tracking-tighter leading-none mb-2">BEREIT FÜR DIE<br/>ERSTE MISSION?</h2>
-      <p class="text-orange-100 text-sm font-body">Kein App-Download. Kein Gerät nötig außer deinem Smartphone.</p>
+      <h2 class="font-headline text-4xl md:text-5xl font-black text-white tracking-tighter leading-none mb-2" data-t="cta-title" data-t-html="1">BEREIT FÜR DIE<br/>ERSTE MISSION?</h2>
+      <p class="text-orange-100 text-sm font-body" data-t="cta-subtitle">Kein App-Download. Kein Gerät nötig außer deinem Smartphone.</p>
     </div>
-    <a href="app.html" class="relative z-10 bg-slate-950 text-white px-12 py-5 rounded-xl font-brand font-black text-lg tracking-widest hover:bg-slate-900 hover:scale-105 transition-all shadow-xl whitespace-nowrap">
+    <a href="app.html" class="relative z-10 bg-slate-950 text-white px-12 py-5 rounded-xl font-brand font-black text-lg tracking-widest hover:bg-slate-900 hover:scale-105 transition-all shadow-xl whitespace-nowrap" data-t="cta-button">
       JETZT STARTEN
     </a>
   </div>
@@ -548,19 +557,149 @@ body {
   <div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
     <div>
       <div class="font-brand font-bold text-slate-400 text-sm">TRACETOUR BY FLORIAN S. THIEL</div>
-      <div class="font-body text-xs text-slate-600 mt-1">Gamifizierte Audio-Stadttouren</div>
+      <div class="font-body text-xs text-slate-600 mt-1" data-t="footer-tagline">Gamifizierte Audio-Stadttouren</div>
     </div>
     <div class="font-body text-xs tracking-widest uppercase text-slate-600 text-center">
       &copy; 2026 TraceTour by Florian S. Thiel
     </div>
     <div class="flex gap-6">
-      <a class="font-body text-xs tracking-widest uppercase text-slate-500 hover:text-orange-400 transition-colors" href="impressum.html">Impressum</a>
-      <a class="font-body text-xs tracking-widest uppercase text-slate-500 hover:text-orange-400 transition-colors" href="datenschutz.html">Datenschutz</a>
-      <a class="font-body text-xs tracking-widest uppercase text-slate-500 hover:text-orange-400 transition-colors" href="agb.html">AGB</a>
-      <a class="font-body text-xs tracking-widest uppercase text-slate-500 hover:text-orange-400 transition-colors" href="app.html">Zur App</a>
+      <a class="font-body text-xs tracking-widest uppercase text-slate-500 hover:text-orange-400 transition-colors" href="impressum.html" data-t="footer-imprint">Impressum</a>
+      <a class="font-body text-xs tracking-widest uppercase text-slate-500 hover:text-orange-400 transition-colors" href="datenschutz.html" data-t="footer-privacy">Datenschutz</a>
+      <a class="font-body text-xs tracking-widest uppercase text-slate-500 hover:text-orange-400 transition-colors" href="agb.html" data-t="footer-terms">AGB</a>
+      <a class="font-body text-xs tracking-widest uppercase text-slate-500 hover:text-orange-400 transition-colors" href="app.html" data-t="footer-app">Zur App</a>
     </div>
   </div>
 </footer>
 
+<script>
+const translations = {
+  // Nav
+  'nav-tours': ['Touren', 'Tours'],
+  'nav-how': ['So funktioniert\'s', 'How It Works'],
+  'nav-cities': ['Städte', 'Cities'],
+  'nav-about': ['Über mich', 'About Me'],
+  'nav-login': ['Login', 'Login'],
+  'nav-start': ['STARTEN', 'START'],
+
+  // Hero
+  'hero-title': ['DIE STADT IST DEIN<br/><span class="text-primary-container">SPIELFELD.</span>', 'THE CITY IS YOUR<br/><span class="text-primary-container">PLAYGROUND.</span>'],
+  'hero-subtitle': ['Kriminalfälle, Rätsel und echte Geschichte vereint in einer gamifizierten Audio-Experience für die Hosentasche. Entdecke deine Stadt in einem völlig neuen Licht.', 'Crime cases, puzzles and real history united in a gamified audio experience for your pocket. Discover your city in a completely new light.'],
+  'hero-cta-start': ['TOUR STARTEN', 'START TOUR'],
+  'hero-cta-how': ['SO FUNKTIONIERT\'S', 'HOW IT WORKS'],
+
+  // Stats bar
+  'stat-stations': ['Stationen', 'Stations'],
+  'stat-playtime': ['Min. Spielzeit', 'Min. Playtime'],
+  'stat-year': ['Das Jahr des Rätsels', 'The Year of the Mystery'],
+  'stat-traces': ['Traces zu sammeln', 'Traces to Collect'],
+
+  // Featured tour
+  'tour-heading': ['Aktuelle Mission', 'Current Mission'],
+  'tour-desc': ['Tübingen, 1869. Ein Wissenschaftler auf der Flucht vor dem Königlichen Ministerium. Eine Formel, die zu gefährlich ist für die Mächtigen. 17 Stationen vom Schloss bis zum Neckar.', 'Tübingen, 1869. A scientist on the run from the Royal Ministry. A formula too dangerous for those in power. 17 stations from the castle to the Neckar river.'],
+  'tour-badge': ['Verfügbar', 'Available'],
+  'tour-stations': ['17 Stationen', '17 Stations'],
+  'tour-duration': ['ca. 120 Min', 'approx. 120 min'],
+  'tour-audio': ['Audio-Experience', 'Audio Experience'],
+  'tour-traces': ['1090 Traces', '1090 Traces'],
+  'tour-story-label': ['Die Story', 'The Story'],
+  'tour-story-text': ['"Eine Formel, die die Welt verändern könnte. Ein Forscher, der vor den Gendarmen des Königs flieht. 17 Orte in Tübingen bewahren sein Geheimnis seit 1869 – findest du alle Fragmente?"', '"A formula that could change the world. A researcher fleeing from the king\'s gendarmes. 17 locations in Tübingen have guarded his secret since 1869 – can you find all the fragments?"'],
+  'tour-expect-label': ['Was dich erwartet', 'What Awaits You'],
+  'tour-feat-1': ['Spannende Erzählung & Tagebücher', 'Thrilling narrative & diaries'],
+  'tour-feat-2': ['GPS-Rätsel vor Ort', 'GPS puzzles on location'],
+  'tour-feat-3': ['8 Formel-Fragmente entschlüsseln', '8 formula fragments to decode'],
+  'tour-feat-4': ['Dein Begleiter „Trace" hilft unterwegs', 'Your companion "Trace" helps along the way'],
+  'tour-feat-5': ['Teilnehmer-Urkunde am Ende', 'Certificate of completion'],
+  'tour-feat-6': ['Kein App-Download nötig', 'No app download needed'],
+  'tour-cta': ['JETZT STARTEN', 'START NOW'],
+
+  // How it works
+  'how-title': ['So funktioniert\'s', 'How It Works'],
+  'how-subtitle': ['In drei Schritten zum Ermittler', 'Become an investigator in three steps'],
+  'step1-title': ['1. Code erhalten', '1. Get Your Code'],
+  'step1-desc': ['Kaufe einen Zugangscode und starte sofort im Browser. Kein Download, kein App Store.', 'Buy an access code and start right away in your browser. No download, no app store.'],
+  'step2-title': ['2. Stadt erkunden', '2. Explore the City'],
+  'step2-desc': ['Geh zum Startpunkt und tauche in die Geschichte ein. GPS führt dich von Station zu Station.', 'Head to the starting point and dive into the story. GPS guides you from station to station.'],
+  'step3-title': ['3. Urkunde sichern', '3. Earn Your Certificate'],
+  'step3-desc': ['Löse alle Rätsel, sammle Traces und erhalte deine persönliche Teilnehmer-Urkunde zum Teilen.', 'Solve all puzzles, collect Traces and receive your personal certificate to share.'],
+
+  // About
+  'about-title': ['Über mich', 'About Me'],
+  'about-text1': ['Ich bin Florian, Entwickler und Gründer von TraceTour. Ich verbinde echte Stadtgeschichte mit Rätseln, Audio-Erzählungen und spielerischen Elementen. Jede Tour wird sorgfältig recherchiert, vor Ort getestet und mit Liebe zum Detail produziert.', 'I\'m Florian, developer and founder of TraceTour. I combine real city history with puzzles, audio narratives, and game elements. Every tour is carefully researched, tested on location, and produced with attention to detail.'],
+  'about-text2': ['Was als Idee in Tübingen begann, wächst zu einer Plattform für gamifizierte Audio-Stadttouren. Mein Ziel: Jede Stadt hat Geschichten, die darauf warten, entdeckt zu werden.', 'What started as an idea in Tübingen is growing into a platform for gamified audio city tours. My goal: every city has stories waiting to be discovered.'],
+
+  // Pricing
+  'pricing-title': ['Dein Ticket zum Abenteuer', 'Your Ticket to Adventure'],
+  'pricing-subtitle': ['Einmal kaufen, sofort starten. Kein Abo, keine versteckten Kosten. Du bekommst deinen Zugangscode direkt nach der Bezahlung.', 'Buy once, start immediately. No subscription, no hidden costs. You receive your access code right after payment.'],
+  'price-solo-name': ['Solo-Ermittler', 'Solo Investigator'],
+  'price-solo-per': ['pro Person', 'per person'],
+  'price-solo-f1': ['Komplette Tour (17 Stationen, ~120 Min)', 'Complete tour (17 stations, ~120 min)'],
+  'price-solo-f2': ['Professionelle Audio-Erzählung', 'Professional audio narration'],
+  'price-solo-f3': ['8 Rätsel + Formel-Puzzle + Quiz', '8 puzzles + formula puzzle + quiz'],
+  'price-solo-f4': ['KI-Assistent "Trace"', 'AI assistant "Trace"'],
+  'price-solo-f5': ['Persönliche Urkunde mit Rang', 'Personal certificate with rank'],
+  'price-solo-cta': ['JETZT BUCHEN', 'BOOK NOW'],
+  'price-team-badge': ['Beliebt', 'Popular'],
+  'price-team-name': ['Ermittler-Team', 'Investigation Team'],
+  'price-team-per': ['pro Person \u00b7 3\u20137 Personen', 'per person \u00b7 3\u20137 people'],
+  'price-team-f1': ['Alles aus dem Solo-Ticket', 'Everything from the Solo ticket'],
+  'price-team-f2': ['Gemeinsam rätseln, zusammen punkten', 'Solve puzzles together, score together'],
+  'price-team-f3': ['Perfekt für Paare, Familien & Freunde', 'Perfect for couples, families & friends'],
+  'price-team-f4': ['20% Ersparnis pro Person', '20% savings per person'],
+  'price-team-f5': ['Ideal als Geschenk oder Teambuilding', 'Ideal as a gift or team building'],
+  'price-team-cta': ['TEAM BUCHEN', 'BOOK TEAM'],
+  'price-class-name': ['Schulklasse', 'School Class'],
+  'price-class-per': ['pauschal \u00b7 bis 30 Personen', 'flat rate \u00b7 up to 30 people'],
+  'price-class-f1': ['Alles aus dem Solo-Ticket', 'Everything from the Solo ticket'],
+  'price-class-f2': ['Bis zu 30 Schüler mit einem Code', 'Up to 30 students with one code'],
+  'price-class-f3': ['Lehrplanbezug: Stadtgeschichte erleben', 'Curriculum-linked: experience city history'],
+  'price-class-f4': ['Ab 2,67 \u20ac pro Schüler', 'From \u20ac2.67 per student'],
+  'price-class-f5': ['Perfekt für Wandertag oder Projekttag', 'Perfect for field trips or project days'],
+  'price-class-cta': ['KLASSE BUCHEN', 'BOOK CLASS'],
+  'pricing-footer': ['Sichere Bezahlung via Stripe. Kreditkarte, Apple Pay & Google Pay. Zugangscode kommt sofort per E-Mail.', 'Secure payment via Stripe. Credit card, Apple Pay & Google Pay. Access code delivered instantly by email.'],
+
+  // Expansion
+  'expansion-title': ['Expansion', 'Expansion'],
+  'expansion-subtitle': ['Weitere Städte & Touren in Vorbereitung', 'More cities & tours in preparation'],
+  'city-prep': ['In Vorbereitung', 'In Preparation'],
+
+  // CTA
+  'cta-title': ['BEREIT FÜR DIE<br/>ERSTE MISSION?', 'READY FOR YOUR<br/>FIRST MISSION?'],
+  'cta-subtitle': ['Kein App-Download. Kein Gerät nötig außer deinem Smartphone.', 'No app download. No device needed other than your smartphone.'],
+  'cta-button': ['JETZT STARTEN', 'START NOW'],
+
+  // Footer
+  'footer-tagline': ['Gamifizierte Audio-Stadttouren', 'Gamified Audio City Tours'],
+  'footer-imprint': ['Impressum', 'Imprint'],
+  'footer-privacy': ['Datenschutz', 'Privacy'],
+  'footer-terms': ['AGB', 'Terms'],
+  'footer-app': ['Zur App', 'To App'],
+};
+
+let currentLang = localStorage.getItem('tracetour_lang') || 'de';
+
+function setPageLang(l) {
+  currentLang = l;
+  localStorage.setItem('tracetour_lang', l);
+  document.querySelectorAll('[data-t]').forEach(el => {
+    const key = el.dataset.t;
+    if (translations[key]) {
+      if (el.dataset.tHtml) {
+        el.innerHTML = translations[key][l === 'en' ? 1 : 0];
+      } else {
+        el.textContent = translations[key][l === 'en' ? 1 : 0];
+      }
+    }
+  });
+  // Update toggle buttons
+  document.querySelectorAll('.lang-btn-lp').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === l.toUpperCase());
+  });
+  // Update html lang attribute
+  document.documentElement.lang = l;
+}
+
+// Init
+setPageLang(currentLang);
+</script>
 </body>
 </html>
