@@ -315,7 +315,8 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 <div class="splash-sub">by Florian S. Thiel</div>
 <div class="login-box">
 <input type="text" id="loginName" placeholder="Dein Ermittlername" autocomplete="off" autocapitalize="words">
-<input type="text" id="loginCode" placeholder="Zugangscode" autocomplete="off" autocapitalize="characters">
+<input type="password" id="loginCode" placeholder="Zugangscode" autocomplete="off">
+<div id="loginError" style="display:none;font-size:.78rem;color:var(--error);margin:-6px 0 8px;padding:8px 12px;background:rgba(248,113,113,.08);border-radius:var(--r-sm);border:1px solid rgba(248,113,113,.2)"></div>
 <input type="text" id="loginGroup" placeholder="Teamname (optional)" autocomplete="off" autocapitalize="words">
 <button class="btn-primary" onclick="doLogin()">Einloggen</button>
 <div class="login-hint" id="loginHint">Dein Zugangscode ist persönlich und an ein Gerät gebunden.<br>Er wird beim ersten Login aktiviert.</div>
@@ -628,7 +629,7 @@ function getAudioBase(){return lang==='en'?'audio/en/':'audio/';}
 const T={
 de:{
   loginPlaceholder:'Dein Ermittlername',codePlaceholder:'Zugangscode',groupPlaceholder:'Teamname (optional)',
-  btnLogin:'Einloggen',loginHint:'Dein Zugangscode ist persönlich und an ein Gerät gebunden.\nEr wird beim ersten Login aktiviert.',
+  btnLogin:'Einloggen',loginError:'Ungültiger Zugangscode. Bitte prüfe deinen Code.',loginHint:'Dein Zugangscode ist persönlich und an ein Gerät gebunden.\nEr wird beim ersten Login aktiviert.',
   backLink:'\u2190 Zurück zur Startseite',
   testerWelcomeHeading:'Willkommen,',testerWelcomeP1:'Schön, dass du TraceTour testest! Du gehörst zu den Ersten, die "Die Formel des Forschers" erleben. Ich freue mich riesig über dein Feedback \u2014 was hat dir gefallen, was kann besser werden, wo hakt es?',
   testerWelcomeP2:'Schreib mir gerne direkt an','testerWelcomeP2b':' oder sprich mich einfach an. Viel Spaß beim Ermitteln!',testerBtn:'LOS GEHT\'S',
@@ -734,7 +735,7 @@ de:{
 },
 en:{
   loginPlaceholder:'Your investigator name',codePlaceholder:'Access code',groupPlaceholder:'Team name (optional)',
-  btnLogin:'Log in',loginHint:'Your access code is personal and tied to one device.\nIt is activated on first login.',
+  btnLogin:'Log in',loginError:'Invalid access code. Please check your code.',loginHint:'Your access code is personal and tied to one device.\nIt is activated on first login.',
   backLink:'\u2190 Back to homepage',
   testerWelcomeHeading:'Welcome,',testerWelcomeP1:'Great to have you testing TraceTour! You are among the first to experience "The Researcher\'s Formula." I would love your feedback \u2014 what did you enjoy, what could be better, where did things get stuck?',
   testerWelcomeP2:'Feel free to write me at','testerWelcomeP2b':' or just talk to me directly. Enjoy the investigation!',testerBtn:'LET\'S GO',
@@ -1487,9 +1488,12 @@ function doLogin(){
   const code=document.getElementById('loginCode').value.trim().toUpperCase();
   if(!name){document.getElementById('loginName').focus();return}
   if(code!=='TUEBINGEN2026'&&code!=='TUEBINGEN2025'&&code!=='PRIVAT'){
+    const err=document.getElementById('loginError');
+    err.textContent=t('loginError');err.style.display='block';
     document.getElementById('loginCode').style.borderColor='var(--error)';
-    setTimeout(()=>document.getElementById('loginCode').style.borderColor='',1500);return;
+    setTimeout(()=>{document.getElementById('loginCode').style.borderColor='';err.style.display='none';},3000);return;
   }
+  document.getElementById('loginError').style.display='none';
   debugMode=(code==='PRIVAT');userName=name;groupName=document.getElementById('loginGroup').value.trim();
   updateDebugToggle();
   document.getElementById('userNameDisplay').textContent=name;
