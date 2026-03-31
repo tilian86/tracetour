@@ -1610,11 +1610,9 @@ function navStation(dir){
   const next=currentStation+dir;
   if(next<0){stopAudio(true);stopAmbient();showScreen('prologue');return}
   if(dir>0&&debugMode&&next<stations.length){
-    // Debug: auto-unlock and skip to next station
     if(!solvedStations[currentStation]){solvedStations[currentStation]=true;}
     if(maxUnlockedStation<next)maxUnlockedStation=next;
-    stopAudio(true);stopAmbient();closeAi();currentStation=next;saveGame();renderStation();
-    window.scrollTo({top:0,behavior:'smooth'});return;
+    stopAudio(true);stopAmbient();closeAi();currentStation=next;saveGame();renderStation();return;
   }
   if(next>=0&&next<=maxUnlockedStation&&next<stations.length){
     stopAudio(true);stopAmbient();closeAi();currentStation=next;saveGame();renderStation();
@@ -1642,7 +1640,7 @@ function renderStation(){
   const s=stations[currentStation],el=document.getElementById('stationContent');
   document.getElementById('topTitle').textContent=stationField(s,'name');
   document.getElementById('navPrev').disabled=false;
-  document.getElementById('navNext').disabled=(currentStation>=maxUnlockedStation);
+  document.getElementById('navNext').disabled=(!debugMode&&currentStation>=maxUnlockedStation);
 
   stationMarkers.forEach((m,i)=>{
     const visible=i<=maxUnlockedStation;
