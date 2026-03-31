@@ -556,6 +556,12 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <div class="ff-text">„Wo aber Gefahr ist, wächst das Rettende auch."</div>
 <div class="ff-author">— Friedrich Hölderlin, „Patmos" (1803)</div>
 <div class="ff-explain">Hölderlin lebte 36 Jahre im Turm am Neckar – nur wenige hundert Meter von deiner letzten Station entfernt. Heinrich kannte seine Verse und verstand: Die wahre Formel war nie eine Waffe. Sie war ein Versprechen. Wo Wissen unterdrückt wird, wächst der Mut, es zu teilen.</div>
+<div class="audio-row" id="audioFormula" onclick="playAudio('formula','audioFormula','formula')" style="margin:1rem 0 0">
+  <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
+  <div><div class="audio-label">Formel anhören</div><div class="audio-sublabel">Erzähler</div></div>
+  <div class="audio-time" id="timeFormula">--:--</div>
+</div>
+<div class="audio-progress" data-type="formula" onclick="seekAudio(event,'formula')" style="margin:6px 0 4px"><div class="audio-progress-fill" id="progFillFormula"></div></div>
 </div>
 
 <div style="margin-bottom:1.5rem">
@@ -569,6 +575,12 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <p id="thankP1" style="font-size:.85rem;line-height:1.7;color:var(--text-2)">Vielen herzlichen Dank, dass du mit uns unterwegs warst. Wir sind ein kleines, leidenschaftliches Team – und jede einzelne Tour bedeutet uns die Welt. Wenn dir die Erfahrung etwas gegeben hat, erzähl es gerne weiter.</p>
 <p id="thankP2" style="font-size:.85rem;line-height:1.7;color:var(--text-2);margin-top:.75rem">Wir wünschen dir noch viel Freude in Tübingen – und wer weiß: Vielleicht sehen wir uns bald bei einer neuen Tour wieder.</p>
 <div style="margin-top:1rem;font-size:.75rem;color:var(--accent);font-weight:600">TraceTour by Florian S. Thiel · tracetour.de</div>
+<div class="audio-row" id="audioThanks" onclick="playAudio('thanks','audioThanks','thanks')" style="margin-top:1rem">
+  <div class="audio-icon"><span class="material-symbols-outlined">play_arrow</span></div>
+  <div><div class="audio-label">Danksagung anhören</div><div class="audio-sublabel">Jessica</div></div>
+  <div class="audio-time" id="timeThanks">--:--</div>
+</div>
+<div class="audio-progress" data-type="thanks" onclick="seekAudio(event,'thanks')" style="margin:6px 0 4px"><div class="audio-progress-fill" id="progFillThanks"></div></div>
 </div>
 
 <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1.5rem;max-width:480px;width:100%">
@@ -580,8 +592,8 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <canvas id="certificateCanvas" style="width:100%;max-width:480px;border-radius:var(--r);border:1px solid var(--border);margin-bottom:1rem"></canvas>
 <button class="share-btn" style="max-width:300px" onclick="shareCertificate()"><span class="material-symbols-outlined">share</span> Urkunde teilen</button>
 <button class="share-btn" style="max-width:300px" onclick="saveCertificate()"><span class="material-symbols-outlined">download</span> Urkunde speichern</button>
-<button class="share-btn" style="max-width:300px" onclick="window.open('mailto:info@tracetour.de?subject=TraceTour Feedback&body=Hey! Ich habe gerade die Tour in Tübingen gemacht und wollte euch sagen:')"><span class="material-symbols-outlined">mail</span> Feedback senden</button>
-<button class="btn-primary" style="max-width:300px;margin-top:.5rem" onclick="clearSave();showScreen('tourSelect')">Zurück zur Übersicht</button>
+<button class="share-btn" style="max-width:300px" onclick="window.location.href='mailto:info@tracetour.de?subject=TraceTour Feedback&body=Hey! Ich habe gerade die Tour in Tübingen gemacht und wollte euch sagen:'"><span class="material-symbols-outlined">mail</span> Feedback senden</button>
+<button class="btn-primary" style="max-width:300px;margin-top:.5rem" onclick="window.location.href='index.html'">Zur Startseite</button>
 </div>
 </div>
 

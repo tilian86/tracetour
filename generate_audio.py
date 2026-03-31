@@ -752,6 +752,30 @@ SPECIAL_AUDIO = {
             "später weitermachen."
         ),
     },
+    "formula": {
+        "voice": NARRATOR_VOICE,
+        "text": (
+            "Heinrichs Formel.\n\n"
+            "Wo aber Gefahr ist, wächst das Rettende auch.\n\n"
+            "Friedrich Hölderlin schrieb diese Zeile achtzehnhundertdrei in seiner Hymne Patmos. "
+            "Er lebte sechsunddreißig Jahre im Turm am Neckar – nur wenige hundert Meter von "
+            "deiner letzten Station entfernt.\n\n"
+            "Heinrich kannte seine Verse und verstand: Die wahre Formel war nie eine Waffe. "
+            "Sie war ein Versprechen. Wo Wissen unterdrückt wird, wächst der Mut, es zu teilen."
+        ),
+    },
+    "thanks": {
+        "voice": "cgSgspJ2msm6clMCkdW9",  # Jessica - warm, persönlich
+        "text": (
+            "Von uns für dich.\n\n"
+            "Vielen herzlichen Dank, dass du mit uns unterwegs warst. Wir sind ein kleines, "
+            "leidenschaftliches Team – und jede einzelne Tour bedeutet uns die Welt. "
+            "Wenn dir die Erfahrung etwas gegeben hat, erzähl es gerne weiter.\n\n"
+            "Wir wünschen dir noch viel Freude in Tübingen – und wer weiß: Vielleicht sehen "
+            "wir uns bald bei einer neuen Tour wieder.\n\n"
+            "TraceTour – by Florian S. Thiel."
+        ),
+    },
     "epilog": {
         "voice": "cgSgspJ2msm6clMCkdW9",  # Jessica - Playful, Bright, Warm
         "text": (
