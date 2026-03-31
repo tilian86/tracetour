@@ -1619,7 +1619,6 @@ function mapsUrl(lat,lng,name){return `https://www.google.com/maps/search/?api=1
 
 // ====== RENDER ======
 function renderStation(){
-  if(debugMode)toggleMobileView();
   const gp=document.getElementById('gamePanel');if(gp)gp.scrollTop=0;
   window.scrollTo({top:0,behavior:'smooth'});
   // Bonus question overlay
