@@ -244,9 +244,11 @@ STATIONS = [
             "Schau nach oben zum Turm: Die vier Evangelistenfiguren auf den Turmfialen - Lukas als Stier, "
             "Matthäus als Engel, Markus als Löwe, Johannes als Adler - stammen erst von "
             "neunzehnhundertzweiunddreißig, geschaffen vom Bildhauer Fritz von Graevenitz.\n\n"
-            "Die Turmwächterwohnung auf halber Höhe war bis neunzehnhundertachtundvierzig bewohnt! "
-            "Der letzte Turmwächter hieß Karl Weihenmaier und lebte dort mit seiner ganzen Familie - "
-            "hundertneunundsechzig Stufen über der Stadt."
+            "Die Turmwächterwohnung auf halber Höhe war bis neunzehnhundertvierundzwanzig bewohnt! "
+            "Der letzte Turmwächter hieß Friedrich Baumann und teilte sich den Dienst mit seinem "
+            "Sohn Wilhelm – im Viertelstundentakt mussten sie nach allen Richtungen Ausschau halten, "
+            "hundertneunundsechzig Stufen über der Stadt. Seine Urenkelin Sabine Ergenzinger erzählt "
+            "heute noch bei Turmführungen aus seinen Briefen."
         ),
         "riddle": (
             "Schau dir den Kirchturm der Stiftskirche genau an. Wie hoch ist er? "
