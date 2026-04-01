@@ -128,12 +128,10 @@ input{font-family:inherit;color:inherit}
 .challenge-actions{display:flex;gap:.5rem;flex-wrap:wrap}
 .challenge-btn{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .9rem;border-radius:var(--r-sm);font-weight:700;font-size:.82rem;transition:transform .1s}
 .challenge-btn:active{transform:scale(.96)}
-.challenge-btn-photo{background:#8b5cf6;color:#fff;border:2px solid #7c3aed}
 .challenge-btn-done{background:var(--green);color:#fff;border:2px solid var(--green-light)}
 .challenge-btn-count{background:var(--yellow);color:var(--green);border:2px solid var(--yellow-dark)}
 .challenge-input{width:70px;padding:.45rem .6rem;border:2px solid #c4b5fd;border-radius:8px;font-size:1rem;font-weight:700;text-align:center;background:#fff;color:var(--text)}
 .challenge-done{background:#e6faf0;border-color:#00a843;color:#006a2d;padding:.6rem .9rem;border-radius:var(--r-sm);font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:.4rem;border:1.5px solid #00a843}
-.challenge-photo-preview{width:100%;border-radius:var(--r-sm);margin-top:.6rem;max-height:200px;object-fit:cover;border:2px solid #c4b5fd;display:none}
 .action-btn{width:100%;padding:14px;font-weight:900;font-size:1rem;border-radius:var(--r-sm);margin-bottom:.8rem;transition:transform .1s}
 .action-btn:active{transform:scale(.97)}
 .action-btn-green{background:var(--green);color:#fff;border:2px solid var(--green-light);box-shadow:0 4px 16px rgba(0,106,45,.25)}
@@ -256,7 +254,7 @@ input{font-family:inherit;color:inherit}
     <div id="splashError">Gib deinen Namen ein! 😊</div>
   </div>
   <div class="splash-footer">Eine Tour von <strong style="color:rgba(255,255,255,.8)">TraceTour Tübingen</strong></div>
-  <div class="splash-prompts-link" onclick="openPrompts()">🎨 Bild-Prompts</div>
+  <div class="splash-prompts-link" id="promptsLink" style="display:none" onclick="openPrompts()">🎨 Bild-Prompts</div>
 </div>
 </div>
 
@@ -346,7 +344,7 @@ question:'Was macht Tübi auf dem Ziffernblatt der Rathausuhr?',
 options:[{text:'Er schlägt jede Stunde die Glocke',correct:false},{text:'Er schnappt sich die Sonne und den Mond',correct:true},{text:'Er bläst Feuer auf die Zeiger',correct:false}],
 win:'🔥 YEAH! Erster Funke gefunden! Tübi schnappt sich Sonne und Mond – darum heißt er der Drachenzeiger!',
 lose:'🐉 Tübi schnappt sich Sonne und Mond! Deswegen heißt er der „Drachenzeiger". Der Funke zählt trotzdem!',
-challenge:{type:'photo',emoji:'📸',text:'Finde den Drachen auf der Rathausuhr und mach ein Selfie mit ihm!',hint:'Schau nach oben auf das Ziffernblatt – siehst du Tübi?'},
+challenge:{type:'seek',emoji:'👀',text:'Schau nach oben auf die Rathausuhr! Kannst du den Drachen auf dem Ziffernblatt finden?',hint:'Tipp: Der Drache sitzt direkt auf dem Zeiger – er schnappt nach Sonne und Mond!'},
 prompt:'A colorful, friendly watercolor cartoon illustration of the Tübingen Rathaus (town hall) at the Marktplatz. The famous astronomical clock is prominently shown on the facade. A small, cute green dragon with a golden belly and tiny wings sits on the clock face, playfully snapping at a golden sun and silver moon. Medieval half-timbered houses frame the square. Warm sunlight, blue sky, soft pastel watercolor style with green and yellow accents, children\'s book illustration, wide format 16:9, no text.'},
 
 {id:1,emoji:'⛪',title:'Der schiefe Turm von Tübingen',chapter:'Kapitel 2',place:'Stiftskirche · Holzmarkt',lat:48.520002,lng:9.055678,image:'images/kinder/station_1.jpg',
@@ -356,7 +354,7 @@ question:'Was stimmt über den Turm der Stiftskirche?',
 options:[{text:'Er ist perfekt gerade',correct:false},{text:'Er lehnt sich 8 Zentimeter zur Seite',correct:true},{text:'Er ist der höchste in ganz Deutschland',correct:false}],
 win:'🔥 Zweiter Funke! Ja, der Turm ist wirklich 8 cm schief – Tübingens eigener schiefer Turm!',
 lose:'⛪ Der Turm lehnt sich 8 cm zur Seite! Ob Tübi daran schuld ist? 😄 Der Funke zählt trotzdem!',
-challenge:{type:'photo',emoji:'📸',text:'Stell dich vor den Turm und lehn dich 8 cm zur Seite – so schief wie der Turm! Mach ein Foto!',hint:'Steh am besten südlich der Kirche, da sieht man die Neigung am besten.'},
+challenge:{type:'do',emoji:'🤸',text:'Stell dich vor den Turm und lehn dich zur Seite – so schief wie der Turm! 8 Zentimeter!',hint:'Steh am besten südlich der Kirche. Von dort sieht man die Neigung am besten!'},
 prompt:'A colorful watercolor cartoon illustration of the Stiftskirche (collegiate church) in Tübingen with its tall, slightly leaning stone tower. A small cute green dragon with golden belly and tiny wings is flying near the tower top, looking startled as if he just bumped into it. The tower visibly tilts slightly. A large old bronze bell is visible in the tower window. Warm golden sunlight, cobblestone square below. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'},
 
 {id:2,emoji:'🐲',title:'Tübis Cousin',chapter:'Kapitel 3',place:'Georgsbrunnen · Holzmarkt',lat:48.520403,lng:9.055689,image:'images/kinder/station_2.jpg',
@@ -366,7 +364,7 @@ question:'Wofür wurde der 500 Jahre alte Brunnen 1961 abgerissen?',
 options:[{text:'Für ein neues Restaurant',correct:false},{text:'Für drei Parkplätze',correct:true},{text:'Für eine Bushaltestelle',correct:false}],
 win:'🔥 Dritter Funke! DREI PARKPLÄTZE! Tübi ist immer noch empört! 😤',
 lose:'🅿️ Für drei Parkplätze! Unglaublich! Zum Glück steht der Brunnen jetzt wieder. Der Funke ist deiner!',
-challenge:{type:'count',emoji:'🔢',text:'Zähle: Wie viele Ecken hat das Brunnenbecken?',hint:'Geh einmal um den Brunnen herum und zähle die Ecken!',answer:8,tolerance:2},
+challenge:{type:'count',emoji:'🔢',text:'Geh einmal um den Brunnen herum und zähle: Aus wie vielen Rohren spritzt das Wasser?',hint:'Schau genau hin – manche sind klein und versteckt!',answer:4,tolerance:2},
 prompt:'A colorful watercolor cartoon illustration of the Georgsbrunnen (St. George fountain) in Tübingen on the Holzmarkt square. A stone knight on horseback fights a dragon on top of the fountain. A small cute green dragon watches from behind a half-timbered house, looking annoyed with crossed arms because the knight is standing on his cousin. Water splashes from the fountain. Medieval square with colorful houses. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'},
 
 {id:3,emoji:'🏰',title:'Tübis Geheimversteck',chapter:'Kapitel 4',place:'Schloss Hohentübingen',lat:48.519513,lng:9.051072,image:'images/kinder/station_3.jpg',
@@ -376,7 +374,7 @@ question:'Wie viele Badewannen passen in das riesige Weinfass?',
 options:[{text:'Ungefähr 50',correct:false},{text:'Ungefähr 336',correct:true},{text:'Ungefähr 1.000',correct:false}],
 win:'🔥 Vierter Funke! 336 Badewannen! Und jetzt wohnt Flatter die Fledermaus darin! 🦇',
 lose:'🛁 336 Badewannen! Ein riesiges Fass – und heute ein Fledermaus-Hotel. Trotzdem: Funke gefunden!',
-challenge:{type:'seek',emoji:'🔍',text:'Finde den Eingang zu den Geheimgängen im Schloss-Innenhof! Wenn du ihn gefunden hast, drück auf „Gefunden!"',hint:'Geh in den westlichen Innenhof und schau dich um – der Eingang ist enger als du denkst!'},
+challenge:{type:'seek',emoji:'🔍',text:'Schau dir das große Schlosstor genau an! Findest du ein Wappen oder ein besonderes Zeichen darauf?',hint:'Am Tor gibt es Steinmetzarbeiten und Wappen – schau über dem Eingang!'},
 prompt:'A colorful watercolor cartoon illustration of Schloss Hohentübingen (castle) on a hilltop. In the dark stone cellar, a giant wooden wine barrel is shown, with several cute bats hanging inside. A small green dragon with golden belly peeks into the barrel with a tiny flashlight, playing with a friendly bat. Above ground, the castle has towers and stone walls against a blue sky. A secret tunnel entrance is visible. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'},
 
 {id:4,emoji:'💰',title:'Geld, Dichter und ein Gefängnis',chapter:'Kapitel 5',place:'Münzgasse',lat:48.520001,lng:9.055591,image:'images/kinder/station_4.jpg',
@@ -396,7 +394,7 @@ question:'Welche berühmte Blume ist nach einem Bewohner des Nonnenhauses benann
 options:[{text:'Die Rose',correct:false},{text:'Die Fuchsie',correct:true},{text:'Die Sonnenblume',correct:false}],
 win:'🔥 Sechster Funke! Die Fuchsie – nach Leonhart Fuchs! Der hatte hier 10 Kinder! 🌺',
 lose:'🌺 Die Fuchsie! Benannt nach Leonhart Fuchs, der hier mit 10 Kindern wohnte. Funke gefunden!',
-challenge:{type:'seek',emoji:'👀',text:'Geh in den Buchladen im Erdgeschoss und schau durch das Glasfenster im Boden! Was siehst du?',hint:'Der Originalboden von 1488 – über 530 Jahre alt!'},
+challenge:{type:'count',emoji:'🔢',text:'Zähle die Holzbalken an der Vorderseite des Nonnenhauses! Wie viele senkrechte Balken siehst du?',hint:'Nur die senkrechten (von oben nach unten) zählen! Tipp: Wenn der Buchladen geöffnet hat, schau mal durch das Glasfenster im Boden – da siehst du den Originalboden von 1488!',answer:null,tolerance:99},
 prompt:'A colorful watercolor cartoon illustration of the medieval Nonnenhaus (half-timbered house from 1488) in Tübingen, next to a small canal. The house is large with dark wooden beams and white walls. A botanical garden with colorful flowers (including pink fuchsia) grows next to it. Children play in the garden. A small green dragon with golden belly sits on the steep roof watching the children, with a tiny potted plant next to him. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'},
 
 {id:6,emoji:'🌳',title:'Die Riesenbäume und die Gummienten',chapter:'Kapitel 7',place:'Platanenallee · Neckarinsel',lat:48.519017,lng:9.057506,image:'images/kinder/station_6.jpg',
@@ -406,7 +404,7 @@ question:'Wie viele Platanenbäume stehen in der Allee?',
 options:[{text:'Ungefähr 30',correct:false},{text:'84 – genau 42 auf jeder Seite',correct:true},{text:'Über 200',correct:false}],
 win:'🔥 Siebter Funke! 84 riesige Platanen – die älteste Allee Deutschlands! NUR NOCH EINER! 🎉',
 lose:'🌳 84 Bäume – 42 auf jeder Seite! Die älteste Platanenallee Deutschlands! Funke ist deiner!',
-challenge:{type:'photo',emoji:'🤗',text:'Umarme den dicksten Platanen-Baum! Schaffst du es alleine – oder brauchst du Hilfe? Mach ein Foto!',hint:'Die dicksten Bäume stehen in der Mitte der Allee. Manche brauchen 3 Kinder zum Umarmen!'},
+challenge:{type:'do',emoji:'🤗',text:'Umarme eine der riesigen Platanen! Breite deine Arme aus – wie weit kommst du um den Stamm herum?',hint:'Wenn du mit Freunden oder Familie da bist, versucht gemeinsam den ganzen Stamm zu umfassen!'},
 prompt:'A colorful watercolor cartoon illustration of the Platanenallee (plane tree avenue) on the Neckarinsel in Tübingen. Two rows of massive ancient plane trees create a green tunnel over a path. In the river, dozens of bright yellow rubber ducks race through the water. A small green dragon with golden belly sits high in the largest tree, excitedly cheering on the ducks, almost falling off. Dappled sunlight through leaves. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'},
 
 {id:7,emoji:'🚣',title:'Die letzte Flamme',chapter:'Kapitel 8 · Das große Finale',place:'Stocherkahn · Neckar',lat:48.521100,lng:9.054100,image:'images/kinder/station_7.jpg',
@@ -416,7 +414,7 @@ question:'Was müssen die Verlierer beim Stocherkahnrennen trinken?',
 options:[{text:'Kalten Apfelsaft mit Essig 🍎',correct:false},{text:'Salzwasser aus dem Neckar 🌊',correct:false},{text:'Lebertran – Öl aus Fischbäuchen 🐟',correct:true}],
 win:'🔥🔥🔥 DER LETZTE FUNKE!! TÜBIS FLAMME IST ZURÜCK!! Der kleine Drache springt in die Luft und spuckt den allerersten Feuerstrahl seit Wochen! 🐉✨🔥 DANKE, DRACHENKIND!!',
 lose:'🐟 Lebertran – Öl aus Fischbäuchen! SO eklig! Aber Tübi drückt beide Augen zu – DER LETZTE FUNKE IST DEINER! 🔥🐉',
-challenge:{type:'count',emoji:'🔢',text:'Schau aufs Wasser: Wie viele Stocherkähne kannst du gerade auf dem Neckar zählen?',hint:'Es können auch null sein – im Winter sind weniger unterwegs!',answer:null,tolerance:99},
+challenge:{type:'count',emoji:'🔢',text:'Stell dich auf die Neckarbrücke und zähle: Wie viele Brücken kannst du von hier aus sehen?',hint:'Schau in beide Richtungen – flussauf und flussab! Zähle auch die, auf der du stehst!',answer:3,tolerance:2},
 prompt:'A colorful watercolor cartoon illustration of the Stocherkahnrennen (punt race) on the Neckar river in Tübingen. Flat wooden boats with students in silly costumes race through the water, some falling in. Spectators cheer from the stone bridge above. A small green dragon with golden belly sits on the bridge railing, watching excitedly. A golden spark of flame floats near the dragon. Splashing water, festive chaos, sunny day. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'}
 ];
 
@@ -487,13 +485,12 @@ function renderStation(){
   if(s.challenge){
     const cdone=challengesDone[currentStation];
     if(cdone){
-      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-done">✅ Geschafft! +5 Bonus-Drachenfunken!</div>${cdone.photo?`<img class="challenge-photo-preview" src="${cdone.photo}" style="display:block">`:''}${cdone.count!=null?`<div style="font-size:.82rem;font-weight:700;color:var(--text-2);margin-top:.4rem">Deine Antwort: ${cdone.count}</div>`:''}</div>`;
-    } else if(s.challenge.type==='photo'){
-      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-text">${s.challenge.text}</div><div class="challenge-hint">${s.challenge.hint}</div><div class="challenge-actions"><button class="challenge-btn challenge-btn-photo" onclick="takeChallenge(${currentStation})"><span>📸</span> Foto machen</button><button class="challenge-btn challenge-btn-done" onclick="skipChallenge(${currentStation})">⏩ Überspringen</button></div><input type="file" id="challengeFile_${currentStation}" accept="image/*" capture="environment" style="display:none" onchange="onChallengePhoto(${currentStation},this)"><img class="challenge-photo-preview" id="challengePreview_${currentStation}"></div>`;
+      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-done">✅ ${cdone.skipped?'Übersprungen':'Geschafft! +5 Bonus-Drachenfunken!'}</div>${cdone.count!=null?`<div style="font-size:.82rem;font-weight:700;color:var(--text-2);margin-top:.4rem">Deine Antwort: ${cdone.count}</div>`:''}</div>`;
     } else if(s.challenge.type==='count'){
       ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-text">${s.challenge.text}</div><div class="challenge-hint">${s.challenge.hint}</div><div class="challenge-actions"><input class="challenge-input" type="number" id="challengeCount_${currentStation}" placeholder="?" min="0" max="999"><button class="challenge-btn challenge-btn-count" onclick="submitCount(${currentStation})">Abschicken!</button><button class="challenge-btn challenge-btn-done" onclick="skipChallenge(${currentStation})">⏩ Überspringen</button></div></div>`;
     } else {
-      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-text">${s.challenge.text}</div><div class="challenge-hint">${s.challenge.hint}</div><div class="challenge-actions"><button class="challenge-btn challenge-btn-done" onclick="completeChallenge(${currentStation})">✅ Gefunden!</button><button class="challenge-btn challenge-btn-done" onclick="skipChallenge(${currentStation})" style="background:var(--border);color:var(--text-2);border-color:var(--border)">⏩ Überspringen</button></div></div>`;
+      const doneLabel=s.challenge.type==='do'?'✅ Gemacht!':'✅ Gefunden!';
+      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-text">${s.challenge.text}</div><div class="challenge-hint">${s.challenge.hint}</div><div class="challenge-actions"><button class="challenge-btn challenge-btn-done" onclick="completeChallenge(${currentStation})">${doneLabel}</button><button class="challenge-btn" onclick="skipChallenge(${currentStation})" style="background:var(--border);color:var(--text-2);border-color:var(--border)">⏩ Überspringen</button></div></div>`;
     }
   }
 
@@ -515,18 +512,6 @@ function showXpToast(m){const t=document.getElementById('xpToast');t.textContent
 function spawnSparkles(){const e=['✨','⭐','🌟','💫','🔥'];for(let i=0;i<6;i++)setTimeout(()=>{const el=document.createElement('div');el.className='sparkle';el.textContent=e[Math.floor(Math.random()*e.length)];el.style.left=(15+Math.random()*70)+'%';el.style.top=(25+Math.random()*35)+'%';document.body.appendChild(el);setTimeout(()=>el.remove(),900)},i*100)}
 
 /* ===== CHALLENGES ===== */
-function takeChallenge(idx){document.getElementById('challengeFile_'+idx).click()}
-function onChallengePhoto(idx,input){
-  if(!input.files||!input.files[0])return;
-  const reader=new FileReader();
-  reader.onload=function(e){
-    const prev=document.getElementById('challengePreview_'+idx);
-    if(prev){prev.src=e.target.result;prev.style.display='block'}
-    challengesDone[idx]={photo:e.target.result};totalXp+=5;saveGame();updateHeader();
-    showXpToast('📸 +5 Bonus-Funken!');spawnSparkles();
-    setTimeout(()=>renderStation(),1200);
-  };reader.readAsDataURL(input.files[0]);
-}
 function submitCount(idx){
   const input=document.getElementById('challengeCount_'+idx);
   const val=parseInt(input.value);
@@ -564,7 +549,14 @@ function openPrompts(){document.getElementById('promptModal').innerHTML=`<h3>�
 function closePrompts(){document.getElementById('promptOverlay').classList.remove('active')}
 function copyPrompt(i,btn){navigator.clipboard.writeText(PROMPTS[i].text).then(()=>{btn.textContent='✓ Kopiert!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Kopieren';btn.classList.remove('copied')},1500)}).catch(()=>alert(PROMPTS[i].text))}
 
-window.addEventListener('DOMContentLoaded',()=>{if(loadGame()&&playerName)launchGame()});
+/* Secret dev tap: 5x tap on splash title to reveal prompt button */
+let devTaps=0,devTimer=null;
+function devTap(){devTaps++;if(devTimer)clearTimeout(devTimer);devTimer=setTimeout(()=>{devTaps=0},2000);if(devTaps>=5){document.getElementById('promptsLink').style.display='inline-flex';devTaps=0}}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  document.querySelector('.splash-title').addEventListener('click',devTap);
+  if(loadGame()&&playerName)launchGame();
+});
 </script>
 </body>
 </html>
