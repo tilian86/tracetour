@@ -6,323 +6,255 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>TraceTour Kinder – Tübingens Geheimnisse</title>
+<title>TraceTour Kids – Tübis Geheimnisse</title>
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 :root {
-  --green: #006a2d;
-  --green-light: #009e44;
-  --green-pale: #e8f5ee;
-  --yellow: #ffca51;
-  --yellow-dark: #e6a800;
-  --yellow-pale: #fff9e6;
-  --bg: #f9f7f0;
-  --card: #ffffff;
-  --text: #1a2e1a;
-  --text-2: #4a6741;
-  --text-3: #8aaa80;
-  --border: #d4e8d0;
-  --r: 18px;
-  --r-sm: 12px;
-  --r-lg: 24px;
-  --shadow: 0 4px 24px rgba(0,106,45,.12);
-  --shadow-card: 0 2px 12px rgba(0,0,0,.06);
+  --green: #006a2d; --green-light: #009e44; --green-pale: #e8f5ee;
+  --yellow: #ffca51; --yellow-dark: #e6a800; --yellow-pale: #fff9e6;
+  --bg: #f9f7f0; --card: #ffffff; --text: #1a2e1a; --text-2: #4a6741; --text-3: #8aaa80;
+  --border: #d4e8d0; --r: 18px; --r-sm: 12px; --r-lg: 24px;
+  --shadow: 0 4px 24px rgba(0,106,45,.12); --shadow-card: 0 2px 12px rgba(0,0,0,.06);
   --font: 'Plus Jakarta Sans', -apple-system, sans-serif;
-  --safe-top: env(safe-area-inset-top, 0px);
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top,0px); --safe-bottom: env(safe-area-inset-bottom,0px);
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-html, body { height:100%; overflow:hidden; font-family:var(--font); background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; -webkit-tap-highlight-color:transparent; }
-button { font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
-input { font-family:inherit; color:inherit; }
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;font-family:var(--font);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input{font-family:inherit;color:inherit}
 
-/* SCREENS */
-.screen { position:fixed; inset:0; display:none; flex-direction:column; overflow-y:auto; -webkit-overflow-scrolling:touch; }
-.screen.active { display:flex; }
+.screen{position:fixed;inset:0;display:none;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.screen.active{display:flex}
 
-/* ======================== SPLASH ======================== */
-#splash {
-  background: linear-gradient(160deg, #006a2d 0%, #00a843 60%, #ffca51 100%);
-  align-items:center; justify-content:center; text-align:center; padding:2rem;
-  min-height:100%; padding-top:calc(2rem + var(--safe-top));
-}
-.splash-dragon { font-size:5rem; line-height:1; margin-bottom:1rem; animation:bounce 2s infinite; }
-@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-.splash-title {
-  font-size:2.2rem; font-weight:900; color:#fff; line-height:1.1; margin-bottom:.4rem;
-  text-shadow:0 2px 12px rgba(0,0,0,.2);
-}
-.splash-title span { color:var(--yellow); }
-.splash-sub { font-size:1rem; color:rgba(255,255,255,.85); font-weight:600; margin-bottom:.4rem; }
-.splash-sub2 { font-size:.85rem; color:rgba(255,255,255,.7); margin-bottom:2.5rem; }
+/* ======== SPLASH ======== */
+#splash{background:linear-gradient(160deg,#006a2d 0%,#00a843 50%,#ffca51 100%);align-items:center;justify-content:center;text-align:center;padding:2rem;min-height:100%;padding-top:calc(2rem + var(--safe-top))}
+.splash-dragon{font-size:5rem;line-height:1;margin-bottom:.8rem;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.splash-title{font-size:2.2rem;font-weight:900;color:#fff;line-height:1.1;margin-bottom:.3rem;text-shadow:0 2px 12px rgba(0,0,0,.2)}
+.splash-title span{color:var(--yellow)}
+.splash-sub{font-size:1rem;color:rgba(255,255,255,.85);font-weight:600;margin-bottom:2rem}
 
-.splash-form { width:100%; max-width:340px; text-align:left; }
-.splash-label { display:block; font-size:.85rem; font-weight:700; color:rgba(255,255,255,.9); margin-bottom:.5rem; letter-spacing:.02em; }
-.splash-input {
-  width:100%; padding:14px 18px; background:rgba(255,255,255,.95); border:2px solid transparent;
-  border-radius:var(--r-sm); font-size:1.05rem; font-weight:600; color:var(--text);
-  outline:none; transition:border .2s; margin-bottom:1rem;
+/* Tübi Intro Story Box */
+.splash-story{
+  background:rgba(255,255,255,.92);border-radius:var(--r);padding:1.1rem 1rem;
+  max-width:380px;width:100%;text-align:left;margin-bottom:1.5rem;
+  box-shadow:0 4px 20px rgba(0,0,0,.15);position:relative;
 }
-.splash-input:focus { border-color:var(--yellow); }
-.splash-input::placeholder { color:#aaa; font-weight:400; }
-.btn-start {
-  width:100%; padding:16px; background:var(--yellow); color:var(--green);
-  font-weight:900; font-size:1.1rem; border-radius:var(--r-sm);
-  border:3px solid var(--yellow-dark); transition:transform .1s, background .2s;
-  letter-spacing:.01em; box-shadow: 0 4px 16px rgba(230,168,0,.4);
-}
-.btn-start:active { transform:scale(.97); }
-.btn-start:hover { background:var(--yellow-dark); color:#fff; }
-.splash-footer { margin-top:1.5rem; font-size:.75rem; color:rgba(255,255,255,.6); text-align:center; }
+.splash-story::before{content:'🐉';position:absolute;top:-18px;left:16px;font-size:1.8rem}
+.splash-story-text{font-size:.9rem;color:var(--text);line-height:1.65;font-weight:500}
+.splash-story-text strong{color:var(--green)}
 
-/* ======================== GAME HEADER ======================== */
-#gameHeader {
-  position:fixed; top:0; left:0; right:0; z-index:100;
-  background:var(--green); padding-top:var(--safe-top);
-}
-.header-inner {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:.75rem 1rem; gap:.75rem;
-}
-.header-dragon { font-size:1.6rem; line-height:1; flex-shrink:0; }
-.header-info { flex:1; min-width:0; }
-.header-name { font-size:.85rem; font-weight:700; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.header-station { font-size:.7rem; color:rgba(255,255,255,.7); font-weight:500; margin-top:.1rem; }
-.header-xp {
-  display:flex; align-items:center; gap:.3rem; background:var(--yellow);
-  color:var(--green); font-weight:900; font-size:.9rem; padding:.35rem .7rem;
-  border-radius:20px; border:2px solid var(--yellow-dark); flex-shrink:0;
-}
-.header-xp-icon { font-size:1rem; }
-
-/* PROGRESS BAR */
-.progress-bar-wrap { background:rgba(0,0,0,.2); height:6px; }
-.progress-bar-fill { height:100%; background:var(--yellow); transition:width .5s cubic-bezier(.4,0,.2,1); }
-
-/* ======================== GAME SCREEN ======================== */
-#game {
-  padding-top:calc(72px + var(--safe-top) + 6px);
-  padding-bottom:calc(90px + var(--safe-bottom));
-}
-.station-hero {
-  background:var(--green); padding:1.2rem 1rem 1.5rem;
-  text-align:center; position:relative; overflow:hidden;
-}
-.station-hero::after {
-  content:''; position:absolute; bottom:-16px; left:0; right:0; height:32px;
-  background:var(--bg); border-radius:32px 32px 0 0;
-}
-.station-emoji { font-size:3.5rem; display:block; margin-bottom:.5rem; animation:popIn .4s cubic-bezier(.68,-.55,.27,1.55); }
-@keyframes popIn { 0%{transform:scale(0)}80%{transform:scale(1.1)}100%{transform:scale(1)} }
-.station-number { font-size:.75rem; font-weight:700; color:rgba(255,255,255,.6); letter-spacing:.15em; text-transform:uppercase; margin-bottom:.3rem; }
-.station-title { font-size:1.4rem; font-weight:900; color:#fff; line-height:1.2; }
-
-.station-body { padding:1.2rem 1rem 0; }
-
-/* INFO CARD */
-.info-card {
-  background:var(--card); border-radius:var(--r); padding:1.1rem 1rem;
-  margin-bottom:1rem; border:2px solid var(--border); box-shadow:var(--shadow-card);
-  position:relative;
-}
-.info-card-label {
-  display:inline-flex; align-items:center; gap:.35rem;
-  background:var(--green-pale); color:var(--green); font-size:.7rem; font-weight:800;
-  padding:.25rem .6rem; border-radius:20px; margin-bottom:.7rem; letter-spacing:.05em; text-transform:uppercase;
-}
-.info-card-text { font-size:.95rem; line-height:1.65; color:var(--text); font-weight:500; }
-.info-card-text strong { color:var(--green); }
-
-/* QUESTION CARD */
-.question-card {
-  background:var(--yellow-pale); border-radius:var(--r); padding:1.1rem 1rem;
-  margin-bottom:1rem; border:2px solid var(--yellow); box-shadow:var(--shadow-card);
-}
-.question-label {
-  display:inline-flex; align-items:center; gap:.35rem;
-  background:var(--yellow); color:var(--green); font-size:.7rem; font-weight:800;
-  padding:.25rem .6rem; border-radius:20px; margin-bottom:.7rem; letter-spacing:.05em; text-transform:uppercase;
-}
-.question-text { font-size:1rem; font-weight:700; color:var(--text); line-height:1.45; margin-bottom:.9rem; }
-
-/* MC OPTIONS */
-.mc-options { display:flex; flex-direction:column; gap:.6rem; }
-.mc-btn {
-  width:100%; padding:.85rem 1rem; background:var(--card); border:2px solid var(--border);
-  border-radius:var(--r-sm); font-size:.95rem; font-weight:600; text-align:left;
-  transition:all .2s; display:flex; align-items:center; gap:.6rem;
-  color:var(--text);
-}
-.mc-btn:active { transform:scale(.98); }
-.mc-btn:hover:not(:disabled) { border-color:var(--green); background:var(--green-pale); }
-.mc-btn.correct { background:#e6faf0; border-color:#00a843; color:#006a2d; }
-.mc-btn.wrong { background:#fef2f2; border-color:#f87171; color:#b91c1c; }
-.mc-btn:disabled { cursor:default; }
-.mc-letter {
-  width:28px; height:28px; border-radius:50%; background:var(--green-pale);
-  color:var(--green); font-weight:800; font-size:.8rem; display:flex; align-items:center;
-  justify-content:center; flex-shrink:0;
-}
-.mc-btn.correct .mc-letter { background:var(--green); color:#fff; }
-.mc-btn.wrong .mc-letter { background:#f87171; color:#fff; }
-
-/* FEEDBACK */
-.question-feedback {
-  margin-top:.9rem; padding:.8rem 1rem; border-radius:var(--r-sm);
-  font-size:.9rem; font-weight:600; line-height:1.4; display:none;
-}
-.question-feedback.show { display:block; }
-.question-feedback.win { background:#e6faf0; color:#006a2d; border:1.5px solid #00a843; }
-.question-feedback.lose { background:#fef2f2; color:#b91c1c; border:1.5px solid #f87171; }
-
-/* SOLVED BADGE */
-.solved-badge {
-  background:var(--green); color:#fff; border-radius:var(--r-sm); padding:.7rem 1rem;
-  font-size:.9rem; font-weight:700; display:flex; align-items:center; gap:.5rem;
-  margin-bottom:1rem;
+.splash-play-btn{
+  display:inline-flex;align-items:center;gap:.4rem;background:var(--green);color:#fff;
+  font-weight:700;font-size:.8rem;padding:.45rem .9rem;border-radius:20px;margin-top:.7rem;
+  border:2px solid var(--green-light);
 }
 
-/* BOTTOM NAV */
-#gameNav {
-  position:fixed; bottom:0; left:0; right:0; z-index:100;
-  background:var(--card); border-top:2px solid var(--border);
-  padding-bottom:var(--safe-bottom);
-  display:none;
-}
-#gameNav.show { display:block; }
-.nav-inner { display:flex; align-items:center; justify-content:space-between; padding:.75rem 1rem; gap:.75rem; }
-.nav-btn {
-  width:48px; height:48px; border-radius:14px; display:flex; align-items:center;
-  justify-content:center; font-size:1.4rem; font-weight:700;
-  transition:transform .1s, background .2s;
-}
-.nav-btn:active { transform:scale(.93); }
-.nav-btn-prev { background:var(--green-pale); color:var(--green); border:2px solid var(--border); }
-.nav-btn-next {
-  background:var(--green); color:#fff; border:2px solid var(--green-light);
-  box-shadow: 0 4px 12px rgba(0,106,45,.3);
-}
-.nav-btn-next:disabled { background:#ccc; border-color:#bbb; box-shadow:none; }
-.nav-station-dots { display:flex; gap:5px; align-items:center; flex-wrap:wrap; justify-content:center; flex:1; }
-.nav-dot { width:9px; height:9px; border-radius:50%; background:var(--border); transition:all .3s; }
-.nav-dot.done { background:var(--green); }
-.nav-dot.current { background:var(--yellow); width:24px; border-radius:5px; border:1.5px solid var(--yellow-dark); }
+.splash-form{width:100%;max-width:340px;text-align:left}
+.splash-label{display:block;font-size:.85rem;font-weight:700;color:rgba(255,255,255,.9);margin-bottom:.5rem}
+.splash-input{width:100%;padding:14px 18px;background:rgba(255,255,255,.95);border:2px solid transparent;border-radius:var(--r-sm);font-size:1.05rem;font-weight:600;color:var(--text);outline:none;transition:border .2s;margin-bottom:1rem}
+.splash-input:focus{border-color:var(--yellow)}
+.splash-input::placeholder{color:#aaa;font-weight:400}
+.btn-start{width:100%;padding:16px;background:var(--yellow);color:var(--green);font-weight:900;font-size:1.1rem;border-radius:var(--r-sm);border:3px solid var(--yellow-dark);transition:transform .1s;box-shadow:0 4px 16px rgba(230,168,0,.4)}
+.btn-start:active{transform:scale(.97)}
+#splashError{color:#fff;background:rgba(255,0,0,.3);border-radius:8px;padding:.6rem .8rem;margin-top:.8rem;font-size:.9rem;font-weight:700;display:none}
+.splash-footer{margin-top:1.5rem;font-size:.75rem;color:rgba(255,255,255,.6)}
 
-/* ======================== QUIZ ======================== */
-#quiz {
-  padding-top:calc(var(--safe-top));
-  background:var(--bg); min-height:100%;
-}
-.quiz-header {
-  background:var(--green); padding:calc(1rem + var(--safe-top)) 1rem 1.5rem;
-  text-align:center;
-}
-.quiz-header h2 { font-size:1.5rem; font-weight:900; color:#fff; }
-.quiz-header p { color:rgba(255,255,255,.75); font-size:.9rem; margin-top:.3rem; }
-.quiz-body { padding:1rem; }
-.quiz-progress { text-align:center; margin-bottom:1rem; font-size:.8rem; font-weight:700; color:var(--text-2); }
-.quiz-q-card {
-  background:var(--card); border-radius:var(--r); padding:1.2rem; margin-bottom:1rem;
-  border:2px solid var(--border); box-shadow:var(--shadow-card);
-}
-.quiz-q-num { font-size:.7rem; font-weight:800; color:var(--text-3); letter-spacing:.1em; text-transform:uppercase; margin-bottom:.5rem; }
-.quiz-q-text { font-size:1rem; font-weight:700; color:var(--text); line-height:1.4; margin-bottom:1rem; }
-.quiz-done-btn {
-  width:100%; padding:16px; background:var(--green); color:#fff;
-  font-weight:900; font-size:1.05rem; border-radius:var(--r-sm); margin-top:.5rem;
-  border:2px solid var(--green-light); box-shadow:0 4px 16px rgba(0,106,45,.25);
-  display:none;
-}
-.quiz-done-btn.show { display:block; }
+/* ======== GAME HEADER ======== */
+#gameHeader{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--green);padding-top:var(--safe-top)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1rem;gap:.7rem}
+.header-dragon{font-size:1.5rem;flex-shrink:0}
+.header-info{flex:1;min-width:0}
+.header-name{font-size:.8rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.header-station{font-size:.65rem;color:rgba(255,255,255,.7);font-weight:500;margin-top:.05rem}
+.header-xp{display:flex;align-items:center;gap:.3rem;background:var(--yellow);color:var(--green);font-weight:900;font-size:.85rem;padding:.3rem .65rem;border-radius:20px;border:2px solid var(--yellow-dark);flex-shrink:0}
+.progress-bar-wrap{background:rgba(0,0,0,.2);height:5px}
+.progress-bar-fill{height:100%;background:var(--yellow);transition:width .5s cubic-bezier(.4,0,.2,1)}
 
-/* ======================== CERTIFICATE ======================== */
-#certificate {
-  background:linear-gradient(160deg, #006a2d 0%, #00a843 50%, #ffca51 100%);
-  align-items:center; justify-content:center; text-align:center;
-  padding:2rem 1.5rem; min-height:100%;
-  padding-top:calc(2rem + var(--safe-top));
-  padding-bottom:calc(2rem + var(--safe-bottom));
-}
-.cert-card {
-  background:rgba(255,255,255,.95); border-radius:var(--r-lg); padding:2rem 1.5rem;
-  max-width:360px; width:100%; box-shadow:0 8px 40px rgba(0,0,0,.2);
-  border:3px solid var(--yellow);
-}
-.cert-dragon { font-size:4rem; margin-bottom:1rem; animation:bounce 2s infinite; }
-.cert-title { font-size:1.6rem; font-weight:900; color:var(--green); margin-bottom:.3rem; }
-.cert-sub { font-size:.85rem; color:var(--text-2); margin-bottom:1.2rem; font-weight:500; }
-.cert-name { font-size:1.4rem; font-weight:900; color:var(--text); margin-bottom:.3rem; }
-.cert-rank {
-  display:inline-block; background:var(--yellow); color:var(--green);
-  font-weight:900; font-size:.9rem; padding:.4rem 1.2rem; border-radius:20px;
-  border:2px solid var(--yellow-dark); margin-bottom:1.2rem;
-}
-.cert-score {
-  font-size:2.8rem; font-weight:900; color:var(--green); line-height:1;
-}
-.cert-score-label { font-size:.85rem; color:var(--text-2); font-weight:600; margin-top:.2rem; margin-bottom:1.2rem; }
-.cert-stars { font-size:2rem; margin-bottom:1.2rem; }
-.cert-msg { font-size:.9rem; color:var(--text-2); line-height:1.5; margin-bottom:1.5rem; }
-.btn-cert-home {
-  width:100%; padding:14px; background:var(--green); color:#fff;
-  font-weight:800; font-size:1rem; border-radius:var(--r-sm);
-  border:2px solid var(--green-light); margin-bottom:.6rem;
-}
-.btn-cert-share {
-  width:100%; padding:14px; background:var(--yellow); color:var(--green);
-  font-weight:800; font-size:1rem; border-radius:var(--r-sm);
-  border:2px solid var(--yellow-dark);
-}
+/* ======== GAME SCREEN ======== */
+#game{padding-top:calc(68px + var(--safe-top) + 5px);padding-bottom:calc(80px + var(--safe-bottom))}
 
-/* ======================== TRANSITIONS ======================== */
-.fade-in { animation:fadeIn .3s ease; }
-@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+/* Station Hero */
+.station-hero{background:var(--green);padding:1rem 1rem 1.3rem;text-align:center;position:relative;overflow:hidden}
+.station-hero::after{content:'';position:absolute;bottom:-14px;left:0;right:0;height:28px;background:var(--bg);border-radius:28px 28px 0 0}
+.station-emoji{font-size:3rem;display:block;margin-bottom:.4rem;animation:popIn .4s cubic-bezier(.68,-.55,.27,1.55)}
+@keyframes popIn{0%{transform:scale(0)}80%{transform:scale(1.1)}100%{transform:scale(1)}}
+.station-number{font-size:.7rem;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.2rem}
+.station-title{font-size:1.3rem;font-weight:900;color:#fff;line-height:1.2}
 
-/* ======================== XP TOAST ======================== */
-.xp-toast {
-  position:fixed; top:calc(80px + var(--safe-top)); left:50%; transform:translateX(-50%) translateY(-10px);
-  background:var(--yellow); color:var(--green); font-weight:900; font-size:1.1rem;
-  padding:.5rem 1.2rem; border-radius:30px; border:2px solid var(--yellow-dark);
-  box-shadow:0 4px 20px rgba(230,168,0,.4); z-index:999; pointer-events:none;
-  opacity:0; transition:all .3s; white-space:nowrap;
-}
-.xp-toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+.station-body{padding:1rem 1rem 0}
 
-/* SPARKLE */
-.sparkle {
-  position:fixed; pointer-events:none; z-index:998; font-size:1.5rem;
-  animation:sparkleUp .8s ease-out forwards;
+/* Station Image */
+.station-img-wrap{border-radius:var(--r);overflow:hidden;margin-bottom:1rem;aspect-ratio:16/9;background:linear-gradient(135deg,var(--green-pale),var(--yellow-pale));display:flex;align-items:center;justify-content:center;position:relative;border:2px solid var(--border)}
+.station-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.station-img-placeholder{font-size:4rem;opacity:.5}
+.station-img-credit{position:absolute;bottom:4px;right:6px;font-size:.55rem;color:rgba(0,0,0,.4);background:rgba(255,255,255,.6);padding:1px 5px;border-radius:4px}
+
+/* Audio Play Button */
+.audio-btn{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:var(--green);color:#fff;font-weight:700;font-size:.85rem;
+  padding:.55rem 1rem;border-radius:var(--r-sm);margin-bottom:1rem;
+  border:2px solid var(--green-light);box-shadow:0 2px 8px rgba(0,106,45,.2);
+  transition:transform .1s,background .15s;
 }
-@keyframes sparkleUp { 0%{opacity:1;transform:translateY(0) scale(1)} 100%{opacity:0;transform:translateY(-80px) scale(.5)} }
+.audio-btn:active{transform:scale(.96)}
+.audio-btn.playing{background:var(--yellow-dark);border-color:#c89200;color:#fff}
+.audio-btn .audio-icon{font-size:1.1rem}
+
+/* Info Card */
+.info-card{background:var(--card);border-radius:var(--r);padding:1rem;margin-bottom:1rem;border:2px solid var(--border);box-shadow:var(--shadow-card)}
+.info-card-label{display:inline-flex;align-items:center;gap:.3rem;background:var(--green-pale);color:var(--green);font-size:.65rem;font-weight:800;padding:.2rem .55rem;border-radius:20px;margin-bottom:.6rem;letter-spacing:.05em;text-transform:uppercase}
+.info-card-text{font-size:.92rem;line-height:1.65;color:var(--text);font-weight:500}
+.info-card-text strong{color:var(--green)}
+
+/* Tübi Speech Bubble */
+.tubi-bubble{
+  background:var(--yellow-pale);border-radius:var(--r);padding:1rem;margin-bottom:1rem;
+  border:2px solid var(--yellow);box-shadow:var(--shadow-card);position:relative;
+}
+.tubi-bubble::before{content:'🐉';position:absolute;top:-14px;left:12px;font-size:1.4rem}
+.tubi-bubble .tubi-says{font-size:.7rem;font-weight:800;color:var(--yellow-dark);letter-spacing:.05em;text-transform:uppercase;margin-bottom:.4rem}
+.tubi-bubble .tubi-text{font-size:.92rem;line-height:1.6;color:var(--text);font-weight:500;font-style:italic}
+
+/* Question Card */
+.question-card{background:var(--yellow-pale);border-radius:var(--r);padding:1rem;margin-bottom:1rem;border:2px solid var(--yellow);box-shadow:var(--shadow-card)}
+.question-label{display:inline-flex;align-items:center;gap:.3rem;background:var(--yellow);color:var(--green);font-size:.65rem;font-weight:800;padding:.2rem .55rem;border-radius:20px;margin-bottom:.6rem;letter-spacing:.05em;text-transform:uppercase}
+.question-text{font-size:.95rem;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:.8rem}
+
+.mc-options{display:flex;flex-direction:column;gap:.5rem}
+.mc-btn{width:100%;padding:.75rem .9rem;background:var(--card);border:2px solid var(--border);border-radius:var(--r-sm);font-size:.9rem;font-weight:600;text-align:left;transition:all .2s;display:flex;align-items:center;gap:.5rem;color:var(--text)}
+.mc-btn:active:not(:disabled){transform:scale(.98)}
+.mc-btn:disabled{cursor:default}
+.mc-btn.correct{background:#e6faf0;border-color:#00a843;color:#006a2d}
+.mc-btn.wrong{background:#fef2f2;border-color:#f87171;color:#b91c1c}
+.mc-letter{width:26px;height:26px;border-radius:50%;background:var(--green-pale);color:var(--green);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mc-btn.correct .mc-letter{background:var(--green);color:#fff}
+.mc-btn.wrong .mc-letter{background:#f87171;color:#fff}
+
+.question-feedback{margin-top:.8rem;padding:.7rem .9rem;border-radius:var(--r-sm);font-size:.85rem;font-weight:600;line-height:1.4;display:none}
+.question-feedback.show{display:block}
+.question-feedback.win{background:#e6faf0;color:#006a2d;border:1.5px solid #00a843}
+.question-feedback.lose{background:#fef2f2;color:#b91c1c;border:1.5px solid #f87171}
+
+.solved-badge{background:var(--green);color:#fff;border-radius:var(--r-sm);padding:.65rem .9rem;font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:.5rem;margin-bottom:1rem}
+
+/* ======== BOTTOM NAV ======== */
+#gameNav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--card);border-top:2px solid var(--border);padding-bottom:var(--safe-bottom);display:none}
+#gameNav.show{display:block}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:.6rem .8rem;gap:.5rem}
+.nav-btn{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:700;transition:transform .1s}
+.nav-btn:active{transform:scale(.93)}
+.nav-btn-prev{background:var(--green-pale);color:var(--green);border:2px solid var(--border)}
+.nav-btn-next{background:var(--green);color:#fff;border:2px solid var(--green-light);box-shadow:0 3px 10px rgba(0,106,45,.3)}
+.nav-btn-next:disabled{background:#ccc;border-color:#bbb;box-shadow:none}
+.nav-btn-map{background:var(--yellow);color:var(--green);border:2px solid var(--yellow-dark);font-size:1.1rem;width:48px;height:44px}
+.nav-dots{display:flex;gap:4px;align-items:center;flex-wrap:wrap;justify-content:center;flex:1}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s}
+.nav-dot.done{background:var(--green)}
+.nav-dot.current{background:var(--yellow);width:20px;border-radius:4px;border:1.5px solid var(--yellow-dark)}
+
+/* ======== MAP OVERLAY ======== */
+#mapOverlay{position:fixed;inset:0;z-index:200;display:none;flex-direction:column;background:var(--bg)}
+#mapOverlay.active{display:flex}
+.map-header{background:var(--green);padding:calc(.7rem + var(--safe-top)) .8rem .7rem;display:flex;align-items:center;justify-content:space-between}
+.map-header h3{color:#fff;font-size:1rem;font-weight:800}
+.map-close-btn{background:rgba(255,255,255,.2);color:#fff;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700}
+#mapContainer{flex:1;position:relative}
+#map{width:100%;height:100%}
+
+/* Kid-friendly map styling */
+.leaflet-tile-pane{filter:saturate(1.3) brightness(1.02) hue-rotate(-3deg)!important}
+.map-marker{display:flex;align-items:center;justify-content:center;font-size:1.6rem;filter:drop-shadow(0 2px 4px rgba(0,0,0,.3))}
+.map-marker-current{animation:markerPulse 1.5s infinite}
+@keyframes markerPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+.map-label{background:var(--card)!important;border:2px solid var(--green)!important;border-radius:10px!important;padding:4px 8px!important;font-family:var(--font)!important;font-weight:700!important;font-size:.7rem!important;color:var(--green)!important;box-shadow:0 2px 8px rgba(0,0,0,.15)!important}
+.map-label::before{border-top-color:var(--green)!important}
+.map-user-dot{width:14px;height:14px;background:var(--yellow);border:3px solid var(--green);border-radius:50%;box-shadow:0 0 0 4px rgba(255,202,81,.3)}
+.map-legend{position:absolute;bottom:12px;left:12px;z-index:999;background:rgba(255,255,255,.92);border-radius:var(--r-sm);padding:.6rem .8rem;font-size:.7rem;font-weight:600;color:var(--text);box-shadow:0 2px 12px rgba(0,0,0,.12);border:1.5px solid var(--border)}
+.map-legend div{display:flex;align-items:center;gap:.4rem;margin-bottom:.2rem}
+.map-legend div:last-child{margin-bottom:0}
+
+/* ======== QUIZ ======== */
+#quiz{padding-top:var(--safe-top);background:var(--bg);min-height:100%}
+.quiz-header{background:var(--green);padding:calc(.8rem + var(--safe-top)) 1rem 1.3rem;text-align:center}
+.quiz-header h2{font-size:1.4rem;font-weight:900;color:#fff}
+.quiz-header p{color:rgba(255,255,255,.75);font-size:.85rem;margin-top:.2rem}
+.quiz-body{padding:1rem}
+.quiz-progress{text-align:center;margin-bottom:1rem;font-size:.75rem;font-weight:700;color:var(--text-2)}
+.quiz-q-card{background:var(--card);border-radius:var(--r);padding:1.1rem;margin-bottom:1rem;border:2px solid var(--border);box-shadow:var(--shadow-card)}
+.quiz-q-num{font-size:.65rem;font-weight:800;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+.quiz-q-text{font-size:.95rem;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:.9rem}
+.quiz-done-btn{width:100%;padding:15px;background:var(--green);color:#fff;font-weight:900;font-size:1rem;border-radius:var(--r-sm);margin-top:.5rem;border:2px solid var(--green-light);display:none}
+.quiz-done-btn.show{display:block}
+
+/* ======== CERTIFICATE ======== */
+#certificate{background:linear-gradient(160deg,#006a2d 0%,#00a843 50%,#ffca51 100%);align-items:center;justify-content:center;text-align:center;padding:2rem 1.5rem;min-height:100%;padding-top:calc(2rem + var(--safe-top));padding-bottom:calc(2rem + var(--safe-bottom))}
+.cert-card{background:rgba(255,255,255,.95);border-radius:var(--r-lg);padding:1.8rem 1.3rem;max-width:360px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.2);border:3px solid var(--yellow)}
+.cert-dragon{font-size:3.5rem;margin-bottom:.8rem;animation:bounce 2s infinite}
+.cert-title{font-size:1.5rem;font-weight:900;color:var(--green);margin-bottom:.2rem}
+.cert-sub{font-size:.8rem;color:var(--text-2);margin-bottom:1rem;font-weight:500}
+.cert-name{font-size:1.3rem;font-weight:900;color:var(--text);margin-bottom:.3rem}
+.cert-rank{display:inline-block;background:var(--yellow);color:var(--green);font-weight:900;font-size:.85rem;padding:.35rem 1rem;border-radius:20px;border:2px solid var(--yellow-dark);margin-bottom:1rem}
+.cert-score{font-size:2.5rem;font-weight:900;color:var(--green);line-height:1}
+.cert-score-label{font-size:.8rem;color:var(--text-2);font-weight:600;margin-top:.2rem;margin-bottom:1rem}
+.cert-stars{font-size:1.8rem;margin-bottom:1rem}
+.cert-msg{font-size:.85rem;color:var(--text-2);line-height:1.5;margin-bottom:1.2rem}
+.btn-cert-home{width:100%;padding:13px;background:var(--green);color:#fff;font-weight:800;font-size:.95rem;border-radius:var(--r-sm);border:2px solid var(--green-light);margin-bottom:.5rem}
+.btn-cert-share{width:100%;padding:13px;background:var(--yellow);color:var(--green);font-weight:800;font-size:.95rem;border-radius:var(--r-sm);border:2px solid var(--yellow-dark)}
+
+/* ======== EFFECTS ======== */
+.fade-in{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.xp-toast{position:fixed;top:calc(75px + var(--safe-top));left:50%;transform:translateX(-50%) translateY(-10px);background:var(--yellow);color:var(--green);font-weight:900;font-size:1.05rem;padding:.45rem 1.1rem;border-radius:30px;border:2px solid var(--yellow-dark);box-shadow:0 4px 20px rgba(230,168,0,.4);z-index:999;pointer-events:none;opacity:0;transition:all .3s;white-space:nowrap}
+.xp-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.sparkle{position:fixed;pointer-events:none;z-index:998;font-size:1.5rem;animation:sparkleUp .8s ease-out forwards}
+@keyframes sparkleUp{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(.5)}}
+
+/* Action Buttons at station end */
+.action-btn{width:100%;padding:14px;font-weight:900;font-size:1rem;border-radius:var(--r-sm);margin-bottom:.8rem;transition:transform .1s}
+.action-btn:active{transform:scale(.97)}
+.action-btn-green{background:var(--green);color:#fff;border:2px solid var(--green-light);box-shadow:0 4px 16px rgba(0,106,45,.25)}
+.action-btn-yellow{background:var(--yellow);color:var(--green);border:2px solid var(--yellow-dark)}
 </style>
 </head>
 <body>
 
-<!-- XP TOAST -->
-<div class="xp-toast" id="xpToast">+20 🔥 Drachenfunken!</div>
+<div class="xp-toast" id="xpToast"></div>
 
 <!-- ======================== SPLASH ======================== -->
 <div class="screen active" id="splash">
-  <div style="min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;padding-top:calc(2rem + var(--safe-top))">
-    <div class="splash-dragon">🐉</div>
-    <div class="splash-title">Tübinger<br><span>Geheimnisse</span></div>
-    <div class="splash-sub">TraceTour Kids Edition</div>
-    <div class="splash-sub2">8 Orte · Rätsel · Drachenfunken</div>
+<div style="min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;padding-top:calc(1.5rem + var(--safe-top))">
+  <div class="splash-dragon">🐉</div>
+  <div class="splash-title">Tübis<br><span>Geheimnisse</span></div>
+  <div class="splash-sub">TraceTour Kids · 8 Orte · 1 Drache</div>
 
-    <div class="splash-form">
-      <label class="splash-label" for="playerName">Wie heißt du?</label>
-      <input class="splash-input" id="playerName" type="text" placeholder="Dein Name" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">
-      <button class="btn-start" onclick="startGame()">🐉 Abenteuer starten!</button>
-      <div id="splashError" style="color:#fff;background:rgba(255,0,0,.3);border-radius:8px;padding:.6rem .8rem;margin-top:.8rem;font-size:.9rem;font-weight:700;display:none;">
-        Gib deinen Namen ein! 😊
-      </div>
+  <div class="splash-story">
+    <div class="splash-story-text">
+      <strong>Psssst!</strong> Hörst du mich? Ich bin <strong>Tübi</strong> – ein kleiner Drache! Ich lebe seit über 500 Jahren hinter der großen Uhr am Tübinger Rathaus. Die meisten Menschen denken, ich bin nur eine Figur auf dem Ziffernblatt – aber in Wirklichkeit bin ich echt!
+      <br><br>
+      Ich kenne <strong>jedes Geheimnis</strong> dieser Stadt: versteckte Tunnel im Schloss, Fledermäuse in einem riesigen Weinfass, einen schiefen Kirchturm und sogar einen Brunnen mit einem Drachen, der aus dem Fluss gefischt wurde!
+      <br><br>
+      Willst du sie alle entdecken? Dann komm mit mir auf ein <strong>Abenteuer</strong>! Aber pass gut auf – am Ende stelle ich dir ein paar knifflige Fragen. Nur echte Drachenfreunde bestehen mein großes <strong>Drachenquiz</strong>!
     </div>
-
-    <div class="splash-footer">Eine Tour von <strong style="color:rgba(255,255,255,.8)">TraceTour Tübingen</strong></div>
+    <button class="splash-play-btn" onclick="playAudio('audio/kinder/prolog.mp3',this)">
+      <span class="audio-icon">▶️</span> Tübi vorlesen lassen
+    </button>
   </div>
+
+  <div class="splash-form">
+    <label class="splash-label" for="playerName">Wie heißt du, Drachenkind?</label>
+    <input class="splash-input" id="playerName" type="text" placeholder="Dein Name" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">
+    <button class="btn-start" onclick="startGame()">🐉 Abenteuer starten!</button>
+    <div id="splashError">Gib deinen Namen ein! 😊</div>
+  </div>
+  <div class="splash-footer">Eine Tour von <strong style="color:rgba(255,255,255,.8)">TraceTour Tübingen</strong></div>
+</div>
 </div>
 
 <!-- ======================== GAME HEADER ======================== -->
@@ -330,40 +262,53 @@ input { font-family:inherit; color:inherit; }
   <div class="header-inner">
     <div class="header-dragon">🐉</div>
     <div class="header-info">
-      <div class="header-name" id="hdrName">Abenteurer</div>
-      <div class="header-station" id="hdrStation">Station 1 von 8</div>
+      <div class="header-name" id="hdrName"></div>
+      <div class="header-station" id="hdrStation"></div>
     </div>
-    <div class="header-xp">
-      <span class="header-xp-icon">🔥</span>
-      <span id="hdrXp">0</span>
-    </div>
+    <div class="header-xp"><span>🔥</span><span id="hdrXp">0</span></div>
   </div>
   <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div>
 </div>
 
 <!-- ======================== GAME SCREEN ======================== -->
-<div class="screen" id="game">
-  <div id="stationContent"></div>
-</div>
+<div class="screen" id="game"><div id="stationContent"></div></div>
 
 <!-- BOTTOM NAV -->
 <div id="gameNav">
   <div class="nav-inner">
     <button class="nav-btn nav-btn-prev" id="navPrev" onclick="navigate(-1)">←</button>
-    <div class="nav-station-dots" id="navDots"></div>
+    <div class="nav-dots" id="navDots"></div>
+    <button class="nav-btn nav-btn-map" onclick="openMap()">🗺️</button>
     <button class="nav-btn nav-btn-next" id="navNext" onclick="navigate(1)" disabled>→</button>
+  </div>
+</div>
+
+<!-- ======================== MAP OVERLAY ======================== -->
+<div id="mapOverlay">
+  <div class="map-header">
+    <h3>🗺️ Tübis Schatzkarte</h3>
+    <button class="map-close-btn" onclick="closeMap()">✕</button>
+  </div>
+  <div id="mapContainer">
+    <div id="map"></div>
+    <div class="map-legend">
+      <div>🐉 Du bist hier</div>
+      <div>📍 Nächste Station</div>
+      <div>✅ Schon entdeckt</div>
+      <div>🔒 Noch geheim</div>
+    </div>
   </div>
 </div>
 
 <!-- ======================== QUIZ ======================== -->
 <div class="screen" id="quiz">
   <div class="quiz-header">
-    <div style="font-size:2rem;margin-bottom:.4rem">🧩</div>
-    <h2>Großes Drachenwissen</h2>
-    <p>Hast du gut aufgepasst?</p>
+    <div style="font-size:2rem;margin-bottom:.3rem">🧩</div>
+    <h2>Tübis Drachenquiz</h2>
+    <p>Hast du gut aufgepasst, Drachenkind?</p>
   </div>
   <div class="quiz-body">
-    <div class="quiz-progress" id="quizProgress">Frage 1 von 5</div>
+    <div class="quiz-progress" id="quizProgress"></div>
     <div id="quizContent"></div>
     <button class="quiz-done-btn" id="quizDoneBtn" onclick="showCertificate()">🏆 Mein Drachenzertifikat!</button>
   </div>
@@ -374,504 +319,513 @@ input { font-family:inherit; color:inherit; }
   <div class="cert-card">
     <div class="cert-dragon">🐉</div>
     <div class="cert-title">Drachenzertifikat</div>
-    <div class="cert-sub">Tübinger Geheimnisse · TraceTour Kids</div>
-    <div class="cert-name" id="certName">Held</div>
-    <div class="cert-rank" id="certRank">🥇 Drachen-Legende</div>
+    <div class="cert-sub">Tübis Geheimnisse · TraceTour Kids</div>
+    <div class="cert-name" id="certName"></div>
+    <div class="cert-rank" id="certRank"></div>
     <div class="cert-score" id="certScore">0</div>
     <div class="cert-score-label">von 210 Drachenfunken 🔥</div>
-    <div class="cert-stars" id="certStars">⭐⭐⭐</div>
-    <div class="cert-msg" id="certMsg">Du hast alle Geheimnisse Tübingens entdeckt!</div>
+    <div class="cert-stars" id="certStars"></div>
+    <div class="cert-msg" id="certMsg"></div>
     <button class="btn-cert-home" onclick="goHome()">🏠 Nochmal spielen</button>
-    <button class="btn-cert-share" onclick="shareResult()">📣 Teilen</button>
+    <button class="btn-cert-share" onclick="shareResult()">📣 Freunden zeigen</button>
   </div>
 </div>
 
 <script>
-/* ======================== DATA ======================== */
+/* ================================================================
+   TÜBI'S GEHEIMNISSE – TraceTour Kids
+   ================================================================ */
+
+/* ====================== STATION DATA ====================== */
 const STATIONS = [
-  {
-    id: 0,
-    emoji: '⏰',
-    title: 'Der Drachenzeiger',
-    place: 'Marktplatz · Rathaus',
-    fact: `Schau mal genau auf die Rathausuhr! Da ist ein <strong>Drache</strong> drauf – und der macht etwas sehr Merkwürdiges: Er <strong>frisst die Sonne und den Mond</strong>! 🌞🌙<br><br>Wenn sich der Zeiger dreht, sieht es so aus, als würde der Drache die beiden Gestirne verschlucken. Deswegen nennt man ihn den <strong>"Drachenzeiger"</strong>. Tübingen hat also schon seit Jahrhunderten einen Drachen auf dem Marktplatz!`,
-    question: 'Was macht der Drache an der Rathausuhr?',
-    options: [
-      { text: 'Er schlägt jede Stunde die Glocke', correct: false },
-      { text: 'Er frisst die Sonne und den Mond', correct: true },
-      { text: 'Er dreht sich dreimal im Kreis', correct: false },
-    ],
-    win: '🎉 Richtig! Der Drache verschluckt tatsächlich Sonne und Mond – wie cool ist das!',
-    lose: '🐉 Fast! Der Drache frisst die Sonne und den Mond – deswegen heißt er der "Drachenzeiger".',
-  },
-  {
-    id: 1,
-    emoji: '🤢',
-    title: 'Wo Goethe würgte',
-    place: 'Münzgasse',
-    fact: `In der Münzgasse hängt ein Schild, das einen berühmten deutschen Dichter etwas blamiert. Der große Dichter <strong>Johann Wolfgang von Goethe</strong> hat hier – na ja – sein Abendessen <strong>wieder nach oben befördert</strong>. 🤮<br><br>Auf dem Schild steht es sogar drauf. Das ist natürlich ein kleiner Witz, aber Goethe war wirklich einmal in Tübingen – und vielleicht war der Wein hier einfach zu gut? 🍷`,
-    question: 'Wer hat in der Münzgasse mal gekotzt?',
-    options: [
-      { text: 'Johann Wolfgang von Goethe', correct: true },
-      { text: 'Friedrich Schiller', correct: false },
-      { text: 'Albert Einstein', correct: false },
-    ],
-    win: '🎉 Genau! Goethe war ein ganz großer Dichter – aber kein so großer Trinker!',
-    lose: '🐢 Fast! Es war Goethe – der berühmteste Dichter Deutschlands!',
-  },
-  {
-    id: 2,
-    emoji: '⛪',
-    title: 'Der schiefe Turm & Dreieiniger Utz',
-    place: 'Stiftskirche',
-    fact: `Die Stiftskirche ist schon über <strong>600 Jahre alt</strong>! Ihr Turm ist sogar ein bisschen schief – er lehnt um <strong>8 Zentimeter</strong> aus der Senkrechten. Das merkst du, wenn du ganz genau hinschaust! 😲<br><br>Im Inneren gibt es ein gruseliges Geheimnis: das Skelett von <strong>"Dreieinigem Utz"</strong> – ein Mensch mit drei Köpfen! 💀 Und wenn du ganz nach oben willst, musst du <strong>169 Stufen</strong> steigen – dann siehst du die ganze Stadt!`,
-    question: 'Wie viele Stufen hat der Turm der Stiftskirche?',
-    options: [
-      { text: '99 Stufen', correct: false },
-      { text: '205 Stufen', correct: false },
-      { text: '169 Stufen', correct: true },
-    ],
-    win: '🎉 Super! 169 Stufen – das ist ganz schön viel! Bist du schon oben gewesen?',
-    lose: '🦅 Es sind 169 Stufen! Das ist fast so viel wie 15 normale Stockwerke.',
-  },
-  {
-    id: 3,
-    emoji: '🏰',
-    title: 'Das Riesenfass & die Fledermäuse',
-    place: 'Schloss Hohentübingen',
-    fact: `Im Schloss Hohentübingen gibt es ein <strong>riesiges Weinfass</strong> – es ist das <strong>zweitgrößte der Welt</strong>! Es fasst unglaubliche <strong>84.000 Liter Wein</strong>. Das ist genug, um ein Schwimmbad zu füllen! 🛁<br><br>Aber Vorsicht: Das Fass ist heute leer. Und wer wohnt darin? <strong>Fledermäuse!</strong> 🦇 Die hängen da drin kopfüber und schlafen tagsüber. Im Schloss wurde auch das älteste Kunstwerk der Welt gefunden – eine <strong>40.000 Jahre alte Figur</strong> aus Mammutknochen!`,
-    question: 'Wer wohnt heute im riesigen Weinfass im Schloss?',
-    options: [
-      { text: 'Fledermäuse 🦇', correct: true },
-      { text: 'Mäuse 🐭', correct: false },
-      { text: 'Eine Eule 🦉', correct: false },
-    ],
-    win: '🦇 Richtig! Fledermäuse lieben das alte Holzfass – sie hängen da kopfüber drin!',
-    lose: '🦇 Es sind Fledermäuse! Die hängen kopfüber im leeren Fass und schlafen.',
-  },
-  {
-    id: 4,
-    emoji: '🐲',
-    title: 'Der Stadtdrache',
-    place: 'Georgsbrunnen',
-    fact: `Tübingen hat einen eigenen <strong>Stadtdrachen</strong>! Die Figur am Georgsbrunnen zeigt den Heiligen Georg, der einen Drachen tötet. Aber weißt du, woher die Drachenfigur kommt? 🤔<br><br>Die Geschichte sagt: Man hat im <strong>Keller eines alten Hauses</strong> einen Drachen gefunden – und ihn erschlagen. Danach soll man die Figur sogar aus dem <strong>Neckar gefischt</strong> haben! Ob das stimmt? Die Tübinger glauben es jedenfalls! 🌊`,
-    question: 'Woher kommt die Drachenfigur am Georgsbrunnen?',
-    options: [
-      { text: 'Sie wurde extra gebaut', correct: false },
-      { text: 'Sie wurde aus dem Neckar gefischt', correct: true },
-      { text: 'Sie kam als Geschenk aus Rom', correct: false },
-    ],
-    win: '🐲 Richtig! Aus dem Neckar gefischt – klingt fast wie ein Märchen, oder?',
-    lose: '🌊 Sie wurde angeblich aus dem Neckar gefischt! Fast zu verrückt, um wahr zu sein.',
-  },
-  {
-    id: 5,
-    emoji: '🗼',
-    title: 'Der Dichter im Turm',
-    place: 'Hölderlinturm',
-    fact: `Der <strong>Hölderlinturm</strong> am Neckar ist ein ganz besonderes Haus. Hier lebte der Dichter <strong>Friedrich Hölderlin</strong> – und zwar für unglaublich lange Zeit: <strong>36 Jahre lang!</strong> 📖<br><br>Hölderlin war krank und wurde von der Familie Zimmer gepflegt, der der Turm gehörte. Er dichtete weiter, spielte Klavier und schaute aus seinem Fenster auf den Neckar. Heute ist der Turm ein kleines Museum – und man kann sein altes Zimmer besichtigen.`,
-    question: 'Wie lange wohnte Hölderlin im Turm?',
-    options: [
-      { text: '10 Jahre', correct: false },
-      { text: '5 Jahre', correct: false },
-      { text: '36 Jahre', correct: true },
-    ],
-    win: '📖 Richtig! 36 Jahre – fast ein ganzes Leben! Hölderlin liebte seinen Turm.',
-    lose: '🗼 Es waren 36 Jahre! Das ist fast so lange wie du alt sein wirst.',
-  },
-  {
-    id: 6,
-    emoji: '🌳',
-    title: 'Die Riesenplatanen',
-    place: 'Platanenallee · Neckarinsel',
-    fact: `Die <strong>Platanenallee</strong> auf der Neckarinsel ist einer der schönsten Orte in Tübingen. Die riesigen Platanenbäume sind schon über <strong>200 Jahre alt</strong>! Das ist älter als deine Urururgroßeltern! 🌿<br><br>Im Sommer spenden sie wunderbaren Schatten. Und am Ende der Allee steht ein <strong>Denkmal für Friedrich Hölderlin</strong> – den Dichter vom Turm, den du gerade kennengelernt hast! Die Bäume haben Stämme, die so dick sind, dass mehrere Kinder sie kaum umfassen könnten.`,
-    question: 'Wie alt sind die Platanenbäume ungefähr?',
-    options: [
-      { text: 'Ungefähr 50 Jahre', correct: false },
-      { text: 'Ungefähr 200 Jahre', correct: true },
-      { text: 'Ungefähr 500 Jahre', correct: false },
-    ],
-    win: '🌳 Richtig! 200 Jahre! Diese Bäume haben die Napoleonischen Kriege erlebt.',
-    lose: '🌳 Ungefähr 200 Jahre! Diese Bäume sind unglaublich alt und groß.',
-  },
-  {
-    id: 7,
-    emoji: '🚣',
-    title: 'Das Lebertran-Rennen',
-    place: 'Neckar · Stocherkahn',
-    fact: `Jedes Jahr im Juni findet das berühmte <strong>Stocherkahnrennen</strong> statt! Studenten fahren mit langen Holzstangen auf flachen Booten – den Stocherkähnen – um die Wette durch den Neckar. 🏆<br><br>Wer <strong>verliert</strong>, muss etwas ganz Ekelhaftes tun: Er muss einen ganzen Becher <strong>Lebertran</strong> trinken! Das ist Öl aus dem Fischbauch – es schmeckt schrecklich nach altem Fisch. 🤢 Man kann sich vorstellen, wie laut die Menschenmassen "Igitt!" rufen, wenn der Verlierer trinken muss!`,
-    question: 'Was müssen die Verlierer beim Stocherkahnrennen trinken?',
-    options: [
-      { text: 'Sauren Apfelsaft 🍎', correct: false },
-      { text: 'Salzwasser 🌊', correct: false },
-      { text: 'Lebertran 🐟', correct: true },
-    ],
-    win: '🤢 Richtig! Lebertran – das ist das Ekligste, was man sich vorstellen kann!',
-    lose: '🐟 Lebertran! Öl aus dem Fischbauch – die Verlierer tun mir wirklich leid.',
-  },
+{
+  id:0, emoji:'⏰', title:'Der Drachenzeiger',
+  place:'Marktplatz · Rathaus',
+  lat:48.520261, lng:9.053388,
+  image:'images/kinder/station_0.jpg',
+  story:`Hier wohne ich! Na ja, eigentlich hinter der Uhr. Schau mal genau hin – siehst du den <strong>Drachen auf dem Ziffernblatt</strong>? Das bin ICH! Seit über <strong>500 Jahren</strong> drehe ich mich auf dieser Uhr. Und weißt du, was ich da oben mache? Ich <strong>schnappe mir die Sonne und den Mond</strong>! Wenn sich der Zeiger dreht, sieht es aus, als würde ich sie verschlucken. Deswegen nennen mich die Tübinger den <strong>„Drachenzeiger"</strong>.\n\nDie Uhr auf dem Rathaus ist eine ganz besondere – eine <strong>astronomische Uhr</strong>. Sie zeigt nicht nur die Zeit, sondern auch die Sternzeichen und die Mondphasen. Sie wurde 1511 von einem Professor namens Stoeffler gebaut – und sie funktioniert immer noch! Stell dir vor: Diese Uhr läuft seit über 500 Jahren, ohne dass sie jemals eine Batterie gebraucht hat!`,
+  tubiSays:'Ich bin ein echter Star auf dem Marktplatz – die Leute fotografieren mich den ganzen Tag! Aber ehrlich gesagt macht mir das Sonnenverschlucken manchmal Bauchschmerzen... 🤭',
+  question:'Was macht Tübi der Drache an der Rathausuhr?',
+  options:[
+    {text:'Er schlägt jede Stunde eine Glocke',correct:false},
+    {text:'Er schnappt sich die Sonne und den Mond',correct:true},
+    {text:'Er bläst Feuer auf die Zeiger',correct:false},
+  ],
+  win:'🎉 Genau! Tübi verschluckt Sonne und Mond – darum heißt er der „Drachenzeiger"!',
+  lose:'🐉 Fast! Tübi schnappt sich Sonne und Mond auf dem Ziffernblatt – deswegen heißt er der „Drachenzeiger".'
+},
+{
+  id:1, emoji:'⛪', title:'Der schiefe Turm',
+  place:'Stiftskirche · Holzmarkt',
+  lat:48.520002, lng:9.055678,
+  image:'images/kinder/station_1.jpg',
+  story:`Komm mit zur Stiftskirche – die ist schon über <strong>600 Jahre alt</strong>! Und sie hat ein Geheimnis: Ihr Turm ist <strong>schief</strong>! Er lehnt sich <strong>8 Zentimeter</strong> zur Seite. Das klingt nicht viel, aber wenn du ganz genau hinschaust, kannst du es tatsächlich sehen!\n\nWenn du mutig bist, kannst du die <strong>170 Stufen</strong> bis nach oben klettern. Von dort siehst du die ganze Stadt, den Neckar und sogar bis zur Schwäbischen Alb! Oben im Turm hängt die <strong>„Dominica"</strong> – eine Glocke, die schon über 600 Jahre alt ist. Sie ist älter als Kolumbus' Reise nach Amerika!\n\nUnter der Kirche gibt es auch eine Gruft – dort liegt <strong>Graf Eberhard im Bart</strong> begraben. Der hieß wirklich so! Er hatte einen besonders langen Bart und hat die Uni Tübingen gegründet.`,
+  tubiSays:'170 Stufen! Als Drache kann ich natürlich einfach hochfliegen. Aber du schaffst das auch – ich warte oben auf dich! 😄',
+  question:'Wie viele Stufen führen auf den Turm der Stiftskirche?',
+  options:[
+    {text:'Ungefähr 170 Stufen',correct:true},
+    {text:'Genau 99 Stufen',correct:false},
+    {text:'Über 300 Stufen',correct:false},
+  ],
+  win:'🎉 Richtig! 170 Stufen – das sind fast 15 normale Stockwerke! Ganz schön hoch!',
+  lose:'⛪ Es sind ungefähr 170 Stufen! Aber es lohnt sich – die Aussicht ist fantastisch.'
+},
+{
+  id:2, emoji:'🐲', title:'Der Drache aus dem Neckar',
+  place:'Georgsbrunnen · Holzmarkt',
+  lat:48.520403, lng:9.055689,
+  image:'images/kinder/station_2.jpg',
+  story:`Jetzt wird es richtig spannend – denn hier steht mein <strong>Cousin</strong>! Am Georgsbrunnen siehst du eine Figur: Den <strong>Ritter Georg</strong>, der einen Drachen besiegt. Diese Figur ist schon seit <strong>1523</strong> hier – also über 500 Jahre alt!\n\nAber woher kommt die Drachenfigur? Die Geschichte ist verrückt: Im Jahr 1911 hat jemand die Figur <strong>im Neckar gefunden</strong> – einfach so im Fluss! Und den Drachen hat man in einem <strong>alten Keller</strong> in der Neckargasse entdeckt. Wie die beiden dort gelandet sind, weiß bis heute niemand genau.\n\nUnd jetzt kommt das Unglaublichste: 1961 haben sie den Brunnen <strong>abgerissen</strong> – wofür? Für <strong>drei Parkplätze</strong>! Drei!! Zum Glück hat man ihn 1976 wieder aufgebaut.`,
+  tubiSays:'Einen 500 Jahre alten Drachenbrunnen für DREI PARKPLÄTZE abreißen?! Das ist das Empörendste, was ich je gehört habe! 😤 Zum Glück steht mein Cousin jetzt wieder da.',
+  question:'Wo wurde die alte Drachenfigur wiedergefunden?',
+  options:[
+    {text:'In einem Museum in Stuttgart',correct:false},
+    {text:'Im Neckar und in einem Keller',correct:true},
+    {text:'Auf dem Dachboden der Stiftskirche',correct:false},
+  ],
+  win:'🐲 Richtig! Die Figur lag im Neckar und der Drache war in einem Keller – wie ein richtiger Schatz!',
+  lose:'🌊 Die Figur wurde 1911 im Neckar gefunden und der Drache in einem Keller in der Neckargasse!'
+},
+{
+  id:3, emoji:'🏰', title:'Das Geheimschloss',
+  place:'Schloss Hohentübingen',
+  lat:48.519513, lng:9.051072,
+  image:'images/kinder/station_3.jpg',
+  story:`Willkommen im <strong>Schloss Hohentübingen</strong>! Dieses Schloss steckt voller Überraschungen.\n\nIm Keller steht das <strong>zweitgrößte Weinfass der Welt</strong>! Es fasst unglaubliche <strong>84.000 Liter</strong> – das sind ungefähr <strong>336 volle Badewannen</strong>! Heute ist das Fass leer, aber dafür wohnen jetzt <strong>Fledermäuse</strong> darin! 🦇 Sie hängen kopfüber im dunklen Fass und schlafen tagsüber.\n\nAber es wird noch besser: Im Schloss gibt es <strong>Geheimgänge</strong>! Zwei enge Tunnel führen vom Innenhof tief hinunter zum Fuß des Turms. Du kannst sie sogar tagsüber besuchen!\n\nUnd das Coolste: Im Museum des Schlosses liegt die <strong>älteste Kunst der Menschheit</strong>: Eine winzige Mammutfigur aus Elfenbein, die über <strong>35.000 Jahre alt</strong> ist! Jemand hat sie geschnitzt, als es noch echte Mammuts gab. Und daneben liegt eine <strong>Flöte aus einem Vogelknochen</strong> – das älteste Musikinstrument der Welt!`,
+  tubiSays:'In den Geheimgängen war ich schon oft. Manchmal besuche ich die Fledermäuse im Weinfass – die sind ganz nett, aber sie hängen immer kopfüber! Versteh einer die Fledermäuse... 🦇',
+  question:'Was wohnt heute im riesigen Weinfass im Schloss?',
+  options:[
+    {text:'Fledermäuse 🦇',correct:true},
+    {text:'Mäuse 🐭',correct:false},
+    {text:'Nichts – das Fass ist verschlossen',correct:false},
+  ],
+  win:'🦇 Richtig! Die Fledermäuse lieben das alte Holzfass – sie hängen kopfüber drin und schlafen!',
+  lose:'🦇 Es sind Fledermäuse! Die hängen kopfüber im leeren Fass – ein echtes Fledermaus-Hotel!'
+},
+{
+  id:4, emoji:'📜', title:'Goethe & das Studentengefängnis',
+  place:'Münzgasse',
+  lat:48.520001, lng:9.055591,
+  image:'images/kinder/station_4.jpg',
+  story:`Die Münzgasse ist eine der ältesten Straßen Tübingens – und sie hat ihren Namen, weil hier früher <strong>echtes Geld hergestellt</strong> wurde! Der „Tübinger Pfennig" wurde direkt in dieser Straße geprägt.\n\nHier hängt auch ein lustiges Schild über einem berühmten Dichter: <strong>Johann Wolfgang von Goethe</strong> – einer der berühmtesten Deutschen überhaupt – war einmal zu Besuch in Tübingen. Und was ist passiert? <strong>Ihm wurde so richtig schlecht!</strong> 🤢 Sein Magen spielte verrückt – wahrscheinlich war der Wein hier ein bisschen zu gut für ihn. Die Tübinger finden das so lustig, dass sie ein Schild aufgehängt haben!\n\nUnd noch etwas Gruseliges: In der Münzgasse gab es früher ein <strong>Studentengefängnis</strong>! Studenten, die Unsinn gemacht haben, wurden hier eingesperrt – und das Gefängnis hatte <strong>nicht einmal ein Klo</strong>! 😱\n\nÜbrigens: Unter der Straße liegen <strong>1.400 Jahre alte Gräber</strong> aus der Alemannenzeit!`,
+  tubiSays:'Dem berühmten Goethe wurde hier also schlecht! Vielleicht hätte er lieber Wasser trinken sollen statt Wein? Oder Drachenfeuer-Tee – der hilft gegen alles! 🍵',
+  question:'Warum heißt die Straße „Münzgasse"?',
+  options:[
+    {text:'Weil es dort eine Münzsammlung gibt',correct:false},
+    {text:'Weil ein Herr Münz dort wohnte',correct:false},
+    {text:'Weil dort echtes Geld hergestellt wurde',correct:true},
+  ],
+  win:'🎉 Genau! Der „Tübinger Pfennig" wurde hier geprägt – echtes Geld, direkt in dieser Straße!',
+  lose:'💰 Hier wurde echtes Geld gemacht! Der „Tübinger Pfennig" wurde in dieser Straße geprägt.'
+},
+{
+  id:5, emoji:'🏠', title:'Das Haus mit dem Fluss-Klo',
+  place:'Nonnenhaus · Zwischen den Toren',
+  lat:48.521913, lng:9.057653,
+  image:'images/kinder/station_5.jpg',
+  story:`Das <strong>Nonnenhaus</strong> ist eines der ältesten Häuser in ganz Tübingen – es wurde <strong>1488</strong> gebaut! Das ist so alt, dass Kolumbus gerade erst nach Amerika gesegelt war.\n\nDas Haus hat ein sehr lustiges Geheimnis: Es hatte früher einen Anbau, der direkt <strong>über dem Fluss</strong> hing. Und was war darin? Ein <strong>Klo!</strong> 🚽 Die Bewohner nannten es fein das „Sprachhaus" – aber in Wirklichkeit war es ihre Toilette! Alles fiel einfach… runter in den Fluss. Igitt! 😄\n\nAber es gibt auch etwas Schönes: In diesem Haus wohnte einmal der Botaniker <strong>Leonhart Fuchs</strong> – mit seinen <strong>zehn Kindern</strong>! Er hat den ältesten Botanischen Garten Europas direkt nebenan angelegt. Und die wunderschöne Blume <strong>Fuchsie</strong>? Die ist nach IHM benannt!\n\nWenn du in den Buchladen im Erdgeschoss gehst, kannst du durch ein Glasfenster im Boden den <strong>Original-Boden von 1488</strong> sehen!`,
+  tubiSays:'Ein Klo über dem Fluss – und sie nannten es „Sprachhaus"! 😂 Die Menschen im Mittelalter hatten wirklich komische Ideen. Ich werfe übrigens auch nichts in den Neckar, versprochen!',
+  question:'Welche berühmte Blume ist nach einem Bewohner des Nonnenhauses benannt?',
+  options:[
+    {text:'Die Rose',correct:false},
+    {text:'Die Fuchsie',correct:true},
+    {text:'Die Tulpe',correct:false},
+  ],
+  win:'🌺 Richtig! Die Fuchsie ist nach Leonhart Fuchs benannt, der hier mit 10 Kindern wohnte!',
+  lose:'🌺 Es ist die Fuchsie! Benannt nach dem Botaniker Leonhart Fuchs, der hier wohnte.'
+},
+{
+  id:6, emoji:'🌳', title:'Die Riesenbäume & die Gummienten',
+  place:'Platanenallee · Neckarinsel',
+  lat:48.519017, lng:9.057506,
+  image:'images/kinder/station_6.jpg',
+  story:`Willkommen auf der <strong>Neckarinsel</strong>! Diese Insel ist gar keine echte Insel – sie wurde <strong>1910 künstlich gebaut</strong>! Die Menschen haben einen Kanal gegraben und so eine fast <strong>1 Kilometer lange Insel</strong> geschaffen.\n\nDie <strong>Platanenallee</strong> hier ist die <strong>älteste in ganz Deutschland</strong>! <strong>84 Platanenbäume</strong> stehen hier in zwei perfekten Reihen – <strong>42 auf jeder Seite</strong>. Sie sind fast <strong>200 Jahre alt</strong> und so riesig, dass sie mit unsichtbaren Drahtseilen gehalten werden müssen, damit sie nicht umfallen.\n\nFrüher erzählte man, der letzte Henker der Stadt hätte die Bäume gepflanzt. Aber Wissenschaftler haben die <strong>Jahresringe</strong> untersucht und herausgefunden: Die Bäume wurden 1828 gepflanzt – die Henker-Geschichte war ein Märchen!\n\nUnd das Allerbeste: Jeden Oktober findet hier das <strong>Entenrennen</strong> statt! Hunderte <strong>knallgelbe Quietscheenten</strong> 🦆 schwimmen durch den Neckar um die Wette!`,
+  tubiSays:'Beim Entenrennen feuere ich die Enten immer von oben an! Letztens bin ich fast selbst ins Wasser gefallen vor Aufregung! 🦆 Und die Bäume hier sind fast so alt wie ich – Respekt!',
+  question:'Wie viele Platanenbäume stehen in der Allee?',
+  options:[
+    {text:'Ungefähr 30 Bäume',correct:false},
+    {text:'84 Bäume – 42 auf jeder Seite',correct:true},
+    {text:'Über 200 Bäume',correct:false},
+  ],
+  win:'🌳 Genau! 84 riesige Platanen in zwei perfekten Reihen – die älteste Allee Deutschlands!',
+  lose:'🌳 Es sind 84 Bäume – 42 auf jeder Seite! Die älteste Platanenallee Deutschlands.'
+},
+{
+  id:7, emoji:'🚣', title:'Das Lebertran-Rennen',
+  place:'Stocherkahn · Neckar',
+  lat:48.521100, lng:9.054100,
+  image:'images/kinder/station_7.jpg',
+  story:`Zum Schluss zeige ich dir noch mein <strong>Lieblingsereignis</strong> des Jahres: Das <strong>Stocherkahnrennen</strong>! Jedes Jahr im Juni fahren Studenten mit langen Holzstangen auf flachen Booten um die Wette. Das Chaos ist riesig: Boote stoßen zusammen, Leute fallen ins Wasser, und alle tragen verrückte Kostüme! 🎭\n\nDas Beste kommt aber zum Schluss: Wer <strong>verliert</strong>, muss einen ganzen Becher <strong>Lebertran</strong> trinken! 🤢 Das ist <strong>Öl aus Fischbäuchen</strong> – es schmeckt so eklig, dass die Zuschauer „Igitt!" schreien! Und nicht nur das: Das <strong>Verliererteam muss auch das Rennen im nächsten Jahr organisieren</strong>!\n\nWusstest du, dass der Neckar einmal so stark zugefroren war, dass <strong>beladene Pferdewagen</strong> darüber fahren konnten? Das war 1595 – also vor über 400 Jahren. Und 2010 versammelten sich plötzlich <strong>Hunderte Fische</strong> unter der Neckarbrücke – und niemand weiß bis heute warum! 🐟\n\nÜbrigens: Der Name „Neckar" kommt aus einer uralten Sprache und bedeutet <strong>„Wildes Wasser"</strong>!`,
+  tubiSays:'Beim Stocherkahnrennen sitze ich immer auf der Brücke und schaue zu! Einmal hat ein Spritzer Lebertran fast MICH getroffen – das wäre eine Katastrophe gewesen! Drachenfeuer und Fischöl – das STINKT! 😵',
+  question:'Was müssen die Verlierer beim Stocherkahnrennen trinken?',
+  options:[
+    {text:'Kalten Apfelsaft mit Essig 🍎',correct:false},
+    {text:'Salzwasser aus dem Neckar 🌊',correct:false},
+    {text:'Lebertran – Öl aus Fischbäuchen 🐟',correct:true},
+  ],
+  win:'🤢 Richtig! Lebertran! Das Ekligste überhaupt! Die armen Verlierer...',
+  lose:'🐟 Es ist Lebertran – Öl aus Fischbäuchen! So eklig, dass alle „Igitt!" schreien.'
+}
 ];
 
 const QUIZ_QUESTIONS = [
-  {
-    text: 'Was macht der Drache an der Rathausuhr?',
-    options: ['Er schlägt die Glocke', 'Er frisst Sonne und Mond', 'Er dreht sich im Kreis'],
-    correct: 1,
-  },
-  {
-    text: 'Wie viele Stufen hat der Turm der Stiftskirche?',
-    options: ['99 Stufen', '169 Stufen', '205 Stufen'],
-    correct: 1,
-  },
-  {
-    text: 'Welches Tier wohnt im Riesenfass im Schloss?',
-    options: ['Mäuse', 'Eulen', 'Fledermäuse'],
-    correct: 2,
-  },
-  {
-    text: 'Wie lange lebte Hölderlin in seinem Turm?',
-    options: ['10 Jahre', '36 Jahre', '5 Jahre'],
-    correct: 1,
-  },
-  {
-    text: 'Was müssen Verlierer beim Stocherkahnrennen trinken?',
-    options: ['Lebertran', 'Salzwasser', 'Sauren Apfelsaft'],
-    correct: 0,
-  },
+  {text:'Was macht Tübi der Drache an der Rathausuhr?',
+   options:['Er schlägt die Glocke','Er schnappt sich Sonne und Mond','Er bläst Feuer'],correct:1},
+  {text:'Wie viele Stufen hat der Stiftskirchen-Turm ungefähr?',
+   options:['99','170','300'],correct:1},
+  {text:'Wofür wurde der Georgsbrunnen 1961 abgerissen?',
+   options:['Für ein neues Haus','Für drei Parkplätze','Für eine Straßenbahn'],correct:1},
+  {text:'Welches Tier wohnt im Riesenfass im Schloss?',
+   options:['Mäuse','Eulen','Fledermäuse'],correct:2},
+  {text:'Wie alt ist die älteste Kunst im Schloss ungefähr?',
+   options:['1.000 Jahre','10.000 Jahre','35.000 Jahre'],correct:2},
+  {text:'Was wurde in der Münzgasse früher hergestellt?',
+   options:['Schuhe','Geld','Brot'],correct:1},
+  {text:'Welche Blume ist nach einem Bewohner des Nonnenhauses benannt?',
+   options:['Rose','Fuchsie','Lilie'],correct:1},
+  {text:'Was bedeutet der Name „Neckar" in einer alten Sprache?',
+   options:['Ruhiges Wasser','Wildes Wasser','Kaltes Wasser'],correct:1},
 ];
 
 const RANKS = [
-  { min: 0,   label: '🥉 Drachenlehrling' },
-  { min: 60,  label: '🥈 Drachenjäger' },
-  { min: 120, label: '🥇 Drachenritter' },
-  { min: 160, label: '🏆 Drachen-Legende' },
+  {min:0,label:'🥉 Drachenlehrling'},
+  {min:70,label:'🥈 Drachenjäger'},
+  {min:140,label:'🥇 Drachenritter'},
+  {min:190,label:'🏆 Drachen-Legende'},
 ];
 
-/* ======================== STATE ======================== */
-let playerName = '';
-let currentStation = 0;
-let maxUnlocked = 0;
-let totalXp = 0;
-let stationSolved = {}; // station idx → true
-let quizAnswers = {};   // q idx → correct bool
-let quizDone = false;
-
 const STATION_XP = 20;
-const QUIZ_XP = 10;
-const MAX_XP = STATIONS.length * STATION_XP + QUIZ_QUESTIONS.length * QUIZ_XP; // 160 + 50 = 210
+const QUIZ_XP = 5;
+const MAX_XP = STATIONS.length * STATION_XP + QUIZ_QUESTIONS.length * QUIZ_XP;
 
-/* ======================== PERSISTENCE ======================== */
-const SAVE_KEY = 'tracetour_kinder_v1';
-function saveGame() {
-  localStorage.setItem(SAVE_KEY, JSON.stringify({ playerName, currentStation, maxUnlocked, totalXp, stationSolved, quizAnswers, quizDone }));
-}
-function loadGame() {
-  try {
-    const d = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null');
-    if (!d) return false;
-    playerName = d.playerName || ''; currentStation = d.currentStation || 0;
-    maxUnlocked = d.maxUnlocked || 0; totalXp = d.totalXp || 0;
-    stationSolved = d.stationSolved || {}; quizAnswers = d.quizAnswers || {};
-    quizDone = d.quizDone || false;
-    return !!playerName;
-  } catch(e) { return false; }
-}
+/* ====================== STATE ====================== */
+let playerName='', currentStation=0, maxUnlocked=0, totalXp=0;
+let stationSolved={}, quizAnswers={}, quizDone=false;
+let currentAudio=null, currentAudioBtn=null;
 
-/* ======================== GAME START ======================== */
-function startGame() {
-  const nameInput = document.getElementById('playerName');
-  const name = nameInput.value.trim();
-  if (!name) { document.getElementById('splashError').style.display = 'block'; return; }
-  playerName = name;
-  saveGame();
-  launchGame();
+/* ====================== MAP VARS ====================== */
+let map=null, mapReady=false, stationMarkers=[], routeLine=null, userMarker=null, fullRouteCoords=null, watchId=null;
+
+/* ====================== PERSISTENCE ====================== */
+const SAVE_KEY='tracetour_kinder_v2';
+function saveGame(){localStorage.setItem(SAVE_KEY,JSON.stringify({playerName,currentStation,maxUnlocked,totalXp,stationSolved,quizAnswers,quizDone}))}
+function loadGame(){
+  try{const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(!d)return false;
+  playerName=d.playerName||'';currentStation=d.currentStation||0;maxUnlocked=d.maxUnlocked||0;
+  totalXp=d.totalXp||0;stationSolved=d.stationSolved||{};quizAnswers=d.quizAnswers||{};quizDone=d.quizDone||false;
+  return !!playerName}catch(e){return false}
 }
 
-function launchGame() {
+/* ====================== AUDIO ====================== */
+function playAudio(src, btn) {
+  // Stop any currently playing audio
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    if (currentAudioBtn) {
+      currentAudioBtn.classList.remove('playing');
+      currentAudioBtn.querySelector('.audio-icon').textContent = '▶️';
+    }
+    // If same button clicked, just stop
+    if (currentAudioBtn === btn) { currentAudio = null; currentAudioBtn = null; return; }
+  }
+  const audio = new Audio(src);
+  currentAudio = audio;
+  currentAudioBtn = btn;
+  btn.classList.add('playing');
+  btn.querySelector('.audio-icon').textContent = '⏸️';
+  audio.play().catch(()=>{
+    btn.classList.remove('playing');
+    btn.querySelector('.audio-icon').textContent = '▶️';
+  });
+  audio.onended = () => {
+    btn.classList.remove('playing');
+    btn.querySelector('.audio-icon').textContent = '▶️';
+    currentAudio = null; currentAudioBtn = null;
+  };
+  audio.onerror = () => {
+    btn.classList.remove('playing');
+    btn.querySelector('.audio-icon').textContent = '▶️';
+    currentAudio = null; currentAudioBtn = null;
+  };
+}
+
+/* ====================== GAME START ====================== */
+function startGame(){
+  const name=document.getElementById('playerName').value.trim();
+  if(!name){document.getElementById('splashError').style.display='block';return}
+  playerName=name; saveGame(); launchGame();
+}
+function launchGame(){
   showScreen('game');
-  document.getElementById('gameHeader').style.display = 'block';
+  document.getElementById('gameHeader').style.display='block';
   document.getElementById('gameNav').classList.add('show');
-  updateHeader();
-  renderStation();
-  renderDots();
+  updateHeader(); renderStation(); renderDots();
 }
 
-/* ======================== NAVIGATION ======================== */
-function navigate(dir) {
-  const next = currentStation + dir;
-  if (next < 0) return;
-  if (next >= STATIONS.length) {
-    // Go to quiz
-    showScreen('quiz');
-    renderQuiz();
-    return;
-  }
-  if (next > maxUnlocked) return;
-  currentStation = next;
-  saveGame();
-  updateHeader();
-  renderStation();
-  renderDots();
-  document.getElementById('game').scrollTo(0, 0);
+/* ====================== NAVIGATION ====================== */
+function navigate(dir){
+  if(currentAudio){currentAudio.pause();currentAudio=null;if(currentAudioBtn){currentAudioBtn.classList.remove('playing');currentAudioBtn.querySelector('.audio-icon').textContent='▶️';currentAudioBtn=null}}
+  const next=currentStation+dir;
+  if(next<0)return;
+  if(next>=STATIONS.length){showScreen('quiz');renderQuiz();return}
+  if(next>maxUnlocked)return;
+  currentStation=next;saveGame();updateHeader();renderStation();renderDots();
+  document.getElementById('game').scrollTo(0,0);
 }
-
-function navToQuiz() {
-  showScreen('quiz');
-  renderQuiz();
-}
-
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  if (id === 'game') {
-    document.getElementById('gameHeader').style.display = 'block';
-    document.getElementById('gameNav').classList.add('show');
-  } else {
-    document.getElementById('gameHeader').style.display = 'none';
-    document.getElementById('gameNav').classList.remove('show');
-  }
+  if(id==='game'){document.getElementById('gameHeader').style.display='block';document.getElementById('gameNav').classList.add('show')}
+  else{document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show')}
 }
 
-/* ======================== HEADER & DOTS ======================== */
-function updateHeader() {
-  document.getElementById('hdrName').textContent = playerName;
-  document.getElementById('hdrStation').textContent = `Station ${currentStation + 1} von ${STATIONS.length}`;
-  document.getElementById('hdrXp').textContent = totalXp;
-  const pct = (maxUnlocked / (STATIONS.length - 1)) * 100;
-  document.getElementById('progressBar').style.width = Math.min(100, pct) + '%';
+/* ====================== HEADER & DOTS ====================== */
+function updateHeader(){
+  document.getElementById('hdrName').textContent=playerName;
+  document.getElementById('hdrStation').textContent=`Station ${currentStation+1} von ${STATIONS.length}`;
+  document.getElementById('hdrXp').textContent=totalXp;
+  document.getElementById('progressBar').style.width=Math.min(100,(maxUnlocked/(STATIONS.length-1))*100)+'%';
 }
-
-function renderDots() {
-  const el = document.getElementById('navDots');
-  el.innerHTML = STATIONS.map((s, i) => {
-    let cls = 'nav-dot';
-    if (i === currentStation) cls += ' current';
-    else if (stationSolved[i]) cls += ' done';
-    return `<div class="${cls}" title="Station ${i+1}"></div>`;
+function renderDots(){
+  document.getElementById('navDots').innerHTML=STATIONS.map((_,i)=>{
+    let c='nav-dot';if(i===currentStation)c+=' current';else if(stationSolved[i])c+=' done';return`<div class="${c}"></div>`;
   }).join('');
-
-  // Prev button
-  document.getElementById('navPrev').style.opacity = currentStation === 0 ? '.3' : '1';
-  document.getElementById('navPrev').disabled = currentStation === 0;
-
-  // Next button: only enabled if current station is solved
-  const canGoNext = stationSolved[currentStation];
-  document.getElementById('navNext').disabled = !canGoNext;
+  document.getElementById('navPrev').disabled=currentStation===0;
+  document.getElementById('navPrev').style.opacity=currentStation===0?'.3':'1';
+  document.getElementById('navNext').disabled=!stationSolved[currentStation];
 }
 
-/* ======================== RENDER STATION ======================== */
-function renderStation() {
-  const s = STATIONS[currentStation];
-  const solved = stationSolved[currentStation];
+/* ====================== RENDER STATION ====================== */
+function renderStation(){
+  const s=STATIONS[currentStation];
+  const solved=stationSolved[currentStation];
 
-  let questionBlock = '';
-  if (solved) {
-    questionBlock = `
-      <div class="solved-badge fade-in">
-        ✅ Schon gelöst! <strong>+${STATION_XP} 🔥 Drachenfunken</strong> eingesammelt
-      </div>`;
+  // Image: try real image, fallback to placeholder
+  const imgHtml=`<div class="station-img-wrap">
+    <img src="${s.image}" alt="${s.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <div class="station-img-placeholder" style="display:none">${s.emoji}</div>
+  </div>`;
+
+  // Audio button
+  const audioBtn=`<button class="audio-btn" onclick="playAudio('audio/kinder/story_${s.id}.mp3',this)">
+    <span class="audio-icon">▶️</span> Tübi erzählt
+  </button>`;
+
+  // Story
+  const storyHtml=`<div class="info-card fade-in">
+    <div class="info-card-label">🔍 Das Geheimnis</div>
+    <div class="info-card-text">${s.story.replace(/\n/g,'<br>')}</div>
+  </div>`;
+
+  // Tübi bubble
+  const tubiHtml=`<div class="tubi-bubble fade-in">
+    <div class="tubi-says">🐉 Tübi sagt:</div>
+    <div class="tubi-text">${s.tubiSays}</div>
+  </div>`;
+
+  // Question or solved badge
+  let questionBlock='';
+  if(solved){
+    questionBlock=`<div class="solved-badge fade-in">✅ Gelöst! +${STATION_XP} 🔥 Drachenfunken</div>`;
   } else {
-    const optionsHtml = s.options.map((opt, i) => {
-      const letter = String.fromCharCode(65 + i);
-      return `<button class="mc-btn" id="opt_${i}" onclick="answerStation(${i})">
-        <span class="mc-letter">${letter}</span>
-        <span>${opt.text}</span>
-      </button>`;
+    const opts=s.options.map((o,i)=>{
+      const letter=String.fromCharCode(65+i);
+      return`<button class="mc-btn" id="opt_${i}" onclick="answerStation(${i})"><span class="mc-letter">${letter}</span><span>${o.text}</span></button>`;
     }).join('');
-    questionBlock = `
-      <div class="question-card fade-in">
-        <div class="question-label">🧩 Frage der Station</div>
-        <div class="question-text">${s.question}</div>
-        <div class="mc-options" id="mcOptions">${optionsHtml}</div>
-        <div class="question-feedback" id="qFeedback"></div>
-      </div>`;
+    questionBlock=`<div class="question-card fade-in">
+      <div class="question-label">🧩 Rätsel</div>
+      <div class="question-text">${s.question}</div>
+      <div class="mc-options" id="mcOptions">${opts}</div>
+      <div class="question-feedback" id="qFeedback"></div>
+    </div>`;
   }
 
-  // If last station solved, show quiz button
-  let quizBtn = '';
-  if (currentStation === STATIONS.length - 1 && solved && !quizDone) {
-    quizBtn = `<button onclick="navToQuiz()" style="width:100%;padding:16px;background:var(--green);color:#fff;font-weight:900;font-size:1.05rem;border-radius:var(--r-sm);border:2px solid var(--green-light);box-shadow:0 4px 16px rgba(0,106,45,.25);margin-bottom:1rem;">
-      🧩 Zum großen Drachenwissen →
-    </button>`;
+  // End-of-tour buttons
+  let extraBtns='';
+  if(currentStation===STATIONS.length-1 && solved && !quizDone){
+    extraBtns=`<button class="action-btn action-btn-green" onclick="showScreen('quiz');renderQuiz()">🧩 Tübis Drachenquiz starten →</button>`;
   }
-  if (quizDone) {
-    quizBtn = `<button onclick="showCertificate()" style="width:100%;padding:16px;background:var(--yellow);color:var(--green);font-weight:900;font-size:1.05rem;border-radius:var(--r-sm);border:2px solid var(--yellow-dark);margin-bottom:1rem;">
-      🏆 Mein Drachenzertifikat →
-    </button>`;
+  if(quizDone){
+    extraBtns=`<button class="action-btn action-btn-yellow" onclick="showCertificate()">🏆 Mein Drachenzertifikat →</button>`;
   }
 
-  document.getElementById('stationContent').innerHTML = `
+  document.getElementById('stationContent').innerHTML=`
     <div class="station-hero">
-      <div class="station-number">Station ${currentStation + 1} von ${STATIONS.length}</div>
+      <div class="station-number">Station ${currentStation+1} von ${STATIONS.length}</div>
       <span class="station-emoji">${s.emoji}</span>
       <div class="station-title">${s.title}</div>
     </div>
     <div class="station-body fade-in">
-      <div style="font-size:.75rem;font-weight:700;color:var(--text-3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.6rem;">📍 ${s.place}</div>
-      <div class="info-card">
-        <div class="info-card-label">🔍 Das Geheimnis</div>
-        <div class="info-card-text">${s.fact}</div>
-      </div>
+      <div style="font-size:.7rem;font-weight:700;color:var(--text-3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:.5rem">📍 ${s.place}</div>
+      ${imgHtml}
+      ${audioBtn}
+      ${storyHtml}
+      ${tubiHtml}
       ${questionBlock}
-      ${quizBtn}
-    </div>
-  `;
-
+      ${extraBtns}
+    </div>`;
   renderDots();
+  // Update map markers if map ready
+  if(mapReady)updateMapMarkers();
 }
 
-/* ======================== ANSWER STATION ======================== */
-function answerStation(idx) {
-  const s = STATIONS[currentStation];
-  const correct = s.options[idx].correct;
-  const btns = document.querySelectorAll('.mc-btn');
-  btns.forEach((btn, i) => {
-    btn.disabled = true;
-    if (s.options[i].correct) btn.classList.add('correct');
-    else if (i === idx && !correct) btn.classList.add('wrong');
+/* ====================== ANSWER STATION ====================== */
+function answerStation(idx){
+  const s=STATIONS[currentStation];
+  const correct=s.options[idx].correct;
+  document.querySelectorAll('.mc-btn').forEach((btn,i)=>{
+    btn.disabled=true;
+    if(s.options[i].correct)btn.classList.add('correct');
+    else if(i===idx&&!correct)btn.classList.add('wrong');
   });
+  const fb=document.getElementById('qFeedback');
+  fb.textContent=correct?s.win:s.lose;
+  fb.className='question-feedback show '+(correct?'win':'lose');
+  if(correct){
+    totalXp+=STATION_XP;stationSolved[currentStation]=true;
+    if(currentStation>=maxUnlocked&&currentStation<STATIONS.length-1)maxUnlocked=currentStation+1;
+    saveGame();updateHeader();renderDots();
+    showXpToast(`+${STATION_XP} 🔥 Drachenfunken!`);spawnSparkles();
+    setTimeout(()=>renderStation(),1400);
+  }
+}
 
-  const feedback = document.getElementById('qFeedback');
-  feedback.textContent = correct ? s.win : s.lose;
-  feedback.className = 'question-feedback show ' + (correct ? 'win' : 'lose');
+/* ====================== XP TOAST & SPARKLES ====================== */
+function showXpToast(msg){const t=document.getElementById('xpToast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
+function spawnSparkles(){const e=['✨','⭐','🌟','💫','🔥'];for(let i=0;i<5;i++){setTimeout(()=>{const el=document.createElement('div');el.className='sparkle';el.textContent=e[Math.floor(Math.random()*e.length)];el.style.left=(20+Math.random()*60)+'%';el.style.top=(30+Math.random()*30)+'%';document.body.appendChild(el);setTimeout(()=>el.remove(),900)},i*120)}}
 
-  if (correct) {
-    totalXp += STATION_XP;
-    stationSolved[currentStation] = true;
-    if (currentStation >= maxUnlocked && currentStation < STATIONS.length - 1) {
-      maxUnlocked = currentStation + 1;
-    } else if (currentStation === STATIONS.length - 1) {
-      maxUnlocked = STATIONS.length - 1;
+/* ====================== MAP ====================== */
+function openMap(){
+  document.getElementById('mapOverlay').classList.add('active');
+  if(!mapReady)initMap();
+  else setTimeout(()=>map.invalidateSize(),200);
+}
+function closeMap(){document.getElementById('mapOverlay').classList.remove('active')}
+
+function initMap(){
+  if(mapReady)return;
+  try{
+    map=L.map('map',{zoomControl:false,attributionControl:false}).setView([48.5200,9.0545],15);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{maxZoom:19}).addTo(map);
+    // Station markers
+    STATIONS.forEach((s,i)=>{
+      const unlocked=i<=maxUnlocked;
+      const isCurrent=i===currentStation;
+      const isDone=!!stationSolved[i];
+      let emoji=unlocked?(isDone?'✅':s.emoji):'🔒';
+      let cls='map-marker'+(isCurrent?' map-marker-current':'');
+      const m=L.marker([s.lat,s.lng],{
+        icon:L.divIcon({html:`<div class="${cls}">${emoji}</div>`,className:'',iconSize:[32,32],iconAnchor:[16,16]})
+      }).addTo(map);
+      if(unlocked)m.bindTooltip(s.title,{permanent:false,direction:'top',className:'map-label'});
+      stationMarkers.push(m);
+    });
+    // Route
+    routeLine=L.polyline([],{color:'#006a2d',weight:3,opacity:.5,dashArray:'8,10'}).addTo(map);
+    fetchRoute();
+    // GPS
+    if(navigator.geolocation){
+      watchId=navigator.geolocation.watchPosition(pos=>{
+        const p=[pos.coords.latitude,pos.coords.longitude];
+        if(!userMarker){
+          userMarker=L.marker(p,{icon:L.divIcon({html:'<div class="map-user-dot"></div>',className:'',iconSize:[14,14],iconAnchor:[7,7]})}).addTo(map);
+        }else userMarker.setLatLng(p);
+      },()=>{},{enableHighAccuracy:true,maximumAge:5000,timeout:15000});
     }
-    saveGame();
-    updateHeader();
-    renderDots();
-    showXpToast(`+${STATION_XP} 🔥 Drachenfunken!`);
-    spawnSparkles();
+    mapReady=true;
+    setTimeout(()=>map.invalidateSize(),200);
+  }catch(e){console.error('Map:',e)}
+}
 
-    // After short delay re-render to show solved state + possible quiz button
-    setTimeout(() => renderStation(), 1400);
+function updateMapMarkers(){
+  if(!mapReady)return;
+  STATIONS.forEach((s,i)=>{
+    const unlocked=i<=maxUnlocked;
+    const isCurrent=i===currentStation;
+    const isDone=!!stationSolved[i];
+    let emoji=unlocked?(isDone?'✅':s.emoji):'🔒';
+    let cls='map-marker'+(isCurrent?' map-marker-current':'');
+    stationMarkers[i].setIcon(L.divIcon({html:`<div class="${cls}">${emoji}</div>`,className:'',iconSize:[32,32],iconAnchor:[16,16]}));
+    if(unlocked&&!stationMarkers[i].getTooltip())stationMarkers[i].bindTooltip(s.title,{permanent:false,direction:'top',className:'map-label'});
+  });
+  updateRouteDisplay();
+  map.flyTo([STATIONS[currentStation].lat,STATIONS[currentStation].lng],16,{duration:.8});
+}
+
+async function fetchRoute(){
+  try{
+    const coords=STATIONS.map(s=>s.lng+','+s.lat).join(';');
+    const resp=await fetch('https://routing.openstreetmap.de/routed-foot/route/v1/foot/'+coords+'?overview=full&geometries=geojson');
+    const data=await resp.json();
+    if(data.routes&&data.routes[0]){fullRouteCoords=data.routes[0].geometry.coordinates.map(c=>[c[1],c[0]])}
+  }catch(e){}
+  updateRouteDisplay();
+}
+
+function updateRouteDisplay(){
+  if(!routeLine)return;
+  if(!fullRouteCoords){
+    routeLine.setLatLngs(STATIONS.slice(0,Math.min(maxUnlocked+1,STATIONS.length)).map(s=>[s.lat,s.lng]));
+    return;
   }
+  const last=Math.min(maxUnlocked,STATIONS.length-1);
+  const target=STATIONS[last];
+  let bestIdx=fullRouteCoords.length-1,bestDist=Infinity;
+  fullRouteCoords.forEach((c,i)=>{const d=Math.abs(c[0]-target.lat)+Math.abs(c[1]-target.lng);if(d<bestDist){bestDist=d;bestIdx=i}});
+  routeLine.setLatLngs(fullRouteCoords.slice(0,bestIdx+1));
 }
 
-/* ======================== XP TOAST ======================== */
-function showXpToast(msg) {
-  const t = document.getElementById('xpToast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2000);
-}
-
-function spawnSparkles() {
-  const emojis = ['✨','⭐','🌟','💫','🔥'];
-  for (let i = 0; i < 5; i++) {
-    setTimeout(() => {
-      const el = document.createElement('div');
-      el.className = 'sparkle';
-      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      el.style.left = (20 + Math.random() * 60) + '%';
-      el.style.top = (30 + Math.random() * 30) + '%';
-      document.body.appendChild(el);
-      setTimeout(() => el.remove(), 900);
-    }, i * 120);
-  }
-}
-
-/* ======================== QUIZ ======================== */
-function renderQuiz() {
-  document.getElementById('gameHeader').style.display = 'none';
-  document.getElementById('gameNav').classList.remove('show');
-
-  const allAnswered = QUIZ_QUESTIONS.every((_, i) => quizAnswers[i] !== undefined);
-  document.getElementById('quizDoneBtn').classList.toggle('show', allAnswered);
-  document.getElementById('quizProgress').textContent = `${Object.keys(quizAnswers).length} von ${QUIZ_QUESTIONS.length} Fragen beantwortet`;
-
-  const html = QUIZ_QUESTIONS.map((q, qi) => {
-    const answered = quizAnswers[qi] !== undefined;
-    const optHtml = q.options.map((opt, oi) => {
-      let cls = 'mc-btn';
-      if (answered) {
-        if (oi === q.correct) cls += ' correct';
-        else if (quizAnswers[qi] === oi && oi !== q.correct) cls += ' wrong';
-      }
-      const letter = String.fromCharCode(65 + oi);
-      return `<button class="${cls}" ${answered ? 'disabled' : ''} onclick="answerQuiz(${qi},${oi})">
-        <span class="mc-letter">${letter}</span><span>${opt}</span>
-      </button>`;
-    }).join('');
-    return `
-      <div class="quiz-q-card fade-in">
-        <div class="quiz-q-num">Frage ${qi + 1}</div>
-        <div class="quiz-q-text">${q.text}</div>
-        <div class="mc-options">${optHtml}</div>
-      </div>`;
+/* ====================== QUIZ ====================== */
+function renderQuiz(){
+  const answered=Object.keys(quizAnswers).length;
+  document.getElementById('quizProgress').textContent=`${answered} von ${QUIZ_QUESTIONS.length} beantwortet`;
+  document.getElementById('quizDoneBtn').classList.toggle('show',answered===QUIZ_QUESTIONS.length);
+  document.getElementById('quizContent').innerHTML=QUIZ_QUESTIONS.map((q,qi)=>{
+    const done=quizAnswers[qi]!==undefined;
+    return`<div class="quiz-q-card fade-in">
+      <div class="quiz-q-num">Frage ${qi+1}</div>
+      <div class="quiz-q-text">${q.text}</div>
+      <div class="mc-options">${q.options.map((o,oi)=>{
+        let c='mc-btn';
+        if(done){if(oi===q.correct)c+=' correct';else if(quizAnswers[qi]===oi&&oi!==q.correct)c+=' wrong'}
+        return`<button class="${c}" ${done?'disabled':''} onclick="answerQuiz(${qi},${oi})"><span class="mc-letter">${String.fromCharCode(65+oi)}</span><span>${o}</span></button>`;
+      }).join('')}</div>
+    </div>`;
   }).join('');
-
-  document.getElementById('quizContent').innerHTML = html;
 }
 
-function answerQuiz(qi, oi) {
-  const q = QUIZ_QUESTIONS[qi];
-  const correct = oi === q.correct;
-  quizAnswers[qi] = oi;
-  if (correct) totalXp += QUIZ_XP;
-  saveGame();
-  updateHeader();
-  renderQuiz();
-  if (correct) { showXpToast(`+${QUIZ_XP} 🔥`); spawnSparkles(); }
+function answerQuiz(qi,oi){
+  quizAnswers[qi]=oi;
+  if(oi===QUIZ_QUESTIONS[qi].correct){totalXp+=QUIZ_XP;showXpToast(`+${QUIZ_XP} 🔥`);spawnSparkles()}
+  saveGame();renderQuiz();
 }
 
-/* ======================== CERTIFICATE ======================== */
-function showCertificate() {
-  quizDone = true;
-  saveGame();
-
-  const rank = [...RANKS].reverse().find(r => totalXp >= r.min) || RANKS[0];
-  const correctQuiz = QUIZ_QUESTIONS.filter((_, i) => quizAnswers[i] === QUIZ_QUESTIONS[i].correct).length;
-  const starsCount = totalXp >= 180 ? 3 : totalXp >= 120 ? 2 : 1;
-  const stars = '⭐'.repeat(starsCount) + '☆'.repeat(3 - starsCount);
-  const msgs = [
-    'Du hast dich auf die Suche gemacht – das ist schon mutig!',
-    'Du weißt jetzt viel über Tübingen! Fast ein echter Drachenritter!',
-    'Du hast alle Geheimnisse Tübingens entdeckt! Beeindruckend! 🎉',
-  ];
-
-  document.getElementById('certName').textContent = playerName;
-  document.getElementById('certRank').textContent = rank.label;
-  document.getElementById('certScore').textContent = totalXp;
-  document.getElementById('certStars').textContent = stars;
-  document.getElementById('certMsg').textContent = msgs[starsCount - 1];
-
+/* ====================== CERTIFICATE ====================== */
+function showCertificate(){
+  quizDone=true;saveGame();
+  const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];
+  const stars=totalXp>=180?3:totalXp>=120?2:1;
+  const msgs=['Du hast dich auf die Suche gemacht – das ist schon richtig mutig!',
+    'Du weißt jetzt richtig viel über Tübingen! Fast ein echter Drachenritter!',
+    'Unglaublich! Du hast alle Geheimnisse Tübingens entdeckt! Tübi ist mega stolz auf dich! 🎉'];
+  document.getElementById('certName').textContent=playerName;
+  document.getElementById('certRank').textContent=rank.label;
+  document.getElementById('certScore').textContent=totalXp;
+  document.getElementById('certStars').textContent='⭐'.repeat(stars)+'☆'.repeat(3-stars);
+  document.getElementById('certMsg').textContent=msgs[stars-1];
   showScreen('certificate');
 }
-
-function goHome() {
-  // Reset state
-  playerName = ''; currentStation = 0; maxUnlocked = 0; totalXp = 0;
-  stationSolved = {}; quizAnswers = {}; quizDone = false;
-  localStorage.removeItem(SAVE_KEY);
-  document.getElementById('playerName').value = '';
-  document.getElementById('splashError').style.display = 'none';
-  showScreen('splash');
-  document.getElementById('gameHeader').style.display = 'none';
-  document.getElementById('gameNav').classList.remove('show');
+function goHome(){playerName='';currentStation=0;maxUnlocked=0;totalXp=0;stationSolved={};quizAnswers={};quizDone=false;localStorage.removeItem(SAVE_KEY);document.getElementById('playerName').value='';document.getElementById('splashError').style.display='none';showScreen('splash');document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show')}
+function shareResult(){
+  const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];
+  const text=`🐉 Ich habe Tübis Geheimnisse entdeckt und ${totalXp} Drachenfunken gesammelt! Rang: ${rank.label} – tracetour.de/kinder.html`;
+  if(navigator.share)navigator.share({title:'TraceTour Kids',text}).catch(()=>{});
+  else{navigator.clipboard.writeText(text).then(()=>alert('Text kopiert! 📋')).catch(()=>alert(text))}
 }
 
-function shareResult() {
-  const rank = [...RANKS].reverse().find(r => totalXp >= r.min) || RANKS[0];
-  const text = `🐉 Ich habe TraceTour Kids gespielt und ${totalXp} Drachenfunken gesammelt! Rang: ${rank.label} – tracetour.de`;
-  if (navigator.share) {
-    navigator.share({ title: 'TraceTour Kids', text }).catch(() => {});
-  } else {
-    navigator.clipboard.writeText(text).then(() => alert('Text kopiert! 📋')).catch(() => alert(text));
-  }
-}
-
-/* ======================== INIT ======================== */
-window.addEventListener('DOMContentLoaded', () => {
-  if (loadGame() && playerName) {
-    launchGame();
-  }
-});
+/* ====================== INIT ====================== */
+window.addEventListener('DOMContentLoaded',()=>{if(loadGame()&&playerName)launchGame()});
 </script>
 </body>
 </html>
