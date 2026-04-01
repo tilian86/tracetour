@@ -476,7 +476,10 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <div class="game-title" id="topTitle">Station</div>
 <button class="nav-arrow" id="navNext" onclick="navStation(1)"><span class="material-symbols-outlined">chevron_right</span></button>
 </div>
+<div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
 <div class="game-xp"><span id="xpLabel">0</span><div class="xp-track"><div class="xp-fill" id="xpFill"></div></div></div>
+<button id="gameLangBtn" onclick="setLang(lang==='de'?'en':'de');renderStation();updateGameLangBtn()" style="font-size:.6rem;font-weight:800;letter-spacing:.08em;color:var(--text-3);border:1px solid var(--border);border-radius:4px;padding:3px 6px;line-height:1;background:var(--bg-card)">DE</button>
+</div>
 </div>
 <div class="game-map"><div id="map"></div></div>
 <button class="fab-toggle" id="fabToggle" onclick="togglePanel()"><span class="material-symbols-outlined">map</span> Karte</button>
@@ -1443,6 +1446,10 @@ function toggleMobileView(){
   const btn=document.getElementById('debugMobileToggle');
   if(btn)btn.textContent=document.body.classList.contains('mobile-sim')?'🖥️ DESKTOP':'📱 MOBILE';
 }
+function updateGameLangBtn(){
+  const btn=document.getElementById('gameLangBtn');
+  if(btn){btn.textContent=lang.toUpperCase();btn.style.color=lang==='en'?'var(--accent)':'var(--text-3)';}
+}
 function updateDebugToggle(){
   const btn=document.getElementById('debugMobileToggle');
   if(btn)btn.style.display=(debugMode&&window.innerWidth>=768)?'block':'none';
@@ -1528,6 +1535,7 @@ function continueTour(){
   document.getElementById('userNameDisplay').textContent=userName;
   document.getElementById('userAvatar').textContent=userName[0].toUpperCase();
   updateDebugToggle();
+  updateGameLangBtn();
   updateXp();showScreen('game');
 }
 document.getElementById('loginCode').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
