@@ -238,10 +238,10 @@ body {
   <div class="max-w-7xl mx-auto">
     <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-4 text-center md:text-left">
       <div>
-        <h2 class="font-headline text-3xl md:text-4xl font-extrabold text-on-surface tracking-tight mb-2" data-t="tour-heading">Aktuelle Mission</h2>
+        <h2 class="font-headline text-3xl md:text-4xl font-extrabold text-on-surface tracking-tight mb-2" data-t="tour-heading">Unsere Touren</h2>
         <div class="accent-line mx-auto md:mx-0"></div>
       </div>
-      <p class="font-body text-slate-400 max-w-md text-sm leading-relaxed" data-t="tour-desc">Tübingen, 1869. Ein Wissenschaftler auf der Flucht vor dem Königlichen Ministerium. Eine Formel, die zu gefährlich ist für die Mächtigen. 17 Stationen vom Schloss bis zum Neckar.</p>
+      <p class="font-body text-slate-400 max-w-md text-sm leading-relaxed" data-t="tour-desc">Zwei Abenteuer, eine Stadt. Ob spannender Kriminalfall für Erwachsene oder magische Drachenjagd für Kinder – Tübingen wartet auf dich.</p>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
       <!-- Main Card -->
@@ -324,6 +324,85 @@ body {
         </div>
       </div>
     </div>
+
+    <!-- ===== KIDS TOUR CARD ===== -->
+    <div class="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- Kids Main Card -->
+      <div class="lg:col-span-8 group relative overflow-hidden rounded-xl shadow-2xl" style="background:linear-gradient(135deg,#006a2d 0%,#00a843 60%,#ffca51 100%)">
+        <div class="absolute inset-0 opacity-10" style="background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><text x=%2210%22 y=%2240%22 font-size=%2230%22 opacity=%220.3%22>🐉</text></svg>');background-size:60px 60px"></div>
+        <div class="relative p-8 md:p-10 min-h-[380px] flex flex-col justify-end">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="bg-yellow-400 text-green-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter" data-t="kids-badge">Neu! Kids 5–10</span>
+            <span class="text-white/70 font-body text-xs uppercase tracking-widest" data-t="kids-subtitle">Mit Tübi dem Drachen</span>
+          </div>
+          <div class="text-5xl md:text-6xl mb-3">🐉</div>
+          <h3 class="font-headline text-3xl md:text-4xl font-black text-white mb-2 tracking-tight" data-t="kids-title">Tübis Geheimnisse</h3>
+          <p class="font-body text-white/80 text-sm mb-6 max-w-lg leading-relaxed" data-t="kids-teaser">Tübi der Drache hat seine Flamme verloren! Sie ist in 8 Funken zersprungen und quer durch Tübingen geflogen. Hilf ihm, alle Funken wiederzufinden – mit Rätseln, Aufgaben und einer magischen Schatzkarte!</p>
+          <div class="grid grid-cols-2 gap-x-6 gap-y-3">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-yellow-300 text-lg">location_on</span>
+              <span class="font-body text-sm uppercase tracking-widest text-white/80" data-t="kids-stations">8 Stationen</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-yellow-300 text-lg">schedule</span>
+              <span class="font-body text-sm uppercase tracking-widest text-white/80" data-t="kids-duration">ca. 60 Min</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-yellow-300 text-lg">record_voice_over</span>
+              <span class="font-body text-sm uppercase tracking-widest text-white/80" data-t="kids-voice">Tübi erzählt</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-yellow-300 text-lg">family_restroom</span>
+              <span class="font-body text-sm uppercase tracking-widest text-white/80" data-t="kids-age">Alter: 5–10 Jahre</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Kids Info Card -->
+      <div class="lg:col-span-4 flex flex-col gap-6">
+        <div class="p-8 rounded-xl border-l-4 border-yellow-400 flex-1" style="background:rgba(0,106,45,.15)">
+          <h4 class="font-brand font-bold text-yellow-400 uppercase text-sm mb-4 tracking-widest" data-t="kids-story-label">Die Story</h4>
+          <p class="font-body text-on-surface leading-relaxed italic text-sm" data-t="kids-story-text">
+            "Hilfe!! Ich habe so doll geniest, dass meine Drachenflamme zersprungen ist! 8 Funken sind quer durch Tübingen geflogen. Ohne meine Flamme kann ich nicht fliegen! Hilfst du mir?"
+          </p>
+        </div>
+        <div class="bg-surface-container-highest/80 p-8 rounded-xl flex flex-col justify-between border border-white/5">
+          <div>
+            <h4 class="font-brand font-bold text-slate-400 uppercase text-sm mb-4 tracking-widest" data-t="kids-expect-label">Was euch erwartet</h4>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3 font-body text-sm">
+                <span class="material-symbols-outlined text-lg" style="color:#00a843">check_circle</span>
+                <span data-t="kids-feat-1">Tübi der Drache erzählt die Geschichte</span>
+              </li>
+              <li class="flex items-center gap-3 font-body text-sm">
+                <span class="material-symbols-outlined text-lg" style="color:#00a843">check_circle</span>
+                <span data-t="kids-feat-2">Kindgerechte Rätsel & Aufgaben vor Ort</span>
+              </li>
+              <li class="flex items-center gap-3 font-body text-sm">
+                <span class="material-symbols-outlined text-lg" style="color:#00a843">check_circle</span>
+                <span data-t="kids-feat-3">Selfie-Kamera mit Tübi-Sticker</span>
+              </li>
+              <li class="flex items-center gap-3 font-body text-sm">
+                <span class="material-symbols-outlined text-lg" style="color:#00a843">check_circle</span>
+                <span data-t="kids-feat-4">Interaktive Schatzkarte</span>
+              </li>
+              <li class="flex items-center gap-3 font-body text-sm">
+                <span class="material-symbols-outlined text-lg" style="color:#00a843">check_circle</span>
+                <span data-t="kids-feat-5">Drachenzertifikat mit Rang</span>
+              </li>
+              <li class="flex items-center gap-3 font-body text-sm">
+                <span class="material-symbols-outlined text-lg" style="color:#00a843">check_circle</span>
+                <span data-t="kids-feat-6">Kein Kind wird blockiert – jeder schafft es!</span>
+              </li>
+            </ul>
+          </div>
+          <a href="kinder.html" class="mt-8 block w-full py-4 rounded-lg font-brand font-bold uppercase tracking-widest transition-all text-center text-sm shadow-lg" style="background:#006a2d;color:#fff;box-shadow:0 4px 16px rgba(0,106,45,.3)" onmouseover="this.style.background='#00a843'" onmouseout="this.style.background='#006a2d'">
+            <span data-t="kids-cta">🐉 ABENTEUER STARTEN</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -607,8 +686,8 @@ const translations = {
   'stat-traces': ['Traces zu sammeln', 'Traces to Collect'],
 
   // Featured tour
-  'tour-heading': ['Aktuelle Mission', 'Current Mission'],
-  'tour-desc': ['Tübingen, 1869. Ein Wissenschaftler auf der Flucht vor dem Königlichen Ministerium. Eine Formel, die zu gefährlich ist für die Mächtigen. 17 Stationen vom Schloss bis zum Neckar.', 'Tübingen, 1869. A scientist on the run from the Royal Ministry. A formula too dangerous for those in power. 17 stations from the castle to the Neckar river.'],
+  'tour-heading': ['Unsere Touren', 'Our Tours'],
+  'tour-desc': ['Zwei Abenteuer, eine Stadt. Ob spannender Kriminalfall für Erwachsene oder magische Drachenjagd für Kinder – Tübingen wartet auf dich.', 'Two adventures, one city. Whether a thrilling crime case for adults or a magical dragon quest for kids – Tübingen awaits you.'],
   'tour-badge': ['Verfügbar', 'Available'],
   'tour-stations': ['17 Stationen', '17 Stations'],
   'tour-duration': ['ca. 120 Min', 'approx. 120 min'],
@@ -625,6 +704,26 @@ const translations = {
   'tour-feat-6': ['Direkt im Browser loslegen — ohne Download', 'Start right in your browser — no download'],
   'tour-feat-7': ['Auf Deutsch & Englisch verfügbar', 'Available in German & English'],
   'tour-cta': ['JETZT STARTEN', 'START NOW'],
+
+  // Kids tour
+  'kids-badge': ['Neu! Kids 5\u201310', 'New! Kids 5\u201310'],
+  'kids-subtitle': ['Mit T\u00fcbi dem Drachen', 'With T\u00fcbi the Dragon'],
+  'kids-title': ['T\u00fcbis Geheimnisse', 'T\u00fcbi\u2019s Secrets'],
+  'kids-teaser': ['T\u00fcbi der Drache hat seine Flamme verloren! Sie ist in 8 Funken zersprungen und quer durch T\u00fcbingen geflogen. Hilf ihm, alle Funken wiederzufinden \u2013 mit R\u00e4tseln, Aufgaben und einer magischen Schatzkarte!', 'T\u00fcbi the dragon has lost his flame! It shattered into 8 sparks that flew all over T\u00fcbingen. Help him find them all \u2013 with puzzles, challenges and a magical treasure map!'],
+  'kids-stations': ['8 Stationen', '8 Stations'],
+  'kids-duration': ['ca. 60 Min', 'approx. 60 min'],
+  'kids-voice': ['T\u00fcbi erz\u00e4hlt', 'T\u00fcbi narrates'],
+  'kids-age': ['Alter: 5\u201310 Jahre', 'Ages: 5\u201310'],
+  'kids-story-label': ['Die Story', 'The Story'],
+  'kids-story-text': ['"Hilfe!! Ich habe so doll geniest, dass meine Drachenflamme zersprungen ist! 8 Funken sind quer durch T\u00fcbingen geflogen. Ohne meine Flamme kann ich nicht fliegen! Hilfst du mir?"', '"Help!! I sneezed so hard that my dragon flame shattered! 8 sparks flew all over T\u00fcbingen. Without my flame I can\u2019t fly! Will you help me?"'],
+  'kids-expect-label': ['Was euch erwartet', 'What Awaits You'],
+  'kids-feat-1': ['T\u00fcbi der Drache erz\u00e4hlt die Geschichte', 'T\u00fcbi the dragon narrates the story'],
+  'kids-feat-2': ['Kindgerechte R\u00e4tsel & Aufgaben vor Ort', 'Kid-friendly puzzles & on-site challenges'],
+  'kids-feat-3': ['Selfie-Kamera mit T\u00fcbi-Sticker', 'Selfie camera with T\u00fcbi sticker'],
+  'kids-feat-4': ['Interaktive Schatzkarte', 'Interactive treasure map'],
+  'kids-feat-5': ['Drachenzertifikat mit Rang', 'Dragon certificate with rank'],
+  'kids-feat-6': ['Kein Kind wird blockiert \u2013 jeder schafft es!', 'No child gets stuck \u2013 everyone succeeds!'],
+  'kids-cta': ['\ud83d\udc09 ABENTEUER STARTEN', '\ud83d\udc09 START ADVENTURE'],
 
   // How it works
   'how-title': ['So funktioniert\'s', 'How It Works'],
