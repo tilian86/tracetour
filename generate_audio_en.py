@@ -38,11 +38,10 @@ except ImportError:
 
 API_KEY = os.environ.get("ELEVENLABS_API_KEY", "sk_18df17d38593a50a53362f37c86f9527c02d4c21ec495fc7")
 
-# TODO: Florian picks English voices from ElevenLabs
-NARRATOR_VOICE_EN = "PICK_NARRATOR_VOICE"   # English narrator (story, riddle)
-HEINRICH_VOICE_EN = "PICK_HEINRICH_VOICE"   # Heinrich's diary (slightly accented English?)
-FACT_VOICE_EN     = "PICK_FACT_VOICE"       # Guide/fact voice
-EPILOG_VOICE_EN   = "PICK_EPILOG_VOICE"     # Jessica equivalent - bright, warm
+NARRATOR_VOICE_EN = "lxYfHSkYm1EzQzGhdbfc"   # English narrator (story, riddle)
+HEINRICH_VOICE_EN = "goT3UYdM9bhm0n2lmKQx"   # Heinrich's diary
+FACT_VOICE_EN     = "ZthjuvLPty3kTMaNKVKb"   # Guide/fact voice (Stadtführer)
+EPILOG_VOICE_EN   = "UgBBYS2sOqTuMpoF3BR0"   # Epilogue - warm, bright (male)
 
 MODEL_ID = "eleven_multilingual_v2"
 OUTPUT_DIR = Path(__file__).parent / "audio" / "en"
