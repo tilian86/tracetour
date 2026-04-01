@@ -348,14 +348,17 @@ input{font-family:inherit;color:inherit}
 </div>
 
 <!-- ======================== DEBUG PANEL ======================== -->
-<div id="debugPanel" style="display:none;position:fixed;bottom:56px;left:0;right:0;z-index:150;background:#1e293b;padding:8px 12px;font-size:.75rem;color:#fff;font-family:monospace">
-  <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
-    <span id="dbgInfo" style="color:#4ade80"></span>
-    <input id="dbgJump" type="number" min="0" max="7" value="0" style="width:40px;padding:2px 4px;border-radius:4px;border:1px solid #444;background:#0f172a;color:#fff;font-size:.75rem">
-    <button onclick="dbgJump()" style="background:#f3632d;color:#fff;padding:3px 8px;border-radius:4px;font-weight:700;font-size:.7rem">GO</button>
-    <button onclick="dbgSolveAll()" style="background:#4ade80;color:#000;padding:3px 8px;border-radius:4px;font-weight:700;font-size:.7rem">ALLE LÖSEN</button>
-    <button onclick="dbgReset()" style="background:#f87171;color:#fff;padding:3px 8px;border-radius:4px;font-weight:700;font-size:.7rem">RESET</button>
-    <button onclick="location.reload()" style="background:#94a3b8;color:#000;padding:3px 8px;border-radius:4px;font-weight:700;font-size:.7rem">↺</button>
+<div id="debugPanel" style="display:none;position:fixed;bottom:56px;left:0;right:0;z-index:150;background:rgba(15,23,42,.97);border-top:1px solid rgba(248,113,113,.3);padding:8px 12px;font-size:.7rem;font-family:'JetBrains Mono',monospace;color:#fff">
+  <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap">
+    <span id="dbgInfo" style="color:#4ade80;margin-right:4px"></span>
+    <input id="dbgJump" type="number" min="0" max="7" placeholder="0-7" style="width:50px;padding:3px 5px;background:#0f172a;border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#fff;font-size:.65rem;font-family:inherit" onkeydown="if(event.key==='Enter')dbgJumpTo()">
+    <button onclick="dbgJumpTo()" style="padding:3px 7px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.6rem;font-weight:700">GO</button>
+    <input id="dbgXpInput" type="number" min="0" placeholder="XP" style="width:45px;padding:3px 5px;background:#0f172a;border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#fff;font-size:.65rem;font-family:inherit" onkeydown="if(event.key==='Enter')dbgSetXp()">
+    <button onclick="dbgSetXp()" style="padding:3px 7px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.6rem;font-weight:700">XP</button>
+    <button onclick="dbgSolveAll()" style="padding:3px 7px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.6rem;font-weight:700">QUIZ</button>
+    <button onclick="showCertificate()" style="padding:3px 7px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.6rem;font-weight:700">ZERTIFIKAT</button>
+    <button onclick="dbgResetStation()" style="padding:3px 7px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.6rem;font-weight:700">RESET ST.</button>
+    <button onclick="location.reload()" style="padding:3px 7px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.6rem;font-weight:700">↺</button>
   </div>
 </div>
 
@@ -493,10 +496,10 @@ let debugMode=false;
 function startGame(){
   const code=document.getElementById('loginCode').value.trim().toUpperCase();
   const errEl=document.getElementById('splashError');
-  if(code!=='PRIVAT'&&code!=='TUBBI'){errEl.textContent='Falscher Zugangscode! 🔒';errEl.style.display='block';return}
+  if(code!=='PRIVAT'&&code!=='TUEBINGEN2025'&&code!=='TUEBINGEN2026'){errEl.textContent='Falscher Zugangscode! 🔒';errEl.style.display='block';return}
   const n=document.getElementById('playerName').value.trim();
   if(!n){errEl.textContent='Gib deinen Namen ein! 😊';errEl.style.display='block';return}
-  debugMode=(code==='TUBBI');
+  debugMode=(code==='PRIVAT');
   playerName=n;saveGame();launchGame();
 }
 function launchGame(){showScreen('game');document.getElementById('gameHeader').style.display='block';document.getElementById('gameNav').classList.add('show');updateHeader();renderStation();renderDots();showDebug()}
@@ -571,9 +574,29 @@ function completeChallenge(idx){challengesDone[idx]={done:true};totalXp+=5;saveG
 function skipChallenge(idx){challengesDone[idx]={skipped:true};saveGame();renderStation()}
 
 /* ===== DEBUG ===== */
-function dbgJump(){const v=parseInt(document.getElementById('dbgJump').value);if(v>=0&&v<STATIONS.length){currentStation=v;if(v>maxUnlocked)maxUnlocked=v;saveGame();updateHeader();renderStation();renderDots();document.getElementById('game').scrollTo(0,0)}}
-function dbgSolveAll(){for(let i=0;i<STATIONS.length;i++){stationSolved[i]=true;challengesDone[i]={done:true}}maxUnlocked=STATIONS.length-1;totalXp=STATIONS.length*STATION_XP;saveGame();updateHeader();renderStation();renderDots()}
-function dbgReset(){goHome()}
+function dbgJumpTo(){
+  const v=parseInt(document.getElementById('dbgJump').value);
+  if(isNaN(v)||v<0||v>=STATIONS.length)return;
+  for(let i=0;i<=v;i++)stationSolved[i]=true;
+  maxUnlocked=Math.max(maxUnlocked,v);
+  currentStation=v;saveGame();updateHeader();renderStation();renderDots();dbgUpdate();
+  document.getElementById('game').scrollTo(0,0);
+}
+function dbgSetXp(){
+  const v=parseInt(document.getElementById('dbgXpInput').value);
+  if(isNaN(v))return;totalXp=v;saveGame();updateHeader();dbgUpdate();
+}
+function dbgSolveAll(){
+  for(let i=0;i<STATIONS.length;i++){stationSolved[i]=true;challengesDone[i]={done:true}}
+  maxUnlocked=STATIONS.length-1;totalXp=STATIONS.length*STATION_XP;
+  saveGame();updateHeader();renderStation();renderDots();
+  showScreen('quiz');renderQuiz();
+}
+function dbgResetStation(){
+  stationSolved[currentStation]=false;challengesDone[currentStation]=undefined;
+  if(maxUnlocked>currentStation)maxUnlocked=currentStation;
+  saveGame();renderStation();renderDots();dbgUpdate();
+}
 function dbgUpdate(){const el=document.getElementById('dbgInfo');if(el)el.textContent=`St.${currentStation} · ${Object.keys(stationSolved).length}/8 · ${totalXp}XP`}
 function showDebug(){if(!debugMode)return;document.getElementById('debugPanel').style.display='block';document.getElementById('navNext').disabled=false;dbgUpdate()}
 
