@@ -396,6 +396,26 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <button class="btn-secondary" id="resetBtn" style="display:none;margin-top:.5rem;font-size:.75rem;opacity:.6" onclick="confirmReset()">🗑️ Fortschritt komplett löschen</button>
 </div>
 <button id="debugMobileToggle" onclick="toggleMobileView()">📱 MOBILE</button>
+
+<!-- DEBUG PANEL -->
+<div id="debugPanel" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9998;background:rgba(15,23,42,.97);border-top:1px solid rgba(248,113,113,.3);padding:10px 12px;font-size:.7rem;font-family:var(--font-m)">
+  <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;max-width:640px;margin:0 auto">
+    <span style="color:#f87171;font-weight:700;letter-spacing:.1em;margin-right:4px">DEBUG</span>
+    <!-- Station jump -->
+    <input id="dbgStationInput" type="number" min="0" max="16" placeholder="St. 0-16" style="width:70px;padding:4px 6px;background:var(--bg-card);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:var(--text);font-size:.7rem;font-family:var(--font-m)" onkeydown="if(event.key==='Enter')dbgJumpStation()">
+    <button onclick="dbgJumpStation()" style="padding:4px 8px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.65rem;font-weight:700">GO</button>
+    <!-- XP set -->
+    <input id="dbgXpInput" type="number" min="0" placeholder="XP" style="width:60px;padding:4px 6px;background:var(--bg-card);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:var(--text);font-size:.7rem;font-family:var(--font-m)" onkeydown="if(event.key==='Enter')dbgSetXp()">
+    <button onclick="dbgSetXp()" style="padding:4px 8px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.65rem;font-weight:700">XP</button>
+    <!-- Jump buttons -->
+    <button onclick="dbgGoQuiz()" style="padding:4px 8px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.65rem;font-weight:700">QUIZ</button>
+    <button onclick="dbgGoCert()" style="padding:4px 8px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.65rem;font-weight:700">ZERTIFIKAT</button>
+    <button onclick="dbgForceBonus()" style="padding:4px 8px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.65rem;font-weight:700">BONUS</button>
+    <button onclick="dbgResetStation()" style="padding:4px 8px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.65rem;font-weight:700">RESET ST.</button>
+    <!-- State info -->
+    <span id="dbgStateInfo" style="color:var(--text-3);font-size:.6rem;margin-left:4px"></span>
+  </div>
+</div>
 <div class="tour-card" style="opacity:.35;pointer-events:none">
 <div class="tour-card-body">
 <span class="badge badge-soon">Bald verfügbar</span>
@@ -1446,6 +1466,49 @@ function toggleMobileView(){
   const btn=document.getElementById('debugMobileToggle');
   if(btn)btn.textContent=document.body.classList.contains('mobile-sim')?'🖥️ DESKTOP':'📱 MOBILE';
 }
+function dbgJumpStation(){
+  const v=parseInt(document.getElementById('dbgStationInput').value);
+  if(isNaN(v)||v<0||v>16)return;
+  for(let i=0;i<=v;i++)solvedStations[i]=true;
+  maxUnlockedStation=Math.max(maxUnlockedStation,v);
+  currentStation=v;saveGame();showScreen('game');renderStation();dbgUpdateState();
+}
+function dbgSetXp(){
+  const v=parseInt(document.getElementById('dbgXpInput').value);
+  if(isNaN(v))return;
+  totalXp=v;updateXp();saveGame();dbgUpdateState();
+}
+function dbgGoQuiz(){
+  for(let i=0;i<stations.length;i++)solvedStations[i]=true;
+  maxUnlockedStation=stations.length;
+  currentStation=stations.length;saveGame();showScreen('formulaPuzzle');initPuzzle();
+}
+function dbgGoCert(){
+  for(let i=0;i<stations.length;i++)solvedStations[i]=true;
+  maxUnlockedStation=stations.length;saveGame();showScreen('success');renderCertificate();
+}
+function dbgForceBonus(){
+  const bq=getBonusQuestions();
+  if(bq[currentStation]){
+    bonusSolved[currentStation]=false;bonusAttempts[currentStation]=0;
+    showBonusOverlay(currentStation);
+  }else{
+    showToast('Keine Bonus-Frage bei dieser Station');
+  }
+}
+function dbgResetStation(){
+  solvedStations[currentStation]=false;
+  if(maxUnlockedStation>currentStation)maxUnlockedStation=currentStation;
+  bonusSolved[currentStation]=false;bonusAttempts[currentStation]=0;
+  saveGame();renderStation();dbgUpdateState();
+}
+function dbgUpdateState(){
+  const el=document.getElementById('dbgStateInfo');
+  if(el){
+    const solved=solvedStations.filter(Boolean).length;
+    el.textContent=`St.${currentStation} · ${solved}/17 gelöst · ${totalXp} XP`;
+  }
+}
 function updateGameLangBtn(){
   const btn=document.getElementById('gameLangBtn');
   if(btn){btn.textContent=lang.toUpperCase();btn.style.color=lang==='en'?'var(--accent)':'var(--text-3)';}
@@ -1453,6 +1516,9 @@ function updateGameLangBtn(){
 function updateDebugToggle(){
   const btn=document.getElementById('debugMobileToggle');
   if(btn)btn.style.display=(debugMode&&window.innerWidth>=768)?'block':'none';
+  const panel=document.getElementById('debugPanel');
+  if(panel)panel.style.display=debugMode?'block':'none';
+  if(debugMode)dbgUpdateState();
 }
 function confirmReset(){
   if(confirm(t('confirmReset1'))){
@@ -1647,6 +1713,7 @@ function mapsUrl(lat,lng,name){return `https://www.google.com/maps/search/?api=1
 
 // ====== RENDER ======
 function renderStation(){
+  if(debugMode)dbgUpdateState();
   const gp=document.getElementById('gamePanel');if(gp)gp.scrollTop=0;
   window.scrollTo({top:0,behavior:'smooth'});
   // Bonus question overlay
