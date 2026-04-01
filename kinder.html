@@ -53,7 +53,7 @@ input{font-family:inherit;color:inherit}
 .btn-start:active{transform:scale(.97)}
 #splashError{color:#fff;background:rgba(255,0,0,.3);border-radius:8px;padding:.6rem .8rem;margin-top:.8rem;font-size:.9rem;font-weight:700;display:none}
 .splash-footer{margin-top:1.5rem;font-size:.72rem;color:rgba(255,255,255,.55)}
-.splash-prompts-link{color:rgba(255,255,255,.4);text-decoration:underline;cursor:pointer;font-size:.65rem;margin-top:.6rem;display:inline-block}
+.splash-prompts-link{color:#fff;cursor:pointer;font-size:.75rem;font-weight:700;margin-top:.8rem;display:inline-flex;align-items:center;gap:.3rem;background:rgba(255,255,255,.2);padding:.4rem .8rem;border-radius:20px;border:1.5px solid rgba(255,255,255,.3)}
 
 /* ======================== HEADER ======================== */
 #gameHeader{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--green);padding-top:var(--safe-top)}
@@ -118,6 +118,22 @@ input{font-family:inherit;color:inherit}
 .question-feedback.win{background:#e6faf0;color:#006a2d;border:1.5px solid #00a843}
 .question-feedback.lose{background:#fef2f2;color:#b91c1c;border:1.5px solid #f87171}
 .solved-badge{background:var(--green);color:#fff;border-radius:var(--r-sm);padding:.6rem .85rem;font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:.45rem;margin-bottom:.9rem}
+
+/* Challenge Card */
+.challenge-card{background:linear-gradient(135deg,#f0e6ff,#e6f0ff);border-radius:var(--r);padding:1rem;margin-bottom:.9rem;border:2px solid #c4b5fd;box-shadow:var(--shadow-card);position:relative}
+.challenge-card::before{content:'⭐';position:absolute;top:-12px;right:12px;font-size:1.2rem}
+.challenge-label{display:inline-flex;align-items:center;gap:.3rem;background:#8b5cf6;color:#fff;font-size:.62rem;font-weight:800;padding:.2rem .55rem;border-radius:20px;margin-bottom:.5rem;letter-spacing:.05em;text-transform:uppercase}
+.challenge-text{font-size:.92rem;line-height:1.6;color:var(--text);font-weight:700;margin-bottom:.7rem}
+.challenge-hint{font-size:.78rem;color:var(--text-2);font-weight:600;font-style:italic;margin-bottom:.7rem}
+.challenge-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+.challenge-btn{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .9rem;border-radius:var(--r-sm);font-weight:700;font-size:.82rem;transition:transform .1s}
+.challenge-btn:active{transform:scale(.96)}
+.challenge-btn-photo{background:#8b5cf6;color:#fff;border:2px solid #7c3aed}
+.challenge-btn-done{background:var(--green);color:#fff;border:2px solid var(--green-light)}
+.challenge-btn-count{background:var(--yellow);color:var(--green);border:2px solid var(--yellow-dark)}
+.challenge-input{width:70px;padding:.45rem .6rem;border:2px solid #c4b5fd;border-radius:8px;font-size:1rem;font-weight:700;text-align:center;background:#fff;color:var(--text)}
+.challenge-done{background:#e6faf0;border-color:#00a843;color:#006a2d;padding:.6rem .9rem;border-radius:var(--r-sm);font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:.4rem;border:1.5px solid #00a843}
+.challenge-photo-preview{width:100%;border-radius:var(--r-sm);margin-top:.6rem;max-height:200px;object-fit:cover;border:2px solid #c4b5fd;display:none}
 .action-btn{width:100%;padding:14px;font-weight:900;font-size:1rem;border-radius:var(--r-sm);margin-bottom:.8rem;transition:transform .1s}
 .action-btn:active{transform:scale(.97)}
 .action-btn-green{background:var(--green);color:#fff;border:2px solid var(--green-light);box-shadow:0 4px 16px rgba(0,106,45,.25)}
@@ -330,6 +346,7 @@ question:'Was macht Tübi auf dem Ziffernblatt der Rathausuhr?',
 options:[{text:'Er schlägt jede Stunde die Glocke',correct:false},{text:'Er schnappt sich die Sonne und den Mond',correct:true},{text:'Er bläst Feuer auf die Zeiger',correct:false}],
 win:'🔥 YEAH! Erster Funke gefunden! Tübi schnappt sich Sonne und Mond – darum heißt er der Drachenzeiger!',
 lose:'🐉 Tübi schnappt sich Sonne und Mond! Deswegen heißt er der „Drachenzeiger". Der Funke zählt trotzdem!',
+challenge:{type:'photo',emoji:'📸',text:'Finde den Drachen auf der Rathausuhr und mach ein Selfie mit ihm!',hint:'Schau nach oben auf das Ziffernblatt – siehst du Tübi?'},
 prompt:'A colorful, friendly watercolor cartoon illustration of the Tübingen Rathaus (town hall) at the Marktplatz. The famous astronomical clock is prominently shown on the facade. A small, cute green dragon with a golden belly and tiny wings sits on the clock face, playfully snapping at a golden sun and silver moon. Medieval half-timbered houses frame the square. Warm sunlight, blue sky, soft pastel watercolor style with green and yellow accents, children\'s book illustration, wide format 16:9, no text.'},
 
 {id:1,emoji:'⛪',title:'Der schiefe Turm von Tübingen',chapter:'Kapitel 2',place:'Stiftskirche · Holzmarkt',lat:48.520002,lng:9.055678,image:'images/kinder/station_1.jpg',
@@ -339,6 +356,7 @@ question:'Was stimmt über den Turm der Stiftskirche?',
 options:[{text:'Er ist perfekt gerade',correct:false},{text:'Er lehnt sich 8 Zentimeter zur Seite',correct:true},{text:'Er ist der höchste in ganz Deutschland',correct:false}],
 win:'🔥 Zweiter Funke! Ja, der Turm ist wirklich 8 cm schief – Tübingens eigener schiefer Turm!',
 lose:'⛪ Der Turm lehnt sich 8 cm zur Seite! Ob Tübi daran schuld ist? 😄 Der Funke zählt trotzdem!',
+challenge:{type:'photo',emoji:'📸',text:'Stell dich vor den Turm und lehn dich 8 cm zur Seite – so schief wie der Turm! Mach ein Foto!',hint:'Steh am besten südlich der Kirche, da sieht man die Neigung am besten.'},
 prompt:'A colorful watercolor cartoon illustration of the Stiftskirche (collegiate church) in Tübingen with its tall, slightly leaning stone tower. A small cute green dragon with golden belly and tiny wings is flying near the tower top, looking startled as if he just bumped into it. The tower visibly tilts slightly. A large old bronze bell is visible in the tower window. Warm golden sunlight, cobblestone square below. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'},
 
 {id:2,emoji:'🐲',title:'Tübis Cousin',chapter:'Kapitel 3',place:'Georgsbrunnen · Holzmarkt',lat:48.520403,lng:9.055689,image:'images/kinder/station_2.jpg',
@@ -348,6 +366,7 @@ question:'Wofür wurde der 500 Jahre alte Brunnen 1961 abgerissen?',
 options:[{text:'Für ein neues Restaurant',correct:false},{text:'Für drei Parkplätze',correct:true},{text:'Für eine Bushaltestelle',correct:false}],
 win:'🔥 Dritter Funke! DREI PARKPLÄTZE! Tübi ist immer noch empört! 😤',
 lose:'🅿️ Für drei Parkplätze! Unglaublich! Zum Glück steht der Brunnen jetzt wieder. Der Funke ist deiner!',
+challenge:{type:'count',emoji:'🔢',text:'Zähle: Wie viele Ecken hat das Brunnenbecken?',hint:'Geh einmal um den Brunnen herum und zähle die Ecken!',answer:8,tolerance:2},
 prompt:'A colorful watercolor cartoon illustration of the Georgsbrunnen (St. George fountain) in Tübingen on the Holzmarkt square. A stone knight on horseback fights a dragon on top of the fountain. A small cute green dragon watches from behind a half-timbered house, looking annoyed with crossed arms because the knight is standing on his cousin. Water splashes from the fountain. Medieval square with colorful houses. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'},
 
 {id:3,emoji:'🏰',title:'Tübis Geheimversteck',chapter:'Kapitel 4',place:'Schloss Hohentübingen',lat:48.519513,lng:9.051072,image:'images/kinder/station_3.jpg',
@@ -357,6 +376,7 @@ question:'Wie viele Badewannen passen in das riesige Weinfass?',
 options:[{text:'Ungefähr 50',correct:false},{text:'Ungefähr 336',correct:true},{text:'Ungefähr 1.000',correct:false}],
 win:'🔥 Vierter Funke! 336 Badewannen! Und jetzt wohnt Flatter die Fledermaus darin! 🦇',
 lose:'🛁 336 Badewannen! Ein riesiges Fass – und heute ein Fledermaus-Hotel. Trotzdem: Funke gefunden!',
+challenge:{type:'seek',emoji:'🔍',text:'Finde den Eingang zu den Geheimgängen im Schloss-Innenhof! Wenn du ihn gefunden hast, drück auf „Gefunden!"',hint:'Geh in den westlichen Innenhof und schau dich um – der Eingang ist enger als du denkst!'},
 prompt:'A colorful watercolor cartoon illustration of Schloss Hohentübingen (castle) on a hilltop. In the dark stone cellar, a giant wooden wine barrel is shown, with several cute bats hanging inside. A small green dragon with golden belly peeks into the barrel with a tiny flashlight, playing with a friendly bat. Above ground, the castle has towers and stone walls against a blue sky. A secret tunnel entrance is visible. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'},
 
 {id:4,emoji:'💰',title:'Geld, Dichter und ein Gefängnis',chapter:'Kapitel 5',place:'Münzgasse',lat:48.520001,lng:9.055591,image:'images/kinder/station_4.jpg',
@@ -366,6 +386,7 @@ question:'Warum heißt die Straße „Münzgasse"?',
 options:[{text:'Weil dort ein Herr Münz wohnte',correct:false},{text:'Weil dort echtes Geld geprägt wurde',correct:true},{text:'Weil man dort Münzen fand',correct:false}],
 win:'🔥 Fünfter Funke! Der Tübinger Pfennig wurde hier hergestellt! Echte Münzen aus der Münzgasse!',
 lose:'💰 Hier wurde Geld geprägt – der „Tübinger Pfennig"! Darum heißt sie Münzgasse. Funke ist deiner!',
+challenge:{type:'seek',emoji:'🔍',text:'Finde das lustige Goethe-Schild an der Hauswand! An welcher Hausnummer hängt es?',hint:'Schau an den Wänden der Häuser in der Münzgasse – es ist an Nummer 13!'},
 prompt:'A colorful watercolor cartoon illustration of the narrow medieval Münzgasse in Tübingen. Half-timbered houses lean in from both sides. Golden coins and medieval Pfennig are scattered on the cobblestones. A small green dragon with golden belly sits on a rooftop, sipping tea from a tiny cup and looking down with amusement. A funny plaque is visible on one wall. A poet in old-fashioned clothes holds his stomach looking unwell nearby. Warm golden light. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'},
 
 {id:5,emoji:'🏠',title:'Das Haus mit zehn Kindern',chapter:'Kapitel 6',place:'Nonnenhaus · Zwischen den Toren',lat:48.521913,lng:9.057653,image:'images/kinder/station_5.jpg',
@@ -375,6 +396,7 @@ question:'Welche berühmte Blume ist nach einem Bewohner des Nonnenhauses benann
 options:[{text:'Die Rose',correct:false},{text:'Die Fuchsie',correct:true},{text:'Die Sonnenblume',correct:false}],
 win:'🔥 Sechster Funke! Die Fuchsie – nach Leonhart Fuchs! Der hatte hier 10 Kinder! 🌺',
 lose:'🌺 Die Fuchsie! Benannt nach Leonhart Fuchs, der hier mit 10 Kindern wohnte. Funke gefunden!',
+challenge:{type:'seek',emoji:'👀',text:'Geh in den Buchladen im Erdgeschoss und schau durch das Glasfenster im Boden! Was siehst du?',hint:'Der Originalboden von 1488 – über 530 Jahre alt!'},
 prompt:'A colorful watercolor cartoon illustration of the medieval Nonnenhaus (half-timbered house from 1488) in Tübingen, next to a small canal. The house is large with dark wooden beams and white walls. A botanical garden with colorful flowers (including pink fuchsia) grows next to it. Children play in the garden. A small green dragon with golden belly sits on the steep roof watching the children, with a tiny potted plant next to him. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'},
 
 {id:6,emoji:'🌳',title:'Die Riesenbäume und die Gummienten',chapter:'Kapitel 7',place:'Platanenallee · Neckarinsel',lat:48.519017,lng:9.057506,image:'images/kinder/station_6.jpg',
@@ -384,6 +406,7 @@ question:'Wie viele Platanenbäume stehen in der Allee?',
 options:[{text:'Ungefähr 30',correct:false},{text:'84 – genau 42 auf jeder Seite',correct:true},{text:'Über 200',correct:false}],
 win:'🔥 Siebter Funke! 84 riesige Platanen – die älteste Allee Deutschlands! NUR NOCH EINER! 🎉',
 lose:'🌳 84 Bäume – 42 auf jeder Seite! Die älteste Platanenallee Deutschlands! Funke ist deiner!',
+challenge:{type:'photo',emoji:'🤗',text:'Umarme den dicksten Platanen-Baum! Schaffst du es alleine – oder brauchst du Hilfe? Mach ein Foto!',hint:'Die dicksten Bäume stehen in der Mitte der Allee. Manche brauchen 3 Kinder zum Umarmen!'},
 prompt:'A colorful watercolor cartoon illustration of the Platanenallee (plane tree avenue) on the Neckarinsel in Tübingen. Two rows of massive ancient plane trees create a green tunnel over a path. In the river, dozens of bright yellow rubber ducks race through the water. A small green dragon with golden belly sits high in the largest tree, excitedly cheering on the ducks, almost falling off. Dappled sunlight through leaves. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'},
 
 {id:7,emoji:'🚣',title:'Die letzte Flamme',chapter:'Kapitel 8 · Das große Finale',place:'Stocherkahn · Neckar',lat:48.521100,lng:9.054100,image:'images/kinder/station_7.jpg',
@@ -393,6 +416,7 @@ question:'Was müssen die Verlierer beim Stocherkahnrennen trinken?',
 options:[{text:'Kalten Apfelsaft mit Essig 🍎',correct:false},{text:'Salzwasser aus dem Neckar 🌊',correct:false},{text:'Lebertran – Öl aus Fischbäuchen 🐟',correct:true}],
 win:'🔥🔥🔥 DER LETZTE FUNKE!! TÜBIS FLAMME IST ZURÜCK!! Der kleine Drache springt in die Luft und spuckt den allerersten Feuerstrahl seit Wochen! 🐉✨🔥 DANKE, DRACHENKIND!!',
 lose:'🐟 Lebertran – Öl aus Fischbäuchen! SO eklig! Aber Tübi drückt beide Augen zu – DER LETZTE FUNKE IST DEINER! 🔥🐉',
+challenge:{type:'count',emoji:'🔢',text:'Schau aufs Wasser: Wie viele Stocherkähne kannst du gerade auf dem Neckar zählen?',hint:'Es können auch null sein – im Winter sind weniger unterwegs!',answer:null,tolerance:99},
 prompt:'A colorful watercolor cartoon illustration of the Stocherkahnrennen (punt race) on the Neckar river in Tübingen. Flat wooden boats with students in silly costumes race through the water, some falling in. Spectators cheer from the stone bridge above. A small green dragon with golden belly sits on the bridge railing, watching excitedly. A golden spark of flame floats near the dragon. Splashing water, festive chaos, sunny day. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'}
 ];
 
@@ -415,13 +439,13 @@ const QUIZ_QUESTIONS=[
 
 const RANKS=[{min:0,label:'🥉 Drachenlehrling'},{min:80,label:'🥈 Drachenjäger'},{min:140,label:'🥇 Drachenritter'},{min:190,label:'🏆 Drachen-Legende'}];
 const STATION_XP=20,QUIZ_XP=5,MAX_XP=STATIONS.length*STATION_XP+QUIZ_QUESTIONS.length*QUIZ_XP;
-let playerName='',currentStation=0,maxUnlocked=0,totalXp=0,stationSolved={},quizAnswers={},quizDone=false;
+let playerName='',currentStation=0,maxUnlocked=0,totalXp=0,stationSolved={},quizAnswers={},quizDone=false,challengesDone={};
 let currentAudio=null,currentAudioBtn=null;
 let map=null,mapReady=false,stationMarkers=[],routeLine=null,userMarker=null,fullRouteCoords=null;
 
 const SAVE_KEY='tracetour_kinder_v3';
-function saveGame(){localStorage.setItem(SAVE_KEY,JSON.stringify({playerName,currentStation,maxUnlocked,totalXp,stationSolved,quizAnswers,quizDone}))}
-function loadGame(){try{const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(!d)return false;playerName=d.playerName||'';currentStation=d.currentStation||0;maxUnlocked=d.maxUnlocked||0;totalXp=d.totalXp||0;stationSolved=d.stationSolved||{};quizAnswers=d.quizAnswers||{};quizDone=d.quizDone||false;return!!playerName}catch(e){return false}}
+function saveGame(){localStorage.setItem(SAVE_KEY,JSON.stringify({playerName,currentStation,maxUnlocked,totalXp,stationSolved,quizAnswers,quizDone,challengesDone}))}
+function loadGame(){try{const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(!d)return false;playerName=d.playerName||'';currentStation=d.currentStation||0;maxUnlocked=d.maxUnlocked||0;totalXp=d.totalXp||0;stationSolved=d.stationSolved||{};quizAnswers=d.quizAnswers||{};quizDone=d.quizDone||false;challengesDone=d.challengesDone||{};return!!playerName}catch(e){return false}}
 
 function playAudio(src,btn){
   if(currentAudio){currentAudio.pause();currentAudio.currentTime=0;if(currentAudioBtn){currentAudioBtn.classList.remove('playing');currentAudioBtn.querySelector('.audio-icon').textContent='▶️'}}
@@ -458,7 +482,22 @@ function renderStation(){
   let extra='';
   if(currentStation===STATIONS.length-1&&solved&&!quizDone)extra=`<button class="action-btn action-btn-green" onclick="showScreen('quiz');renderQuiz()">🧩 Tübis letzter Test →</button>`;
   if(quizDone)extra=`<button class="action-btn action-btn-yellow" onclick="showCertificate()">🔥 Tübis Flamme ansehen →</button>`;
-  document.getElementById('stationContent').innerHTML=`<div class="station-hero"><div class="station-chapter">${s.chapter}</div><span class="station-emoji">${s.emoji}</span><div class="station-title">${s.title}</div></div><div class="station-body fade-in"><div class="station-place">📍 ${s.place}</div>${img}${audio}${spark}${story}${tubi}${q}${extra}</div>`;
+  // Challenge card
+  let ch='';
+  if(s.challenge){
+    const cdone=challengesDone[currentStation];
+    if(cdone){
+      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-done">✅ Geschafft! +5 Bonus-Drachenfunken!</div>${cdone.photo?`<img class="challenge-photo-preview" src="${cdone.photo}" style="display:block">`:''}${cdone.count!=null?`<div style="font-size:.82rem;font-weight:700;color:var(--text-2);margin-top:.4rem">Deine Antwort: ${cdone.count}</div>`:''}</div>`;
+    } else if(s.challenge.type==='photo'){
+      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-text">${s.challenge.text}</div><div class="challenge-hint">${s.challenge.hint}</div><div class="challenge-actions"><button class="challenge-btn challenge-btn-photo" onclick="takeChallenge(${currentStation})"><span>📸</span> Foto machen</button><button class="challenge-btn challenge-btn-done" onclick="skipChallenge(${currentStation})">⏩ Überspringen</button></div><input type="file" id="challengeFile_${currentStation}" accept="image/*" capture="environment" style="display:none" onchange="onChallengePhoto(${currentStation},this)"><img class="challenge-photo-preview" id="challengePreview_${currentStation}"></div>`;
+    } else if(s.challenge.type==='count'){
+      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-text">${s.challenge.text}</div><div class="challenge-hint">${s.challenge.hint}</div><div class="challenge-actions"><input class="challenge-input" type="number" id="challengeCount_${currentStation}" placeholder="?" min="0" max="999"><button class="challenge-btn challenge-btn-count" onclick="submitCount(${currentStation})">Abschicken!</button><button class="challenge-btn challenge-btn-done" onclick="skipChallenge(${currentStation})">⏩ Überspringen</button></div></div>`;
+    } else {
+      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-text">${s.challenge.text}</div><div class="challenge-hint">${s.challenge.hint}</div><div class="challenge-actions"><button class="challenge-btn challenge-btn-done" onclick="completeChallenge(${currentStation})">✅ Gefunden!</button><button class="challenge-btn challenge-btn-done" onclick="skipChallenge(${currentStation})" style="background:var(--border);color:var(--text-2);border-color:var(--border)">⏩ Überspringen</button></div></div>`;
+    }
+  }
+
+  document.getElementById('stationContent').innerHTML=`<div class="station-hero"><div class="station-chapter">${s.chapter}</div><span class="station-emoji">${s.emoji}</span><div class="station-title">${s.title}</div></div><div class="station-body fade-in"><div class="station-place">📍 ${s.place}</div>${img}${audio}${spark}${story}${tubi}${ch}${q}${extra}</div>`;
   renderDots();if(mapReady)updateMapMarkers();
 }
 
@@ -474,6 +513,32 @@ function answerStation(idx){
 
 function showXpToast(m){const t=document.getElementById('xpToast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
 function spawnSparkles(){const e=['✨','⭐','🌟','💫','🔥'];for(let i=0;i<6;i++)setTimeout(()=>{const el=document.createElement('div');el.className='sparkle';el.textContent=e[Math.floor(Math.random()*e.length)];el.style.left=(15+Math.random()*70)+'%';el.style.top=(25+Math.random()*35)+'%';document.body.appendChild(el);setTimeout(()=>el.remove(),900)},i*100)}
+
+/* ===== CHALLENGES ===== */
+function takeChallenge(idx){document.getElementById('challengeFile_'+idx).click()}
+function onChallengePhoto(idx,input){
+  if(!input.files||!input.files[0])return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const prev=document.getElementById('challengePreview_'+idx);
+    if(prev){prev.src=e.target.result;prev.style.display='block'}
+    challengesDone[idx]={photo:e.target.result};totalXp+=5;saveGame();updateHeader();
+    showXpToast('📸 +5 Bonus-Funken!');spawnSparkles();
+    setTimeout(()=>renderStation(),1200);
+  };reader.readAsDataURL(input.files[0]);
+}
+function submitCount(idx){
+  const input=document.getElementById('challengeCount_'+idx);
+  const val=parseInt(input.value);
+  if(isNaN(val)){input.style.borderColor='#f87171';return}
+  challengesDone[idx]={count:val};totalXp+=5;saveGame();updateHeader();
+  const s=STATIONS[idx];
+  if(s.challenge.answer!=null&&Math.abs(val-s.challenge.answer)<=s.challenge.tolerance)showXpToast('🎯 Genau richtig! +5 Bonus!');
+  else showXpToast('📝 +5 Bonus-Funken!');
+  spawnSparkles();setTimeout(()=>renderStation(),1200);
+}
+function completeChallenge(idx){challengesDone[idx]={done:true};totalXp+=5;saveGame();updateHeader();showXpToast('✅ +5 Bonus-Funken!');spawnSparkles();setTimeout(()=>renderStation(),1200)}
+function skipChallenge(idx){challengesDone[idx]={skipped:true};saveGame();renderStation()}
 
 function openMap(){document.getElementById('mapOverlay').classList.add('active');if(!mapReady)initMap();else setTimeout(()=>map.invalidateSize(),150)}
 function closeMap(){document.getElementById('mapOverlay').classList.remove('active')}
@@ -492,7 +557,7 @@ function renderQuiz(){const n=Object.keys(quizAnswers).length;document.getElemen
 function answerQuiz(qi,oi){quizAnswers[qi]=oi;if(oi===QUIZ_QUESTIONS[qi].correct){totalXp+=QUIZ_XP;showXpToast(`+${QUIZ_XP} 🔥`);spawnSparkles()}saveGame();renderQuiz()}
 
 function showCertificate(){quizDone=true;saveGame();const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];const stars=totalXp>=190?3:totalXp>=130?2:1;const msgs=[`Du hast Tübi geholfen, ${playerName}! Ohne dich hätte er seine Flamme nie zurückbekommen!`,`Wow, ${playerName}! Du hast fast alles gewusst! Tübi ist mega stolz auf dich!`,`UNGLAUBLICH, ${playerName}! Du weißt mehr als die meisten Erwachsenen! Tübi ernennt dich zur Drachen-Legende! 🏆`];document.getElementById('certName').textContent=playerName;document.getElementById('certRank').textContent=rank.label;document.getElementById('certScore').textContent=totalXp;document.getElementById('certStars').textContent='⭐'.repeat(stars)+'☆'.repeat(3-stars);document.getElementById('certMsg').textContent=msgs[stars-1];showScreen('certificate')}
-function goHome(){playerName='';currentStation=0;maxUnlocked=0;totalXp=0;stationSolved={};quizAnswers={};quizDone=false;localStorage.removeItem(SAVE_KEY);document.getElementById('playerName').value='';document.getElementById('splashError').style.display='none';showScreen('splash');document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show')}
+function goHome(){playerName='';currentStation=0;maxUnlocked=0;totalXp=0;stationSolved={};quizAnswers={};quizDone=false;challengesDone={};localStorage.removeItem(SAVE_KEY);document.getElementById('playerName').value='';document.getElementById('splashError').style.display='none';showScreen('splash');document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show')}
 function shareResult(){const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];const t=`🐉🔥 Ich habe Tübi geholfen, seine Flamme zurückzubekommen! ${totalXp} Drachenfunken – Rang: ${rank.label}\ntracetour.de/kinder.html`;if(navigator.share)navigator.share({title:'TraceTour Kids',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>alert('Kopiert! 📋')).catch(()=>alert(t))}
 
 function openPrompts(){document.getElementById('promptModal').innerHTML=`<h3>🎨 Bild-Prompts (800×450px, 16:9)</h3><p style="font-size:.72rem;color:var(--text-2);margin-bottom:.8rem;font-weight:600">Tübi = kleiner grüner Drache mit goldenem Bauch und kleinen Flügeln. Passt rein bei Midjourney, DALL-E, Flux etc.</p>${PROMPTS.map((p,i)=>`<div class="prompt-item"><div class="prompt-item-label">${p.label}</div><div class="prompt-item-text">${p.text}</div><button class="prompt-copy" onclick="copyPrompt(${i},this)">Kopieren</button></div>`).join('')}<button class="prompt-close" onclick="closePrompts()">Schließen</button>`;document.getElementById('promptOverlay').classList.add('active')}
