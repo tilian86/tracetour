@@ -202,17 +202,27 @@ input{font-family:inherit;color:inherit}
 .btn-cert-home{background:var(--green);color:#fff;border:2px solid var(--green-light)}
 .btn-cert-share{background:var(--yellow);color:var(--green);border:2px solid var(--yellow-dark)}
 
-/* ======================== PROMPTS ======================== */
-#promptOverlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:1rem}
-#promptOverlay.active{display:flex}
-.prompt-modal{background:#fff;border-radius:var(--r-lg);max-width:420px;width:100%;max-height:85vh;overflow-y:auto;padding:1.2rem}
-.prompt-modal h3{font-size:1.1rem;font-weight:900;color:var(--green);margin-bottom:.8rem}
-.prompt-item{background:var(--green-pale);border-radius:var(--r-sm);padding:.8rem;margin-bottom:.7rem;position:relative}
-.prompt-item-label{font-size:.72rem;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem}
-.prompt-item-text{font-size:.75rem;line-height:1.5;color:var(--text);font-weight:500}
-.prompt-copy{position:absolute;top:.6rem;right:.6rem;background:var(--green);color:#fff;font-size:.65rem;font-weight:800;padding:.25rem .6rem;border-radius:6px;border:1.5px solid var(--green-light)}
-.prompt-copy.copied{background:var(--yellow);color:var(--green);border-color:var(--yellow-dark)}
-.prompt-close{width:100%;padding:12px;background:var(--green);color:#fff;font-weight:800;font-size:.9rem;border-radius:var(--r-sm);border:2px solid var(--green-light);margin-top:.3rem}
+/* ======================== SELFIE CAMERA ======================== */
+#selfieOverlay{position:fixed;inset:0;z-index:300;background:#000;display:none;flex-direction:column}
+#selfieOverlay.active{display:flex}
+.selfie-header{position:absolute;top:0;left:0;right:0;z-index:10;padding:calc(.6rem + var(--safe-top)) .8rem .6rem;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(0,0,0,.6),transparent)}
+.selfie-header h3{color:#fff;font-size:.9rem;font-weight:800}
+.selfie-close{background:rgba(255,255,255,.2);color:#fff;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700}
+#selfieVideo{width:100%;height:100%;object-fit:cover}
+#selfieCanvas{display:none}
+.selfie-tubi{position:absolute;z-index:5;font-size:4rem;cursor:move;touch-action:none;user-select:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4));transition:transform .1s}
+.selfie-controls{position:absolute;bottom:0;left:0;right:0;z-index:10;padding:.8rem .8rem calc(.8rem + var(--safe-bottom));display:flex;align-items:center;justify-content:center;gap:1rem;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)}
+.selfie-snap{width:68px;height:68px;border-radius:50%;background:#fff;border:4px solid var(--yellow);box-shadow:0 4px 20px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;font-size:1.8rem;transition:transform .1s}
+.selfie-snap:active{transform:scale(.9)}
+.selfie-size-btn{background:rgba(255,255,255,.2);color:#fff;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700}
+/* Selfie result */
+.selfie-result{position:fixed;inset:0;z-index:310;background:rgba(0,0,0,.9);display:none;flex-direction:column;align-items:center;justify-content:center;padding:1rem}
+.selfie-result.active{display:flex}
+.selfie-result img{max-width:100%;max-height:60vh;border-radius:var(--r);border:3px solid var(--yellow);box-shadow:0 8px 40px rgba(0,0,0,.5)}
+.selfie-result-actions{display:flex;gap:.8rem;margin-top:1rem}
+.selfie-result-btn{padding:.7rem 1.2rem;border-radius:var(--r-sm);font-weight:800;font-size:.9rem}
+.selfie-save{background:var(--green);color:#fff;border:2px solid var(--green-light)}
+.selfie-retry{background:rgba(255,255,255,.2);color:#fff;border:2px solid rgba(255,255,255,.3)}
 
 /* ======================== FX ======================== */
 .fade-in{animation:fadeIn .3s ease}
@@ -254,7 +264,6 @@ input{font-family:inherit;color:inherit}
     <div id="splashError">Gib deinen Namen ein! 😊</div>
   </div>
   <div class="splash-footer">Eine Tour von <strong style="color:rgba(255,255,255,.8)">TraceTour Tübingen</strong></div>
-  <div class="splash-prompts-link" id="promptsLink" style="display:none" onclick="openPrompts()">🎨 Bild-Prompts</div>
 </div>
 </div>
 
@@ -332,8 +341,28 @@ input{font-family:inherit;color:inherit}
   </div>
 </div>
 
-<!-- ======================== PROMPTS ======================== -->
-<div id="promptOverlay"><div class="prompt-modal" id="promptModal"></div></div>
+<!-- ======================== SELFIE CAMERA ======================== -->
+<div id="selfieOverlay">
+  <div class="selfie-header">
+    <h3>📸 Selfie mit Tübi</h3>
+    <button class="selfie-close" onclick="closeSelfie()">✕</button>
+  </div>
+  <video id="selfieVideo" autoplay playsinline muted></video>
+  <div class="selfie-tubi" id="selfieTubi">🐉</div>
+  <canvas id="selfieCanvas"></canvas>
+  <div class="selfie-controls">
+    <button class="selfie-size-btn" onclick="resizeTubi(-1)">➖</button>
+    <button class="selfie-snap" onclick="snapSelfie()">📸</button>
+    <button class="selfie-size-btn" onclick="resizeTubi(1)">➕</button>
+  </div>
+</div>
+<div class="selfie-result" id="selfieResult">
+  <img id="selfieResultImg" src="">
+  <div class="selfie-result-actions">
+    <button class="selfie-result-btn selfie-retry" onclick="retrySelfie()">🔄 Nochmal</button>
+    <button class="selfie-result-btn selfie-save" onclick="saveSelfie()">💾 Speichern</button>
+  </div>
+</div>
 
 <script>
 const STATIONS=[
@@ -418,11 +447,7 @@ challenge:{type:'count',emoji:'🔢',text:'Stell dich auf die Neckarbrücke und 
 prompt:'A colorful watercolor cartoon illustration of the Stocherkahnrennen (punt race) on the Neckar river in Tübingen. Flat wooden boats with students in silly costumes race through the water, some falling in. Spectators cheer from the stone bridge above. A small green dragon with golden belly sits on the bridge railing, watching excitedly. A golden spark of flame floats near the dragon. Splashing water, festive chaos, sunny day. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'}
 ];
 
-const PROMPTS=[
-{label:'Prolog / Startbild',text:'A colorful watercolor cartoon illustration showing the Tübingen Marktplatz at night. A small cute green dragon with golden belly and tiny wings sits on the astronomical clock of the Rathaus, looking shocked. A golden flame shoots out of his nose in 8 bright sparks that scatter across the starry sky over medieval rooftops. Moonlit town with half-timbered houses below. Magical atmosphere with glowing sparks. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'},
-...STATIONS.map(s=>({label:`Station ${s.id}: ${s.title}`,text:s.prompt})),
-{label:'Zertifikat / Finale',text:'A colorful watercolor cartoon illustration of a small cute green dragon with golden belly happily breathing a bright golden flame into the sky over Tübingen. The dragon stands triumphantly on the Neckarbrücke with Platanenallee, Stiftskirche, and Schloss visible in the panoramic background. A happy child waves at the dragon. Golden sparkles and confetti fill the air. Warm sunset colors. Soft pastel watercolor style, children\'s book illustration, wide format 16:9, no text.'}
-];
+/* PROMPTS removed – provided in chat for dev use only */
 
 const QUIZ_QUESTIONS=[
 {text:'Warum hat Tübi seine Drachenflamme verloren?',options:['Er hat zu viel Feuer gespuckt','Er hat so doll geniest','Er hat sie verschenkt'],correct:1},
@@ -487,10 +512,10 @@ function renderStation(){
     if(cdone){
       ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-done">✅ ${cdone.skipped?'Übersprungen':'Geschafft! +5 Bonus-Drachenfunken!'}</div>${cdone.count!=null?`<div style="font-size:.82rem;font-weight:700;color:var(--text-2);margin-top:.4rem">Deine Antwort: ${cdone.count}</div>`:''}</div>`;
     } else if(s.challenge.type==='count'){
-      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-text">${s.challenge.text}</div><div class="challenge-hint">${s.challenge.hint}</div><div class="challenge-actions"><input class="challenge-input" type="number" id="challengeCount_${currentStation}" placeholder="?" min="0" max="999"><button class="challenge-btn challenge-btn-count" onclick="submitCount(${currentStation})">Abschicken!</button><button class="challenge-btn challenge-btn-done" onclick="skipChallenge(${currentStation})">⏩ Überspringen</button></div></div>`;
+      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-text">${s.challenge.text}</div><div class="challenge-hint">${s.challenge.hint}</div><div class="challenge-actions"><input class="challenge-input" type="number" id="challengeCount_${currentStation}" placeholder="?" min="0" max="999"><button class="challenge-btn challenge-btn-count" onclick="submitCount(${currentStation})">✅</button><button class="challenge-btn" onclick="openSelfie()" style="background:#8b5cf6;color:#fff;border:2px solid #7c3aed">📸 Tübi-Selfie</button><button class="challenge-btn" onclick="skipChallenge(${currentStation})" style="background:var(--border);color:var(--text-2);border-color:var(--border)">⏩</button></div></div>`;
     } else {
       const doneLabel=s.challenge.type==='do'?'✅ Gemacht!':'✅ Gefunden!';
-      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-text">${s.challenge.text}</div><div class="challenge-hint">${s.challenge.hint}</div><div class="challenge-actions"><button class="challenge-btn challenge-btn-done" onclick="completeChallenge(${currentStation})">${doneLabel}</button><button class="challenge-btn" onclick="skipChallenge(${currentStation})" style="background:var(--border);color:var(--text-2);border-color:var(--border)">⏩ Überspringen</button></div></div>`;
+      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-text">${s.challenge.text}</div><div class="challenge-hint">${s.challenge.hint}</div><div class="challenge-actions"><button class="challenge-btn challenge-btn-done" onclick="completeChallenge(${currentStation})">${doneLabel}</button><button class="challenge-btn" onclick="openSelfie()" style="background:#8b5cf6;color:#fff;border:2px solid #7c3aed">📸 Selfie mit Tübi</button><button class="challenge-btn" onclick="skipChallenge(${currentStation})" style="background:var(--border);color:var(--text-2);border-color:var(--border)">⏩</button></div></div>`;
     }
   }
 
@@ -545,16 +570,92 @@ function showCertificate(){quizDone=true;saveGame();const rank=[...RANKS].revers
 function goHome(){playerName='';currentStation=0;maxUnlocked=0;totalXp=0;stationSolved={};quizAnswers={};quizDone=false;challengesDone={};localStorage.removeItem(SAVE_KEY);document.getElementById('playerName').value='';document.getElementById('splashError').style.display='none';showScreen('splash');document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show')}
 function shareResult(){const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];const t=`🐉🔥 Ich habe Tübi geholfen, seine Flamme zurückzubekommen! ${totalXp} Drachenfunken – Rang: ${rank.label}\ntracetour.de/kinder.html`;if(navigator.share)navigator.share({title:'TraceTour Kids',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>alert('Kopiert! 📋')).catch(()=>alert(t))}
 
-function openPrompts(){document.getElementById('promptModal').innerHTML=`<h3>🎨 Bild-Prompts (800×450px, 16:9)</h3><p style="font-size:.72rem;color:var(--text-2);margin-bottom:.8rem;font-weight:600">Tübi = kleiner grüner Drache mit goldenem Bauch und kleinen Flügeln. Passt rein bei Midjourney, DALL-E, Flux etc.</p>${PROMPTS.map((p,i)=>`<div class="prompt-item"><div class="prompt-item-label">${p.label}</div><div class="prompt-item-text">${p.text}</div><button class="prompt-copy" onclick="copyPrompt(${i},this)">Kopieren</button></div>`).join('')}<button class="prompt-close" onclick="closePrompts()">Schließen</button>`;document.getElementById('promptOverlay').classList.add('active')}
-function closePrompts(){document.getElementById('promptOverlay').classList.remove('active')}
-function copyPrompt(i,btn){navigator.clipboard.writeText(PROMPTS[i].text).then(()=>{btn.textContent='✓ Kopiert!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Kopieren';btn.classList.remove('copied')},1500)}).catch(()=>alert(PROMPTS[i].text))}
+/* ===== SELFIE CAMERA WITH TÜBI ===== */
+let selfieStream=null, tubiSize=4, tubiX=50, tubiY=60;
 
-/* Secret dev tap: 5x tap on splash title to reveal prompt button */
-let devTaps=0,devTimer=null;
-function devTap(){devTaps++;if(devTimer)clearTimeout(devTimer);devTimer=setTimeout(()=>{devTaps=0},2000);if(devTaps>=5){document.getElementById('promptsLink').style.display='inline-flex';devTaps=0}}
+function openSelfie(){
+  const overlay=document.getElementById('selfieOverlay');
+  overlay.classList.add('active');
+  const video=document.getElementById('selfieVideo');
+  const tubi=document.getElementById('selfieTubi');
+  tubi.style.fontSize=tubiSize+'rem';
+  tubi.style.left=tubiX+'%';
+  tubi.style.top=tubiY+'%';
+  navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false}).then(stream=>{
+    selfieStream=stream;video.srcObject=stream;
+  }).catch(()=>{closeSelfie();alert('Kamera nicht verfügbar 😔')});
+  // Make Tübi draggable
+  makeDraggable(tubi);
+}
+
+function closeSelfie(){
+  document.getElementById('selfieOverlay').classList.remove('active');
+  document.getElementById('selfieResult').classList.remove('active');
+  if(selfieStream){selfieStream.getTracks().forEach(t=>t.stop());selfieStream=null}
+}
+
+function makeDraggable(el){
+  let startX,startY,origX,origY,dragging=false;
+  function onStart(e){
+    dragging=true;const t=e.touches?e.touches[0]:e;
+    const r=el.getBoundingClientRect();origX=r.left;origY=r.top;startX=t.clientX;startY=t.clientY;
+    e.preventDefault();
+  }
+  function onMove(e){
+    if(!dragging)return;const t=e.touches?e.touches[0]:e;
+    el.style.left=(origX+(t.clientX-startX))+'px';
+    el.style.top=(origY+(t.clientY-startY))+'px';
+    el.style.transform='none';e.preventDefault();
+  }
+  function onEnd(){dragging=false}
+  el.addEventListener('mousedown',onStart);el.addEventListener('touchstart',onStart,{passive:false});
+  document.addEventListener('mousemove',onMove);document.addEventListener('touchmove',onMove,{passive:false});
+  document.addEventListener('mouseup',onEnd);document.addEventListener('touchend',onEnd);
+}
+
+function resizeTubi(dir){
+  tubiSize=Math.max(2,Math.min(8,tubiSize+dir));
+  document.getElementById('selfieTubi').style.fontSize=tubiSize+'rem';
+}
+
+function snapSelfie(){
+  const video=document.getElementById('selfieVideo');
+  const canvas=document.getElementById('selfieCanvas');
+  const tubi=document.getElementById('selfieTubi');
+  const vw=video.videoWidth,vh=video.videoHeight;
+  canvas.width=vw;canvas.height=vh;
+  const ctx=canvas.getContext('2d');
+  // Mirror the video (front camera)
+  ctx.save();ctx.scale(-1,1);ctx.drawImage(video,-vw,0,vw,vh);ctx.restore();
+  // Draw Tübi emoji
+  const overlay=document.getElementById('selfieOverlay');
+  const ow=overlay.offsetWidth,oh=overlay.offsetHeight;
+  const tr=tubi.getBoundingClientRect();
+  const scaleX=vw/ow,scaleY=vh/oh;
+  const tx=(ow-tr.left-tr.width)*scaleX; // mirror x
+  const ty=tr.top*scaleY;
+  const ts=parseFloat(getComputedStyle(tubi).fontSize)*scaleX*1.2;
+  ctx.font=ts+'px serif';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('🐉',tx+ts*.4,ty+ts*.4);
+  // Show result
+  const dataUrl=canvas.toDataURL('image/jpeg',0.92);
+  document.getElementById('selfieResultImg').src=dataUrl;
+  document.getElementById('selfieResult').classList.add('active');
+}
+
+function retrySelfie(){document.getElementById('selfieResult').classList.remove('active')}
+
+function saveSelfie(){
+  const a=document.createElement('a');
+  a.href=document.getElementById('selfieResultImg').src;
+  a.download='tubbi-selfie-'+Date.now()+'.jpg';
+  a.click();
+  closeSelfie();
+  showXpToast('📸 Tübi-Selfie gespeichert!');
+}
 
 window.addEventListener('DOMContentLoaded',()=>{
-  document.querySelector('.splash-title').addEventListener('click',devTap);
   if(loadGame()&&playerName)launchGame();
 });
 </script>
