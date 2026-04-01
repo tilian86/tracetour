@@ -764,6 +764,30 @@ SPECIAL_AUDIO = {
             "Your progress is saved automatically. You can pause anytime and continue later."
         ),
     },
+    "bonus_8": {
+        "voice": NARRATOR_VOICE_EN,
+        "text": (
+            "Bonus question! Seventy-five Traces.\n\n"
+            "Do you remember the Stiftskirche? "
+            "What was the name of the last tower watchman of the Stiftskirche?"
+        ),
+    },
+    "bonus_13": {
+        "voice": NARRATOR_VOICE_EN,
+        "text": (
+            "Bonus question! Seventy-five Traces.\n\n"
+            "Do you remember the Monkey Rock? "
+            "What did Leonhard Fuchs write in fifteen forty-three in the Nonnenhaus?"
+        ),
+    },
+    "bonus_16": {
+        "voice": NARRATOR_VOICE_EN,
+        "text": (
+            "Bonus question! Seventy-five Traces.\n\n"
+            "Do you remember the Neckar Island and the Plane Tree Avenue? "
+            "Which monument stands at the eastern end of the Plane Tree Avenue?"
+        ),
+    },
     "epilog": {
         "voice": EPILOG_VOICE_EN,
         "text": (
@@ -856,7 +880,7 @@ def main():
     else:
         station_nums = list(range(17))
 
-    all_types = ["story", "diary", "fact", "riddle", "anecdote", "prologue", "guide", "epilog"]
+    all_types = ["story", "diary", "fact", "riddle", "anecdote", "prologue", "guide", "epilog", "bonus_8", "bonus_13", "bonus_16"]
     if "--only" in sys.argv:
         idx = sys.argv.index("--only")
         types_to_gen = sys.argv[idx + 1].split(",")
