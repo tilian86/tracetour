@@ -7,6 +7,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>TraceTour Kids – Tübis Geheimnisse</title>
+<meta name="description" content="Tübi der Drache braucht deine Hilfe! Finde 8 Funken in Tübingen und bring seine Flamme zurück. Die Kindertour von TraceTour – für kleine Abenteurer ab 5 Jahren.">
+<meta property="og:title" content="TraceTour Kids – Tübis Geheimnisse">
+<meta property="og:description" content="Hilf Tübi dem Drachen, seine verlorene Flamme wiederzufinden! 8 Stationen, 8 Rätsel, 1 Abenteuer durch Tübingen.">
+<meta property="og:image" content="https://tracetour.de/images/hero_neckarfront.jpg">
+<meta property="og:type" content="website">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -492,6 +497,8 @@ function playAudio(src,btn){
   a.onended=a.onerror=()=>{btn.classList.remove('playing');btn.querySelector('.audio-icon').textContent='▶️';currentAudio=null;currentAudioBtn=null};
 }
 
+function playSFX(src){const a=new Audio(src);a.volume=0.6;a.play().catch(()=>{})}
+
 let debugMode=false;
 function startGame(){
   const code=document.getElementById('loginCode').value.trim().toUpperCase();
@@ -511,7 +518,7 @@ function navigate(dir){
   if(debugMode&&next>maxUnlocked)maxUnlocked=next;
   currentStation=next;saveGame();updateHeader();renderStation();renderDots();document.getElementById('game').scrollTo(0,0);dbgUpdate();
 }
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='game'){document.getElementById('gameHeader').style.display='block';document.getElementById('gameNav').classList.add('show');if(debugMode)document.getElementById('debugPanel').style.display='block'}else{document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show');document.getElementById('debugPanel').style.display='none'}}
+function showScreen(id){if(currentAudio){currentAudio.pause();currentAudio=null;if(currentAudioBtn){currentAudioBtn.classList.remove('playing');currentAudioBtn.querySelector('.audio-icon').textContent='▶️';currentAudioBtn=null}}document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='game'){document.getElementById('gameHeader').style.display='block';document.getElementById('gameNav').classList.add('show');if(debugMode)document.getElementById('debugPanel').style.display='block'}else{document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show');document.getElementById('debugPanel').style.display='none'}}
 function updateHeader(){document.getElementById('hdrName').textContent=playerName;const n=Object.keys(stationSolved).length;document.getElementById('hdrStation').textContent=`🔥 ${n}/${STATIONS.length} Funken`;document.getElementById('hdrXp').textContent=totalXp;document.getElementById('progressBar').style.width=(n/STATIONS.length*100)+'%';document.getElementById('hdrFlame').classList.toggle('header-flame-off',n<STATIONS.length)}
 function renderDots(){document.getElementById('navDots').innerHTML=STATIONS.map((_,i)=>{let c='nav-dot';if(i===currentStation)c+=' current';else if(stationSolved[i])c+=' done';return`<div class="${c}"></div>`}).join('');document.getElementById('navPrev').disabled=currentStation===0;document.getElementById('navPrev').style.opacity=currentStation===0?'.3':'1';document.getElementById('navNext').disabled=!debugMode&&!stationSolved[currentStation]}
 
@@ -552,7 +559,10 @@ function answerStation(idx){
   const fb=document.getElementById('qFeedback');fb.textContent=correct?s.win:s.lose;fb.className='question-feedback show '+(correct?'win':'lose');
   totalXp+=STATION_XP;stationSolved[currentStation]=true;
   if(currentStation>=maxUnlocked&&currentStation<STATIONS.length-1)maxUnlocked=currentStation+1;
-  saveGame();updateHeader();renderDots();showXpToast(correct?`🔥 Funke ${currentStation+1} gefunden!`:`🔥 Funke gefunden!`);spawnSparkles();
+  saveGame();updateHeader();renderDots();
+  if(correct){playSFX('audio/correct.wav')}else{playSFX('audio/wrong.wav')}
+  if(currentStation===STATIONS.length-1){setTimeout(()=>playSFX('audio/fanfare.wav'),600)}
+  showXpToast(correct?`🔥 Funke ${currentStation+1} gefunden!`:`🔥 Funke gefunden!`);spawnSparkles();
   setTimeout(()=>renderStation(),1800);
 }
 
@@ -566,11 +576,11 @@ function submitCount(idx){
   if(isNaN(val)){input.style.borderColor='#f87171';return}
   challengesDone[idx]={count:val};totalXp+=5;saveGame();updateHeader();
   const s=STATIONS[idx];
-  if(s.challenge.answer!=null&&Math.abs(val-s.challenge.answer)<=s.challenge.tolerance)showXpToast('🎯 Genau richtig! +5 Bonus!');
-  else showXpToast('📝 +5 Bonus-Funken!');
+  if(s.challenge.answer!=null&&Math.abs(val-s.challenge.answer)<=s.challenge.tolerance){showXpToast('🎯 Genau richtig! +5 Bonus!');playSFX('audio/correct.wav')}
+  else{showXpToast('📝 +5 Bonus-Funken!');playSFX('audio/correct.wav')}
   spawnSparkles();setTimeout(()=>renderStation(),1200);
 }
-function completeChallenge(idx){challengesDone[idx]={done:true};totalXp+=5;saveGame();updateHeader();showXpToast('✅ +5 Bonus-Funken!');spawnSparkles();setTimeout(()=>renderStation(),1200)}
+function completeChallenge(idx){challengesDone[idx]={done:true};totalXp+=5;saveGame();updateHeader();showXpToast('✅ +5 Bonus-Funken!');spawnSparkles();playSFX('audio/correct.wav');setTimeout(()=>renderStation(),1200)}
 function skipChallenge(idx){challengesDone[idx]={skipped:true};saveGame();renderStation()}
 
 /* ===== DEBUG ===== */
@@ -614,9 +624,9 @@ async function fetchRoute(){try{const c=STATIONS.map(s=>s.lng+','+s.lat).join(';
 function updateRouteDisplay(){if(!routeLine)return;if(!fullRouteCoords){routeLine.setLatLngs(STATIONS.slice(0,Math.min(maxUnlocked+1,STATIONS.length)).map(s=>[s.lat,s.lng]));return}const t=STATIONS[Math.min(maxUnlocked,STATIONS.length-1)];let bi=fullRouteCoords.length-1,bd=Infinity;fullRouteCoords.forEach((c,i)=>{const d=Math.abs(c[0]-t.lat)+Math.abs(c[1]-t.lng);if(d<bd){bd=d;bi=i}});routeLine.setLatLngs(fullRouteCoords.slice(0,bi+1))}
 
 function renderQuiz(){const n=Object.keys(quizAnswers).length;document.getElementById('quizProgress').textContent=`${n} von ${QUIZ_QUESTIONS.length} beantwortet`;document.getElementById('quizDoneBtn').classList.toggle('show',n===QUIZ_QUESTIONS.length);document.getElementById('quizContent').innerHTML=QUIZ_QUESTIONS.map((q,qi)=>{const done=quizAnswers[qi]!==undefined;return`<div class="quiz-q-card fade-in"><div class="quiz-q-num">Frage ${qi+1}</div><div class="quiz-q-text">${q.text}</div><div class="mc-options">${q.options.map((o,oi)=>{let c='mc-btn';if(done){if(oi===q.correct)c+=' correct';else if(quizAnswers[qi]===oi&&oi!==q.correct)c+=' wrong'}return`<button class="${c}" ${done?'disabled':''} onclick="answerQuiz(${qi},${oi})"><span class="mc-letter">${String.fromCharCode(65+oi)}</span><span>${o}</span></button>`}).join('')}</div></div>`}).join('')}
-function answerQuiz(qi,oi){quizAnswers[qi]=oi;if(oi===QUIZ_QUESTIONS[qi].correct){totalXp+=QUIZ_XP;showXpToast(`+${QUIZ_XP} 🔥`);spawnSparkles()}saveGame();renderQuiz()}
+function answerQuiz(qi,oi){quizAnswers[qi]=oi;if(oi===QUIZ_QUESTIONS[qi].correct){totalXp+=QUIZ_XP;showXpToast(`+${QUIZ_XP} 🔥`);spawnSparkles();playSFX('audio/correct.wav')}else{playSFX('audio/wrong.wav')}saveGame();renderQuiz()}
 
-function showCertificate(){quizDone=true;saveGame();const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];const stars=totalXp>=190?3:totalXp>=130?2:1;const msgs=[`Du hast Tübi geholfen, ${playerName}! Ohne dich hätte er seine Flamme nie zurückbekommen!`,`Wow, ${playerName}! Du hast fast alles gewusst! Tübi ist mega stolz auf dich!`,`UNGLAUBLICH, ${playerName}! Du weißt mehr als die meisten Erwachsenen! Tübi ernennt dich zur Drachen-Legende! 🏆`];document.getElementById('certName').textContent=playerName;document.getElementById('certRank').textContent=rank.label;document.getElementById('certScore').textContent=totalXp;document.getElementById('certStars').textContent='⭐'.repeat(stars)+'☆'.repeat(3-stars);document.getElementById('certMsg').textContent=msgs[stars-1];showScreen('certificate')}
+function showCertificate(){quizDone=true;saveGame();const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];const stars=totalXp>=190?3:totalXp>=130?2:1;const msgs=[`Du hast Tübi geholfen, ${playerName}! Ohne dich hätte er seine Flamme nie zurückbekommen!`,`Wow, ${playerName}! Du hast fast alles gewusst! Tübi ist mega stolz auf dich!`,`UNGLAUBLICH, ${playerName}! Du weißt mehr als die meisten Erwachsenen! Tübi ernennt dich zur Drachen-Legende! 🏆`];document.getElementById('certName').textContent=playerName;document.getElementById('certRank').textContent=rank.label;document.getElementById('certScore').textContent=totalXp;document.getElementById('certStars').textContent='⭐'.repeat(stars)+'☆'.repeat(3-stars);document.getElementById('certMsg').textContent=msgs[stars-1];showScreen('certificate');playSFX('audio/fanfare.wav');setTimeout(()=>playSFX('audio/applause.mp3'),800)}
 function goHome(){playerName='';currentStation=0;maxUnlocked=0;totalXp=0;stationSolved={};quizAnswers={};quizDone=false;challengesDone={};localStorage.removeItem(SAVE_KEY);document.getElementById('playerName').value='';document.getElementById('splashError').style.display='none';showScreen('splash');document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show')}
 function shareResult(){const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];const t=`🐉🔥 Ich habe Tübi geholfen, seine Flamme zurückzubekommen! ${totalXp} Drachenfunken – Rang: ${rank.label}\ntracetour.de/kinder.html`;if(navigator.share)navigator.share({title:'TraceTour Kids',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>alert('Kopiert! 📋')).catch(()=>alert(t))}
 
@@ -722,6 +732,8 @@ function downloadSelfie(dataUrl){
 
 window.addEventListener('DOMContentLoaded',()=>{
   if(loadGame()&&playerName)launchGame();
+  document.getElementById('playerName').addEventListener('keydown',e=>{if(e.key==='Enter')startGame()});
+  document.getElementById('loginCode').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('playerName').focus()});
 });
 </script>
 </body>
