@@ -36,7 +36,7 @@ except ImportError:
 # CONFIGURATION
 # ============================================================
 
-API_KEY = os.environ.get("ELEVENLABS_API_KEY", "sk_18df17d38593a50a53362f37c86f9527c02d4c21ec495fc7")
+API_KEY = os.environ.get("ELEVENLABS_API_KEY", "sk_2255291b0198d4faabca23550d95c34914be2cdf14861aa2")
 
 NARRATOR_VOICE_EN = "lxYfHSkYm1EzQzGhdbfc"   # English narrator (story, riddle)
 HEINRICH_VOICE_EN = "goT3UYdM9bhm0n2lmKQx"   # Heinrich's diary
