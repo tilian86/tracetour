@@ -788,6 +788,33 @@ SPECIAL_AUDIO = {
             "Which monument stands at the eastern end of the Plane Tree Avenue?"
         ),
     },
+    "formula": {
+        "voice": NARRATOR_VOICE_EN,
+        "text": (
+            "Heinrich's Formula.\n\n"
+            "But where danger is, grows the saving power also.\n\n"
+            "Friedrich Hoelderlin wrote this line in eighteen oh three in his hymn Patmos. "
+            "He lived thirty-six years in the tower on the Neckar — just a few hundred meters "
+            "from your last station. A poet searching for hope in a time of upheaval.\n\n"
+            "Heinrich knew these verses. And he understood something the powerful refused to see: "
+            "the true formula was never a weapon. It was a promise.\n\n"
+            "Where knowledge is suppressed, the courage to share it grows. Where fear rules, "
+            "people rise above themselves. Where all seems lost, something new is born.\n\n"
+            "This was true in eighteen oh three. It was true in eighteen sixty-nine. "
+            "And it is true today.\n\n"
+            "We live in a time when the news overwhelms us daily with crises — climate change, "
+            "conflicts, uncertainty. It is easy to lose hope. But Hoelderlin's insight is more "
+            "relevant than ever: precisely because danger exists, the saving power also grows.\n\n"
+            "Young researchers are developing solutions for the energy transition. People are "
+            "standing up for peace. Cities like Tuebingen show that change is possible — "
+            "with courage, knowledge, and solidarity.\n\n"
+            "Heinrich did not hide his formula for kings. He hid it for people like you — "
+            "people curious enough to search for secrets. Brave enough to carry the truth forward. "
+            "And wise enough to understand: knowledge does not belong to the powerful. "
+            "Knowledge belongs to the world.\n\n"
+            "This is Heinrich's legacy. And now it is yours too."
+        ),
+    },
     "epilog": {
         "voice": EPILOG_VOICE_EN,
         "text": (
@@ -797,11 +824,8 @@ SPECIAL_AUDIO = {
             "The formula that Heinrich von Calw scattered across half the city was never a "
             "physical equation. It was an insight — inspired by Friedrich Hoelderlin, the poet "
             "who lived thirty-six years in the tower on the Neckar. Just a few hundred meters "
-            "from your last station.\n\n"
+            "from your last station. An insight that is more important now than ever.\n\n"
             "But where danger is, grows the saving power also.\n\n"
-            "Hoelderlin wrote this line in eighteen oh three in his hymn Patmos. Heinrich knew "
-            "his verses and understood: Where knowledge is suppressed, the courage to share it "
-            "grows.\n\n"
             "Thank you so much for joining us on this journey! We hope Tuebingen brought you "
             "as much joy as it brings us. Share your certificate with friends — and perhaps "
             "we will see each other again on a new tour soon. Until then: fare well, "
@@ -880,7 +904,7 @@ def main():
     else:
         station_nums = list(range(17))
 
-    all_types = ["story", "diary", "fact", "riddle", "anecdote", "prologue", "guide", "epilog", "bonus_8", "bonus_13", "bonus_16"]
+    all_types = ["story", "diary", "fact", "riddle", "anecdote", "prologue", "guide", "formula", "epilog", "bonus_8", "bonus_13", "bonus_16"]
     if "--only" in sys.argv:
         idx = sys.argv.index("--only")
         types_to_gen = sys.argv[idx + 1].split(",")
