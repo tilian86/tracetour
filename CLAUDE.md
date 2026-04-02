@@ -74,14 +74,41 @@
 - **Fundamente Haagtor:** Alte Stadttor-Fundamente noch erhalten, Leute sitzen heute darauf! → **Neue Rätsel-Idee:** "Worauf sitzt du gerade?" → Antwort: Fundamente des alten Haagtors / Stadtmauer
 - **Rätsel-Wechsel nötig:** Eisvogel-Rätsel ersetzen durch Haagtor-Fundament-Rätsel
 
+### Station 10 — Froschkönig-Brunnen (beim Café Hirsch)
+- **Fotos gemacht:** Brunnen Querformat, Blick in den Brunnen
+- **Kein Froschkönig aktuell** — nur ein Seil mit Karabiner im Brunnen, Figur fehlt (nach Diebstahl noch nicht ersetzt?)
+- **Café Hirsch** direkt daneben bestätigt
+- **Brunnen selbst:** Tiefer Steinbrunnen, rund, mit Glasabdeckung/Gitter
+- **Story trotzdem nutzbar:** Vermüllter Brunnen, Bürger-Initiative, Reinigung — besprechen zu Hause
+
+### Bonus — Johanneskirche (bei Station 10)
+- **Fotos gemacht:** Kirchenfassade Querformat, Infotafel, "Sitzende"-Skulptur
+- **St. Johannes Evangelist:** 1875–1878, neogotisch, Oberbaurat Joseph Egle, katholische Pfarrkirche + Wilhelmsstift-Kirche, im 19./frühen 20. Jh. auch Garnisonskirche
+- **Rosettenfenster** im Portal — mögliches Rätsel-Element
+- **"Sitzende"** von Wilhelm Pfeiffer (1982), Kunstpfad Tübingen Station 10, Spende Gerhard Rösch — jemand hat ihr Blumen in den Arm gelegt, charmantes Detail
+- **Mögliches Rätsel Kinder-Tour:** "Wer hat hier Blumen bekommen?"
+
+### Station 11 — Affenfelsen / Radfahrerkönig
+- **Radfahrerkönig: NOCH DA** ✓ — Bronze-Skulptur, König mit Krone auf Fahrrad, Kunstpfad Tübingen Station 12
+- **Fotos gemacht:** Radfahrerkönig Querformat, Umgebung
+
+### Station 14 — Nonnenhaus
+- **Fotos gemacht:** Fachwerk-Fassade mit Geigenbau Gornowskij, Infotafel, Rückseite/Sprachhaus über Ammerkanal, Spielplatz
+- **Infotafel:** 1488 erbaut, anfangs Dominikanerinnen, dann Beginen. Nach Reformation Wohnhaus von Leonhart Fuchs (1501–1566), der den ersten botanischen Garten anlegte. **Fuchsie** nach ihm benannt!
+- **"Sprachhaus"** = Vorbau am Ammerkanal, war ursprünglich ein **Abort (Toilette)** — tolles Rätsel für beide Touren
+- **Geigenbau Gornowskij** im Gebäude — Geigenbauer im ältesten Fachwerkhaus
+- **Spielplatz** mit Bodentrampolin direkt daneben — Pause-Station für Kinder-Tour
+- **Kartoffelladen** in der Nähe
+- **Ammerkanal-Rückseite:** Alte Steinbrücke, Schleusen/Wehre, Enten, atmosphärisch
+
+### Station 16 — Indianersteg / Ammerkanal
+- **Fotos gemacht:** Kanal-Verzweigung beim Indianersteg
+- **Ammerkanal teilt sich** hier — sichtbar auf Foto
+
 ### Noch ausstehende Stationen
-- Station 10 — Froschkönig-Brunnen: Ist er wieder da nach Diebstahl?
-- Station 11 — Affenfelsen: Radfahrerkönig noch da?
 - Station 12 — Alter Bot. Garten: Hölderlin-Denkmal
 - Station 13 — Neue Aula: Attempto-Giebel
-- Station 14 — Nonnenhaus: "Sprachhaus" Rückseite sichtbar?
 - Station 15 — Platanenallee/Neckarinsel
-- Station 16 — Indianersteg
 
 ## Foto-Guidelines
 - **App-Stationsfotos:** Querformat
