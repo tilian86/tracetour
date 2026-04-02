@@ -45,12 +45,25 @@
 - **Fotos gemacht:** Georg + Drache close-up, mit Turm im Hintergrund
 - **Brunnen hat 4 Rohre** — Rätsel "wie viele Rohre" nicht gut genug, stattdessen Drachentöter-Rätsel (siehe Station 4)
 
-### Station 6 — Rathaus (IN ARBEIT)
-- Zu checken: Fassade, astronomische Uhr/Drachenzeiger, gemalte Namen zählen, "Zur Krone" gegenüber
+### Station 6 — Rathaus & Marktplatz
+- **Fotos gemacht:** Rathaus-Fassade quer, astronomische Uhr close-up (Drachenzeiger sichtbar!), Uhren-Gesamtansicht, Neptunbrunnen (mehrere Perspektiven), Marktplatz-Panorama
+- **Rätsel Drachenzeiger verifiziert** ✓ — goldener verzierter Zeiger auf astronomischer Uhr, Sonne links, Mond rechts, Tierkreiszeichen
+- **Infotafel "Zerstörung der kommunalen Demokratie":** 31.3.1933 Gemeinderat aufgelöst, Hugo Benzinger (KPD) ins KZ Heuberg, Simon Hayum (liberal, jüdisch) zum Rücktritt gezwungen. Mai 1933: erstes Freibadverbot für "Juden und Fremdrasse" im Deutschen Reich
+- **Neptunbrunnen — noch offen:** Zigarren-Figuren der Handwerker sichtbar? WMF/Waffenstahl verifizieren? Zu Hause recherchieren
+- **"Zur Krone"** — nicht explizit gecheckt, zu Hause recherchieren
+- **Fassaden-Inschriften:** "Anno 1435", "Anno 1508" und weitere Jahreszahlen sichtbar
+
+### Station 7 — Kornhaus/Stadtmuseum
+- **Fotos gemacht:** Fachwerk-Fassade quer, Öffnungszeiten-Tür, Veranstaltungsaushang April 2026
+- **Öffnungszeiten verifiziert:** Mi, Fr–So 11–17 Uhr, **Eintritt frei** ✓
+- **Sonntagsführungen:** 5€, ermäßigt 3€ ✓
+- **Offener Kunst Freitag:** 14:30–16:30 für Kinder, 3€ Kind / 7€ Erwachsene
+- **Ausstellungen aktuell:** "My Generation – Jung sein in Tübingen" (bis 6.4.2026), "Über Städte und Dörfer" (Mahler, bis 31.5.2026), Lotte Reiniger Dauerausstellung, neue Ausstellung ab Feb 2027: "Der erste Trickfilm! 100 Jahre Abenteuer des Prinzen Achmed"
+- **Room of Memories: EXISTIERT** ✓ — Dauerausstellung, Serious Game über NS in Tübingen. Dachboden-Raum mit sprechendem Spiegel, 2–4 Personen, ca. 50 Min, ab 14 Jahre. Kein Schild am Eingang, ist drinnen. Quelle: stadtmuseum-tuebingen.de
+- **Adresse:** Kornhausstraße 10, 72070 Tübingen
 
 ### Noch ausstehende Stationen
-- Station 7 — Kornhaus/Stadtmuseum: "Room of Memories" Escape Room? Öffnungszeiten?
-- Station 8 — Ammerschlag: Foto
+- Station 8 — Ammerschlag: Foto, schiefes Fachwerk Ammergasse (Stadtfunken Geheimtipps-Karte)
 - Station 9 — Haagtorplatz: Eisvogel-Streetart noch da?
 - Station 10 — Froschkönig-Brunnen: Ist er wieder da nach Diebstahl?
 - Station 11 — Affenfelsen: Radfahrerkönig noch da?
