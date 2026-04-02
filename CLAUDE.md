@@ -1,0 +1,87 @@
+# TraceTour — Projekt-Memory
+
+## Stadtgang 2. April 2026 — Erkenntnisse vor Ort
+
+### Station 0 — Schloss Hohentübingen
+- **Fotos gemacht:** Schlosstor, Außenansicht, Infotafel Geschichte, DNS-Tafel (Miescher 1869), Wildpferd-Skulptur, Augustus-Kopf "Täuschend echt!", MUT-Öffnungszeiten
+- **Cafe Musee: DAUERHAFT GESCHLOSSEN** — muss in App korrigiert werden falls erwähnt
+- **Rätsel verifiziert:** Hirsch ist das größte Tier auf dem Wappen ✓
+- **MUT Museum:** Mi–So 10–17 Uhr, Do bis 19 Uhr, AlbCard-Partner
+- **Schloss Öffnungszeiten:** täglich 7–20 Uhr
+- **Schloss-Fakten von Infotafel:** 1078 erste Erwähnung "Castrum Twingia", 1477 Eberhard im Bart Uni-Gründer, Riesenfass 84.000 Liter (1549), 1816 Schloss an Uni übergeben
+- **DNS-Tafel:** Friedrich Miescher entdeckte 1869 in der Schlossküche das Nuklein (DNS) — passt perfekt zur 1869-Story
+- **Wildpferd:** Original aus Mammutelfenbein, ~40.000 Jahre alt, 4,82 cm, UNESCO-Weltkulturerbe, aus Vogelherd-Höhle im Lonetal
+- **Schleichweg Schloss → Münzgasse:** Enge Gasse mit Steintreppen zwischen Häusern, kommt bei Hausnr. 3 auf der Münzgasse raus (bei Hotel am Schloss / Mauganeschtle). Toll für Kinder-Tour, NICHT kinderwagentauglich (Treppen!). Für beide Touren einbauen mit Variante: mit Kinderwagen (Hauptweg) / ohne (Schleichweg)
+- GPS-Koordinaten aus Foto-EXIF nutzen für exakte Navigation in beiden Touren
+
+### Station 1 — Studentenkarzer (Münzgasse 20)
+- **Nicht zugänglich** von außen, nur Eingangstür sichtbar
+- Foto der Eingangstür gemacht (viel Graffiti)
+
+### Station 2 — Alte Aula (Münzgasse 30)
+- **Fotos gemacht:** Fassade quer, Infotafel
+- **Rätsel verifiziert:** Infotafel bestätigt "1547 erbaut" und "1777 zum 300-jährigen Jubiläum umgebaut" ✓
+- Rätsel 1777 − 300 = 1477 funktioniert perfekt
+
+### Station 3 — Martinianum (Münzgasse 13)
+- **Fotos gemacht:** "Hier kotzte Goethe"-Schild, Cottahaus-Tafel, Banner, Fassade
+- **Cottahaus-Tafel:** "Hier wohnte Goethe, 7.–16. September 1797"
+- **Banner:** "Damit auch künftige Goethes hier kotzen können! www.muezgasse13.de"
+- **Rätsel-/Story-Idee:** Kontrast zwischen elegantem Goethe-Aufenthalt im Cottahaus (schöner Blick ins Neckartal) und dem deftigen "Hier kotzte Goethe"-Schild nebenan
+
+### Station 4 — Stiftskirche
+- **Fotos gemacht:** Infotafel, Turm+Uhr, Hauptportal (Holzmarkt-Seite), Evangelistensymbole, Georgs-Relief, Kirchenwand-Details
+- **Infotafel:** "Ab 1470 in spätgotischem Stil errichtet, seit 1534 evangelisch. Chor zunächst auch Festsaal der Universität, seit 1537 Grablege der württembergischen Herzöge."
+- **Turmhöhe 56m:** Bestätigt (anderweitig recherchiert), steht NICHT auf der Infotafel vor Ort
+- **Evangelistensymbole Turmecken:** Muschelkalk, 1932/33, Fritz von Graevenitz (1892–1959). Kunstpfad Tübingen Station 9. "Hervorstehende Tierplastiken auf halber Höhe des Turms"
+- **Zwei Fabelwesen am Hauptportal:** Links und rechts über dem Spitzbogen (spätgotisch, älter als Graevenitz-Symbole)
+- **Georgs-Relief über Fenster:** Ritter auf Pferd tötet Drachen, Prinzessin dabei, Wappen oben rechts — an der Kirchenwand Richtung Holzmarkt
+- **Goldener Wetterhahn** auf der Turmspitze — mögliches Rätsel-Element
+- **Rätsel-Idee Kinder-Tour:** "Stell dich vor den Georgsbrunnen. Schau den Drachentöter an. Jetzt dreh dich um — wo versteckt sich noch ein Drachentöter an der Kirchenwand?"
+- **Rätsel-Idee Erwachsene:** "Vom Brunnen siehst du den Drachentöter zweimal. Welche Person ist im Steinrelief dabei, die auf dem Brunnen fehlt?" → Antwort: Prinzessin
+- **Noch offen:** Glocken dorische Tonleiter? Turmneigung 1962-64? Turmbesteigung möglich + Preis? → zu Hause recherchieren
+
+### Station 5 — Holzmarkt & Georgsbrunnen
+- **Fotos gemacht:** Georg + Drache close-up, mit Turm im Hintergrund
+- **Brunnen hat 4 Rohre** — Rätsel "wie viele Rohre" nicht gut genug, stattdessen Drachentöter-Rätsel (siehe Station 4)
+
+### Station 6 — Rathaus (IN ARBEIT)
+- Zu checken: Fassade, astronomische Uhr/Drachenzeiger, gemalte Namen zählen, "Zur Krone" gegenüber
+
+### Noch ausstehende Stationen
+- Station 7 — Kornhaus/Stadtmuseum: "Room of Memories" Escape Room? Öffnungszeiten?
+- Station 8 — Ammerschlag: Foto
+- Station 9 — Haagtorplatz: Eisvogel-Streetart noch da?
+- Station 10 — Froschkönig-Brunnen: Ist er wieder da nach Diebstahl?
+- Station 11 — Affenfelsen: Radfahrerkönig noch da?
+- Station 12 — Alter Bot. Garten: Hölderlin-Denkmal
+- Station 13 — Neue Aula: Attempto-Giebel
+- Station 14 — Nonnenhaus: "Sprachhaus" Rückseite sichtbar?
+- Station 15 — Platanenallee/Neckarinsel
+- Station 16 — Indianersteg
+
+## Foto-Guidelines
+- **App-Stationsfotos:** Querformat
+- **Stadtfunken-Karten:** Querformat
+- **Infotafeln:** Egal, Hauptsache lesbar
+- GPS-EXIF-Daten aus Fotos für exakte Koordinaten in der App nutzen
+
+## Code-Änderungen (2. April 2026 — Session)
+- Sound-Fix: AudioContext resume() abwarten vor Oszillator-Scheduling, Gain erhöht
+- Audio-Unlock: Listener bleibt aktiv bis Context running (nicht mehr {once:true})
+- Karzer-Koordinaten korrigiert auf (48.5198596, 9.0549385)
+- Scroll-to-top bei Stationswechsel (gamePanel.scrollTop = 0)
+- Alte Aula Rätsel: Neues Mathe-Rätsel (1777 − 300 = 1477) statt Jahreszahl an Fassade
+- Stiftskirche Rätsel: Multiple-Choice Turmhöhe (45m/56m/68m/74m) statt Jahrhundert-Frage
+- Anecdote "Gesehen"-Button: Expliziter "Weiter"-Button statt auto-navigation
+- Auto-Resume: Bei gespeichertem Spielstand direkt zur Tour-Auswahl statt Login
+- Landing Page: Stats-Bar und Tour-Card Metadata auf CSS Grid umgestellt für Mobile
+
+## Offene Aufgaben
+- Cafe Musee aus App entfernen (dauerhaft geschlossen)
+- Schleichweg Schloss→Münzgasse als Route einbauen (2 Varianten: mit/ohne Kinderwagen)
+- Stiftskirche: Neues Rätsel mit Drachentöter-Vergleich (Brunnen vs. Kirchenwand) einbauen
+- Goethe-Kontrast-Story für Martinianum einbauen
+- Evangelistensymbole + Wetterhahn als mögliche Rätsel-Elemente prüfen
+- GPS-Koordinaten aus Foto-EXIF für alle Stationen aktualisieren
+- Dorische Tonleiter, Turmneigung, Turmbesteigung recherchieren
