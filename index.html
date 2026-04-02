@@ -328,40 +328,42 @@ body {
     <!-- ===== KIDS TOUR CARD ===== -->
     <div class="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
       <!-- Kids Main Card -->
-      <div class="lg:col-span-8 group relative overflow-hidden rounded-xl shadow-2xl" style="background:linear-gradient(135deg,#006a2d 0%,#00a843 60%,#ffca51 100%)">
-        <div class="absolute inset-0 opacity-10" style="background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><text x=%2210%22 y=%2240%22 font-size=%2230%22 opacity=%220.3%22>🐉</text></svg>');background-size:60px 60px"></div>
-        <div class="relative p-8 md:p-10 min-h-[380px] flex flex-col justify-end">
+      <div class="lg:col-span-8 group relative overflow-hidden rounded-xl shadow-2xl">
+        <img class="w-full h-full min-h-[380px] object-cover transition-transform duration-700 group-hover:scale-105"
+          src="images/tour_kinder.jpg"
+          alt="Tübi der Drache am Tübinger Rathaus">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-8 w-full">
           <div class="flex items-center gap-3 mb-4">
-            <span class="bg-yellow-400 text-green-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter" data-t="kids-badge">Neu! Kids 5–10</span>
-            <span class="text-white/70 font-body text-xs uppercase tracking-widest" data-t="kids-subtitle">Mit Tübi dem Drachen</span>
+            <span class="bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter" data-t="kids-badge">Neu! Kids 5–10</span>
+            <span class="text-slate-300 font-body text-xs uppercase tracking-widest" data-t="kids-subtitle">Mit Tübi dem Drachen</span>
           </div>
-          <div class="text-5xl md:text-6xl mb-3">🐉</div>
-          <h3 class="font-headline text-3xl md:text-4xl font-black text-white mb-2 tracking-tight" data-t="kids-title">Tübis Geheimnisse</h3>
-          <p class="font-body text-white/80 text-sm mb-6 max-w-lg leading-relaxed" data-t="kids-teaser">Tübi der Drache hat seine Flamme verloren! Sie ist in 8 Funken zersprungen und quer durch Tübingen geflogen. Hilf ihm, alle Funken wiederzufinden – mit Rätseln, Aufgaben und einer magischen Schatzkarte!</p>
+          <h3 class="font-headline text-4xl md:text-5xl font-black text-white mb-3 tracking-tighter" data-t="kids-title">Tübis Geheimnisse</h3>
+          <p class="font-body text-slate-300 text-sm mb-6 max-w-lg leading-relaxed" data-t="kids-teaser">Tübi der Drache hat seine Flamme verloren! Sie ist in 8 Funken zersprungen und quer durch Tübingen geflogen. Hilf ihm, alle Funken wiederzufinden – mit Rätseln, Aufgaben und einer magischen Schatzkarte!</p>
           <div class="grid grid-cols-2 gap-x-6 gap-y-3">
             <div class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-yellow-300 text-lg">location_on</span>
-              <span class="font-body text-sm uppercase tracking-widest text-white/80" data-t="kids-stations">8 Stationen</span>
+              <span class="material-symbols-outlined text-emerald-400 text-lg">location_on</span>
+              <span class="font-body text-sm uppercase tracking-widest text-slate-300" data-t="kids-stations">8 Stationen</span>
             </div>
             <div class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-yellow-300 text-lg">schedule</span>
-              <span class="font-body text-sm uppercase tracking-widest text-white/80" data-t="kids-duration">ca. 60 Min</span>
+              <span class="material-symbols-outlined text-emerald-400 text-lg">schedule</span>
+              <span class="font-body text-sm uppercase tracking-widest text-slate-300" data-t="kids-duration">ca. 60 Min</span>
             </div>
             <div class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-yellow-300 text-lg">record_voice_over</span>
-              <span class="font-body text-sm uppercase tracking-widest text-white/80" data-t="kids-voice">Tübi erzählt</span>
+              <span class="material-symbols-outlined text-emerald-400 text-lg">record_voice_over</span>
+              <span class="font-body text-sm uppercase tracking-widest text-slate-300" data-t="kids-voice">Tübi erzählt</span>
             </div>
             <div class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-yellow-300 text-lg">family_restroom</span>
-              <span class="font-body text-sm uppercase tracking-widest text-white/80" data-t="kids-age">Alter: 5–10 Jahre</span>
+              <span class="material-symbols-outlined text-emerald-400 text-lg">family_restroom</span>
+              <span class="font-body text-sm uppercase tracking-widest text-slate-300" data-t="kids-age">Alter: 5–10 Jahre</span>
             </div>
           </div>
         </div>
       </div>
       <!-- Kids Info Card -->
       <div class="lg:col-span-4 flex flex-col gap-6">
-        <div class="p-8 rounded-xl border-l-4 border-yellow-400 flex-1" style="background:rgba(0,106,45,.15)">
-          <h4 class="font-brand font-bold text-yellow-400 uppercase text-sm mb-4 tracking-widest" data-t="kids-story-label">Die Story</h4>
+        <div class="p-8 rounded-xl border-l-4 border-emerald-500 flex-1" style="background:rgba(0,106,45,.12)">
+          <h4 class="font-brand font-bold text-emerald-400 uppercase text-sm mb-4 tracking-widest" data-t="kids-story-label">Die Story</h4>
           <p class="font-body text-on-surface leading-relaxed italic text-sm" data-t="kids-story-text">
             "Hilfe!! Ich habe so doll geniest, dass meine Drachenflamme zersprungen ist! 8 Funken sind quer durch Tübingen geflogen. Ohne meine Flamme kann ich nicht fliegen! Hilfst du mir?"
           </p>
