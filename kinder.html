@@ -230,6 +230,39 @@ input{font-family:inherit;color:inherit}
 .selfie-save{background:var(--green);color:#fff;border:2px solid var(--green-light)}
 .selfie-retry{background:rgba(255,255,255,.2);color:#fff;border:2px solid rgba(255,255,255,.3)}
 
+/* ======================== DESKTOP ======================== */
+@media(min-width:768px){
+  #splash>div{max-width:640px;margin:0 auto}
+  #game{display:flex;flex-direction:column;align-items:center}
+  #game>div{max-width:640px;width:100%}
+  .station-hero{max-width:640px;margin:0 auto;width:100%;border-radius:0 0 var(--r) var(--r)}
+  .station-body{max-width:640px;margin:0 auto;width:100%}
+  .nav-inner{max-width:640px;margin:0 auto}
+  .header-inner{max-width:640px;margin:0 auto}
+  #quiz .quiz-body{max-width:640px;margin:0 auto}
+  #certificate .cert-card{max-width:400px}
+  #mapContainer{max-width:640px;margin:0 auto}
+  body.mobile-sim #game>div,body.mobile-sim .station-hero,body.mobile-sim .station-body,body.mobile-sim .nav-inner,body.mobile-sim .header-inner{max-width:390px}
+}
+
+/* ======================== AUDIO PLAYER ======================== */
+.audio-row{display:flex;align-items:center;gap:.6rem;background:var(--card);border:2px solid var(--border);border-radius:var(--r-sm);padding:.6rem .8rem;margin-bottom:.4rem;cursor:pointer;transition:border-color .2s}
+.audio-row:active{border-color:var(--green)}
+.audio-row.playing{border-color:var(--green);background:var(--green-pale)}
+.audio-row .audio-icon{width:32px;height:32px;background:var(--green);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.audio-row.playing .audio-icon{background:var(--yellow-dark)}
+.audio-row .audio-label{font-size:.82rem;font-weight:700;color:var(--text)}
+.audio-row .audio-sublabel{font-size:.65rem;color:var(--text-3);font-weight:600}
+.audio-row .audio-time{margin-left:auto;font-size:.7rem;color:var(--text-3);font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.audio-progress{width:100%;height:6px;background:var(--border);border-radius:3px;margin-bottom:.9rem;cursor:pointer;overflow:hidden}
+.audio-progress-fill{height:100%;background:var(--green);border-radius:3px;width:0%;transition:width .1s}
+.speed-select{background:var(--green-pale);border:1.5px solid var(--border);border-radius:6px;padding:2px 4px;font-size:.65rem;font-weight:700;color:var(--green);font-family:var(--font);cursor:pointer;margin-left:.4rem}
+
+/* ======================== MAPS LINK ======================== */
+.maps-link{display:flex;align-items:center;gap:.4rem;background:var(--green-pale);color:var(--green);font-size:.75rem;font-weight:700;padding:.5rem .8rem;border-radius:var(--r-sm);margin-bottom:.7rem;text-decoration:none;border:1.5px solid var(--border);transition:background .2s}
+.maps-link:active{background:var(--green);color:#fff}
+.maps-link .coords{margin-left:auto;font-size:.6rem;color:var(--text-3);font-weight:500}
+
 /* ======================== FX ======================== */
 .fade-in{animation:fadeIn .3s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
@@ -258,9 +291,12 @@ input{font-family:inherit;color:inherit}
       <br><br>
       Ich brauche ein mutiges <strong>Drachenkind</strong>, das mir hilft, alle 8 Funken wiederzufinden. An jedem Ort wartet ein <strong>Geheimnis</strong> – und wenn du es löst, kommt ein Funke zurück! Hilfst du mir?
     </div>
-    <button class="splash-play" onclick="playAudio('audio/kinder/prolog.mp3',this)">
-      <span class="audio-icon">▶️</span> Tübi anhören
-    </button>
+    <div class="audio-row" id="audioPrologRow" onclick="playAudio('audio/kinder/prolog.mp3','audioPrologRow')" style="margin-top:.7rem">
+      <div class="audio-icon">▶️</div>
+      <div><div class="audio-label">Tübi anhören</div><div class="audio-sublabel">Prolog</div></div>
+      <div class="audio-time" id="time_audioPrologRow">--:--</div>
+    </div>
+    <div class="audio-progress" onclick="seekAudio(event,'audioPrologRow')" style="margin-bottom:0"><div class="audio-progress-fill" id="prog_audioPrologRow"></div></div>
   </div>
 
   <div class="splash-form">
@@ -281,7 +317,7 @@ input{font-family:inherit;color:inherit}
 <!-- ======================== HEADER ======================== -->
 <div id="gameHeader" style="display:none">
   <div class="header-inner">
-    <div class="header-dragon"><span id="hdrFlame" class="header-flame-off">🐉</span></div>
+    <div class="header-dragon" onclick="backToStart()" style="cursor:pointer"><span id="hdrFlame" class="header-flame-off">🐉</span></div>
     <div class="header-info">
       <div class="header-name" id="hdrName"></div>
       <div class="header-station" id="hdrStation"></div>
@@ -363,6 +399,9 @@ input{font-family:inherit;color:inherit}
     <button onclick="dbgSolveAll()" style="padding:3px 7px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.6rem;font-weight:700">QUIZ</button>
     <button onclick="showCertificate()" style="padding:3px 7px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.6rem;font-weight:700">ZERTIFIKAT</button>
     <button onclick="dbgResetStation()" style="padding:3px 7px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.6rem;font-weight:700">RESET ST.</button>
+    <button onclick="dbgSolveAllOnly()" style="padding:3px 7px;background:rgba(74,222,128,.15);border:1px solid rgba(74,222,128,.3);border-radius:4px;color:#4ade80;font-size:.6rem;font-weight:700">ALLE ✅</button>
+    <button onclick="goHome()" style="padding:3px 7px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.6rem;font-weight:700">RESET ALL</button>
+    <button onclick="toggleMobileView()" style="padding:3px 7px;background:rgba(148,163,184,.15);border:1px solid rgba(148,163,184,.3);border-radius:4px;color:#94a3b8;font-size:.6rem;font-weight:700">📱</button>
     <button onclick="location.reload()" style="padding:3px 7px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);border-radius:4px;color:#f87171;font-size:.6rem;font-weight:700">↺</button>
   </div>
 </div>
@@ -403,7 +442,7 @@ challenge:{type:'seek',emoji:'🔭',text:'Schau auf die Rathausuhr! Findest du d
 
 {id:1,emoji:'🏰',title:'Tübis Geheimversteck',chapter:'Kapitel 2',place:'Schloss Hohentübingen',lat:48.519513,lng:9.051072,image:'images/kinder/station_1.jpg',image2:'images/kinder/station_1b.jpg',
 story:`Willkommen in meinem <strong>Geheimversteck</strong>! Das Schloss ist mein Lieblings-Spielplatz!\n\nIm Keller steht das <strong>zweitgrößte Weinfass der Welt</strong> – <strong>84.000 Liter</strong>, ungefähr <strong>336 Badewannen</strong>! 🛁 Heute ist es leer, aber dafür wohnt darin mein bester Freund: <strong>Flatter die Fledermaus</strong>! 🦇 Er hängt kopfüber drin und schläft den ganzen Tag.\n\nDas Schloss hat echte <strong>Geheimgänge</strong>! Zwei enge Tunnel führen vom Innenhof tief nach unten. Ich spiel dort Fangen mit den Fledermäusen! 🤫\n\nIm Museum liegt die <strong>älteste Kunst der Menschheit</strong> – eine Figur aus Mammut-Elfenbein, über <strong>35.000 Jahre alt</strong>! Geschnitzt, als es noch echte Mammuts gab! Daneben: eine <strong>Flöte aus einem Vogelknochen</strong> – das älteste Musikinstrument! 🎵`,
-tubiSays:`Flatter liebt es, mich im Geheimgang zu erschrecken! Einmal hat er „BUH!" gerufen und ich hab vor Schreck einen Feuerstrahl an die Decke geschossen – da war meine Flamme noch heil... 😔`,
+tubiSays:`Flatter liebt es, mich im Geheimgang zu erschrecken! Einmal hat er „BUH!" gerufen und ich hab vor Schreck einen Feuerstrahl an die Decke geschossen – da war meine Flamme noch heil... 😔\n\nÜbrigens: Ich kenne einen geheimen Weg vom Schloss runter – eine enge Gasse mit steilen Steintreppen zwischen den Häusern! Wenn du mutig bist, folge mir hinunter. Wenn du einen Kinderwagen dabei hast, nimm lieber den breiteren Hauptweg über die Burgsteige.`,
 question:'Wie viele Badewannen passen in das riesige Weinfass?',
 options:[{text:'Ungefähr 50',correct:false},{text:'Ungefähr 336',correct:true},{text:'Ungefähr 1.000',correct:false}],
 win:'🔥 Zweiter Funke! 336 Badewannen! Und jetzt wohnt Flatter darin! 🦇',
@@ -484,18 +523,32 @@ let playerName='',currentStation=0,maxUnlocked=0,totalXp=0,stationSolved={},quiz
 let currentAudio=null,currentAudioBtn=null;
 let map=null,mapReady=false,stationMarkers=[],routeLine=null,userMarker=null,fullRouteCoords=null;
 
-const SAVE_KEY='tracetour_kinder_v4';
+const SAVE_KEY='tracetour_kinder_v5';
 function saveGame(){localStorage.setItem(SAVE_KEY,JSON.stringify({playerName,currentStation,maxUnlocked,totalXp,stationSolved,quizAnswers,quizDone,challengesDone}))}
 function loadGame(){try{const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(!d)return false;playerName=d.playerName||'';currentStation=d.currentStation||0;maxUnlocked=d.maxUnlocked||0;totalXp=d.totalXp||0;stationSolved=d.stationSolved||{};quizAnswers=d.quizAnswers||{};quizDone=d.quizDone||false;challengesDone=d.challengesDone||{};return!!playerName}catch(e){return false}}
 
-function playAudio(src,btn){
-  if(currentAudio){currentAudio.pause();currentAudio.currentTime=0;if(currentAudioBtn){currentAudioBtn.classList.remove('playing');currentAudioBtn.querySelector('.audio-icon').textContent='▶️'}}
-  if(currentAudioBtn===btn){currentAudio=null;currentAudioBtn=null;return}
-  const a=new Audio(src);currentAudio=a;currentAudioBtn=btn;
-  btn.classList.add('playing');btn.querySelector('.audio-icon').textContent='⏸️';
-  a.play().catch(()=>{btn.classList.remove('playing');btn.querySelector('.audio-icon').textContent='▶️'});
-  a.onended=a.onerror=()=>{btn.classList.remove('playing');btn.querySelector('.audio-icon').textContent='▶️';currentAudio=null;currentAudioBtn=null};
+let audioSpeed=1.0;
+function fmtTime(s){if(!s||isNaN(s))return'--:--';const m=Math.floor(s/60);return m+':'+(Math.floor(s%60)+'').padStart(2,'0')}
+function playAudio(src,rowId){
+  const row=document.getElementById(rowId);if(!row)return;
+  // Stop previous
+  if(currentAudio){currentAudio.pause();currentAudio.currentTime=0;if(currentAudioBtn){currentAudioBtn.classList.remove('playing');const ic=currentAudioBtn.querySelector('.audio-icon');if(ic)ic.textContent='▶️'}}
+  // Toggle off if same
+  if(currentAudioBtn===row){currentAudio=null;currentAudioBtn=null;return}
+  const a=new Audio(src);a.playbackRate=audioSpeed;currentAudio=a;currentAudioBtn=row;
+  row.classList.add('playing');const icon=row.querySelector('.audio-icon');if(icon)icon.textContent='⏸️';
+  // Add speed select if missing
+  if(!row.querySelector('.speed-select')){const sel=document.createElement('select');sel.className='speed-select';[1,1.25,1.5,1.75,2].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v+'x';if(v===audioSpeed)o.selected=true;sel.appendChild(o)});sel.onchange=e=>{audioSpeed=parseFloat(e.target.value);if(currentAudio)currentAudio.playbackRate=audioSpeed};row.appendChild(sel)}
+  // Progress
+  const progId='prog_'+rowId,timeId='time_'+rowId;
+  a.addEventListener('timeupdate',()=>{const pf=document.getElementById(progId);if(pf)pf.style.width=(a.currentTime/a.duration*100)+'%';const tf=document.getElementById(timeId);if(tf)tf.textContent=fmtTime(a.currentTime)+'/'+fmtTime(a.duration)});
+  a.play().catch(()=>{row.classList.remove('playing');if(icon)icon.textContent='▶️'});
+  a.onended=a.onerror=()=>{row.classList.remove('playing');if(icon)icon.textContent='▶️';currentAudio=null;currentAudioBtn=null};
 }
+function seekAudio(e,rowId){if(!currentAudio)return;const bar=e.currentTarget;const rect=bar.getBoundingClientRect();const x=(e.touches?e.touches[0].clientX:e.clientX)-rect.left;currentAudio.currentTime=(x/rect.width)*currentAudio.duration}
+function mapsUrl(lat,lng,name){return'https://www.google.com/maps/search/?api=1&query='+lat+','+lng+'&query_place_id='+encodeURIComponent(name)}
+function backToStart(){if(currentAudio){currentAudio.pause();currentAudio=null}saveGame();showScreen('splash');document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show');document.getElementById('debugPanel').style.display='none'}
+function toggleMobileView(){document.body.classList.toggle('mobile-sim')}
 
 function playSFX(src){const a=new Audio(src);a.volume=0.6;a.play().catch(()=>{})}
 
@@ -526,7 +579,11 @@ function renderStation(){
   const s=STATIONS[currentStation],solved=stationSolved[currentStation],n=Object.keys(stationSolved).length;
   const img=`<div class="station-img-wrap"><img src="${s.image}" alt="${s.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="station-img-placeholder" style="display:none">${s.emoji}</div></div>`;
   const img2=s.image2?`<div class="station-img-wrap fade-in" style="margin-top:-.2rem"><img src="${s.image2}" alt="${s.title}" onerror="this.parentElement.style.display='none'"></div>`:'';
-  const audio=`<button class="audio-btn" onclick="playAudio('audio/kinder/story_${s.id}.mp3',this)"><span class="audio-icon">▶️</span> Tübi erzählt</button>`;
+  const audioRowId='audioRow_'+s.id;
+  const audio=`<div class="audio-row" id="${audioRowId}" onclick="playAudio('audio/kinder/story_${s.id}.mp3','${audioRowId}')"><div class="audio-icon">▶️</div><div><div class="audio-label">Tübi erzählt</div><div class="audio-sublabel">${s.chapter}</div></div><div class="audio-time" id="time_${audioRowId}">--:--</div></div><div class="audio-progress" onclick="seekAudio(event,'${audioRowId}')"><div class="audio-progress-fill" id="prog_${audioRowId}"></div></div>`;
+  const mapsHere=`<a class="maps-link" href="${mapsUrl(s.lat,s.lng,s.title)}" target="_blank" rel="noopener">📍 Navigation: ${s.place}<span class="coords">${s.lat.toFixed(4)}, ${s.lng.toFixed(4)}</span></a>`;
+  const nextS=STATIONS[currentStation+1];
+  const mapsNext=nextS?`<a class="maps-link" href="${mapsUrl(nextS.lat,nextS.lng,nextS.title)}" target="_blank" rel="noopener" style="margin-top:.5rem">📍 Weiter zu: ${nextS.place}<span class="coords">${nextS.lat.toFixed(4)}, ${nextS.lng.toFixed(4)}</span></a>`:'';
   const spark=`<div class="spark-status">🔥 ${n}/${STATIONS.length} Funken <div class="spark-bar"><div class="spark-fill" style="width:${n/STATIONS.length*100}%"></div></div></div>`;
   const story=`<div class="story-card fade-in"><div class="story-card-label">📖 ${s.chapter}</div><div class="story-card-text">${s.story.replace(/\n/g,'<br>')}</div></div>`;
   const tubi=`<div class="tubi-bubble fade-in"><div class="tubi-says">🐉 Tübi flüstert:</div><div class="tubi-text">${s.tubiSays.replace(/\n/g,'<br>')}</div></div>`;
@@ -550,7 +607,7 @@ function renderStation(){
     }
   }
 
-  document.getElementById('stationContent').innerHTML=`<div class="station-hero"><div class="station-chapter">${s.chapter}</div><span class="station-emoji">${s.emoji}</span><div class="station-title">${s.title}</div></div><div class="station-body fade-in"><div class="station-place">📍 ${s.place}</div>${img}${audio}${spark}${story}${img2}${tubi}${ch}${q}${extra}</div>`;
+  document.getElementById('stationContent').innerHTML=`<div class="station-hero"><div class="station-chapter">${s.chapter}</div><span class="station-emoji">${s.emoji}</span><div class="station-title">${s.title}</div></div><div class="station-body fade-in"><div class="station-place">📍 ${s.place}</div>${mapsHere}${img}${audio}${spark}${story}${img2}${tubi}${ch}${q}${mapsNext}${extra}</div>`;
   renderDots();if(mapReady)updateMapMarkers();
 }
 
@@ -602,6 +659,11 @@ function dbgSolveAll(){
   maxUnlocked=STATIONS.length-1;totalXp=STATIONS.length*STATION_XP;
   saveGame();updateHeader();renderStation();renderDots();
   showScreen('quiz');renderQuiz();
+}
+function dbgSolveAllOnly(){
+  for(let i=0;i<STATIONS.length;i++){stationSolved[i]=true;challengesDone[i]={done:true}}
+  maxUnlocked=STATIONS.length-1;totalXp=STATIONS.length*STATION_XP;
+  saveGame();updateHeader();renderStation();renderDots();dbgUpdate();
 }
 function dbgResetStation(){
   stationSolved[currentStation]=false;challengesDone[currentStation]=undefined;
