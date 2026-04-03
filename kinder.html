@@ -401,7 +401,7 @@ win:'🔥 YEAH! Erster Funke! Tübi schnappt Sonne und Mond – der Drachenzeige
 lose:'🐉 Tübi schnappt Sonne und Mond! Der Funke zählt trotzdem!',
 challenge:{type:'seek',emoji:'🔭',text:'Schau auf die Rathausuhr! Findest du das Tierkreiszeichen, das zu deinem Geburtsmonat passt?',hint:'Die Uhr zeigt alle 12 Sternzeichen! Welches ist deins?'}},
 
-{id:1,emoji:'🏰',title:'Tübis Geheimversteck',chapter:'Kapitel 2',place:'Schloss Hohentübingen',lat:48.519513,lng:9.051072,image:'images/kinder/station_1.jpg',
+{id:1,emoji:'🏰',title:'Tübis Geheimversteck',chapter:'Kapitel 2',place:'Schloss Hohentübingen',lat:48.519513,lng:9.051072,image:'images/kinder/station_1.jpg',image2:'images/kinder/station_1b.jpg',
 story:`Willkommen in meinem <strong>Geheimversteck</strong>! Das Schloss ist mein Lieblings-Spielplatz!\n\nIm Keller steht das <strong>zweitgrößte Weinfass der Welt</strong> – <strong>84.000 Liter</strong>, ungefähr <strong>336 Badewannen</strong>! 🛁 Heute ist es leer, aber dafür wohnt darin mein bester Freund: <strong>Flatter die Fledermaus</strong>! 🦇 Er hängt kopfüber drin und schläft den ganzen Tag.\n\nDas Schloss hat echte <strong>Geheimgänge</strong>! Zwei enge Tunnel führen vom Innenhof tief nach unten. Ich spiel dort Fangen mit den Fledermäusen! 🤫\n\nIm Museum liegt die <strong>älteste Kunst der Menschheit</strong> – eine Figur aus Mammut-Elfenbein, über <strong>35.000 Jahre alt</strong>! Geschnitzt, als es noch echte Mammuts gab! Daneben: eine <strong>Flöte aus einem Vogelknochen</strong> – das älteste Musikinstrument! 🎵`,
 tubiSays:`Flatter liebt es, mich im Geheimgang zu erschrecken! Einmal hat er „BUH!" gerufen und ich hab vor Schreck einen Feuerstrahl an die Decke geschossen – da war meine Flamme noch heil... 😔`,
 question:'Wie viele Badewannen passen in das riesige Weinfass?',
@@ -525,6 +525,7 @@ function renderDots(){document.getElementById('navDots').innerHTML=STATIONS.map(
 function renderStation(){
   const s=STATIONS[currentStation],solved=stationSolved[currentStation],n=Object.keys(stationSolved).length;
   const img=`<div class="station-img-wrap"><img src="${s.image}" alt="${s.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="station-img-placeholder" style="display:none">${s.emoji}</div></div>`;
+  const img2=s.image2?`<div class="station-img-wrap fade-in" style="margin-top:-.2rem"><img src="${s.image2}" alt="${s.title}" onerror="this.parentElement.style.display='none'"></div>`:'';
   const audio=`<button class="audio-btn" onclick="playAudio('audio/kinder/story_${s.id}.mp3',this)"><span class="audio-icon">▶️</span> Tübi erzählt</button>`;
   const spark=`<div class="spark-status">🔥 ${n}/${STATIONS.length} Funken <div class="spark-bar"><div class="spark-fill" style="width:${n/STATIONS.length*100}%"></div></div></div>`;
   const story=`<div class="story-card fade-in"><div class="story-card-label">📖 ${s.chapter}</div><div class="story-card-text">${s.story.replace(/\n/g,'<br>')}</div></div>`;
@@ -549,7 +550,7 @@ function renderStation(){
     }
   }
 
-  document.getElementById('stationContent').innerHTML=`<div class="station-hero"><div class="station-chapter">${s.chapter}</div><span class="station-emoji">${s.emoji}</span><div class="station-title">${s.title}</div></div><div class="station-body fade-in"><div class="station-place">📍 ${s.place}</div>${img}${audio}${spark}${story}${tubi}${ch}${q}${extra}</div>`;
+  document.getElementById('stationContent').innerHTML=`<div class="station-hero"><div class="station-chapter">${s.chapter}</div><span class="station-emoji">${s.emoji}</span><div class="station-title">${s.title}</div></div><div class="station-body fade-in"><div class="station-place">📍 ${s.place}</div>${img}${audio}${spark}${story}${img2}${tubi}${ch}${q}${extra}</div>`;
   renderDots();if(mapReady)updateMapMarkers();
 }
 
