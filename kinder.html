@@ -438,7 +438,7 @@ question:'Was macht Tübi auf dem Ziffernblatt der Rathausuhr?',
 options:[{text:'Er schlägt jede Stunde die Glocke',correct:false},{text:'Er schnappt sich Sonne und Mond',correct:true},{text:'Er bläst Feuer auf die Zeiger',correct:false}],
 win:'🔥 YEAH! Erster Funke! Tübi schnappt Sonne und Mond – der Drachenzeiger!',
 lose:'🐉 Tübi schnappt Sonne und Mond! Der Funke zählt trotzdem!',
-challenge:{type:'seek',emoji:'🔭',text:'Schau auf die Rathausuhr! Findest du das Tierkreiszeichen, das zu deinem Geburtsmonat passt?',hint:'Die Uhr zeigt alle 12 Sternzeichen! Welches ist deins?'}},
+challenge:{type:'mc',emoji:'🔭',text:'Was zeigt die astronomische Uhr am Rathaus NICHT an?',options:['Die Uhrzeit','Das Wetter','Die Mondphasen','Die Sternzeichen'],correct:1,win:'Richtig! Die Uhr zeigt Zeit, Mond und Sternzeichen \u2013 aber kein Wetter! \ud83c\udf19',lose:'Die Uhr zeigt Zeit, Mondphasen und Sternzeichen \u2013 aber NICHT das Wetter!'}},
 
 {id:1,emoji:'🏰',title:'Tübis Geheimversteck',chapter:'Kapitel 2',place:'Schloss Hohentübingen',lat:48.519513,lng:9.051072,image:'images/kinder/station_1.jpg',image2:'images/kinder/station_1b.jpg',
 story:`Willkommen in meinem <strong>Geheimversteck</strong>! Das Schloss ist mein Lieblings-Spielplatz!\n\nIm Keller steht das <strong>zweitgrößte Weinfass der Welt</strong> – <strong>84.000 Liter</strong>, ungefähr <strong>336 Badewannen</strong>! 🛁 Heute ist es leer, aber dafür wohnt darin mein bester Freund: <strong>Flatter die Fledermaus</strong>! 🦇 Er hängt kopfüber drin und schläft den ganzen Tag.\n\nDas Schloss hat echte <strong>Geheimgänge</strong>! Zwei enge Tunnel führen vom Innenhof tief nach unten. Ich spiel dort Fangen mit den Fledermäusen! 🤫\n\nIm Museum liegt die <strong>älteste Kunst der Menschheit</strong> – eine Figur aus Mammut-Elfenbein, über <strong>35.000 Jahre alt</strong>! Geschnitzt, als es noch echte Mammuts gab! Daneben: eine <strong>Flöte aus einem Vogelknochen</strong> – das älteste Musikinstrument! 🎵`,
@@ -447,7 +447,7 @@ question:'Wie viele Badewannen passen in das riesige Weinfass?',
 options:[{text:'Ungefähr 50',correct:false},{text:'Ungefähr 336',correct:true},{text:'Ungefähr 1.000',correct:false}],
 win:'🔥 Zweiter Funke! 336 Badewannen! Und jetzt wohnt Flatter darin! 🦇',
 lose:'🛁 336 Badewannen! Fledermaus-Hotel! Funke gefunden!',
-challenge:{type:'seek',emoji:'🔍',text:'Schau dir das Schlosstor genau an! Findest du ein Wappen oder besonderes Zeichen darauf?',hint:'Über dem Eingang gibt es Steinmetzarbeiten und Wappen!'}},
+challenge:{type:'mc',emoji:'🔍',text:'Welches Tier ist das gr\u00f6\u00dfte auf dem Wappen am Schlosstor?',options:['Ein L\u00f6we \ud83e\udd81','Ein Hirsch \ud83e\udd8c','Ein Adler \ud83e\udd85','Ein Drache \ud83d\udc32'],correct:1,win:'Richtig! Der Hirsch ist das Wappentier W\u00fcrttembergs! \ud83e\udd8c',lose:'Es ist der Hirsch \u2013 das Wappentier W\u00fcrttembergs!'}},
 
 {id:2,emoji:'⛪',title:'Der schiefe Turm & das Goethe-Schild',chapter:'Kapitel 3',place:'Stiftskirche · Münzgasse',lat:48.520002,lng:9.055678,image:'images/kinder/station_2.jpg',
 story:`Als kleiner Drache bin ich nachts um die Stiftskirche geflogen – und <strong>BUMM!</strong> Gegen den Turm geknallt! 💥 Seitdem lehnt er sich <strong>8 Zentimeter</strong> zur Seite. Der Turm ist wirklich schief!\n\nDie Kirche ist über <strong>600 Jahre alt</strong>. Im Turm hängt die <strong>Dominica</strong> – eine Glocke, die klingt, seit Kolumbus in die Schule ging. Mutige können <strong>170 Stufen</strong> hochklettern!\n\nUnter der Kirche liegt <strong>Graf Eberhard im Bart</strong> – der hieß wirklich so! Er gründete die <strong>Uni Tübingen</strong>.\n\nUnd gleich nebenan in der <strong>Münzgasse</strong> hängt ein lustiges Schild: Dem Dichter <strong>Goethe</strong> wurde hier richtig <strong>übel</strong>! 🤢 Zu viel Wein! Die Tübinger fanden das so lustig, dass sie ein Schild aufhängten.\n\nDie Münzgasse heißt übrigens so, weil hier früher <strong>echtes Geld</strong> geprägt wurde – der „Tübinger Pfennig"! Und es gab ein <strong>Studentengefängnis ohne Klo!</strong> 😱`,
@@ -456,7 +456,7 @@ question:'Was stimmt über den Turm der Stiftskirche?',
 options:[{text:'Er ist perfekt gerade',correct:false},{text:'Er lehnt sich 8 Zentimeter zur Seite',correct:true},{text:'Er ist der höchste in Deutschland',correct:false}],
 win:'🔥 Dritter Funke! 8 cm schief – Tübingens eigener schiefer Turm!',
 lose:'⛪ 8 cm schief! Ob Tübi schuld ist? 😄 Funke zählt trotzdem!',
-challenge:{type:'count',emoji:'👹',text:'Die Stiftskirche hat steinerne Wächter auf dem Dach – gruselige Wasserspeier! Wie viele findest du? Und danach: Such das Goethe-Schild in der Münzgasse!',hint:'Schau an den Ecken und Kanten des Dachs. Manche verstecken sich!',answer:null,tolerance:99}},
+challenge:{type:'mc',emoji:'👹',text:'Was sitzt auf den vier Ecken des Kirchturms?',options:['Vier Drachen','Vier Engel','Vier Tiere (Stier, Engel, L\u00f6we, Adler)','Vier Ritter'],correct:2,win:'Genau! Die vier Evangelisten-Symbole: Stier, Engel, L\u00f6we und Adler! Seit 1932 da oben!',lose:'Es sind die vier Evangelisten-Symbole: Stier, Engel, L\u00f6we und Adler!'}},
 
 {id:3,emoji:'🐲',title:'Tübis Cousin',chapter:'Kapitel 4',place:'Georgsbrunnen · Holzmarkt',lat:48.520403,lng:9.055689,image:'images/kinder/station_3.jpg',
 story:`Jetzt lernst du meinen <strong>Cousin</strong> kennen! Der Drache am Brunnen ist <strong>Georg-Drache</strong>. Der arme Kerl spielt seit 500 Jahren den Toten, weil ein Ritter auf ihm steht! 😤\n\nDen <strong>Georgsbrunnen</strong> gibt es seit <strong>1523</strong>! 1911 hat jemand die Figur <strong>im Neckar gefunden</strong> – im Fluss! Den Drachen fand man in einem <strong>Keller</strong>. Wie die dort landeten, weiß niemand!\n\n1961 haben sie den Brunnen <strong>abgerissen</strong>. Wofür? Für <strong>DREI PARKPLÄTZE!</strong> 🅿️ Zum Glück wurde er 1976 wieder aufgebaut.\n\nIch besuche meinen Cousin jede Nacht. Er erzählt mir, welche Touristen die lustigsten Selfies machen. 📸`,
@@ -465,7 +465,7 @@ question:'Wofür wurde der 500 Jahre alte Brunnen 1961 abgerissen?',
 options:[{text:'Für ein neues Restaurant',correct:false},{text:'Für drei Parkplätze',correct:true},{text:'Für eine Bushaltestelle',correct:false}],
 win:'🔥 Vierter Funke! DREI PARKPLÄTZE! Tübi ist empört! 😤',
 lose:'🅿️ Drei Parkplätze! Zum Glück steht er wieder. Funke ist deiner!',
-challenge:{type:'seek',emoji:'🔍',text:'Tübis Detektiv-Aufgabe! Vom Brunnen aus siehst du den Drachentöter ZWEIMAL: einmal auf dem Brunnen und einmal an der Kirchenwand! Aber im Steinbild an der Wand ist jemand dabei, der am Brunnen fehlt. Wer ist es?',hint:'Dreh dich vom Brunnen zur Stiftskirche und schau auf die Wand Richtung Holzmarkt. Im Relief ist neben dem Ritter und dem Drachen noch eine Person...'}},
+challenge:{type:'mc',emoji:'🔍',text:'T\u00fcbis Detektiv-Aufgabe! Du siehst den Drachent\u00f6ter auf dem Brunnen UND an der Kirchenwand. Im Steinbild an der Wand ist jemand dabei, der am Brunnen fehlt. Wer?',options:['Ein K\u00f6nig \ud83d\udc51','Eine Prinzessin \ud83d\udc78','Ein Zauberer \ud83e\uddd9','T\u00fcbi der Drache \ud83d\udc09'],correct:1,win:'Genau! Die Prinzessin! Im Relief rettet Georg sie vor dem Drachen \u2013 am Brunnen ist sie nicht dabei! \ud83d\udc78',lose:'Es ist die Prinzessin! Dreh dich vom Brunnen zur Kirchenwand und schau genau hin!'}},
 
 {id:4,emoji:'🗼',title:'Der Dichter im Turm',chapter:'Kapitel 5',place:'Hölderlinturm · Neckarfront',lat:48.52095,lng:9.05700,image:'images/kinder/station_4.jpg',
 story:`Der gelbe Turm am Neckar ist der <strong>Hölderlinturm</strong>!\n\nHier lebte der Dichter <strong>Friedrich Hölderlin</strong> – <strong>36 Jahre lang</strong>! Das ist wahrscheinlich länger als deine Eltern alt sind! 📖 Er war krank und wurde von der Familie Zimmer gepflegt. Er dichtete, spielte Klavier und schaute auf den Neckar.\n\nDer Turm war Teil der <strong>Stadtmauer</strong>. 1875 hat er <strong>gebrannt</strong> und wurde in seiner runden Form wieder aufgebaut – wie ein Phönix! 🔥\n\nVon hier siehst du die <strong>Neckarfront</strong> – die bunten Häuser, die sich im Wasser spiegeln. Einer der <strong>meistfotografierten Orte</strong> Tübingens!\n\nIch komme abends hierher, setze mich auf die Mauer und schaue auf den Neckar. Manchmal reimt sich sogar was in meinem Drachenkopf!`,
@@ -474,7 +474,7 @@ question:'Wie lange wohnte Hölderlin in seinem Turm?',
 options:[{text:'5 Jahre',correct:false},{text:'36 Jahre',correct:true},{text:'100 Jahre',correct:false}],
 win:'🔥 Fünfter Funke! 36 Jahre – fast ein ganzes Leben!',
 lose:'🗼 36 Jahre! So lange in einem Turm! Funke trotzdem deiner!',
-challenge:{type:'do',emoji:'🪨',text:'Such dir ein Steinchen und wirf einen „Drachenwunsch" in den Neckar! Was wünschst du dir?',hint:'Steh an der Mauer, denk dir was Schönes – und wirf! Drachenwünsche gehen immer in Erfüllung!'}},
+challenge:{type:'mc',emoji:'🪨',text:'Such dir ein Steinchen und wirf einen Drachenwunsch in den Neckar! Aber zuerst: Wie lange hat H\u00f6lderlin in seinem Turm gelebt?',options:['5 Jahre','15 Jahre','36 Jahre','100 Jahre'],correct:2,win:'36 Jahre! Und jetzt: Wirf dein Steinchen und w\u00fcnsch dir was! Drachenw\u00fcnsche gehen IMMER in Erf\u00fcllung! \ud83e\udea8\u2728',lose:'Es waren 36 Jahre! Trotzdem: Wirf dein Steinchen und w\u00fcnsch dir was Sch\u00f6nes!'}},
 
 {id:5,emoji:'🌉',title:'Die Brücke der Stocherkähne',chapter:'Kapitel 6',place:'Eberhardsbrücke · Neckar',lat:48.52050,lng:9.05500,image:'images/kinder/station_5.jpg',
 story:`Von der <strong>Eberhardsbrücke</strong> siehst du den ganzen Neckar!\n\n<strong>Stocherkähne</strong> sind flache Holzboote – mit einer langen Stange über den Flussgrund geschoben. Kein Motor, keine Ruder!\n\nJedes Jahr im Juni: das <strong>Stocherkahnrennen</strong>! Studenten fahren um die Wette – <strong>totales Chaos</strong>: Boote krachen, Leute fallen rein, verrückte Kostüme! 🎭\n\nWer <strong>verliert</strong>: <strong>Lebertran</strong>! 🤢 <strong>Öl aus Fischbäuchen</strong> – SO eklig! Und die Verlierer müssen das Rennen nächstes Jahr <strong>organisieren</strong>!\n\nDer Neckar war 1595 so <strong>zugefroren</strong>, dass <strong>Pferdewagen</strong> drüber fuhren! Und „<strong>Neckar</strong>" bedeutet in einer uralten Sprache: „<strong>Wildes Wasser</strong>"!`,
@@ -483,7 +483,7 @@ question:'Was müssen die Verlierer beim Stocherkahnrennen trinken?',
 options:[{text:'Apfelsaft mit Essig 🍎',correct:false},{text:'Salzwasser 🌊',correct:false},{text:'Lebertran – Fischöl 🐟',correct:true}],
 win:'🔥 Sechster Funke! Lebertran! Das Ekligste überhaupt!',
 lose:'🐟 Lebertran – Fischöl! Igitt! Funke ist trotzdem deiner!',
-challenge:{type:'count',emoji:'🔢',text:'Stell dich auf die Brücke: Wie viele Brücken siehst du von hier?',hint:'Flussauf und flussab schauen! Die unter dir zählt auch!',answer:3,tolerance:2}},
+challenge:{type:'mc',emoji:'🤢',text:'Was m\u00fcssen die Verlierer beim Stocherkahnrennen trinken?',options:['Kalten Kakao \u2615','Lebertran \u2013 Fisch\u00f6l! \ud83d\udc1f','Neckarwasser \ud83d\udca7','Saure Milch \ud83e\udd5b'],correct:1,win:'IGITT! Lebertran \u2013 \u00d6l aus Fischb\u00e4uchen! \ud83e\udd22 Z\u00e4hle mal: Wie viele Br\u00fccken siehst du von hier?',lose:'Lebertran \u2013 Fisch\u00f6l! Das Ekligste \u00fcberhaupt! \ud83d\udc1f\ud83e\udd22'}},
 
 {id:6,emoji:'🏠',title:'Das Haus mit zehn Kindern',chapter:'Kapitel 7',place:'Nonnenhaus',lat:48.521913,lng:9.057653,image:'images/kinder/station_6.jpg',
 story:`Das <strong>Nonnenhaus</strong> wurde <strong>1488</strong> gebaut – als Kolumbus Amerika entdeckte!\n\nFrüher gab es einen Anbau direkt <strong>über dem Fluss</strong>. Darin war... das <strong>Klo</strong>! 🚽 Alles fiel runter ins Wasser! Die Bewohner nannten es das „<strong>Sprachhaus</strong>" – aber es war eine Toilette! 😂\n\nHier wohnte <strong>Leonhart Fuchs</strong> – mit <strong>zehn Kindern</strong>! Er legte einen der <strong>ältesten botanischen Gärten Europas</strong> an. Die Blume <strong>Fuchsie</strong>? Nach IHM benannt! 🌺\n\nWenn der Buchladen im Erdgeschoss auf hat: Durch ein <strong>Glasfenster im Boden</strong> siehst du den Boden von 1488!`,
@@ -492,7 +492,7 @@ question:'Welche Blume ist nach einem Bewohner des Nonnenhauses benannt?',
 options:[{text:'Die Rose',correct:false},{text:'Die Fuchsie',correct:true},{text:'Die Sonnenblume',correct:false}],
 win:'🔥 Siebter Funke! Die Fuchsie – nach Leonhart Fuchs! NUR NOCH EINER! 🎉',
 lose:'🌺 Die Fuchsie! Funke gefunden!',
-challenge:{type:'count',emoji:'🔢',text:'Zähle die senkrechten Holzbalken an der Vorderseite des Nonnenhauses!',hint:'Nur senkrechte (oben nach unten) zählen! Tipp: Buchladen auf? Glasfenster im Boden anschauen!',answer:null,tolerance:99}},
+challenge:{type:'mc',emoji:'🚽',text:'Was war das \u201eSprachhaus\u201c an der R\u00fcckseite des Nonnenhauses WIRKLICH?',options:['Ein Gebetsraum \ud83d\ude4f','Ein Klo \u00fcber dem Fluss! \ud83d\udebd','Eine Bibliothek \ud83d\udcda','Ein Geheimgang \ud83d\udd73\ufe0f'],correct:1,win:'HAHA! Ein Klo! \ud83d\udebd\ud83d\ude02 Alles fiel direkt runter in den Fluss! Und sie nannten es das \u201eSprachhaus\u201c!',lose:'Es war ein Klo! \ud83d\udebd Alles fiel in den Ammerkanal! Die nannten es \u201eSprachhaus\u201c \u2013 was f\u00fcr ein Name! \ud83d\ude02'}},
 
 {id:7,emoji:'🐸',title:'Die letzte Flamme',chapter:'Kapitel 8 · Das große Finale',place:'Froschkönig-Brunnen',lat:48.52100,lng:9.05410,image:'images/kinder/station_7.jpg',
 story:`Die <strong>letzte Station</strong> – und sie hat eine verrückte Geschichte!\n\nDer <strong>Froschkönig-Brunnen</strong> am Ammerkanal zeigt einen Frosch mit Krone. Aber im Oktober 2025 wurde der Froschkönig <strong>gestohlen</strong>! 😱 Jemand hat ihn einfach mitgenommen! Die ganze Stadt suchte – zum Glück wurde er zurückgebracht.\n\nDer Brunnen erinnert ans Märchen vom <strong>Froschkönig</strong>. Manche sagen, der Frosch war ein verwunschener Drache... 🐉\n\nHier ist es ruhig – perfekt zum Verschnaufen nach dem Abenteuer!\n\nUnd jetzt... der <strong>letzte Funke</strong> ist ganz nah! Wenn du das Rätsel löst, bekomme ich meine <strong>Flamme zurück</strong>! 🔥\n\nDu hast mir durch die ganze Stadt geholfen, Drachenkind. Du bist ein echter Freund! ✨`,
@@ -501,7 +501,7 @@ question:'Was passierte 2025 mit dem Froschkönig-Brunnen?',
 options:[{text:'Er wurde neu angestrichen',correct:false},{text:'Der Froschkönig wurde gestohlen',correct:true},{text:'Er wurde an einen anderen Platz gestellt',correct:false}],
 win:'🔥🔥🔥 DER LETZTE FUNKE!! TÜBIS FLAMME IST ZURÜCK!! 🐉✨🔥 DANKE, DRACHENKIND!!',
 lose:'🐸 Gestohlen! Zum Glück wieder da. Tübi drückt beide Augen zu – LETZTER FUNKE! 🔥🐉',
-challenge:{type:'do',emoji:'📝',text:'Dichter-Challenge! Erfinde einen Reim über Tübi! „In Tübingen am Neckarstrand, da lebt ein Drache wohlbekannt."',hint:'Reimwörter: Gasse/Tasse, Turm/Wurm, Schloss/Ross, Drache/Sache, Frosch/Klosch 😂'}}
+challenge:{type:'mc',emoji:'🐸',text:'Was ist 2025 mit dem Froschk\u00f6nig am Brunnen passiert?',options:['Er wurde golden angemalt \ud83c\udfa8','Er wurde gestohlen! \ud83d\ude31','Er hat angefangen zu quaken \ud83d\udc38','Er wurde zum K\u00f6nig gekr\u00f6nt \ud83d\udc51'],correct:1,win:'Gestohlen! \ud83d\ude31 Jemand hat ihn einfach mitgenommen! Zum Gl\u00fcck wurde er wieder zur\u00fcckgebracht.',lose:'Er wurde gestohlen! Zum Gl\u00fcck ist er wieder da.'}}
 ];
 
 /* PROMPTS removed – provided in chat for dev use only */
@@ -598,12 +598,13 @@ function renderStation(){
   if(s.challenge){
     const cdone=challengesDone[currentStation];
     if(cdone){
-      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-done">✅ ${cdone.skipped?'Übersprungen':'Geschafft! +5 Bonus-Drachenfunken!'}</div>${cdone.count!=null?`<div style="font-size:.82rem;font-weight:700;color:var(--text-2);margin-top:.4rem">Deine Antwort: ${cdone.count}</div>`:''}</div>`;
-    } else if(s.challenge.type==='count'){
-      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-text">${s.challenge.text}</div><div class="challenge-hint">${s.challenge.hint}</div><div class="challenge-actions"><input class="challenge-input" type="number" id="challengeCount_${currentStation}" placeholder="?" min="0" max="999"><button class="challenge-btn challenge-btn-count" onclick="submitCount(${currentStation})">✅</button><button class="challenge-btn" onclick="openSelfie()" style="background:#8b5cf6;color:#fff;border:2px solid #7c3aed">📸 Tübi-Selfie</button><button class="challenge-btn" onclick="skipChallenge(${currentStation})" style="background:var(--border);color:var(--text-2);border-color:var(--border)">⏩</button></div></div>`;
+      const msg=cdone.skipped?'Übersprungen':cdone.correct?s.challenge.win:'Geschafft! +5 Bonus-Drachenfunken!';
+      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-done">✅ ${cdone.skipped?'Übersprungen':'Geschafft!'}</div>${cdone.msg?`<div style="font-size:.82rem;font-weight:600;color:var(--text-2);margin-top:.4rem;line-height:1.5">${cdone.msg}</div>`:''}</div>`;
+    } else if(s.challenge.type==='mc'){
+      const opts=s.challenge.options.map((o,i)=>`<button class="mc-btn" onclick="answerChallengeMC(${currentStation},${i})"><span class="mc-letter">${String.fromCharCode(65+i)}</span><span>${o}</span></button>`).join('');
+      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-text">${s.challenge.text}</div><div class="mc-options">${opts}</div><div class="question-feedback" id="chFeedback"></div><div style="margin-top:.6rem"><button class="challenge-btn" onclick="openSelfie()" style="background:#8b5cf6;color:#fff;border:2px solid #7c3aed">📸 Selfie mit Tübi</button></div></div>`;
     } else {
-      const doneLabel=s.challenge.type==='do'?'✅ Gemacht!':'✅ Gefunden!';
-      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-text">${s.challenge.text}</div><div class="challenge-hint">${s.challenge.hint}</div><div class="challenge-actions"><button class="challenge-btn challenge-btn-done" onclick="completeChallenge(${currentStation})">${doneLabel}</button><button class="challenge-btn" onclick="openSelfie()" style="background:#8b5cf6;color:#fff;border:2px solid #7c3aed">📸 Selfie mit Tübi</button><button class="challenge-btn" onclick="skipChallenge(${currentStation})" style="background:var(--border);color:var(--text-2);border-color:var(--border)">⏩</button></div></div>`;
+      ch=`<div class="challenge-card fade-in"><div class="challenge-label">${s.challenge.emoji} Tübis Aufgabe</div><div class="challenge-text">${s.challenge.text}</div><div class="challenge-actions"><button class="challenge-btn challenge-btn-done" onclick="completeChallenge(${currentStation})">✅ Gemacht!</button><button class="challenge-btn" onclick="openSelfie()" style="background:#8b5cf6;color:#fff;border:2px solid #7c3aed">📸 Selfie mit Tübi</button></div></div>`;
     }
   }
 
@@ -628,6 +629,13 @@ function showXpToast(m){const t=document.getElementById('xpToast');t.textContent
 function spawnSparkles(){const e=['✨','⭐','🌟','💫','🔥'];for(let i=0;i<6;i++)setTimeout(()=>{const el=document.createElement('div');el.className='sparkle';el.textContent=e[Math.floor(Math.random()*e.length)];el.style.left=(15+Math.random()*70)+'%';el.style.top=(25+Math.random()*35)+'%';document.body.appendChild(el);setTimeout(()=>el.remove(),900)},i*100)}
 
 /* ===== CHALLENGES ===== */
+function answerChallengeMC(idx,oi){
+  const s=STATIONS[idx];const correct=oi===s.challenge.correct;
+  document.querySelectorAll('.challenge-card .mc-btn').forEach((b,i)=>{b.disabled=true;if(i===s.challenge.correct)b.classList.add('correct');else if(i===oi&&!correct)b.classList.add('wrong')});
+  const fb=document.getElementById('chFeedback');fb.textContent=correct?s.challenge.win:s.challenge.lose;fb.className='question-feedback show '+(correct?'win':'lose');
+  challengesDone[idx]={correct,msg:correct?s.challenge.win:s.challenge.lose};totalXp+=5;saveGame();updateHeader();
+  if(correct){showXpToast('+5 Bonus-Funken! ⭐');spawnSparkles()}
+}
 function submitCount(idx){
   const input=document.getElementById('challengeCount_'+idx);
   const val=parseInt(input.value);
