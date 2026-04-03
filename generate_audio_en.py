@@ -81,7 +81,8 @@ STATIONS = [
             "centuries-old passages thread through the tangle of buildings like hidden veins. "
             "You are standing now where it all began.\n\n"
             "Tip: Follow Heinrich's escape route through the shortcut down to the Muenzgasse — "
-            "or take the wider main path via the Burgsteige."
+            "or take the wider main path via the Burgsteige if you have a stroller "
+            "or prefer an easier walk."
         ),
         "diary": (
             "This is my last entry in this laboratory. The smell of burned paper still hangs "

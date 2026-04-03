@@ -80,7 +80,8 @@ STATIONS = [
             "typisch für die Tübinger Altstadt, wo sich jahrhundertealte Treppenwege wie Adern "
             "durch das Häusergewirr ziehen. Du stehst jetzt dort, wo alles begann.\n\n"
             "Tipp: Folge Heinrichs Fluchtweg durch den Schleichweg hinab zur Münzgasse – "
-            "oder nimm den breiteren Hauptweg über die Burgsteige."
+            "oder nimm den breiteren Hauptweg über die Burgsteige, wenn du nicht so "
+            "gut zu Fuß bist oder einen Kinderwagen dabei hast."
         ),
         "diary": (
             "Dies ist mein letzter Eintrag in diesem Labor. Der Geruch verbrannten Papiers hängt "
