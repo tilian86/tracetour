@@ -1,0 +1,15 @@
+name = "tracetour-checkout"
+main = "worker.js"
+compatibility_date = "2026-04-01"
+
+kv_namespaces = [
+  { binding = "CODES", id = "2181716fc5f847c0bf041baa04e9485f" }
+]
+
+# Secrets (via `wrangler secret put`):
+#   STRIPE_WEBHOOK_SECRET  — whsec_… vom Stripe-Webhook-Endpunkt
+#   RESEND_API_KEY         — re_… von resend.com (erst nach Domain-Verifizierung)
+
+[vars]
+FROM_EMAIL = "TraceTour <codes@tracetour.de>"
+ALLOWED_ORIGIN = "https://tracetour.de"

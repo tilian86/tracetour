@@ -4,3 +4,8 @@ images/.DS_Store
 .claude/
 _source/
 images/Zugeschnitten/
+.webhook_secret
+checkout-worker/.webhook_secret
+checkout-worker/codes_backup.json
+checkout-worker/kv_bulk.json
+checkout-worker/.wrangler/

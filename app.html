@@ -321,7 +321,7 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 </div>
 <div id="loginError" style="display:none;font-size:.78rem;color:var(--error);margin:-6px 0 8px;padding:8px 12px;background:rgba(248,113,113,.08);border-radius:var(--r-sm);border:1px solid rgba(248,113,113,.2)"></div>
 <input type="text" id="loginGroup" placeholder="Teamname (optional)" autocomplete="off" autocapitalize="words">
-<button class="btn-primary" onclick="doLogin()">Einloggen</button>
+<button class="btn-primary" id="loginBtn" onclick="doLogin()">Einloggen</button>
 <div class="login-hint" id="loginHint">Dein Zugangscode ist persönlich und an ein Gerät gebunden.<br>Er wird beim ersten Login aktiviert.</div>
 <div class="lang-toggle">
   <button class="lang-btn active" onclick="setLang('de')">DE</button>
@@ -1598,16 +1598,38 @@ function checkSavedGame(){
 }
 
 // ====== LOGIN ======
-function doLogin(){
+const CODE_VALIDATE_URL='https://tracetour-checkout.florian-s-thiel.workers.dev/validate';
+function showLoginError(msg){
+  const err=document.getElementById('loginError');
+  err.textContent=msg||t('loginError');err.style.display='block';
+  document.getElementById('loginCode').style.borderColor='var(--error)';
+  setTimeout(()=>{document.getElementById('loginCode').style.borderColor='';err.style.display='none';},3000);
+}
+async function doLogin(){
   const name=document.getElementById('loginName').value.trim();
   const code=document.getElementById('loginCode').value.trim().toUpperCase();
-  if(code!=='TUEBINGEN2026'&&code!=='TUEBINGEN2025'&&code!=='PRIVAT'){
-    const err=document.getElementById('loginError');
-    err.textContent=t('loginError');err.style.display='block';
-    document.getElementById('loginCode').style.borderColor='var(--error)';
-    setTimeout(()=>{document.getElementById('loginCode').style.borderColor='';err.style.display='none';},3000);return;
-  }
+  const isLegacy=(code==='TUEBINGEN2026'||code==='TUEBINGEN2025'||code==='PRIVAT');
+  const isPurchased=/^TT-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code);
+  if(!isLegacy&&!isPurchased){showLoginError();return;}
   if(!name){document.getElementById('loginName').focus();return}
+  if(isPurchased){
+    // Gekaufter Code: online gegen den Worker validieren (einmal pro Gerät, danach offline ok)
+    let cached=null;try{cached=localStorage.getItem('tracetour_code_ok')}catch(e){}
+    if(cached!==code){
+      const btn=document.getElementById('loginBtn');const oldTxt=btn?btn.textContent:'';
+      if(btn){btn.disabled=true;btn.textContent='…'}
+      try{
+        const r=await fetch(CODE_VALIDATE_URL,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code})});
+        const d=await r.json();
+        if(!d.valid){showLoginError();if(btn){btn.disabled=false;btn.textContent=oldTxt}return;}
+        try{localStorage.setItem('tracetour_code_ok',code)}catch(e){}
+      }catch(e){
+        showLoginError(lang==='en'?'No connection – code check needs internet once.':'Keine Verbindung – die Code-Prüfung braucht einmalig Internet.');
+        if(btn){btn.disabled=false;btn.textContent=oldTxt}return;
+      }
+      if(btn){btn.disabled=false;btn.textContent=oldTxt}
+    }
+  }
   document.getElementById('loginError').style.display='none';
   debugMode=(code==='PRIVAT');userName=name;groupName=document.getElementById('loginGroup').value.trim();
   updateDebugToggle();
@@ -1633,6 +1655,8 @@ function continueTour(){
 }
 document.getElementById('loginCode').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
 document.getElementById('loginName').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('loginCode').focus()});
+// Nach Kauf: Code von der Danke-Seite vorbefüllen
+try{const pc=localStorage.getItem('tracetour_purchased_code');if(pc&&!document.getElementById('loginCode').value)document.getElementById('loginCode').value=pc;}catch(e){}
 
 function startTour(){
   currentStation=0;maxUnlockedStation=0;totalXp=0;aiQuestionsLeft=MAX_AI_QUESTIONS;
