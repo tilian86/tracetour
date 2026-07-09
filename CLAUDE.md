@@ -91,10 +91,11 @@
 - Landing Page: Stats-Bar und Tour-Card Metadata auf CSS Grid umgestellt für Mobile
 
 ## Offene Aufgaben
-- Cafe Musee aus App entfernen (dauerhaft geschlossen)
-- Schleichweg Schloss→Münzgasse als Route einbauen (2 Varianten: mit/ohne Kinderwagen)
-- Stiftskirche: Neues Rätsel mit Drachentöter-Vergleich (Brunnen vs. Kirchenwand) einbauen
-- Goethe-Kontrast-Story für Martinianum einbauen
 - Evangelistensymbole + Wetterhahn als mögliche Rätsel-Elemente prüfen
-- GPS-Koordinaten aus Foto-EXIF für alle Stationen aktualisieren
-- Dorische Tonleiter, Turmneigung, Turmbesteigung recherchieren
+- GPS-Koordinaten aus Foto-EXIF für alle Stationen aktualisieren (Station 3 bereits via OSM korrigiert)
+- Froschkönig-Status vor Ort prüfen (Story sagt "schau ob er wieder da ist")
+- Erledigt: Cafe Musee entfernt, Schleichweg eingebaut, Drachentöter-Rätsel eingebaut, Goethe-Story eingebaut, Glocken/Turmneigung recherchiert (9 Glocken, phrygisch, NS-Luftschutzkeller)
+
+## Launch-Audit Mai 2026 (Commit 5de919e)
+Kompletter Audit + Fixes: Bonusfragen 13/16, EN-Neptun-Sync, Quiz "Sieben Fragen", Station-3-GPS, XP-Guards, sw.js v2 (sprachbewusst, Leaflet-Cache), API-Keys aus Skripten entfernt (.env). Details in Auto-Memory project_tracetour.md.
+NOCH OFFEN: ElevenLabs-Keys rotieren (waren public!), 7 Audios regenerieren nach Freigabe (anecdote_7 DE+EN, bonus_13 DE+EN, bonus_16 DE+EN, thanks EN).
