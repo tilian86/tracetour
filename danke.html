@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Danke – TraceTour</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:560px;margin:0 auto;padding:2.5rem 1.5rem;background:#1e293b;color:#d2e4fb;line-height:1.7;text-align:center}
+h1{font-size:1.7rem;margin:.5rem 0}
+.sub{color:#8192a7;font-size:.95rem}
+.code-box{background:#0f172a;border:2px solid #f3632d;border-radius:14px;padding:1.4rem;margin:1.8rem 0;font-size:1.7rem;font-weight:800;letter-spacing:3px;color:#fff;user-select:all}
+.pending{border-color:#8192a7;color:#8192a7;font-size:1rem;font-weight:400;letter-spacing:normal}
+.btn{display:inline-block;background:#f3632d;color:#fff;font-weight:700;padding:.9rem 2rem;border-radius:10px;text-decoration:none;margin-top:.5rem}
+.copy{background:none;border:1px solid #8192a7;color:#8192a7;border-radius:8px;padding:.4rem 1rem;font-size:.85rem;cursor:pointer;margin-top:.6rem}
+.steps{text-align:left;font-size:.9rem;color:#b0c4de;margin:1.5rem auto;max-width:420px}
+.error{color:#fa7e91}
+a{color:#f3632d}
+</style>
+</head>
+<body>
+<div style="font-size:3rem">🎉</div>
+<h1>Danke für deinen Kauf!</h1>
+<p class="sub">Deine Zahlung war erfolgreich. Hier ist dein Zugangscode – er kommt zusätzlich per E-Mail.</p>
+
+<div class="code-box pending" id="codeBox">Code wird erstellt …</div>
+<button class="copy" id="copyBtn" style="display:none" onclick="copyCode()">Code kopieren</button>
+
+<div class="steps">
+<strong>So geht's los:</strong>
+<ol>
+<li>Öffne die Tour auf deinem Smartphone</li>
+<li>Gib deinen Code ein und wähle deinen Ermittler-Namen</li>
+<li>Starte am Schloss Hohentübingen – Kopfhörer nicht vergessen!</li>
+</ol>
+</div>
+
+<a class="btn" href="app.html">Zur Tour →</a>
+<p class="sub" style="margin-top:2rem;font-size:.8rem">Kein Code nach 2 Minuten? Schreib uns: <a href="mailto:info@tracetour.de">info@tracetour.de</a></p>
+
+<script>
+const WORKER='https://tracetour-checkout.florian-s-thiel.workers.dev';
+const sid=new URLSearchParams(location.search).get('session_id')||'';
+let tries=0,codeVal='';
+function copyCode(){navigator.clipboard.writeText(codeVal).then(()=>{document.getElementById('copyBtn').textContent='Kopiert ✓'})}
+async function poll(){
+  const box=document.getElementById('codeBox');
+  if(!sid){box.textContent='Kein Bestellbezug gefunden.';box.classList.add('error');return}
+  try{
+    const r=await fetch(WORKER+'/code?session_id='+encodeURIComponent(sid));
+    const d=await r.json();
+    if(d.code){
+      codeVal=d.code;
+      box.textContent=d.code;box.classList.remove('pending');
+      document.getElementById('copyBtn').style.display='inline-block';
+      try{localStorage.setItem('tracetour_purchased_code',d.code)}catch(e){}
+      return;
+    }
+  }catch(e){}
+  if(++tries<40){setTimeout(poll,3000)}
+  else{box.innerHTML='Dein Code braucht gerade etwas länger – er kommt per E-Mail.<br>Falls nicht: <a href="mailto:info@tracetour.de">info@tracetour.de</a>';box.classList.add('error')}
+}
+poll();
+</script>
+</body>
+</html>
