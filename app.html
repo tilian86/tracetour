@@ -555,7 +555,7 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <div style="background:linear-gradient(180deg,rgba(243,99,45,.08) 0%,transparent 60%),var(--bg);padding:calc(var(--safe-top) + 2rem) 1.5rem calc(var(--safe-bottom) + 2rem);display:flex;flex-direction:column;align-items:center;text-align:center;min-height:100vh">
 <div style="font-size:2.5rem;margin-bottom:.5rem">🎓</div>
 <h1 style="font-family:var(--font-h);font-size:1.6rem;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:.5rem;line-height:1.2">Bonus-Runde:<br><span style="color:var(--accent)">Wie gut hast du aufgepasst?</span></h1>
-<p style="font-size:.85rem;color:var(--text-2);margin-bottom:1.5rem;max-width:400px">Fünf Fragen aus der Tour. Jede richtige Antwort bringt 50 Bonus-Traces.</p>
+<p style="font-size:.85rem;color:var(--text-2);margin-bottom:1.5rem;max-width:400px">Sieben Fragen aus der Tour. Jede richtige Antwort bringt 50 Bonus-Traces.</p>
 <div id="quizContent" style="max-width:480px;width:100%"></div>
 </div>
 </div>
@@ -774,7 +774,7 @@ de:{
   formulaLabel:'Heinrichs Formel',formulaQuote:'\u201eWo aber Gefahr ist, wächst das Rettende auch.\u201c',formulaAuthor:'\u2014 Friedrich Hölderlin, \u201ePatmos\u201c (1803)',
   formulaExplain:'Friedrich Hölderlin schrieb diese Zeile 1803 in seiner Hymne \u201ePatmos\u201c. Er lebte 36 Jahre im Turm am Neckar \u2013 nur wenige hundert Meter von deiner letzten Station entfernt. Ein Dichter, der in einer Zeit des Umbruchs nach Hoffnung suchte.\n\nHeinrich kannte diese Verse. Und er verstand etwas, das die Mächtigen nicht verstehen wollten: Die wahre Formel war nie eine Waffe. Sie war ein Versprechen.\n\nWo Wissen unterdrückt wird, wächst der Mut, es zu teilen. Wo Angst regiert, wachsen Menschen über sich hinaus. Wo alles verloren scheint, entsteht etwas Neues.\n\nDas gilt 1803. Das gilt 1869. Und das gilt heute.\n\nWir leben in einer Zeit, in der die Nachrichten uns täglich mit Krisen überhäufen \u2013 Klimawandel, Konflikte, Unsicherheit. Es ist leicht, die Hoffnung zu verlieren. Aber Hölderlins Erkenntnis ist aktueller denn je: Gerade weil Gefahr da ist, wächst auch das Rettende.\n\nJunge Forschende entwickeln Lösungen für die Energiewende. Menschen setzen sich für Frieden ein. Städte wie Tübingen zeigen, dass Wandel möglich ist \u2013 mit Mut, Wissen und Zusammenhalt.\n\nHeinrich hat seine Formel nicht für Könige versteckt. Er hat sie für Menschen wie dich versteckt \u2013 Menschen, die neugierig genug sind, Geheimnisse zu suchen. Die mutig genug sind, die Wahrheit weiterzutragen. Und die verstehen: Wissen gehört nicht den Mächtigen. Wissen gehört der Welt.\n\nDas ist Heinrichs Vermächtnis. Und jetzt ist es auch deins.',
   quizTitle:'Bonus-Runde:',quizTitleAccent:'Wie gut hast du aufgepasst?',
-  quizDesc:'Fünf Fragen aus der Tour. Jede richtige Antwort bringt 50 Bonus-Traces.',
+  quizDesc:'Sieben Fragen aus der Tour. Jede richtige Antwort bringt 50 Bonus-Traces.',
   quizQnum:'Frage {x} von {y}',quizResult:'{x} von {y} richtig!',quizBonus:'+{x} Bonus-Traces',quizToCert:'Zur Urkunde \u2192',
   successLabel:'Fall gelöst',successH1a:'Unglaublich,',successH1b:'Ermittler!',
   successP:'Du hast alle 17 Stationen erkundet, 8 Rätsel gelöst und Heinrichs Formel entschlüsselt. Das schaffen nicht viele.',
@@ -1112,7 +1112,7 @@ const QUIZ_QUESTIONS_EN=[
   {q:'What did astronomer Stoeffler predict for February 20, 1524?',
    opts:['A solar eclipse','A comet impact','A great flood','The end of the world','A volcanic eruption','A lunar eclipse'],correct:2},
   {q:'What was the Neptune figure on the Marktplatz cast from?',
-   opts:['Church bells','Melted-down French weapons','Roman coins','Swabian iron ore','Old castle cannons','Recycled printing type'],correct:1},
+   opts:['Church bells','Melted-down Wehrmacht weapons','Roman coins','Swabian iron ore','Old castle cannons','Recycled printing type'],correct:1},
   {q:'How much did the city pay in 1828 for 96 plane trees?',
    opts:['12 Gulden','32 Gulden','64 Gulden','96 Gulden','150 Gulden','24 Gulden'],correct:1},
   {q:'What did the sculptors hide in the water spouts of the Neptune Fountain?',
@@ -1127,10 +1127,10 @@ const QUIZ_QUESTIONS_EN=[
 const BONUS_QUESTIONS_EN={
   8:{source:4,q:'What was the name of the last tower warden of the Stiftskirche?',
     opts:['Friedrich Baumann','Fritz von Graevenitz','Philipp Hornung','Peter Hemmel','Georg Stoeffler','Wilhelm Bautmann'],correct:0,xp:75},
-  13:{source:11,q:'What did Leonhard Fuchs write in the Nonnenhaus in 1543?',
-    opts:['New Kreuterbuch','Herbarium Vivae','Flora Germanica','Hortus Sanitatis','Botanica Illustrata','New Pflanzenbuch'],correct:0,xp:75},
-  16:{source:15,q:'Which monument stands at the eastern end of the Platanenallee?',
-    opts:['Silcher Monument','Schiller Bust','Hoelderlin Monument','Uhland Statue','Eberhard Column','Kepler Stele'],correct:2,xp:75}
+  13:{source:11,q:'Which figure sits enthroned as an artwork at the Affenfelsen?',
+    opts:['The Cycling King','The Frog King','A climbing monkey','The Ammer Neptune','A stone dragon','The tower watchman'],correct:0,xp:75},
+  16:{source:15,q:'Which monument stands at the western end of the Platanenallee?',
+    opts:['Silcher Monument','Schiller Bust','Hoelderlin Monument','Uhland Statue','Eberhard Column','Kepler Stele'],correct:0,xp:75}
 };
 
 // English formula puzzle
@@ -1298,7 +1298,7 @@ const stations=[
   aiHints_en:['Read the information board next to the entrance \u2014 it shows two years.','The renovation year is 1777, for the 300th anniversary.','Calculate: 1777 minus 300 \u2014 that is the founding year of the university.']
 },
 {
-  lat:48.520001,lng:9.055591,name:'Martinianum – Münzgasse 13',ambientIdx:3,xp:30,anecdote:true,
+  lat:48.5199855,lng:9.0553059,name:'Martinianum – Münzgasse 13',ambientIdx:3,xp:30,anecdote:true,
   story:'Heinrich hastete die Münzgasse hinunter. Im Vorbeigehen streifte sein Blick ein kleines Schild an der Hauswand – das berühmteste Schild Tübingens. „Hier kotzte Goethe."\n\nJohann Wolfgang von Goethe kam am 7. September 1797 nach Tübingen und blieb bis zum 16. September – er reiste morgens um vier Uhr ab. Schiller hatte ihm den Verleger Cotta empfohlen, bei dem Goethe nebenan in der Münzgasse 15 wohnte. Am ersten Abend lud ihn der Apotheker Dr. Christian Gmelin zum Essen ein. Sein Urteil über die Stadt: „Die Stadt selbst ist abscheulich, allein man darf nur wenige Schritte tun, um die schönste Gegend zu sehen." Die Stiftskirchenfenster lobte er als größte Pracht, die Universität dagegen kritisierte er scharf – und über Hölderlin äußerte er sich gegenüber Schiller abfällig.\n\nDas Schild „Hier kotzte Goethe" an der Münzgasse 13 ist ein frecher Gegenkommentar zur ehrwürdigen Marmortafel am Nachbarhaus, dem Cottahaus – kein historisches Ereignis, sondern satirischer Protest gegen den übertriebenen Goethe-Kult.\n\nHeinrich hatte hier zeitweise gewohnt, bevor er sein Labor im Schloss bezog. Das Zimmer im zweiten Stock, karg aber ruhig. Von seinem Fenster aus konnte er die enge Münzgasse überblicken – und jeden sehen, der heraufkam. Eine nützliche Eigenschaft, die er heute hätte gebrauchen können.',
   name_en:'Martinianum \u2013 Muenzgasse 13',
   story_en:'Heinrich hurried down the Muenzgasse. In passing, his gaze caught a small sign on a house wall \u2014 the most famous sign in Tuebingen. "Hier kotzte Goethe." (Goethe threw up here.)\n\nJohann Wolfgang von Goethe arrived in Tuebingen on September 7, 1797, and stayed until September 16 \u2014 he departed at four in the morning. Schiller had recommended the publisher Cotta to him, and Goethe stayed next door at Muenzgasse 15. On his first evening, the pharmacist Dr. Christian Gmelin invited him to dinner. His verdict on the city: "The town itself is abominable, but one only needs to take a few steps to see the most beautiful countryside." He praised the Stiftskirche windows as magnificent splendor, but harshly criticized the university \u2014 and made dismissive remarks about Hoelderlin to Schiller.\n\nThe sign "Hier kotzte Goethe" at Muenzgasse 13 is a cheeky counter-comment to the distinguished marble plaque on the neighboring Cottahaus \u2014 not a historical event, but satirical protest against the excessive Goethe cult.\n\nHeinrich had lived here for a time before moving to his laboratory at the castle. The room on the second floor, sparse but quiet. From his window he could survey the narrow Muenzgasse \u2014 and see anyone coming up. A useful trait that he could have used today.'
@@ -1342,12 +1342,12 @@ const stations=[
   factBullets:['Astronomische Uhr von 1511 – Stöffler sagte Sintflut voraus','Neptunbrunnen 1617 von Schickhardt – nach Vorbild in Bologna','Neptunfigur von WMF aus eingeschmolzenen Wehrmacht-Waffen gegossen (1947/48)','Porsche testete 1936 den VW-Prototypen am Neptunbrunnen','Ranitzky: Neubau nach Brand, nur das Fachwerk ist „alt"','Brände 1476 und 1540 – Platz wurde jedes Mal größer'],
   aiHints:['Zähle die Namen auf der bemalten Fassade genau.','Die meisten sind leicht zu finden – aber einer versteckt sich oben am Giebel.','Es sind mehr als 6 – schau ganz nach oben!'],
   name_en:'Town Hall & Astronomical Clock',
-  story_en:'The Marktplatz \u2014 the heart of the city, barely changed for over a hundred years. The small cobblestones, the little shop windows, the restored half-timbered houses \u2014 all original. On Mondays, Wednesdays, and Fridays there is a weekly market with around 40 stalls of regional produce. On summer evenings the square belongs to the students, who gather at the Neptune Fountain with drinks they brought \u2014 and occasionally cool off in it.\n\nThe Neptune Fountain was designed in 1617 by Heinrich Schickhardt \u2014 inspired by the famous Neptune Fountain in Bologna. The Neptune figure itself was cast by WMF \u2014 yes, the kitchenware company \u2014 from melted-down captured French weapons. If you look closely, you will discover hidden silhouette portraits of the sculptors in the water spouts \u2014 with cigars in their mouths.\n\nThe magnificent Town Hall stands at the head of the square, its facade richly painted. The astronomical clock on the side shows not only the time but also moon phases, zodiac signs, and the orbits of the planets. The staircase next to the Town Hall is deliberately crooked \u2014 it follows the old drainage channel that once ran through the middle of the square.\n\nHeinrich blended in with the last visitors and hid a fragment in a wall niche beneath the Town Hall.',
+  story_en:'The Marktplatz \u2014 the heart of the city, barely changed for over a hundred years. The small cobblestones, the little shop windows, the restored half-timbered houses \u2014 all original. On Mondays, Wednesdays, and Fridays there is a weekly market with around 40 stalls of regional produce. On summer evenings the square belongs to the students, who gather at the Neptune Fountain with drinks they brought \u2014 and occasionally cool off in it.\n\nThe Neptune Fountain was designed in 1617 by Heinrich Schickhardt \u2014 inspired by the famous Neptune Fountain in Bologna. The Neptune figure itself was cast by WMF \u2014 yes, the kitchenware company \u2014 from melted-down Wehrmacht weapons released by the French occupation after the war. If you look closely, you will discover hidden silhouette portraits of the craftsmen who renewed the fountain in 1947 in the water spouts \u2014 two of them with cigars in their mouths.\n\nThe magnificent Town Hall stands at the head of the square, its facade richly painted. The astronomical clock on the side shows not only the time but also moon phases, zodiac signs, and the orbits of the planets. The staircase next to the Town Hall is deliberately crooked \u2014 it follows the old drainage channel that once ran through the middle of the square.\n\nHeinrich blended in with the last visitors and hid a fragment in a wall niche beneath the Town Hall.',
   diary_en:'The Marktplatz was still bustling. Too bustling. I ducked behind the Neptune Fountain and waited until a group of students had passed. My heart was pounding in my throat.\n\nI hid the fragment in a wall niche beneath the Town Hall. My hands were trembling. How much time do I have left? The gendarmes cannot be far. I must reach the Neckar before they seal off the Marktplatz.',
   riddle_en:'Stand in front of the Town Hall facade and count the painted names of famous figures. How many are there? Tip: One is hiding near the very top \u2014 easy to miss!',
   hint_en:'Count all names on the painted facade. Most are at eye level, but one is at the very top near the gable.',
   fact_en:'The astronomical clock was designed in 1511 by the astronomer Johannes Stoeffler \u2014 a masterpiece that calculates moon phases, zodiac signs, and eclipses. The "dragon hand" marks the lunar nodes and predicts solar and lunar eclipses. Stoeffler took his work so seriously that from 1522 to 1530 he lived with his students in the "Zur Krone" inn directly opposite the town hall (today Kronenstrasse 11, Cafe Ranitzky) \u2014 just so he could observe and recalibrate the mechanism in any weather.\n\nHis most famous blunder: he predicted a great flood for February 1524. All of Europe panicked, people built arks. It rained a little. Yet Stoeffler was a highly respected scholar \u2014 his proposals for calendar reform anticipated parts of the later Gregorian reform. He died in 1531 of the plague, not a flood.\n\nThe Cafe Ranitzky on the square looks like old half-timbering \u2014 but it is entirely a modern reconstruction. The original Cafe Pfuderer burned down in the 1970s and was rebuilt in the same style.\n\nThe Mayer\'sche Apotheke at the market (number 13) was founded in 1569 \u2014 one of the oldest pharmacies in Wuerttemberg. It closed at the end of 2017 after nearly 450 years.',
-  factBullets_en:['Astronomical clock from 1511 \u2014 Stoeffler predicted a great flood','Neptune Fountain 1617 by Schickhardt \u2014 modeled after Bologna','Neptune figure cast by WMF from melted French weapons','Porsche tested the VW prototype at the Neptune Fountain in 1936','Ranitzky: modern reconstruction after fire, only the timber-frame is "old"','Fires of 1476 and 1540 \u2014 the square grew larger each time'],
+  factBullets_en:['Astronomical clock from 1511 \u2014 Stoeffler predicted a great flood','Neptune Fountain 1617 by Schickhardt \u2014 modeled after Bologna','Neptune figure cast by WMF from melted-down Wehrmacht weapons (1947/48)','Porsche tested the VW prototype at the Neptune Fountain in 1936','Ranitzky: modern reconstruction after fire, only the timber-frame is "old"','Fires of 1476 and 1540 \u2014 the square grew larger each time'],
   aiHints_en:['Count the names on the painted facade carefully.','Most are easy to find \u2014 but one is hiding up near the gable.','There are more than 6 \u2014 look all the way to the top!']
 },
 {
@@ -1471,7 +1471,7 @@ const stations=[
 // ====== SAVE/LOAD ======
 function saveGame(){
   try{localStorage.setItem(SAVE_KEY,JSON.stringify({
-    userName,groupName,debugMode,currentStation,maxUnlockedStation,totalXp,solvedStations,aiQuestionsLeft,bonusSolved,bonusAttempts,ts:Date.now()
+    userName,groupName,debugMode,currentStation,maxUnlockedStation,totalXp,solvedStations,aiQuestionsLeft,bonusSolved,bonusAttempts,puzzleRewarded,quizRewarded,ts:Date.now()
   }))}catch(e){}
 }
 function loadGame(){
@@ -1483,6 +1483,7 @@ function loadGame(){
     totalXp=d.totalXp||0;solvedStations=d.solvedStations||stations.map(()=>false);
     aiQuestionsLeft=d.aiQuestionsLeft??MAX_AI_QUESTIONS;
     bonusSolved=d.bonusSolved||{};bonusAttempts=d.bonusAttempts||{};
+    puzzleRewarded=d.puzzleRewarded||false;quizRewarded=d.quizRewarded||false;
     return true;
   }catch(e){return false}
 }
@@ -1945,8 +1946,8 @@ function unlockFactAudio(){
 function playAudio(fileKey,rowId,type){
   const row=document.getElementById(rowId);
   if(!row||row.dataset.locked==='true')return;
-  const progMap={story:'progFillStory',diary:'progFillDiary',anecdote:'progFillAnecdote',riddle:'progFillRiddle',fact:'progFillFact',prologue:'progFillPrologue',guide:'progFillGuide',epilog:'progFillEpilog'};
-  const timeMap={story:'timeStory',diary:'timeDiary',anecdote:'timeAnecdote',riddle:'timeRiddle',fact:'timeFact',prologue:'timePrologue',guide:'timeGuide',epilog:'timeEpilog'};
+  const progMap={story:'progFillStory',diary:'progFillDiary',anecdote:'progFillAnecdote',riddle:'progFillRiddle',fact:'progFillFact',prologue:'progFillPrologue',guide:'progFillGuide',epilog:'progFillEpilog',formula:'progFillFormula',thanks:'progFillThanks'};
+  const timeMap={story:'timeStory',diary:'timeDiary',anecdote:'timeAnecdote',riddle:'timeRiddle',fact:'timeFact',prologue:'timePrologue',guide:'timeGuide',epilog:'timeEpilog',formula:'timeFormula',thanks:'timeThanks'};
   const progId=progMap[type]||'progFillFact';
   const timeId=timeMap[type]||'timeFact';
   const textId=type==='story'||type==='anecdote'?'storyText':type==='diary'?'diaryText':null;
@@ -2574,7 +2575,7 @@ if('serviceWorker' in navigator){
 }
 function downloadForOffline(){
   if(navigator.serviceWorker&&navigator.serviceWorker.controller){
-    navigator.serviceWorker.controller.postMessage('download-all');
+    navigator.serviceWorker.controller.postMessage({type:'download-all',lang});
     const btn=document.getElementById('offlineBtn');
     if(btn)btn.textContent=t('downloading').replace('{x}','0');
   }else{showToast(t('reloadPrompt'))}
@@ -2584,14 +2585,15 @@ function downloadForOffline(){
 let puzzleOrder=[],puzzleAttempts=0,puzzleHintGiven=false;
 let bonusSolved={};
 let bonusAttempts={};
+let puzzleRewarded=false,quizRewarded=false;
 // Bonus questions appear delayed: key = station where question shows, source = station whose content is tested
 const BONUS_QUESTIONS={
   8:{source:4,q:'Wie hieß der letzte Turmwächter der Stiftskirche?',
     opts:['Friedrich Baumann','Fritz von Graevenitz','Philipp Hornung','Peter Hemmel','Georg Stöffler','Wilhelm Bautmann'],correct:0,xp:75},
-  13:{source:11,q:'Was schrieb Leonhard Fuchs 1543 im Nonnenhaus?',
-    opts:['New Kreüterbuch','Herbarium Vivae','Flora Germanica','Hortus Sanitatis','Botanica Illustrata','New Pflanzenbuch'],correct:0,xp:75},
-  16:{source:15,q:'Welches Denkmal steht am östlichen Ende der Platanenallee?',
-    opts:['Silcher-Denkmal','Schiller-Büste','Hölderlin-Denkmal','Uhland-Statue','Eberhard-Säule','Kepler-Stele'],correct:2,xp:75}
+  13:{source:11,q:'Welche Figur thront als Kunstwerk am Affenfelsen?',
+    opts:['Der Radfahrerkönig','Der Froschkönig','Ein kletternder Affe','Der Ammer-Neptun','Ein steinerner Drache','Der Turmwächter'],correct:0,xp:75},
+  16:{source:15,q:'Welches Denkmal steht am westlichen Ende der Platanenallee?',
+    opts:['Silcher-Denkmal','Schiller-Büste','Hölderlin-Denkmal','Uhland-Statue','Eberhard-Säule','Kepler-Stele'],correct:0,xp:75}
 };
 const PUZZLE_CORRECT=['WO','ABER','GEFAHR','IST','WÄCHST','DAS','RETTENDE','AUCH'];
 function initPuzzle(){
@@ -2684,7 +2686,8 @@ function checkPuzzle(){
     btn.textContent=t('puzzleContinue');
     btn.onclick=()=>{showScreen('quizScreen');initQuiz()};
     fb.appendChild(btn);
-    totalXp+=100;updateXp();saveGame();
+    if(!puzzleRewarded){totalXp+=100;puzzleRewarded=true;}
+    updateXp();saveGame();
   }else{
     playSfx('wrong');
     puzzleAttempts++;
@@ -2811,7 +2814,8 @@ function renderQuizQuestion(){
   if(quizIdx>=qq.length){
     // Quiz done
     const bonus=quizScore*50;
-    totalXp+=bonus;updateXp();saveGame();
+    if(!quizRewarded){totalXp+=bonus;quizRewarded=true;}
+    updateXp();saveGame();
     el.innerHTML=`
       <div style="font-size:2.5rem;margin-bottom:.5rem">${quizScore>=6?'🌟':quizScore>=4?'👏':'💪'}</div>
       <div style="font-size:1.3rem;font-weight:900;font-family:var(--font-h);margin-bottom:.5rem">${t('quizResult').replace('{x}',quizScore).replace('{y}',qq.length)}</div>

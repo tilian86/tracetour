@@ -254,14 +254,13 @@ The enormous wine barrel in the cellar was built in 1548 and holds 84,000 liters
 
 In the northeast tower, an astronomical observatory was established in 1752. Professor Bohnenberger built the state survey of Wuerttemberg from here starting in 1798 — the castle tower is the cartographic center of the state! All coordinates are measured from this point. He also invented the gyroscope.
 
-The "Alte Kulturen" museum displays Ice Age finds from caves of the Swabian Jura: 40,000-year-old ivory figurines — mammoths, the little wild horse, lions — the oldest artworks in human history. Plus an ancient Egyptian burial chamber. Since 2023 there is the Cafe Musee on the eastern bastion.
+The "Alte Kulturen" museum displays Ice Age finds from caves of the Swabian Jura: 40,000-year-old ivory figurines — mammoths, the little wild horse, lions — the oldest artworks in human history. Plus an ancient Egyptian burial chamber.
 
 **factBullets:**
 - Wine barrel: 84,000 liters, second largest in the world (bats!)
 - Northeast tower = cartographic center of Wuerttemberg
 - Gyroscope invented here (Prof. Bohnenberger)
 - 40,000-year-old ivory art in the museum
-- Cafe Musee on the eastern bastion since 2023
 
 **aiHints:**
 - Look at the coat of arms above the entrance gate.

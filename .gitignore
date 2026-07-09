@@ -1,0 +1,6 @@
+.env
+.DS_Store
+images/.DS_Store
+.claude/
+_source/
+images/Zugeschnitten/

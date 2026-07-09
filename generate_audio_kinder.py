@@ -20,7 +20,24 @@ from pathlib import Path
 # KONFIGURATION
 # ============================================================
 
-API_KEY = os.environ.get("ELEVENLABS_API_KEY", "sk_18df17d38593a50a53362f37c86f9527c02d4c21ec495fc7")
+def _load_key():
+    """ElevenLabs-Key aus Umgebungsvariable oder lokaler .env-Datei (nicht im Repo)."""
+    import os
+    key = os.environ.get("ELEVENLABS_API_KEY", "")
+    if not key:
+        try:
+            with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")) as f:
+                for line in f:
+                    line = line.strip()
+                    if line.startswith("ELEVENLABS_API_KEY="):
+                        key = line.split("=", 1)[1].strip().strip('"').strip("'")
+        except FileNotFoundError:
+            pass
+    if not key:
+        raise SystemExit("FEHLER: ELEVENLABS_API_KEY fehlt. Setze die Umgebungsvariable oder lege eine .env-Datei mit ELEVENLABS_API_KEY=... an.")
+    return key
+
+API_KEY = _load_key()
 
 TUBI_VOICE = "gGrh7S39Hy7hjt4rtiDw"   # Tuebi der Drache
 
