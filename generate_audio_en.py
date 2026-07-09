@@ -36,7 +36,24 @@ except ImportError:
 # CONFIGURATION
 # ============================================================
 
-API_KEY = os.environ.get("ELEVENLABS_API_KEY", "sk_2255291b0198d4faabca23550d95c34914be2cdf14861aa2")
+def _load_key():
+    """ElevenLabs-Key aus Umgebungsvariable oder lokaler .env-Datei (nicht im Repo)."""
+    import os
+    key = os.environ.get("ELEVENLABS_API_KEY", "")
+    if not key:
+        try:
+            with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")) as f:
+                for line in f:
+                    line = line.strip()
+                    if line.startswith("ELEVENLABS_API_KEY="):
+                        key = line.split("=", 1)[1].strip().strip('"').strip("'")
+        except FileNotFoundError:
+            pass
+    if not key:
+        raise SystemExit("FEHLER: ELEVENLABS_API_KEY fehlt. Setze die Umgebungsvariable oder lege eine .env-Datei mit ELEVENLABS_API_KEY=... an.")
+    return key
+
+API_KEY = _load_key()
 
 NARRATOR_VOICE_EN = "lxYfHSkYm1EzQzGhdbfc"   # English narrator (story, riddle)
 HEINRICH_VOICE_EN = "goT3UYdM9bhm0n2lmKQx"   # Heinrich's diary
@@ -401,8 +418,8 @@ STATIONS = [
             "Prince Achmed' is the first full-length animated film in history — years before "
             "Walt Disney's 'Snow White.' The exhibition showcases the delicate multi-layer "
             "animation tables she used to create this sensation frame by frame.\n\n"
-            "Under the roof beams awaits a unique experience: the 'Room of Memories' — an "
-            "escape room about the Nazi era in Tuebingen. In small groups, visitors interact "
+            "Under the roof beams awaits a unique experience: the 'Room of Memories' — a "
+            "serious game designed as an old attic, exploring the Nazi era in Tuebingen. In small groups, visitors interact "
             "with a talking mirror and reconstruct decisions that Tuebingen citizens faced, "
             "using real attic finds.\n\n"
             "The exposed timber framing of the Kornhaus defines the rooms — though during the "
@@ -814,7 +831,7 @@ SPECIAL_AUDIO = {
         "text": (
             "Bonus question! Seventy-five Traces.\n\n"
             "Do you remember the Monkey Rock? "
-            "What did Leonhard Fuchs write in fifteen forty-three in the Nonnenhaus?"
+            "Which figure sits enthroned there as an artwork?"
         ),
     },
     "bonus_16": {
@@ -822,7 +839,7 @@ SPECIAL_AUDIO = {
         "text": (
             "Bonus question! Seventy-five Traces.\n\n"
             "Do you remember the Neckar Island and the Plane Tree Avenue? "
-            "Which monument stands at the eastern end of the Plane Tree Avenue?"
+            "Which monument stands at the western end of the Plane Tree Avenue?"
         ),
     },
     "formula": {
@@ -850,6 +867,18 @@ SPECIAL_AUDIO = {
             "And wise enough to understand: knowledge does not belong to the powerful. "
             "Knowledge belongs to the world.\n\n"
             "This is Heinrich's legacy. And now it is yours too."
+        ),
+    },
+    "thanks": {
+        "voice": EPILOG_VOICE_EN,
+        "text": (
+            "From us, to you.\n\n"
+            "Thank you so much for exploring with us. We are a small, passionate team — "
+            "and every single tour means the world to us. If this experience gave you "
+            "something, feel free to pass it on.\n\n"
+            "We wish you a wonderful time in Tuebingen — and who knows: maybe we will "
+            "see you again soon on a new tour.\n\n"
+            "TraceTour — by Florian S. Thiel."
         ),
     },
     "epilog": {
@@ -941,7 +970,7 @@ def main():
     else:
         station_nums = list(range(17))
 
-    all_types = ["story", "diary", "fact", "riddle", "anecdote", "prologue", "guide", "formula", "epilog", "bonus_8", "bonus_13", "bonus_16"]
+    all_types = ["story", "diary", "fact", "riddle", "anecdote", "prologue", "guide", "formula", "thanks", "epilog", "bonus_8", "bonus_13", "bonus_16"]
     if "--only" in sys.argv:
         idx = sys.argv.index("--only")
         types_to_gen = sys.argv[idx + 1].split(",")

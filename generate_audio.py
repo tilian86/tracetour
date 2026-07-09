@@ -36,7 +36,24 @@ except ImportError:
 # KONFIGURATION
 # ============================================================
 
-API_KEY = os.environ.get("ELEVENLABS_API_KEY", "sk_2255291b0198d4faabca23550d95c34914be2cdf14861aa2")
+def _load_key():
+    """ElevenLabs-Key aus Umgebungsvariable oder lokaler .env-Datei (nicht im Repo)."""
+    import os
+    key = os.environ.get("ELEVENLABS_API_KEY", "")
+    if not key:
+        try:
+            with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")) as f:
+                for line in f:
+                    line = line.strip()
+                    if line.startswith("ELEVENLABS_API_KEY="):
+                        key = line.split("=", 1)[1].strip().strip('"').strip("'")
+        except FileNotFoundError:
+            pass
+    if not key:
+        raise SystemExit("FEHLER: ELEVENLABS_API_KEY fehlt. Setze die Umgebungsvariable oder lege eine .env-Datei mit ELEVENLABS_API_KEY=... an.")
+    return key
+
+API_KEY = _load_key()
 
 NARRATOR_VOICE = "WHaUUVTDq47Yqc9aDbkH"   # Story-Stimme (gleich wie vorher)
 HEINRICH_VOICE = "2OcnG4mH3jIMtWz3vKus"   # Tagebuch-Stimme (gleich wie vorher)
@@ -403,7 +420,7 @@ STATIONS = [
             "Ausstellung zeigt die filigranen Multiebenen-Trickfilmtische, mit denen Reiniger "
             "Bild für Bild diese Sensation schuf.\n\n"
             "Unter dem Dachgebälk gibt es ein besonderes Erlebnis: den 'Room of Memories' – "
-            "einen Escape Room, der die NS-Zeit in Tübingen thematisiert. In Gruppen interagieren "
+            "ein als alter Dachboden gestaltetes Serious Game, das die NS-Zeit in Tübingen thematisiert. In Gruppen interagieren "
             "Besucher mit einem sprechenden Spiegel und rekonstruieren anhand echter "
             "Dachbodenfunde Entscheidungen, die Tübinger Bürger damals trafen.\n\n"
             "Das Fachwerk des Kornhauses ist freigelegt und prägt die Räume – allerdings wurde "
@@ -1034,7 +1051,7 @@ BONUS_AUDIO = {
         "text": (
             "Bonus-Frage! Fünfundsiebzig Traces.\n\n"
             "Erinnerst du dich an den Affenfelsen? "
-            "Was schrieb Leonhard Fuchs fünfzehnhundertdreiundvierzig im Nonnenhaus?"
+            "Welche Figur thront dort als Kunstwerk?"
         ),
     },
     "bonus_16": {
@@ -1042,7 +1059,7 @@ BONUS_AUDIO = {
         "text": (
             "Bonus-Frage! Fünfundsiebzig Traces.\n\n"
             "Erinnerst du dich an die Neckarinsel und die Platanenallee? "
-            "Welches Denkmal steht am östlichen Ende der Platanenallee?"
+            "Welches Denkmal steht am westlichen Ende der Platanenallee?"
         ),
     },
 }
