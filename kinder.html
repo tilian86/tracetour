@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -10,7 +10,11 @@
 <meta name="description" content="Tübi der Drache braucht deine Hilfe! Finde 8 Funken in Tübingen und bring seine Flamme zurück. Die Kindertour von TraceTour – für kleine Abenteurer ab 5 Jahren.">
 <meta property="og:title" content="TraceTour Kids – Tübis Geheimnisse">
 <meta property="og:description" content="Hilf Tübi dem Drachen, seine verlorene Flamme wiederzufinden! 8 Stationen, 8 Rätsel, 1 Abenteuer durch Tübingen.">
-<meta property="og:image" content="https://tracetour.de/images/hero_neckarfront.jpg">
+<meta property="og:image" content="https://tracetour.de/images/tour_kinder.jpg">
+<meta property="og:url" content="https://tracetour.de/kinder.html">
+<link rel="canonical" href="https://tracetour.de/kinder.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tracetour.de/images/tour_kinder.jpg">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
@@ -177,7 +181,7 @@ input{font-family:inherit;color:inherit}
 
 /* ======================== QUIZ ======================== */
 #quiz{padding-top:var(--safe-top);background:var(--bg);min-height:100%}
-.quiz-header{background:var(--green);padding:calc(.7rem + var(--safe-top)) 1rem 1.2rem;text-align:center}
+.quiz-header{background:var(--green);padding:calc(.7rem + var(--safe-top)) 1rem 1.2rem;text-align:center;position:relative}
 .quiz-header h2{font-size:1.4rem;font-weight:900;color:#fff}
 .quiz-header p{color:rgba(255,255,255,.75);font-size:.82rem;margin-top:.2rem;font-weight:600}
 .quiz-body{padding:1rem}
@@ -359,6 +363,7 @@ input{font-family:inherit;color:inherit}
 <!-- ======================== QUIZ ======================== -->
 <div class="screen" id="quiz">
   <div class="quiz-header">
+    <button onclick="showScreen('game');renderStation();renderDots()" style="position:absolute;left:1rem;top:1rem;background:none;border:2px solid rgba(255,255,255,.5);border-radius:10px;padding:.35rem .7rem;font-family:inherit;font-weight:700;color:#fff;cursor:pointer">← Tour</button>
     <div style="font-size:1.8rem;margin-bottom:.2rem">🧩</div>
     <h2>Tübis letzter Test</h2>
     <p>Beweise, dass du ein echtes Drachenkind bist!</p>
@@ -467,23 +472,23 @@ win:'🔥 Vierter Funke! DREI PARKPLÄTZE! Tübi ist empört! 😤',
 lose:'🅿️ Drei Parkplätze! Zum Glück steht er wieder. Funke ist deiner!',
 challenge:{type:'mc',emoji:'🔍',text:'T\u00fcbis Detektiv-Aufgabe! Du siehst den Drachent\u00f6ter auf dem Brunnen UND an der Kirchenwand. Im Steinbild an der Wand ist jemand dabei, der am Brunnen fehlt. Wer?',options:['Ein K\u00f6nig \ud83d\udc51','Eine Prinzessin \ud83d\udc78','Ein Zauberer \ud83e\uddd9','T\u00fcbi der Drache \ud83d\udc09'],correct:1,win:'Genau! Die Prinzessin! Im Relief rettet Georg sie vor dem Drachen \u2013 am Brunnen ist sie nicht dabei! \ud83d\udc78',lose:'Es ist die Prinzessin! Dreh dich vom Brunnen zur Kirchenwand und schau genau hin!'}},
 
-{id:4,emoji:'🗼',title:'Der Dichter im Turm',chapter:'Kapitel 5',place:'Hölderlinturm · Neckarfront',lat:48.52095,lng:9.05700,image:'images/kinder/station_4.jpg',
+{id:4,emoji:'🗼',title:'Der Dichter im Turm',chapter:'Kapitel 5',place:'Hölderlinturm · Neckarfront',lat:48.51933,lng:9.05568,image:'images/kinder/station_4.jpg',
 story:`Der gelbe Turm am Neckar ist der <strong>Hölderlinturm</strong>!\n\nHier lebte der Dichter <strong>Friedrich Hölderlin</strong> – <strong>36 Jahre lang</strong>! Das ist wahrscheinlich länger als deine Eltern alt sind! 📖 Er war krank und wurde von der Familie Zimmer gepflegt. Er dichtete, spielte Klavier und schaute auf den Neckar.\n\nDer Turm war Teil der <strong>Stadtmauer</strong>. 1875 hat er <strong>gebrannt</strong> und wurde in seiner runden Form wieder aufgebaut – wie ein Phönix! 🔥\n\nVon hier siehst du die <strong>Neckarfront</strong> – die bunten Häuser, die sich im Wasser spiegeln. Einer der <strong>meistfotografierten Orte</strong> Tübingens!\n\nIch komme abends hierher, setze mich auf die Mauer und schaue auf den Neckar. Manchmal reimt sich sogar was in meinem Drachenkopf!`,
 tubiSays:`36 Jahre in einem Zimmer! Ich wohne seit 500 Jahren hinter einer Uhr, also verstehe ich das. Aber Hölderlin hatte wenigstens den Neckar-Blick! Das Museum ist sogar umsonst – wie cool ist das?`,
 question:'Wie lange wohnte Hölderlin in seinem Turm?',
 options:[{text:'5 Jahre',correct:false},{text:'36 Jahre',correct:true},{text:'100 Jahre',correct:false}],
 win:'🔥 Fünfter Funke! 36 Jahre – fast ein ganzes Leben!',
 lose:'🗼 36 Jahre! So lange in einem Turm! Funke trotzdem deiner!',
-challenge:{type:'mc',emoji:'🪨',text:'Such dir ein Steinchen und wirf einen Drachenwunsch in den Neckar! Aber zuerst: Wie lange hat H\u00f6lderlin in seinem Turm gelebt?',options:['5 Jahre','15 Jahre','36 Jahre','100 Jahre'],correct:2,win:'36 Jahre! Und jetzt: Wirf dein Steinchen und w\u00fcnsch dir was! Drachenw\u00fcnsche gehen IMMER in Erf\u00fcllung! \ud83e\udea8\u2728',lose:'Es waren 36 Jahre! Trotzdem: Wirf dein Steinchen und w\u00fcnsch dir was Sch\u00f6nes!'}},
+challenge:{type:'mc',emoji:'🎨',text:'Schau zum Turm hoch: Welche Farbe hat der Hölderlinturm?',options:['Rosa 🌸','Gelb 🌞','Blau 💙','Grün 🌿'],correct:1,win:'Gelb wie Sonnenschein! 🌞 Und jetzt: Such dir ein Steinchen und wirf einen Drachenwunsch in den Neckar! Drachenwünsche gehen IMMER in Erfüllung! 🪨✨',lose:'Er ist gelb! Schau nochmal hin! 🌞 Und dann: Steinchen suchen und Drachenwunsch in den Neckar werfen!'}},
 
-{id:5,emoji:'🌉',title:'Die Brücke der Stocherkähne',chapter:'Kapitel 6',place:'Eberhardsbrücke · Neckar',lat:48.52050,lng:9.05500,image:'images/kinder/station_5.jpg',
+{id:5,emoji:'🌉',title:'Die Brücke der Stocherkähne',chapter:'Kapitel 6',place:'Eberhardsbrücke · Neckar',lat:48.51899,lng:9.05793,image:'images/kinder/station_5.jpg',
 story:`Von der <strong>Eberhardsbrücke</strong> siehst du den ganzen Neckar!\n\n<strong>Stocherkähne</strong> sind flache Holzboote – mit einer langen Stange über den Flussgrund geschoben. Kein Motor, keine Ruder!\n\nJedes Jahr im Juni: das <strong>Stocherkahnrennen</strong>! Studenten fahren um die Wette – <strong>totales Chaos</strong>: Boote krachen, Leute fallen rein, verrückte Kostüme! 🎭\n\nWer <strong>verliert</strong>: <strong>Lebertran</strong>! 🤢 <strong>Öl aus Fischbäuchen</strong> – SO eklig! Und die Verlierer müssen das Rennen nächstes Jahr <strong>organisieren</strong>!\n\nDer Neckar war 1595 so <strong>zugefroren</strong>, dass <strong>Pferdewagen</strong> drüber fuhren! Und „<strong>Neckar</strong>" bedeutet in einer uralten Sprache: „<strong>Wildes Wasser</strong>"!`,
 tubiSays:`Beim Rennen sitze ich hier auf der Brücke! Einmal hat Lebertran fast MICH getroffen! 😱 Drachenfeuer und Fischöl – das hätte SO gestunken!`,
 question:'Was müssen die Verlierer beim Stocherkahnrennen trinken?',
 options:[{text:'Apfelsaft mit Essig 🍎',correct:false},{text:'Salzwasser 🌊',correct:false},{text:'Lebertran – Fischöl 🐟',correct:true}],
 win:'🔥 Sechster Funke! Lebertran! Das Ekligste überhaupt!',
 lose:'🐟 Lebertran – Fischöl! Igitt! Funke ist trotzdem deiner!',
-challenge:{type:'mc',emoji:'🤢',text:'Was m\u00fcssen die Verlierer beim Stocherkahnrennen trinken?',options:['Kalten Kakao \u2615','Lebertran \u2013 Fisch\u00f6l! \ud83d\udc1f','Neckarwasser \ud83d\udca7','Saure Milch \ud83e\udd5b'],correct:1,win:'IGITT! Lebertran \u2013 \u00d6l aus Fischb\u00e4uchen! \ud83e\udd22 Z\u00e4hle mal: Wie viele Br\u00fccken siehst du von hier?',lose:'Lebertran \u2013 Fisch\u00f6l! Das Ekligste \u00fcberhaupt! \ud83d\udc1f\ud83e\udd22'}},
+challenge:{type:'mc',emoji:'🥶',text:'Der Neckar war 1595 SO dick zugefroren, dass etwas Verrücktes über das Eis gefahren ist. Was?',options:['Pferdewagen 🐴','Eine Eisenbahn 🚂','Hundeschlitten 🐕','Ritter mit Kanonen 🛡️'],correct:0,win:'Pferdewagen auf dem Eis! 🐴🥶 SO kalt war es damals! Und jetzt schau aufs Wasser: Wie viele Stocherkähne siehst du gerade?',lose:'Es waren Pferdewagen! 🐴 Das Eis war dicker als eine Matratze! Zähl mal die Stocherkähne auf dem Wasser!'}},
 
 {id:6,emoji:'🏠',title:'Das Haus mit zehn Kindern',chapter:'Kapitel 7',place:'Nonnenhaus',lat:48.521913,lng:9.057653,image:'images/kinder/station_6.jpg',
 story:`Das <strong>Nonnenhaus</strong> wurde <strong>1488</strong> gebaut – als Kolumbus Amerika entdeckte!\n\nFrüher gab es einen Anbau direkt <strong>über dem Fluss</strong>. Darin war... das <strong>Klo</strong>! 🚽 Alles fiel runter ins Wasser! Die Bewohner nannten es das „<strong>Sprachhaus</strong>" – aber es war eine Toilette! 😂\n\nHier wohnte <strong>Leonhart Fuchs</strong> – mit <strong>zehn Kindern</strong>! Er legte einen der <strong>ältesten botanischen Gärten Europas</strong> an. Die Blume <strong>Fuchsie</strong>? Nach IHM benannt! 🌺\n\nWenn der Buchladen im Erdgeschoss auf hat: Durch ein <strong>Glasfenster im Boden</strong> siehst du den Boden von 1488!`,
@@ -501,7 +506,7 @@ question:'Was passierte 2025 mit dem Froschkönig-Brunnen?',
 options:[{text:'Er wurde neu angestrichen',correct:false},{text:'Der Froschkönig wurde gestohlen',correct:true},{text:'Er wurde an einen anderen Platz gestellt',correct:false}],
 win:'🔥🔥🔥 DER LETZTE FUNKE!! TÜBIS FLAMME IST ZURÜCK!! 🐉✨🔥 DANKE, DRACHENKIND!!',
 lose:'🐸 Gestohlen! Zum Glück wieder da. Tübi drückt beide Augen zu – LETZTER FUNKE! 🔥🐉',
-challenge:{type:'mc',emoji:'🐸',text:'Was ist 2025 mit dem Froschk\u00f6nig am Brunnen passiert?',options:['Er wurde golden angemalt \ud83c\udfa8','Er wurde gestohlen! \ud83d\ude31','Er hat angefangen zu quaken \ud83d\udc38','Er wurde zum K\u00f6nig gekr\u00f6nt \ud83d\udc51'],correct:1,win:'Gestohlen! \ud83d\ude31 Jemand hat ihn einfach mitgenommen! Zum Gl\u00fcck wurde er wieder zur\u00fcckgebracht.',lose:'Er wurde gestohlen! Zum Gl\u00fcck ist er wieder da.'}}
+challenge:{type:'mc',emoji:'👑',text:'Letzte Drachen-Frage: Was trägt ein echter Froschkönig auf dem Kopf?',options:['Eine Zipfelmütze 🎅','Eine goldene Krone 👑','Einen Seerosen-Hut 🌸','Gar nichts – Frösche sind pleite 🐸'],correct:1,win:'Eine goldene Krone! 👑 Nur echte Könige tragen so etwas – und echte Drachenkinder wissen das! ✨',lose:'Eine goldene Krone natürlich! 👑 Deshalb heißt er ja FroschKÖNIG! 😄'}}
 ];
 
 /* PROMPTS removed – provided in chat for dev use only */
@@ -546,19 +551,34 @@ function playAudio(src,rowId){
   a.onended=a.onerror=()=>{row.classList.remove('playing');if(icon)icon.textContent='▶️';currentAudio=null;currentAudioBtn=null};
 }
 function seekAudio(e,rowId){if(!currentAudio)return;const bar=e.currentTarget;const rect=bar.getBoundingClientRect();const x=(e.touches?e.touches[0].clientX:e.clientX)-rect.left;currentAudio.currentTime=(x/rect.width)*currentAudio.duration}
-function mapsUrl(lat,lng,name){return'https://www.google.com/maps/search/?api=1&query='+lat+','+lng+'&query_place_id='+encodeURIComponent(name)}
-function backToStart(){if(currentAudio){currentAudio.pause();currentAudio=null}saveGame();showScreen('splash');document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show');document.getElementById('debugPanel').style.display='none'}
+function mapsUrl(lat,lng,name){return'https://www.google.com/maps/search/?api=1&query='+lat+','+lng}
+function backToStart(){if(currentAudio){currentAudio.pause();currentAudio=null}if(currentAudioBtn){currentAudioBtn.classList.remove('playing');const ic=currentAudioBtn.querySelector('.audio-icon');if(ic)ic.textContent='▶️';currentAudioBtn=null}saveGame();showScreen('splash');document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show');document.getElementById('debugPanel').style.display='none'}
 function toggleMobileView(){document.body.classList.toggle('mobile-sim')}
 
 function playSFX(src){const a=new Audio(src);a.volume=0.6;a.play().catch(()=>{})}
 
 let debugMode=false;
-function startGame(){
+const CODE_VALIDATE_URL='https://tracetour-checkout.florian-s-thiel.workers.dev/validate';
+async function startGame(){
   const code=document.getElementById('loginCode').value.trim().toUpperCase();
   const errEl=document.getElementById('splashError');
-  if(code!=='PRIVAT'&&code!=='TUEBINGEN2025'&&code!=='TUEBINGEN2026'){errEl.textContent='Falscher Zugangscode! 🔒';errEl.style.display='block';return}
+  const isLegacy=(code==='PRIVAT'||code==='TUEBINGEN2025'||code==='TUEBINGEN2026');
+  const isPurchased=/^TT-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code);
+  if(!isLegacy&&!isPurchased){errEl.textContent='Falscher Zugangscode! 🔒';errEl.style.display='block';return}
   const n=document.getElementById('playerName').value.trim();
   if(!n){errEl.textContent='Gib deinen Namen ein! 😊';errEl.style.display='block';return}
+  if(isPurchased){
+    let cached=null;try{cached=localStorage.getItem('tracetour_code_ok')}catch(e){}
+    if(cached!==code){
+      errEl.style.display='none';
+      try{
+        const r=await fetch(CODE_VALIDATE_URL,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code})});
+        const d=await r.json();
+        if(!d.valid){errEl.textContent='Falscher Zugangscode! 🔒';errEl.style.display='block';return}
+        try{localStorage.setItem('tracetour_code_ok',code)}catch(e){}
+      }catch(e){errEl.textContent='Keine Verbindung – die Code-Prüfung braucht einmal Internet! 📶';errEl.style.display='block';return}
+    }
+  }
   debugMode=(code==='PRIVAT');
   playerName=n;saveGame();launchGame();
 }
@@ -674,7 +694,7 @@ function dbgSolveAllOnly(){
   saveGame();updateHeader();renderStation();renderDots();dbgUpdate();
 }
 function dbgResetStation(){
-  stationSolved[currentStation]=false;challengesDone[currentStation]=undefined;
+  delete stationSolved[currentStation];delete challengesDone[currentStation];
   if(maxUnlocked>currentStation)maxUnlocked=currentStation;
   saveGame();renderStation();renderDots();dbgUpdate();
 }
@@ -684,8 +704,9 @@ function showDebug(){if(!debugMode)return;document.getElementById('debugPanel').
 function openMap(){document.getElementById('mapOverlay').classList.add('active');if(!mapReady)initMap();else setTimeout(()=>map.invalidateSize(),150)}
 function closeMap(){document.getElementById('mapOverlay').classList.remove('active')}
 function initMap(){if(mapReady)return;try{
-  map=L.map('map',{zoomControl:false,attributionControl:false}).setView([48.5200,9.0545],15);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{maxZoom:19}).addTo(map);
+  map=L.map('map',{zoomControl:false,attributionControl:true}).setView([48.5200,9.0545],15);
+  map.attributionControl.setPrefix(false);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'}).addTo(map);
   STATIONS.forEach((s,i)=>{const ul=i<=maxUnlocked,done=!!stationSolved[i],cur=i===currentStation;const emoji=ul?(done?'✅':s.emoji):'🔒';const m=L.marker([s.lat,s.lng],{icon:L.divIcon({html:`<div class="map-marker${cur?' map-marker-current':''}">${emoji}</div>`,className:'',iconSize:[32,32],iconAnchor:[16,16]})}).addTo(map);if(ul)m.bindTooltip(s.title,{permanent:false,direction:'top',className:'map-label'});stationMarkers.push(m)});
   routeLine=L.polyline([],{color:'#006a2d',weight:3,opacity:.5,dashArray:'8,10'}).addTo(map);fetchRoute();
   if(navigator.geolocation)navigator.geolocation.watchPosition(p=>{const ll=[p.coords.latitude,p.coords.longitude];if(!userMarker)userMarker=L.marker(ll,{icon:L.divIcon({html:'<div class="map-user-dot"></div>',className:'',iconSize:[14,14],iconAnchor:[7,7]})}).addTo(map);else userMarker.setLatLng(ll)},()=>{},{enableHighAccuracy:true,maximumAge:5000,timeout:15000});
@@ -698,7 +719,7 @@ function renderQuiz(){const n=Object.keys(quizAnswers).length;document.getElemen
 function answerQuiz(qi,oi){quizAnswers[qi]=oi;if(oi===QUIZ_QUESTIONS[qi].correct){totalXp+=QUIZ_XP;showXpToast(`+${QUIZ_XP} 🔥`);spawnSparkles();playSFX('audio/correct.wav')}else{playSFX('audio/wrong.wav')}saveGame();renderQuiz()}
 
 function showCertificate(){quizDone=true;saveGame();const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];const stars=totalXp>=190?3:totalXp>=130?2:1;const msgs=[`Du hast Tübi geholfen, ${playerName}! Ohne dich hätte er seine Flamme nie zurückbekommen!`,`Wow, ${playerName}! Du hast fast alles gewusst! Tübi ist mega stolz auf dich!`,`UNGLAUBLICH, ${playerName}! Du weißt mehr als die meisten Erwachsenen! Tübi ernennt dich zur Drachen-Legende! 🏆`];document.getElementById('certName').textContent=playerName;document.getElementById('certRank').textContent=rank.label;document.getElementById('certScore').textContent=totalXp;document.getElementById('certStars').textContent='⭐'.repeat(stars)+'☆'.repeat(3-stars);document.getElementById('certMsg').textContent=msgs[stars-1];showScreen('certificate');playSFX('audio/fanfare.wav');setTimeout(()=>playSFX('audio/applause.mp3'),800)}
-function goHome(){playerName='';currentStation=0;maxUnlocked=0;totalXp=0;stationSolved={};quizAnswers={};quizDone=false;challengesDone={};localStorage.removeItem(SAVE_KEY);document.getElementById('playerName').value='';document.getElementById('splashError').style.display='none';showScreen('splash');document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show')}
+function goHome(){if(!confirm('Wirklich nochmal von vorne anfangen? Dein Abenteuer wird gelöscht!'))return;playerName='';currentStation=0;maxUnlocked=0;totalXp=0;stationSolved={};quizAnswers={};quizDone=false;challengesDone={};localStorage.removeItem(SAVE_KEY);document.getElementById('playerName').value='';document.getElementById('splashError').style.display='none';showScreen('splash');document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show')}
 function shareResult(){const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];const t=`🐉🔥 Ich habe Tübi geholfen, seine Flamme zurückzubekommen! ${totalXp} Drachenfunken – Rang: ${rank.label}\ntracetour.de/kinder.html`;if(navigator.share)navigator.share({title:'TraceTour Kids',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>alert('Kopiert! 📋')).catch(()=>alert(t))}
 
 /* ===== SELFIE CAMERA WITH TÜBI ===== */
