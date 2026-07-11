@@ -143,6 +143,7 @@ async function sendCodeMail(env, { to, name, code, tour }) {
     <li>${startHint}</li>
   </ol>
   <p style="font-size:.85rem;color:#64748b">Tipp: Lade die Tour vorher im WLAN für unterwegs herunter. Kopfhörer oder Lautsprecher nicht vergessen!</p>
+  <p style="font-size:.8rem;color:#94a3b8">Gut zu wissen: Ab dem ersten Start hast du 48 Stunden Zeit für die Tour – aktiviere den Code also erst, wenn du wirklich losgehst. Einlösbar bis 12 Monate nach Kauf.</p>
   <p style="font-size:.85rem;color:#64748b">Fragen? Antworte einfach auf diese E-Mail.<br>TraceTour – by Florian S. Thiel · <a href="https://tracetour.de">tracetour.de</a></p>
 </div>`,
   };
@@ -198,19 +199,31 @@ async function handleValidate(request, env) {
     return new Response(JSON.stringify({ valid: false, reason: 'wrong_tour', codeTour }), { headers: { ...JSON_HEADERS, ...cors(env) } });
   }
 
-  // Geräte-Limit gegen Weitergabe: ein Code darf auf maximal DEVICE_CAP verschiedenen
-  // Geräten aktiviert werden. Familie/Zweitgerät/Neuinstallation = ok, WhatsApp-Gruppe = blockiert.
+  // Schutz gegen Weitergabe — zwei kombinierte Schranken:
+  //  1) Aktivierungs-Zeitfenster: ab dem ersten Start bleibt der Code ACTIVATION_HOURS lang
+  //     aktivierbar. Danach wird KEIN neues Gerät mehr freigeschaltet (Code "verglüht").
+  //  2) Geräte-Limit: maximal DEVICE_CAP verschiedene Geräte insgesamt.
+  // Bereits aktivierte (bekannte) Geräte bleiben IMMER gültig — kein Rauswurf mitten in der Tour,
+  // auch offline. Nur NEUE Geräte unterliegen Fenster + Limit. So wird das Durchschleusen
+  // (Code an Freunde weitergeben) gestoppt, ohne den ehrlichen Käufer zu behindern.
   const DEVICE_CAP = parseInt(env.DEVICE_CAP || '4', 10);
+  const WINDOW_MS = parseInt(env.ACTIVATION_HOURS || '48', 10) * 3600 * 1000;
   const device = String(body.device || '').slice(0, 64);
+  const now = Date.now();
   state.devices = Array.isArray(state.devices) ? state.devices : [];
   const known = device && state.devices.includes(device);
   if (!known) {
+    // Fenster nur prüfen, wenn der Code schon einmal aktiviert wurde
+    if (state.firstUse && WINDOW_MS > 0 && (now - state.firstUse) > WINDOW_MS) {
+      return new Response(JSON.stringify({ valid: false, reason: 'expired' }), { headers: { ...JSON_HEADERS, ...cors(env) } });
+    }
     if (state.devices.length >= DEVICE_CAP) {
       return new Response(JSON.stringify({ valid: false, reason: 'device_limit' }), { headers: { ...JSON_HEADERS, ...cors(env) } });
     }
     if (device) state.devices.push(device);
+    if (!state.firstUse) state.firstUse = now;
   }
-  if (!state.firstUse) state.firstUse = Date.now();
   await env.CODES.put(`code:${code}`, JSON.stringify(state));
-  return new Response(JSON.stringify({ valid: true, devicesUsed: state.devices.length, deviceCap: DEVICE_CAP }), { headers: { ...JSON_HEADERS, ...cors(env) } });
+  const hoursLeft = state.firstUse ? Math.max(0, Math.round((state.firstUse + WINDOW_MS - now) / 3600000)) : Math.round(WINDOW_MS / 3600000);
+  return new Response(JSON.stringify({ valid: true, devicesUsed: state.devices.length, deviceCap: DEVICE_CAP, hoursLeft }), { headers: { ...JSON_HEADERS, ...cors(env) } });
 }
