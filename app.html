@@ -1599,6 +1599,7 @@ function checkSavedGame(){
 
 // ====== LOGIN ======
 const CODE_VALIDATE_URL='https://tracetour-checkout.florian-s-thiel.workers.dev/validate';
+function getDeviceId(){try{let d=localStorage.getItem('tracetour_device');if(!d){d=(crypto&&crypto.randomUUID?crypto.randomUUID():'d'+Date.now()+Math.random().toString(36).slice(2));localStorage.setItem('tracetour_device',d)}return d}catch(e){return 'nostore'}}
 function showLoginError(msg){
   const err=document.getElementById('loginError');
   err.textContent=msg||t('loginError');err.style.display='block';
@@ -1619,10 +1620,12 @@ async function doLogin(){
       const btn=document.getElementById('loginBtn');const oldTxt=btn?btn.textContent:'';
       if(btn){btn.disabled=true;btn.textContent='…'}
       try{
-        const r=await fetch(CODE_VALIDATE_URL,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code,tour:'adult'})});
+        const r=await fetch(CODE_VALIDATE_URL,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code,tour:'adult',device:getDeviceId()})});
         const d=await r.json();
         if(!d.valid){
-          if(d.reason==='wrong_tour'){showLoginError(lang==='en'?'This code belongs to the kids tour! 🐉 Open the kids tour instead.':'Dieser Code gehört zur Kindertour! 🐉 Öffne dafür die Kindertour.');}else{showLoginError();}
+          if(d.reason==='wrong_tour'){showLoginError(lang==='en'?'This code belongs to the kids tour! 🐉 Open the kids tour instead.':'Dieser Code gehört zur Kindertour! 🐉 Öffne dafür die Kindertour.');}
+          else if(d.reason==='device_limit'){showLoginError(lang==='en'?'This code has already been used on too many devices.':'Dieser Code wurde bereits auf zu vielen Geräten benutzt.');}
+          else{showLoginError();}
           if(btn){btn.disabled=false;btn.textContent=oldTxt}return;
         }
         try{localStorage.setItem('tracetour_code_ok_adult',code)}catch(e){}

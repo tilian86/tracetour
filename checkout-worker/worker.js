@@ -197,11 +197,20 @@ async function handleValidate(request, env) {
   if (codeTour !== requestedTour) {
     return new Response(JSON.stringify({ valid: false, reason: 'wrong_tour', codeTour }), { headers: { ...JSON_HEADERS, ...cors(env) } });
   }
-  // Erste Aktivierung protokollieren (Code bleibt für denselben Käufer wiederverwendbar,
-  // z.B. zweites Gerät oder erneutes Spielen — AGB: persönlich, nicht übertragbar)
-  if (!state.firstUse) {
-    state.firstUse = Date.now();
-    await env.CODES.put(`code:${code}`, JSON.stringify(state));
+
+  // Geräte-Limit gegen Weitergabe: ein Code darf auf maximal DEVICE_CAP verschiedenen
+  // Geräten aktiviert werden. Familie/Zweitgerät/Neuinstallation = ok, WhatsApp-Gruppe = blockiert.
+  const DEVICE_CAP = parseInt(env.DEVICE_CAP || '4', 10);
+  const device = String(body.device || '').slice(0, 64);
+  state.devices = Array.isArray(state.devices) ? state.devices : [];
+  const known = device && state.devices.includes(device);
+  if (!known) {
+    if (state.devices.length >= DEVICE_CAP) {
+      return new Response(JSON.stringify({ valid: false, reason: 'device_limit' }), { headers: { ...JSON_HEADERS, ...cors(env) } });
+    }
+    if (device) state.devices.push(device);
   }
-  return new Response(JSON.stringify({ valid: true }), { headers: { ...JSON_HEADERS, ...cors(env) } });
+  if (!state.firstUse) state.firstUse = Date.now();
+  await env.CODES.put(`code:${code}`, JSON.stringify(state));
+  return new Response(JSON.stringify({ valid: true, devicesUsed: state.devices.length, deviceCap: DEVICE_CAP }), { headers: { ...JSON_HEADERS, ...cors(env) } });
 }
