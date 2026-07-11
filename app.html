@@ -1625,6 +1625,7 @@ async function doLogin(){
         if(!d.valid){
           if(d.reason==='wrong_tour'){showLoginError(lang==='en'?'This code belongs to the kids tour! 🐉 Open the kids tour instead.':'Dieser Code gehört zur Kindertour! 🐉 Öffne dafür die Kindertour.');}
           else if(d.reason==='device_limit'){showLoginError(lang==='en'?'This code has already been used on too many devices.':'Dieser Code wurde bereits auf zu vielen Geräten benutzt.');}
+          else if(d.reason==='expired'){showLoginError(lang==='en'?'This code has expired – the time window after the first start is over.':'Dieser Code ist abgelaufen – das Zeitfenster nach dem Start ist vorbei.');}
           else{showLoginError();}
           if(btn){btn.disabled=false;btn.textContent=oldTxt}return;
         }
