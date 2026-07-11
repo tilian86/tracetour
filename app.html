@@ -1677,8 +1677,9 @@ function initMap(){
   if(mapInitStarted)return;mapInitStarted=true;
   setTimeout(()=>{
     try{
-      map=L.map('map',{zoomControl:false,attributionControl:false}).setView([48.5215,9.0540],15);
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:19}).addTo(map);
+      map=L.map('map',{zoomControl:false,attributionControl:true}).setView([48.5215,9.0540],15);
+      map.attributionControl.setPrefix(false);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'}).addTo(map);
       stations.forEach((s,i)=>{
         const visible=i<=maxUnlockedStation;
         const m=L.circleMarker([s.lat,s.lng],{radius:i===0?10:6,color:'#f3632d',fillColor:i===0?'#f3632d':'#4a5d73',fillOpacity:visible?(i===0?1:.5):0,weight:visible?2:0,opacity:visible?1:0}).addTo(map);
