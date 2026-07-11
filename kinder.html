@@ -568,14 +568,14 @@ async function startGame(){
   const n=document.getElementById('playerName').value.trim();
   if(!n){errEl.textContent='Gib deinen Namen ein! 😊';errEl.style.display='block';return}
   if(isPurchased){
-    let cached=null;try{cached=localStorage.getItem('tracetour_code_ok')}catch(e){}
+    let cached=null;try{cached=localStorage.getItem('tracetour_code_ok_kids')}catch(e){}
     if(cached!==code){
       errEl.style.display='none';
       try{
-        const r=await fetch(CODE_VALIDATE_URL,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code})});
+        const r=await fetch(CODE_VALIDATE_URL,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code,tour:'kids'})});
         const d=await r.json();
-        if(!d.valid){errEl.textContent='Falscher Zugangscode! 🔒';errEl.style.display='block';return}
-        try{localStorage.setItem('tracetour_code_ok',code)}catch(e){}
+        if(!d.valid){errEl.textContent=d.reason==='wrong_tour'?'Dieser Code gehört zur großen Tour! 🔍 Öffne dafür die Erwachsenen-Tour.':'Falscher Zugangscode! 🔒';errEl.style.display='block';return}
+        try{localStorage.setItem('tracetour_code_ok_kids',code)}catch(e){}
       }catch(e){errEl.textContent='Keine Verbindung – die Code-Prüfung braucht einmal Internet! 📶';errEl.style.display='block';return}
     }
   }
