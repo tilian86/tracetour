@@ -1614,15 +1614,18 @@ async function doLogin(){
   if(!name){document.getElementById('loginName').focus();return}
   if(isPurchased){
     // Gekaufter Code: online gegen den Worker validieren (einmal pro Gerät, danach offline ok)
-    let cached=null;try{cached=localStorage.getItem('tracetour_code_ok')}catch(e){}
+    let cached=null;try{cached=localStorage.getItem('tracetour_code_ok_adult')}catch(e){}
     if(cached!==code){
       const btn=document.getElementById('loginBtn');const oldTxt=btn?btn.textContent:'';
       if(btn){btn.disabled=true;btn.textContent='…'}
       try{
-        const r=await fetch(CODE_VALIDATE_URL,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code})});
+        const r=await fetch(CODE_VALIDATE_URL,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code,tour:'adult'})});
         const d=await r.json();
-        if(!d.valid){showLoginError();if(btn){btn.disabled=false;btn.textContent=oldTxt}return;}
-        try{localStorage.setItem('tracetour_code_ok',code)}catch(e){}
+        if(!d.valid){
+          if(d.reason==='wrong_tour'){showLoginError(lang==='en'?'This code belongs to the kids tour! 🐉 Open the kids tour instead.':'Dieser Code gehört zur Kindertour! 🐉 Öffne dafür die Kindertour.');}else{showLoginError();}
+          if(btn){btn.disabled=false;btn.textContent=oldTxt}return;
+        }
+        try{localStorage.setItem('tracetour_code_ok_adult',code)}catch(e){}
       }catch(e){
         showLoginError(lang==='en'?'No connection – code check needs internet once.':'Keine Verbindung – die Code-Prüfung braucht einmalig Internet.');
         if(btn){btn.disabled=false;btn.textContent=oldTxt}return;

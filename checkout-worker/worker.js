@@ -72,6 +72,8 @@ async function handleWebhook(request, env) {
   const sessionId = session.id;
   const email = session.customer_details?.email || session.customer_email || '';
   const name = session.customer_details?.name || '';
+  // Tour-Bindung: Payment-Link-Metadata wird von Stripe in die Session kopiert
+  const tour = session.metadata?.tour === 'kids' ? 'kids' : 'adult';
 
   // Idempotenz: gibt es für diese Session schon einen Code?
   const existing = await env.CODES.get(`session:${sessionId}`);
@@ -79,7 +81,7 @@ async function handleWebhook(request, env) {
   if (existing) {
     code = JSON.parse(existing).code;
   } else {
-    code = await assignCode(env, { sessionId, email, name });
+    code = await assignCode(env, { sessionId, email, name, tour });
     if (!code) {
       console.error('CODE POOL EMPTY!');
       return new Response('No codes left', { status: 500 }); // Stripe retried -> Zeit zum Nachfüllen
@@ -88,7 +90,7 @@ async function handleWebhook(request, env) {
 
   // Mail senden (nicht fatal wenn's fehlschlägt: /code-Fallback existiert,
   // aber 500 zurückgeben, damit Stripe es erneut versucht, solange Resend fehlt)
-  const mailed = await sendCodeMail(env, { to: email, name, code });
+  const mailed = await sendCodeMail(env, { to: email, name, code, tour });
   if (!mailed) {
     console.warn(`Mail fehlgeschlagen für ${sessionId} (Code ${code}) — Stripe wird retryn`);
     return new Response('Mail failed, will retry', { status: 500 });
@@ -107,34 +109,40 @@ async function assignCode(env, meta) {
     const state = JSON.parse((await env.CODES.get(`code:${code}`)) || '{}');
     if (state.status !== 'unused') continue;
     await env.CODES.put(`code:${code}`, JSON.stringify({
-      status: 'assigned', session: meta.sessionId, email: meta.email, name: meta.name, ts: Date.now(),
+      status: 'assigned', tour: meta.tour, session: meta.sessionId, email: meta.email, name: meta.name, ts: Date.now(),
     }));
-    await env.CODES.put(`session:${meta.sessionId}`, JSON.stringify({ code, ts: Date.now() }));
+    await env.CODES.put(`session:${meta.sessionId}`, JSON.stringify({ code, tour: meta.tour, ts: Date.now() }));
     await env.CODES.put('meta:counter', String(counter + 1));
     return code;
   }
   return null;
 }
 
-async function sendCodeMail(env, { to, name, code }) {
+async function sendCodeMail(env, { to, name, code, tour }) {
   if (!env.RESEND_API_KEY || !to) return false;
   const first = (name || '').split(' ')[0] || 'Entdecker/in';
+  const kids = tour === 'kids';
+  const tourName = kids ? 'TraceTour Kids – Tübis Geheimnisse' : 'TraceTour Tübingen';
+  const tourUrl = kids ? 'https://tracetour.de/kinder.html' : 'https://tracetour.de/app.html';
+  const startHint = kids
+    ? 'Startet am Marktplatz beim Rathaus – Tübi wartet schon! 🐉'
+    : 'Starte am Schloss Hohentübingen – und folge Heinrichs Spur 🔍';
   const body = {
     from: env.FROM_EMAIL,
     to: [to],
-    subject: `Dein TraceTour-Zugangscode: ${code}`,
+    subject: `Dein Zugangscode für ${tourName}: ${code}`,
     html: `
 <div style="font-family:-apple-system,Segoe UI,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#1e293b">
-  <h1 style="font-size:1.4rem">Willkommen bei TraceTour, ${escapeHtml(first)}! 🔍</h1>
+  <h1 style="font-size:1.4rem">Willkommen bei ${tourName}, ${escapeHtml(first)}! ${kids ? '🐉' : '🔍'}</h1>
   <p>vielen Dank für deinen Kauf. Hier ist dein persönlicher Zugangscode:</p>
-  <div style="background:#1e293b;color:#fff;font-size:1.6rem;font-weight:800;letter-spacing:2px;text-align:center;padding:18px;border-radius:12px;margin:20px 0">${code}</div>
+  <div style="background:${kids ? '#006a2d' : '#1e293b'};color:#fff;font-size:1.6rem;font-weight:800;letter-spacing:2px;text-align:center;padding:18px;border-radius:12px;margin:20px 0">${code}</div>
   <p><strong>So geht's los:</strong></p>
   <ol>
-    <li>Öffne <a href="https://tracetour.de/app.html">tracetour.de/app.html</a> auf deinem Smartphone</li>
-    <li>Gib den Code ein und wähle deinen Ermittler-Namen</li>
-    <li>Starte am Schloss Hohentübingen – und folge Heinrichs Spur</li>
+    <li>Öffne <a href="${tourUrl}">${tourUrl.replace('https://', '')}</a> auf deinem Smartphone</li>
+    <li>Gib den Code ein${kids ? ' und euren Drachenkind-Namen' : ' und wähle deinen Ermittler-Namen'}</li>
+    <li>${startHint}</li>
   </ol>
-  <p style="font-size:.85rem;color:#64748b">Tipp: Lade die Tour vorher im WLAN für unterwegs herunter (Button „Offline verfügbar machen" in der App). Kopfhörer nicht vergessen!</p>
+  <p style="font-size:.85rem;color:#64748b">Tipp: Lade die Tour vorher im WLAN für unterwegs herunter. Kopfhörer oder Lautsprecher nicht vergessen!</p>
   <p style="font-size:.85rem;color:#64748b">Fragen? Antworte einfach auf diese E-Mail.<br>TraceTour – by Florian S. Thiel · <a href="https://tracetour.de">tracetour.de</a></p>
 </div>`,
   };
@@ -167,7 +175,8 @@ async function handleGetCode(url, env) {
   if (!entry) {
     return new Response(JSON.stringify({ pending: true }), { status: 202, headers: { ...JSON_HEADERS, ...cors(env) } });
   }
-  return new Response(JSON.stringify({ code: JSON.parse(entry).code }), { headers: { ...JSON_HEADERS, ...cors(env) } });
+  const e = JSON.parse(entry);
+  return new Response(JSON.stringify({ code: e.code, tour: e.tour || 'adult' }), { headers: { ...JSON_HEADERS, ...cors(env) } });
 }
 
 // ---------- App-Login: Code validieren ----------
@@ -181,6 +190,12 @@ async function handleValidate(request, env) {
   const state = JSON.parse((await env.CODES.get(`code:${code}`)) || 'null');
   if (!state || state.status !== 'assigned') {
     return new Response(JSON.stringify({ valid: false, reason: 'unknown' }), { headers: { ...JSON_HEADERS, ...cors(env) } });
+  }
+  // Tour-Bindung: Code gilt nur für die gekaufte Tour
+  const requestedTour = body.tour === 'kids' ? 'kids' : 'adult';
+  const codeTour = state.tour || 'adult';
+  if (codeTour !== requestedTour) {
+    return new Response(JSON.stringify({ valid: false, reason: 'wrong_tour', codeTour }), { headers: { ...JSON_HEADERS, ...cors(env) } });
   }
   // Erste Aktivierung protokollieren (Code bleibt für denselben Käufer wiederverwendbar,
   // z.B. zweites Gerät oder erneutes Spielen — AGB: persönlich, nicht übertragbar)
