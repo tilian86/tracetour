@@ -711,9 +711,14 @@ body {
       <h2 class="font-headline text-4xl md:text-5xl font-black text-white tracking-tighter leading-none mb-2" data-t="cta-title" data-t-html="1">BEREIT FÜR DIE<br/>ERSTE MISSION?</h2>
       <p class="text-orange-100 text-sm font-body" data-t="cta-subtitle">Kein App-Download. Kein Gerät nötig außer deinem Smartphone.</p>
     </div>
-    <a href="app.html" class="relative z-10 bg-slate-950 text-white px-12 py-5 rounded-xl font-brand font-black text-lg tracking-widest hover:bg-slate-900 hover:scale-105 transition-all shadow-xl whitespace-nowrap" data-t="cta-button">
-      JETZT STARTEN
-    </a>
+    <div class="relative z-10 flex flex-col sm:flex-row items-center gap-3">
+      <a href="app.html" class="bg-slate-950 text-white px-12 py-5 rounded-xl font-brand font-black text-lg tracking-widest hover:bg-slate-900 hover:scale-105 transition-all shadow-xl whitespace-nowrap text-center" data-t="cta-button">
+        JETZT STARTEN
+      </a>
+      <button onclick="shareTour()" class="flex items-center justify-center gap-2 bg-white/15 text-white px-8 py-5 rounded-xl font-brand font-bold text-sm tracking-widest hover:bg-white/25 transition-all whitespace-nowrap border border-white/25" data-t="cta-share" aria-label="TraceTour teilen">
+        <span class="material-symbols-outlined text-xl">ios_share</span> WEITERSAGEN
+      </button>
+    </div>
   </div>
 </section>
 
@@ -749,6 +754,7 @@ const translations = {
   'nav-about': ['Über TraceTour', 'About TraceTour'],
   'nav-login': ['CODE EINLÖSEN', 'REDEEM CODE'],
   'nav-start': ['STARTEN', 'START'],
+  'cta-share': ['WEITERSAGEN', 'SHARE'],
 
   // Hero
   'hero-title': ['DIE STADT IST DEIN<br/><span class="text-primary-container">SPIELFELD.</span>', 'THE CITY IS YOUR<br/><span class="text-primary-container">PLAYGROUND.</span>'],
@@ -910,6 +916,38 @@ function setPageLang(l) {
       ? 'Gamified audio city tour through T\u00fcbingen: crime story, riddles and real history \u2013 right in your browser. Adult mystery tour and kids tour with T\u00fcbi the dragon.'
       : md.dataset.de);
   }
+}
+
+// Teilen: native Share-Leiste auf dem Handy, Zwischenablage-Fallback auf Desktop
+function shareTour() {
+  const en = currentLang === 'en';
+  const shareData = {
+    title: 'TraceTour Tübingen',
+    text: en
+      ? 'Turn Tübingen into a crime scene: a gamified audio city tour with puzzles, story and real history. Play right in your browser 🔍'
+      : 'Mach Tübingen zum Tatort: eine gamifizierte Audio-Stadttour mit Rätseln, Story und echter Geschichte. Direkt im Browser spielbar 🔍',
+    url: 'https://tracetour.de'
+  };
+  if (navigator.share) {
+    navigator.share(shareData).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(shareData.text + ' https://tracetour.de')
+      .then(() => showShareToast(en ? 'Link copied! 📋' : 'Link kopiert! 📋'))
+      .catch(() => showShareToast('https://tracetour.de'));
+  }
+}
+function showShareToast(msg) {
+  let t = document.getElementById('shareToast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'shareToast';
+    t.style.cssText = 'position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:#0f172a;color:#fff;padding:14px 22px;border-radius:12px;font-family:inherit;font-size:14px;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,.4);border:1px solid rgba(243,99,45,.4);opacity:0;transition:all .3s;z-index:9999;pointer-events:none';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  requestAnimationFrame(() => { t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(0)'; });
+  clearTimeout(t._h);
+  t._h = setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(-50%) translateY(20px)'; }, 2600);
 }
 
 // Init
