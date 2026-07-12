@@ -1,10 +1,11 @@
 // TraceTour Service Worker — Offline Cache
-const CACHE_NAME = 'tracetour-v2';
+const CACHE_NAME = 'tracetour-v3';
 
 const CORE_FILES = [
   'index.html',
   'app.html',
   'favicon.svg',
+  'fonts/fonts.css',
 ];
 
 // Leaflet vom CDN — wird beim Offline-Download mitgecacht, sonst ist die Karte offline kaputt
@@ -74,7 +75,7 @@ self.addEventListener('fetch', event => {
   const isCdnAsset = url.hostname === 'unpkg.com';
 
   // Audio, images, Leaflet: cache-first
-  if (isCdnAsset || url.pathname.match(/\.(mp3|wav|jpg|png|svg|css)$/)) {
+  if (isCdnAsset || url.pathname.match(/\.(mp3|wav|jpg|png|svg|css|woff2)$/)) {
     event.respondWith(
       caches.match(event.request).then(cached => {
         if (cached) return cached;
