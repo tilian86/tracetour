@@ -152,6 +152,25 @@ body {
   .city-card .label span.status { font-size: 0.6rem; letter-spacing: 0.2em; margin-top: 4px; }
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TouristAttraction",
+  "name": "TraceTour Tübingen",
+  "description": "Gamifizierte Audio-Stadttouren durch Tübingen: Krimi-Tour für Erwachsene und Kindertour mit Drache Tübi. Direkt im Browser, ohne App-Installation.",
+  "url": "https://tracetour.de/",
+  "image": "https://tracetour.de/images/og-preview.jpg",
+  "address": {"@type": "PostalAddress", "addressLocality": "Tübingen", "postalCode": "72070", "addressCountry": "DE"},
+  "geo": {"@type": "GeoCoordinates", "latitude": 48.5216, "longitude": 9.0576},
+  "isAccessibleForFree": false,
+  "makesOffer": [
+    {"@type": "Offer", "name": "Solo-Ticket", "price": "9.99", "priceCurrency": "EUR"},
+    {"@type": "Offer", "name": "Kindertour mit Tübi", "price": "9.99", "priceCurrency": "EUR"},
+    {"@type": "Offer", "name": "Team-Ticket (3-7 Personen)", "price": "7.99", "priceCurrency": "EUR"},
+    {"@type": "Offer", "name": "Schulklassen-Ticket", "price": "79.99", "priceCurrency": "EUR"}
+  ]
+}
+</script>
 </head>
 <body class="font-body selection:bg-primary-container selection:text-white">
 
@@ -210,7 +229,7 @@ body {
   </div>
   <div class="absolute bottom-12 right-6 hidden lg:block border-r-2 border-primary/30 pr-4 py-2 opacity-50 text-right">
     <p class="font-body text-[10px] tracking-[0.2em] uppercase text-slate-400">Case File: 1869</p>
-    <p class="font-body text-[10px] tracking-[0.2em] uppercase text-slate-400">Die Formel des Forschers</p>
+    <p class="font-body text-[10px] tracking-[0.2em] uppercase text-slate-400" data-t="hud-case">Die Formel des Forschers</p>
   </div>
 </header>
 
@@ -265,14 +284,14 @@ body {
       <div class="lg:col-span-8 group relative overflow-hidden rounded-xl shadow-2xl">
         <img class="w-full h-full min-h-[380px] object-cover transition-transform duration-700 group-hover:scale-105"
           src="images/tour_tuebingen.jpg"
-          alt="Hölderlinturm Tübingen">
+          alt="Hölderlinturm Tübingen" loading="lazy" decoding="async">
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
         <div class="absolute bottom-0 left-0 p-8 w-full">
           <div class="flex items-center gap-4 mb-4">
             <span class="bg-primary-container text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter" data-t="tour-badge">Verfügbar</span>
             <span class="text-slate-300 font-body text-xs uppercase tracking-widest">Tübingen, 1869</span>
           </div>
-          <h3 class="font-headline text-4xl md:text-5xl font-black text-white mb-3 tracking-tighter">Die Formel des Forschers</h3>
+          <h3 class="font-headline text-4xl md:text-5xl font-black text-white mb-3 tracking-tighter" data-t="tour-title">Die Formel des Forschers</h3>
           <p class="font-body text-slate-300 text-sm mb-6 max-w-lg leading-relaxed" data-t="tour-teaser">Ein Wissenschaftler auf der Flucht. Eine Formel, zu gefährlich für die Mächtigen. 17 Stationen vom Schloss bis zum Neckar – findest du alle Fragmente, bevor es zu spät ist?</p>
           <div class="grid grid-cols-2 gap-x-6 gap-y-3">
             <div class="flex items-center gap-2">
@@ -349,7 +368,7 @@ body {
       <div class="lg:col-span-8 group relative overflow-hidden rounded-xl shadow-2xl">
         <img class="w-full h-full min-h-[380px] object-cover transition-transform duration-700 group-hover:scale-105"
           src="images/tour_kinder.jpg"
-          alt="Tübi der Drache am Tübinger Rathaus">
+          alt="Tübi der Drache am Tübinger Rathaus" loading="lazy" decoding="async">
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent"></div>
         <div class="absolute bottom-0 left-0 p-8 w-full">
           <div class="flex items-center gap-3 mb-4">
@@ -467,7 +486,7 @@ body {
     <div class="flex flex-col md:flex-row items-center gap-12">
       <!-- Photo placeholder -->
       <div class="w-56 h-56 md:w-72 md:h-64 flex-shrink-0 rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
-        <img src="images/team-v2.jpg" class="w-full h-full object-cover" alt="TraceTour Team" style="object-position:20% 100%;filter:saturate(1.1) brightness(.95) contrast(1.05)">
+        <img src="images/team-v2.jpg" class="w-full h-full object-cover" alt="TraceTour Team" style="object-position:20% 100%;filter:saturate(1.1) brightness(.95) contrast(1.05)" loading="lazy" decoding="async">
       </div>
       <div>
         <h2 class="font-headline text-3xl font-extrabold text-on-surface tracking-tight mb-2" data-t="about-title">Über TraceTour</h2>
@@ -657,7 +676,7 @@ body {
     </div>
     <div class="grid grid-cols-3 gap-3 sm:gap-6">
       <div class="city-card">
-        <img src="images/city_tuebingen2.jpg" alt="Tübingen II">
+        <img src="images/city_tuebingen2.jpg" alt="Tübingen II" loading="lazy" decoding="async">
         <div class="overlay"></div>
         <div class="label">
           <span class="name">Tübingen II</span>
@@ -665,7 +684,7 @@ body {
         </div>
       </div>
       <div class="city-card">
-        <img src="images/city_muenchen.jpg" alt="München">
+        <img src="images/city_muenchen.jpg" alt="München" loading="lazy" decoding="async">
         <div class="overlay"></div>
         <div class="label">
           <span class="name">München</span>
@@ -673,7 +692,7 @@ body {
         </div>
       </div>
       <div class="city-card">
-        <img src="images/city_stuttgart.jpg" alt="Stuttgart">
+        <img src="images/city_stuttgart.jpg" alt="Stuttgart" loading="lazy" decoding="async">
         <div class="overlay"></div>
         <div class="label">
           <span class="name">Stuttgart</span>
@@ -842,6 +861,8 @@ const translations = {
   // Expansion
   'expansion-title': ['Weitere Städte', 'More Cities'],
   'expansion-subtitle': ['Weitere Städte & Touren in Vorbereitung', 'More cities & tours in preparation'],
+  'tour-title': ['Die Formel des Forschers', "The Researcher's Formula"],
+  'hud-case': ['Die Formel des Forschers', "The Researcher's Formula"],
   'city-prep': ['In Vorbereitung', 'In Preparation'],
 
   // CTA
@@ -878,6 +899,17 @@ function setPageLang(l) {
   });
   // Update html lang attribute
   document.documentElement.lang = l;
+  // Update title + meta description
+  document.title = l === 'en'
+    ? 'TraceTour by Florian S. Thiel \u2013 The City Is Your Playing Field'
+    : 'TraceTour by Florian S. Thiel \u2013 Die Stadt ist dein Spielfeld';
+  const md = document.querySelector('meta[name="description"]');
+  if (md) {
+    if (!md.dataset.de) md.dataset.de = md.getAttribute('content');
+    md.setAttribute('content', l === 'en'
+      ? 'Gamified audio city tour through T\u00fcbingen: crime story, riddles and real history \u2013 right in your browser. Adult mystery tour and kids tour with T\u00fcbi the dragon.'
+      : md.dataset.de);
+  }
 }
 
 // Init
