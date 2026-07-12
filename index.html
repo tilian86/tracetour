@@ -167,14 +167,14 @@ body {
       <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#how-it-works" data-t="nav-how">So funktioniert's</a>
       <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#pricing" data-t="nav-pricing">Preise</a>
       <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#about" data-t="nav-about">Über TraceTour</a>
-      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#expansion" data-t="nav-coming">Coming Soon</a>
+      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#expansion" data-t="nav-coming">Weitere Städte</a>
     </div>
     <div class="flex items-center gap-3">
       <div class="flex gap-1 mr-2">
         <button class="lang-btn-lp px-2.5 py-1 text-[11px] font-bold tracking-wider rounded-md border border-white/10 text-slate-400 hover:text-slate-200 transition-all cursor-pointer" onclick="setPageLang('de')">DE</button>
         <button class="lang-btn-lp px-2.5 py-1 text-[11px] font-bold tracking-wider rounded-md border border-white/10 text-slate-400 hover:text-slate-200 transition-all cursor-pointer" onclick="setPageLang('en')">EN</button>
       </div>
-      <a href="app.html" class="bg-primary-container text-white px-5 py-2 rounded-lg font-brand uppercase tracking-[0.05em] text-sm font-bold hover:bg-orange-500 transition-all active:scale-95 shadow-lg shadow-primary-container/20" data-t="nav-login">LOGIN</a>
+      <a href="app.html" class="bg-primary-container text-white px-5 py-2 rounded-lg font-brand uppercase tracking-[0.05em] text-sm font-bold hover:bg-orange-500 transition-all active:scale-95 shadow-lg shadow-primary-container/20" data-t="nav-login">CODE EINLÖSEN</a>
     </div>
   </div>
 </nav>
@@ -496,7 +496,7 @@ body {
     <h2 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-4" data-t="pricing-title">Dein Ticket zum Abenteuer</h2>
     <p class="font-body text-slate-400 text-sm max-w-lg mx-auto" data-t="pricing-subtitle">Einmal kaufen, sofort starten. Kein Abo, keine versteckten Kosten. Du bekommst deinen Zugangscode direkt nach der Bezahlung.</p>
   </div>
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
     <!-- Solo Ticket -->
     <div class="glass-panel rounded-2xl p-8 border border-white/10 flex flex-col hover:border-white/20 transition-colors">
       <div class="mb-6">
@@ -529,8 +529,46 @@ body {
           <span data-t="price-solo-f5">Persönliche Urkunde mit Rang</span>
         </li>
       </ul>
-      <a href="#" class="block w-full bg-primary-container text-white py-4 rounded-xl font-brand font-bold uppercase tracking-widest hover:bg-orange-500 transition-all text-center text-sm shadow-lg shadow-primary-container/20" data-t="price-solo-cta">
-        JETZT BUCHEN
+      <a href="mailto:info@tracetour.de?subject=Erinnerung%3A%20TraceTour-Start%20%28Solo%29&body=Hallo%21%20Bitte%20gebt%20mir%20Bescheid%2C%20sobald%20die%20Tour%20buchbar%20ist.%20/%20Please%20notify%20me%20when%20booking%20opens." class="block w-full bg-primary-container text-white py-4 rounded-xl font-brand font-bold uppercase tracking-widest hover:bg-orange-500 transition-all text-center text-sm shadow-lg shadow-primary-container/20" data-t="price-solo-cta">
+        BALD BUCHBAR · ERINNERE MICH 🔔
+      </a>
+    </div>
+
+    <!-- Kindertour Ticket -->
+    <div class="glass-panel rounded-2xl p-8 border border-emerald-400/30 flex flex-col hover:border-emerald-400/50 transition-colors relative">
+      <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-[10px] font-brand font-bold uppercase tracking-widest px-3 py-1 rounded-full" data-t="price-kids-badge">Für Familien</div>
+      <div class="mb-6">
+        <h3 class="font-brand font-bold text-emerald-400 uppercase text-xs tracking-widest mb-2" data-t="price-kids-name">Kindertour mit Tübi 🐉</h3>
+        <div class="flex items-baseline gap-1">
+          <span class="font-headline text-5xl font-black text-on-surface">9,99</span>
+          <span class="text-slate-400 font-body text-lg">&euro;</span>
+        </div>
+        <p class="text-slate-500 text-sm mt-2" data-t="price-kids-per">pro Familie (1 Gerät)</p>
+      </div>
+      <ul class="space-y-3 mb-8 flex-1">
+        <li class="flex items-center gap-3 font-body text-sm text-slate-300">
+          <span class="material-symbols-outlined text-emerald-400 text-lg">check_circle</span>
+          <span data-t="price-kids-f1">8 Stationen mit Drache Tübi (~90 Min)</span>
+        </li>
+        <li class="flex items-center gap-3 font-body text-sm text-slate-300">
+          <span class="material-symbols-outlined text-emerald-400 text-lg">check_circle</span>
+          <span data-t="price-kids-f2">Kindgerechte Audio-Story (5–10 Jahre)</span>
+        </li>
+        <li class="flex items-center gap-3 font-body text-sm text-slate-300">
+          <span class="material-symbols-outlined text-emerald-400 text-lg">check_circle</span>
+          <span data-t="price-kids-f3">Rätsel, Funken sammeln &amp; Mitmach-Aufgaben</span>
+        </li>
+        <li class="flex items-center gap-3 font-body text-sm text-slate-300">
+          <span class="material-symbols-outlined text-emerald-400 text-lg">check_circle</span>
+          <span data-t="price-kids-f4">Selfie-Kamera mit Tübi-Sticker</span>
+        </li>
+        <li class="flex items-center gap-3 font-body text-sm text-slate-300">
+          <span class="material-symbols-outlined text-emerald-400 text-lg">check_circle</span>
+          <span data-t="price-kids-f5">Drachenkind-Urkunde zum Abschluss</span>
+        </li>
+      </ul>
+      <a href="mailto:info@tracetour.de?subject=Erinnerung%3A%20TraceTour-Start%20%28Kindertour%29&body=Hallo%21%20Bitte%20gebt%20mir%20Bescheid%2C%20sobald%20die%20Tour%20buchbar%20ist.%20/%20Please%20notify%20me%20when%20booking%20opens." class="block w-full bg-emerald-600 text-white py-4 rounded-xl font-brand font-bold uppercase tracking-widest hover:bg-emerald-500 transition-all text-center text-sm shadow-lg shadow-emerald-600/20" data-t="price-kids-cta">
+        BALD BUCHBAR · ERINNERE MICH 🔔
       </a>
     </div>
     <!-- Gruppe Ticket -->
@@ -566,8 +604,8 @@ body {
           <span data-t="price-team-f5">Ideal als Geschenk oder Teambuilding</span>
         </li>
       </ul>
-      <a href="#" class="block w-full bg-primary-container text-white py-4 rounded-xl font-brand font-bold uppercase tracking-widest hover:bg-orange-500 transition-all text-center text-sm shadow-lg shadow-primary-container/20" data-t="price-team-cta">
-        TEAM BUCHEN
+      <a href="mailto:info@tracetour.de?subject=Erinnerung%3A%20TraceTour-Start%20%28Team%29&body=Hallo%21%20Bitte%20gebt%20mir%20Bescheid%2C%20sobald%20die%20Tour%20buchbar%20ist.%20/%20Please%20notify%20me%20when%20booking%20opens." class="block w-full bg-primary-container text-white py-4 rounded-xl font-brand font-bold uppercase tracking-widest hover:bg-orange-500 transition-all text-center text-sm shadow-lg shadow-primary-container/20" data-t="price-team-cta">
+        BALD BUCHBAR · ERINNERE MICH 🔔
       </a>
     </div>
     <!-- Schulklasse Ticket -->
@@ -602,8 +640,8 @@ body {
           <span data-t="price-class-f5">Perfekt für Wandertag oder Projekttag</span>
         </li>
       </ul>
-      <a href="#" class="block w-full bg-primary-container text-white py-4 rounded-xl font-brand font-bold uppercase tracking-widest hover:bg-orange-500 transition-all text-center text-sm shadow-lg shadow-primary-container/20" data-t="price-class-cta">
-        KLASSE BUCHEN
+      <a href="mailto:info@tracetour.de?subject=Erinnerung%3A%20TraceTour-Start%20%28Schulklasse%29&body=Hallo%21%20Bitte%20gebt%20mir%20Bescheid%2C%20sobald%20die%20Tour%20buchbar%20ist.%20/%20Please%20notify%20me%20when%20booking%20opens." class="block w-full bg-primary-container text-white py-4 rounded-xl font-brand font-bold uppercase tracking-widest hover:bg-orange-500 transition-all text-center text-sm shadow-lg shadow-primary-container/20" data-t="price-class-cta">
+        BALD BUCHBAR · ERINNERE MICH 🔔
       </a>
     </div>
   </div>
@@ -614,7 +652,7 @@ body {
 <section id="expansion" class="py-24 px-6 bg-slate-800/30">
   <div class="max-w-7xl mx-auto">
     <div class="mb-16">
-      <h2 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-2" data-t="expansion-title">Coming Soon</h2>
+      <h2 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-2" data-t="expansion-title">Weitere Städte</h2>
       <p class="font-body text-slate-400 text-sm" data-t="expansion-subtitle">Weitere Städte & Touren in Vorbereitung</p>
     </div>
     <div class="grid grid-cols-3 gap-3 sm:gap-6">
@@ -688,9 +726,9 @@ const translations = {
   'nav-tours': ['Touren', 'Tours'],
   'nav-how': ['So funktioniert\'s', 'How It Works'],
   'nav-pricing': ['Preise', 'Pricing'],
-  'nav-coming': ['Coming Soon', 'Coming Soon'],
+  'nav-coming': ['Weitere Städte', 'More Cities'],
   'nav-about': ['Über TraceTour', 'About TraceTour'],
-  'nav-login': ['LOGIN', 'LOGIN'],
+  'nav-login': ['CODE EINLÖSEN', 'REDEEM CODE'],
   'nav-start': ['STARTEN', 'START'],
 
   // Hero
@@ -772,7 +810,16 @@ const translations = {
   'price-solo-f3': ['8 Rätsel + Formel-Puzzle + Quiz', '8 puzzles + formula puzzle + quiz'],
   'price-solo-f4': ['KI-Assistent "Trace"', 'AI assistant "Trace"'],
   'price-solo-f5': ['Persönliche Urkunde mit Rang', 'Personal certificate with rank'],
-  'price-solo-cta': ['JETZT BUCHEN', 'BOOK NOW'],
+  'price-solo-cta': ['BALD BUCHBAR · ERINNERE MICH 🔔', 'COMING SOON · REMIND ME 🔔'],
+  'price-kids-badge': ['Für Familien', 'For Families'],
+  'price-kids-name': ['Kindertour mit Tübi 🐉', 'Kids Tour with Tübi 🐉'],
+  'price-kids-per': ['pro Familie (1 Gerät)', 'per family (1 device)'],
+  'price-kids-f1': ['8 Stationen mit Drache Tübi (~90 Min)', '8 stations with Tübi the dragon (~90 min)'],
+  'price-kids-f2': ['Kindgerechte Audio-Story (5–10 Jahre)', 'Kid-friendly audio story (ages 5–10)'],
+  'price-kids-f3': ['Rätsel, Funken sammeln & Mitmach-Aufgaben', 'Riddles, spark collecting & hands-on tasks'],
+  'price-kids-f4': ['Selfie-Kamera mit Tübi-Sticker', 'Selfie camera with Tübi sticker'],
+  'price-kids-f5': ['Drachenkind-Urkunde zum Abschluss', 'Dragon-kid certificate at the end'],
+  'price-kids-cta': ['BALD BUCHBAR · ERINNERE MICH 🔔', 'COMING SOON · REMIND ME 🔔'],
   'price-team-badge': ['Beliebt', 'Popular'],
   'price-team-name': ['Ermittler-Team', 'Investigation Team'],
   'price-team-per': ['pro Person \u00b7 3\u20137 Personen', 'per person \u00b7 3\u20137 people'],
@@ -781,7 +828,7 @@ const translations = {
   'price-team-f3': ['Perfekt für Paare, Familien & Freunde', 'Perfect for couples, families & friends'],
   'price-team-f4': ['20% Ersparnis pro Person', '20% savings per person'],
   'price-team-f5': ['Ideal als Geschenk oder Teambuilding', 'Ideal as a gift or team building'],
-  'price-team-cta': ['TEAM BUCHEN', 'BOOK TEAM'],
+  'price-team-cta': ['BALD BUCHBAR · ERINNERE MICH 🔔', 'COMING SOON · REMIND ME 🔔'],
   'price-class-name': ['Schulklasse', 'School Class'],
   'price-class-per': ['pauschal \u00b7 bis 30 Personen', 'flat rate \u00b7 up to 30 people'],
   'price-class-f1': ['Alles aus dem Solo-Ticket', 'Everything from the Solo ticket'],
@@ -789,11 +836,11 @@ const translations = {
   'price-class-f3': ['Bildungsplanbezug: Stadtgeschichte erleben', 'Curriculum-linked: experience city history'],
   'price-class-f4': ['Ab 2,67 \u20ac pro Schüler', 'From \u20ac2.67 per student'],
   'price-class-f5': ['Perfekt für Wandertag oder Projekttag', 'Perfect for field trips or project days'],
-  'price-class-cta': ['KLASSE BUCHEN', 'BOOK CLASS'],
+  'price-class-cta': ['BALD BUCHBAR · ERINNERE MICH 🔔', 'COMING SOON · REMIND ME 🔔'],
   'pricing-footer': ['Sichere Bezahlung via Stripe. Kreditkarte, Apple Pay & Google Pay. Zugangscode kommt sofort per E-Mail.', 'Secure payment via Stripe. Credit card, Apple Pay & Google Pay. Access code delivered instantly by email.'],
 
   // Expansion
-  'expansion-title': ['Coming Soon', 'Coming Soon'],
+  'expansion-title': ['Weitere Städte', 'More Cities'],
   'expansion-subtitle': ['Weitere Städte & Touren in Vorbereitung', 'More cities & tours in preparation'],
   'city-prep': ['In Vorbereitung', 'In Preparation'],
 
