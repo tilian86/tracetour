@@ -1,11 +1,12 @@
 // TraceTour Service Worker — Offline Cache
-const CACHE_NAME = 'tracetour-v3';
+const CACHE_NAME = 'tracetour-v4';
 
 const CORE_FILES = [
   'index.html',
   'app.html',
   'favicon.svg',
   'fonts/fonts.css',
+  'css/tailwind.css',
 ];
 
 // Leaflet vom CDN — wird beim Offline-Download mitgecacht, sonst ist die Karte offline kaputt

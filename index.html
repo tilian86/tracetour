@@ -23,46 +23,9 @@
 <meta name="twitter:image" content="https://tracetour.de/images/og-preview.jpg">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="css/tailwind.css" rel="stylesheet">
 <link href="fonts/fonts.css" rel="stylesheet">
-<script>
-tailwind.config = {
-  darkMode: "class",
-  theme: {
-    extend: {
-      colors: {
-        "surface-tint": "#ffb59c",
-        "primary-container": "#f3632d",
-        "primary": "#ffb59c",
-        "surface-variant": "#2a3548",
-        "surface-container-high": "#1f2a3c",
-        "surface-container": "#152031",
-        "surface-container-low": "#111c2d",
-        "surface-container-lowest": "#040e1f",
-        "surface-container-highest": "#2a3548",
-        "surface-bright": "#2f3a4c",
-        "surface-dim": "#081425",
-        "on-surface": "#d8e3fb",
-        "on-surface-variant": "#e1bfb4",
-        "on-background": "#d8e3fb",
-        "secondary": "#b9c7e0",
-        "secondary-container": "#3c4a5e",
-        "on-secondary-container": "#abb9d2",
-        "outline": "#a88a80",
-        "outline-variant": "#594139",
-        "on-primary-container": "#511500",
-        "on-primary-fixed": "#390c00",
-      },
-      fontFamily: {
-        "headline": ["Epilogue", "sans-serif"],
-        "body": ["Inter", "sans-serif"],
-        "brand": ["Montserrat", "sans-serif"],
-      },
-    },
-  },
-}
-</script>
-<style>
+<style><style>
 body {
   background-color: #1e293b;
   color: #d8e3fb;
@@ -193,8 +156,21 @@ body {
         <button class="lang-btn-lp px-2.5 py-1 text-[11px] font-bold tracking-wider rounded-md border border-white/10 text-slate-400 hover:text-slate-200 transition-all cursor-pointer" onclick="setPageLang('de')">DE</button>
         <button class="lang-btn-lp px-2.5 py-1 text-[11px] font-bold tracking-wider rounded-md border border-white/10 text-slate-400 hover:text-slate-200 transition-all cursor-pointer" onclick="setPageLang('en')">EN</button>
       </div>
-      <a href="app.html" class="bg-primary-container text-white px-5 py-2 rounded-lg font-brand uppercase tracking-[0.05em] text-sm font-bold hover:bg-orange-500 transition-all active:scale-95 shadow-lg shadow-primary-container/20" data-t="nav-login">CODE EINLÖSEN</a>
+      <a href="app.html" class="hidden sm:inline-block bg-primary-container text-white px-5 py-2 rounded-lg font-brand uppercase tracking-[0.05em] text-sm font-bold hover:bg-orange-500 transition-all active:scale-95 shadow-lg shadow-primary-container/20" data-t="nav-login">CODE EINLÖSEN</a>
+      <button id="mobileMenuBtn" class="md:hidden flex flex-col justify-center gap-[5px] w-10 h-10 rounded-lg border border-white/10 items-center" aria-label="Menü öffnen" aria-expanded="false" onclick="toggleMobileMenu()">
+        <span class="block w-5 h-0.5 bg-slate-300 transition-transform"></span>
+        <span class="block w-5 h-0.5 bg-slate-300 transition-opacity"></span>
+        <span class="block w-5 h-0.5 bg-slate-300 transition-transform"></span>
+      </button>
     </div>
+  </div>
+  <div id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-slate-900/95 backdrop-blur-xl px-6 py-4 flex-col gap-4">
+    <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-300" href="#featured" data-t="nav-tours" onclick="toggleMobileMenu()">Touren</a>
+    <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-300" href="#how-it-works" data-t="nav-how" onclick="toggleMobileMenu()">So funktioniert's</a>
+    <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-300" href="#pricing" data-t="nav-pricing" onclick="toggleMobileMenu()">Preise</a>
+    <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-300" href="#about" data-t="nav-about" onclick="toggleMobileMenu()">Über TraceTour</a>
+    <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-300" href="#expansion" data-t="nav-coming" onclick="toggleMobileMenu()">Weitere Städte</a>
+    <a href="app.html" class="sm:hidden bg-primary-container text-white px-5 py-2.5 rounded-lg font-brand uppercase tracking-[0.05em] text-sm font-bold text-center shadow-lg shadow-primary-container/20" data-t="nav-login">CODE EINLÖSEN</a>
   </div>
 </nav>
 
@@ -215,7 +191,7 @@ body {
     </p>
     <div class="flex flex-col md:flex-row items-center justify-center gap-4">
       <a href="app.html" class="bg-primary-container text-white px-10 py-5 rounded-xl font-brand font-black text-lg tracking-widest hover:bg-orange-500 hover:-translate-y-1 transition-all shadow-lg shadow-primary-container/25" data-t="hero-cta-start">
-        TOUR STARTEN
+        MIT CODE STARTEN
       </a>
       <a href="#how-it-works" class="glass-panel border border-white/10 text-white px-10 py-5 rounded-xl font-brand font-black text-lg tracking-widest hover:bg-white/10 transition-all" data-t="hero-cta-how">
         SO FUNKTIONIERT'S
@@ -356,7 +332,7 @@ body {
             </ul>
           </div>
           <a href="app.html" class="mt-8 block w-full bg-primary-container text-white py-4 rounded-lg font-brand font-bold uppercase tracking-widest hover:bg-orange-500 transition-all text-center text-sm shadow-lg shadow-primary-container/20">
-            <span data-t="tour-cta">🔍 JETZT STARTEN</span>
+            <span data-t="tour-cta">🔍 MIT CODE STARTEN</span>
           </a>
         </div>
       </div>
@@ -384,7 +360,7 @@ body {
             </div>
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-emerald-400 text-lg">schedule</span>
-              <span class="font-body text-sm uppercase tracking-widest text-slate-300" data-t="kids-duration">ca. 60 Min</span>
+              <span class="font-body text-sm uppercase tracking-widest text-slate-300" data-t="kids-duration">ca. 60–90 Min</span>
             </div>
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-emerald-400 text-lg">record_voice_over</span>
@@ -567,7 +543,7 @@ body {
       <ul class="space-y-3 mb-8 flex-1">
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-emerald-400 text-lg">check_circle</span>
-          <span data-t="price-kids-f1">8 Stationen mit Drache Tübi (~90 Min)</span>
+          <span data-t="price-kids-f1">8 Stationen mit Drache Tübi (60–90 Min)</span>
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span class="material-symbols-outlined text-emerald-400 text-lg">check_circle</span>
@@ -688,7 +664,7 @@ body {
         <div class="overlay"></div>
         <div class="label">
           <span class="name">München</span>
-          <span class="status">Coming Soon</span>
+          <span class="status" data-t="city-soon">Bald verfügbar</span>
         </div>
       </div>
       <div class="city-card">
@@ -696,7 +672,7 @@ body {
         <div class="overlay"></div>
         <div class="label">
           <span class="name">Stuttgart</span>
-          <span class="status">Coming Soon</span>
+          <span class="status" data-t="city-soon">Bald verfügbar</span>
         </div>
       </div>
     </div>
@@ -713,7 +689,7 @@ body {
     </div>
     <div class="relative z-10 flex flex-col sm:flex-row items-center gap-3">
       <a href="app.html" class="bg-slate-950 text-white px-12 py-5 rounded-xl font-brand font-black text-lg tracking-widest hover:bg-slate-900 hover:scale-105 transition-all shadow-xl whitespace-nowrap text-center" data-t="cta-button">
-        JETZT STARTEN
+        MIT CODE STARTEN
       </a>
       <button onclick="shareTour()" class="flex items-center justify-center gap-2 bg-white/15 text-white px-8 py-5 rounded-xl font-brand font-bold text-sm tracking-widest hover:bg-white/25 transition-all whitespace-nowrap border border-white/25" data-t="cta-share" aria-label="TraceTour teilen">
         <span class="material-symbols-outlined text-xl">ios_share</span> WEITERSAGEN
@@ -753,13 +729,12 @@ const translations = {
   'nav-coming': ['Weitere Städte', 'More Cities'],
   'nav-about': ['Über TraceTour', 'About TraceTour'],
   'nav-login': ['CODE EINLÖSEN', 'REDEEM CODE'],
-  'nav-start': ['STARTEN', 'START'],
   'cta-share': ['WEITERSAGEN', 'SHARE'],
 
   // Hero
   'hero-title': ['DIE STADT IST DEIN<br/><span class="text-primary-container">SPIELFELD.</span>', 'THE CITY IS YOUR<br/><span class="text-primary-container">PLAYGROUND.</span>'],
   'hero-subtitle': ['Kriminalfälle, Rätsel und echte Geschichte vereint in einer gamifizierten Audio-Experience für die Hosentasche. Entdecke deine Stadt in einem völlig neuen Licht.', 'Crime cases, puzzles and real history united in a gamified audio experience for your pocket. Discover your city in a completely new light.'],
-  'hero-cta-start': ['TOUR STARTEN', 'START TOUR'],
+  'hero-cta-start': ['MIT CODE STARTEN', 'START WITH CODE'],
   'hero-cta-how': ['SO FUNKTIONIERT\'S', 'HOW IT WORKS'],
 
   // Stats bar
@@ -787,7 +762,7 @@ const translations = {
   'tour-feat-5': ['Persönliche Urkunde mit deinem Ermittlerrang', 'Personal certificate with your investigator rank'],
   'tour-feat-6': ['Direkt im Browser loslegen — ohne Download', 'Start right in your browser — no download'],
   'tour-feat-7': ['Auf Deutsch & Englisch verfügbar', 'Available in German & English'],
-  'tour-cta': ['🔍 JETZT STARTEN', '🔍 START NOW'],
+  'tour-cta': ['🔍 MIT CODE STARTEN', '🔍 START WITH CODE'],
 
   // Kids tour
   'kids-badge': ['Neu! Kids 5\u201310', 'New! Kids 5\u201310'],
@@ -795,7 +770,7 @@ const translations = {
   'kids-title': ['T\u00fcbis Geheimnisse', 'T\u00fcbi\u2019s Secrets'],
   'kids-teaser': ['T\u00fcbi der Drache hat seine Flamme verloren! Sie ist in 8 Funken zersprungen und quer durch T\u00fcbingen geflogen. Hilf ihm, alle Funken wiederzufinden \u2013 mit R\u00e4tseln, Aufgaben und einer magischen Schatzkarte!', 'T\u00fcbi the dragon has lost his flame! It shattered into 8 sparks that flew all over T\u00fcbingen. Help him find them all \u2013 with puzzles, challenges and a magical treasure map!'],
   'kids-stations': ['8 Stationen', '8 Stations'],
-  'kids-duration': ['ca. 60 Min', 'approx. 60 min'],
+  'kids-duration': ['ca. 60–90 Min', 'approx. 60–90 min'],
   'kids-voice': ['T\u00fcbi erz\u00e4hlt', 'T\u00fcbi narrates'],
   'kids-age': ['Alter: 5\u201310 Jahre', 'Ages: 5\u201310'],
   'kids-story-label': ['Die Story', 'The Story'],
@@ -839,7 +814,7 @@ const translations = {
   'price-kids-badge': ['Für Familien', 'For Families'],
   'price-kids-name': ['Kindertour mit Tübi 🐉', 'Kids Tour with Tübi 🐉'],
   'price-kids-per': ['pro Familie (1 Gerät)', 'per family (1 device)'],
-  'price-kids-f1': ['8 Stationen mit Drache Tübi (~90 Min)', '8 stations with Tübi the dragon (~90 min)'],
+  'price-kids-f1': ['8 Stationen mit Drache Tübi (60–90 Min)', '8 stations with Tübi the dragon (60–90 min)'],
   'price-kids-f2': ['Kindgerechte Audio-Story (5–10 Jahre)', 'Kid-friendly audio story (ages 5–10)'],
   'price-kids-f3': ['Rätsel, Funken sammeln & Mitmach-Aufgaben', 'Riddles, spark collecting & hands-on tasks'],
   'price-kids-f4': ['Selfie-Kamera mit Tübi-Sticker', 'Selfie camera with Tübi sticker'],
@@ -870,11 +845,12 @@ const translations = {
   'tour-title': ['Die Formel des Forschers', "The Researcher's Formula"],
   'hud-case': ['Die Formel des Forschers', "The Researcher's Formula"],
   'city-prep': ['In Vorbereitung', 'In Preparation'],
+  'city-soon': ['Bald verfügbar', 'Coming Soon'],
 
   // CTA
   'cta-title': ['BEREIT FÜR DIE<br/>ERSTE MISSION?', 'READY FOR YOUR<br/>FIRST MISSION?'],
   'cta-subtitle': ['Kein App-Download. Kein Gerät nötig außer deinem Smartphone.', 'No app download. No device needed other than your smartphone.'],
-  'cta-button': ['JETZT STARTEN', 'START NOW'],
+  'cta-button': ['MIT CODE STARTEN', 'START WITH CODE'],
 
   // Footer
   'footer-tagline': ['Gamifizierte Audio-Stadttouren', 'Gamified Audio City Tours'],
@@ -886,6 +862,13 @@ const translations = {
 
 let currentLang = localStorage.getItem('tracetour_lang') || 'de';
 
+function toggleMobileMenu() {
+  const m = document.getElementById('mobileMenu'), b = document.getElementById('mobileMenuBtn');
+  const open = m.classList.contains('hidden');
+  m.classList.toggle('hidden', !open);
+  m.classList.toggle('flex', open);
+  b.setAttribute('aria-expanded', String(open));
+}
 function setPageLang(l) {
   currentLang = l;
   localStorage.setItem('tracetour_lang', l);
