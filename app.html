@@ -8,6 +8,15 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="color-scheme" content="dark">
 <title>TraceTour – Die Formel des Forschers</title>
+<meta name="description" content="Die gamifizierte Audio-Stadttour durch Tübingen: Löse den Fall von 1869, folge Prof. Heinrich von Calw durch 17 Stationen und entschlüssle die Formel des Forschers.">
+<meta property="og:title" content="TraceTour – Die Formel des Forschers">
+<meta property="og:description" content="Krimi-Stadttour durch Tübingen: 17 Stationen, Rätsel, Audio-Story. Entschlüssle die Formel des Forschers.">
+<meta property="og:image" content="https://tracetour.de/images/hero_neckarfront.jpg">
+<meta property="og:url" content="https://tracetour.de/app.html">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://tracetour.de/app.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tracetour.de/images/hero_neckarfront.jpg">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 <link href="fonts/fonts.css" rel="stylesheet">
@@ -321,7 +330,7 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 <div id="loginError" style="display:none;font-size:.78rem;color:var(--error);margin:-6px 0 8px;padding:8px 12px;background:rgba(248,113,113,.08);border-radius:var(--r-sm);border:1px solid rgba(248,113,113,.2)"></div>
 <input type="text" id="loginGroup" placeholder="Teamname (optional)" autocomplete="off" autocapitalize="words">
 <button class="btn-primary" id="loginBtn" onclick="doLogin()">Einloggen</button>
-<div class="login-hint" id="loginHint">Dein Zugangscode ist persönlich und an ein Gerät gebunden.<br>Er wird beim ersten Login aktiviert.</div>
+<div class="login-hint" id="loginHint">Dein Zugangscode ist persönlich und an ein Gerät gebunden.<br>Er wird beim ersten Login aktiviert.<br>Noch keinen Code? Alle Infos auf <a href="index.html#pricing" style="color:var(--accent);text-decoration:none;font-weight:600">tracetour.de</a></div>
 <div class="lang-toggle">
   <button class="lang-btn active" onclick="setLang('de')">DE</button>
   <button class="lang-btn" onclick="setLang('en')">EN</button>
@@ -690,7 +699,7 @@ function getAudioBase(){return lang==='en'?'audio/en/':'audio/';}
 const T={
 de:{
   loginPlaceholder:'Dein Ermittlername',codePlaceholder:'Zugangscode',groupPlaceholder:'Teamname (optional)',
-  btnLogin:'Einloggen',loginError:'Ungültiger Zugangscode. Bitte prüfe deinen Code.',loginHint:'Dein Zugangscode ist persönlich und an ein Gerät gebunden.\nEr wird beim ersten Login aktiviert.',
+  btnLogin:'Einloggen',loginError:'Ungültiger Zugangscode. Bitte prüfe deinen Code.',loginHint:'Dein Zugangscode ist persönlich und an ein Gerät gebunden.\nEr wird beim ersten Login aktiviert.\nNoch keinen Code? Alle Infos auf <a href="index.html#pricing" style="color:var(--accent);text-decoration:none;font-weight:600">tracetour.de</a>',
   backLink:'\u2190 Zurück zur Startseite',
   testerWelcomeHeading:'Willkommen,',testerWelcomeP1:'Schön, dass du TraceTour testest! Du gehörst zu den Ersten, die "Die Formel des Forschers" erleben. Ich freue mich riesig über dein Feedback \u2014 was hat dir gefallen, was kann besser werden, wo hakt es?',
   testerWelcomeP2:'Schreib mir gerne direkt an','testerWelcomeP2b':' oder sprich mich einfach an. Viel Spaß beim Ermitteln!',testerBtn:'LOS GEHT\'S',
@@ -797,7 +806,7 @@ de:{
 },
 en:{
   loginPlaceholder:'Your investigator name',codePlaceholder:'Access code',groupPlaceholder:'Team name (optional)',
-  btnLogin:'Log in',loginError:'Invalid access code. Please check your code.',loginHint:'Your access code is personal and tied to one device.\nIt is activated on first login.',
+  btnLogin:'Log in',loginError:'Invalid access code. Please check your code.',loginHint:'Your access code is personal and tied to one device.\nIt is activated on first login.\nNo code yet? Find all info at <a href="index.html#pricing" style="color:var(--accent);text-decoration:none;font-weight:600">tracetour.de</a>',
   backLink:'\u2190 Back to homepage',
   testerWelcomeHeading:'Welcome,',testerWelcomeP1:'Great to have you testing TraceTour! You are among the first to experience "The Researcher\'s Formula." I would love your feedback \u2014 what did you enjoy, what could be better, where did things get stuck?',
   testerWelcomeP2:'Feel free to write me at','testerWelcomeP2b':' or just talk to me directly. Enjoy the investigation!',testerBtn:'LET\'S GO',
@@ -931,7 +940,7 @@ function applyLangUI(){
   const lc=document.getElementById('loginCode');if(lc)lc.placeholder=t('codePlaceholder');
   const lg=document.getElementById('loginGroup');if(lg)lg.placeholder=t('groupPlaceholder');
   const lb=document.querySelector('#splash .btn-primary');if(lb)lb.textContent=t('btnLogin');
-  const lh=document.getElementById('loginHint');if(lh)lh.innerHTML=t('loginHint').replace('\n','<br>');
+  const lh=document.getElementById('loginHint');if(lh)lh.innerHTML=t('loginHint').replace(/\n/g,'<br>');
   const bl=document.getElementById('backLink');if(bl)bl.textContent=t('backLink');
   // Tour select
   const si=document.getElementById('saveInfoText');
@@ -2461,6 +2470,7 @@ function getMaxTraces(){
 
 // ====== CERTIFICATE ======
 function renderCertificate(){
+  hideMissingThanksAudio();
   const c=document.getElementById('certificateCanvas');
   if(!c)return;
   c.width=1080;c.height=1350;
@@ -2510,7 +2520,7 @@ function renderCertificate(){
     ctx.fillText('Team: '+groupName,540,762);
   }
   const rank=getRank(totalXp);
-  ctx.font='900 28px Inter,Arial,sans-serif';ctx.fillStyle='var(--gold)';ctx.fillStyle='#d4a843';
+  ctx.font='900 28px Inter,Arial,sans-serif';ctx.fillStyle='#d4a843';
   ctx.fillText(t('certRank').replace('{rank}',rank.toUpperCase()),540,groupName?802:780);
   const maxTraces=getMaxTraces();
   ctx.font='900 72px Arial,sans-serif';ctx.fillStyle='#f3632d';
@@ -2563,6 +2573,17 @@ function renderCertificate(){
 function finishCertificate(c){
   // Certificate is rendered, nothing else to do for inline display
 }
+// Blendet die Danksagungs-Audiozeile aus, wenn die Audiodatei (noch) fehlt —
+// betrifft aktuell audio/en/thanks.mp3; heilt sich selbst, sobald die Datei existiert.
+function hideMissingThanksAudio(){
+  const row=document.getElementById('audioThanks');if(!row)return;
+  fetch(getAudioBase()+'thanks.mp3',{method:'HEAD'}).then(r=>{
+    const show=r.ok?'':'none';
+    row.style.display=show;
+    const prog=document.querySelector('.audio-progress[data-type="thanks"]');
+    if(prog)prog.style.display=show;
+  }).catch(()=>{});
+}
 function shareCertificate(){
   const c=document.getElementById('certificateCanvas');if(!c)return;
   c.toBlob(blob=>{
@@ -2582,7 +2603,7 @@ function saveCertificate(){
 }
 function downloadBlob(blob){
   const url=URL.createObjectURL(blob),a=document.createElement('a');
-  a.href=url;a.download='tracetour-ergebnis.png';a.click();
+  a.href=url;a.download='tracetour-urkunde.png';a.click();
   URL.revokeObjectURL(url);showToast(t('toastImage'));
 }
 

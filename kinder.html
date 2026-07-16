@@ -205,6 +205,8 @@ input{font-family:inherit;color:inherit}
 .cert-score-label{font-size:.78rem;color:var(--text-2);font-weight:600;margin-top:.15rem;margin-bottom:.8rem}
 .cert-stars{font-size:1.7rem;margin-bottom:.8rem}
 .cert-msg{font-size:.88rem;color:var(--text-2);line-height:1.55;margin-bottom:1rem;font-weight:600}
+.cert-achieve{font-size:.8rem;color:var(--green);font-weight:800;margin-bottom:.4rem}
+.cert-date{font-size:.72rem;color:var(--text-2);font-weight:600;margin-bottom:1rem}
 .btn-cert{width:100%;padding:13px;font-weight:800;font-size:.95rem;border-radius:var(--r-sm);margin-bottom:.5rem;transition:transform .1s}
 .btn-cert:active{transform:scale(.97)}
 .btn-cert-home{background:var(--green);color:#fff;border:2px solid var(--green-light)}
@@ -387,8 +389,11 @@ input{font-family:inherit;color:inherit}
     <div class="cert-score-label">Drachenfunken 🔥</div>
     <div class="cert-stars" id="certStars"></div>
     <div class="cert-msg" id="certMsg"></div>
-    <button class="btn-cert btn-cert-home" onclick="goHome()">🏠 Nochmal spielen</button>
+    <div class="cert-achieve" id="certAchieve"></div>
+    <div class="cert-date" id="certDate"></div>
+    <button class="btn-cert btn-cert-share" onclick="saveKinderCert()">💾 Urkunde speichern</button>
     <button class="btn-cert btn-cert-share" onclick="shareResult()">📣 Freunden zeigen</button>
+    <button class="btn-cert btn-cert-home" onclick="goHome()">🏠 Nochmal spielen</button>
   </div>
 </div>
 
@@ -718,9 +723,88 @@ function updateRouteDisplay(){if(!routeLine)return;if(!fullRouteCoords){routeLin
 function renderQuiz(){const n=Object.keys(quizAnswers).length;document.getElementById('quizProgress').textContent=`${n} von ${QUIZ_QUESTIONS.length} beantwortet`;document.getElementById('quizDoneBtn').classList.toggle('show',n===QUIZ_QUESTIONS.length);document.getElementById('quizContent').innerHTML=QUIZ_QUESTIONS.map((q,qi)=>{const done=quizAnswers[qi]!==undefined;return`<div class="quiz-q-card fade-in"><div class="quiz-q-num">Frage ${qi+1}</div><div class="quiz-q-text">${q.text}</div><div class="mc-options">${q.options.map((o,oi)=>{let c='mc-btn';if(done){if(oi===q.correct)c+=' correct';else if(quizAnswers[qi]===oi&&oi!==q.correct)c+=' wrong'}return`<button class="${c}" ${done?'disabled':''} onclick="answerQuiz(${qi},${oi})"><span class="mc-letter">${String.fromCharCode(65+oi)}</span><span>${o}</span></button>`}).join('')}</div></div>`}).join('')}
 function answerQuiz(qi,oi){quizAnswers[qi]=oi;if(oi===QUIZ_QUESTIONS[qi].correct){totalXp+=QUIZ_XP;showXpToast(`+${QUIZ_XP} 🔥`);spawnSparkles();playSFX('audio/correct.wav')}else{playSFX('audio/wrong.wav')}saveGame();renderQuiz()}
 
-function showCertificate(){quizDone=true;saveGame();const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];const stars=totalXp>=190?3:totalXp>=130?2:1;const msgs=[`Du hast Tübi geholfen, ${playerName}! Ohne dich hätte er seine Flamme nie zurückbekommen!`,`Wow, ${playerName}! Du hast fast alles gewusst! Tübi ist mega stolz auf dich!`,`UNGLAUBLICH, ${playerName}! Du weißt mehr als die meisten Erwachsenen! Tübi ernennt dich zur Drachen-Legende! 🏆`];document.getElementById('certName').textContent=playerName;document.getElementById('certRank').textContent=rank.label;document.getElementById('certScore').textContent=totalXp;document.getElementById('certStars').textContent='⭐'.repeat(stars)+'☆'.repeat(3-stars);document.getElementById('certMsg').textContent=msgs[stars-1];showScreen('certificate');playSFX('audio/fanfare.wav');setTimeout(()=>playSFX('audio/applause.mp3'),800)}
+function showCertificate(){quizDone=true;saveGame();const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];const stars=totalXp>=190?3:totalXp>=140?2:1;const msgs=[`Du hast Tübi geholfen, ${playerName}! Ohne dich hätte er seine Flamme nie zurückbekommen!`,`Wow, ${playerName}! Du hast fast alles gewusst! Tübi ist mega stolz auf dich!`,`UNGLAUBLICH, ${playerName}! Du weißt mehr als die meisten Erwachsenen! Tübi ernennt dich zur Drachen-Legende! 🏆`];const solvedN=Object.keys(stationSolved).length;document.getElementById('certName').textContent=playerName;document.getElementById('certRank').textContent=rank.label;document.getElementById('certScore').textContent=totalXp;document.getElementById('certStars').textContent='⭐'.repeat(stars)+'☆'.repeat(3-stars);document.getElementById('certMsg').textContent=msgs[stars-1];document.getElementById('certAchieve').textContent=solvedN>=STATIONS.length?`🗺️ Alle ${STATIONS.length} Stationen geschafft!`:`🗺️ ${solvedN} von ${STATIONS.length} Stationen geschafft`;document.getElementById('certDate').textContent='Tübingen, '+new Date().toLocaleDateString('de-DE',{day:'numeric',month:'long',year:'numeric'});showScreen('certificate');playSFX('audio/fanfare.wav');setTimeout(()=>playSFX('audio/applause.mp3'),800)}
 function goHome(){if(!confirm('Wirklich nochmal von vorne anfangen? Dein Abenteuer wird gelöscht!'))return;playerName='';currentStation=0;maxUnlocked=0;totalXp=0;stationSolved={};quizAnswers={};quizDone=false;challengesDone={};localStorage.removeItem(SAVE_KEY);document.getElementById('playerName').value='';document.getElementById('splashError').style.display='none';showScreen('splash');document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show')}
-function shareResult(){const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];const t=`🐉🔥 Ich habe Tübi geholfen, seine Flamme zurückzubekommen! ${totalXp} Drachenfunken – Rang: ${rank.label}\ntracetour.de/kinder.html`;if(navigator.share)navigator.share({title:'TraceTour Kids',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>alert('Kopiert! 📋')).catch(()=>alert(t))}
+function shareResult(){const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];const t=`🐉🔥 Ich habe Tübi geholfen, seine Flamme zurückzubekommen! ${totalXp} Drachenfunken – Rang: ${rank.label}\nhttps://tracetour.de/kinder.html`;renderKinderCert().then(canvas=>{canvas.toBlob(blob=>{if(blob&&navigator.share&&navigator.canShare){const file=new File([blob],'tuebi-urkunde.png',{type:'image/png'});if(navigator.canShare({files:[file]})){navigator.share({text:t,files:[file]}).catch(()=>{});return}}if(navigator.share)navigator.share({title:'TraceTour Kids',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>alert('Kopiert! 📋')).catch(()=>alert(t))},'image/png')})}
+
+/* Urkunde als Bild (1080×1350) — festliches Andenken zum Speichern/Drucken */
+function renderKinderCert(){
+  return new Promise(resolve=>{
+    const c=document.createElement('canvas');c.width=1080;c.height=1350;
+    const ctx=c.getContext('2d');
+    // Hintergrund: Grün→Gold-Verlauf wie der Zertifikat-Screen
+    const bg=ctx.createLinearGradient(0,0,540,1350);
+    bg.addColorStop(0,'#006a2d');bg.addColorStop(.55,'#00a843');bg.addColorStop(1,'#ffca51');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,1080,1350);
+    // Weiße Karte mit Gold-Rahmen
+    const card=(x,y,w,h,r)=>{ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,w,h,r);else ctx.rect(x,y,w,h)};
+    ctx.save();ctx.shadowColor='rgba(0,0,0,.3)';ctx.shadowBlur=40;ctx.shadowOffsetY=12;
+    ctx.fillStyle='rgba(255,255,255,.97)';card(70,70,940,1210,36);ctx.fill();ctx.restore();
+    ctx.strokeStyle='#ffca51';ctx.lineWidth=8;card(70,70,940,1210,36);ctx.stroke();
+    ctx.strokeStyle='#e0a521';ctx.lineWidth=2;card(92,92,896,1166,28);ctx.stroke();
+    ctx.textAlign='center';
+    // Kopf
+    ctx.font='120px serif';ctx.fillText('🐉',540,250);
+    ctx.font='64px serif';ctx.fillText('🔥',540,340);
+    ctx.font='900 40px Nunito,Arial,sans-serif';ctx.fillStyle='#e0a521';
+    ctx.fillText('★ URKUNDE ★',540,420);
+    ctx.font='900 58px Nunito,Arial,sans-serif';ctx.fillStyle='#006a2d';
+    ctx.fillText('Tübis Flamme ist zurück!',540,495);
+    ctx.font='600 26px Nunito,Arial,sans-serif';ctx.fillStyle='#64748b';
+    ctx.fillText('Drachenzertifikat · Tübis Geheimnisse',540,540);
+    // Name
+    ctx.font='400 26px Nunito,Arial,sans-serif';ctx.fillStyle='#64748b';
+    ctx.fillText('Verliehen an',540,625);
+    ctx.font='900 64px Nunito,Arial,sans-serif';ctx.fillStyle='#1e293b';
+    ctx.fillText(playerName,540,700);
+    // Rang-Badge
+    const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];
+    ctx.font='900 34px Nunito,Arial,sans-serif';
+    const bw=ctx.measureText(rank.label).width+90;
+    ctx.fillStyle='#ffca51';card(540-bw/2,735,bw,66,33);ctx.fill();
+    ctx.strokeStyle='#e0a521';ctx.lineWidth=3;card(540-bw/2,735,bw,66,33);ctx.stroke();
+    ctx.fillStyle='#006a2d';ctx.fillText(rank.label,540,780);
+    // Funken + Sterne
+    ctx.font='900 96px Nunito,Arial,sans-serif';ctx.fillStyle='#006a2d';
+    ctx.fillText(String(totalXp),540,920);
+    ctx.font='600 28px Nunito,Arial,sans-serif';ctx.fillStyle='#64748b';
+    ctx.fillText('Drachenfunken 🔥',540,962);
+    const stars=totalXp>=190?3:totalXp>=140?2:1;
+    ctx.font='56px serif';ctx.fillText('⭐'.repeat(stars)+'☆'.repeat(3-stars),540,1045);
+    // Leistung + Datum
+    const solvedN=Object.keys(stationSolved).length;
+    ctx.font='800 28px Nunito,Arial,sans-serif';ctx.fillStyle='#006a2d';
+    ctx.fillText(solvedN>=STATIONS.length?`🗺️ Alle ${STATIONS.length} Stationen geschafft!`:`🗺️ ${solvedN} von ${STATIONS.length} Stationen geschafft`,540,1115);
+    ctx.font='600 24px Nunito,Arial,sans-serif';ctx.fillStyle='#64748b';
+    ctx.fillText('Tübingen, '+new Date().toLocaleDateString('de-DE',{day:'numeric',month:'long',year:'numeric'}),540,1160);
+    // Footer
+    ctx.strokeStyle='rgba(224,165,33,.5)';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(300,1195);ctx.lineTo(780,1195);ctx.stroke();
+    ctx.font='700 22px Nunito,Arial,sans-serif';ctx.fillStyle='#00a843';
+    ctx.fillText('tracetour.de · Die Stadttour mit Drache Tübi',540,1240);
+    resolve(c);
+  });
+}
+function saveKinderCert(){
+  renderKinderCert().then(canvas=>{
+    canvas.toBlob(blob=>{
+      if(!blob)return;
+      if(navigator.share&&navigator.canShare){
+        const file=new File([blob],'tuebi-urkunde.png',{type:'image/png'});
+        if(navigator.canShare({files:[file]})){
+          navigator.share({files:[file],title:'Tübis Drachenurkunde 🐉'}).catch(()=>downloadKinderCert(blob));
+          return;
+        }
+      }
+      downloadKinderCert(blob);
+    },'image/png');
+  });
+}
+function downloadKinderCert(blob){
+  const url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='tuebi-urkunde.png';a.click();
+  URL.revokeObjectURL(url);showXpToast('💾 Urkunde gespeichert!');
+}
 
 /* ===== SELFIE CAMERA WITH TÜBI ===== */
 let selfieStream=null, tubiSize=6, selfieEmojis=['🐉'];
@@ -811,14 +895,14 @@ function saveSelfie(){
   // Try native share first (mobile), fallback to download
   if(navigator.share){
     fetch(dataUrl).then(r=>r.blob()).then(blob=>{
-      const file=new File([blob],'tubbi-selfie.jpg',{type:'image/jpeg'});
+      const file=new File([blob],'tuebi-selfie.jpg',{type:'image/jpeg'});
       navigator.share({files:[file],title:'Selfie mit Tübi! 🐉'}).catch(()=>downloadSelfie(dataUrl));
     }).catch(()=>downloadSelfie(dataUrl));
   } else { downloadSelfie(dataUrl); }
 }
 function downloadSelfie(dataUrl){
   const a=document.createElement('a');a.href=dataUrl;
-  a.download='tubbi-selfie-'+Date.now()+'.jpg';a.click();
+  a.download='tuebi-selfie-'+Date.now()+'.jpg';a.click();
   closeSelfie();showXpToast('📸 Selfie gespeichert!');
 }
 
