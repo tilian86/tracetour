@@ -25,11 +25,19 @@
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 <link href="css/tailwind.css" rel="stylesheet">
 <link href="fonts/fonts.css" rel="stylesheet">
-<style><style>
+<style>
 body {
   background-color: #1e293b;
   color: #d8e3fb;
 }
+.faq-item{background:rgba(30,41,59,.5);border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;transition:border-color .2s}
+.faq-item[open]{border-color:rgba(243,99,45,.35)}
+.faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.1rem 1.25rem;cursor:pointer;list-style:none;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.95rem;color:#d8e3fb}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{color:#ffb59c}
+.faq-chevron{color:#f3632d;transition:transform .25s;flex-shrink:0}
+.faq-item[open] .faq-chevron{transform:rotate(180deg)}
+.faq-item p{padding:0 1.25rem 1.25rem;font-family:'Inter',sans-serif;font-size:.9rem;line-height:1.7;color:#8fa3bd}
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   display: inline-block;
@@ -134,6 +142,22 @@ body {
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Brauche ich eine App?", "acceptedAnswer": {"@type": "Answer", "text": "Nein. TraceTour läuft direkt im Browser deines Smartphones – ohne App-Download und ohne Anmeldung. Code eingeben und losspielen."}},
+    {"@type": "Question", "name": "Wie bekomme ich meinen Zugangscode?", "acceptedAnswer": {"@type": "Answer", "text": "Sofort nach der Bezahlung: Der Code erscheint auf der Bestätigungsseite und kommt zusätzlich per E-Mail. Bezahlt wird sicher über Stripe – mit Kreditkarte, Apple Pay, Google Pay oder Klarna."}},
+    {"@type": "Question", "name": "Wie lange ist mein Code gültig?", "acceptedAnswer": {"@type": "Answer", "text": "Der Code kann bis zu 12 Monate nach dem Kauf eingelöst werden. Ab dem Tour-Start gilt ein 48-Stunden-Fenster mit beliebig vielen Spieldurchgängen."}},
+    {"@type": "Question", "name": "Was brauche ich für die Tour?", "acceptedAnswer": {"@type": "Answer", "text": "Ein internetfähiges Smartphone mit GPS und Browser – mehr nicht. Kopfhörer sind optional."}},
+    {"@type": "Question", "name": "Funktioniert die Tour auch offline?", "acceptedAnswer": {"@type": "Answer", "text": "Ja. Die komplette Tour kann vorab heruntergeladen werden (ca. 50 MB) und läuft dann ohne Internet. Nur die einmalige Code-Aktivierung braucht kurz eine Verbindung."}},
+    {"@type": "Question", "name": "Kann ich die Tour unterbrechen?", "acceptedAnswer": {"@type": "Answer", "text": "Jederzeit. Der Spielstand wird automatisch gespeichert und kann innerhalb des 48-Stunden-Fensters fortgesetzt werden."}},
+    {"@type": "Question", "name": "Für wen ist die Kindertour geeignet?", "acceptedAnswer": {"@type": "Answer", "text": "Für Kinder von 5 bis 10 Jahren in Begleitung. Drache Tübi führt in 60–90 Minuten durch 8 Stationen der Tübinger Altstadt."}},
+    {"@type": "Question", "name": "Was passiert bei technischen Problemen?", "acceptedAnswer": {"@type": "Answer", "text": "Wenn eine technische Störung die Tour unmöglich macht, wird der Kaufpreis erstattet. Kontakt: info@tracetour.de"}}
+  ]
+}
+</script>
 </head>
 <body class="font-body selection:bg-primary-container selection:text-white">
 
@@ -148,6 +172,7 @@ body {
       <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-[#f3632d] border-b-2 border-[#f3632d] pb-1" href="#featured" data-t="nav-tours">Touren</a>
       <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#how-it-works" data-t="nav-how">So funktioniert's</a>
       <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#pricing" data-t="nav-pricing">Preise</a>
+      <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#faq">FAQ</a>
       <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#about" data-t="nav-about">Über TraceTour</a>
       <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300" href="#expansion" data-t="nav-coming">Weitere Städte</a>
     </div>
@@ -168,6 +193,7 @@ body {
     <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-300" href="#featured" data-t="nav-tours" onclick="toggleMobileMenu()">Touren</a>
     <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-300" href="#how-it-works" data-t="nav-how" onclick="toggleMobileMenu()">So funktioniert's</a>
     <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-300" href="#pricing" data-t="nav-pricing" onclick="toggleMobileMenu()">Preise</a>
+    <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-300" href="#faq" onclick="toggleMobileMenu()">FAQ</a>
     <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-300" href="#about" data-t="nav-about" onclick="toggleMobileMenu()">Über TraceTour</a>
     <a class="font-brand uppercase tracking-[0.05em] text-sm font-bold text-slate-300" href="#expansion" data-t="nav-coming" onclick="toggleMobileMenu()">Weitere Städte</a>
     <a href="app.html" class="sm:hidden bg-primary-container text-white px-5 py-2.5 rounded-lg font-brand uppercase tracking-[0.05em] text-sm font-bold text-center shadow-lg shadow-primary-container/20" data-t="nav-login">CODE EINLÖSEN</a>
@@ -643,6 +669,50 @@ body {
   <p class="text-center text-slate-500 text-xs mt-8 font-body" data-t="pricing-footer">Sichere Bezahlung via Stripe. Kreditkarte, Apple Pay & Google Pay. Zugangscode kommt sofort per E-Mail.</p>
 </section>
 
+<!-- FAQ Section -->
+<section id="faq" class="py-24 px-6">
+  <div class="max-w-3xl mx-auto">
+    <div class="mb-16 text-center">
+      <h2 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-2" data-t="faq-title">Häufige Fragen</h2>
+      <p class="font-body text-slate-400 text-sm" data-t="faq-subtitle">Alles, was du vor deiner ersten Mission wissen willst</p>
+    </div>
+    <div class="flex flex-col gap-3">
+      <details class="faq-item">
+        <summary><span data-t="faq-q1">Brauche ich eine App?</span><span class="faq-chevron material-symbols-outlined">expand_more</span></summary>
+        <p data-t="faq-a1">Nein. TraceTour läuft direkt im Browser deines Smartphones – ohne App-Download und ohne Anmeldung. Code eingeben und losspielen.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span data-t="faq-q2">Wie bekomme ich meinen Zugangscode?</span><span class="faq-chevron material-symbols-outlined">expand_more</span></summary>
+        <p data-t="faq-a2">Sofort nach der Bezahlung: Der Code erscheint auf der Bestätigungsseite und kommt zusätzlich per E-Mail. Bezahlt wird sicher über Stripe – mit Kreditkarte, Apple Pay, Google Pay oder Klarna.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span data-t="faq-q3">Wie lange ist mein Code gültig?</span><span class="faq-chevron material-symbols-outlined">expand_more</span></summary>
+        <p data-t="faq-a3">Du kannst deinen Code bis zu 12 Monate nach dem Kauf einlösen. Ab dem Tour-Start hast du dann ein 48-Stunden-Fenster, in dem du beliebig oft spielen kannst – genug für ein ganzes Wochenende in Tübingen.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span data-t="faq-q4">Was brauche ich für die Tour?</span><span class="faq-chevron material-symbols-outlined">expand_more</span></summary>
+        <p data-t="faq-a4">Ein internetfähiges Smartphone mit GPS und Browser – mehr nicht. Kopfhörer machen das Audio-Erlebnis noch intensiver, es geht aber auch ohne.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span data-t="faq-q5">Funktioniert die Tour auch offline?</span><span class="faq-chevron material-symbols-outlined">expand_more</span></summary>
+        <p data-t="faq-a5">Ja! Du kannst die komplette Tour vorab herunterladen (ca. 50 MB) und dann ohne Internet spielen. Nur die einmalige Code-Aktivierung braucht kurz eine Verbindung.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span data-t="faq-q6">Kann ich die Tour unterbrechen?</span><span class="faq-chevron material-symbols-outlined">expand_more</span></summary>
+        <p data-t="faq-a6">Jederzeit. Dein Spielstand wird automatisch gespeichert – mach eine Pause im Café und spiel innerhalb deines 48-Stunden-Fensters genau dort weiter, wo du warst.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span data-t="faq-q7">Für wen ist die Kindertour geeignet?</span><span class="faq-chevron material-symbols-outlined">expand_more</span></summary>
+        <p data-t="faq-a7">Für Kinder von 5 bis 10 Jahren in Begleitung. Drache Tübi führt in 60–90 Minuten durch 8 Stationen der Altstadt. Mit Kinderwagen? Die App weist unterwegs auf eine passende Wegvariante hin.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span data-t="faq-q8">Was passiert bei technischen Problemen?</span><span class="faq-chevron material-symbols-outlined">expand_more</span></summary>
+        <p data-t="faq-a8" data-t-html="1">Wenn eine technische Störung die Tour unmöglich macht, erstatten wir den Kaufpreis. Schreib uns einfach an <a href="mailto:info@tracetour.de" class="text-primary-container hover:underline">info@tracetour.de</a> – wir melden uns schnell.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <!-- Expansion Section -->
 <section id="expansion" class="py-24 px-6 bg-slate-800/30">
   <div class="max-w-7xl mx-auto">
@@ -844,6 +914,26 @@ const translations = {
   'expansion-subtitle': ['Weitere Städte & Touren in Vorbereitung', 'More cities & tours in preparation'],
   'tour-title': ['Die Formel des Forschers', "The Researcher's Formula"],
   'hud-case': ['Die Formel des Forschers', "The Researcher's Formula"],
+  // FAQ
+  'faq-title': ['Häufige Fragen', 'Frequently Asked Questions'],
+  'faq-subtitle': ['Alles, was du vor deiner ersten Mission wissen willst', 'Everything you want to know before your first mission'],
+  'faq-q1': ['Brauche ich eine App?', 'Do I need an app?'],
+  'faq-a1': ['Nein. TraceTour läuft direkt im Browser deines Smartphones – ohne App-Download und ohne Anmeldung. Code eingeben und losspielen.', 'No. TraceTour runs directly in your smartphone browser – no app download, no sign-up. Enter your code and start playing.'],
+  'faq-q2': ['Wie bekomme ich meinen Zugangscode?', 'How do I get my access code?'],
+  'faq-a2': ['Sofort nach der Bezahlung: Der Code erscheint auf der Bestätigungsseite und kommt zusätzlich per E-Mail. Bezahlt wird sicher über Stripe – mit Kreditkarte, Apple Pay, Google Pay oder Klarna.', 'Immediately after payment: your code appears on the confirmation page and is also sent by email. Payment is handled securely by Stripe – credit card, Apple Pay, Google Pay or Klarna.'],
+  'faq-q3': ['Wie lange ist mein Code gültig?', 'How long is my code valid?'],
+  'faq-a3': ['Du kannst deinen Code bis zu 12 Monate nach dem Kauf einlösen. Ab dem Tour-Start hast du dann ein 48-Stunden-Fenster, in dem du beliebig oft spielen kannst – genug für ein ganzes Wochenende in Tübingen.', 'You can redeem your code up to 12 months after purchase. Once you start the tour, you have a 48-hour window with unlimited plays – enough for a whole weekend in Tübingen.'],
+  'faq-q4': ['Was brauche ich für die Tour?', 'What do I need for the tour?'],
+  'faq-a4': ['Ein internetfähiges Smartphone mit GPS und Browser – mehr nicht. Kopfhörer machen das Audio-Erlebnis noch intensiver, es geht aber auch ohne.', 'An internet-enabled smartphone with GPS and a browser – that\'s it. Headphones make the audio experience even more immersive, but they\'re optional.'],
+  'faq-q5': ['Funktioniert die Tour auch offline?', 'Does the tour work offline?'],
+  'faq-a5': ['Ja! Du kannst die komplette Tour vorab herunterladen (ca. 50 MB) und dann ohne Internet spielen. Nur die einmalige Code-Aktivierung braucht kurz eine Verbindung.', 'Yes! You can download the entire tour in advance (approx. 50 MB) and then play without internet. Only the one-time code activation briefly needs a connection.'],
+  'faq-q6': ['Kann ich die Tour unterbrechen?', 'Can I pause the tour?'],
+  'faq-a6': ['Jederzeit. Dein Spielstand wird automatisch gespeichert – mach eine Pause im Café und spiel innerhalb deines 48-Stunden-Fensters genau dort weiter, wo du warst.', 'Anytime. Your progress is saved automatically – take a break at a café and continue exactly where you left off within your 48-hour window.'],
+  'faq-q7': ['Für wen ist die Kindertour geeignet?', 'Who is the kids tour for?'],
+  'faq-a7': ['Für Kinder von 5 bis 10 Jahren in Begleitung. Drache Tübi führt in 60–90 Minuten durch 8 Stationen der Altstadt. Mit Kinderwagen? Die App weist unterwegs auf eine passende Wegvariante hin.', 'For children aged 5 to 10, accompanied by an adult. Tübi the dragon guides you through 8 old-town stations in 60–90 minutes. Bringing a stroller? The app points out a suitable route variant along the way.'],
+  'faq-q8': ['Was passiert bei technischen Problemen?', 'What if something goes wrong technically?'],
+  'faq-a8': ['Wenn eine technische Störung die Tour unmöglich macht, erstatten wir den Kaufpreis. Schreib uns einfach an <a href="mailto:info@tracetour.de" class="text-primary-container hover:underline">info@tracetour.de</a> – wir melden uns schnell.', 'If a technical fault makes the tour impossible, we refund the purchase price. Just write to <a href="mailto:info@tracetour.de" class="text-primary-container hover:underline">info@tracetour.de</a> – we\'ll get back to you quickly.'],
+
   'city-prep': ['In Vorbereitung', 'In Preparation'],
   'city-soon': ['Bald verfügbar', 'Coming Soon'],
 
