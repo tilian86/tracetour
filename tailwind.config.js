@@ -1,0 +1,37 @@
+module.exports = {
+  content: ["./index.html"],
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-tint": "#ffb59c",
+        "primary-container": "#f3632d",
+        "primary": "#ffb59c",
+        "surface-variant": "#2a3548",
+        "surface-container-high": "#1f2a3c",
+        "surface-container": "#152031",
+        "surface-container-low": "#111c2d",
+        "surface-container-lowest": "#040e1f",
+        "surface-container-highest": "#2a3548",
+        "surface-bright": "#2f3a4c",
+        "surface-dim": "#081425",
+        "on-surface": "#d8e3fb",
+        "on-surface-variant": "#e1bfb4",
+        "on-background": "#d8e3fb",
+        "secondary": "#b9c7e0",
+        "secondary-container": "#3c4a5e",
+        "on-secondary-container": "#abb9d2",
+        "outline": "#a88a80",
+        "outline-variant": "#594139",
+        "on-primary-container": "#511500",
+        "on-primary-fixed": "#390c00",
+      },
+      fontFamily: {
+        "headline": ["Epilogue", "sans-serif"],
+        "body": ["Inter", "sans-serif"],
+        "brand": ["Montserrat", "sans-serif"],
+      },
+    },
+  },
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/container-queries")],
+}

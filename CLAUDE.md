@@ -99,3 +99,11 @@
 ## Launch-Audit Mai 2026 (Commit 5de919e)
 Kompletter Audit + Fixes: Bonusfragen 13/16, EN-Neptun-Sync, Quiz "Sieben Fragen", Station-3-GPS, XP-Guards, sw.js v2 (sprachbewusst, Leaflet-Cache), API-Keys aus Skripten entfernt (.env). Details in Auto-Memory project_tracetour.md.
 NOCH OFFEN: ElevenLabs-Keys rotieren (waren public!), 7 Audios regenerieren nach Freigabe (anecdote_7 DE+EN, bonus_13 DE+EN, bonus_16 DE+EN, thanks EN).
+
+## Tailwind-Build (seit 2026-07-16)
+index.html nutzt STATISCHES css/tailwind.css (kein CDN mehr!). Nach Änderungen an Utility-Klassen in index.html neu bauen:
+```bash
+npm install -D tailwindcss@3 @tailwindcss/forms @tailwindcss/container-queries
+npx tailwindcss -c tailwind.config.js -i tailwind-input.css -o css/tailwind.css --minify
+```
+Config: tailwind.config.js (Repo-Root), Input: tailwind-input.css. Node 22 in ~/.local/node.
