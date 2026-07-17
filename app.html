@@ -284,6 +284,9 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 #success p{color:var(--text-2);font-size:.92rem;line-height:1.6;max-width:400px;margin-bottom:2rem}
 .xp-final{font-size:2.5rem;font-weight:900;color:var(--accent);font-family:var(--font-h)}
 .xp-final-label{font-size:.7rem;color:var(--text-3);letter-spacing:.15em;text-transform:uppercase;margin-bottom:2rem;font-weight:600}
+.recap-tile{background:rgba(15,23,42,.5);border:1px solid var(--border);border-radius:var(--r-sm);padding:.75rem .5rem;text-align:center}
+.recap-num{font-size:1.35rem;font-weight:900;color:var(--accent);font-family:var(--font-h);line-height:1.2}
+.recap-lbl{font-size:.62rem;color:var(--text-3);letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin-top:.2rem}
 .share-btn{width:100%;max-width:300px;padding:14px;background:var(--bg-card);border:1px solid var(--border-accent);color:var(--accent);font-family:var(--font-h);font-weight:700;font-size:.9rem;border-radius:var(--r-sm);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px}
 .share-btn .material-symbols-outlined{font-size:20px}
 .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--bg-card);border:1px solid var(--border-accent);color:var(--accent);padding:10px 20px;border-radius:var(--r-sm);font-size:.8rem;font-weight:600;z-index:3000;opacity:0;transition:opacity .3s;pointer-events:none}
@@ -625,6 +628,18 @@ Das ist Heinrichs Vermächtnis. Und jetzt ist es auch deins.</div>
 <div style="font-size:.8rem;color:var(--text-2)" id="solvedCount"></div>
 </div>
 
+<!-- FALLAKTE: Deine Ermittlung in Zahlen -->
+<div id="recapCard" style="background:var(--bg-card);border:1px solid var(--border-accent);border-radius:var(--r);padding:1.25rem;margin-bottom:1.5rem;max-width:480px;width:100%">
+<div id="recapTitle" style="font-size:.65rem;letter-spacing:.2em;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:1rem">Deine Ermittlung in Zahlen</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem">
+  <div class="recap-tile"><div class="recap-num" id="recapStations">–</div><div class="recap-lbl" id="recapStationsLbl">Stationen besucht</div></div>
+  <div class="recap-tile"><div class="recap-num" id="recapRiddles">–</div><div class="recap-lbl" id="recapRiddlesLbl">Rätsel gelöst</div></div>
+  <div class="recap-tile"><div class="recap-num" id="recapQuiz">–</div><div class="recap-lbl" id="recapQuizLbl">Quiz-Fragen richtig</div></div>
+  <div class="recap-tile"><div class="recap-num" id="recapBonus">–</div><div class="recap-lbl" id="recapBonusLbl">Bonusfragen geknackt</div></div>
+</div>
+<div class="recap-tile" style="margin-top:.6rem"><div class="recap-num" id="recapRank" style="font-size:1.1rem">–</div><div class="recap-lbl" id="recapRankLbl">Dein Ermittler-Rang</div></div>
+</div>
+
 <div style="background:linear-gradient(135deg,rgba(243,99,45,.08),rgba(15,23,42,.5));border:1px solid var(--border-accent);border-radius:var(--r);padding:1.25rem;margin-bottom:1.5rem;max-width:480px;width:100%">
 <div style="font-size:.65rem;letter-spacing:.2em;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:.75rem">Von uns für dich</div>
 <p id="thankP1" style="font-size:.85rem;line-height:1.7;color:var(--text-2)">Vielen herzlichen Dank, dass du mit uns unterwegs warst. Wir sind ein kleines, leidenschaftliches Team – und jede einzelne Tour bedeutet uns die Welt. Wenn dir die Erfahrung etwas gegeben hat, erzähl es gerne weiter.</p>
@@ -792,6 +807,7 @@ de:{
   epilogP3:'Seine Formel wurde nie für Waffen genutzt. Stattdessen veröffentlichte er sie 1871 in einer Zürcher Fachzeitschrift \u2013 frei zugänglich für alle. Das Königliche Ministerium in Stuttgart tobte. Aber es war zu spät. Das Wissen gehörte der Welt.',
   epilogP4:'Doch die Formel war nie das, was das Ministerium vermutete. Keine physikalische Gleichung. Keine chemische Reaktion. Was Heinrich über die halbe Stadt verteilt hatte, war eine Erkenntnis \u2013 inspiriert von einem Dichter, der 36 Jahre lang im Turm am Neckar lebte. Eine Erkenntnis, die gerade in unserer Zeit wichtiger ist denn je.',
   tracesLabel:'gesammelte Traces',solvedFormat:'{x} von {y} Rätseln gelöst \u00b7 Rang: {rank}',
+  recapTitle:'Deine Ermittlung in Zahlen',recapStationsLbl:'Stationen besucht',recapRiddlesLbl:'Rätsel gelöst',recapQuizLbl:'Quiz-Fragen richtig',recapBonusLbl:'Bonusfragen geknackt',recapRankLbl:'Dein Ermittler-Rang',
   thankLabel:'Von uns für dich',thankP1:'Vielen herzlichen Dank, dass du mit uns unterwegs warst. Wir sind ein kleines, leidenschaftliches Team \u2013 und jede einzelne Tour bedeutet uns die Welt. Wenn dir die Erfahrung etwas gegeben hat, erzähl es gerne weiter.',
   thankP2:'Wir wünschen dir noch viel Freude in Tübingen \u2013 und wer weiß: Vielleicht sehen wir uns bald bei einer neuen Tour wieder.',
   nextLabel:'Was kommt als Nächstes?',nextP1:'Es kommen fortlaufend neue Touren und Städte dazu. Heute Tübingen, morgen Stuttgart, München \u2013 und wer weiß wohin die Reise noch geht.',
@@ -899,6 +915,7 @@ en:{
   epilogP3:'His formula was never used for weapons. Instead, he published it in 1871 in a Zurich academic journal \u2014 freely accessible to all. The Royal Ministry in Stuttgart was furious. But it was too late. The knowledge belonged to the world.',
   epilogP4:'But the formula was never what the Ministry suspected. Not a physical equation. Not a chemical reaction. What Heinrich had scattered across half the city was an insight \u2014 inspired by a poet who lived 36 years in the tower on the Neckar. An insight that is more important now than ever.',
   tracesLabel:'Traces collected',solvedFormat:'{x} of {y} puzzles solved \u00b7 Rank: {rank}',
+  recapTitle:'Your investigation in numbers',recapStationsLbl:'Stations visited',recapRiddlesLbl:'Riddles solved',recapQuizLbl:'Quiz questions correct',recapBonusLbl:'Bonus questions cracked',recapRankLbl:'Your detective rank',
   thankLabel:'From us to you',thankP1:'Thank you so much for joining us on this journey. We are a small, passionate team \u2014 and every single tour means the world to us. If this experience gave you something, we would love it if you spread the word.',
   thankP2:'We wish you much joy in Tuebingen \u2014 and who knows: perhaps we will see each other again on a new tour soon.',
   nextLabel:'What\'s next?',nextP1:'New tours and cities are being added continuously. Today Tuebingen, tomorrow Stuttgart, Munich \u2014 and who knows where the journey will lead.',
@@ -1520,7 +1537,7 @@ function dbgGoQuiz(){
 }
 function dbgGoCert(){
   for(let i=0;i<stations.length;i++)solvedStations[i]=true;
-  maxUnlockedStation=stations.length;saveGame();showScreen('success');renderCertificate();
+  maxUnlockedStation=stations.length;saveGame();renderRecap();showScreen('success');renderCertificate();
 }
 function dbgForceBonus(){
   const bq=getBonusQuestions();
@@ -2904,7 +2921,26 @@ function showFinale(){
     const ridTotal=stations.filter(st=>!st.anecdote).length;
     sc.textContent=t('solvedFormat').replace('{x}',ridSolved).replace('{y}',ridTotal).replace('{rank}',getRank(totalXp));
   }
+  renderRecap();
   showScreen('success');playSfx('applause');setTimeout(renderCertificate,300);
+}
+// Fallakte: füllt „Deine Ermittlung in Zahlen" auf dem Erfolgs-Screen
+function renderRecap(){
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
+  set('recapTitle',t('recapTitle'));
+  set('recapStations',solvedStations.filter(Boolean).length+' / '+stations.length);
+  set('recapStationsLbl',t('recapStationsLbl'));
+  const ridSolved=stations.filter((st,i)=>!st.anecdote&&solvedStations[i]).length;
+  const ridTotal=stations.filter(st=>!st.anecdote).length;
+  set('recapRiddles',ridSolved+' / '+ridTotal);
+  set('recapRiddlesLbl',t('recapRiddlesLbl'));
+  set('recapQuiz',quizScore>0?quizScore+' / '+getQuizQuestions().length:'–');
+  set('recapQuizLbl',t('recapQuizLbl'));
+  const bq=Object.keys(getBonusQuestions()).length;
+  set('recapBonus',Object.values(bonusSolved).filter(Boolean).length+' / '+bq);
+  set('recapBonusLbl',t('recapBonusLbl'));
+  set('recapRank','🎖️ '+getRank(totalXp));
+  set('recapRankLbl',t('recapRankLbl'));
 }
 
 // ====== INIT ======
