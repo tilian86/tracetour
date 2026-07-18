@@ -297,6 +297,21 @@
   .cap-cell input { width:100%; text-align:center; padding:8px 2px; border:1px solid var(--line-strong);
     background:var(--paper); color:var(--ink); border-radius:9px; font-size:14px; font-family:inherit; outline:none; }
   .cap-cell input:focus { border-color:var(--brand); }
+  .engine-note { font-size:12px; line-height:1.5; color:var(--muted); background:var(--brand-soft);
+    border:1px solid color-mix(in srgb,var(--brand) 25%,transparent); border-radius:11px; padding:10px 12px; margin-top:4px; }
+  .engine-note b { color:var(--brand-ink); }
+  .plan-summary { display:flex; gap:8px; flex-wrap:wrap; margin:2px 0 12px; }
+  .plan-stat { flex:1; min-width:90px; border:1px solid var(--line); border-radius:11px; padding:9px 11px; background:var(--paper); }
+  .plan-stat .n { font-size:20px; font-weight:800; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+  .plan-stat .l { font-size:11px; color:var(--muted); font-weight:600; }
+  .plan-list { list-style:none; margin:0 0 12px; padding:0; display:flex; flex-direction:column; gap:5px; max-height:210px; overflow-y:auto; }
+  .plan-item { display:flex; align-items:center; gap:8px; font-size:13px; padding:6px 9px; border-radius:9px; background:var(--paper); border:1px solid var(--line); }
+  .plan-item .pi-badge { flex:none; font-size:10px; font-weight:800; padding:1px 6px; border-radius:6px; background:var(--brand-soft); color:var(--brand-ink); }
+  .plan-item .pi-day { flex:none; font-size:11px; color:var(--muted); font-weight:700; margin-left:auto; }
+  .plan-item.drop { opacity:.55; }
+  .plan-item.drop .pi-title { text-decoration:line-through; text-decoration-color:var(--faint); }
+  .plan-item .pi-why { flex:none; font-size:11px; color:var(--faint); margin-left:auto; }
+  .plan-item .pi-title { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 
   /* toast */
   .toast { position:fixed; left:50%; bottom:84px; transform:translateX(-50%) translateY(20px);
@@ -360,7 +375,8 @@
 <div class="actionbar">
   <div class="actionbar-inner">
     <button class="btn primary" id="addBtn">+ Aufgabe</button>
-    <button class="btn" id="balanceBtn" title="Überladene Tage automatisch verteilen">✦ Woche glätten</button>
+    <button class="btn" id="planBtn" title="Aufgabenliste importieren und automatisch einplanen">✦ Import &amp; Planen</button>
+    <button class="btn" id="balanceBtn" title="Überladene Tage automatisch verteilen">✧ Glätten</button>
     <div class="spacer"></div>
     <button class="btn ghost" id="carryBtn" style="display:none">↪ Übertragen</button>
   </div>
@@ -427,6 +443,31 @@
       <button class="btn primary" id="setClose" style="flex:1">Fertig</button>
     </div>
     <input type="file" id="importFile" accept="application/json" style="display:none">
+  </div>
+</div>
+
+<!-- Import & plan sheet -->
+<div class="scrim" id="planScrim">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="planTitle">
+    <h3 id="planTitle">Import &amp; Planen</h3>
+    <p class="sub">Aufgaben einfügen (eine pro Zeile). Zitate, Merkzettel &amp; PINs werden aussortiert, der Rest bekommt automatisch ein Gewicht und wird unter deine Tageskapazität verteilt.</p>
+    <div class="field">
+      <label for="planInput">Aufgabenliste</label>
+      <textarea id="planInput" rows="7" placeholder="Angebot fertig schreiben&#10;Reiseapotheke checken&#10;Wocheneinkauf&#10;…"
+        style="width:100%;border:1px solid var(--line-strong);background:var(--paper);color:var(--ink);border-radius:10px;padding:11px;font-size:14px;font-family:inherit;outline:none;resize:vertical;line-height:1.5"></textarea>
+      <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" id="planSample" style="height:30px;font-size:12.5px">↩ Todoist-Beispiel laden</button>
+        <button class="btn ghost" id="planClear" style="height:30px;font-size:12.5px">Leeren</button>
+      </div>
+    </div>
+    <div id="planResult" style="display:none"></div>
+    <div class="engine-note" id="engineNote">
+      <b>Demo:</b> Diese Einordnung ist regelbasiert. In der echten Todoist-Anbindung ersetzt hier ein Claude-Aufruf die Heuristik — er versteht den Kontext, statt nur Muster zu matchen.
+    </div>
+    <div class="sheet-actions">
+      <button class="btn ghost" id="planCancel">Schließen</button>
+      <button class="btn primary" id="planGo">✦ Planen</button>
+    </div>
   </div>
 </div>
 
@@ -975,7 +1016,7 @@
   });
 
   document.addEventListener("keydown",e=>{
-    if(e.key==="Escape"){ closeScrim(taskScrim); closeScrim(setScrim); }
+    if(e.key==="Escape"){ closeScrim(taskScrim); closeScrim(setScrim); closeScrim(planScrim); }
     if((e.key==="n"||e.key==="N") && !/input|textarea/i.test(document.activeElement.tagName)){ e.preventDefault(); openNew(); }
   });
 
@@ -984,6 +1025,109 @@
     const n=prevWeekUndone().length;
     if(n>0) toast(n+" offene Aufgabe"+(n>1?"n":"")+" aus der Vorwoche.","Übertragen",carryOver);
   }
+
+  // ---------- Import & Plan (triage + auto-weight + bin-pack) ----------
+  // NOTE: this classifier is a transparent, rule-based STAND-IN. In a real
+  // Todoist integration this function is where a Claude API call goes — it
+  // would read each task in context instead of pattern-matching.
+  const planScrim=$("#planScrim");
+  const RX = {
+    sensitive: /(visa|mastercard|iban|kreditkart|kontonummer|geheimzahl|\bpin\b|\bksk\b|\bbic\b)/i,
+    pinLike: /:\s*\d{3,}\b/,
+    someday: /(programmier|vermarkt|aufmachen|\büben\b|strandbar|plattform|irgendwann|eines tages|someday)/i,
+    xl: /(konzept|projekt|präsentation|steuererklär|umzug|renovier|thesis|hausarbeit|masterplan)/i,
+    l:  /(schreiben|vorbereiten|planen|organisier|recherche|einrichten|angebot|bewerbung|report|aufsetzen|entwerfen)/i,
+    s:  /(checken|kaufen|anruf|mail|buchen|packen|rollen|abholen|holen|termin|einkauf|putzen|müll|gießen|drucken)/i
+  };
+  function classifyLine(raw){
+    const line=raw.trim();
+    if(!line) return null;
+    if(line.startsWith("*") || line.length>120) return {title:line.replace(/^\*\s*/,""), kind:"note", reason:"Zitat/Notiz"};
+    if(RX.sensitive.test(line) || RX.pinLike.test(line)) return {title:line, kind:"sensitive", reason:"sensibel (PIN/Karte)"};
+    if(/:\s*$/.test(line)) return {title:line, kind:"note", reason:"Merkzettel"};
+    if(RX.someday.test(line)) return {title:line, kind:"someday", reason:"Idee/Someday"};
+    let effort="M";
+    if(RX.xl.test(line)) effort="XL";
+    else if(RX.l.test(line)) effort="L";
+    else if(RX.s.test(line) || line.length<16) effort="S";
+    return {title:line, kind:"task", effort, reason:"Aufgabe"};
+  }
+  function classify(text){
+    const tasks=[], filtered=[];
+    text.split(/\r?\n/).forEach(l=>{
+      const c=classifyLine(l); if(!c) return;
+      if(c.kind==="task") tasks.push(c); else filtered.push(c);
+    });
+    return {tasks, filtered};
+  }
+  function distribute(tasks){
+    const days=[];
+    for(let i=0;i<7;i++){ const dk=iso(addDays(viewMonday,i)); days.push({i,dk,cap:state.settings.capacity[i]||0,load:dayLoad(dk)}); }
+    const sorted=tasks.slice().sort((a,b)=>effW(b.effort)-effW(a.effort));
+    const placed=[];
+    sorted.forEach(t=>{
+      const w=effW(t.effort);
+      const fits=days.filter(d=>d.cap-d.load>=w).sort((a,b)=>(b.cap-b.load)-(a.cap-a.load));
+      const target=fits[0] || days.slice().sort((a,b)=>(a.load-a.cap)-(b.load-b.cap))[0];
+      target.load+=w;
+      const task={id:uid(),title:t.title,effort:t.effort,dayKey:target.dk,done:false};
+      state.tasks.push(task);
+      placed.push({title:t.title,effort:t.effort,day:target.i, over:target.load>target.cap});
+    });
+    return placed;
+  }
+  function runPlan(){
+    const text=$("#planInput").value;
+    const {tasks,filtered}=classify(text);
+    if(tasks.length===0 && filtered.length===0){ toast("Erst ein paar Zeilen einfügen."); return; }
+    const placed = distribute(tasks);
+    save(); render();
+    renderPlanResult(placed, filtered);
+    toast(placed.length+" Aufgabe"+(placed.length!==1?"n":"")+" eingeplant, "+filtered.length+" gefiltert.");
+  }
+  function renderPlanResult(placed, filtered){
+    let weekLoad=0, weekCap=0;
+    for(let i=0;i<7;i++){ weekLoad+=dayLoad(iso(addDays(viewMonday,i))); weekCap+=state.settings.capacity[i]||0; }
+    let html='<div class="plan-summary">'+
+      '<div class="plan-stat"><div class="n">'+placed.length+'</div><div class="l">eingeplant</div></div>'+
+      '<div class="plan-stat"><div class="n">'+filtered.length+'</div><div class="l">gefiltert</div></div>'+
+      '<div class="plan-stat"><div class="n">'+weekLoad+'/'+weekCap+'</div><div class="l">Wochenlast</div></div>'+
+    '</div>';
+    if(placed.length){
+      html+='<ul class="plan-list">'+placed.map(p=>
+        '<li class="plan-item"><span class="pi-badge">'+p.effort+'</span><span class="pi-title">'+esc(p.title)+'</span><span class="pi-day">'+WD[p.day]+(p.over?" ⚠":"")+'</span></li>'
+      ).join("")+'</ul>';
+    }
+    if(filtered.length){
+      html+='<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:2px 0 6px">Aussortiert</div>';
+      html+='<ul class="plan-list">'+filtered.map(f=>
+        '<li class="plan-item drop"><span class="pi-title">'+esc(f.title)+'</span><span class="pi-why">'+f.reason+'</span></li>'
+      ).join("")+'</ul>';
+    }
+    const box=$("#planResult"); box.innerHTML=html; box.style.display="";
+  }
+  const SAMPLE=[
+    "Angebot fertig schreiben",
+    "Reiseapotheke checken (Kohletabletten, Nasenspray, Pflaster)",
+    "KFZ-Ladegerät, Führerschein & Mietwagen-Voucher einpacken",
+    "Diverse Klamotten rollen und in Beutel",
+    "Handgepäckskoffer holen",
+    "Wocheneinkauf",
+    "Kundencall vorbereiten",
+    "Konzept für neue Tour entwerfen",
+    "Friseur-Terminplattform programmieren & vermarkten",
+    "Lockpicking üben",
+    "Barclay Visa: 0000",
+    "* You only live once, but if you do it right, once is enough! - Mae West",
+    "Allgemein:"
+  ].join("\n");
+
+  $("#planBtn").addEventListener("click",()=>{ $("#planResult").style.display="none"; openScrim(planScrim); });
+  $("#planCancel").addEventListener("click",()=>closeScrim(planScrim));
+  $("#planGo").addEventListener("click",runPlan);
+  $("#planSample").addEventListener("click",()=>{ $("#planInput").value=SAMPLE; $("#planInput").focus(); });
+  $("#planClear").addEventListener("click",()=>{ $("#planInput").value=""; $("#planResult").style.display="none"; });
+  planScrim.addEventListener("click",e=>{ if(e.target===planScrim) closeScrim(planScrim); });
 
   // ---------- init ----------
   applyTheme();
