@@ -732,24 +732,33 @@
     const inp=row.querySelector("input");
     const effBtn=row.querySelector(".eff-cycle");
     const go=row.querySelector(".add-go");
-    let eff="M";
+    // keep the text field focused when tapping the buttons (otherwise blur closes the row)
+    [effBtn,go].forEach(btn=>btn.addEventListener("mousedown",e=>e.preventDefault()));
     effBtn.addEventListener("click",e=>{
       e.stopPropagation();
-      const i=EFFORTS.findIndex(x=>x.k===eff);
-      eff=EFFORTS[(i+1)%EFFORTS.length].k; effBtn.textContent=eff;
+      const i=EFFORTS.findIndex(x=>x.k===effBtn.textContent);
+      effBtn.textContent=EFFORTS[(i+1)%EFFORTS.length].k;
     });
     const commit=()=>{
       const title=inp.value.trim();
       if(!title){ row.classList.remove("open"); return; }
+      const eff=effBtn.textContent;
       addTask({title, effort:eff, dayKey:dk});
-      inp.value=""; inp.focus();
+      reopenInline(dk, eff); // render() rebuilt the card — reopen so you can add several in a row
     };
     go.addEventListener("click",e=>{ e.stopPropagation(); commit(); });
     inp.addEventListener("keydown",e=>{
       if(e.key==="Enter"){ e.preventDefault(); commit(); }
       if(e.key==="Escape"){ inp.value=""; row.classList.remove("open"); }
     });
-    inp.addEventListener("blur",()=>{ if(!inp.value.trim()) row.classList.remove("open"); });
+    inp.addEventListener("blur",e=>{ if(row.contains(e.relatedTarget)) return; if(!inp.value.trim()) row.classList.remove("open"); });
+  }
+  function reopenInline(dk, eff){
+    const card=weekEl.querySelector('.day[data-day="'+dk+'"]');
+    if(!card) return;
+    const row=card.querySelector(".addrow"); row.classList.add("open");
+    if(eff) card.querySelector(".eff-cycle").textContent=eff;
+    card.querySelector(".addrow input").focus();
   }
 
   // ---------- task ops ----------
