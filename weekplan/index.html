@@ -6,7 +6,17 @@
 <meta name="theme-color" content="#F4F5F2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14161A" media="(prefers-color-scheme: dark)">
 <meta name="description" content="Kapa — ein ruhiger Wochenplaner, der nach Kapazität statt nach Uhrzeit plant. Lokal, ohne Konto, ohne Tracking.">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Kapa">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kapa — Wochenplaner nach Kapazität">
+<meta property="og:description" content="Plane nach Gewicht statt nach Uhrzeit. Lokal, ohne Konto, ohne Tracking.">
 <title>Kapa — Wochenplaner nach Kapazität</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2333507A'/%3E%3Crect x='7' y='19' width='4' height='7' rx='1.5' fill='%234C9A82'/%3E%3Crect x='14' y='13' width='4' height='13' rx='1.5' fill='%23CF9433'/%3E%3Crect x='21' y='7' width='4' height='19' rx='1.5' fill='%23C55B45'/%3E%3C/svg%3E">
 <style>html,body{margin:0}body{background:#F4F5F2}@media(prefers-color-scheme:dark){body{background:#14161A}}</style>
 </head>
@@ -297,6 +307,14 @@
   .cap-cell input { width:100%; text-align:center; padding:8px 2px; border:1px solid var(--line-strong);
     background:var(--paper); color:var(--ink); border-radius:9px; font-size:14px; font-family:inherit; outline:none; }
   .cap-cell input:focus { border-color:var(--brand); }
+  .ob-hero { display:flex; align-items:flex-end; justify-content:center; gap:10px; height:96px; margin:2px 0 16px;
+    padding:14px; background:var(--surface-2); border-radius:14px; }
+  .ob-bar { width:34px; border-radius:7px 7px 3px 3px; display:block; box-shadow:0 2px 6px rgba(0,0,0,.12); }
+  .ob-list { list-style:none; margin:2px 0 4px; padding:0; display:flex; flex-direction:column; gap:9px; }
+  .ob-list li { position:relative; padding-left:22px; font-size:13.5px; color:var(--ink); line-height:1.45; }
+  .ob-list li::before { content:""; position:absolute; left:2px; top:7px; width:8px; height:8px; border-radius:3px;
+    background:var(--brand); }
+  .ob-list b { font-weight:700; }
   .engine-note { font-size:12px; line-height:1.5; color:var(--muted); background:var(--brand-soft);
     border:1px solid color-mix(in srgb,var(--brand) 25%,transparent); border-radius:11px; padding:10px 12px; margin-top:4px; }
   .engine-note b { color:var(--brand-ink); }
@@ -344,6 +362,7 @@
       </div>
       <button class="iconbtn" id="nextWeek" aria-label="Nächste Woche">›</button>
     </div>
+    <button class="iconbtn" id="installBtn" aria-label="App installieren" title="Als App installieren" style="display:none">⇩</button>
     <button class="iconbtn" id="themeBtn" aria-label="Design wechseln" title="Hell / Dunkel">◐</button>
     <button class="iconbtn" id="settingsBtn" aria-label="Einstellungen" title="Einstellungen">⚙</button>
   </div>
@@ -471,6 +490,29 @@
   </div>
 </div>
 
+<!-- Onboarding -->
+<div class="scrim" id="onboardScrim">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="obTitle">
+    <div class="ob-hero" aria-hidden="true">
+      <span class="ob-bar" style="height:34%;background:var(--ok)"></span>
+      <span class="ob-bar" style="height:62%;background:var(--warn)"></span>
+      <span class="ob-bar" style="height:96%;background:var(--over)"></span>
+    </div>
+    <h3 id="obTitle">Plane nach Kraft, nicht nach Uhrzeit</h3>
+    <p class="sub">Jede Aufgabe bekommt ein Gewicht, jeder Tag ein Maximum. Die Linie zeigt dir sofort, ob ein Tag noch realistisch ist — oder überläuft.</p>
+    <ul class="ob-list">
+      <li><b>S · M · L · XL</b> — so viel Kraft kostet eine Aufgabe</li>
+      <li><b>Ziehen</b> verschiebt Aufgaben zwischen Tagen · <b>Antippen</b> bearbeitet</li>
+      <li><b>✦ Import &amp; Planen</b> sortiert eine Liste automatisch in die Woche</li>
+      <li><b>Alles lokal</b> — kein Konto, kein Tracking</li>
+    </ul>
+    <div class="sheet-actions">
+      <button class="btn" id="obFresh">Leer starten</button>
+      <button class="btn primary" id="obGo" style="flex:1.4">Mit Beispielwoche loslegen</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"><span id="toastMsg"></span><button id="toastAction" style="display:none"></button></div>
 
 <script>
@@ -498,6 +540,8 @@
 
   // ---------- state ----------
   const todayISO = iso(new Date());
+  let _seq=0;
+  function uid(){ return "t"+Date.now().toString(36)+(_seq++).toString(36)+Math.random().toString(36).slice(2,5); }
   let state = load();
   let viewMonday = mondayOf(new Date());
   let editingId = null;      // task id being edited (null = new)
@@ -543,7 +587,6 @@
     s.templates = [];
     return s;
   }
-  function uid(){ return "t"+Math.random().toString(36).slice(2,9)+(state?state.tasks.length:0); }
 
   // ---------- recurring materialization ----------
   function materialize(monday){
@@ -1016,7 +1059,7 @@
   });
 
   document.addEventListener("keydown",e=>{
-    if(e.key==="Escape"){ closeScrim(taskScrim); closeScrim(setScrim); closeScrim(planScrim); }
+    if(e.key==="Escape"){ closeScrim(taskScrim); closeScrim(setScrim); closeScrim(planScrim); if(onboardScrim.classList.contains("open")) finishOnboard(); }
     if((e.key==="n"||e.key==="N") && !/input|textarea/i.test(document.activeElement.tagName)){ e.preventDefault(); openNew(); }
   });
 
@@ -1129,9 +1172,54 @@
   $("#planClear").addEventListener("click",()=>{ $("#planInput").value=""; $("#planResult").style.display="none"; });
   planScrim.addEventListener("click",e=>{ if(e.target===planScrim) closeScrim(planScrim); });
 
+  // ---------- onboarding ----------
+  const onboardScrim=$("#onboardScrim");
+  const OB_KEY="kapa.onboarded.v1";
+  function finishOnboard(){ try{ localStorage.setItem(OB_KEY,"1"); }catch(e){} closeScrim(onboardScrim); }
+  $("#obGo").addEventListener("click",finishOnboard);
+  $("#obFresh").addEventListener("click",()=>{
+    const theme=state.settings.theme, cap=state.settings.capacity.slice(), ac=state.settings.autoCarry;
+    state=defaultState(); state.settings.theme=theme; state.settings.capacity=cap; state.settings.autoCarry=ac;
+    save(); finishOnboard(); render();
+    toast("Leere Woche — leg los mit „+ Aufgabe“.");
+  });
+  function maybeOnboard(){
+    let seen=false; try{ seen=!!localStorage.getItem(OB_KEY); }catch(e){}
+    if(!seen) openScrim(onboardScrim);
+  }
+
+  // ---------- install prompt (PWA) ----------
+  let deferredPrompt=null;
+  window.addEventListener("beforeinstallprompt",e=>{ e.preventDefault(); deferredPrompt=e; $("#installBtn").style.display=""; });
+  $("#installBtn").addEventListener("click",async()=>{
+    if(!deferredPrompt) return;
+    deferredPrompt.prompt();
+    try{ await deferredPrompt.userChoice; }catch(e){}
+    deferredPrompt=null; $("#installBtn").style.display="none";
+  });
+  window.addEventListener("appinstalled",()=>{ $("#installBtn").style.display="none"; toast("Kapa installiert 🎉"); });
+
+  // ---------- service worker (offline) ----------
+  if("serviceWorker" in navigator){
+    window.addEventListener("load",()=>{ navigator.serviceWorker.register("sw.js").catch(()=>{}); });
+  }
+
+  // ---------- scroll to today on phones ----------
+  function scrollToToday(){
+    if(window.innerWidth>560) return;
+    if(iso(viewMonday)!==iso(mondayOf(new Date()))) return;
+    const el=weekEl.querySelector(".day.today");
+    if(el) el.scrollIntoView({block:"start",behavior:"auto"});
+  }
+
+  // add onboarding scrim to Escape handling
+  onboardScrim.addEventListener("click",e=>{ if(e.target===onboardScrim) finishOnboard(); });
+
   // ---------- init ----------
   applyTheme();
   render();
+  maybeOnboard();
+  setTimeout(scrollToToday,0);
 })();
 </script>
 
