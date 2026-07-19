@@ -4,10 +4,13 @@ TraceTour Kids Audio Generator -- ElevenLabs TTS
 Generiert alle Audio-Dateien fuer die Kindertour (kinder.html):
   - prolog.mp3       (Splash-Screen Story)
   - story_0..7.mp3   (Tuebi erzaehlt an jeder Station)
+  - whisper_0..7.mp3 (Tuebi-fluestert-Bubbles, via --whisper)
 
 Verwendung:
   python3 generate_audio_kinder.py
   python3 generate_audio_kinder.py --station 0,1,2
+  python3 generate_audio_kinder.py --whisper            # alle Fluester-Audios
+  python3 generate_audio_kinder.py --whisper --station 3
   python3 generate_audio_kinder.py --list-voices
 """
 
@@ -49,6 +52,16 @@ VOICE_SETTINGS = {
     "stability": 0.25,
     "similarity_boost": 0.85,
     "style": 0.7,
+    "use_speaker_boost": True,
+}
+
+# Fluester-Voice fuer die "Tuebi fluestert"-Bubbles (whisper_0..7.mp3)
+WHISPER_VOICE = "T8glqERsNnkmTitewfiY"   # Tuebi Fluestert
+# Robust/max Stability fuer konsistenten Fluesterton
+WHISPER_SETTINGS = {
+    "stability": 1.0,
+    "similarity_boost": 0.85,
+    "style": 0.0,
     "use_speaker_boost": True,
 }
 
@@ -210,7 +223,52 @@ STORIES = [
 # AUDIO GENERIERUNG
 # ============================================================
 
-def generate_audio(text, voice_id, output_path):
+WHISPER_TEXTS = [
+    # Station 0 - Rathaus/Marktplatz (1:1 aus kinder.html tubiSays)
+    (
+        "Wenn du ganz leise bist, siehst du, wie ich auf der Uhr die Sonne schnappe! Die Touristen denken, ich wäre nur aus Metall. Wenn die wüssten... 🤫"
+    ),
+    # Station 1 - Schloss (1:1 aus kinder.html tubiSays)
+    (
+        "Flatter liebt es, mich im Geheimgang zu erschrecken! Einmal hat er „BUH!\" gerufen und ich hab vor Schreck einen Feuerstrahl an die Decke geschossen – da war meine Flamme noch heil... 😔\n"
+        "\n"
+        "Übrigens: Ich kenne einen geheimen Weg vom Schloss runter – eine enge Gasse mit steilen Steintreppen zwischen den Häusern! Wenn du mutig bist, folge mir hinunter. Wenn du einen Kinderwagen dabei hast, nimm lieber den breiteren Hauptweg über die Burgsteige."
+    ),
+    # Station 2 - Stiftskirche (1:1 aus kinder.html tubiSays)
+    (
+        "Ob der Turm wegen mir schief ist? Vielleicht... 😅 Und der arme Goethe – hätte lieber meinen Drachenfeuer-Tee trinken sollen statt Wein! 🍵"
+    ),
+    # Station 3 - Georgsbrunnen (1:1 aus kinder.html tubiSays)
+    (
+        "DREI PARKPLÄTZE! Ich bin IMMER NOCH sauer! 😤 Mein Cousin hat 15 Jahre geschmollt. Jetzt steht er wieder da – ziemlich heldenhaft, oder?"
+    ),
+    # Station 4 - Hoelderlinturm (1:1 aus kinder.html tubiSays)
+    (
+        "36 Jahre in einem Zimmer! Ich wohne seit 500 Jahren hinter einer Uhr, also verstehe ich das. Aber Hölderlin hatte wenigstens den Neckar-Blick! Das Museum ist sogar umsonst – wie cool ist das?"
+    ),
+    # Station 5 - Eberhardsbruecke (1:1 aus kinder.html tubiSays)
+    (
+        "Beim Rennen sitze ich hier auf der Brücke! Einmal hat Lebertran fast MICH getroffen! 😱 Drachenfeuer und Fischöl – das hätte SO gestunken!"
+    ),
+    # Station 6 - Nonnenhaus (1:1 aus kinder.html tubiSays)
+    (
+        "Zehn Kinder! Immer geschrien und gelacht! 😅 Leonhart hat mir eine Pflanze geschenkt – steht hinter der Uhr. Leider bin ich als Gärtner eine Katastrophe..."
+    ),
+    # Station 7 - Froschkoenig (1:1 aus kinder.html tubiSays)
+    (
+        "Der Froschkönig wurde gestohlen! 😱 Hoffentlich klaut niemand MICH von der Rathausuhr! Aber weißt du was? Ich glaube, der Frosch war ein kleiner Drache. Wir können uns verwandeln – aber psssst! 🤫\n"
+        "\n"
+        "Nur noch dieses letzte Rätsel... dann kann ich wieder fliegen!"
+    ),
+]
+
+# Emojis/Symbole vor dem TTS-Versand entfernen (Texte bleiben 1:1 wie in kinder.html)
+def strip_for_tts(text):
+    import re as _re
+    return _re.sub(r'[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F]', '', text).strip()
+
+
+def generate_audio(text, voice_id, output_path, settings=None):
     """Generiert eine MP3-Datei via ElevenLabs REST API."""
     import requests
 
@@ -227,7 +285,7 @@ def generate_audio(text, voice_id, output_path):
             json={
                 "text": text,
                 "model_id": MODEL_ID,
-                "voice_settings": VOICE_SETTINGS,
+                "voice_settings": settings if settings is not None else VOICE_SETTINGS,
             },
             stream=True,
         )
@@ -253,6 +311,7 @@ def main():
     parser = argparse.ArgumentParser(description="TraceTour Kids Audio Generator")
     parser.add_argument("--station", type=str, help="Nur bestimmte Stationen (z.B. 0,1,2)")
     parser.add_argument("--prolog-only", action="store_true", help="Nur Prolog generieren")
+    parser.add_argument("--whisper", action="store_true", help="Nur Fluester-Audios (whisper_0..7) generieren")
     parser.add_argument("--dry-run", action="store_true", help="Nur Texte anzeigen, nichts generieren")
     args = parser.parse_args()
 
@@ -267,39 +326,47 @@ def main():
     # Aufgaben sammeln
     tasks = []
 
-    if not args.station or args.prolog_only:
-        tasks.append(("prolog.mp3", PROLOG))
-
-    if not args.prolog_only:
+    if args.whisper:
         for i in station_ids:
-            if i < 0 or i >= len(STORIES):
-                print(f"  Station {i} existiert nicht (0-{len(STORIES)-1}), ueberspringe.")
+            if i < 0 or i >= len(WHISPER_TEXTS):
+                print(f"  Station {i} existiert nicht (0-{len(WHISPER_TEXTS)-1}), ueberspringe.")
                 continue
-            tasks.append((f"story_{i}.mp3", STORIES[i]))
+            tasks.append((f"whisper_{i}.mp3", strip_for_tts(WHISPER_TEXTS[i]), WHISPER_VOICE, WHISPER_SETTINGS))
+    else:
+        if not args.station or args.prolog_only:
+            tasks.append(("prolog.mp3", PROLOG, TUBI_VOICE, None))
+
+        if not args.prolog_only:
+            for i in station_ids:
+                if i < 0 or i >= len(STORIES):
+                    print(f"  Station {i} existiert nicht (0-{len(STORIES)-1}), ueberspringe.")
+                    continue
+                tasks.append((f"story_{i}.mp3", STORIES[i], TUBI_VOICE, None))
 
     print(f"\n{'='*50}")
     print(f"TraceTour Kids Audio Generator")
-    print(f"Voice: Tuebi ({TUBI_VOICE})")
-    print(f"Kreativitaet: stability={VOICE_SETTINGS['stability']}, style={VOICE_SETTINGS['style']}")
+    print(f"Voice: {'Tuebi Fluestert ('+WHISPER_VOICE+')' if args.whisper else 'Tuebi ('+TUBI_VOICE+')'}")
+    _vs = WHISPER_SETTINGS if args.whisper else VOICE_SETTINGS
+    print(f"Settings: stability={_vs['stability']}, style={_vs['style']}")
     print(f"Output: {OUTPUT_DIR}")
     print(f"Dateien: {len(tasks)}")
     print(f"{'='*50}\n")
 
     if args.dry_run:
-        for filename, text in tasks:
+        for filename, text, _v, _s in tasks:
             print(f"\n--- {filename} ({len(text)} Zeichen) ---")
             print(text[:200] + "..." if len(text) > 200 else text)
         return
 
     success = 0
-    for i, (filename, text) in enumerate(tasks):
+    for i, (filename, text, voice, settings) in enumerate(tasks):
         output_path = OUTPUT_DIR / filename
         if output_path.exists():
             print(f"  {filename} existiert bereits, ueberspringe. (Loeschen zum Neu-Generieren)")
             success += 1
             continue
 
-        ok = generate_audio(text, TUBI_VOICE, output_path)
+        ok = generate_audio(text, voice, output_path, settings=settings)
         if ok:
             success += 1
 
