@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Danke – TraceTour</title>
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#1e293b">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:560px;margin:0 auto;padding:2.5rem 1.5rem;background:#1e293b;color:#d2e4fb;line-height:1.7;text-align:center}
@@ -17,38 +18,88 @@ h1{font-size:1.7rem;margin:.5rem 0}
 .steps{text-align:left;font-size:.9rem;color:#b0c4de;margin:1.5rem auto;max-width:420px}
 .error{color:#fa7e91}
 a{color:#f3632d}
+.lang-toggle{position:absolute;top:1rem;right:1rem;display:flex;gap:.3rem}
+.lang-btn{background:none;border:1px solid #8192a7;color:#8192a7;border-radius:6px;padding:.2rem .6rem;font-size:.75rem;font-weight:700;cursor:pointer}
+.lang-btn.active{background:#f3632d;border-color:#f3632d;color:#fff}
 </style>
 </head>
 <body>
+<div class="lang-toggle">
+  <button class="lang-btn" id="langDe" onclick="setLang('de')">DE</button>
+  <button class="lang-btn" id="langEn" onclick="setLang('en')">EN</button>
+</div>
 <div style="font-size:3rem">🎉</div>
-<h1>Danke für deinen Kauf!</h1>
-<p class="sub">Deine Zahlung war erfolgreich. Hier ist dein Zugangscode – er kommt zusätzlich per E-Mail.</p>
+<h1 data-t="h1">Danke für deinen Kauf!</h1>
+<p class="sub" data-t="sub">Deine Zahlung war erfolgreich. Hier ist dein Zugangscode – er kommt zusätzlich per E-Mail.</p>
 
 <div class="code-box pending" id="codeBox">Code wird erstellt …</div>
-<button class="copy" id="copyBtn" style="display:none" onclick="copyCode()">Code kopieren</button>
+<button class="copy" id="copyBtn" style="display:none" onclick="copyCode()" data-t="copy">Code kopieren</button>
 
 <div class="steps">
-<strong>So geht's los:</strong>
+<strong data-t="stepsTitle">So geht's los:</strong>
 <ol>
-<li>Öffne die Tour auf deinem Smartphone</li>
-<li>Gib deinen Code ein und wähle deinen Ermittler-Namen</li>
+<li data-t="step1">Öffne die Tour auf deinem Smartphone</li>
+<li data-t="step2">Gib deinen Code ein und wähle deinen Ermittler-Namen</li>
 <li id="stepStart">Erwachsenen-Tour: Start am Schloss Hohentübingen · Kindertour: Start am Marktplatz</li>
-<li>Kopfhörer nicht vergessen! 🎧</li>
+<li data-t="step4">Kopfhörer nicht vergessen! 🎧</li>
 </ol>
-<p style="font-size:.8rem;color:#8192a7;margin-top:.6rem">Gut zu wissen: Ab dem <strong>ersten Start</strong> hast du <strong>48 Stunden</strong> Zeit für die Tour – aktiviere den Code also erst, wenn du wirklich losgehst. Einlösbar bis 12 Monate nach Kauf.</p>
+<p style="font-size:.8rem;color:#8192a7;margin-top:.6rem" data-t="hint" data-t-html="1">Gut zu wissen: Ab dem <strong>ersten Start</strong> hast du <strong>48 Stunden</strong> Zeit für die Tour – aktiviere den Code also erst, wenn du wirklich losgehst. Einlösbar bis 12 Monate nach Kauf.</p>
 </div>
 
 <a class="btn" id="tourBtn" href="app.html">Zur Tour →</a>
-<p class="sub" style="margin-top:2rem;font-size:.8rem">Kein Code nach 2 Minuten? Schreib uns: <a href="mailto:info@tracetour.de">info@tracetour.de</a></p>
+<p class="sub" style="margin-top:2rem;font-size:.8rem"><span data-t="footer">Kein Code nach 2 Minuten? Schreib uns:</span> <a href="mailto:info@tracetour.de">info@tracetour.de</a></p>
 
 <script>
+const T={
+  title:['Danke – TraceTour','Thank you – TraceTour'],
+  h1:['Danke für deinen Kauf!','Thank you for your purchase!'],
+  sub:['Deine Zahlung war erfolgreich. Hier ist dein Zugangscode – er kommt zusätzlich per E-Mail.','Your payment was successful. Here is your access code – it will also be sent to you by email.'],
+  pending:['Code wird erstellt …','Creating your code …'],
+  copy:['Code kopieren','Copy code'],
+  copied:['Kopiert ✓','Copied ✓'],
+  stepsTitle:["So geht's los:",'How to get started:'],
+  step1:['Öffne die Tour auf deinem Smartphone','Open the tour on your smartphone'],
+  step2:['Gib deinen Code ein und wähle deinen Ermittler-Namen','Enter your code and choose your detective name'],
+  step4:['Kopfhörer nicht vergessen! 🎧',"Don't forget your headphones! 🎧"],
+  hint:['Gut zu wissen: Ab dem <strong>ersten Start</strong> hast du <strong>48 Stunden</strong> Zeit für die Tour – aktiviere den Code also erst, wenn du wirklich losgehst. Einlösbar bis 12 Monate nach Kauf.','Good to know: from the <strong>first start</strong> you have <strong>48 hours</strong> for the tour – so only activate your code when you are really setting off. Redeemable up to 12 months after purchase.'],
+  footer:['Kein Code nach 2 Minuten? Schreib uns:','No code after 2 minutes? Write to us:'],
+  btnAdult:['Zur Tour →','To the tour →'],
+  btnKids:['Zur Kindertour mit Tübi 🐉','To the kids tour with Tübi 🐉'],
+  startDefault:['Erwachsenen-Tour: Start am Schloss Hohentübingen · Kindertour: Start am Marktplatz','Adult tour: starts at Hohentübingen Castle · Kids tour: starts at the market square'],
+  startAdult:['Starte am Schloss Hohentübingen – folge Heinrichs Spur 🔍',"Start at Hohentübingen Castle – follow Heinrich's trail 🔍"],
+  startKids:['Startet am Marktplatz beim Rathaus – Tübi wartet schon! 🐉','Starts at the market square by the town hall – Tübi is already waiting! 🐉'],
+  noSid:['Kein Bestellbezug gefunden.','No order reference found.'],
+  late:['Dein Code braucht gerade etwas länger – er kommt per E-Mail.<br>Falls nicht: <a href="mailto:info@tracetour.de">info@tracetour.de</a>','Your code is taking a little longer – it will arrive by email.<br>If it does not: <a href="mailto:info@tracetour.de">info@tracetour.de</a>'],
+};
+let lang='de',tourKind='';  // '' | 'adult' | 'kids'
+try{const st=localStorage.getItem('tracetour_lang');lang=st==='en'?'en':st==='de'?'de':(navigator.language||'de').toLowerCase().startsWith('de')?'de':'en'}catch(e){}
+const tt=k=>T[k][lang==='en'?1:0];
+function setLang(l){
+  lang=l;try{localStorage.setItem('tracetour_lang',l)}catch(e){}
+  document.documentElement.lang=l;document.title=tt('title');
+  document.getElementById('langDe').classList.toggle('active',l==='de');
+  document.getElementById('langEn').classList.toggle('active',l==='en');
+  document.querySelectorAll('[data-t]').forEach(el=>{
+    const v=tt(el.dataset.t);
+    if(el.dataset.tHtml==='1'||el.hasAttribute('data-t-html'))el.innerHTML=v;else el.textContent=v;
+  });
+  renderDynamic();
+}
+function renderDynamic(){
+  const box=document.getElementById('codeBox');
+  if(box.classList.contains('pending')&&!box.classList.contains('error'))box.textContent=tt('pending');
+  const tb=document.getElementById('tourBtn'),ss=document.getElementById('stepStart');
+  if(tourKind==='kids'){tb.textContent=tt('btnKids');ss.textContent=tt('startKids')}
+  else if(tourKind==='adult'){tb.textContent=tt('btnAdult');ss.textContent=tt('startAdult')}
+  else{tb.textContent=tt('btnAdult');ss.textContent=tt('startDefault')}
+}
 const WORKER='https://tracetour-checkout.florian-s-thiel.workers.dev';
 const sid=new URLSearchParams(location.search).get('session_id')||'';
 let tries=0,codeVal='';
-function copyCode(){navigator.clipboard.writeText(codeVal).then(()=>{document.getElementById('copyBtn').textContent='Kopiert ✓'})}
+function copyCode(){navigator.clipboard.writeText(codeVal).then(()=>{document.getElementById('copyBtn').textContent=tt('copied')})}
 async function poll(){
   const box=document.getElementById('codeBox');
-  if(!sid){box.textContent='Kein Bestellbezug gefunden.';box.classList.add('error');return}
+  if(!sid){box.textContent=tt('noSid');box.classList.add('error');return}
   try{
     const r=await fetch(WORKER+'/code?session_id='+encodeURIComponent(sid));
     const d=await r.json();
@@ -56,18 +107,17 @@ async function poll(){
       codeVal=d.code;
       box.textContent=d.code;box.classList.remove('pending');
       document.getElementById('copyBtn').style.display='inline-block';
-      const kids=d.tour==='kids';
-      const tb=document.getElementById('tourBtn');
-      tb.href=kids?'kinder.html':'app.html';
-      tb.textContent=kids?'Zur Kindertour mit Tübi 🐉':'Zur Tour →';
-      document.getElementById('stepStart').textContent=kids?'Startet am Marktplatz beim Rathaus – Tübi wartet schon! 🐉':'Starte am Schloss Hohentübingen – folge Heinrichs Spur 🔍';
+      tourKind=d.tour==='kids'?'kids':'adult';
+      document.getElementById('tourBtn').href=tourKind==='kids'?'kinder.html':'app.html';
+      renderDynamic();
       try{localStorage.setItem('tracetour_purchased_code',d.code)}catch(e){}
       return;
     }
   }catch(e){}
   if(++tries<40){setTimeout(poll,3000)}
-  else{box.innerHTML='Dein Code braucht gerade etwas länger – er kommt per E-Mail.<br>Falls nicht: <a href="mailto:info@tracetour.de">info@tracetour.de</a>';box.classList.add('error')}
+  else{box.innerHTML=tt('late');box.classList.add('error')}
 }
+setLang(lang);
 poll();
 </script>
 </body>
