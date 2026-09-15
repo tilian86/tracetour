@@ -137,7 +137,7 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 .game-map{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1}
 #map{width:100%;height:100%}
 .leaflet-control-zoom{display:none}
-.leaflet-tile-pane{filter:saturate(.8) brightness(1.5) contrast(.85)!important}
+.leaflet-tile-pane{filter:invert(1) hue-rotate(195deg) brightness(.78) contrast(.92) saturate(.45)!important}
 
 .fab-toggle{position:fixed;bottom:calc(var(--safe-bottom) + 20px);right:16px;z-index:1000;background:var(--accent);color:#fff;padding:12px 20px;border-radius:30px;font-family:var(--font-h);font-weight:700;font-size:.8rem;box-shadow:0 4px 20px rgba(243,99,45,.4);transition:transform .2s;display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.05em}
 .fab-toggle:active{transform:scale(.95)}
@@ -1712,7 +1712,7 @@ function initMap(){
     try{
       map=L.map('map',{zoomControl:false,attributionControl:true}).setView([48.5215,9.0540],15);
       map.attributionControl.setPrefix(false);
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'}).addTo(map);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
       stations.forEach((s,i)=>{
         const visible=i<=maxUnlockedStation;
         const m=L.circleMarker([s.lat,s.lng],{radius:i===0?10:6,color:'#f3632d',fillColor:i===0?'#f3632d':'#4a5d73',fillOpacity:visible?(i===0?1:.5):0,weight:visible?2:0,opacity:visible?1:0}).addTo(map);
