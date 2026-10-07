@@ -1,4 +1,4 @@
+# Seite im Aufbau: jede Seite trägt noindex. Crawlen bleibt erlaubt, damit Google das noindex auch sieht.
 User-agent: *
 Allow: /
 Disallow: /danke.html
-Sitemap: https://tracetour.de/sitemap.xml
