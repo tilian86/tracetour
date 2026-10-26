@@ -100,6 +100,15 @@
 Kompletter Audit + Fixes: Bonusfragen 13/16, EN-Neptun-Sync, Quiz "Sieben Fragen", Station-3-GPS, XP-Guards, sw.js v2 (sprachbewusst, Leaflet-Cache), API-Keys aus Skripten entfernt (.env). Details in Auto-Memory project_tracetour.md.
 NOCH OFFEN: ElevenLabs-Keys rotieren (waren public!), 7 Audios regenerieren nach Freigabe (anecdote_7 DE+EN, bonus_13 DE+EN, bonus_16 DE+EN, thanks EN).
 
+## Audit Oktober 2026 (Branch claude/vigilant-sagan-jhhh1c, Bericht: BERICHT-CLOUD.md)
+- **Icon-Schrift:** fonts/materialsymbols-subset.woff2 (nur genutzte Icons, 14 KB). Neues Icon in index.html/app.html → `tools/subset_icons.py` ausführen (Anleitung im Skript) und `?v=` in fonts/fonts.css hochzählen. Volle Schrift liegt in fonts/source/.
+- **Leaflet** liegt lokal in vendor/leaflet/ (kein unpkg mehr).
+- **Cache-Buster:** CSS/JS-Links tragen `?v=20261026`. Bei Änderungen an CSS/JS: Datum in allen HTML-Links UND `ASSET_V` in sw.js anpassen.
+- **Service Worker:** `CORE_CACHE` hochzählen bei Code-Änderungen; `MEDIA_CACHE` NUR hochzählen, wenn MP3s/Fotos unter gleichem Namen ersetzt werden (z. B. nach dem Neu-Generieren der Audios!) – sonst behalten Offline-Nutzer die alten Audios.
+- **Verkaufsstart:** Stripe-Links in `CHECKOUT_LINKS` (index.html, oben im Script) eintragen → Buttons werden zu „Jetzt buchen“, Hinweis „Verkauf startet in Kürze“ verschwindet.
+- **Button-Orange** für weiße Schrift: `bg-cta` (#cf4a18, WCAG AA). #f3632d bleibt Akzentfarbe.
+- **Tailwind ohne node_modules im Repo:** Pakete in einen Temp-Ordner installieren und mit `NODE_PATH=<temp>/node_modules <temp>/node_modules/.bin/tailwindcss -c tailwind.config.js -i tailwind-input.css -o css/tailwind.css --minify` bauen.
+
 ## Tailwind-Build (seit 2026-07-16)
 index.html nutzt STATISCHES css/tailwind.css (kein CDN mehr!). Nach Änderungen an Utility-Klassen in index.html neu bauen:
 ```bash
