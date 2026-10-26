@@ -37,13 +37,15 @@
 <p><strong>Reichweitenmessung (Cloudflare Web Analytics).</strong> Zur anonymen Auswertung, wie oft die Website aufgerufen wird und wie schnell sie lädt, nutzen wir <strong>Cloudflare Web Analytics</strong> (Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA). Der Dienst arbeitet <strong>ohne Cookies</strong> und ohne Speicherung von Informationen auf deinem Gerät; es werden keine personenbezogenen Nutzerprofile erstellt und keine Daten mit anderen Websites zusammengeführt. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer bedarfsgerechten, stabilen Website). Der Anbieter sitzt in den USA; die Datenübermittlung stützt sich auf den Angemessenheitsbeschluss der EU-Kommission zum EU-US Data Privacy Framework, nach dem Cloudflare zertifiziert ist. Du kannst der Verarbeitung jederzeit widersprechen (Art. 21 DSGVO), z.&nbsp;B. per E-Mail an info@tracetour.de.</p>
 
 <h2>4. Lokale Datenspeicherung</h2>
-<p>TraceTour speichert deinen Spielfortschritt ausschließlich lokal in deinem Browser (localStorage). Folgende Daten werden gespeichert:</p>
+<p>TraceTour speichert Folgendes lokal in deinem Browser (localStorage bzw. Browser-Cache):</p>
 <ul>
-  <li>Dein eingegebener Name (für die Urkunde)</li>
-  <li>Gelöste Stationen und gesammelte Punkte</li>
-  <li>Aktuelle Position in der Tour</li>
+  <li>Dein eingegebener Name und ggf. Teamname (für die Urkunde)</li>
+  <li>Gelöste Stationen, gesammelte Punkte und deine aktuelle Position in der Tour</li>
+  <li>Deine Sprachauswahl</li>
+  <li>Den Hinweis, dass dein Zugangscode auf diesem Gerät bereits geprüft wurde, sowie eine zufällig erzeugte Geräte-ID (siehe Ziffer 10)</li>
+  <li>Wenn du die Tour für unterwegs herunterlädst: Audios, Bilder und Seiten der Tour</li>
 </ul>
-<p>Diese Daten werden <strong>nicht</strong> an einen Server übertragen. Du kannst sie jederzeit über die App-Funktion „Fortschritt löschen" oder über die Browser-Einstellungen entfernen.</p>
+<p>Spielstand, Name und Sprache werden <strong>nicht</strong> an einen Server übertragen. Die Speicherung ist für die von dir gewünschte Nutzung der App unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Du kannst die Daten jederzeit über die App-Funktion „Nochmal spielen“ bzw. „Fortschritt löschen“ oder über die Browser-Einstellungen („Websitedaten löschen“) entfernen.</p>
 
 <h2>5. Standortdaten</h2>
 <p>Die App fragt über deinen Browser nach deinem Standort (GPS), um deine Position auf der Karte anzuzeigen und die Entfernung zur nächsten Station zu berechnen. Die Standortdaten werden <strong>ausschließlich lokal</strong> in deinem Browser verarbeitet und <strong>nicht</strong> an unsere Server oder Dritte übertragen. Du kannst die Standortfreigabe jederzeit in deinen Browser-Einstellungen widerrufen.</p>
@@ -54,13 +56,13 @@
   <li>Dein Fragetext (max. 500 Zeichen)</li>
   <li>Kontext zur aktuellen Station (Rätsel, Hinweise)</li>
 </ul>
-<p>Es werden <strong>keine</strong> personenbezogenen Daten (Name, Standort, E-Mail) an den Dienst übertragen. Die Anfragen werden nicht gespeichert. Rate-Limiting erfolgt über die IP-Adresse, die im Cloudflare Worker verarbeitet, aber nicht dauerhaft gespeichert wird.</p>
+<p>Es werden <strong>keine</strong> personenbezogenen Daten (Name, Standort, E-Mail) an den Dienst übertragen – bitte schreib auch selbst keine persönlichen Daten in deine Frage. Die Anfragen werden von uns nicht gespeichert. Rate-Limiting erfolgt über die IP-Adresse, die im Cloudflare Worker verarbeitet, aber nicht dauerhaft gespeichert wird.</p>
 <p>Weitere Informationen: <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener">Anthropic Privacy Policy</a></p>
 
 <h2>7. Externe Dienste</h2>
 <p>Die App nutzt folgende externe Dienste:</p>
 <ul>
-  <li><strong>Leaflet / OpenStreetMap</strong> – für die Kartenanzeige. Die Kartenbibliothek Leaflet wird vom CDN unpkg.com geladen, Kartenkacheln direkt von der OpenStreetMap Foundation (tile.openstreetmap.org, Großbritannien). Für die Fußweg-Route wird der Routingdienst routing.openstreetmap.de (FOSSGIS e.&nbsp;V., Deutschland) angefragt; dabei werden die Stations-Koordinaten der Tour übertragen, nicht dein Standort. <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">OSM Datenschutz</a></li>
+  <li><strong>OpenStreetMap</strong> – für die Kartenanzeige. Die Kartenbibliothek Leaflet liegt auf unserem eigenen Server. Die Kartenkacheln lädt dein Browser direkt von der OpenStreetMap Foundation (tile.openstreetmap.org, Großbritannien; für das Vereinigte Königreich besteht ein Angemessenheitsbeschluss der EU-Kommission). Für die Fußweg-Route wird der Routingdienst routing.openstreetmap.de (FOSSGIS e.&nbsp;V., Deutschland) angefragt; dabei werden die Stations-Koordinaten der Tour übertragen, nicht dein Standort. Beide Dienste erhalten technisch bedingt deine IP-Adresse. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer funktionierenden Karte). <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">OSM Datenschutz</a></li>
   <li><strong>Schriftarten:</strong> Alle Schriften werden lokal von unserem Server geladen — es findet <strong>keine</strong> Verbindung zu Google Fonts oder anderen Font-Diensten statt.</li>
   <li><strong>Google Maps</strong> – für Navigationslinks (werden erst beim Antippen in einem neuen Tab geöffnet)</li>
 </ul>
@@ -69,10 +71,15 @@
 <p>TraceTour selbst setzt <strong>keine Cookies</strong>. Externe Dienste (GitHub Pages, OpenStreetMap, Stripe beim Bezahlvorgang) können eigene Cookies setzen.</p>
 
 <h2>9. Kauf und Zahlungsabwicklung (Stripe)</h2>
-<p>Beim Kauf eines Zugangscodes wirst du auf eine Bezahlseite unseres Zahlungsdienstleisters <strong>Stripe</strong> (Stripe Payments Europe, Ltd., 1 Grand Canal Street Lower, Dublin, Irland) weitergeleitet. Stripe verarbeitet dort die von dir eingegebenen Daten (Name, E-Mail-Adresse, Zahlungsdaten) zur Abwicklung der Zahlung; deine vollständigen Zahlungsdaten erreichen unsere Systeme zu keinem Zeitpunkt. Wir erhalten von Stripe eine Bestätigung der Zahlung sowie deinen Namen und deine E-Mail-Adresse zur Bereitstellung des Zugangscodes. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung). <a href="https://stripe.com/de/privacy" target="_blank" rel="noopener">Stripe-Datenschutzerklärung</a></p>
+<p>Beim Kauf eines Zugangscodes wirst du auf eine Bezahlseite unseres Zahlungsdienstleisters <strong>Stripe</strong> (Stripe Payments Europe, Ltd., 1 Grand Canal Street Lower, Dublin, Irland) weitergeleitet. Stripe verarbeitet dort die von dir eingegebenen Daten (Name, E-Mail-Adresse, Zahlungsdaten) zur Abwicklung der Zahlung; deine vollständigen Zahlungsdaten erreichen unsere Systeme zu keinem Zeitpunkt. Wir erhalten von Stripe eine Bestätigung der Zahlung sowie deinen Namen und deine E-Mail-Adresse zur Bereitstellung des Zugangscodes. Stripe kann Daten auch an Stripe, Inc. in den USA übermitteln; dies stützt sich auf das EU-US Data Privacy Framework bzw. EU-Standardvertragsklauseln. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung). <a href="https://stripe.com/de/privacy" target="_blank" rel="noopener">Stripe-Datenschutzerklärung</a></p>
 
 <h2>10. Zugangscode-Versand und -Prüfung</h2>
-<p>Nach erfolgreicher Zahlung senden wir dir deinen Zugangscode per E-Mail über den Versanddienst <strong>Resend</strong> (Resend, Inc., USA; Übermittlung abgesichert über EU-Standardvertragsklauseln). Dazu verarbeiten wir deine E-Mail-Adresse und deinen Namen. Die Zuordnung von Zugangscode zu Bestellung (Code, E-Mail-Adresse, Zeitpunkt) speichern wir in einer Datenbank bei Cloudflare, solange dein Zugangscode gültig ist. Beim Einlösen des Codes in der App wird ausschließlich der Code selbst an unseren Server übertragen und geprüft — kein Name, kein Standort. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung). <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener">Resend Privacy Policy</a></p>
+<p>Nach erfolgreicher Zahlung senden wir dir deinen Zugangscode per E-Mail über den Versanddienst <strong>Resend</strong> (Resend, Inc., USA; Übermittlung abgesichert über EU-Standardvertragsklauseln). Dazu verarbeiten wir deine E-Mail-Adresse und deinen Namen. Die Zuordnung von Zugangscode zu Bestellung (Code, gebuchte Tour, Name, E-Mail-Adresse, Zeitpunkt, Stripe-Bestellnummer) speichern wir in einer Datenbank bei Cloudflare.</p>
+<p>Beim Einlösen des Codes in der App werden der Code, die gewählte Tour und eine zufällig erzeugte Geräte-ID an unseren Server (Cloudflare Worker) übertragen – kein Name, kein Standort. Zum Code speichern wir die Geräte-IDs, auf denen er aktiviert wurde, und den Zeitpunkt der ersten Aktivierung. Das brauchen wir für das 48-Stunden-Fenster und die begrenzte Geräteanzahl (Schutz vor Weitergabe, siehe AGB). Die Geräte-ID lässt für sich genommen keinen Rückschluss auf deine Person zu; sie wird gelöscht, wenn du die Websitedaten deines Browsers löschst.</p>
+<p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung) und Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am Schutz vor unberechtigter Weitergabe). Wir löschen diese Daten, sobald sie dafür nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten (z.&nbsp;B. steuerrechtlich) entgegenstehen. <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener">Resend Privacy Policy</a></p>
+
+<h2>10a. Kontakt per E-Mail</h2>
+<p>Wenn du uns schreibst (z.&nbsp;B. an info@tracetour.de oder über die „Erinnere mich“-Mail), verarbeiten wir deine E-Mail-Adresse und den Inhalt deiner Nachricht, um dir zu antworten bzw. dich wie gewünscht über den Verkaufsstart zu informieren. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Anfragen zu Vertrag oder Kauf) bzw. lit. f DSGVO (sonstige Anfragen). Wir löschen die Nachricht, sobald die Anfrage erledigt ist und keine Aufbewahrungspflichten bestehen.</p>
 
 <h2>11. Selfie-Kamera (Kindertour)</h2>
 <p>Die Kindertour bietet eine optionale Selfie-Funktion mit Tübi-Sticker. Das Kamerabild wird dabei <strong>ausschließlich lokal auf deinem Gerät</strong> verarbeitet — es wird <strong>nichts hochgeladen</strong>, nichts an uns oder Dritte übertragen und nichts von uns gespeichert. Das fertige Foto wird nur auf deinem Gerät gespeichert bzw. über den Teilen-Dialog deines Geräts weitergegeben, wenn du das möchtest. Den Kamera-Zugriff kannst du jederzeit in den Browser-Einstellungen widerrufen.</p>
@@ -85,9 +92,9 @@
 <p>Bei Fragen zum Datenschutz wende dich an: info@tracetour.de</p>
 
 <h2>14. Änderungen</h2>
-<p>Diese Datenschutzerklärung kann gelegentlich aktualisiert werden. Stand: Oktober 2026.</p>
+<p>Diese Datenschutzerklärung kann gelegentlich aktualisiert werden. Stand: 26. Oktober 2026.</p>
 
-<p style="margin-top:3rem; font-size:0.75rem; color:#44474c;">© 2026 TraceTour by Florian S. Thiel</p>
+<p style="margin-top:3rem; font-size:0.75rem; color:#a3b3c7;">© 2026 TraceTour by Florian S. Thiel</p>
 </div>
 </body>
 </html>

@@ -412,7 +412,7 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <div id="continueBox" style="display:none">
 <button class="btn-primary" onclick="continueTour()" id="continueBtn">Fortsetzen</button>
 <button class="btn-secondary" onclick="showScreen('prologue')">Neu starten</button>
-<button class="btn-secondary" id="resetBtn" style="display:none;margin-top:.5rem;font-size:.75rem;opacity:.6" onclick="confirmReset()">🗑️ Fortschritt komplett löschen</button>
+<button class="btn-secondary" id="resetBtn" style="display:none;margin-top:.5rem;font-size:.8rem;opacity:.85" onclick="confirmReset()">🗑️ Fortschritt komplett löschen</button>
 </div>
 <button id="debugMobileToggle" onclick="toggleMobileView()">📱 MOBILE</button>
 
@@ -1635,7 +1635,7 @@ function checkSavedGame(){
         document.getElementById('saveInfoText').textContent=t('saveInfoFormat').replace('{name}',d.userName).replace('{solved}',solved).replace('{total}',stations.length).replace('{xp}',d.totalXp);
         info.classList.add('visible');box.style.display='block';
         document.getElementById('continueBtn').textContent=t('continueFormat').replace('{x}',(d.currentStation||0)+1);
-        const rb=document.getElementById('resetBtn');if(rb)rb.style.display=debugMode?'block':'none';
+        const rb=document.getElementById('resetBtn');if(rb)rb.style.display='block'; // Löschen für alle (Datenschutz)
         return;
       }
     }catch(e){}
