@@ -20,14 +20,14 @@
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-<link href="fonts/fonts.css" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link href="fonts/fonts.css?v=20261026" rel="stylesheet">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css?v=1.9.4">
+<script src="vendor/leaflet/leaflet.js?v=1.9.4"></script>
 <style>
 :root {
   --green:#006a2d;--green-light:#009e44;--green-pale:#e8f5ee;
   --yellow:#ffca51;--yellow-dark:#e6a800;--yellow-pale:#fff9e6;
-  --bg:#f9f7f0;--card:#ffffff;--text:#1a2e1a;--text-2:#4a6741;--text-3:#8aaa80;
+  --bg:#f9f7f0;--card:#ffffff;--text:#1a2e1a;--text-2:#4a6741;--text-3:#5a7851;
   --border:#d4e8d0;--r:18px;--r-sm:12px;--r-lg:24px;
   --shadow-card:0 2px 12px rgba(0,0,0,.06);
   --font:'Nunito',-apple-system,sans-serif;
@@ -37,6 +37,8 @@
 html,body{height:100%;overflow:hidden;font-family:var(--font);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 input{font-family:inherit;color:inherit}
+:focus-visible{outline:3px solid #ffca51;outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .screen{position:fixed;inset:0;display:none;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .screen.active{display:flex}
 
@@ -62,7 +64,11 @@ input{font-family:inherit;color:inherit}
 .btn-start{width:100%;padding:16px;background:var(--yellow);color:var(--green);font-weight:900;font-size:1.15rem;border-radius:var(--r-sm);border:3px solid var(--yellow-dark);box-shadow:0 4px 16px rgba(230,168,0,.4);transition:transform .1s}
 .btn-start:active{transform:scale(.97)}
 #splashError{color:#fff;background:rgba(255,0,0,.3);border-radius:8px;padding:.6rem .8rem;margin-top:.8rem;font-size:.9rem;font-weight:700;display:none}
-.splash-footer{margin-top:1.5rem;font-size:.72rem;color:rgba(255,255,255,.55)}
+.splash-footer{margin-top:1.5rem;font-size:.78rem;color:rgba(255,255,255,.9)}
+.splash-help{margin-top:1rem;font-size:.85rem;font-weight:700;color:#fff;text-align:center}
+.splash-help a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.splash-offline{margin-top:.8rem;width:100%;padding:11px;border-radius:var(--r-sm);background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.45);color:#fff;font-weight:800;font-size:.88rem}
+.splash-offline:disabled{opacity:.8}
 .splash-prompts-link{color:#fff;cursor:pointer;font-size:.75rem;font-weight:700;margin-top:.8rem;display:inline-flex;align-items:center;gap:.3rem;background:rgba(255,255,255,.2);padding:.4rem .8rem;border-radius:20px;border:1.5px solid rgba(255,255,255,.3)}
 
 /* ======================== HEADER ======================== */
@@ -83,7 +89,7 @@ input{font-family:inherit;color:inherit}
 .station-hero::after{content:'';position:absolute;bottom:-14px;left:0;right:0;height:28px;background:var(--bg);border-radius:28px 28px 0 0}
 .station-emoji{font-size:2.8rem;display:block;margin-bottom:.3rem;animation:popIn .4s cubic-bezier(.68,-.55,.27,1.55)}
 @keyframes popIn{0%{transform:scale(0)}80%{transform:scale(1.1)}100%{transform:scale(1)}}
-.station-chapter{font-size:.62rem;font-weight:800;color:rgba(255,255,255,.5);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.15rem}
+.station-chapter{font-size:.68rem;font-weight:800;color:rgba(255,255,255,.85);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.15rem}
 .station-title{font-size:1.35rem;font-weight:900;color:#fff;line-height:1.15}
 .station-body{padding:1rem 1rem 0}
 .station-place{font-size:.7rem;font-weight:700;color:var(--text-3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:.5rem}
@@ -104,7 +110,7 @@ input{font-family:inherit;color:inherit}
 
 .tubi-bubble{background:var(--yellow-pale);border-radius:var(--r);padding:.9rem 1rem;margin-bottom:.9rem;border:2px solid var(--yellow);box-shadow:var(--shadow-card);position:relative}
 .tubi-bubble::before{content:'🐉';position:absolute;top:-13px;left:12px;font-size:1.3rem}
-.tubi-says{font-size:.62rem;font-weight:800;color:var(--yellow-dark);letter-spacing:.05em;text-transform:uppercase;margin-bottom:.35rem}
+.tubi-says{font-size:.68rem;font-weight:800;color:#8a6400;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.35rem}
 .tubi-text{font-size:.92rem;line-height:1.65;color:var(--text);font-weight:600;font-style:italic}
 
 .spark-status{display:flex;align-items:center;gap:.4rem;background:linear-gradient(135deg,#fff9e6,#e8f5ee);border-radius:var(--r-sm);padding:.6rem .9rem;margin-bottom:.9rem;border:1.5px solid var(--border);font-size:.82rem;font-weight:700;color:var(--green)}
@@ -167,7 +173,7 @@ input{font-family:inherit;color:inherit}
 #mapOverlay.active{display:flex}
 .map-header{background:var(--green);padding:calc(.65rem + var(--safe-top)) .8rem .65rem;display:flex;align-items:center;justify-content:space-between}
 .map-header h3{color:#fff;font-size:1rem;font-weight:800}
-.map-close{background:rgba(255,255,255,.2);color:#fff;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700}
+.map-close{background:rgba(255,255,255,.2);color:#fff;width:44px;height:44px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700}
 #mapContainer{flex:1;position:relative}
 #map{width:100%;height:100%}
 .leaflet-tile-pane{filter:saturate(1.15) brightness(1.03) contrast(.95)!important}
@@ -219,7 +225,7 @@ input{font-family:inherit;color:inherit}
 #selfieOverlay.active{display:flex}
 .selfie-header{position:absolute;top:0;left:0;right:0;z-index:10;padding:calc(.6rem + var(--safe-top)) .8rem .6rem;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(0,0,0,.6),transparent)}
 .selfie-header h3{color:#fff;font-size:.9rem;font-weight:800}
-.selfie-close{background:rgba(255,255,255,.2);color:#fff;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700}
+.selfie-close{background:rgba(255,255,255,.2);color:#fff;width:44px;height:44px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700}
 #selfieVideo{width:100%;height:100%;object-fit:cover}
 #selfieCanvas{display:none}
 #selfieStickerArea{position:absolute;inset:0;z-index:5;pointer-events:none}
@@ -263,7 +269,7 @@ input{font-family:inherit;color:inherit}
 .audio-row .audio-time{margin-left:auto;font-size:.7rem;color:var(--text-3);font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
 .audio-progress{width:100%;height:6px;background:var(--border);border-radius:3px;margin-bottom:.9rem;cursor:pointer;overflow:hidden}
 .audio-progress-fill{height:100%;background:var(--green);border-radius:3px;width:0%;transition:width .1s}
-.speed-select{background:var(--green-pale);border:1.5px solid var(--border);border-radius:6px;padding:2px 4px;font-size:.65rem;font-weight:700;color:var(--green);font-family:var(--font);cursor:pointer;margin-left:.4rem}
+.speed-select{background:var(--green-pale);border:1.5px solid var(--border);border-radius:8px;padding:6px 8px;min-height:32px;min-width:46px;font-size:.75rem;font-weight:800;color:var(--green);font-family:var(--font);cursor:pointer;margin-left:.4rem}
 
 /* ======================== MAPS LINK ======================== */
 .maps-link{display:flex;align-items:center;gap:.4rem;background:var(--green-pale);color:var(--green);font-size:.75rem;font-weight:700;padding:.5rem .8rem;border-radius:var(--r-sm);margin-bottom:.7rem;text-decoration:none;border:1.5px solid var(--border);transition:background .2s}
@@ -298,8 +304,8 @@ input{font-family:inherit;color:inherit}
       <br><br>
       Ich brauche ein mutiges <strong>Drachenkind</strong>, das mir hilft, alle 8 Funken wiederzufinden. An jedem Ort wartet ein <strong>Geheimnis</strong> – und wenn du es löst, kommt ein Funke zurück! Hilfst du mir?
     </div>
-    <div class="audio-row" id="audioPrologRow" onclick="playAudio('audio/kinder/prolog.mp3','audioPrologRow')" style="margin-top:.7rem">
-      <div class="audio-icon">▶️</div>
+    <div class="audio-row" id="audioPrologRow" role="button" tabindex="0" onclick="playAudio('audio/kinder/prolog.mp3','audioPrologRow')" style="margin-top:.7rem">
+      <div class="audio-icon" aria-hidden="true">▶️</div>
       <div><div class="audio-label">Tübi anhören</div><div class="audio-sublabel">Prolog</div></div>
       <div class="audio-time" id="time_audioPrologRow">--:--</div>
     </div>
@@ -309,22 +315,24 @@ input{font-family:inherit;color:inherit}
   <div class="splash-form">
     <label class="splash-label" for="loginCode">Zugangscode</label>
     <div style="position:relative;margin-bottom:.8rem">
-      <input class="splash-input" id="loginCode" type="password" placeholder="Code eingeben" maxlength="20" autocomplete="off" style="margin-bottom:0;padding-right:48px">
-      <button onclick="const i=document.getElementById('loginCode');i.type=i.type==='password'?'text':'password';this.textContent=i.type==='password'?'👁':'🙈'" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:1.2rem">👁</button>
+      <input class="splash-input" id="loginCode" type="password" placeholder="Code eingeben" maxlength="20" autocomplete="off" autocapitalize="characters" spellcheck="false" style="margin-bottom:0;padding-right:52px">
+      <button type="button" aria-label="Code anzeigen" onclick="const i=document.getElementById('loginCode');i.type=i.type==='password'?'text':'password';this.textContent=i.type==='password'?'👁':'🙈'" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:1.2rem;min-width:44px;min-height:44px">👁</button>
     </div>
     <label class="splash-label" for="playerName">Wie heißt du, Drachenkind?</label>
     <input class="splash-input" id="playerName" type="text" placeholder="Dein Name" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">
-    <button class="btn-start" onclick="startGame()">🐉 Tübi helfen!</button>
-    <div id="splashError" style="display:none"></div>
+    <button class="btn-start" id="startBtn" onclick="startGame()">🐉 Tübi helfen!</button>
+    <div id="splashError" role="alert" style="display:none"></div>
+    <button type="button" class="splash-offline" id="offlineBtn" onclick="downloadForOffline()">📶 Für unterwegs speichern (ca. 10 MB)</button>
+    <p class="splash-help">Noch keinen Code? <a href="index.html#kids">Hier gibt's die Kindertour</a></p>
   </div>
-  <div class="splash-footer">Eine Tour von <strong style="color:rgba(255,255,255,.8)">TraceTour Tübingen</strong></div>
+  <div class="splash-footer">Eine Tour von <a href="index.html" style="color:#fff;font-weight:800">TraceTour</a></div>
 </div>
 </div>
 
 <!-- ======================== HEADER ======================== -->
 <div id="gameHeader" style="display:none">
   <div class="header-inner">
-    <div class="header-dragon" onclick="backToStart()" style="cursor:pointer"><span id="hdrFlame" class="header-flame-off">🐉</span></div>
+    <div class="header-dragon" role="button" tabindex="0" aria-label="Pause – zurück zum Start" onclick="backToStart()" style="cursor:pointer"><span id="hdrFlame" class="header-flame-off" aria-hidden="true">🐉</span></div>
     <div class="header-info">
       <div class="header-name" id="hdrName"></div>
       <div class="header-station" id="hdrStation"></div>
@@ -339,10 +347,10 @@ input{font-family:inherit;color:inherit}
 
 <div id="gameNav">
   <div class="nav-inner">
-    <button class="nav-btn nav-btn-prev" id="navPrev" onclick="navigate(-1)">←</button>
-    <div class="nav-dots" id="navDots"></div>
-    <button class="nav-btn nav-btn-map" onclick="openMap()">🗺️</button>
-    <button class="nav-btn nav-btn-next" id="navNext" onclick="navigate(1)" disabled>→</button>
+    <button class="nav-btn nav-btn-prev" id="navPrev" aria-label="Vorherige Station" onclick="navigate(-1)">←</button>
+    <div class="nav-dots" id="navDots" aria-hidden="true"></div>
+    <button class="nav-btn nav-btn-map" aria-label="Schatzkarte öffnen" onclick="openMap()">🗺️</button>
+    <button class="nav-btn nav-btn-next" id="navNext" aria-label="Nächste Station" onclick="navigate(1)" disabled>→</button>
   </div>
 </div>
 
@@ -350,7 +358,7 @@ input{font-family:inherit;color:inherit}
 <div id="mapOverlay">
   <div class="map-header">
     <h3>🗺️ Tübis Schatzkarte</h3>
-    <button class="map-close" onclick="closeMap()">✕</button>
+    <button class="map-close" aria-label="Karte schließen" onclick="closeMap()">✕</button>
   </div>
   <div id="mapContainer">
     <div id="map"></div>
@@ -421,19 +429,19 @@ input{font-family:inherit;color:inherit}
 <div id="selfieOverlay">
   <div class="selfie-header">
     <h3>📸 Selfie mit Tübi</h3>
-    <button class="selfie-close" onclick="closeSelfie()">✕</button>
+    <button class="selfie-close" aria-label="Kamera schließen" onclick="closeSelfie()">✕</button>
   </div>
   <video id="selfieVideo" autoplay playsinline muted></video>
   <div id="selfieStickerArea"></div>
   <canvas id="selfieCanvas"></canvas>
   <div class="selfie-controls">
-    <button class="selfie-size-btn" onclick="resizeTubi(-1)">➖</button>
-    <button class="selfie-snap" onclick="snapSelfie()">📸</button>
-    <button class="selfie-size-btn" onclick="resizeTubi(1)">➕</button>
+    <button class="selfie-size-btn" aria-label="Tübi kleiner" onclick="resizeTubi(-1)">➖</button>
+    <button class="selfie-snap" aria-label="Foto aufnehmen" onclick="snapSelfie()">📸</button>
+    <button class="selfie-size-btn" aria-label="Tübi größer" onclick="resizeTubi(1)">➕</button>
   </div>
 </div>
 <div class="selfie-result" id="selfieResult">
-  <img id="selfieResultImg" src="">
+  <img id="selfieResultImg" alt="Dein Selfie mit Tübi">
   <div class="selfie-result-actions">
     <button class="selfie-result-btn selfie-retry" onclick="retrySelfie()">🔄 Nochmal</button>
     <button class="selfie-result-btn selfie-save" onclick="saveSelfie()">📤 Teilen / Speichern</button>
@@ -535,7 +543,7 @@ let currentAudio=null,currentAudioBtn=null;
 let map=null,mapReady=false,stationMarkers=[],routeLine=null,userMarker=null,fullRouteCoords=null;
 
 const SAVE_KEY='tracetour_kinder_v5';
-function saveGame(){localStorage.setItem(SAVE_KEY,JSON.stringify({playerName,currentStation,maxUnlocked,totalXp,stationSolved,quizAnswers,quizDone,challengesDone}))}
+function saveGame(){try{localStorage.setItem(SAVE_KEY,JSON.stringify({playerName,currentStation,maxUnlocked,totalXp,stationSolved,quizAnswers,quizDone,challengesDone}))}catch(e){}}
 function loadGame(){try{const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(!d)return false;playerName=d.playerName||'';currentStation=d.currentStation||0;maxUnlocked=d.maxUnlocked||0;totalXp=d.totalXp||0;stationSolved=d.stationSolved||{};quizAnswers=d.quizAnswers||{};quizDone=d.quizDone||false;challengesDone=d.challengesDone||{};return!!playerName}catch(e){return false}}
 
 let audioSpeed=1.0;
@@ -549,7 +557,8 @@ function playAudio(src,rowId){
   const a=new Audio(src);a.playbackRate=audioSpeed;currentAudio=a;currentAudioBtn=row;
   row.classList.add('playing');const icon=row.querySelector('.audio-icon');if(icon)icon.textContent='⏸️';
   // Add speed select if missing
-  if(!row.querySelector('.speed-select')){const sel=document.createElement('select');sel.className='speed-select';[1,1.25,1.5,1.75,2].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v+'x';if(v===audioSpeed)o.selected=true;sel.appendChild(o)});sel.onchange=e=>{audioSpeed=parseFloat(e.target.value);if(currentAudio)currentAudio.playbackRate=audioSpeed};row.appendChild(sel)}
+  // Tempo-Knopf: jeder Tipp eine Stufe schneller (statt <select>, das auf iOS ins Bild zoomt)
+  if(!row.querySelector('.speed-select')){const b=document.createElement('button');b.type='button';b.className='speed-select';b.setAttribute('aria-label','Abspielgeschwindigkeit');const lbl=v=>String(v).replace('.',',')+'×';b.textContent=lbl(audioSpeed);b.onclick=e=>{e.stopPropagation();const sp=[1,1.25,1.5,1.75,2];audioSpeed=sp[(sp.indexOf(audioSpeed)+1)%sp.length];b.textContent=lbl(audioSpeed);if(currentAudio)currentAudio.playbackRate=audioSpeed};b.onkeydown=e=>e.stopPropagation();row.appendChild(b)}
   // Progress
   const progId='prog_'+rowId,timeId='time_'+rowId;
   a.addEventListener('timeupdate',()=>{const pf=document.getElementById(progId);if(pf)pf.style.width=(a.currentTime/a.duration*100)+'%';const tf=document.getElementById(timeId);if(tf)tf.textContent=fmtTime(a.currentTime)+'/'+fmtTime(a.duration)});
@@ -566,24 +575,44 @@ function playSFX(src){const a=new Audio(src);a.volume=0.6;a.play().catch(()=>{})
 let debugMode=false;
 const CODE_VALIDATE_URL='https://tracetour-checkout.florian-s-thiel.workers.dev/validate';
 function getDeviceId(){try{let d=localStorage.getItem('tracetour_device');if(!d){d=(crypto&&crypto.randomUUID?crypto.randomUUID():'d'+Date.now()+Math.random().toString(36).slice(2));localStorage.setItem('tracetour_device',d)}return d}catch(e){return 'nostore'}}
+// Code tolerant einlesen: Leerzeichen raus, Gedankenstriche aus Mails zu "-", fehlende Bindestriche ergänzen
+function normalizeCode(raw){
+  let c=String(raw||'').toUpperCase().replace(/\s+/g,'').replace(/[\u2010-\u2015]/g,'-');
+  if(/^TT[A-Z0-9]{8}$/.test(c))c='TT-'+c.slice(2,6)+'-'+c.slice(6);
+  return c;
+}
+function fetchWithTimeout(url,opts,ms){
+  const ctrl=typeof AbortController!=='undefined'?new AbortController():null;
+  const timer=ctrl?setTimeout(()=>ctrl.abort(),ms):null;
+  return fetch(url,Object.assign({},opts,ctrl?{signal:ctrl.signal}:{})).finally(()=>{if(timer)clearTimeout(timer)});
+}
 async function startGame(){
-  const code=document.getElementById('loginCode').value.trim().toUpperCase();
+  const code=normalizeCode(document.getElementById('loginCode').value);
   const errEl=document.getElementById('splashError');
+  const showErr=(msg,link)=>{errEl.textContent=msg;if(link){const a=document.createElement('a');a.href=link.href;a.textContent=' '+link.text;a.style.cssText='color:#fff;text-decoration:underline';errEl.appendChild(a)}errEl.style.display='block'};
   const isLegacy=(code==='PRIVAT'||code==='TUEBINGEN2025'||code==='TUEBINGEN2026');
   const isPurchased=/^TT-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code);
-  if(!isLegacy&&!isPurchased){errEl.textContent='Falscher Zugangscode! 🔒';errEl.style.display='block';return}
+  if(!isLegacy&&!isPurchased){showErr('Falscher Zugangscode! 🔒 Schau nochmal in deine E-Mail – der Code sieht so aus: TT-XXXX-XXXX');return}
   const n=document.getElementById('playerName').value.trim();
-  if(!n){errEl.textContent='Gib deinen Namen ein! 😊';errEl.style.display='block';return}
+  if(!n){showErr('Gib deinen Namen ein! 😊');document.getElementById('playerName').focus();return}
   if(isPurchased){
     let cached=null;try{cached=localStorage.getItem('tracetour_code_ok_kids')}catch(e){}
     if(cached!==code){
       errEl.style.display='none';
+      const btn=document.getElementById('startBtn'),oldTxt=btn.textContent;
+      btn.disabled=true;btn.textContent='🐉 Moment, Tübi prüft den Code …';
+      const reset=()=>{btn.disabled=false;btn.textContent=oldTxt};
       try{
-        const r=await fetch(CODE_VALIDATE_URL,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code,tour:'kids',device:getDeviceId()})});
+        const r=await fetchWithTimeout(CODE_VALIDATE_URL,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code,tour:'kids',device:getDeviceId()})},15000);
         const d=await r.json();
-        if(!d.valid){errEl.textContent=d.reason==='wrong_tour'?'Dieser Code gehört zur großen Tour! 🔍 Öffne dafür die Erwachsenen-Tour.':d.reason==='device_limit'?'Dieser Code wurde schon auf zu vielen Geräten benutzt! 📱':d.reason==='expired'?'Dieser Code ist abgelaufen – das Zeitfenster nach dem Start ist vorbei! ⏰':'Falscher Zugangscode! 🔒';errEl.style.display='block';return}
+        if(!d.valid){
+          reset();
+          if(d.reason==='wrong_tour'){try{sessionStorage.setItem('tracetour_code_for_adult',code)}catch(e){}showErr('Dieser Code gehört zur großen Krimi-Tour! 🔍',{href:'app.html',text:'Zur Krimi-Tour →'});return}
+          showErr(d.reason==='device_limit'?'Dieser Code wurde schon auf zu vielen Geräten benutzt! 📱 Schreib uns an info@tracetour.de.':d.reason==='expired'?'Dieser Code ist abgelaufen – die 48 Stunden nach dem ersten Start sind vorbei! ⏰':'Falscher Zugangscode! 🔒');return
+        }
         try{localStorage.setItem('tracetour_code_ok_kids',code)}catch(e){}
-      }catch(e){errEl.textContent='Keine Verbindung – die Code-Prüfung braucht einmal Internet! 📶';errEl.style.display='block';return}
+      }catch(e){reset();showErr('Keine oder zu langsame Verbindung – die Code-Prüfung braucht einmal Internet! 📶 Bitte gleich nochmal versuchen.');return}
+      reset();
     }
   }
   debugMode=(code==='PRIVAT');
@@ -607,7 +636,7 @@ function renderStation(){
   const img=`<div class="station-img-wrap"><img src="${s.image}" alt="${s.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="station-img-placeholder" style="display:none">${s.emoji}</div></div>`;
   const img2=s.image2?`<div class="station-img-wrap fade-in" style="margin-top:-.2rem"><img src="${s.image2}" alt="${s.title}" onerror="this.parentElement.style.display='none'"></div>`:'';
   const audioRowId='audioRow_'+s.id;
-  const audio=`<div class="audio-row" id="${audioRowId}" onclick="playAudio('audio/kinder/story_${s.id}.mp3','${audioRowId}')"><div class="audio-icon">▶️</div><div><div class="audio-label">Tübi erzählt</div><div class="audio-sublabel">${s.chapter}</div></div><div class="audio-time" id="time_${audioRowId}">--:--</div></div><div class="audio-progress" onclick="seekAudio(event,'${audioRowId}')"><div class="audio-progress-fill" id="prog_${audioRowId}"></div></div>`;
+  const audio=`<div class="audio-row" id="${audioRowId}" role="button" tabindex="0" onclick="playAudio('audio/kinder/story_${s.id}.mp3','${audioRowId}')"><div class="audio-icon" aria-hidden="true">▶️</div><div><div class="audio-label">Tübi erzählt</div><div class="audio-sublabel">${s.chapter}</div></div><div class="audio-time" id="time_${audioRowId}">--:--</div></div><div class="audio-progress" onclick="seekAudio(event,'${audioRowId}')"><div class="audio-progress-fill" id="prog_${audioRowId}"></div></div>`;
   const mapsHere=`<a class="maps-link" href="${mapsUrl(s.lat,s.lng,s.title)}" target="_blank" rel="noopener">📍 Navigation: ${s.place}<span class="coords">${s.lat.toFixed(4)}, ${s.lng.toFixed(4)}</span></a>`;
   const nextS=STATIONS[currentStation+1];
   const mapsNext=nextS?`<a class="maps-link" href="${mapsUrl(nextS.lat,nextS.lng,nextS.title)}" target="_blank" rel="noopener" style="margin-top:.5rem">📍 Weiter zu: ${nextS.place}<span class="coords">${nextS.lat.toFixed(4)}, ${nextS.lng.toFixed(4)}</span></a>`:'';
@@ -641,7 +670,9 @@ function renderStation(){
 
 function answerStation(idx){
   const s=STATIONS[currentStation],correct=s.options[idx].correct;
-  document.querySelectorAll('.mc-btn').forEach((b,i)=>{b.disabled=true;if(s.options[i].correct)b.classList.add('correct');else if(i===idx&&!correct)b.classList.add('wrong')});
+  if(stationSolved[currentStation])return;
+  // Nur die Knöpfe der Hauptfrage – die Bonus-Aufgabe darüber hat eigene .mc-btn
+  document.querySelectorAll('.question-card .mc-btn').forEach((b,i)=>{b.disabled=true;if(s.options[i].correct)b.classList.add('correct');else if(i===idx&&!correct)b.classList.add('wrong')});
   const fb=document.getElementById('qFeedback');fb.textContent=correct?s.win:s.lose;fb.className='question-feedback show '+(correct?'win':'lose');
   totalXp+=STATION_XP;stationSolved[currentStation]=true;
   if(currentStation>=maxUnlocked&&currentStation<STATIONS.length-1)maxUnlocked=currentStation+1;
@@ -726,8 +757,8 @@ function renderQuiz(){const n=Object.keys(quizAnswers).length;document.getElemen
 function answerQuiz(qi,oi){quizAnswers[qi]=oi;if(oi===QUIZ_QUESTIONS[qi].correct){totalXp+=QUIZ_XP;showXpToast(`+${QUIZ_XP} 🔥`);spawnSparkles();playSFX('audio/correct.wav')}else{playSFX('audio/wrong.wav')}saveGame();renderQuiz()}
 
 function showCertificate(){quizDone=true;saveGame();const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];const stars=totalXp>=190?3:totalXp>=140?2:1;const msgs=[`Du hast Tübi geholfen, ${playerName}! Ohne dich hätte er seine Flamme nie zurückbekommen!`,`Wow, ${playerName}! Du hast fast alles gewusst! Tübi ist mega stolz auf dich!`,`UNGLAUBLICH, ${playerName}! Du weißt mehr als die meisten Erwachsenen! Tübi ernennt dich zur Drachen-Legende! 🏆`];const solvedN=Object.keys(stationSolved).length;document.getElementById('certName').textContent=playerName;document.getElementById('certRank').textContent=rank.label;document.getElementById('certScore').textContent=totalXp;document.getElementById('certStars').textContent='⭐'.repeat(stars)+'☆'.repeat(3-stars);document.getElementById('certMsg').textContent=msgs[stars-1];document.getElementById('certAchieve').textContent=solvedN>=STATIONS.length?`🗺️ Alle ${STATIONS.length} Stationen geschafft!`:`🗺️ ${solvedN} von ${STATIONS.length} Stationen geschafft`;document.getElementById('certDate').textContent='Tübingen, '+new Date().toLocaleDateString('de-DE',{day:'numeric',month:'long',year:'numeric'});showScreen('certificate');playSFX('audio/fanfare.wav');setTimeout(()=>playSFX('audio/applause.mp3'),800);for(let w=0;w<6;w++)setTimeout(spawnSparkles,300+w*400)}
-function goHome(){if(!confirm('Wirklich nochmal von vorne anfangen? Dein Abenteuer wird gelöscht!'))return;playerName='';currentStation=0;maxUnlocked=0;totalXp=0;stationSolved={};quizAnswers={};quizDone=false;challengesDone={};localStorage.removeItem(SAVE_KEY);document.getElementById('playerName').value='';document.getElementById('splashError').style.display='none';showScreen('splash');document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show')}
-function shareResult(){const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];const t=`🐉🔥 Ich habe Tübi geholfen, seine Flamme zurückzubekommen! ${totalXp} Drachenfunken – Rang: ${rank.label}\nhttps://tracetour.de/kinder.html`;renderKinderCert().then(canvas=>{canvas.toBlob(blob=>{if(blob&&navigator.share&&navigator.canShare){const file=new File([blob],'tuebi-urkunde.png',{type:'image/png'});if(navigator.canShare({files:[file]})){navigator.share({text:t,files:[file]}).catch(()=>{});return}}if(navigator.share)navigator.share({title:'TraceTour Kids',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>alert('Kopiert! 📋')).catch(()=>alert(t))},'image/png')})}
+function goHome(){if(!confirm('Wirklich nochmal von vorne anfangen? Dein Abenteuer wird gelöscht!'))return;playerName='';currentStation=0;maxUnlocked=0;totalXp=0;stationSolved={};quizAnswers={};quizDone=false;challengesDone={};try{localStorage.removeItem(SAVE_KEY)}catch(e){}document.getElementById('playerName').value='';document.getElementById('splashError').style.display='none';showScreen('splash');document.getElementById('gameHeader').style.display='none';document.getElementById('gameNav').classList.remove('show')}
+function shareResult(){const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];const t=`🐉🔥 Ich habe Tübi geholfen, seine Flamme zurückzubekommen! ${totalXp} Drachenfunken – Rang: ${rank.label}\nhttps://tracetour.de/#kids`;renderKinderCert().then(canvas=>{canvas.toBlob(blob=>{if(blob&&navigator.share&&navigator.canShare){const file=new File([blob],'tuebi-urkunde.png',{type:'image/png'});if(navigator.canShare({files:[file]})){navigator.share({text:t,files:[file]}).catch(()=>{});return}}if(navigator.share)navigator.share({title:'TraceTour Kids',text:t}).catch(()=>{});else navigator.clipboard.writeText(t).then(()=>alert('Kopiert! 📋')).catch(()=>alert(t))},'image/png')})}
 
 /* Urkunde als Bild (1080×1350) — festliches Andenken zum Speichern/Drucken */
 function renderKinderCert(){
@@ -758,7 +789,7 @@ function renderKinderCert(){
     ctx.font='400 26px Nunito,Arial,sans-serif';ctx.fillStyle='#64748b';
     ctx.fillText('Verliehen an',540,625);
     ctx.font='900 64px Nunito,Arial,sans-serif';ctx.fillStyle='#1e293b';
-    ctx.fillText(playerName,540,700);
+    ctx.fillText(playerName,540,700,860);
     // Rang-Badge
     const rank=[...RANKS].reverse().find(r=>totalXp>=r.min)||RANKS[0];
     ctx.font='900 34px Nunito,Arial,sans-serif';
@@ -794,7 +825,7 @@ function saveKinderCert(){
       if(navigator.share&&navigator.canShare){
         const file=new File([blob],'tuebi-urkunde.png',{type:'image/png'});
         if(navigator.canShare({files:[file]})){
-          navigator.share({files:[file],title:'Tübis Drachenurkunde 🐉'}).catch(()=>downloadKinderCert(blob));
+          navigator.share({files:[file],title:'Tübis Drachenurkunde 🐉'}).catch(err=>{if(!err||err.name!=='AbortError')downloadKinderCert(blob)});
           return;
         }
       }
@@ -804,8 +835,8 @@ function saveKinderCert(){
 }
 function downloadKinderCert(blob){
   const url=URL.createObjectURL(blob),a=document.createElement('a');
-  a.href=url;a.download='tuebi-urkunde.png';a.click();
-  URL.revokeObjectURL(url);showXpToast('💾 Urkunde gespeichert!');
+  a.href=url;a.download='tuebi-urkunde.png';document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);showXpToast('💾 Urkunde gespeichert!');
 }
 
 /* ===== SELFIE CAMERA WITH TÜBI ===== */
@@ -831,6 +862,7 @@ function openSelfie(){
     makeDraggable(el);
     stickerArea.appendChild(el);
   });
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){closeSelfie();alert('Kamera nicht verfügbar 😔');return}
   navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false}).then(stream=>{
     selfieStream=stream;video.srcObject=stream;
   }).catch(()=>{closeSelfie();alert('Kamera nicht verfügbar 😔')});
@@ -870,6 +902,7 @@ function snapSelfie(){
   const video=document.getElementById('selfieVideo');
   const canvas=document.getElementById('selfieCanvas');
   const vw=video.videoWidth,vh=video.videoHeight;
+  if(!vw||!vh)return; // Kamera noch nicht bereit
   canvas.width=vw;canvas.height=vh;
   const ctx=canvas.getContext('2d');
   ctx.save();ctx.scale(-1,1);ctx.drawImage(video,-vw,0,vw,vh);ctx.restore();
@@ -898,7 +931,7 @@ function saveSelfie(){
   if(navigator.share){
     fetch(dataUrl).then(r=>r.blob()).then(blob=>{
       const file=new File([blob],'tuebi-selfie.jpg',{type:'image/jpeg'});
-      navigator.share({files:[file],title:'Selfie mit Tübi! 🐉'}).catch(()=>downloadSelfie(dataUrl));
+      navigator.share({files:[file],title:'Selfie mit Tübi! 🐉'}).catch(err=>{if(!err||err.name!=='AbortError')downloadSelfie(dataUrl)});
     }).catch(()=>downloadSelfie(dataUrl));
   } else { downloadSelfie(dataUrl); }
 }
@@ -908,8 +941,39 @@ function downloadSelfie(dataUrl){
   closeSelfie();showXpToast('📸 Selfie gespeichert!');
 }
 
+/* ===== OFFLINE (Service Worker) ===== */
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+  navigator.serviceWorker.addEventListener('message',e=>{
+    const d=e.data||{};if(d.type!=='download-progress'||d.tour!=='kids')return;
+    const btn=document.getElementById('offlineBtn');if(!btn)return;
+    if(d.done>=d.total){
+      if(d.failed>0){btn.disabled=false;btn.textContent=`📶 ${d.failed} Dateien fehlen – nochmal tippen`}
+      else{btn.disabled=true;btn.textContent='✅ Tour ist fürs Handy gespeichert'}
+    }else{btn.textContent=`📶 Wird gespeichert … ${Math.round(d.done/d.total*100)} %`}
+  });
+}
+function downloadForOffline(){
+  const btn=document.getElementById('offlineBtn');
+  if(!('serviceWorker' in navigator)){alert('Dein Browser kann die Tour leider nicht offline speichern.');return}
+  btn.disabled=true;btn.textContent='📶 Wird gespeichert … 0 %';
+  try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+  const ready=navigator.serviceWorker.ready.then(reg=>navigator.serviceWorker.controller||reg.active);
+  Promise.race([ready,new Promise(r=>setTimeout(r,8000,null))]).then(w=>{
+    if(!w)throw new Error('no worker');
+    w.postMessage({type:'download-all',tour:'kids'});
+  }).catch(()=>{btn.disabled=false;btn.textContent='📶 Für unterwegs speichern (ca. 10 MB)';alert('Bitte lade die Seite einmal neu und versuch es dann nochmal.')});
+}
+document.addEventListener('keydown',e=>{
+  const el=e.target;
+  if((e.key==='Enter'||e.key===' ')&&el&&el.matches&&el.matches('.audio-row,.header-dragon')){e.preventDefault();el.click()}
+});
+
 window.addEventListener('DOMContentLoaded',()=>{
   if(loadGame()&&playerName)launchGame();
+  // Nach Kauf (Danke-Seite) oder Weiterleitung aus der Krimi-Tour: Code vorbefüllen
+  try{const pc=sessionStorage.getItem('tracetour_code_for_kids')||localStorage.getItem('tracetour_purchased_code');const lc=document.getElementById('loginCode');if(pc&&!lc.value)lc.value=pc}catch(e){}
+  ['loginCode','playerName'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{document.getElementById('splashError').style.display='none'}));
   document.getElementById('playerName').addEventListener('keydown',e=>{if(e.key==='Enter')startGame()});
   document.getElementById('loginCode').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('playerName').focus()});
 });
