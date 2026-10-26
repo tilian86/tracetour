@@ -13,14 +13,14 @@ h1{font-size:1.7rem;margin:.5rem 0}
 .sub{color:#8192a7;font-size:.95rem}
 .code-box{background:#0f172a;border:2px solid #f3632d;border-radius:14px;padding:1.4rem;margin:1.8rem 0;font-size:1.7rem;font-weight:800;letter-spacing:3px;color:#fff;user-select:all}
 .pending{border-color:#8192a7;color:#8192a7;font-size:1rem;font-weight:400;letter-spacing:normal}
-.btn{display:inline-block;background:#f3632d;color:#fff;font-weight:700;padding:.9rem 2rem;border-radius:10px;text-decoration:none;margin-top:.5rem}
+.btn{display:inline-block;background:#cf4a18;color:#fff;font-weight:700;padding:.9rem 2rem;border-radius:10px;text-decoration:none;margin-top:.5rem}
 .copy{background:none;border:1px solid #8192a7;color:#8192a7;border-radius:8px;padding:.4rem 1rem;font-size:.85rem;cursor:pointer;margin-top:.6rem}
 .steps{text-align:left;font-size:.9rem;color:#b0c4de;margin:1.5rem auto;max-width:420px}
 .error{color:#fa7e91}
 a{color:#f3632d}
 .lang-toggle{position:absolute;top:1rem;right:1rem;display:flex;gap:.3rem}
 .lang-btn{background:none;border:1px solid #8192a7;color:#8192a7;border-radius:6px;padding:.2rem .6rem;font-size:.75rem;font-weight:700;cursor:pointer}
-.lang-btn.active{background:#f3632d;border-color:#f3632d;color:#fff}
+.lang-btn.active{background:#cf4a18;border-color:#cf4a18;color:#fff}
 </style>
 </head>
 <body>
@@ -32,7 +32,7 @@ a{color:#f3632d}
 <h1 data-t="h1">Danke für deinen Kauf!</h1>
 <p class="sub" data-t="sub">Deine Zahlung war erfolgreich. Hier ist dein Zugangscode – er kommt zusätzlich per E-Mail.</p>
 
-<div class="code-box pending" id="codeBox">Code wird erstellt …</div>
+<div class="code-box pending" id="codeBox" role="status" aria-live="polite">Code wird erstellt …</div>
 <button class="copy" id="copyBtn" style="display:none" onclick="copyCode()" data-t="copy">Code kopieren</button>
 
 <div class="steps">
