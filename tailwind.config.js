@@ -6,6 +6,9 @@ module.exports = {
       colors: {
         "surface-tint": "#ffb59c",
         "primary-container": "#f3632d",
+        // Button-Orange: minimal dunkler als #f3632d, damit weiße Schrift WCAG AA (4,5:1) erfüllt
+        "cta": "#cf4a18",
+        "cta-hover": "#b23e12",
         "primary": "#ffb59c",
         "surface-variant": "#2a3548",
         "surface-container-high": "#1f2a3c",
