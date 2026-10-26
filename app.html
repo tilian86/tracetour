@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0f172a">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -21,14 +21,14 @@
 <meta name="twitter:image" content="https://tracetour.de/images/hero_neckarfront.jpg">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-<link href="fonts/fonts.css" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link href="fonts/fonts.css?v=20261026" rel="stylesheet">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css?v=1.9.4">
+<script src="vendor/leaflet/leaflet.js?v=1.9.4"></script>
 <style>
 :root{
 --bg:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;--bg-panel:#1e293b;
 --accent:#f3632d;--accent-dim:#d44d1a;--accent-glow:rgba(243,99,45,.15);--accent-bg:rgba(243,99,45,.08);--accent-soft:#ffb59d;--gold:#d4a843;
---text:#d2e4fb;--text-2:#8192a7;--text-3:#4a5d73;--success:#4ade80;--error:#f87171;
+--text:#d2e4fb;--text-2:#a3b3c7;--text-3:#8495ab;--accent-strong:#cf4a18;--accent-strong-hover:#b23e12;--success:#4ade80;--error:#f87171;
 --border:rgba(255,255,255,.06);--border-accent:rgba(243,99,45,.25);--glass:rgba(37,54,72,.6);--glass-border:rgba(255,255,255,.08);
 --r:12px;--r-sm:8px;--r-lg:16px;--shadow:0 8px 40px rgba(0,0,0,.5);
 --font-h:'Epilogue',sans-serif;--font-b:'Inter',-apple-system,sans-serif;--font-brand:'Montserrat',sans-serif;--font-m:'JetBrains Mono',monospace;
@@ -52,15 +52,17 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 .login-box input{width:100%;padding:14px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);font-size:1rem;margin-bottom:12px;outline:none;transition:border .2s;color:var(--text)}
 .login-box input:focus{border-color:var(--accent)}
 .login-box input::placeholder{color:var(--text-3)}
-.btn-primary{width:100%;padding:14px;background:var(--accent);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.95rem;border-radius:var(--r-sm);transition:background .2s,transform .1s;text-transform:uppercase;letter-spacing:.08em}
+.btn-primary{width:100%;padding:14px;background:var(--accent-strong);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.95rem;border-radius:var(--r-sm);transition:background .2s,transform .1s;text-transform:uppercase;letter-spacing:.08em}
 .btn-primary:active{transform:scale(.97)}
-.btn-primary:hover{background:var(--accent-dim)}
+.btn-primary:hover{background:var(--accent-strong-hover)}
+:focus-visible{outline:2px solid var(--accent-soft);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .btn-secondary{width:100%;padding:14px;background:transparent;color:var(--accent);font-family:var(--font-h);font-weight:700;font-size:.95rem;border-radius:var(--r-sm);border:1px solid var(--border-accent);text-transform:uppercase;letter-spacing:.08em;margin-top:8px}
 .login-hint{margin-top:1rem;font-size:.75rem;color:var(--text-3)}
 .login-hint strong{color:var(--text-2)}
 .lang-toggle{display:flex;gap:4px;justify-content:center;margin-top:1rem}
 .lang-btn{padding:6px 14px;font-size:.75rem;font-weight:700;letter-spacing:.1em;border-radius:var(--r-sm);border:1px solid var(--border);color:var(--text-3);background:transparent;transition:all .2s;cursor:pointer}
-.lang-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.lang-btn.active{background:var(--accent-strong);color:#fff;border-color:var(--accent-strong)}
 
 /* TOUR SELECT */
 #tourSelect{padding:calc(var(--safe-top) + 1rem) 1.25rem calc(var(--safe-bottom) + 2rem)}
@@ -68,7 +70,7 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 .tour-logo{font-family:var(--font-brand);font-size:1.3rem;font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
 .tour-logo span{color:var(--accent)}
 .tour-user{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--text-2)}
-.tour-avatar{width:32px;height:32px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;color:#fff}
+.tour-avatar{width:32px;height:32px;border-radius:50%;background:var(--accent-strong);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;color:#fff}
 .tour-hero h1{font-family:var(--font-h);font-size:2.2rem;font-weight:900;line-height:1.1;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:-.02em}
 .tour-hero h1 span{color:var(--accent)}
 .tour-hero p{color:var(--text-2);font-size:.92rem;line-height:1.6;margin-bottom:2rem;max-width:480px}
@@ -124,10 +126,10 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 }
 .game-top{position:fixed;top:0;left:0;right:0;z-index:800;padding:calc(var(--safe-top) + 8px) 12px 8px;background:linear-gradient(var(--bg) 60%,transparent);display:flex;align-items:center;justify-content:space-between;pointer-events:none}
 .game-top>*{pointer-events:auto}
-.game-back{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.game-back{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .game-back .material-symbols-outlined{font-size:20px;color:var(--text-2)}
 .station-nav{display:flex;align-items:center;gap:8px;flex:1;justify-content:center;overflow:hidden;margin:0 10px}
-.nav-arrow{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .1s;flex-shrink:0}
+.nav-arrow{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .1s;flex-shrink:0}
 .nav-arrow .material-symbols-outlined{font-size:20px}
 .nav-arrow:active{transform:scale(.9)}
 .nav-arrow:disabled{opacity:.2;pointer-events:none}
@@ -140,7 +142,7 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 .leaflet-control-zoom{display:none}
 .leaflet-tile-pane{filter:invert(1) hue-rotate(195deg) brightness(.78) contrast(.92) saturate(.45)!important}
 
-.fab-toggle{position:fixed;bottom:calc(var(--safe-bottom) + 20px);right:16px;z-index:1000;background:var(--accent);color:#fff;padding:12px 20px;border-radius:30px;font-family:var(--font-h);font-weight:700;font-size:.8rem;box-shadow:0 4px 20px rgba(243,99,45,.4);transition:transform .2s;display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.05em}
+.fab-toggle{position:fixed;bottom:calc(var(--safe-bottom) + 20px);right:16px;z-index:1000;background:var(--accent-strong);color:#fff;padding:12px 20px;border-radius:30px;font-family:var(--font-h);font-weight:700;font-size:.8rem;box-shadow:0 4px 20px rgba(243,99,45,.4);transition:transform .2s;display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.05em}
 .fab-toggle:active{transform:scale(.95)}
 .fab-toggle .material-symbols-outlined{font-size:18px}
 
@@ -163,7 +165,7 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 .story-block-header .material-symbols-outlined{font-size:16px;color:var(--accent)}
 .story-text{font-size:.88rem;line-height:1.8;color:var(--text-2)}
 .story-text .word{display:inline;border-radius:2px;padding:0 1px;transition:background .15s,color .15s}
-.story-text .word.hl{background:var(--accent);color:#fff}
+.story-text .word.hl{background:var(--accent-strong);color:#fff}
 .fact-bullets{list-style:none;padding:0;margin-top:.75rem}
 .fact-bullets li{font-size:.82rem;color:var(--text-2);padding:6px 0 6px 20px;position:relative;line-height:1.5}
 .fact-bullets li::before{content:'';position:absolute;left:4px;top:12px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
@@ -179,7 +181,7 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 .audio-label{flex:1;font-size:.8rem;font-weight:500}
 .audio-sublabel{font-size:.68rem;color:var(--text-3);font-weight:400}
 .audio-time{font-size:.68rem;color:var(--text-3);font-family:var(--font-m)}
-.speed-select{font-size:.6rem;color:var(--accent);background:var(--bg-card);border:1px solid var(--border-accent);border-radius:4px;padding:2px 2px;font-weight:700;font-family:var(--font-m);min-width:42px;text-align:center;-webkit-appearance:none;appearance:none;cursor:pointer}
+.speed-select{font-size:.7rem;color:var(--accent-soft);background:var(--bg-card);border:1px solid var(--border-accent);border-radius:6px;padding:6px 8px;font-weight:700;font-family:var(--font-m);min-width:46px;min-height:32px;text-align:center;cursor:pointer}
 .audio-progress{width:100%;height:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.06);border-radius:8px;margin-top:5px;overflow:hidden;cursor:pointer;position:relative;touch-action:none}
 .audio-progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-soft));width:0%;transition:width .05s linear;pointer-events:none}
 
@@ -196,7 +198,7 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 .riddle-label .material-symbols-outlined{font-size:14px}
 .riddle-q{font-size:.9rem;line-height:1.55;margin-bottom:.75rem;color:var(--text)}
 .riddle-input-row{display:flex;gap:8px}
-.riddle-input{flex:1;padding:11px 14px;background:rgba(15,23,42,.6);border:1px solid var(--border);border-radius:var(--r-sm);font-size:.95rem;outline:none;color:var(--text);font-family:var(--font-m);letter-spacing:.05em}
+.riddle-input{flex:1;min-width:0;padding:11px 14px;background:rgba(15,23,42,.6);border:1px solid var(--border);border-radius:var(--r-sm);font-size:1rem;outline:none;color:var(--text);font-family:var(--font-m);letter-spacing:.05em}
 .riddle-input:focus{border-color:var(--accent)}
 .riddle-input:disabled,.riddle-submit:disabled{opacity:.5;cursor:not-allowed}
 .riddle-choices{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
@@ -206,7 +208,7 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 .riddle-choice:disabled{opacity:.5;cursor:not-allowed}
 .riddle-choice.correct-choice{border-color:var(--success);background:rgba(74,222,128,.15);color:var(--success)}
 .riddle-choice.wrong-choice{border-color:var(--error);background:rgba(248,113,113,.1)}
-.riddle-submit{padding:11px 18px;background:var(--accent);color:#fff;font-family:var(--font-h);font-weight:700;border-radius:var(--r-sm);font-size:.85rem;text-transform:uppercase;letter-spacing:.05em}.riddle-fb{margin-top:10px;font-size:.85rem;padding:10px 14px;border-radius:var(--r-sm)}
+.riddle-submit{padding:11px 18px;background:var(--accent-strong);color:#fff;font-family:var(--font-h);font-weight:700;border-radius:var(--r-sm);font-size:.85rem;text-transform:uppercase;letter-spacing:.05em}.riddle-fb{margin-top:10px;font-size:.85rem;padding:10px 14px;border-radius:var(--r-sm)}
 .riddle-fb.correct{background:rgba(74,222,128,.1);color:var(--success);border:1px solid rgba(74,222,128,.2)}
 .riddle-fb.wrong{background:rgba(248,113,113,.1);color:var(--error);border:1px solid rgba(248,113,113,.2)}
 .fragment-reveal{background:linear-gradient(135deg,rgba(243,99,45,.12),rgba(255,181,157,.08));border:1px solid rgba(243,99,45,.3);border-radius:var(--r);padding:1.2rem;margin:1rem 0;text-align:center;animation:fragmentIn .6s ease}
@@ -225,6 +227,7 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 .finale-formula .ff-explain{font-size:.82rem;color:var(--text-2);line-height:1.7;text-align:left}
 .distance-bar{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--accent-bg);border:1px solid var(--border-accent);border-radius:var(--r-sm);margin-bottom:1rem;font-size:.8rem;color:var(--accent)}
 .distance-bar .material-symbols-outlined{font-size:18px}
+.distance-bar[hidden]{display:none}
 .hint-btn{width:100%;padding:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);font-size:.82rem;color:var(--text-2);display:flex;align-items:center;justify-content:center;gap:8px;transition:border .2s;margin-bottom:.5rem}
 .hint-btn:active{border-color:var(--accent)}
 .hint-btn .material-symbols-outlined{font-size:18px;color:var(--accent)}
@@ -262,7 +265,7 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 .ai-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .ai-header h3{font-family:var(--font-h);font-size:.9rem;font-weight:700;display:flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:.03em}
 .ai-dot{width:8px;height:8px;border-radius:50%;background:var(--success);display:inline-block;animation:pulse 2s infinite}
-.ai-close{font-size:1.4rem;color:var(--text-3);padding:4px 8px}
+.ai-close{font-size:1.6rem;color:var(--text-2);padding:4px 12px;min-width:44px;min-height:44px}
 .ai-msgs{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px}
 .ai-msg{padding:10px 14px;border-radius:var(--r-sm);margin-bottom:8px;font-size:.85rem;line-height:1.5;max-width:88%}
 .ai-msg.bot{background:var(--bg-card);color:var(--text-2)}
@@ -273,9 +276,9 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 .typing-dots span:nth-child(3){animation-delay:.3s}
 @keyframes tdot{0%,100%{opacity:.3}50%{opacity:1}}
 .ai-input-row{padding:12px 16px calc(var(--safe-bottom) + 12px);border-top:1px solid var(--border);display:flex;gap:8px}
-.ai-input{flex:1;padding:10px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);font-size:.88rem;outline:none;color:var(--text)}
+.ai-input{flex:1;padding:10px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);font-size:1rem;outline:none;color:var(--text)}
 .ai-input:focus{border-color:var(--accent)}
-.ai-send{width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center}
+.ai-send{width:44px;height:44px;border-radius:50%;background:var(--accent-strong);color:#fff;display:flex;align-items:center;justify-content:center}
 .ai-send .material-symbols-outlined{font-size:20px}
 .ai-limit{font-size:.68rem;color:var(--text-3);text-align:center;padding:4px;font-family:var(--font-m)}
 
@@ -327,20 +330,23 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 <div class="splash-brand"><span>Trace</span>Tour</div>
 <div class="splash-sub">by Florian S. Thiel</div>
 <div class="login-box">
-<input type="text" id="loginName" placeholder="Dein Ermittlername" autocomplete="off" autocapitalize="words">
+<label for="loginName" class="sr-only" id="loginNameLbl">Dein Ermittlername</label>
+<input type="text" id="loginName" placeholder="Dein Ermittlername" autocomplete="off" autocapitalize="words" maxlength="30">
 <div style="position:relative">
-<input type="password" id="loginCode" placeholder="Zugangscode" autocomplete="off" style="padding-right:44px">
-<button type="button" onclick="const i=document.getElementById('loginCode');i.type=i.type==='password'?'text':'password';this.textContent=i.type==='password'?'👁':'🙈'" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:1rem;opacity:.5;padding:4px">👁</button>
+<label for="loginCode" class="sr-only" id="loginCodeLbl">Zugangscode</label>
+<input type="password" id="loginCode" placeholder="Zugangscode" autocomplete="off" autocapitalize="characters" spellcheck="false" style="padding-right:48px">
+<button type="button" id="codeToggle" aria-label="Code anzeigen" onclick="const i=document.getElementById('loginCode');i.type=i.type==='password'?'text':'password';this.textContent=i.type==='password'?'👁':'🙈'" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:1rem;opacity:.7;padding:8px;min-width:40px;min-height:40px">👁</button>
 </div>
-<div id="loginError" style="display:none;font-size:.78rem;color:var(--error);margin:-6px 0 8px;padding:8px 12px;background:rgba(248,113,113,.08);border-radius:var(--r-sm);border:1px solid rgba(248,113,113,.2)"></div>
-<input type="text" id="loginGroup" placeholder="Teamname (optional)" autocomplete="off" autocapitalize="words">
+<div id="loginError" role="alert" style="display:none;font-size:.82rem;color:var(--error);margin:-6px 0 8px;padding:8px 12px;background:rgba(248,113,113,.08);border-radius:var(--r-sm);border:1px solid rgba(248,113,113,.2)"></div>
+<label for="loginGroup" class="sr-only" id="loginGroupLbl">Teamname (optional)</label>
+<input type="text" id="loginGroup" placeholder="Teamname (optional)" autocomplete="off" autocapitalize="words" maxlength="30">
 <button class="btn-primary" id="loginBtn" onclick="doLogin()">Einloggen</button>
 <div class="login-hint" id="loginHint">Dein Zugangscode ist persönlich und an ein Gerät gebunden.<br>Er wird beim ersten Login aktiviert.<br>Noch keinen Code? Alle Infos auf <a href="index.html#pricing" style="color:var(--accent);text-decoration:none;font-weight:600">tracetour.de</a></div>
 <div class="lang-toggle">
   <button class="lang-btn active" onclick="setLang('de')">DE</button>
   <button class="lang-btn" onclick="setLang('en')">EN</button>
 </div>
-<a href="index.html" id="backLink" style="display:block;margin-top:1rem;font-size:.75rem;color:var(--text-3);text-decoration:none">← Zurück zur Startseite</a>
+<a href="index.html" id="backLink" style="display:block;margin-top:1rem;font-size:.8rem;color:var(--text-2);text-decoration:none;padding:6px 0">← Zurück zur Startseite</a>
 </div>
 </div>
 
@@ -394,8 +400,8 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <h1>Willkommen in<br><span>Tübingen</span></h1>
 <p>Du bist Teil einer Geschichte geworden. Löse Rätsel vor Ort, entdecke verborgene Winkel, höre die Stimmen der Vergangenheit – und sammle Erfahrungspunkte.</p>
 </div>
-<div class="tour-card" onclick="showScreen('prologue')">
-<img class="tour-card-img" src="images/city_tuebingen2.jpg" alt="Tübingen Neckarfront" onerror="this.style.display='none'">
+<div class="tour-card" role="button" tabindex="0" onclick="showScreen('prologue')">
+<img class="tour-card-img" src="images/city_tuebingen2.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
 <div class="tour-card-body">
 <span class="badge badge-live">Verfügbar</span>
 <h3>Die Formel des Forschers</h3>
@@ -430,8 +436,8 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
     <span id="dbgStateInfo" style="color:var(--text-3);font-size:.6rem;margin-left:4px"></span>
   </div>
 </div>
-<div class="tour-card" onclick="window.location.href='kinder.html'" style="border:1.5px solid rgba(0,158,68,.25);background:linear-gradient(135deg,rgba(0,106,45,.08),rgba(255,202,81,.05))">
-<img class="tour-card-img" src="images/tour_kinder.jpg" alt="Tübi der Drache" onerror="this.style.display='none'" style="max-height:200px">
+<div class="tour-card" role="link" tabindex="0" onclick="window.location.href='kinder.html'" style="border:1.5px solid rgba(0,158,68,.25);background:linear-gradient(135deg,rgba(0,106,45,.08),rgba(255,202,81,.05))">
+<img class="tour-card-img" src="images/tour_kinder.jpg" alt="" loading="lazy" onerror="this.style.display='none'" style="max-height:200px">
 <div class="tour-card-body">
 <span class="badge" style="background:rgba(0,158,68,.15);color:#00a843;border:1px solid rgba(0,158,68,.3)" data-t="kidsBadge">🐉 Kids 5–10</span>
 <h3 data-t="kidsTitle">Tübis Geheimnisse</h3>
@@ -439,7 +445,7 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <div class="tour-card-meta"><span>📍 8 Stops</span><span>⏱ ca. 60 Min</span><span>🐉 Tübi erzählt</span><span>🔥 Drachenfunken</span></div>
 </div>
 </div>
-<div class="tour-card" style="opacity:.35;pointer-events:none">
+<div class="tour-card" aria-disabled="true" style="opacity:.55;pointer-events:none">
 <div class="tour-card-body">
 <span class="badge badge-soon" data-t="badgeSoon">Bald verfügbar</span>
 <h3 data-t="tour2Title">Schatten über dem Schloss</h3>
@@ -452,7 +458,7 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <!-- PROLOGUE -->
 <div id="prologue" class="screen">
 <div class="prologue-hero">
-<img src="images/city_tuebingen2.jpg" alt="Tübingen bei Nacht">
+<img src="images/city_tuebingen2.jpg" alt="" loading="lazy">
 <div class="prologue-hero-overlay">
 <h1>Die Formel des <span>Forschers</span></h1>
 </div>
@@ -467,10 +473,10 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <div class="prologue-text">
 <p>Tübingen, im November des Jahres 1869. Das Königreich Württemberg unter König Karl I. erlebt turbulente Zeiten. Preußen rüstet auf, Europa balanciert am Rand eines Krieges, und in den Laboren der Universität wird an Entdeckungen gearbeitet, die alles verändern könnten.</p>
 <p><strong>Professor Heinrich von Calw</strong>, ein brillanter Naturwissenschaftler, forscht in seinem Labor im Schloss Hohentübingen an einer revolutionären Energie-Formel. Offiziell arbeitet er an „chemischen Grundlagen" für das Königliche Ministerium. In Wahrheit hat er etwas entdeckt, das die Kriegsführung – und die Welt – für immer verändern würde.</p>
-<div style="margin:1.25rem 0;border-radius:var(--r);overflow:hidden;max-height:180px"><img src="images/station_0.jpg" alt="Schloss Hohentübingen" style="width:100%;height:180px;object-fit:cover;object-position:center 25%;filter:brightness(.75) saturate(.8)"></div>
+<div style="margin:1.25rem 0;border-radius:var(--r);overflow:hidden;max-height:180px"><img src="images/station_0.jpg" alt="Schloss Hohentübingen" loading="lazy" style="width:100%;height:180px;object-fit:cover;object-position:center 25%;filter:brightness(.75) saturate(.8)"></div>
 <p>Doch das Ministerium hat Wind bekommen. Gendarmen sind unterwegs, um sein Labor zu versiegeln und seine Aufzeichnungen zu konfiszieren. Heinrich hat vielleicht eine Stunde Vorsprung. Er greift sein Manuskript, zündet den Rest seiner Notizen an – und flieht vom Schloss bergab durch die Gassen der Altstadt.</p>
 <p>Sein Plan: den Neckar erreichen und über die Brücke am Stadtrand in die Dunkelheit verschwinden. Unterwegs versteckt er codierte Fragmente seines Werks an verschiedenen Orten – für den Fall, dass jemand Würdiges seine Spur findet.</p>
-<div style="margin:1.25rem 0;border-radius:var(--r);overflow:hidden;max-height:140px"><img src="images/hero_neckarfront.jpg" alt="Neckarfront Tübingen" style="width:100%;height:140px;object-fit:cover;object-position:center 30%;filter:brightness(.6) saturate(.7)"></div>
+<div style="margin:1.25rem 0;border-radius:var(--r);overflow:hidden;max-height:140px"><img src="images/hero_neckarfront.jpg" alt="Neckarfront Tübingen" loading="lazy" style="width:100%;height:140px;object-fit:cover;object-position:center 30%;filter:brightness(.6) saturate(.7)"></div>
 <p><strong>Dieser Jemand bist du.</strong></p>
 </div>
 <div class="prologue-quote">
@@ -513,15 +519,15 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <!-- GAME -->
 <div id="game" class="screen">
 <div class="game-top">
-<button class="game-back" onclick="backToMenu()"><span class="material-symbols-outlined">close</span></button>
+<button class="game-back" id="gameBack" aria-label="Tour pausieren und zur Übersicht" onclick="backToMenu()"><span class="material-symbols-outlined">close</span></button>
 <div class="station-nav">
-<button class="nav-arrow" id="navPrev" onclick="navStation(-1)"><span class="material-symbols-outlined">chevron_left</span></button>
-<div class="game-title" id="topTitle">Station</div>
-<button class="nav-arrow" id="navNext" onclick="navStation(1)"><span class="material-symbols-outlined">chevron_right</span></button>
+<button class="nav-arrow" id="navPrev" aria-label="Vorherige Station" onclick="navStation(-1)"><span class="material-symbols-outlined">chevron_left</span></button>
+<div class="game-title" id="topTitle" aria-live="polite">Station</div>
+<button class="nav-arrow" id="navNext" aria-label="Nächste Station" onclick="navStation(1)"><span class="material-symbols-outlined">chevron_right</span></button>
 </div>
 <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
 <div class="game-xp"><span id="xpLabel">0</span><div class="xp-track"><div class="xp-fill" id="xpFill"></div></div></div>
-<button id="gameLangBtn" onclick="setLang(lang==='de'?'en':'de');renderStation();updateGameLangBtn()" style="font-size:.6rem;font-weight:800;letter-spacing:.08em;color:var(--text-3);border:1px solid var(--border);border-radius:4px;padding:3px 6px;line-height:1;background:var(--bg-card)">DE</button>
+<button id="gameLangBtn" aria-label="Sprache wechseln / switch language" onclick="setLang(lang==='de'?'en':'de');renderStation();updateGameLangBtn()" style="font-size:.7rem;font-weight:800;letter-spacing:.08em;color:var(--text-2);border:1px solid var(--border);border-radius:6px;padding:8px 8px;line-height:1;background:var(--bg-card);min-width:40px;min-height:32px">DE</button>
 </div>
 </div>
 <div class="game-map"><div id="map"></div></div>
@@ -534,18 +540,18 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 
 <!-- AI -->
 <div class="ai-overlay" id="aiOverlay">
-<div class="ai-box">
+<div class="ai-box" role="dialog" aria-modal="true" aria-label="Trace">
 <div class="ai-header">
-<h3><img src="images/trace-avatar.png" style="width:28px;height:28px;border-radius:50%;vertical-align:middle;margin-right:6px"> Trace</h3>
-<button class="ai-close" onclick="closeAi()">×</button>
+<h3><img src="images/trace-avatar.png" alt="" loading="lazy" style="width:28px;height:28px;border-radius:50%;vertical-align:middle;margin-right:6px"> Trace</h3>
+<button class="ai-close" aria-label="Schließen" onclick="closeAi()">×</button>
 </div>
-<div class="ai-msgs" id="aiMsgs">
+<div class="ai-msgs" id="aiMsgs" aria-live="polite">
 <div class="ai-msg bot">Hey, ich bin Trace – dein Begleiter auf dieser Tour! Frag mich zu Rätseln, zur Stadt oder zur Geschichte. Ich helfe dir weiter – nur die Lösung musst du selbst finden. Was willst du wissen?</div>
 </div>
 <div class="ai-limit" id="aiLimit">5/5</div>
 <div class="ai-input-row">
-<input class="ai-input" id="aiInput" placeholder="Frag mich etwas..." autocomplete="off">
-<button class="ai-send" onclick="sendAi()"><span class="material-symbols-outlined">send</span></button>
+<input class="ai-input" id="aiInput" placeholder="Frag mich etwas..." aria-label="Frage an Trace" autocomplete="off" maxlength="500">
+<button class="ai-send" aria-label="Senden" onclick="sendAi()"><span class="material-symbols-outlined">send</span></button>
 </div>
 </div>
 </div>
@@ -661,7 +667,7 @@ Das ist Heinrichs Vermächtnis. Und jetzt ist es auch deins.</div>
 <p id="nextP2" style="font-size:.85rem;line-height:1.7;color:var(--text-2)">Es freut uns, wenn wir uns irgendwo auf der Welt beim Erkunden wiederbegegnen. Bis dahin – fare well, Ermittler.</p>
 </div>
 
-<canvas id="certificateCanvas" style="width:100%;max-width:480px;border-radius:var(--r);border:1px solid var(--border);margin-bottom:1rem"></canvas>
+<canvas id="certificateCanvas" role="img" aria-label="Deine Urkunde" style="width:100%;max-width:480px;border-radius:var(--r);border:1px solid var(--border);margin-bottom:1rem"></canvas>
 <button class="share-btn" style="max-width:300px" onclick="shareCertificate()"><span class="material-symbols-outlined">share</span> Urkunde teilen</button>
 <button class="share-btn" style="max-width:300px" onclick="saveCertificate()"><span class="material-symbols-outlined">download</span> Urkunde speichern</button>
 <button class="share-btn" style="max-width:300px" onclick="window.location.href='mailto:info@tracetour.de?subject=TraceTour Feedback&body=Hey! Ich habe gerade die Tour in Tübingen gemacht und wollte euch sagen:'"><span class="material-symbols-outlined">mail</span> Feedback senden</button>
@@ -670,7 +676,7 @@ Das ist Heinrichs Vermächtnis. Und jetzt ist es auch deins.</div>
 </div>
 
 <!-- TOAST -->
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <!-- BONUS OVERLAY -->
 <div id="bonusOverlay" class="screen" style="align-items:center;justify-content:center;text-align:center;padding:2rem;background:radial-gradient(ellipse at 50% 30%,rgba(212,168,67,.08) 0%,transparent 70%),var(--bg)">
@@ -688,19 +694,20 @@ let aiQuestionsLeft=5,debugMode=false;
 const MAX_AI_QUESTIONS=5;
 let currentAudio=null,currentAmbient=null,ambientCtx=null,ambientMaster=null;
 let audioSpeed=1.0;
+const AUDIO_SPEEDS=[1,1.25,1.5,1.75,2];
+function speedLabel(v){return (lang==='de'?String(v).replace('.',','):String(v))+'×'}
+// Tempo-Knopf: jeder Tipp schaltet eine Stufe weiter (statt <select>, das auf iOS ins Bild zoomt)
 function onSpeedChange(e){
   e.stopPropagation();
-  audioSpeed=parseFloat(e.target.value);
+  audioSpeed=AUDIO_SPEEDS[(AUDIO_SPEEDS.indexOf(audioSpeed)+1)%AUDIO_SPEEDS.length];
+  e.currentTarget.textContent=speedLabel(audioSpeed);
   if(currentAudio)currentAudio.playbackRate=audioSpeed;
 }
 function makeSpeedSelect(){
-  const sel=document.createElement('select');sel.className='speed-select';
-  sel.onclick=e=>e.stopPropagation();sel.onchange=onSpeedChange;
-  [1,1.25,1.5,1.75,2].forEach(v=>{
-    const o=document.createElement('option');o.value=v;o.textContent=v+'x';
-    if(v===audioSpeed)o.selected=true;sel.appendChild(o);
-  });
-  return sel;
+  const b=document.createElement('button');b.type='button';b.className='speed-select';
+  b.textContent=speedLabel(audioSpeed);b.setAttribute('aria-label',t('speedLabel'));
+  b.onclick=onSpeedChange;b.onkeydown=e=>e.stopPropagation();
+  return b;
 }
 let solvedStations=[];
 let highlightWords=[],highlightIdx=-1,highlightTimer=null;
@@ -711,13 +718,17 @@ const AUDIO_BASE='audio/';
 const AI_PROXY_URL=window.TRACETOUR_AI_ENDPOINT||'https://tracetour-ai.florian-s-thiel.workers.dev';
 
 // ====== LANGUAGE SYSTEM ======
-let lang=localStorage.getItem('tracetour_lang')||'de';
+let lang=(()=>{try{const v=localStorage.getItem('tracetour_lang');if(v==='de'||v==='en')return v}catch(e){}return (navigator.language||'de').toLowerCase().startsWith('de')?'de':'en'})();
 function getAudioBase(){return lang==='en'?'audio/en/':'audio/';}
 const T={
 de:{
   loginPlaceholder:'Dein Ermittlername',codePlaceholder:'Zugangscode',groupPlaceholder:'Teamname (optional)',
   btnLogin:'Einloggen',loginError:'Ungültiger Zugangscode. Bitte prüfe deinen Code.',loginHint:'Dein Zugangscode ist persönlich und an ein Gerät gebunden.\nEr wird beim ersten Login aktiviert.\nNoch keinen Code? Alle Infos auf <a href="index.html#pricing" style="color:var(--accent);text-decoration:none;font-weight:600">tracetour.de</a>',
   backLink:'\u2190 Zurück zur Startseite',
+  loginNameMissing:'Bitte gib zuerst deinen Ermittlernamen ein \u2013 er steht später auf deiner Urkunde.',loginNoNet:'Keine oder zu langsame Verbindung \u2013 die Code-Prüfung braucht einmalig Internet. Bitte gleich nochmal versuchen.',
+  loginWrongTour:'Dieser Code gehört zur Kindertour! \ud83d\udc09',loginWrongTourLink:'Zur Kindertour \u2192',loginDeviceLimit:'Dieser Code wurde bereits auf zu vielen Geräten benutzt. Schreib uns an info@tracetour.de, wir helfen dir.',loginExpired:'Dieser Code ist abgelaufen \u2013 das 48-Stunden-Fenster nach dem ersten Start ist vorbei.',
+  gpsDenied:'Standort ist aus \u2013 die Karte zeigt trotzdem alle Stationen. Den Weg findest du über die Navigationslinks.',speedLabel:'Abspielgeschwindigkeit',navNextLabel:'Nächste Station',showCode:'Code anzeigen',
+  offlineIncomplete:'{x} Dateien fehlen \u2013 tippen zum Wiederholen',offlineUnsupported:'Dein Browser kann die Tour leider nicht offline speichern.',
   testerWelcomeHeading:'Willkommen,',testerWelcomeP1:'Schön, dass du TraceTour testest! Du gehörst zu den Ersten, die "Die Formel des Forschers" erleben. Ich freue mich riesig über dein Feedback \u2014 was hat dir gefallen, was kann besser werden, wo hakt es?',
   testerWelcomeP2:'Schreib mir gerne direkt an','testerWelcomeP2b':' oder sprich mich einfach an. Viel Spaß beim Ermitteln!',testerBtn:'LOS GEHT\'S',
   officialWelcomeHeading:'Willkommen,',officialDefaultName:'Ermittler',
@@ -826,6 +837,10 @@ en:{
   loginPlaceholder:'Your investigator name',codePlaceholder:'Access code',groupPlaceholder:'Team name (optional)',
   btnLogin:'Log in',loginError:'Invalid access code. Please check your code.',loginHint:'Your access code is personal and tied to one device.\nIt is activated on first login.\nNo code yet? Find all info at <a href="index.html#pricing" style="color:var(--accent);text-decoration:none;font-weight:600">tracetour.de</a>',
   backLink:'\u2190 Back to homepage',
+  loginNameMissing:'Please enter your investigator name first \u2013 it will appear on your certificate.',loginNoNet:'No or too slow connection \u2013 the code check needs internet once. Please try again in a moment.',
+  loginWrongTour:'This code belongs to the kids tour! \ud83d\udc09',loginWrongTourLink:'Go to the kids tour \u2192',loginDeviceLimit:'This code has already been used on too many devices. Write to info@tracetour.de and we will help.',loginExpired:'This code has expired \u2013 the 48-hour window after the first start is over.',
+  gpsDenied:'Location is off \u2013 the map still shows all stations. Use the navigation links to find your way.',speedLabel:'Playback speed',navNextLabel:'Next station',showCode:'Show code',
+  offlineIncomplete:'{x} files missing \u2013 tap to retry',offlineUnsupported:'Your browser cannot save the tour for offline use.',
   testerWelcomeHeading:'Welcome,',testerWelcomeP1:'Great to have you testing TraceTour! You are among the first to experience "The Researcher\'s Formula." I would love your feedback \u2014 what did you enjoy, what could be better, where did things get stuck?',
   testerWelcomeP2:'Feel free to write me at','testerWelcomeP2b':' or just talk to me directly. Enjoy the investigation!',testerBtn:'LET\'S GO',
   officialWelcomeHeading:'Welcome,',officialDefaultName:'Investigator',
@@ -947,7 +962,8 @@ function getRankLocalized(xp){
 
 function setLang(l){
   lang=l;
-  localStorage.setItem('tracetour_lang',l);
+  try{localStorage.setItem('tracetour_lang',l)}catch(e){}
+  document.documentElement.lang=l;
   document.querySelectorAll('.lang-btn').forEach(b=>{
     b.classList.toggle('active',b.textContent.trim()===l.toUpperCase());
   });
@@ -958,6 +974,8 @@ function applyLangUI(){
   const ln=document.getElementById('loginName');if(ln)ln.placeholder=t('loginPlaceholder');
   const lc=document.getElementById('loginCode');if(lc)lc.placeholder=t('codePlaceholder');
   const lg=document.getElementById('loginGroup');if(lg)lg.placeholder=t('groupPlaceholder');
+  [['loginNameLbl','loginPlaceholder'],['loginCodeLbl','codePlaceholder'],['loginGroupLbl','groupPlaceholder']].forEach(([id,k])=>{const el=document.getElementById(id);if(el)el.textContent=t(k)});
+  const ct=document.getElementById('codeToggle');if(ct)ct.setAttribute('aria-label',t('showCode'));
   const lb=document.querySelector('#splash .btn-primary');if(lb)lb.textContent=t('btnLogin');
   const lh=document.getElementById('loginHint');if(lh)lh.innerHTML=t('loginHint').replace(/\n/g,'<br>');
   const bl=document.getElementById('backLink');if(bl)bl.textContent=t('backLink');
@@ -1514,7 +1532,7 @@ function loadGame(){
     return true;
   }catch(e){return false}
 }
-function clearSave(){localStorage.removeItem(SAVE_KEY)}
+function clearSave(){try{localStorage.removeItem(SAVE_KEY)}catch(e){}}
 function toggleMobileView(){
   document.body.classList.toggle('mobile-sim');
   const btn=document.getElementById('debugMobileToggle');
@@ -1585,9 +1603,9 @@ function confirmReset(){
     }
   }
 }
-function showToast(msg){
+function showToast(msg,ms=2000){
   const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2000);
+  clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),ms);
 }
 
 // ====== SCREENS ======
@@ -1596,6 +1614,7 @@ function showScreen(id){
   document.getElementById(id).classList.add('active');
   if(id==='game'){
     if(mapInitStarted&&map){setTimeout(()=>{map.invalidateSize();renderStation()},150)}
+    else if(mapInitStarted){setTimeout(renderStation,50)} // Karte nicht verfügbar: Tour läuft trotzdem
     else{initMap()}
     return;
   }
@@ -1605,7 +1624,7 @@ function showScreen(id){
 }
 
 function checkSavedGame(){
-  const raw=localStorage.getItem(SAVE_KEY);
+  let raw=null;try{raw=localStorage.getItem(SAVE_KEY)}catch(e){}
   const box=document.getElementById('continueBox');
   const info=document.getElementById('saveInfo');
   if(raw){
@@ -1627,19 +1646,34 @@ function checkSavedGame(){
 // ====== LOGIN ======
 const CODE_VALIDATE_URL='https://tracetour-checkout.florian-s-thiel.workers.dev/validate';
 function getDeviceId(){try{let d=localStorage.getItem('tracetour_device');if(!d){d=(crypto&&crypto.randomUUID?crypto.randomUUID():'d'+Date.now()+Math.random().toString(36).slice(2));localStorage.setItem('tracetour_device',d)}return d}catch(e){return 'nostore'}}
-function showLoginError(msg){
+function showLoginError(msg,link){
   const err=document.getElementById('loginError');
   err.textContent=msg||t('loginError');err.style.display='block';
+  if(link){const a=document.createElement('a');a.href=link.href;a.textContent=' '+link.text;a.style.cssText='color:var(--accent-soft);font-weight:700';err.appendChild(a)}
   document.getElementById('loginCode').style.borderColor='var(--error)';
-  setTimeout(()=>{document.getElementById('loginCode').style.borderColor='';err.style.display='none';},3000);
+}
+function hideLoginError(){
+  document.getElementById('loginError').style.display='none';
+  document.getElementById('loginCode').style.borderColor='';
+}
+// Code tolerant einlesen: Leerzeichen raus, Gedankenstriche aus Mails zu "-", fehlende Bindestriche ergänzen
+function normalizeCode(raw){
+  let c=String(raw||'').toUpperCase().replace(/\s+/g,'').replace(/[\u2010-\u2015]/g,'-');
+  if(/^TT[A-Z0-9]{8}$/.test(c))c='TT-'+c.slice(2,6)+'-'+c.slice(6);
+  return c;
+}
+function fetchWithTimeout(url,opts,ms){
+  const ctrl=typeof AbortController!=='undefined'?new AbortController():null;
+  const timer=ctrl?setTimeout(()=>ctrl.abort(),ms):null;
+  return fetch(url,Object.assign({},opts,ctrl?{signal:ctrl.signal}:{})).finally(()=>{if(timer)clearTimeout(timer)});
 }
 async function doLogin(){
   const name=document.getElementById('loginName').value.trim();
-  const code=document.getElementById('loginCode').value.trim().toUpperCase();
+  const code=normalizeCode(document.getElementById('loginCode').value);
   const isLegacy=(code==='TUEBINGEN2026'||code==='TUEBINGEN2025'||code==='PRIVAT');
   const isPurchased=/^TT-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code);
   if(!isLegacy&&!isPurchased){showLoginError();return;}
-  if(!name){document.getElementById('loginName').focus();return}
+  if(!name){showLoginError(t('loginNameMissing'));document.getElementById('loginCode').style.borderColor='';document.getElementById('loginName').focus();return}
   if(isPurchased){
     // Gekaufter Code: online gegen den Worker validieren (einmal pro Gerät, danach offline ok)
     let cached=null;try{cached=localStorage.getItem('tracetour_code_ok_adult')}catch(e){}
@@ -1647,18 +1681,21 @@ async function doLogin(){
       const btn=document.getElementById('loginBtn');const oldTxt=btn?btn.textContent:'';
       if(btn){btn.disabled=true;btn.textContent='…'}
       try{
-        const r=await fetch(CODE_VALIDATE_URL,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code,tour:'adult',device:getDeviceId()})});
+        const r=await fetchWithTimeout(CODE_VALIDATE_URL,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code,tour:'adult',device:getDeviceId()})},15000);
         const d=await r.json();
         if(!d.valid){
-          if(d.reason==='wrong_tour'){showLoginError(lang==='en'?'This code belongs to the kids tour! 🐉 Open the kids tour instead.':'Dieser Code gehört zur Kindertour! 🐉 Öffne dafür die Kindertour.');}
-          else if(d.reason==='device_limit'){showLoginError(lang==='en'?'This code has already been used on too many devices.':'Dieser Code wurde bereits auf zu vielen Geräten benutzt.');}
-          else if(d.reason==='expired'){showLoginError(lang==='en'?'This code has expired – the time window after the first start is over.':'Dieser Code ist abgelaufen – das Zeitfenster nach dem Start ist vorbei.');}
+          if(d.reason==='wrong_tour'){
+            try{sessionStorage.setItem('tracetour_code_for_kids',code)}catch(e){}
+            showLoginError(t('loginWrongTour'),{href:'kinder.html',text:t('loginWrongTourLink')});
+          }
+          else if(d.reason==='device_limit'){showLoginError(t('loginDeviceLimit'));}
+          else if(d.reason==='expired'){showLoginError(t('loginExpired'));}
           else{showLoginError();}
           if(btn){btn.disabled=false;btn.textContent=oldTxt}return;
         }
         try{localStorage.setItem('tracetour_code_ok_adult',code)}catch(e){}
       }catch(e){
-        showLoginError(lang==='en'?'No connection – code check needs internet once.':'Keine Verbindung – die Code-Prüfung braucht einmalig Internet.');
+        showLoginError(t('loginNoNet'));
         if(btn){btn.disabled=false;btn.textContent=oldTxt}return;
       }
       if(btn){btn.disabled=false;btn.textContent=oldTxt}
@@ -1689,8 +1726,9 @@ function continueTour(){
 }
 document.getElementById('loginCode').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
 document.getElementById('loginName').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('loginCode').focus()});
-// Nach Kauf: Code von der Danke-Seite vorbefüllen
-try{const pc=localStorage.getItem('tracetour_purchased_code');if(pc&&!document.getElementById('loginCode').value)document.getElementById('loginCode').value=pc;}catch(e){}
+['loginCode','loginName'].forEach(id=>document.getElementById(id).addEventListener('input',hideLoginError));
+// Nach Kauf (Danke-Seite) oder Weiterleitung aus der Kindertour: Code vorbefüllen
+try{const pc=sessionStorage.getItem('tracetour_code_for_adult')||localStorage.getItem('tracetour_purchased_code');if(pc&&!document.getElementById('loginCode').value)document.getElementById('loginCode').value=pc;}catch(e){}
 
 function startTour(){
   currentStation=0;maxUnlockedStation=0;totalXp=0;aiQuestionsLeft=MAX_AI_QUESTIONS;
@@ -1722,17 +1760,40 @@ function initMap(){
       });
       routeLine=L.polyline([],{color:'#f3632d',weight:2,opacity:.35,dashArray:'6,8'}).addTo(map);
       fetchWalkingRoute();
-      if(navigator.geolocation){
-        watchId=navigator.geolocation.watchPosition(pos=>{
-          userPos={lat:pos.coords.latitude,lng:pos.coords.longitude};
-          if(!userMarker){
-            userMarker=L.circleMarker([userPos.lat,userPos.lng],{radius:7,color:'#4fc3f7',fillColor:'#4fc3f7',fillOpacity:1,weight:2}).addTo(map);
-          }else{userMarker.setLatLng([userPos.lat,userPos.lng])}
-        },err=>{console.log('GPS:',err.message)},{enableHighAccuracy:true,maximumAge:5000,timeout:15000});
-      }
       setTimeout(()=>{map.invalidateSize();renderStation()},200);
-    }catch(e){console.error('Map init:',e)}
+    }catch(e){
+      // Karte nicht verfügbar (z. B. Skript nicht geladen): Tour trotzdem anzeigen
+      console.error('Map init:',e);map=null;renderStation();
+    }
+    startGps();
   },150);
+}
+let gpsWarned=false;
+function startGps(){
+  if(!navigator.geolocation||watchId!==null)return;
+  watchId=navigator.geolocation.watchPosition(pos=>{
+    userPos={lat:pos.coords.latitude,lng:pos.coords.longitude};
+    if(map&&typeof L!=='undefined'){
+      if(!userMarker){
+        userMarker=L.circleMarker([userPos.lat,userPos.lng],{radius:7,color:'#4fc3f7',fillColor:'#4fc3f7',fillOpacity:1,weight:2}).addTo(map);
+      }else{userMarker.setLatLng([userPos.lat,userPos.lng])}
+    }
+    updateDistanceBar();
+  },err=>{
+    console.log('GPS:',err.message);
+    if(err.code===1&&!gpsWarned){gpsWarned=true;showToast(t('gpsDenied'),7000)}
+  },{enableHighAccuracy:true,maximumAge:5000,timeout:15000});
+}
+// Entfernung zur aktuellen Station live nachführen (nicht nur beim Stationswechsel)
+function distanceText(s){
+  const d=getDistance(userPos.lat,userPos.lng,s.lat,s.lng);
+  return d<50?t('distHere'):d<200?t('distAlmost').replace('{x}',Math.round(d)):t('distAway').replace('{x}',Math.round(d));
+}
+function updateDistanceBar(){
+  const bar=document.getElementById('distBar');
+  if(!bar||!userPos||currentStation>=stations.length)return;
+  bar.querySelector('.dist-text').textContent=distanceText(stations[currentStation]);
+  bar.hidden=false;
 }
 
 // ====== WALKING ROUTE (OSRM) ======
@@ -1825,11 +1886,7 @@ function renderStation(){
   updateRouteDisplay();
   if(map)map.flyTo([s.lat,s.lng],16,{duration:1});
 
-  let distHtml='';
-  if(userPos){
-    const d=getDistance(userPos.lat,userPos.lng,s.lat,s.lng);
-    distHtml=`<div class="distance-bar"><span class="material-symbols-outlined">near_me</span> ${d<50?t('distHere'):d<200?t('distAlmost').replace('{x}',Math.round(d)):t('distAway').replace('{x}',Math.round(d))}</div>`;
-  }
+  const distHtml=`<div class="distance-bar" id="distBar" ${userPos?'':'hidden'}><span class="material-symbols-outlined">near_me</span> <span class="dist-text">${userPos?distanceText(s):''}</span></div>`;
 
   const photo=STATION_PHOTOS[currentStation];
   const solved=!!solvedStations[currentStation],ai=currentStation;
@@ -1870,7 +1927,7 @@ function renderStation(){
     <div class="bottom-nav-row">
       <button onclick="navStation(-1)"><span class="material-symbols-outlined">chevron_left</span> ${currentStation===0?t('navBack0'):t('navBackOther')}</button>
       <span class="bottom-nav-label">${t('navLabel').replace('{x}',currentStation+1).replace('{y}',stations.length)}</span>
-      <button onclick="navStation(1)" ${!debugMode&&currentStation>=maxUnlockedStation?'disabled':''}><span class="material-symbols-outlined">chevron_right</span></button>
+      <button onclick="navStation(1)" aria-label="${t('navNextLabel')}" ${!debugMode&&currentStation>=maxUnlockedStation?'disabled':''}><span class="material-symbols-outlined">chevron_right</span></button>
     </div>
   `;
   }else{
@@ -1928,17 +1985,17 @@ function renderStation(){
       <div class="riddle-label"><span class="material-symbols-outlined">search</span> ${t('riddleLabel')}</div>
       <div class="riddle-q">${stationField(s,'riddle')}</div>
       ${sChoices?`<div class="riddle-choices">${sChoices.map((c,ci)=>`<button class="riddle-choice${solved?' correct-choice':''}" data-choice="${ci}" onclick="checkChoice(this)" ${solved?'disabled':''}>${solved?'✓ ':''} ${esc(c)}</button>`).join('')}</div>`:`<div class="riddle-input-row">
-        <input class="riddle-input" id="riddleAnswer" placeholder="${t('riddlePlaceholder')}" autocomplete="off" ${solved?`disabled value="${s.answer[0].charAt(0).toUpperCase()+s.answer[0].slice(1)} ✓"`:''}>
+        <input class="riddle-input" id="riddleAnswer" placeholder="${t('riddlePlaceholder')}" aria-label="${t('riddlePlaceholder')}" autocomplete="off" enterkeyhint="done" ${solved?`disabled value="${s.answer[0].charAt(0).toUpperCase()+s.answer[0].slice(1)} ✓"`:''}>
         <button class="riddle-submit" onclick="checkAnswer()" ${solved?'disabled':''}>${t('riddleSubmit')}</button>
       </div>`}
       <div id="riddleFb"></div>
     </div>
-    <button class="hint-btn" onclick="openAi()"><img src="images/trace-avatar.png" style="width:20px;height:20px;border-radius:50%"> ${t('btnAskTrace')}</button>
+    <button class="hint-btn" onclick="openAi()"><img src="images/trace-avatar.png" alt="" style="width:20px;height:20px;border-radius:50%"> ${t('btnAskTrace')}</button>
     ${debugMode?`<button onclick="skipStation()" style="width:100%;margin-top:4px;padding:8px;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.15);border-radius:var(--r-sm);color:var(--error);font-size:.7rem">DEBUG: Skip</button>`:''}
     <div class="bottom-nav-row">
       <button onclick="navStation(-1)"><span class="material-symbols-outlined">chevron_left</span> ${currentStation===0?t('navBack0'):t('navBackOther')}</button>
       <span class="bottom-nav-label">${t('navLabel').replace('{x}',currentStation+1).replace('{y}',stations.length)}</span>
-      <button onclick="navStation(1)" ${!debugMode&&currentStation>=maxUnlockedStation?'disabled':''}><span class="material-symbols-outlined">chevron_right</span></button>
+      <button onclick="navStation(1)" aria-label="${t('navNextLabel')}" ${!debugMode&&currentStation>=maxUnlockedStation?'disabled':''}><span class="material-symbols-outlined">chevron_right</span></button>
     </div>
   `;
   }
@@ -2225,6 +2282,7 @@ function checkAnswer(){
   const idx=currentStation,s=stations[idx];
   if(solvedStations[idx])return;
   const val=document.getElementById('riddleAnswer').value.trim().toLowerCase().replace(/[.,!?]/g,'');
+  if(!val){document.getElementById('riddleAnswer').focus();return} // leeres Absenden kostet keinen Versuch
   const fb=document.getElementById('riddleFb');
   const correct=s.answer.some(a=>fuzzyMatch(val,a)||val.split(' ').some(w=>fuzzyMatch(w,a)));
   if(correct){
@@ -2441,20 +2499,20 @@ STRIKTE REGELN:
 async function sendAi(){
   const input=document.getElementById('aiInput'),text=input.value.trim();if(!text)return;
   if(aiQuestionsLeft<=0){addAiMsg(t('aiLimitReached'),'system');return}
-  addAiMsg(text,'user');input.value='';aiQuestionsLeft--;
+  addAiMsg(esc(text),'user');input.value='';aiQuestionsLeft--;
   document.getElementById('aiLimit').textContent=aiQuestionsLeft+'/'+MAX_AI_QUESTIONS;
   const tid='t'+Date.now();
   addAiMsg('<span class="typing-dots"><span></span><span></span><span></span></span>','bot',tid);
   const s=stations[currentStation];let reply=fallbackHint(text,s);
   if(AI_PROXY_URL){
     try{
-      const resp=await fetch(AI_PROXY_URL,{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:300,system:buildPrompt(s),messages:[{role:'user',content:text}]})});
+      const resp=await fetchWithTimeout(AI_PROXY_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:300,system:buildPrompt(s),messages:[{role:'user',content:text}]})},15000);
       if(!resp.ok)throw new Error(resp.status);
       const data=await resp.json();reply=data.content?.[0]?.text||data.reply||data.message||reply;
     }catch(e){console.warn('AI fallback')}
   }
-  document.getElementById(tid).innerHTML=reply;
+  document.getElementById(tid).innerHTML=formatReply(reply);
   document.getElementById('aiMsgs').scrollTop=document.getElementById('aiMsgs').scrollHeight;
   saveGame();
 }
@@ -2468,6 +2526,8 @@ function fallbackHint(q,s){
   if(ql.includes('geschichte')||ql.includes('fakt')||ql.includes('history')||ql.includes('fact'))return stationField(s,'fact');
   return next();
 }
+// Antworten als Text behandeln (kein fremdes HTML), nur **fett** und Zeilenumbrüche darstellen
+function formatReply(txt){return esc(String(txt)).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')}
 function addAiMsg(html,type,id){
   const div=document.createElement('div');div.className='ai-msg '+type;div.innerHTML=html;
   if(id)div.id=id;
@@ -2533,10 +2593,10 @@ function renderCertificate(){
   ctx.font='400 20px Inter,Arial,sans-serif';ctx.fillStyle='#4a5d73';
   ctx.fillText(t('certConfirmed'),540,670);
   ctx.font='700 48px Arial,sans-serif';ctx.fillStyle='#ffb59d';
-  ctx.fillText(userName.toUpperCase(),540,730);
+  ctx.fillText(userName.toUpperCase(),540,730,900);
   if(groupName){
     ctx.font='500 22px Inter,Arial,sans-serif';ctx.fillStyle='#8192a7';
-    ctx.fillText('Team: '+groupName,540,762);
+    ctx.fillText(t('certTeam')+' '+groupName,540,762,900);
   }
   const rank=getRank(totalXp);
   ctx.font='900 28px Inter,Arial,sans-serif';ctx.fillStyle='#d4a843';
@@ -2609,7 +2669,7 @@ function shareCertificate(){
     if(navigator.share&&navigator.canShare){
       const file=new File([blob],'tracetour-urkunde.png',{type:'image/png'});
       if(navigator.canShare({files:[file]})){
-        navigator.share({text:t('shareText'),files:[file]}).catch(()=>downloadBlob(blob));
+        navigator.share({text:t('shareText'),files:[file]}).catch(err=>{if(!err||err.name!=='AbortError')downloadBlob(blob)});
         return;
       }
     }
@@ -2621,35 +2681,50 @@ function saveCertificate(){
   c.toBlob(blob=>downloadBlob(blob),'image/png');
 }
 function downloadBlob(blob){
+  if(!blob)return;
   const url=URL.createObjectURL(blob),a=document.createElement('a');
-  a.href=url;a.download='tracetour-urkunde.png';a.click();
-  URL.revokeObjectURL(url);showToast(t('toastImage'));
+  a.href=url;a.download='tracetour-urkunde.png';document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);showToast(t('toastImage'));
 }
 
 // ====== SERVICE WORKER ======
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('sw.js').catch(()=>{});
   navigator.serviceWorker.addEventListener('message',e=>{
-    if(e.data.type==='download-progress'){
-      const pct=Math.round(e.data.done/e.data.total*100);
-      const btn=document.getElementById('offlineBtn');
-      if(btn){
-        if(e.data.done>=e.data.total){
-          btn.innerHTML='<span class="material-symbols-outlined" style="font-size:16px">cloud_done</span> '+t('offlineReady');
-          btn.disabled=true;btn.style.opacity='.5';
-        }else{
-          btn.textContent=t('downloading').replace('{x}',pct);
-        }
+    const d=e.data||{};
+    if(d.type!=='download-progress'||(d.tour&&d.tour!=='adult'))return;
+    const pct=Math.round(d.done/d.total*100);
+    const btn=document.getElementById('offlineBtn');
+    if(!btn)return;
+    if(d.done>=d.total){
+      if(d.failed>0){
+        // Unvollständig (z. B. Funkloch): ehrlich sagen und erneutes Tippen erlauben
+        btn.disabled=false;btn.style.opacity='';
+        btn.innerHTML='<span class="material-symbols-outlined" style="font-size:16px">cloud_download</span> '+t('offlineIncomplete').replace('{x}',d.failed);
+      }else{
+        btn.innerHTML='<span class="material-symbols-outlined" style="font-size:16px">cloud_done</span> '+t('offlineReady');
+        btn.disabled=true;btn.style.opacity='.6';
       }
+    }else{
+      btn.textContent=t('downloading').replace('{x}',pct);
     }
   });
 }
 function downloadForOffline(){
-  if(navigator.serviceWorker&&navigator.serviceWorker.controller){
-    navigator.serviceWorker.controller.postMessage({type:'download-all',lang});
-    const btn=document.getElementById('offlineBtn');
-    if(btn)btn.textContent=t('downloading').replace('{x}','0');
-  }else{showToast(t('reloadPrompt'))}
+  const btn=document.getElementById('offlineBtn');
+  if(!('serviceWorker' in navigator)){showToast(t('offlineUnsupported'),4000);return}
+  if(btn){btn.disabled=true;btn.textContent=t('downloading').replace('{x}','0')}
+  try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+  // Auch beim allerersten Besuch (Seite noch nicht vom Service Worker gesteuert) direkt starten
+  const ready=navigator.serviceWorker.ready.then(reg=>navigator.serviceWorker.controller||reg.active);
+  const timeout=new Promise(r=>setTimeout(r,8000,null));
+  Promise.race([ready,timeout]).then(w=>{
+    if(!w)throw new Error('no worker');
+    w.postMessage({type:'download-all',lang,tour:'adult'});
+  }).catch(()=>{
+    if(btn){btn.disabled=false;btn.innerHTML='<span class="material-symbols-outlined" style="font-size:16px">cloud_download</span> '+t('offlineBtn')}
+    showToast(t('reloadPrompt'),4000);
+  });
 }
 
 // ====== FORMULA PUZZLE ======
@@ -2944,6 +3019,22 @@ function renderRecap(){
   set('recapRank','🎖️ '+getRank(totalXp));
   set('recapRankLbl',t('recapRankLbl'));
 }
+
+// ====== BARRIEREFREIHEIT ======
+// Icon-Ligaturen nicht vorlesen lassen; Audio-Zeilen per Tastatur bedienbar machen
+function a11yMark(root){
+  if(!root||root.nodeType!==1)return;
+  const all=sel=>[...(root.matches(sel)?[root]:[]),...root.querySelectorAll(sel)];
+  all('.material-symbols-outlined:not([aria-hidden])').forEach(i=>i.setAttribute('aria-hidden','true'));
+  all('.audio-row:not([role])').forEach(r=>{r.setAttribute('role','button');r.setAttribute('tabindex','0')});
+}
+a11yMark(document.body);
+new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(a11yMark))).observe(document.body,{childList:true,subtree:true});
+document.addEventListener('keydown',e=>{
+  const el=e.target;
+  if((e.key==='Enter'||e.key===' ')&&el&&el.matches&&el.matches('.audio-row,.tour-card[role]')){e.preventDefault();el.click()}
+  if(e.key==='Escape'&&document.getElementById('aiOverlay').classList.contains('active'))closeAi();
+});
 
 // ====== INIT ======
 (function(){
