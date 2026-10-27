@@ -185,8 +185,8 @@ STORIES = [
     ),
     # Station 6 - Nonnenhaus
     (
-        "Das Nonnenhaus wurde vierzehnhundertachtundachtzig gebaut – als Kolumbus "
-        "Amerika entdeckte!\n\n"
+        "Das Nonnenhaus wurde vierzehnhundertachtundachtzig gebaut – vier Jahre "
+        "bevor Kolumbus nach Amerika segelte!\n\n"
         "Früher gab es einen Anbau direkt über dem Fluss. Darin war... das Klo! "
         "Alles fiel runter ins Wasser! Die Bewohner nannten es das Sprachhaus – "
         "aber es war eine Toilette!\n\n"

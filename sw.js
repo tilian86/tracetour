@@ -10,6 +10,14 @@ const MEDIA_CACHE = 'tracetour-media-v1';
 const ASSET_V = '20261026'; // muss zu den ?v=-Parametern in den HTML-Dateien passen
 const NET_TIMEOUT = 4000;   // ms: danach liefern Seiten bei schlechtem Netz die gespeicherte Version
 
+// Audios/Fotos, die unter gleichem Dateinamen NEU erzeugt wurden. Werden bei jedem Update des
+// Service Workers aus dem Offline-Cache entfernt und beim nächsten Abspielen/Download frisch geladen –
+// ohne dass alle anderen Downloads verloren gehen (wie beim Hochzählen von MEDIA_CACHE).
+// Ablauf: neue MP3 committen, Pfad hier eintragen, CORE_CACHE hochzählen.
+const MEDIA_REFRESH = [
+  'audio/kinder/story_6.mp3', // Nonnenhaus: Kolumbus-Satz korrigiert (Neuvertonung ausstehend)
+];
+
 const CORE_FILES = [
   'index.html',
   'app.html',
@@ -110,9 +118,17 @@ self.addEventListener('activate', event => {
       if (/^tracetour-v\d+$/.test(key)) await migrateMedia(key);
       await caches.delete(key);
     }
+    await refreshMedia();
     await self.clients.claim();
   })());
 });
+
+async function refreshMedia() {
+  try {
+    const media = await caches.open(MEDIA_CACHE);
+    await Promise.all(MEDIA_REFRESH.map(f => media.delete(new URL(f, self.registration.scope).href)));
+  } catch (e) {}
+}
 
 async function migrateMedia(oldKey) {
   try {
