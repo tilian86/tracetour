@@ -3,6 +3,12 @@
 // - GET  /code      : ?session_id=cs_... -> Code für die Danke-Seite (Fallback ohne Mail)
 // - POST /validate  : {code} -> Code gültig? (App-Login)
 // Idempotent: pro Stripe-Session wird genau ein Code vergeben (Retry-sicher).
+//
+// Testcodes stehen NICHT im Quelltext, sondern im Secret TESTER_CODES (kommagetrennt):
+//   npx wrangler secret put TESTER_CODES
+//   Wert z. B.: TT-ABCD-EFGH=adult, TT-JKLM-NPQR=kids, TT-STUV-WXYZ=both+debug, TT-HJKM-2345=adult+personal
+//   Flags: adult | kids | both (Tour), debug (Debug-Leiste), personal (persönliche Begrüßung)
+// Testcodes haben kein Geräte-Limit und kein 48-h-Fenster. Sperren = Code aus dem Secret löschen.
 
 const JSON_HEADERS = { 'content-type': 'application/json' };
 
@@ -180,6 +186,21 @@ async function handleGetCode(url, env) {
   return new Response(JSON.stringify({ code: e.code, tour: e.tour || 'adult' }), { headers: { ...JSON_HEADERS, ...cors(env) } });
 }
 
+// ---------- Testcodes (aus Secret, nicht im Repo) ----------
+function findTesterCode(env, code) {
+  for (const entry of String(env.TESTER_CODES || '').split(',')) {
+    const [c, flagStr = ''] = entry.split('=');
+    if (!c || c.trim().toUpperCase() !== code) continue;
+    const flags = flagStr.toLowerCase().split('+').map(f => f.trim());
+    return {
+      tour: flags.includes('both') ? 'both' : flags.includes('kids') ? 'kids' : 'adult',
+      debug: flags.includes('debug'),
+      personal: flags.includes('personal'),
+    };
+  }
+  return null;
+}
+
 // ---------- App-Login: Code validieren ----------
 async function handleValidate(request, env) {
   let body;
@@ -187,6 +208,14 @@ async function handleValidate(request, env) {
   const code = String(body.code || '').trim().toUpperCase();
   if (!/^TT-[A-Z2-9]{4}-[A-Z2-9]{4}$/.test(code)) {
     return new Response(JSON.stringify({ valid: false, reason: 'format' }), { headers: { ...JSON_HEADERS, ...cors(env) } });
+  }
+  const tester = findTesterCode(env, code);
+  if (tester) {
+    const wanted = body.tour === 'kids' ? 'kids' : 'adult';
+    if (tester.tour !== 'both' && tester.tour !== wanted) {
+      return new Response(JSON.stringify({ valid: false, reason: 'wrong_tour', codeTour: tester.tour }), { headers: { ...JSON_HEADERS, ...cors(env) } });
+    }
+    return new Response(JSON.stringify({ valid: true, tester: true, debug: tester.debug, personal: tester.personal }), { headers: { ...JSON_HEADERS, ...cors(env) } });
   }
   const state = JSON.parse((await env.CODES.get(`code:${code}`)) || 'null');
   if (!state || state.status !== 'assigned') {

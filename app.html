@@ -350,7 +350,7 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 </div>
 </div>
 
-<!-- TESTER WELCOME -->
+<!-- TESTER WELCOME persönlich (Testcode mit Flag personal) -->
 <div id="testerWelcome" class="screen" style="align-items:center;justify-content:center;text-align:center;padding:2rem;background:radial-gradient(ellipse at 50% 30%,rgba(243,99,45,.06) 0%,transparent 70%),#1e293b">
 <div style="max-width:420px">
 <div style="font-size:3rem;margin-bottom:1rem">🎉</div>
@@ -365,7 +365,7 @@ Schreib mir gerne direkt an <a href="mailto:florian@tracetour.de" style="color:v
 </div>
 </div>
 
-<!-- OFFICIAL TESTER WELCOME (TUEBINGEN2026) -->
+<!-- TESTER WELCOME allgemein (Testcode aus dem Worker-Secret TESTER_CODES) -->
 <div id="officialWelcome" class="screen" style="align-items:center;justify-content:center;text-align:center;padding:2rem;background:radial-gradient(ellipse at 50% 30%,rgba(243,99,45,.06) 0%,transparent 70%),#1e293b">
 <div style="max-width:420px">
 <div style="font-size:3rem;margin-bottom:1rem">🕵️</div>
@@ -1670,13 +1670,13 @@ function fetchWithTimeout(url,opts,ms){
 async function doLogin(){
   const name=document.getElementById('loginName').value.trim();
   const code=normalizeCode(document.getElementById('loginCode').value);
-  const isLegacy=(code==='TUEBINGEN2026'||code==='TUEBINGEN2025'||code==='PRIVAT');
-  const isPurchased=/^TT-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code);
-  if(!isLegacy&&!isPurchased){showLoginError();return;}
+  // Alle Codes (auch Testcodes) prüft der Worker – im Quelltext steht kein gültiger Code
+  if(!/^TT-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code)){showLoginError();return;}
   if(!name){showLoginError(t('loginNameMissing'));document.getElementById('loginCode').style.borderColor='';document.getElementById('loginName').focus();return}
-  if(isPurchased){
-    // Gekaufter Code: online gegen den Worker validieren (einmal pro Gerät, danach offline ok)
-    let cached=null;try{cached=localStorage.getItem('tracetour_code_ok_adult')}catch(e){}
+  let flags={};
+  {
+    // Online gegen den Worker validieren (einmal pro Gerät, danach offline ok)
+    let cached=null;try{cached=localStorage.getItem('tracetour_code_ok_adult');flags=JSON.parse(localStorage.getItem('tracetour_code_flags_adult')||'{}')}catch(e){}
     if(cached!==code){
       const btn=document.getElementById('loginBtn');const oldTxt=btn?btn.textContent:'';
       if(btn){btn.disabled=true;btn.textContent='…'}
@@ -1693,7 +1693,8 @@ async function doLogin(){
           else{showLoginError();}
           if(btn){btn.disabled=false;btn.textContent=oldTxt}return;
         }
-        try{localStorage.setItem('tracetour_code_ok_adult',code)}catch(e){}
+        flags={tester:!!d.tester,debug:!!d.debug,personal:!!d.personal};
+        try{localStorage.setItem('tracetour_code_ok_adult',code);localStorage.setItem('tracetour_code_flags_adult',JSON.stringify(flags))}catch(e){}
       }catch(e){
         showLoginError(t('loginNoNet'));
         if(btn){btn.disabled=false;btn.textContent=oldTxt}return;
@@ -1702,14 +1703,14 @@ async function doLogin(){
     }
   }
   document.getElementById('loginError').style.display='none';
-  debugMode=(code==='PRIVAT');userName=name;groupName=document.getElementById('loginGroup').value.trim();
+  debugMode=!!flags.debug;userName=name;groupName=document.getElementById('loginGroup').value.trim();
   updateDebugToggle();
   document.getElementById('userNameDisplay').textContent=name;
   document.getElementById('userAvatar').textContent=name[0].toUpperCase();
-  if(code==='TUEBINGEN2025'){
+  if(flags.tester&&flags.personal&&!flags.debug){
     document.getElementById('testerName').textContent=name;
     showScreen('testerWelcome');
-  } else if(code==='TUEBINGEN2026'){
+  } else if(flags.tester&&!flags.debug){
     document.getElementById('officialName').textContent=name;
     showScreen('officialWelcome');
   } else {

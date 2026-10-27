@@ -590,13 +590,13 @@ async function startGame(){
   const code=normalizeCode(document.getElementById('loginCode').value);
   const errEl=document.getElementById('splashError');
   const showErr=(msg,link)=>{errEl.textContent=msg;if(link){const a=document.createElement('a');a.href=link.href;a.textContent=' '+link.text;a.style.cssText='color:#fff;text-decoration:underline';errEl.appendChild(a)}errEl.style.display='block'};
-  const isLegacy=(code==='PRIVAT'||code==='TUEBINGEN2025'||code==='TUEBINGEN2026');
-  const isPurchased=/^TT-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code);
-  if(!isLegacy&&!isPurchased){showErr('Falscher Zugangscode! 🔒 Schau nochmal in deine E-Mail – der Code sieht so aus: TT-XXXX-XXXX');return}
+  // Alle Codes (auch Testcodes) prüft der Worker – im Quelltext steht kein gültiger Code
+  if(!/^TT-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code)){showErr('Falscher Zugangscode! 🔒 Schau nochmal in deine E-Mail – der Code sieht so aus: TT-XXXX-XXXX');return}
   const n=document.getElementById('playerName').value.trim();
   if(!n){showErr('Gib deinen Namen ein! 😊');document.getElementById('playerName').focus();return}
-  if(isPurchased){
-    let cached=null;try{cached=localStorage.getItem('tracetour_code_ok_kids')}catch(e){}
+  let flags={};
+  {
+    let cached=null;try{cached=localStorage.getItem('tracetour_code_ok_kids');flags=JSON.parse(localStorage.getItem('tracetour_code_flags_kids')||'{}')}catch(e){}
     if(cached!==code){
       errEl.style.display='none';
       const btn=document.getElementById('startBtn'),oldTxt=btn.textContent;
@@ -610,12 +610,13 @@ async function startGame(){
           if(d.reason==='wrong_tour'){try{sessionStorage.setItem('tracetour_code_for_adult',code)}catch(e){}showErr('Dieser Code gehört zur großen Krimi-Tour! 🔍',{href:'app.html',text:'Zur Krimi-Tour →'});return}
           showErr(d.reason==='device_limit'?'Dieser Code wurde schon auf zu vielen Geräten benutzt! 📱 Schreib uns an info@tracetour.de.':d.reason==='expired'?'Dieser Code ist abgelaufen – die 48 Stunden nach dem ersten Start sind vorbei! ⏰':'Falscher Zugangscode! 🔒');return
         }
-        try{localStorage.setItem('tracetour_code_ok_kids',code)}catch(e){}
+        flags={tester:!!d.tester,debug:!!d.debug};
+        try{localStorage.setItem('tracetour_code_ok_kids',code);localStorage.setItem('tracetour_code_flags_kids',JSON.stringify(flags))}catch(e){}
       }catch(e){reset();showErr('Keine oder zu langsame Verbindung – die Code-Prüfung braucht einmal Internet! 📶 Bitte gleich nochmal versuchen.');return}
       reset();
     }
   }
-  debugMode=(code==='PRIVAT');
+  debugMode=!!flags.debug;
   playerName=n;saveGame();launchGame();
 }
 function launchGame(){showScreen('game');document.getElementById('gameHeader').style.display='block';document.getElementById('gameNav').classList.add('show');updateHeader();renderStation();renderDots();showDebug()}
