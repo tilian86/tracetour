@@ -17,11 +17,21 @@ function cors(env) {
     'Access-Control-Allow-Origin': env.ALLOWED_ORIGIN || 'https://tracetour.de',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'content-type',
+    'Vary': 'Origin',
   };
+}
+
+// ALLOWED_ORIGIN darf eine Komma-Liste sein (z. B. + http://localhost:8767 zum lokalen Testen);
+// geantwortet wird mit dem passenden Eintrag, sonst dem ersten.
+function pickOrigin(request, env) {
+  const list = String(env.ALLOWED_ORIGIN || 'https://tracetour.de').split(',').map(o => o.trim()).filter(Boolean);
+  const origin = request.headers.get('Origin');
+  return list.includes(origin) ? origin : list[0];
 }
 
 export default {
   async fetch(request, env, ctx) {
+    env = { ...env, ALLOWED_ORIGIN: pickOrigin(request, env) };
     const url = new URL(request.url);
     if (request.method === 'OPTIONS') {
       return new Response(null, { headers: cors(env) });

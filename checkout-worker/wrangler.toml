@@ -8,8 +8,9 @@ kv_namespaces = [
 
 # Secrets (via `wrangler secret put`):
 #   STRIPE_WEBHOOK_SECRET  — whsec_… vom Stripe-Webhook-Endpunkt
+#   TESTER_CODES           — Testcodes, Zeile steht in der Ordnungsfunk-Notiz „🔑 TraceTour – Testcodes“
 #   RESEND_API_KEY         — re_… von resend.com (erst nach Domain-Verifizierung)
 
 [vars]
 FROM_EMAIL = "TraceTour <codes@tracetour.de>"
-ALLOWED_ORIGIN = "https://tracetour.de"
+ALLOWED_ORIGIN = "https://tracetour.de,http://localhost:8000,http://localhost:8767"
