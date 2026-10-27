@@ -104,17 +104,17 @@ STORIES = [
     # Station 1 - Schloss Hohentübingen
     (
         "Willkommen in meinem Geheimversteck! Das Schloss ist mein Lieblings-Spielplatz!\n\n"
-        "Im Keller steht das zweitgrößte Weinfass der Welt – vierundachtzigtausend Liter, "
+        "Im Keller steht das älteste Riesen-Weinfass der Welt – es steht sogar im Guinness-Buch der Rekorde! Vierundachtzigtausend Liter, "
         "ungefähr dreihundertsechsunddreißig Badewannen! Heute ist es leer, aber dafür "
         "wohnt darin mein bester Freund: Flatter die Fledermaus! "
         "Er hängt kopfüber drin und schläft den ganzen Tag.\n\n"
-        "Das Schloss hat echte Geheimgänge! Zwei enge Tunnel führen vom Innenhof tief "
-        "nach unten. Ich spiel dort Fangen mit den Fledermäusen!\n\n"
-        "Im Museum liegt die älteste Kunst der Menschheit – eine Figur aus "
-        "Mammut-Elfenbein, über fünfunddreißigtausend Jahre alt! Geschnitzt, als es noch "
+        "Im Schlosskeller wohnt eine echte Fledermaus-Kolonie! Damit die Fledermäuse "
+        "ihre Ruhe haben, darf man das Fass nur im Winter besuchen. Ich spiel dort Fangen mit ihnen!\n\n"
+        "Im Museum liegen einige der ältesten Kunstwerke der Menschheit – zum Beispiel ein "
+        "Mammut aus Elfenbein, über fünfunddreißigtausend Jahre alt! Geschnitzt, als es noch "
         "echte Mammuts gab! Daneben: ein winziges Wildpferd aus Elfenbein – nicht größer "
         "als dein Finger!\n\n"
-        "Flatter liebt es, mich im Geheimgang zu erschrecken! Einmal hat er Buh gerufen "
+        "Flatter liebt es, mich im dunklen Keller zu erschrecken! Einmal hat er Buh gerufen "
         "und ich hab vor Schreck einen Feuerstrahl an die Decke geschossen – da war "
         "meine Flamme noch heil..."
     ),
@@ -174,12 +174,11 @@ STORIES = [
         "Von der Eberhardsbrücke siehst du den ganzen Neckar!\n\n"
         "Stocherkähne sind flache Holzboote – mit einer langen Stange über den "
         "Flussgrund geschoben. Kein Motor, keine Ruder!\n\n"
-        "Jedes Jahr im Juni: das Stocherkahnrennen! Studenten fahren um die Wette – "
+        "Jedes Jahr an einem Feiertag im Mai oder Juni: das Stocherkahnrennen! Studenten fahren um die Wette – "
         "totales Chaos: Boote krachen, Leute fallen rein, verrückte Kostüme!\n\n"
-        "Wer verliert: Lebertran! Öl aus Fischbäuchen – SO eklig! Und die Verlierer "
+        "Wer verliert: Lebertran! Öl aus Fischleber – SO eklig! Und die Verlierer "
         "müssen das Rennen nächstes Jahr organisieren!\n\n"
-        "Der Neckar war fünfzehnhundertfünfundneunzig so zugefroren, dass Pferdewagen "
-        "drüber fuhren! Und Neckar bedeutet in einer uralten Sprache: Wildes Wasser!\n\n"
+        "Und weißt du, was Neckar bedeutet? In der uralten Sprache der Kelten wohl: Wildes Wasser!\n\n"
         "Beim Rennen sitze ich hier auf der Brücke! Einmal hat Lebertran fast MICH "
         "getroffen! Drachenfeuer und Fischöl – das hätte SO gestunken!"
     ),
@@ -230,7 +229,7 @@ WHISPER_TEXTS = [
     ),
     # Station 1 - Schloss (1:1 aus kinder.html tubiSays)
     (
-        "Flatter liebt es, mich im Geheimgang zu erschrecken! Einmal hat er „BUH!\" gerufen und ich hab vor Schreck einen Feuerstrahl an die Decke geschossen – da war meine Flamme noch heil... 😔\n"
+        "Flatter liebt es, mich im dunklen Keller zu erschrecken! Einmal hat er „BUH!\" gerufen und ich hab vor Schreck einen Feuerstrahl an die Decke geschossen – da war meine Flamme noch heil... 😔\n"
         "\n"
         "Übrigens: Ich kenne einen geheimen Weg vom Schloss runter – eine enge Gasse mit steilen Steintreppen zwischen den Häusern! Wenn du mutig bist, folge mir hinunter. Wenn du einen Kinderwagen dabei hast, nimm lieber den breiteren Hauptweg über die Burgsteige."
     ),
