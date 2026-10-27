@@ -172,6 +172,8 @@ Quellen: [IT-Recht Kanzlei: Widerrufsbutton bei digitalen Inhalten](https://www.
 
 **Ein Einstieg für alle Codes (Nachtrag 27.10., abends):** Neue Seite `tracetour.de/code`. Man gibt nur den Code ein, die Seite erkennt die Tour und leitet weiter; gilt ein Code für beide Touren, wählt man dort. Wer schon spielt, sieht „Weiterspielen“-Kacheln. Alle „Code einlösen“-Knöpfe der Startseite führen dorthin, die FAQ nennt die Adresse.
 
+**Kindertour: Begrüßung und Familien (Nachtrag 27.10., abends):** Testcodes mit „persönlicher Begrüßung“ zeigen jetzt auch in der Kindertour einen eigenen Willkommensbildschirm: „Hallo, Mia & Ben!“, ein Satz für die Kinder und ein Absatz „Für die Großen“ mit der Bitte um Rückmeldung an florian@tracetour.de. Beim Namen steht jetzt „z. B. Mia oder Mia & Ben“ und der Hinweis, dass mehrere Kinder einfach alle Namen eintragen (bis 30 Zeichen, alles kommt auf die Urkunde). Vorerst kein Kombiticket und keine Geschenkkarte: Wer verschenken will, leitet die Code-Mail weiter (so steht es schon in der FAQ). Der Flyer führt per QR-Code auf die Startseite tracetour.de, das passt.
+
 ## 6. Gut zu wissen nach dem Merge
 
 - Der neue Service Worker übernimmt beim ersten Besuch automatisch und behält vorhandene Offline-Downloads.

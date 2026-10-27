@@ -43,7 +43,7 @@ input{font-family:inherit;color:inherit}
 .screen.active{display:flex}
 
 /* ======================== SPLASH ======================== */
-#splash{background:linear-gradient(160deg,#006a2d 0%,#00a843 50%,#ffca51 100%);align-items:center;justify-content:center;text-align:center;padding:1.5rem;min-height:100%;padding-top:calc(1.5rem + var(--safe-top))}
+#splash,#welcome{background:linear-gradient(160deg,#006a2d 0%,#00a843 50%,#ffca51 100%);align-items:center;justify-content:center;text-align:center;padding:1.5rem;min-height:100%;padding-top:calc(1.5rem + var(--safe-top))}
 .splash-dragon{font-size:4.5rem;line-height:1;margin-bottom:.6rem;animation:bounce 2s infinite}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .splash-title{font-size:2.4rem;font-weight:900;color:#fff;line-height:1.1;margin-bottom:.2rem;text-shadow:0 2px 12px rgba(0,0,0,.2)}
@@ -61,10 +61,11 @@ input{font-family:inherit;color:inherit}
 .splash-input{width:100%;padding:14px 18px;background:rgba(255,255,255,.95);border:2px solid transparent;border-radius:var(--r-sm);font-size:1.05rem;font-weight:700;color:var(--text);outline:none;transition:border .2s;margin-bottom:1rem}
 .splash-input:focus{border-color:var(--yellow)}
 .splash-input::placeholder{color:#aaa;font-weight:500}
-.btn-start{width:100%;padding:16px;background:var(--yellow);color:var(--green);font-weight:900;font-size:1.15rem;border-radius:var(--r-sm);border:3px solid var(--yellow-dark);box-shadow:0 4px 16px rgba(230,168,0,.4);transition:transform .1s}
+.btn-start{width:100%;padding:16px;background:var(--yellow);color:#00602a;font-weight:900;font-size:1.15rem;border-radius:var(--r-sm);border:3px solid var(--yellow-dark);box-shadow:0 4px 16px rgba(230,168,0,.4);transition:transform .1s}
 .btn-start:active{transform:scale(.97)}
 #splashError{color:#fff;background:rgba(255,0,0,.3);border-radius:8px;padding:.6rem .8rem;margin-top:.8rem;font-size:.9rem;font-weight:700;display:none}
 .splash-footer{margin-top:1.5rem;font-size:.78rem;color:rgba(255,255,255,.9)}
+.splash-hint{margin:-.6rem 0 1rem;font-size:.8rem;font-weight:700;color:rgba(255,255,255,.9)}
 .splash-help{margin-top:1rem;font-size:.85rem;font-weight:700;color:#fff;text-align:center}
 .splash-help a{color:#fff;text-decoration:underline;text-underline-offset:3px}
 .splash-offline{margin-top:.8rem;width:100%;padding:11px;border-radius:var(--r-sm);background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.45);color:#fff;font-weight:800;font-size:.88rem}
@@ -245,7 +246,7 @@ input{font-family:inherit;color:inherit}
 
 /* ======================== DESKTOP ======================== */
 @media(min-width:768px){
-  #splash>div{max-width:640px;margin:0 auto}
+  #splash>div,#welcome>div{max-width:640px;margin:0 auto}
   #game{align-items:center}
   #game>div{max-width:640px;width:100%}
   .station-hero{max-width:640px;margin:0 auto;width:100%;border-radius:0 0 var(--r) var(--r)}
@@ -319,13 +320,32 @@ input{font-family:inherit;color:inherit}
       <button type="button" aria-label="Code anzeigen" onclick="const i=document.getElementById('loginCode');i.type=i.type==='password'?'text':'password';this.textContent=i.type==='password'?'👁':'🙈'" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:1.2rem;min-width:44px;min-height:44px">👁</button>
     </div>
     <label class="splash-label" for="playerName">Wie heißt du, Drachenkind?</label>
-    <input class="splash-input" id="playerName" type="text" placeholder="Dein Name" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">
+    <input class="splash-input" id="playerName" type="text" placeholder="z. B. Mia oder Mia &amp; Ben" maxlength="30" autocomplete="off" autocorrect="off" spellcheck="false" aria-describedby="playerNameHint">
+    <p class="splash-hint" id="playerNameHint">Ihr seid mehrere? Schreibt einfach alle Namen rein – sie kommen auf die Urkunde.</p>
     <button class="btn-start" id="startBtn" onclick="startGame()">🐉 Tübi helfen!</button>
     <div id="splashError" role="alert" style="display:none"></div>
     <button type="button" class="splash-offline" id="offlineBtn" onclick="downloadForOffline()">📶 Für unterwegs speichern (ca. 11 MB)</button>
     <p class="splash-help">Noch keinen Code? <a href="index.html#kids">Hier gibt's die Kindertour</a></p>
   </div>
   <div class="splash-footer">Eine Tour von <a href="index.html" style="color:#fff;font-weight:800">TraceTour</a></div>
+</div>
+</div>
+
+<!-- ======================== BEGRÜSSUNG (Testcodes mit Flag "personal") ======================== -->
+<div class="screen" id="welcome">
+<div style="min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.3rem;padding-top:calc(1.5rem + var(--safe-top))">
+  <div class="splash-dragon" aria-hidden="true">🐉</div>
+  <h1 class="splash-title" id="welcomeHeading" tabindex="-1" style="font-size:2rem;margin-bottom:1.6rem;outline:none">Hallo, <span id="welcomeName"></span>!</h1>
+  <div class="splash-story">
+    <div class="splash-story-text">
+      Schön, dass ihr Tübi helft! Ihr gehört zu den Ersten, die <strong>„Tübis Geheimnisse“</strong> ausprobieren.
+      <br><br>
+      <strong>Für die Großen:</strong> Ich freue mich riesig über eure Rückmeldung. Was hat Spaß gemacht, wo hat's gehakt, was war zu schwer oder zu leicht? Schreibt mir an <a href="mailto:florian@tracetour.de" style="color:var(--green);font-weight:800">florian@tracetour.de</a> oder sprecht mich einfach an.
+      <br><br>
+      Viel Spaß beim Funkensammeln!<br>Florian
+    </div>
+  </div>
+  <button class="btn-start" style="max-width:340px" onclick="launchGame()">🔥 Los geht's!</button>
 </div>
 </div>
 
@@ -610,14 +630,17 @@ async function startGame(){
           if(d.reason==='wrong_tour'){try{sessionStorage.setItem('tracetour_code_for_adult',code)}catch(e){}showErr('Dieser Code gehört zur großen Krimi-Tour! 🔍',{href:'app.html',text:'Zur Krimi-Tour →'});return}
           showErr(d.reason==='device_limit'?'Dieser Code wurde schon auf zu vielen Geräten benutzt! 📱 Schreib uns an info@tracetour.de.':d.reason==='expired'?'Dieser Code ist abgelaufen – die 48 Stunden nach dem ersten Start sind vorbei! ⏰':'Falscher Zugangscode! 🔒');return
         }
-        flags={tester:!!d.tester,debug:!!d.debug};
+        flags={tester:!!d.tester,debug:!!d.debug,personal:!!d.personal};
         try{localStorage.setItem('tracetour_code_ok_kids',code);localStorage.setItem('tracetour_code_flags_kids',JSON.stringify(flags))}catch(e){}
       }catch(e){reset();showErr('Keine oder zu langsame Verbindung – die Code-Prüfung braucht einmal Internet! 📶 Bitte gleich nochmal versuchen.');return}
       reset();
     }
   }
   debugMode=!!flags.debug;
-  playerName=n;saveGame();launchGame();
+  playerName=n;saveGame();
+  // Persönlich vergebene Testcodes bekommen erst eine Begrüßung mit Bitte um Rückmeldung
+  if(flags.tester&&flags.personal&&!flags.debug){document.getElementById('welcomeName').textContent=n;showScreen('welcome');document.getElementById('welcomeHeading').focus();return}
+  launchGame();
 }
 function launchGame(){showScreen('game');document.getElementById('gameHeader').style.display='block';document.getElementById('gameNav').classList.add('show');updateHeader();renderStation();renderDots();showDebug()}
 function navigate(dir){

@@ -159,7 +159,7 @@ async function validate(code, tour) {
 function remember(tour, code, d) {
   try {
     localStorage.setItem('tracetour_code_ok_' + tour, code);
-    localStorage.setItem('tracetour_code_flags_' + tour, JSON.stringify(tour === 'kids' ? { tester: !!d.tester, debug: !!d.debug } : { tester: !!d.tester, debug: !!d.debug, personal: !!d.personal }));
+    localStorage.setItem('tracetour_code_flags_' + tour, JSON.stringify({ tester: !!d.tester, debug: !!d.debug, personal: !!d.personal }));
     sessionStorage.setItem('tracetour_code_for_' + tour, code);
   } catch (e) {}
 }
