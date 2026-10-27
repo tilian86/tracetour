@@ -1,16 +1,28 @@
 # TraceTour — Projekt-Memory
 
-## AKTUELLER STAND (27.10.2026) — zuerst lesen
-- **Großer Überarbeitungs-PR offen, noch NICHT gemergt:** https://github.com/tilian86/tracetour/pull/1 (Draft), Branch `claude/vigilant-sagan-jhhh1c`. `main` ist live (GitHub Pages) und enthält das alles noch nicht. Ausführlicher Bericht: `BERICHT-CLOUD.md` auf dem Branch.
-- **Im PR enthalten:** Kindertour-Bug (Station hing, wenn Hauptfrage vor Bonus-Aufgabe beantwortet → live!) behoben; Krimi-App bleibt nicht mehr leer ohne Leaflet; neue Landingpage-Texte/FAQ; Offline-Modus neu (sw.js); Barrierefreiheit WCAG AA; Datenschutz korrigiert; Testcodes über Worker-Secret; Trace als „Digitaler Begleiter“ (+ KI-Hinweis im Chat, Pflicht nach Art. 50 KI-VO); Kolumbus-Satz Kindertour korrigiert.
-- **Testcodes:** stehen NICHT mehr im Quelltext. `TUEBINGEN2025`, `TUEBINGEN2026`, `PRIVAT` funktionieren nach dem Merge nicht mehr. Neue Testcodes kommen ins Worker-Secret `TESTER_CODES` (Format `TT-XXXX-XXXX`, nur A–Z und 2–9, keine 0/1), z. B. `TT-ABCD-EFGH=adult, TT-JKLM-NPQR=kids, TT-STUV-WXYZ=both+debug, TT-HJKM-2345=adult+personal`. Flags: adult|kids|both, debug (Debug-Leiste), personal (persönliche Begrüßung). Kein Geräte-Limit, kein 48-h-Fenster.
+## AKTUELLER STAND (27.10.2026, nachmittags) — zuerst lesen
+**Zusammenarbeit (rechte Hand / linke Hand):** Es arbeiten zwei Claude-Sessions an TraceTour: eine Cloud-Session (kein Mac-Zugriff, keine Keys) und eine am Mac (ElevenLabs-Key in `.env`, wrangler-Login). Regeln, damit nichts Verbessertes verloren geht:
+1. Vor jeder Arbeit `git fetch` und auf dem aktuellen Stand aufsetzen; nie alte Dateiversionen über neue kopieren.
+2. Solange PR #1 offen ist, Inhalte (Texte, Audios, Bilder) gern auf `main`, Code-Umbauten auf dem PR-Branch. Wer den anderen Zweig einmergt, behält bei Konflikten **Inhalte aus main** und **Code aus dem Branch** – und prüft danach per Test.
+3. Nach jeder Session diesen Abschnitt aktualisieren (was erledigt, was offen). Erst das ist „die Memory“ für alle Chats.
+4. Geheimnisse (Testcodes, Keys) NIE in dieses Repo schreiben.
+
+**Stand der Zweige:**
+- `main` (live): enthält die Arbeit der Mac-Session vom 27.10.: Kindertour-Fakten korrigiert (ältestes Weinfass statt zweitgrößtes, Kirche über 500 Jahre, „noch bevor Kolumbus Amerika entdeckte“, Parkplätze ohne „drei“, Froschkönig nicht zurück/neuer bestellt, unbelegte Geheimgänge und „Neckar 1595 zugefroren“ ersetzt, Schlosstor-Quiz → Landsknechte statt Hirsch-Wappen), Kindertour-Audios Station 1–7 neu vertont, Krimi-Audios anecdote_7, bonus_13, bonus_16 (DE+EN) und thanks EN neu, neue Tübi-Bilder Station 0–7, Desktop-Fehler Kindertour behoben.
+- PR #1 (Draft, Branch `claude/vigilant-sagan-jhhh1c`, https://github.com/tilian86/tracetour/pull/1): main ist dort **eingemergt** (Commit d4edb0e, Inhalte aus main übernommen). Zusätzlich: Kindertour-Bug (Station hing, wenn Hauptfrage vor Bonus-Aufgabe beantwortet) behoben, Krimi-App läuft ohne Leaflet weiter, neue Landingpage-Texte/FAQ (15 Fragen), Offline-Modus neu (sw.js), WCAG AA, Datenschutz korrigiert, Testcodes über Worker-Secret, Trace als „Digitaler Begleiter“ + KI-Hinweis im Chat (Pflicht Art. 50 KI-VO), Performance (Icon-Font 14 KB, Bilder komprimiert). Bericht: `BERICHT-CLOUD.md`.
+
+**Testcodes:** stehen NICHT mehr im Quelltext. `TUEBINGEN2025`, `TUEBINGEN2026`, `PRIVAT` gelten nur noch bis zum Merge von PR #1 (live auf main funktionieren sie noch). Neue Testcodes stehen im Worker-Secret `TESTER_CODES`, kommagetrennt, Format `TT-XXXX-XXXX` (nur A–Z und 2–9). Flags: `adult|kids|both` (Tour), `debug` (Debug-Leiste, nur für Florian), `personal` (persönliche Begrüßung mit Bitte um Feedback). Für Freunde: `both+personal`, für Florian: `both+debug`. Kein Geräte-Limit, kein 48-h-Fenster, sperren = Code aus dem Secret löschen. Die konkreten Codes stehen nur im Secret und im Chat, nicht hier.
 
 ### Nächste Schritte am Mac (Reihenfolge einhalten)
 1. ElevenLabs-Key rotieren (alter war öffentlich), neuen Key in `.env` (nicht ins Repo).
-2. Branch auschecken: `git fetch && git checkout claude/vigilant-sagan-jhhh1c`.
-3. Kindertour Station „Nonnenhaus“ neu vertonen: `python3 generate_audio_kinder.py --station 6` → erzeugt `audio/kinder/story_6.mp3` (Text ist schon korrigiert: „vier Jahre bevor Kolumbus nach Amerika segelte“). Committen + pushen auf den Branch. `MEDIA_REFRESH` in sw.js enthält die Datei schon. Falls erst NACH dem Merge vertont wird: zusätzlich `CORE_CACHE` in sw.js hochzählen (v5 → v6), damit Offline-Nutzer die neue Datei bekommen.
-4. Checkout-Worker: Testcodes ausdenken, `cd checkout-worker && npx wrangler secret put TESTER_CODES`, dann `npx wrangler deploy`. ERST DANACH den PR mergen (sonst kommen Tester nicht rein). Testern die neuen Codes schicken.
-5. Ausstehende Krimi-Audios (anecdote_7 DE+EN, bonus_13 DE+EN, bonus_16 DE+EN, thanks EN): nach Neu-Erzeugen jeweils in `MEDIA_REFRESH` eintragen.
+2. `cd checkout-worker && npx wrangler secret put TESTER_CODES` (Wert: Codes mit Flags, siehe oben), dann `npx wrangler deploy`.
+3. Mit einem neuen Testcode auf dem Branch-Stand testen (lokal `python3 -m http.server`), dann PR #1 als „Ready“ markieren und mergen. Danach Freunden die neuen Codes schicken.
+4. Ab dem Merge: neu vertonte oder ersetzte Audios/Bilder in `MEDIA_REFRESH` (sw.js) eintragen und `CORE_CACHE` hochzählen – NICHT mehr `CACHE_NAME` (gibt es im neuen sw.js nicht mehr).
+5. Vertonungs-Modell: alle Skripte nutzen `eleven_multilingual_v2`. Eleven v4 ist seit 28.09.2026 verfügbar; vor einem Wechsel eine Station mit v2 und v4 vergleichen (geklonte Stimmen können unter v4 anders klingen, Kosten prüfen). Noch nicht entschieden.
+
+### Offen / widersprüchlich (Florian entscheidet)
+- **Hirsch-Wappen:** April-Stadtgang notiert „Hirsch ist das größte Tier auf dem Wappen ✓“ (Krimi-Rätsel Station 0, Antwort „hirsch“). Die Mac-Session hat das Wappen am 27.10. für die Kindertour als „unbelegt“ ersetzt. Beides passt nicht zusammen → vor Ort klären, ggf. Krimi-Rätsel Station 0 anpassen (gesprochener Text + Audio riddle_0).
+- Froschkönig: Krimi sagt „Sie bestellte sofort einen neuen. Schau mal, ob er schon wieder da ist!“ – passt zur Kindertour; Status vor Ort prüfen.
 
 ### Vor dem Verkaufsstart (offen)
 - **Widerrufsrecht:** Florian will nach Code-Einlösung keinen Widerruf. Lösung: korrektes vorzeitiges Erlöschen bei digitalen Inhalten (§ 356 BGB): eigene Pflicht-Checkbox im Stripe-Checkout (ausdrückliche Zustimmung zum sofortigen Beginn + Kenntnis vom Verlust des Widerrufsrechts) UND Bestätigung dieser Zustimmung in der Code-Mail (§ 312f BGB). Ist das sauber umgesetzt, ist laut IT-Recht Kanzlei (16.06.2026) kein Widerrufsbutton (§ 356a BGB) nötig. Fehlt einer der Bausteine: Widerruf bis 12 Monate + 14 Tage möglich. Mail-Satz-Vorschlag steht in BERICHT-CLOUD.md.
@@ -21,15 +33,12 @@
 - KI-Proxy (`worker.js`) ist offen nutzbar (eigener Systemprompt möglich) → härten.
 - **Native App:** Florian überlegt eine App. Empfehlung bisher: erst PWA („Zum Homescreen hinzufügen“, Manifest fehlt noch), weil App-Stores bei digitalen Inhalten 15–30 % nehmen und „ohne App“ ein Verkaufsargument ist.
 
-### Faktenzweifel (nicht geändert, Florian entscheidet)
-Kindertour: „zweitgrößte Weinfass der Welt, 84.000 l“ vs. Krimi „ältestes Riesenweinfass (Guinness 2019), ~85.000 l“; Stiftskirche „über 600 Jahre alt“ (Infotafel: ab 1470); Georgsbrunnen-Frage „500 Jahre alt“ (1523 → 1961 ≈ 440 J.); Froschkönig-Status vor Ort prüfen.
-
 ## Stadtgang 2. April 2026 — Erkenntnisse vor Ort
 
 ### Station 0 — Schloss Hohentübingen
 - **Fotos gemacht:** Schlosstor, Außenansicht, Infotafel Geschichte, DNS-Tafel (Miescher 1869), Wildpferd-Skulptur, Augustus-Kopf "Täuschend echt!", MUT-Öffnungszeiten
 - **Cafe Musee: DAUERHAFT GESCHLOSSEN** — muss in App korrigiert werden falls erwähnt
-- **Rätsel verifiziert:** Hirsch ist das größte Tier auf dem Wappen ✓
+- **Rätsel verifiziert:** Hirsch ist das größte Tier auf dem Wappen ✓ (⚠️ 27.10.: Mac-Session hält das Hirsch-Wappen für unbelegt – siehe „Offen / widersprüchlich“ oben)
 - **MUT Museum:** Mi–So 10–17 Uhr, Do bis 19 Uhr, AlbCard-Partner
 - **Schloss Öffnungszeiten:** täglich 7–20 Uhr
 - **Schloss-Fakten von Infotafel:** 1078 erste Erwähnung "Castrum Twingia", 1477 Eberhard im Bart Uni-Gründer, Riesenfass 84.000 Liter (1549), 1816 Schloss an Uni übergeben
@@ -122,13 +131,13 @@ Kindertour: „zweitgrößte Weinfass der Welt, 84.000 l“ vs. Krimi „ältest
 
 ## Launch-Audit Mai 2026 (Commit 5de919e)
 Kompletter Audit + Fixes: Bonusfragen 13/16, EN-Neptun-Sync, Quiz "Sieben Fragen", Station-3-GPS, XP-Guards, sw.js v2 (sprachbewusst, Leaflet-Cache), API-Keys aus Skripten entfernt (.env). Details in Auto-Memory project_tracetour.md.
-NOCH OFFEN: ElevenLabs-Keys rotieren (waren public!), 7 Audios regenerieren nach Freigabe (anecdote_7 DE+EN, bonus_13 DE+EN, bonus_16 DE+EN, thanks EN).
+NOCH OFFEN: ElevenLabs-Keys rotieren (waren public!). Erledigt 27.10.: die 7 Audios (anecdote_7, bonus_13, bonus_16 DE+EN, thanks EN) sind neu vertont.
 
 ## Audit Oktober 2026 (Branch claude/vigilant-sagan-jhhh1c, Bericht: BERICHT-CLOUD.md)
 - **Icon-Schrift:** fonts/materialsymbols-subset.woff2 (nur genutzte Icons, 14 KB). Neues Icon in index.html/app.html → `tools/subset_icons.py` ausführen (Anleitung im Skript) und `?v=` in fonts/fonts.css hochzählen. Volle Schrift liegt in fonts/source/.
 - **Leaflet** liegt lokal in vendor/leaflet/ (kein unpkg mehr).
 - **Cache-Buster:** CSS/JS-Links tragen `?v=20261026`. Bei Änderungen an CSS/JS: Datum in allen HTML-Links UND `ASSET_V` in sw.js anpassen.
-- **Service Worker:** `CORE_CACHE` hochzählen bei Code-Änderungen; `MEDIA_CACHE` NUR hochzählen, wenn MP3s/Fotos unter gleichem Namen ersetzt werden (z. B. nach dem Neu-Generieren der Audios!) – sonst behalten Offline-Nutzer die alten Audios.
+- **Service Worker:** `CORE_CACHE` hochzählen bei Code-Änderungen. Neu vertonte/ersetzte Audios oder Bilder in `MEDIA_REFRESH` eintragen (+ `CORE_CACHE` hochzählen) – sonst behalten Offline-Nutzer die alte Fassung. `MEDIA_CACHE` nur im Notfall hochzählen (löscht alle Downloads).
 - **Verkaufsstart:** Stripe-Links in `CHECKOUT_LINKS` (index.html, oben im Script) eintragen → Buttons werden zu „Jetzt buchen“, Hinweis „Verkauf startet in Kürze“ verschwindet.
 - **Button-Orange** für weiße Schrift: `bg-cta` (#cf4a18, WCAG AA). #f3632d bleibt Akzentfarbe.
 - **Tailwind ohne node_modules im Repo:** Pakete in einen Temp-Ordner installieren und mit `NODE_PATH=<temp>/node_modules <temp>/node_modules/.bin/tailwindcss -c tailwind.config.js -i tailwind-input.css -o css/tailwind.css --minify` bauen.

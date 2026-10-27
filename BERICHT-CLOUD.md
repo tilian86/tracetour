@@ -137,6 +137,8 @@ Alles liegt auf dem Branch `claude/vigilant-sagan-jhhh1c` als Draft-PR gegen `ma
 
 ## 4. Vorschläge für gesprochene Texte (nicht umgesetzt)
 
+*Nachtrag 27.10. (nachmittags): Die Mac-Session hat diese Punkte auf `main` bereits korrigiert und neu vertont (Weinfass, Kirchenalter, Brunnen, Kolumbus, Froschkönig). Beim Einmergen in den PR wurden diese Fassungen übernommen. Neu offen: Das Hirsch-Wappen gilt dort als unbelegt, das Krimi-Rätsel an Station 0 fragt aber genau danach (siehe CLAUDE.md).*
+
 **Mögliche Faktenfehler (bitte prüfen):**
 - ~~**Kindertour, Station 7 „Nonnenhaus“**: Kolumbus 1488~~ *Nachtrag 27.10.: Text korrigiert („vier Jahre bevor Kolumbus nach Amerika segelte“), Neuvertonung von `story_6.mp3` steht noch aus (am Mac).*
 - **Kindertour, Station 2 „Schloss“:** „das zweitgrößte Weinfass der Welt – 84.000 Liter“. Der Krimi sagt „ältestes erhaltenes Riesenweinfass der Welt“ (Guinness 2019) und „rund 85.000 Liter“, die Infotafel vor Ort laut CLAUDE.md 84.000. Vorschlag für beide Touren einheitlich: „das älteste Riesenweinfass der Welt – 84.000 Liter“ (336 Badewannen passt zu 84.000).
