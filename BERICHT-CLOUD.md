@@ -5,7 +5,7 @@
 2. Die Krimi-Tour blieb leer, sobald die Kartenbibliothek nicht lud (Funkloch, blockiertes CDN). Behoben; die Karte liegt jetzt auf dem eigenen Server, die Tour läuft notfalls auch ohne Karte.
 3. Die Startseite erklärt jetzt in einem Satz, was TraceTour ist, zeigt Startpunkte, Sprachen und Preis „ab 7,99 €“ und beantwortet 15 statt 8 Kauffragen. Sie lädt 745 KB statt 2,2 MB.
 4. Offline-Modus, Barrierefreiheit (0 Fehler im WCAG-AA-Prüfer axe-core) und Datenschutzerklärung sind auf Stand. Die Datenschutzerklärung beschrieb die Code-Prüfung vorher falsch.
-5. Vor dem Verkaufsstart musst du 4 Dinge entscheiden: Widerrufsbutton (seit Juni 2026 Pflicht), aktuelle Widerrufsbelehrung, Testcodes im Quelltext, Gerätelimit pro Ticket. Details stehen unten jeweils mit einer Empfehlung.
+5. Vor dem Verkaufsstart bleiben zwei Rechtsthemen: das vorzeitige Erlöschen des Widerrufsrechts sauber umsetzen (Checkbox im Stripe-Checkout + Satz in der Code-Mail) und die Widerrufsbelehrung aktualisieren. Testcodes und „KI“-Wording sind seit dem Nachtrag vom 27.10. erledigt (Abschnitt 5).
 
 Alles liegt auf dem Branch `claude/vigilant-sagan-jhhh1c` als Draft-PR gegen `main`. Live ist noch nichts, erst wenn du mergst.
 
@@ -93,8 +93,8 @@ Alles liegt auf dem Branch `claude/vigilant-sagan-jhhh1c` als Draft-PR gegen `ma
 |---|---|
 | Alle gesprochenen Texte (Stations-Texte in app.html/kinder.html, generate_audio*.py, MP3s) | Hängen an fertigen Audios. Vorschläge stehen in Abschnitt 4. |
 | Geprüfte Fakten (9 Glocken, phrygische Tonleiter, Weinfass laut Guinness …) | Vorgabe. Zweifel stehen in Abschnitt 4. |
-| Kauf- und Code-Logik (Worker `/validate`, Tour-Bindung, Geräte-Limit, 48-h-Fenster, Danke-Seite) | Kein klarer Fehler gefunden. Nur die Eingabe im Browser ist toleranter (Leerzeichen, Bindestriche); geprüft wird weiter ausschließlich im Worker. |
-| Testcodes `TUEBINGEN2025`, `TUEBINGEN2026`, `PRIVAT` | Werden womöglich gerade von Testern genutzt. Entscheidung unten. |
+| Kauf- und Code-Logik (Tour-Bindung, Geräte-Limit, 48-h-Fenster, Danke-Seite) | Kein klarer Fehler gefunden. Die Eingabe im Browser ist toleranter (Leerzeichen, Bindestriche); `/validate` kennt seit dem Nachtrag zusätzlich Testcodes aus einem Secret. Gekaufte Codes werden unverändert geprüft. |
+| ~~Testcodes `TUEBINGEN2025`, `TUEBINGEN2026`, `PRIVAT`~~ | Nachtrag 27.10.: auf deinen Wunsch umgebaut, siehe Abschnitt 5. |
 | Mailtext im Checkout-Worker | Gehört zum Kaufablauf und wird separat deployt. Textvorschlag unten. |
 | `noindex` auf allen Seiten | Bewusst gesetzt („Seite im Aufbau“). Entscheidung unten. |
 | KI-Proxy (worker.js) | Kein Fehler im engeren Sinn, aber ein Kostenrisiko. Entscheidung unten. |
@@ -108,11 +108,11 @@ Alles liegt auf dem Branch `claude/vigilant-sagan-jhhh1c` als Draft-PR gegen `ma
 ## 3. Offene Entscheidungen für dich (je mit Empfehlung)
 
 **Vor dem Verkaufsstart (wichtig):**
-1. **Widerrufsbutton** (§ 356a BGB, seit 19.06.2026 Pflicht für online geschlossene Verträge): Fehlt er, verlängert sich die Widerrufsfrist auf 12 Monate und 14 Tage. → *Empfehlung: Seite „Vertrag widerrufen“ mit Formular (nur Name, Bestellung/Code, E-Mail) und Knopf „Widerruf bestätigen“ plus automatische Eingangsbestätigung per Mail über den Checkout-Worker bauen. Kann ich in einer Folgerunde umsetzen.*
-2. **Widerrufsbelehrung und AGB** auf den Stand vom 19.06.2026 bringen: Die Quellen widersprechen sich, ob das amtliche Muster nur ergänzt wurde oder entfallen ist. → *Empfehlung: Rechtstexte von einem Rechtstext-Dienst (z. B. IT-Recht Kanzlei, Händlerbund) erzeugen lassen, nicht selbst formulieren.*
+1. **Widerrufsbutton** (§ 356a BGB): *Nachtrag 27.10.: nicht nötig, wenn das Erlöschen (Punkt 3) sauber umgesetzt ist – siehe Abschnitt 5.*
+2. **Widerrufsbelehrung und AGB** auf den Stand vom 19.06.2026 bringen. *Nachtrag 27.10.: geprüft, das amtliche Muster wurde ergänzt, nicht abgeschafft – siehe Abschnitt 5.* → *Empfehlung: von einem Rechtstext-Dienst erzeugen lassen.*
 3. **Zustimmung zum Erlöschen des Widerrufsrechts:** Laut AGB passiert sie mit dem Akzeptieren der AGB. Sie muss aber ausdrücklich erklärt und danach per Mail bestätigt werden (§ 356 Abs. 5, § 312f Abs. 3 BGB). → *Empfehlung: eigene Pflicht-Checkbox im Stripe-Checkout und diesen Satz in die Code-Mail:* „Du hast beim Kauf ausdrücklich zugestimmt, dass wir sofort mit der Bereitstellung beginnen, und bestätigt, dass dein Widerrufsrecht damit erlischt. Unsere AGB: tracetour.de/agb.html“
-4. **Testcodes im öffentlichen Quelltext:** Jeder kann `TUEBINGEN2026` nachlesen und gratis spielen; `PRIVAT` schaltet den Debug-Modus frei. → *Empfehlung: vor Verkaufsstart entfernen und Testern normale Codes über den Worker geben.*
-5. **Gerätelimit vs. Preis pro Person:** Jeder Code läuft auf bis zu 4 Handys. Drei Freunde kaufen also ein Solo-Ticket für 9,99 € statt drei Team-Tickets für 23,97 €. → *Empfehlung: Limit pro Produkt im Worker (Solo 1, Familie 1 wie auf der Preiskarte, Team 4, Klasse 8) oder ehrlich „pro Handy“ bepreisen.*
+4. ~~**Testcodes im öffentlichen Quelltext**~~ *Nachtrag 27.10.: erledigt, Testcodes liegen jetzt als Secret im Worker (Abschnitt 5).*
+5. **Gerätelimit vs. Preis pro Person:** Jeder Code läuft auf bis zu 4 Handys. Drei Freunde kaufen also ein Solo-Ticket für 9,99 € statt drei Team-Tickets für 23,97 €. Das Limit steckt im Cloudflare-Worker, nicht in Stripe. → *Empfehlung: Stripe-Payment-Link bekommt ein Metadatum `devices` (z. B. Solo 1, Familie 1, Team 4, Klasse 8), der Worker übernimmt es beim Kauf. Kleine Worker-Änderung, kann ich bauen.*
 6. **Schulklasse (30 Personen) mit 4 Geräten:** → *Empfehlung: Klassen-Code mit höherem Limit; im Text „ein Handy pro Gruppe“ nennen.*
 7. **Team-Ticket bei Stripe:** → *Empfehlung: Payment Link mit einstellbarer Menge (min. 3, max. 7).*
 8. **Stripe-Links eintragen:** in `CHECKOUT_LINKS` (index.html, oben im Script). → *Empfehlung: erst nach Punkt 1–4.*
@@ -123,7 +123,7 @@ Alles liegt auf dem Branch `claude/vigilant-sagan-jhhh1c` als Draft-PR gegen `ma
 11. **KI-Proxy ist offen:** Jede fremde Website kann über `tracetour-ai…workers.dev` mit eigenem Systemprompt Claude auf deine Kosten nutzen (Limit nur 30/h pro IP und Worker-Instanz). → *Empfehlung: Prompt im Worker bauen, nur Stationsnummer und Frage annehmen, Herkunft auf tracetour.de begrenzen.*
 12. **Löschkonzept im Worker:** Codes, E-Mails und Geräte-IDs werden nie gelöscht. → *Empfehlung: z. B. 13 Monate nach Kauf E-Mail und Geräte-IDs entfernen (steuerlich nötige Daten liegen ohnehin bei Stripe).*
 13. **Trace/Anthropic in der Datenschutzerklärung:** Rechtsgrundlage für die Übermittlung in die USA fehlt. → *Empfehlung: mit Anthropics Datenverarbeitungsbedingungen ergänzen; ich weiß nicht sicher, ob Anthropic unter dem Data Privacy Framework zertifiziert ist.*
-14. **Trace-Begleiter erreichbar?** Aus meiner Testumgebung war der KI-Worker nicht erreichbar, daher ungeprüft. → *Empfehlung: einmal live fragen; ohne Worker antwortet Trace nur mit festen Tipps, die Preisliste verspricht aber „KI-Assistent“.*
+14. **Trace-Begleiter erreichbar?** Aus meiner Testumgebung war der Trace-Worker nicht erreichbar, daher ungeprüft. → *Empfehlung: einmal live fragen; ohne Worker antwortet Trace nur mit festen Tipps.*
 
 **Produkt:**
 15. **Echten App-Screenshot zeigen:** `images/app-screenshot.png` liegt ungenutzt im Repo (1 MB). → *Empfehlung: verkleinert im Abschnitt „So funktioniert's“ zeigen; ein echter Screen überzeugt mehr als jede Beschreibung.*
@@ -138,7 +138,7 @@ Alles liegt auf dem Branch `claude/vigilant-sagan-jhhh1c` als Draft-PR gegen `ma
 ## 4. Vorschläge für gesprochene Texte (nicht umgesetzt)
 
 **Mögliche Faktenfehler (bitte prüfen):**
-- **Kindertour, Station 7 „Nonnenhaus“** (kinder.html und generate_audio_kinder.py): „Das Nonnenhaus wurde 1488 gebaut – als Kolumbus Amerika entdeckte!“ Kolumbus kam 1492 an. Vorschlag: „Das Nonnenhaus wurde 1488 gebaut – vier Jahre bevor Kolumbus nach Amerika segelte!“
+- ~~**Kindertour, Station 7 „Nonnenhaus“**: Kolumbus 1488~~ *Nachtrag 27.10.: Text korrigiert („vier Jahre bevor Kolumbus nach Amerika segelte“), Neuvertonung von `story_6.mp3` steht noch aus (am Mac).*
 - **Kindertour, Station 2 „Schloss“:** „das zweitgrößte Weinfass der Welt – 84.000 Liter“. Der Krimi sagt „ältestes erhaltenes Riesenweinfass der Welt“ (Guinness 2019) und „rund 85.000 Liter“, die Infotafel vor Ort laut CLAUDE.md 84.000. Vorschlag für beide Touren einheitlich: „das älteste Riesenweinfass der Welt – 84.000 Liter“ (336 Badewannen passt zu 84.000).
 - **Kindertour, Station 3 „Stiftskirche“:** „Die Kirche ist über 600 Jahre alt.“ Laut Infotafel ab 1470 erbaut, also gut 550 Jahre. Vorschlag: „über 550 Jahre alt“ (falls ein Vorgängerbau gemeint ist, so sagen).
 - **Kindertour, Frage Station 4** (nur Bildschirmtext): „der 500 Jahre alte Brunnen 1961 abgerissen“. Bei Baujahr 1523 war er 1961 rund 440 Jahre alt. Vorschlag: „der über 400 Jahre alte Brunnen“.
@@ -152,7 +152,23 @@ Alles liegt auf dem Branch `claude/vigilant-sagan-jhhh1c` als Draft-PR gegen `ma
 
 ---
 
-## 5. Gut zu wissen nach dem Merge
+## 5. Nachtrag 27.10.2026 – deine Rückfragen
+
+**Widerrufsbutton – brauchst du ihn?** Dein Ziel („nach dem Einlösen kein Widerruf“) erreichst du nicht über den Button, sondern über das vorzeitige Erlöschen des Widerrufsrechts bei digitalen Inhalten. Dafür braucht es drei Bausteine: (1) eine eigene Pflicht-Checkbox im Stripe-Checkout mit ausdrücklicher Zustimmung zum sofortigen Beginn und der Bestätigung, dass das Widerrufsrecht damit erlischt, (2) die sofortige Bereitstellung des Codes und (3) eine Bestätigung dieser Zustimmung in der Code-Mail. Die IT-Recht Kanzlei meint: Erlischt das Widerrufsrecht so wirksam schon bei der Bereitstellung, kann der Widerrufsbutton entfallen. Fehlt aber einer der Bausteine, gilt die volle Widerrufsfrist, und ohne Button verlängert sie sich auf 12 Monate und 14 Tage – dann könnte wirklich jeder die Tour machen und widerrufen. Der Button selbst gibt niemandem ein zusätzliches Recht; ein Widerruf nach wirksamem Erlöschen ist einfach unwirksam. → *Empfehlung: Bausteine 1–3 sauber umsetzen, Button weglassen. Rechtsberatung ist das nicht.*
+
+**Widerrufsbelehrung – was widerspricht sich?** Eine einzelne Kanzlei (GK-law) schrieb, die amtlichen Muster seien ersatzlos entfallen. Alle anderen Quellen (Wettbewerbszentrale, Avalex, Liesegang, NWB) und das Bundesgesetzblatt 2026 I Nr. 28 sprechen von einer Ergänzung: Das Muster bekommt einen Hinweis auf die Online-Widerrufsfunktion und die Eingangsbestätigung – das betrifft dich nur, wenn du einen Button anbietest. Ergebnis: Das Muster gibt es weiter. Den amtlichen Text konnte ich aus meiner Umgebung nicht öffnen (Seite gesperrt). Unabhängig davon fehlen deinen AGB bisher eine vollständige Widerrufsbelehrung und das Muster-Widerrufsformular. → *Empfehlung: beides von einem Rechtstext-Dienst erzeugen lassen; dabei auch die Absatznummer prüfen (eine Quelle führt das Erlöschen bei digitalen Inhalten inzwischen als § 356 Abs. 6 statt Abs. 5).*
+
+**Testcodes – umgebaut:** Im Quelltext steht kein gültiger Code mehr. Testcodes liegen als Secret `TESTER_CODES` im Checkout-Worker und sehen aus wie gekaufte Codes (`TT-XXXX-XXXX`). Pro Code lässt sich festlegen: Erwachsene, Kinder oder beide Touren, Debug-Leiste, persönliche Begrüßung. Sperren heißt: Code aus dem Secret löschen. Ablauf: Secret setzen, Worker deployen, *dann* mergen. Die alten Codes funktionieren danach nicht mehr; laufende Spielstände bleiben erhalten.
+
+**„KI-Assistent“ – umformuliert:** In der Preisliste steht jetzt „Digitaler Begleiter „Trace“ für Tipps“. Ganz ohne das Wort geht es im Chat selbst nicht: Seit 2. August 2026 verlangt die KI-Verordnung (Art. 50 Abs. 1), dass Nutzer beim Chatten erkennen, dass eine KI antwortet. Im Chatfenster steht deshalb klein: „Trace antwortet automatisch mithilfe künstlicher Intelligenz – meistens richtig, aber nicht immer. Die Lösung verrät Trace nie.“
+
+**Gerätelimit – Stripe oder Worker?** Stripe kennt keine Geräte. Das Limit (aktuell 4 für alle Codes) steht im Cloudflare-Worker. Willst du es pro Produkt, bekommt jeder Stripe-Payment-Link ein Metadatum (wie heute schon `tour`), und der Worker übernimmt es. Das kann ich bauen, sobald du die Zahlen festlegst.
+
+**Eigene App?** Eine App-Store-App löst das Weitergabe-Problem nicht von selbst, und Apple/Google nehmen bei digitalen Inhalten 15–30 % Provision. „Ohne App“ ist außerdem eines deiner Verkaufsargumente. → *Empfehlung: zuerst eine installierbare Web-App (PWA, „Zum Home-Bildschirm“) – das kostet ein Manifest und ein Icon, der Rest ist schon da.*
+
+Quellen: [IT-Recht Kanzlei: Widerrufsbutton bei digitalen Inhalten](https://www.it-recht-kanzlei.de/widerrufsbutton-digitale-inhalte.html), [GK-law](https://www.gk-law.de/news-service/reminder-widerrufsbelehrung-aenderungen-ab-19-juni-2026/), [Wettbewerbszentrale](https://www.wettbewerbszentrale.de/die-zeit-laeuft-ab-19-06-2026-ist-der-widerrufsbutton-pflicht/), [Avalex-FAQ](https://avalex.de/blog/widerrufsbutton/), [Liesegang: amtliches Muster](https://liesegang-partner.com/de/mustervertraege/agb/amtliches-muster-fuer-die-widerrufsbelehrung), [BGBl. 2026 I Nr. 28](https://www.recht.bund.de/bgbl/1/2026/28/regelungstext.pdf?__blob=publicationFile&v=1), [Baker Botts: Art. 50 KI-VO](https://www.bakerbotts.com/thought-leadership/publications/2026/september/eu-ai-act-article-50-transparency-obligations-go-live), [Ropes & Gray: Transparenzpflichten](https://www.ropesgray.com/en/insights/viewpoints/2026/08/102nfqm/you-talkin-to-me-operationalising-the-eu-ai-acts-transparency-obligations)
+
+## 6. Gut zu wissen nach dem Merge
 
 - Der neue Service Worker übernimmt beim ersten Besuch automatisch und behält vorhandene Offline-Downloads.
 - Neues Icon nötig? `tools/subset_icons.py` ausführen (Anleitung im Skript), sonst erscheint statt des Icons sein Name als Text.

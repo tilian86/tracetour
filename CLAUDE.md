@@ -1,5 +1,29 @@
 # TraceTour — Projekt-Memory
 
+## AKTUELLER STAND (27.10.2026) — zuerst lesen
+- **Großer Überarbeitungs-PR offen, noch NICHT gemergt:** https://github.com/tilian86/tracetour/pull/1 (Draft), Branch `claude/vigilant-sagan-jhhh1c`. `main` ist live (GitHub Pages) und enthält das alles noch nicht. Ausführlicher Bericht: `BERICHT-CLOUD.md` auf dem Branch.
+- **Im PR enthalten:** Kindertour-Bug (Station hing, wenn Hauptfrage vor Bonus-Aufgabe beantwortet → live!) behoben; Krimi-App bleibt nicht mehr leer ohne Leaflet; neue Landingpage-Texte/FAQ; Offline-Modus neu (sw.js); Barrierefreiheit WCAG AA; Datenschutz korrigiert; Testcodes über Worker-Secret; Trace als „Digitaler Begleiter“ (+ KI-Hinweis im Chat, Pflicht nach Art. 50 KI-VO); Kolumbus-Satz Kindertour korrigiert.
+- **Testcodes:** stehen NICHT mehr im Quelltext. `TUEBINGEN2025`, `TUEBINGEN2026`, `PRIVAT` funktionieren nach dem Merge nicht mehr. Neue Testcodes kommen ins Worker-Secret `TESTER_CODES` (Format `TT-XXXX-XXXX`, nur A–Z und 2–9, keine 0/1), z. B. `TT-ABCD-EFGH=adult, TT-JKLM-NPQR=kids, TT-STUV-WXYZ=both+debug, TT-HJKM-2345=adult+personal`. Flags: adult|kids|both, debug (Debug-Leiste), personal (persönliche Begrüßung). Kein Geräte-Limit, kein 48-h-Fenster.
+
+### Nächste Schritte am Mac (Reihenfolge einhalten)
+1. ElevenLabs-Key rotieren (alter war öffentlich), neuen Key in `.env` (nicht ins Repo).
+2. Branch auschecken: `git fetch && git checkout claude/vigilant-sagan-jhhh1c`.
+3. Kindertour Station „Nonnenhaus“ neu vertonen: `python3 generate_audio_kinder.py --station 6` → erzeugt `audio/kinder/story_6.mp3` (Text ist schon korrigiert: „vier Jahre bevor Kolumbus nach Amerika segelte“). Committen + pushen auf den Branch. `MEDIA_REFRESH` in sw.js enthält die Datei schon. Falls erst NACH dem Merge vertont wird: zusätzlich `CORE_CACHE` in sw.js hochzählen (v5 → v6), damit Offline-Nutzer die neue Datei bekommen.
+4. Checkout-Worker: Testcodes ausdenken, `cd checkout-worker && npx wrangler secret put TESTER_CODES`, dann `npx wrangler deploy`. ERST DANACH den PR mergen (sonst kommen Tester nicht rein). Testern die neuen Codes schicken.
+5. Ausstehende Krimi-Audios (anecdote_7 DE+EN, bonus_13 DE+EN, bonus_16 DE+EN, thanks EN): nach Neu-Erzeugen jeweils in `MEDIA_REFRESH` eintragen.
+
+### Vor dem Verkaufsstart (offen)
+- **Widerrufsrecht:** Florian will nach Code-Einlösung keinen Widerruf. Lösung: korrektes vorzeitiges Erlöschen bei digitalen Inhalten (§ 356 BGB): eigene Pflicht-Checkbox im Stripe-Checkout (ausdrückliche Zustimmung zum sofortigen Beginn + Kenntnis vom Verlust des Widerrufsrechts) UND Bestätigung dieser Zustimmung in der Code-Mail (§ 312f BGB). Ist das sauber umgesetzt, ist laut IT-Recht Kanzlei (16.06.2026) kein Widerrufsbutton (§ 356a BGB) nötig. Fehlt einer der Bausteine: Widerruf bis 12 Monate + 14 Tage möglich. Mail-Satz-Vorschlag steht in BERICHT-CLOUD.md.
+- **Widerrufsbelehrung/AGB:** Amtliches Muster (Anlage 1 EGBGB) wurde zum 19.06.2026 ergänzt (BGBl. 2026 I Nr. 28), nicht abgeschafft (eine Kanzlei behauptete Letzteres – Einzelmeinung). Empfehlung: Belehrung + Muster-Widerrufsformular von Rechtstext-Dienst erzeugen lassen; Absatznummer des Erlöschens (§ 356 Abs. 5 oder 6) dabei prüfen.
+- Stripe-Payment-Links in `CHECKOUT_LINKS` (index.html) eintragen; Team-Ticket mit einstellbarer Menge 3–7.
+- `noindex` auf Startseite und Rechtstexten entfernen (app/kinder/danke behalten).
+- **Gerätelimit:** gilt global (Worker-Variable `DEVICE_CAP`, Standard 4) – nicht in Stripe. Pro Produkt ginge über Stripe-Metadaten (`devices`) + kleine Worker-Änderung; noch nicht entschieden.
+- KI-Proxy (`worker.js`) ist offen nutzbar (eigener Systemprompt möglich) → härten.
+- **Native App:** Florian überlegt eine App. Empfehlung bisher: erst PWA („Zum Homescreen hinzufügen“, Manifest fehlt noch), weil App-Stores bei digitalen Inhalten 15–30 % nehmen und „ohne App“ ein Verkaufsargument ist.
+
+### Faktenzweifel (nicht geändert, Florian entscheidet)
+Kindertour: „zweitgrößte Weinfass der Welt, 84.000 l“ vs. Krimi „ältestes Riesenweinfass (Guinness 2019), ~85.000 l“; Stiftskirche „über 600 Jahre alt“ (Infotafel: ab 1470); Georgsbrunnen-Frage „500 Jahre alt“ (1523 → 1961 ≈ 440 J.); Froschkönig-Status vor Ort prüfen.
+
 ## Stadtgang 2. April 2026 — Erkenntnisse vor Ort
 
 ### Station 0 — Schloss Hohentübingen
