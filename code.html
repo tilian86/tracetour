@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1e293b">
+<title>Code einlösen – TraceTour</title>
+<meta name="description" content="Zugangscode für TraceTour einlösen: Krimi-Tour für Erwachsene oder Kindertour mit Drache Tübi.">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link href="fonts/fonts.css?v=20261026" rel="stylesheet">
+<style>
+:root{--bg:#1e293b;--card:#0f172a;--text:#d8e3fb;--text-2:#a3b3c7;--accent:#f3632d;--accent-soft:#ffb59c;--cta:#cf4a18;--cta-hover:#b23e12;--green:#006a2d;--error:#fca5a5;--border:rgba(255,255,255,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-soft)}
+:focus-visible{outline:2px solid var(--accent-soft);outline-offset:3px}
+.wrap{max-width:460px;margin:0 auto;padding:calc(1rem + env(safe-area-inset-top,0px)) 1.25rem calc(2rem + env(safe-area-inset-bottom,0px))}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:2.5rem}
+.brand{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.2rem;text-transform:uppercase;letter-spacing:-.02em;text-decoration:none;color:var(--text)}
+.brand span{color:var(--accent)}
+.lang{display:flex;gap:.3rem}
+.lang button{background:none;border:1px solid var(--border);color:var(--text-2);border-radius:6px;padding:.45rem .65rem;font-size:.75rem;font-weight:700;cursor:pointer;min-height:36px}
+.lang button[aria-pressed="true"]{background:var(--cta);border-color:var(--cta);color:#fff}
+h1{font-family:'Epilogue','Montserrat',sans-serif;font-size:2rem;font-weight:900;line-height:1.15;margin-bottom:.5rem}
+.sub{color:var(--text-2);margin-bottom:1.75rem}
+label{display:block;font-weight:700;font-size:.9rem;margin-bottom:.4rem}
+input{width:100%;padding:16px 18px;font-size:1.25rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-family:'JetBrains Mono',ui-monospace,monospace;color:var(--text);background:var(--card);border:2px solid var(--border);border-radius:12px;outline:none}
+input:focus{border-color:var(--accent)}
+input::placeholder{color:#8495ab;letter-spacing:.12em}
+.btn{display:block;width:100%;margin-top:.9rem;padding:16px;border:none;border-radius:12px;background:var(--cta);color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;text-align:center;text-decoration:none}
+.btn:hover{background:var(--cta-hover)}
+.btn:disabled{opacity:.7;cursor:wait}
+.hint{font-size:.85rem;color:var(--text-2);margin-top:.9rem}
+#err{display:none;margin-top:.9rem;padding:.75rem .9rem;border-radius:10px;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.35);color:var(--error);font-size:.9rem}
+#err a{color:#fff}
+.tour{display:flex;gap:.9rem;align-items:center;width:100%;padding:1rem;margin-top:.75rem;border-radius:14px;background:var(--card);border:2px solid var(--border);color:var(--text);text-decoration:none;cursor:pointer;font:inherit;text-align:left}
+.tour:hover{border-color:var(--accent)}
+.tour.kids:hover{border-color:#22c55e}
+.tour .ic{font-size:2rem;line-height:1;flex-shrink:0}
+.tour strong{display:block;font-size:1.05rem}
+.tour small{display:block;color:var(--text-2);font-size:.82rem;line-height:1.4}
+.section-label{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-soft);margin:2rem 0 .25rem}
+.buy{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--border);font-size:.9rem;color:var(--text-2)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="index.html" aria-label="TraceTour – zur Startseite"><span>Trace</span>Tour</a>
+    <div class="lang">
+      <button type="button" id="langDe" lang="de" aria-label="Deutsch" onclick="setLang('de')">DE</button>
+      <button type="button" id="langEn" lang="en" aria-label="English" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+
+  <main>
+    <h1 data-t="h1">Code einlösen</h1>
+    <p class="sub" data-t="sub">Gib deinen Zugangscode ein – wir bringen dich direkt zur richtigen Tour.</p>
+
+    <section id="resume" hidden aria-labelledby="resumeLabel">
+      <p class="section-label" id="resumeLabel" data-t="resume">Weiterspielen</p>
+      <a class="tour" id="resumeAdult" href="app.html" hidden><span class="ic" aria-hidden="true">🔍</span><span><strong data-t="tourAdult">Krimi: Die Formel des Forschers</strong><small id="resumeAdultInfo"></small></span></a>
+      <a class="tour kids" id="resumeKids" href="kinder.html" hidden><span class="ic" aria-hidden="true">🐉</span><span><strong data-t="tourKids">Kindertour: Tübis Geheimnisse</strong><small id="resumeKidsInfo"></small></span></a>
+      <p class="section-label" data-t="newCode">Neuen Code einlösen</p>
+    </section>
+
+    <form id="codeForm" novalidate>
+      <label for="code" data-t="label">Zugangscode</label>
+      <input id="code" name="code" type="text" placeholder="TT-XXXX-XXXX" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" maxlength="20" aria-describedby="codeHint">
+      <button class="btn" id="goBtn" type="submit" data-t="go">Weiter</button>
+      <div id="err" role="alert" aria-live="assertive"></div>
+      <p class="hint" id="codeHint" data-t="hint">Deinen Code findest du in der Bestätigungs-Mail nach dem Kauf. Er sieht so aus: TT-XXXX-XXXX.</p>
+    </form>
+
+    <section id="choice" hidden aria-labelledby="choiceLabel">
+      <p class="section-label" id="choiceLabel" data-t="choice">Dein Code gilt für beide Touren. Womit startest du?</p>
+      <a class="tour" id="choiceAdult" href="app.html"><span class="ic" aria-hidden="true">🔍</span><span><strong data-t="tourAdult">Krimi: Die Formel des Forschers</strong><small data-t="tourAdultInfo">Für Erwachsene · 17 Stationen · ca. 120 Min · Start am Schloss</small></span></a>
+      <a class="tour kids" id="choiceKids" href="kinder.html"><span class="ic" aria-hidden="true">🐉</span><span><strong data-t="tourKids">Kindertour: Tübis Geheimnisse</strong><small data-t="tourKidsInfo">Für Kinder von 5–10 · 8 Stationen · ca. 60–90 Min · Start am Marktplatz</small></span></a>
+    </section>
+
+    <p class="buy"><span data-t="noCode">Noch keinen Code?</span> <a href="index.html#pricing" data-t="buyLink">Touren und Tickets ansehen</a></p>
+  </main>
+</div>
+
+<script>
+// Einheitlicher Einstieg: Der Code bestimmt die Tour. Geprüft wird ausschließlich im Worker.
+const CODE_VALIDATE_URL = 'https://tracetour-checkout.florian-s-thiel.workers.dev/validate';
+const T = {
+  title: ['Code einlösen – TraceTour', 'Redeem code – TraceTour'],
+  h1: ['Code einlösen', 'Redeem your code'],
+  sub: ['Gib deinen Zugangscode ein – wir bringen dich direkt zur richtigen Tour.', 'Enter your access code – we’ll take you straight to the right tour.'],
+  resume: ['Weiterspielen', 'Continue playing'],
+  newCode: ['Neuen Code einlösen', 'Redeem a new code'],
+  label: ['Zugangscode', 'Access code'],
+  go: ['Weiter', 'Continue'],
+  checking: ['Code wird geprüft …', 'Checking code …'],
+  hint: ['Deinen Code findest du in der Bestätigungs-Mail nach dem Kauf. Er sieht so aus: TT-XXXX-XXXX.', 'You’ll find your code in the confirmation email after purchase. It looks like this: TT-XXXX-XXXX.'],
+  choice: ['Dein Code gilt für beide Touren. Womit startest du?', 'Your code works for both tours. Which one first?'],
+  tourAdult: ['Krimi: Die Formel des Forschers', 'Mystery: The Researcher’s Formula'],
+  tourAdultInfo: ['Für Erwachsene · 17 Stationen · ca. 120 Min · Start am Schloss', 'For adults · 17 stations · approx. 120 min · starts at the castle'],
+  tourKids: ['Kindertour: Tübis Geheimnisse', 'Kids tour: Tübi’s Secrets'],
+  tourKidsInfo: ['Für Kinder von 5–10 · 8 Stationen · ca. 60–90 Min · Start am Marktplatz', 'For kids aged 5–10 · 8 stations · approx. 60–90 min · in German · starts at the market square'],
+  noCode: ['Noch keinen Code?', 'No code yet?'],
+  buyLink: ['Touren und Tickets ansehen', 'See tours and tickets'],
+  errFormat: ['Das sieht nicht nach einem Zugangscode aus. Er hat die Form TT-XXXX-XXXX – schau nochmal in deine Mail.', 'That doesn’t look like an access code. It has the form TT-XXXX-XXXX – please check your email.'],
+  errUnknown: ['Diesen Code kennen wir nicht. Bitte prüf ihn noch einmal Zeichen für Zeichen.', 'We don’t recognise this code. Please check it character by character.'],
+  errDevices: ['Dieser Code wurde schon auf zu vielen Geräten benutzt. Schreib uns an info@tracetour.de, wir helfen dir.', 'This code has already been used on too many devices. Write to info@tracetour.de and we’ll help.'],
+  errExpired: ['Dieser Code ist abgelaufen – die 48 Stunden nach dem ersten Start sind vorbei.', 'This code has expired – the 48 hours after the first start are over.'],
+  errNet: ['Keine oder zu langsame Verbindung. Die Code-Prüfung braucht einmal kurz Internet – bitte gleich nochmal versuchen.', 'No or too slow connection. Checking the code needs internet once – please try again in a moment.'],
+  resumeAdult: ['{name} · bei Stop {x} von 17', '{name} · at stop {x} of 17'],
+  resumeKids: ['{name} · bei Station {x} von 8', '{name} · at station {x} of 8'],
+};
+let lang = 'de';
+try { const s = localStorage.getItem('tracetour_lang'); lang = s === 'en' || s === 'de' ? s : ((navigator.language || 'de').toLowerCase().startsWith('de') ? 'de' : 'en'); } catch (e) {}
+const tt = k => T[k][lang === 'en' ? 1 : 0];
+
+function setLang(l) {
+  lang = l;
+  try { localStorage.setItem('tracetour_lang', l); } catch (e) {}
+  document.documentElement.lang = l;
+  document.title = tt('title');
+  document.querySelectorAll('[data-t]').forEach(el => { el.textContent = tt(el.dataset.t); });
+  document.getElementById('langDe').setAttribute('aria-pressed', String(l === 'de'));
+  document.getElementById('langEn').setAttribute('aria-pressed', String(l === 'en'));
+  showResume();
+}
+
+// Gespeicherte Spielstände als „Weiterspielen“-Abkürzung anzeigen
+function readSave(key) { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch (e) { return null; } }
+function showResume() {
+  const a = readSave('tracetour_v5'), k = readSave('tracetour_kinder_v5');
+  const hasA = !!(a && a.userName), hasK = !!(k && k.playerName);
+  document.getElementById('resume').hidden = !(hasA || hasK);
+  document.getElementById('resumeAdult').hidden = !hasA;
+  document.getElementById('resumeKids').hidden = !hasK;
+  if (hasA) document.getElementById('resumeAdultInfo').textContent = tt('resumeAdult').replace('{name}', a.userName).replace('{x}', Math.min(17, (a.currentStation || 0) + 1));
+  if (hasK) document.getElementById('resumeKidsInfo').textContent = tt('resumeKids').replace('{name}', k.playerName).replace('{x}', Math.min(8, (k.currentStation || 0) + 1));
+}
+
+// Code tolerant einlesen: Leerzeichen raus, Gedankenstriche aus Mails zu "-", fehlende Bindestriche ergänzen
+function normalizeCode(raw) {
+  let c = String(raw || '').toUpperCase().replace(/\s+/g, '').replace(/[‐-―]/g, '-');
+  if (/^TT[A-Z0-9]{8}$/.test(c)) c = 'TT-' + c.slice(2, 6) + '-' + c.slice(6);
+  return c;
+}
+function getDeviceId() { try { let d = localStorage.getItem('tracetour_device'); if (!d) { d = (crypto && crypto.randomUUID ? crypto.randomUUID() : 'd' + Date.now() + Math.random().toString(36).slice(2)); localStorage.setItem('tracetour_device', d); } return d; } catch (e) { return 'nostore'; } }
+async function validate(code, tour) {
+  const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  const timer = ctrl ? setTimeout(() => ctrl.abort(), 15000) : null;
+  try {
+    const r = await fetch(CODE_VALIDATE_URL, Object.assign({ method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ code, tour, device: getDeviceId() }) }, ctrl ? { signal: ctrl.signal } : {}));
+    return await r.json();
+  } finally { if (timer) clearTimeout(timer); }
+}
+// Prüfergebnis so ablegen, wie die Tour-Apps es lesen (dort entfällt dann die zweite Prüfung)
+function remember(tour, code, d) {
+  try {
+    localStorage.setItem('tracetour_code_ok_' + tour, code);
+    localStorage.setItem('tracetour_code_flags_' + tour, JSON.stringify(tour === 'kids' ? { tester: !!d.tester, debug: !!d.debug } : { tester: !!d.tester, debug: !!d.debug, personal: !!d.personal }));
+    sessionStorage.setItem('tracetour_code_for_' + tour, code);
+  } catch (e) {}
+}
+function go(tour) { location.href = tour === 'kids' ? 'kinder.html' : 'app.html'; }
+function showErr(key) {
+  const el = document.getElementById('err');
+  el.textContent = tt(key); el.style.display = 'block';
+}
+function reasonKey(reason) { return reason === 'device_limit' ? 'errDevices' : reason === 'expired' ? 'errExpired' : reason === 'format' ? 'errFormat' : 'errUnknown'; }
+
+document.getElementById('codeForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const input = document.getElementById('code'), btn = document.getElementById('goBtn');
+  const code = normalizeCode(input.value);
+  input.value = code;
+  document.getElementById('err').style.display = 'none';
+  document.getElementById('choice').hidden = true;
+  if (!/^TT-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code)) { showErr('errFormat'); input.focus(); return; }
+  btn.disabled = true; btn.textContent = tt('checking');
+  try {
+    // Erst als Krimi-Code prüfen; meldet der Worker „falsche Tour“, ist es ein Kindertour-Code
+    const d = await validate(code, 'adult');
+    if (d.valid) {
+      remember('adult', code, d);
+      if (Array.isArray(d.tours) && d.tours.includes('kids')) {
+        try { sessionStorage.setItem('tracetour_code_for_kids', code); } catch (err) {}
+        document.getElementById('choice').hidden = false;
+        document.getElementById('choiceAdult').focus();
+        return;
+      }
+      go('adult'); return;
+    }
+    if (d.reason === 'wrong_tour') {
+      const k = await validate(code, 'kids');
+      if (k.valid) { remember('kids', code, k); go('kids'); return; }
+      showErr(reasonKey(k.reason)); return;
+    }
+    showErr(reasonKey(d.reason));
+  } catch (err) {
+    showErr('errNet');
+  } finally {
+    btn.disabled = false; btn.textContent = tt('go');
+  }
+});
+document.getElementById('code').addEventListener('input', () => { document.getElementById('err').style.display = 'none'; });
+
+// Nach dem Kauf (Danke-Seite) Code vorbefüllen
+try { const pc = localStorage.getItem('tracetour_purchased_code'); if (pc) document.getElementById('code').value = pc; } catch (e) {}
+setLang(lang);
+</script>
+</body>
+</html>

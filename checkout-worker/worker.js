@@ -215,7 +215,9 @@ async function handleValidate(request, env) {
     if (tester.tour !== 'both' && tester.tour !== wanted) {
       return new Response(JSON.stringify({ valid: false, reason: 'wrong_tour', codeTour: tester.tour }), { headers: { ...JSON_HEADERS, ...cors(env) } });
     }
-    return new Response(JSON.stringify({ valid: true, tester: true, debug: tester.debug, personal: tester.personal }), { headers: { ...JSON_HEADERS, ...cors(env) } });
+    // tours: für welche Touren der Code gilt – die Seite code.html bietet bei beiden eine Auswahl an
+    const tours = tester.tour === 'both' ? ['adult', 'kids'] : [tester.tour];
+    return new Response(JSON.stringify({ valid: true, tester: true, debug: tester.debug, personal: tester.personal, tours }), { headers: { ...JSON_HEADERS, ...cors(env) } });
   }
   const state = JSON.parse((await env.CODES.get(`code:${code}`)) || 'null');
   if (!state || state.status !== 'assigned') {
@@ -254,5 +256,5 @@ async function handleValidate(request, env) {
   }
   await env.CODES.put(`code:${code}`, JSON.stringify(state));
   const hoursLeft = state.firstUse ? Math.max(0, Math.round((state.firstUse + WINDOW_MS - now) / 3600000)) : Math.round(WINDOW_MS / 3600000);
-  return new Response(JSON.stringify({ valid: true, devicesUsed: state.devices.length, deviceCap: DEVICE_CAP, hoursLeft }), { headers: { ...JSON_HEADERS, ...cors(env) } });
+  return new Response(JSON.stringify({ valid: true, devicesUsed: state.devices.length, deviceCap: DEVICE_CAP, hoursLeft, tours: [codeTour] }), { headers: { ...JSON_HEADERS, ...cors(env) } });
 }

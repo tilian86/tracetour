@@ -170,6 +170,8 @@ Alles liegt auf dem Branch `claude/vigilant-sagan-jhhh1c` als Draft-PR gegen `ma
 
 Quellen: [IT-Recht Kanzlei: Widerrufsbutton bei digitalen Inhalten](https://www.it-recht-kanzlei.de/widerrufsbutton-digitale-inhalte.html), [GK-law](https://www.gk-law.de/news-service/reminder-widerrufsbelehrung-aenderungen-ab-19-juni-2026/), [Wettbewerbszentrale](https://www.wettbewerbszentrale.de/die-zeit-laeuft-ab-19-06-2026-ist-der-widerrufsbutton-pflicht/), [Avalex-FAQ](https://avalex.de/blog/widerrufsbutton/), [Liesegang: amtliches Muster](https://liesegang-partner.com/de/mustervertraege/agb/amtliches-muster-fuer-die-widerrufsbelehrung), [BGBl. 2026 I Nr. 28](https://www.recht.bund.de/bgbl/1/2026/28/regelungstext.pdf?__blob=publicationFile&v=1), [Baker Botts: Art. 50 KI-VO](https://www.bakerbotts.com/thought-leadership/publications/2026/september/eu-ai-act-article-50-transparency-obligations-go-live), [Ropes & Gray: Transparenzpflichten](https://www.ropesgray.com/en/insights/viewpoints/2026/08/102nfqm/you-talkin-to-me-operationalising-the-eu-ai-acts-transparency-obligations)
 
+**Ein Einstieg für alle Codes (Nachtrag 27.10., abends):** Neue Seite `tracetour.de/code`. Man gibt nur den Code ein, die Seite erkennt die Tour und leitet weiter; gilt ein Code für beide Touren, wählt man dort. Wer schon spielt, sieht „Weiterspielen“-Kacheln. Alle „Code einlösen“-Knöpfe der Startseite führen dorthin, die FAQ nennt die Adresse.
+
 ## 6. Gut zu wissen nach dem Merge
 
 - Der neue Service Worker übernimmt beim ersten Besuch automatisch und behält vorhandene Offline-Downloads.
