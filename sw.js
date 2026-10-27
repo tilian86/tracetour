@@ -1,5 +1,5 @@
 // TraceTour Service Worker — Offline Cache
-const CACHE_NAME = 'tracetour-v5';
+const CACHE_NAME = 'tracetour-v6';
 
 const CORE_FILES = [
   'index.html',
