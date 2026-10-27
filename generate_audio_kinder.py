@@ -104,17 +104,17 @@ STORIES = [
     # Station 1 - Schloss Hohentübingen
     (
         "Willkommen in meinem Geheimversteck! Das Schloss ist mein Lieblings-Spielplatz!\n\n"
-        "Im Keller steht das zweitgrößte Weinfass der Welt – vierundachtzigtausend Liter, "
+        "Im Keller steht das älteste Riesen-Weinfass der Welt – es steht sogar im Guinness-Buch der Rekorde! Vierundachtzigtausend Liter, "
         "ungefähr dreihundertsechsunddreißig Badewannen! Heute ist es leer, aber dafür "
         "wohnt darin mein bester Freund: Flatter die Fledermaus! "
         "Er hängt kopfüber drin und schläft den ganzen Tag.\n\n"
-        "Das Schloss hat echte Geheimgänge! Zwei enge Tunnel führen vom Innenhof tief "
-        "nach unten. Ich spiel dort Fangen mit den Fledermäusen!\n\n"
-        "Im Museum liegt die älteste Kunst der Menschheit – eine Figur aus "
-        "Mammut-Elfenbein, über fünfunddreißigtausend Jahre alt! Geschnitzt, als es noch "
-        "echte Mammuts gab! Daneben: eine Flöte aus einem Vogelknochen – das älteste "
-        "Musikinstrument!\n\n"
-        "Flatter liebt es, mich im Geheimgang zu erschrecken! Einmal hat er Buh gerufen "
+        "Im Schlosskeller wohnt eine echte Fledermaus-Kolonie! Damit die Fledermäuse "
+        "ihre Ruhe haben, darf man das Fass nur im Winter besuchen. Ich spiel dort Fangen mit ihnen!\n\n"
+        "Im Museum liegen einige der ältesten Kunstwerke der Menschheit – zum Beispiel ein "
+        "Mammut aus Elfenbein, über fünfunddreißigtausend Jahre alt! Geschnitzt, als es noch "
+        "echte Mammuts gab! Daneben: ein winziges Wildpferd aus Elfenbein – nicht größer "
+        "als dein Finger!\n\n"
+        "Flatter liebt es, mich im dunklen Keller zu erschrecken! Einmal hat er Buh gerufen "
         "und ich hab vor Schreck einen Feuerstrahl an die Decke geschossen – da war "
         "meine Flamme noch heil..."
     ),
@@ -123,9 +123,9 @@ STORIES = [
         "Als kleiner Drache bin ich nachts um die Stiftskirche geflogen – und BUMM! "
         "Gegen den Turm geknallt! Seitdem lehnt er sich acht Zentimeter zur Seite. "
         "Der Turm ist wirklich schief!\n\n"
-        "Die Kirche ist über sechshundert Jahre alt. Im Turm hängt die Dominica – "
-        "eine Glocke, die klingt, seit Kolumbus in die Schule ging. Mutige können "
-        "hundertsiebzig Stufen hochklettern!\n\n"
+        "Die Kirche ist über fünfhundert Jahre alt. Im Turm hängt die Dominica – "
+        "eine Glocke von vierzehnhundertelf, die ist sogar noch älter als die Kirche! Mutige können "
+        "hundertneunundsechzig Stufen hochklettern!\n\n"
         "Unter der Kirche liegt Graf Eberhard im Bart – der hieß wirklich so! "
         "Er gründete die Uni Tübingen.\n\n"
         "Und gleich nebenan in der Münzgasse hängt ein lustiges Schild: Dem Dichter "
@@ -142,14 +142,14 @@ STORIES = [
         "Der arme Kerl spielt seit fünfhundert Jahren den Toten, weil ein Ritter auf "
         "ihm steht!\n\n"
         "Den Georgsbrunnen gibt es seit fünfzehnhundertdreiundzwanzig! "
-        "Neunzehnhundertelf hat jemand die Figur im Neckar gefunden – im Fluss! "
-        "Den Drachen fand man in einem Keller. Wie die dort landeten, weiß niemand!\n\n"
-        "Neunzehnhunderteinundsechzig haben sie den Brunnen abgerissen. Wofür? "
-        "Für DREI PARKPLÄTZE! Zum Glück wurde er neunzehnhundertsechsundsiebzig "
+        "Neunzehnhundertelf hat jemand die alte Ritterfigur im Neckar gefunden – im Fluss! "
+        "Wie sie da hineinkam, weiß niemand!\n\n"
+        "Neunzehnhunderteinundsechzig haben sie den Brunnen abgebaut. Wofür? "
+        "Für PARKPLÄTZE! Zum Glück wurde er neunzehnhundertsechsundsiebzig "
         "wieder aufgebaut.\n\n"
         "Ich besuche meinen Cousin jede Nacht. Er erzählt mir, welche Touristen die "
         "lustigsten Selfies machen.\n\n"
-        "DREI PARKPLÄTZE! Ich bin IMMER NOCH sauer! Mein Cousin hat fünfzehn Jahre "
+        "PARKPLÄTZE! Für AUTOS! Ich bin IMMER NOCH sauer! Mein Cousin hat fünfzehn Jahre "
         "geschmollt. Jetzt steht er wieder da – ziemlich heldenhaft, oder?"
     ),
     # Station 4 - Hölderlinturm / Neckarfront
@@ -167,26 +167,25 @@ STORIES = [
         "Manchmal reimt sich sogar was in meinem Drachenkopf!\n\n"
         "Sechsunddreißig Jahre in einem Zimmer! Ich wohne seit fünfhundert Jahren "
         "hinter einer Uhr, also verstehe ich das. Aber Hölderlin hatte wenigstens den "
-        "Neckar-Blick! Das Museum ist sogar umsonst – wie cool ist das?"
+        "Neckar-Blick! Heute ist in seinem Turm ein kleines Museum über ihn!"
     ),
     # Station 5 - Eberhardsbrücke / Neckar
     (
         "Von der Eberhardsbrücke siehst du den ganzen Neckar!\n\n"
         "Stocherkähne sind flache Holzboote – mit einer langen Stange über den "
         "Flussgrund geschoben. Kein Motor, keine Ruder!\n\n"
-        "Jedes Jahr im Juni: das Stocherkahnrennen! Studenten fahren um die Wette – "
+        "Jedes Jahr an einem Feiertag im Mai oder Juni: das Stocherkahnrennen! Studenten fahren um die Wette – "
         "totales Chaos: Boote krachen, Leute fallen rein, verrückte Kostüme!\n\n"
-        "Wer verliert: Lebertran! Öl aus Fischbäuchen – SO eklig! Und die Verlierer "
+        "Wer verliert: Lebertran! Öl aus Fischleber – SO eklig! Und die Verlierer "
         "müssen das Rennen nächstes Jahr organisieren!\n\n"
-        "Der Neckar war fünfzehnhundertfünfundneunzig so zugefroren, dass Pferdewagen "
-        "drüber fuhren! Und Neckar bedeutet in einer uralten Sprache: Wildes Wasser!\n\n"
+        "Und weißt du, was Neckar bedeutet? In der uralten Sprache der Kelten wohl: Wildes Wasser!\n\n"
         "Beim Rennen sitze ich hier auf der Brücke! Einmal hat Lebertran fast MICH "
         "getroffen! Drachenfeuer und Fischöl – das hätte SO gestunken!"
     ),
     # Station 6 - Nonnenhaus
     (
-        "Das Nonnenhaus wurde vierzehnhundertachtundachtzig gebaut – vier Jahre "
-        "bevor Kolumbus nach Amerika segelte!\n\n"
+        "Das Nonnenhaus wurde vierzehnhundertachtundachtzig gebaut – noch bevor Kolumbus "
+        "Amerika entdeckte!\n\n"
         "Früher gab es einen Anbau direkt über dem Fluss. Darin war... das Klo! "
         "Alles fiel runter ins Wasser! Die Bewohner nannten es das Sprachhaus – "
         "aber es war eine Toilette!\n\n"
@@ -200,10 +199,10 @@ STORIES = [
     # Station 7 - Froschkönig-Brunnen (Finale)
     (
         "Die letzte Station – und sie hat eine verrückte Geschichte!\n\n"
-        "Der Froschkönig-Brunnen am Ammerkanal zeigt einen Frosch mit Krone. "
-        "Aber im Oktober zweitausendfünfundzwanzig wurde der Froschkönig gestohlen! "
-        "Jemand hat ihn einfach mitgenommen! Die ganze Stadt suchte – zum Glück "
-        "wurde er zurückgebracht.\n\n"
+        "Im alten Froschkönig-Brunnen saß ein bunter Frosch aus Ton mit Krone – hinter einer Glasscheibe. "
+        "Aber im Oktober zweitausendfünfundzwanzig wurde er gestohlen! "
+        "Jemand hat ihn einfach mitgenommen! Die Frau, die sich um den Brunnen kümmert, "
+        "hat sofort einen neuen bestellt. Schau mal, ob er schon wieder da ist!\n\n"
         "Der Brunnen erinnert ans Märchen vom Froschkönig. Manche sagen, der Frosch "
         "war ein verwunschener Drache...\n\n"
         "Hier ist es ruhig – perfekt zum Verschnaufen nach dem Abenteuer!\n\n"
@@ -230,7 +229,7 @@ WHISPER_TEXTS = [
     ),
     # Station 1 - Schloss (1:1 aus kinder.html tubiSays)
     (
-        "Flatter liebt es, mich im Geheimgang zu erschrecken! Einmal hat er „BUH!\" gerufen und ich hab vor Schreck einen Feuerstrahl an die Decke geschossen – da war meine Flamme noch heil... 😔\n"
+        "Flatter liebt es, mich im dunklen Keller zu erschrecken! Einmal hat er „BUH!\" gerufen und ich hab vor Schreck einen Feuerstrahl an die Decke geschossen – da war meine Flamme noch heil... 😔\n"
         "\n"
         "Übrigens: Ich kenne einen geheimen Weg vom Schloss runter – eine enge Gasse mit steilen Steintreppen zwischen den Häusern! Wenn du mutig bist, folge mir hinunter. Wenn du einen Kinderwagen dabei hast, nimm lieber den breiteren Hauptweg über die Burgsteige."
     ),
@@ -240,11 +239,11 @@ WHISPER_TEXTS = [
     ),
     # Station 3 - Georgsbrunnen (1:1 aus kinder.html tubiSays)
     (
-        "DREI PARKPLÄTZE! Ich bin IMMER NOCH sauer! 😤 Mein Cousin hat 15 Jahre geschmollt. Jetzt steht er wieder da – ziemlich heldenhaft, oder?"
+        "PARKPLÄTZE! Für AUTOS! Ich bin IMMER NOCH sauer! 😤 Mein Cousin hat 15 Jahre geschmollt. Jetzt steht er wieder da – ziemlich heldenhaft, oder?"
     ),
     # Station 4 - Hoelderlinturm (1:1 aus kinder.html tubiSays)
     (
-        "36 Jahre in einem Zimmer! Ich wohne seit 500 Jahren hinter einer Uhr, also verstehe ich das. Aber Hölderlin hatte wenigstens den Neckar-Blick! Das Museum ist sogar umsonst – wie cool ist das?"
+        "36 Jahre in einem Zimmer! Ich wohne seit 500 Jahren hinter einer Uhr, also verstehe ich das. Aber Hölderlin hatte wenigstens den Neckar-Blick! Heute ist in seinem Turm ein kleines Museum über ihn!"
     ),
     # Station 5 - Eberhardsbruecke (1:1 aus kinder.html tubiSays)
     (

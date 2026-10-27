@@ -4,7 +4,7 @@
 //  - CORE:  Seiten, CSS, JS, Schriften. Bei jeder Änderung an CORE_FILES/ASSET_V hochzählen.
 //  - MEDIA: Audios und Bilder (groß, ändern sich selten). Bleibt über Code-Updates erhalten,
 //           damit ein Update niemandem mitten in der Tour die Offline-Audios löscht.
-//           Nur hochzählen, wenn MP3s oder Fotos unter gleichem Dateinamen ersetzt wurden.
+//           Einzelne neu vertonte Dateien stattdessen in MEDIA_REFRESH eintragen.
 const CORE_CACHE = 'tracetour-core-v5';
 const MEDIA_CACHE = 'tracetour-media-v1';
 const ASSET_V = '20261026'; // muss zu den ?v=-Parametern in den HTML-Dateien passen
@@ -14,8 +14,18 @@ const NET_TIMEOUT = 4000;   // ms: danach liefern Seiten bei schlechtem Netz die
 // Service Workers aus dem Offline-Cache entfernt und beim nächsten Abspielen/Download frisch geladen –
 // ohne dass alle anderen Downloads verloren gehen (wie beim Hochzählen von MEDIA_CACHE).
 // Ablauf: neue MP3 committen, Pfad hier eintragen, CORE_CACHE hochzählen.
+// Einträge können nach einigen Wochen wieder raus (bis dahin wird nur je Update einmal neu geladen).
 const MEDIA_REFRESH = [
-  'audio/kinder/story_6.mp3', // Nonnenhaus: Kolumbus-Satz korrigiert (Neuvertonung ausstehend)
+  // Oktober 2026 neu vertont (Erwachsenen-Tour)
+  'audio/anecdote_7.mp3', 'audio/bonus_13.mp3', 'audio/bonus_16.mp3',
+  'audio/en/anecdote_7.mp3', 'audio/en/bonus_13.mp3', 'audio/en/bonus_16.mp3',
+  // Oktober 2026 neu vertont bzw. neue Bilder (Kindertour, Fakten korrigiert)
+  'audio/kinder/story_1.mp3', 'audio/kinder/story_2.mp3', 'audio/kinder/story_3.mp3',
+  'audio/kinder/story_4.mp3', 'audio/kinder/story_5.mp3', 'audio/kinder/story_6.mp3',
+  'audio/kinder/story_7.mp3',
+  'images/kinder/station_0.jpg', 'images/kinder/station_1.jpg', 'images/kinder/station_1b.jpg',
+  'images/kinder/station_2.jpg', 'images/kinder/station_3.jpg', 'images/kinder/station_4.jpg',
+  'images/kinder/station_5.jpg', 'images/kinder/station_6.jpg', 'images/kinder/station_7.jpg',
 ];
 
 const CORE_FILES = [
@@ -72,8 +82,8 @@ const AUDIO_BASENAMES = [
   'anecdote_15.mp3',
   'story_16.mp3', 'diary_16.mp3', 'fact_16.mp3', 'riddle_16.mp3',
 ];
-// audio/en/thanks.mp3 existiert noch nicht (App blendet die Zeile dann aus)
-const AUDIO_MISSING_EN = ['thanks.mp3'];
+// Fehlt eine EN-Datei noch, hier eintragen (App blendet die Zeile dann aus)
+const AUDIO_MISSING_EN = [];
 
 const IMAGE_FILES = [
   'images/station_0.jpg', 'images/station_1.jpg', 'images/station_2.jpg',
