@@ -265,6 +265,7 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 .ai-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .ai-header h3{font-family:var(--font-h);font-size:.9rem;font-weight:700;display:flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:.03em}
 .ai-dot{width:8px;height:8px;border-radius:50%;background:var(--success);display:inline-block;animation:pulse 2s infinite}
+.ai-note{padding:8px 16px;font-size:.72rem;line-height:1.45;color:var(--text-2);border-bottom:1px solid var(--border);background:rgba(15,23,42,.4)}
 .ai-close{font-size:1.6rem;color:var(--text-2);padding:4px 12px;min-width:44px;min-height:44px}
 .ai-msgs{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px}
 .ai-msg{padding:10px 14px;border-radius:var(--r-sm);margin-bottom:8px;font-size:.85rem;line-height:1.5;max-width:88%}
@@ -545,6 +546,7 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <h3><img src="images/trace-avatar.png" alt="" loading="lazy" style="width:28px;height:28px;border-radius:50%;vertical-align:middle;margin-right:6px"> Trace</h3>
 <button class="ai-close" aria-label="Schließen" onclick="closeAi()">×</button>
 </div>
+<div class="ai-note" id="aiNote">Trace antwortet automatisch mithilfe künstlicher Intelligenz – meistens richtig, aber nicht immer. Die Lösung verrät Trace nie.</div>
 <div class="ai-msgs" id="aiMsgs" aria-live="polite">
 <div class="ai-msg bot">Hey, ich bin Trace – dein Begleiter auf dieser Tour! Frag mich zu Rätseln, zur Stadt oder zur Geschichte. Ich helfe dir weiter – nur die Lösung musst du selbst finden. Was willst du wissen?</div>
 </div>
@@ -769,7 +771,7 @@ de:{
   confirmSkip:'Möchtest du das Rätsel wirklich überspringen? Du bekommst keine Traces dafür \u2013 aber die Lösung und den Fakten-Track.',
   reloadPrompt:'Bitte Seite einmal neu laden',
   aiGreeting:'Hey, ich bin Trace \u2013 dein Begleiter auf dieser Tour! Frag mich zu Rätseln, zur Stadt oder zur Geschichte. Ich helfe dir weiter \u2013 nur die Lösung musst du selbst finden. Was willst du wissen?',
-  aiPlaceholder:'Frag mich etwas...',aiLimitReached:'Fragen-Limit erreicht.',
+  aiPlaceholder:'Frag mich etwas...',aiLimitReached:'Fragen-Limit erreicht.',aiNote:'Trace antwortet automatisch mithilfe künstlicher Intelligenz \u2013 meistens richtig, aber nicht immer. Die Lösung verrät Trace nie.',
   aiFallback:'Das musst du selbst herausfinden \u2013 ich bin nur dein Berater, nicht dein Spickzettel.',
   offlineBtn:'Tour für Offline herunterladen (~50 MB)',downloading:'Wird heruntergeladen... {x}%',offlineReady:'Offline verfügbar \u2713',
   certTitle:'T E I L N E H M E R U R K U N D E',certCaseSolved:'FALL GELÖST',certSubtitle:'Die Formel des Forschers',
@@ -881,7 +883,7 @@ en:{
   confirmSkip:'Do you really want to skip this puzzle? You will not earn Traces for it \u2014 but you will get the answer and the facts track.',
   reloadPrompt:'Please reload the page once',
   aiGreeting:'Hey, I am Trace \u2014 your companion on this tour! Ask me about puzzles, the city, or the history. I will help you along \u2014 but you have to find the answer yourself. What do you want to know?',
-  aiPlaceholder:'Ask me something...',aiLimitReached:'Question limit reached.',
+  aiPlaceholder:'Ask me something...',aiLimitReached:'Question limit reached.',aiNote:'Trace answers automatically using artificial intelligence \u2013 usually right, but not always. Trace never gives away the solution.',
   aiFallback:'You will have to figure that out yourself \u2014 I am your advisor, not your cheat sheet.',
   offlineBtn:'Download tour for offline use (~50 MB)',downloading:'Downloading... {x}%',offlineReady:'Available offline \u2713',
   certTitle:'C E R T I F I C A T E',certCaseSolved:'CASE SOLVED',certSubtitle:'The Researcher\'s Formula',
@@ -1140,6 +1142,7 @@ function applyLangStaticScreens(){
   }
   const aiInputEl=document.getElementById('aiInput');
   if(aiInputEl)aiInputEl.placeholder=t('aiPlaceholder');
+  const aiNoteEl=document.getElementById('aiNote');if(aiNoteEl)aiNoteEl.textContent=t('aiNote');
   // Thank/next paragraphs by ID
   const tp1=document.getElementById('thankP1');if(tp1)tp1.textContent=t('thankP1');
   const tp2=document.getElementById('thankP2');if(tp2)tp2.textContent=t('thankP2');
