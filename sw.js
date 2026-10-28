@@ -5,7 +5,7 @@
 //  - MEDIA: Audios und Bilder (groß, ändern sich selten). Bleibt über Code-Updates erhalten,
 //           damit ein Update niemandem mitten in der Tour die Offline-Audios löscht.
 //           Einzelne neu vertonte Dateien stattdessen in MEDIA_REFRESH eintragen.
-const CORE_CACHE = 'tracetour-core-v5';
+const CORE_CACHE = 'tracetour-core-v6';
 const MEDIA_CACHE = 'tracetour-media-v1';
 const ASSET_V = '20261026'; // muss zu den ?v=-Parametern in den HTML-Dateien passen
 const NET_TIMEOUT = 4000;   // ms: danach liefern Seiten bei schlechtem Netz die gespeicherte Version
@@ -19,7 +19,8 @@ const MEDIA_REFRESH = [
   // Oktober 2026 neu vertont (Erwachsenen-Tour)
   'audio/anecdote_7.mp3', 'audio/bonus_13.mp3', 'audio/bonus_16.mp3',
   'audio/en/anecdote_7.mp3', 'audio/en/bonus_13.mp3', 'audio/en/bonus_16.mp3',
-  // Oktober 2026 neu vertont bzw. neue Bilder (Kindertour, Fakten korrigiert)
+  // Oktober 2026 neu vertont bzw. neue Bilder (Kindertour, Fakten korrigiert; 28.10. komplett mit Eleven v4)
+  'audio/kinder/prolog.mp3', 'audio/kinder/story_0.mp3',
   'audio/kinder/story_1.mp3', 'audio/kinder/story_2.mp3', 'audio/kinder/story_3.mp3',
   'audio/kinder/story_4.mp3', 'audio/kinder/story_5.mp3', 'audio/kinder/story_6.mp3',
   'audio/kinder/story_7.mp3',

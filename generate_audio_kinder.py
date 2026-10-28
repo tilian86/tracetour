@@ -44,7 +44,7 @@ API_KEY = _load_key()
 
 TUBI_VOICE = "gGrh7S39Hy7hjt4rtiDw"   # Tuebi der Drache
 
-MODEL_ID = "eleven_multilingual_v2"
+MODEL_ID = "eleven_v4"
 OUTPUT_DIR = Path(__file__).parent / "audio" / "kinder"
 
 # Max Kreativitaet: stability niedrig, similarity hoch
