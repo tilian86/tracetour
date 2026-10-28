@@ -5,7 +5,7 @@
 //  - MEDIA: Audios und Bilder (groß, ändern sich selten). Bleibt über Code-Updates erhalten,
 //           damit ein Update niemandem mitten in der Tour die Offline-Audios löscht.
 //           Einzelne neu vertonte Dateien stattdessen in MEDIA_REFRESH eintragen.
-const CORE_CACHE = 'tracetour-core-v7';
+const CORE_CACHE = 'tracetour-core-v8';
 const MEDIA_CACHE = 'tracetour-media-v1';
 const ASSET_V = '20261026'; // muss zu den ?v=-Parametern in den HTML-Dateien passen
 const NET_TIMEOUT = 4000;   // ms: danach liefern Seiten bei schlechtem Netz die gespeicherte Version
