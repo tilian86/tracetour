@@ -5,7 +5,7 @@
 //  - MEDIA: Audios und Bilder (groß, ändern sich selten). Bleibt über Code-Updates erhalten,
 //           damit ein Update niemandem mitten in der Tour die Offline-Audios löscht.
 //           Einzelne neu vertonte Dateien stattdessen in MEDIA_REFRESH eintragen.
-const CORE_CACHE = 'tracetour-core-v9';
+const CORE_CACHE = 'tracetour-core-v10';
 const MEDIA_CACHE = 'tracetour-media-v1';
 const ASSET_V = '20261026'; // muss zu den ?v=-Parametern in den HTML-Dateien passen
 const NET_TIMEOUT = 4000;   // ms: danach liefern Seiten bei schlechtem Netz die gespeicherte Version
@@ -40,6 +40,7 @@ const CORE_FILES = [
   'fonts/materialsymbols-subset.woff2?v=1',
   'vendor/leaflet/leaflet.css?v=1.9.4',
   'vendor/leaflet/leaflet.js?v=1.9.4',
+  'vendor/protomaps-leaflet/protomaps-leaflet.js?v=5.1.0',
 ];
 
 const FONT_FILES = [
@@ -109,7 +110,30 @@ const KIDS_FILES = [
   'images/favicon-32.png',
 ];
 
-const MEDIA_RE = /\.(mp3|wav|jpg|jpeg|png|svg|webp)$/i;
+// Offline-Karte: eigene Vektorkacheln Tübingen (Zoom 12–15) + vorberechnete Fußwege
+const MAP_FILES = [
+  'map/v1/tiles/12/2150/1414.mvt', 'map/v1/tiles/12/2150/1415.mvt', 'map/v1/tiles/12/2151/1414.mvt',
+  'map/v1/tiles/12/2151/1415.mvt',
+  'map/v1/tiles/13/4300/2828.mvt', 'map/v1/tiles/13/4300/2829.mvt', 'map/v1/tiles/13/4300/2830.mvt',
+  'map/v1/tiles/13/4301/2828.mvt', 'map/v1/tiles/13/4301/2829.mvt', 'map/v1/tiles/13/4301/2830.mvt',
+  'map/v1/tiles/13/4302/2828.mvt', 'map/v1/tiles/13/4302/2829.mvt', 'map/v1/tiles/13/4302/2830.mvt',
+  'map/v1/tiles/13/4303/2828.mvt', 'map/v1/tiles/13/4303/2829.mvt', 'map/v1/tiles/13/4303/2830.mvt',
+  'map/v1/tiles/14/8603/5658.mvt', 'map/v1/tiles/14/8603/5659.mvt', 'map/v1/tiles/14/8603/5660.mvt',
+  'map/v1/tiles/14/8604/5658.mvt', 'map/v1/tiles/14/8604/5659.mvt', 'map/v1/tiles/14/8604/5660.mvt',
+  'map/v1/tiles/14/8605/5658.mvt', 'map/v1/tiles/14/8605/5659.mvt', 'map/v1/tiles/14/8605/5660.mvt',
+  'map/v1/tiles/15/17206/11317.mvt', 'map/v1/tiles/15/17206/11318.mvt', 'map/v1/tiles/15/17206/11319.mvt',
+  'map/v1/tiles/15/17206/11320.mvt', 'map/v1/tiles/15/17206/11321.mvt', 'map/v1/tiles/15/17207/11317.mvt',
+  'map/v1/tiles/15/17207/11318.mvt', 'map/v1/tiles/15/17207/11319.mvt', 'map/v1/tiles/15/17207/11320.mvt',
+  'map/v1/tiles/15/17207/11321.mvt', 'map/v1/tiles/15/17208/11317.mvt', 'map/v1/tiles/15/17208/11318.mvt',
+  'map/v1/tiles/15/17208/11319.mvt', 'map/v1/tiles/15/17208/11320.mvt', 'map/v1/tiles/15/17208/11321.mvt',
+  'map/v1/tiles/15/17209/11317.mvt', 'map/v1/tiles/15/17209/11318.mvt', 'map/v1/tiles/15/17209/11319.mvt',
+  'map/v1/tiles/15/17209/11320.mvt', 'map/v1/tiles/15/17209/11321.mvt', 'map/v1/tiles/15/17210/11317.mvt',
+  'map/v1/tiles/15/17210/11318.mvt', 'map/v1/tiles/15/17210/11319.mvt', 'map/v1/tiles/15/17210/11320.mvt',
+  'map/v1/tiles/15/17210/11321.mvt',
+];
+const MAP_ROUTE = { adult: 'map/v1/route_krimi.json', kids: 'map/v1/route_kinder.json' };
+
+const MEDIA_RE = /\.(mp3|wav|jpg|jpeg|png|svg|webp|mvt)$|\/map\/v\d+\/route_\w+\.json$/i;
 const ASSET_RE = /\.(css|js|woff2)$/i;
 
 self.addEventListener('install', event => {
@@ -159,7 +183,7 @@ self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
-  // Kartenkacheln, Routing, Code-Prüfung usw. gehen direkt ans Netz
+  // Fremde Server (Code-Prüfung, Trace, OSM-Notnagel) gehen direkt ans Netz
   if (url.origin !== self.location.origin) return;
   const path = url.pathname;
 
@@ -283,13 +307,13 @@ self.addEventListener('message', event => {
 async function downloadAll(tour, lang) {
   let files;
   if (tour === 'kids') {
-    files = [...CORE_FILES, ...KIDS_FONT_FILES, ...SFX_FILES, ...KIDS_FILES];
+    files = [...CORE_FILES, ...KIDS_FONT_FILES, ...SFX_FILES, ...KIDS_FILES, ...MAP_FILES, MAP_ROUTE.kids];
   } else {
     const prefix = lang === 'en' ? 'audio/en/' : 'audio/';
     const audio = AUDIO_BASENAMES
       .filter(f => !(lang === 'en' && AUDIO_MISSING_EN.includes(f)))
       .map(f => prefix + f);
-    files = [...CORE_FILES, ...FONT_FILES, ...SFX_FILES, ...audio, ...IMAGE_FILES];
+    files = [...CORE_FILES, ...FONT_FILES, ...SFX_FILES, ...audio, ...IMAGE_FILES, ...MAP_FILES, MAP_ROUTE.adult];
   }
   const core = await caches.open(CORE_CACHE);
   const media = await caches.open(MEDIA_CACHE);

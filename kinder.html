@@ -23,6 +23,7 @@
 <link href="fonts/fonts.css?v=20261026" rel="stylesheet">
 <link rel="stylesheet" href="vendor/leaflet/leaflet.css?v=1.9.4">
 <script src="vendor/leaflet/leaflet.js?v=1.9.4"></script>
+<script src="vendor/protomaps-leaflet/protomaps-leaflet.js?v=5.1.0"></script>
 <style>
 :root {
   --green:#006a2d;--green-light:#009e44;--green-pale:#e8f5ee;
@@ -324,7 +325,7 @@ input{font-family:inherit;color:inherit}
     <p class="splash-hint" id="playerNameHint">Ihr seid mehrere? Schreibt einfach alle Namen rein – sie kommen auf die Urkunde.</p>
     <button class="btn-start" id="startBtn" onclick="startGame()">🐉 Tübi helfen!</button>
     <div id="splashError" role="alert" style="display:none"></div>
-    <button type="button" class="splash-offline" id="offlineBtn" onclick="downloadForOffline()">📶 Für unterwegs speichern (ca. 11 MB)</button>
+    <button type="button" class="splash-offline" id="offlineBtn" onclick="downloadForOffline()">📶 Für unterwegs speichern (ca. 14 MB)</button>
     <p class="splash-help">Noch keinen Code? <a href="index.html#kids">Hier gibt's die Kindertour</a></p>
   </div>
   <div class="splash-footer">Eine Tour von <a href="index.html" style="color:#fff;font-weight:800">TraceTour</a></div>
@@ -765,16 +766,22 @@ function showDebug(){if(!debugMode)return;document.getElementById('debugPanel').
 
 function openMap(){document.getElementById('mapOverlay').classList.add('active');if(!mapReady)initMap();else setTimeout(()=>map.invalidateSize(),150)}
 function closeMap(){document.getElementById('mapOverlay').classList.remove('active')}
+// Eigene Kartenkacheln (Protomaps/OSM, map/v1) – laufen nach dem Download auch offline
+function addBaseMap(map,lang){
+  map.setMinZoom(12);map.setMaxBounds([[48.47,8.97],[48.57,9.13]]);
+  if(typeof protomapsL!=='undefined'){protomapsL.leafletLayer({url:'map/v1/tiles/{z}/{x}/{y}.mvt',flavor:'light',lang:lang,maxDataZoom:15,maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · Protomaps'}).addTo(map);return}
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+}
 function initMap(){if(mapReady)return;try{
   map=L.map('map',{zoomControl:false,attributionControl:true}).setView([48.5200,9.0545],15);
   map.attributionControl.setPrefix(false);
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+  addBaseMap(map,'de');
   STATIONS.forEach((s,i)=>{const ul=i<=maxUnlocked,done=!!stationSolved[i],cur=i===currentStation;const emoji=ul?(done?'✅':s.emoji):'🔒';const m=L.marker([s.lat,s.lng],{icon:L.divIcon({html:`<div class="map-marker${cur?' map-marker-current':''}">${emoji}</div>`,className:'',iconSize:[32,32],iconAnchor:[16,16]})}).addTo(map);if(ul)m.bindTooltip(s.title,{permanent:false,direction:'top',className:'map-label'});stationMarkers.push(m)});
   routeLine=L.polyline([],{color:'#006a2d',weight:3,opacity:.5,dashArray:'8,10'}).addTo(map);fetchRoute();
   if(navigator.geolocation)navigator.geolocation.watchPosition(p=>{const ll=[p.coords.latitude,p.coords.longitude];if(!userMarker)userMarker=L.marker(ll,{icon:L.divIcon({html:'<div class="map-user-dot"></div>',className:'',iconSize:[14,14],iconAnchor:[7,7]})}).addTo(map);else userMarker.setLatLng(ll)},()=>{},{enableHighAccuracy:true,maximumAge:5000,timeout:15000});
   mapReady=true;setTimeout(()=>map.invalidateSize(),200)}catch(e){console.error('Map:',e)}}
 function updateMapMarkers(){if(!mapReady)return;STATIONS.forEach((s,i)=>{const ul=i<=maxUnlocked,done=!!stationSolved[i],cur=i===currentStation;stationMarkers[i].setIcon(L.divIcon({html:`<div class="map-marker${cur?' map-marker-current':''}">${ul?(done?'✅':s.emoji):'🔒'}</div>`,className:'',iconSize:[32,32],iconAnchor:[16,16]}));if(ul&&!stationMarkers[i].getTooltip())stationMarkers[i].bindTooltip(s.title,{permanent:false,direction:'top',className:'map-label'})});updateRouteDisplay();map.flyTo([STATIONS[currentStation].lat,STATIONS[currentStation].lng],16,{duration:.8})}
-async function fetchRoute(){try{const c=STATIONS.map(s=>s.lng+','+s.lat).join(';');const r=await fetch('https://routing.openstreetmap.de/routed-foot/route/v1/foot/'+c+'?overview=full&geometries=geojson');const d=await r.json();if(d.routes&&d.routes[0])fullRouteCoords=d.routes[0].geometry.coordinates.map(c=>[c[1],c[0]])}catch(e){}updateRouteDisplay()}
+async function fetchRoute(){try{const r=await fetch('map/v1/route_kinder.json');const d=await r.json();if(Array.isArray(d)&&d.length>1)fullRouteCoords=d}catch(e){}updateRouteDisplay()}
 function updateRouteDisplay(){if(!routeLine)return;if(!fullRouteCoords){routeLine.setLatLngs(STATIONS.slice(0,Math.min(maxUnlocked+1,STATIONS.length)).map(s=>[s.lat,s.lng]));return}const t=STATIONS[Math.min(maxUnlocked,STATIONS.length-1)];let bi=fullRouteCoords.length-1,bd=Infinity;fullRouteCoords.forEach((c,i)=>{const d=Math.abs(c[0]-t.lat)+Math.abs(c[1]-t.lng);if(d<bd){bd=d;bi=i}});routeLine.setLatLngs(fullRouteCoords.slice(0,bi+1))}
 
 function renderQuiz(){const n=Object.keys(quizAnswers).length;document.getElementById('quizProgress').textContent=`${n} von ${QUIZ_QUESTIONS.length} beantwortet`;document.getElementById('quizDoneBtn').classList.toggle('show',n===QUIZ_QUESTIONS.length);document.getElementById('quizContent').innerHTML=QUIZ_QUESTIONS.map((q,qi)=>{const done=quizAnswers[qi]!==undefined;return`<div class="quiz-q-card fade-in"><div class="quiz-q-num">Frage ${qi+1}</div><div class="quiz-q-text">${q.text}</div><div class="mc-options">${q.options.map((o,oi)=>{let c='mc-btn';if(done){if(oi===q.correct)c+=' correct';else if(quizAnswers[qi]===oi&&oi!==q.correct)c+=' wrong'}return`<button class="${c}" ${done?'disabled':''} onclick="answerQuiz(${qi},${oi})"><span class="mc-letter">${String.fromCharCode(65+oi)}</span><span>${o}</span></button>`}).join('')}</div></div>`}).join('')}
@@ -986,7 +993,7 @@ function downloadForOffline(){
   Promise.race([ready,new Promise(r=>setTimeout(r,8000,null))]).then(w=>{
     if(!w)throw new Error('no worker');
     w.postMessage({type:'download-all',tour:'kids'});
-  }).catch(()=>{btn.disabled=false;btn.textContent='📶 Für unterwegs speichern (ca. 11 MB)';alert('Bitte lade die Seite einmal neu und versuch es dann nochmal.')});
+  }).catch(()=>{btn.disabled=false;btn.textContent='📶 Für unterwegs speichern (ca. 14 MB)';alert('Bitte lade die Seite einmal neu und versuch es dann nochmal.')});
 }
 document.addEventListener('keydown',e=>{
   const el=e.target;

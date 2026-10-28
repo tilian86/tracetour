@@ -24,6 +24,7 @@
 <link href="fonts/fonts.css?v=20261026" rel="stylesheet">
 <link rel="stylesheet" href="vendor/leaflet/leaflet.css?v=1.9.4">
 <script src="vendor/leaflet/leaflet.js?v=1.9.4"></script>
+<script src="vendor/protomaps-leaflet/protomaps-leaflet.js?v=5.1.0"></script>
 <style>
 :root{
 --bg:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;--bg-panel:#1e293b;
@@ -508,7 +509,7 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <span style="font-size:.8rem;opacity:.7">Falls du die Berechtigung verweigert hast:<br>
 <strong>iPhone:</strong> Einstellungen → Safari → Standort → Erlauben (oder suche: <em>„iPhone Safari Standort erlauben"</em>)<br>
 <strong>Android:</strong> Einstellungen → Apps → Chrome → Berechtigungen → Standort (oder suche: <em>„Android Chrome Standort Berechtigung"</em>)</span></p>
-<p style="margin-bottom:.75rem">📶 <strong>Offline unterwegs?</strong> Lade die Tour vorab herunter – dann funktioniert alles auch ohne Internet.</p>
+<p style="margin-bottom:.75rem">📶 <strong>Offline unterwegs?</strong> Lade die Tour vorab herunter – dann laufen Geschichten, Rätsel und Karte auch ohne Internet (nur Trace braucht Netz).</p>
 <p style="margin-bottom:.75rem">🔄 <strong>Fortschritt wird automatisch gespeichert.</strong> Du kannst jederzeit pausieren und später weitermachen.</p>
 <button id="offlineBtn" onclick="downloadForOffline()" class="hint-btn" style="width:100%;margin-bottom:.5rem"><span class="material-symbols-outlined" style="font-size:16px">cloud_download</span> Tour für Offline herunterladen (~50 MB)</button>
 </div>
@@ -799,7 +800,7 @@ de:{
   guideGroup:'\ud83d\udd0a <strong>In der Gruppe?</strong> \u2013 Nehmt einen Bluetooth-Lautsprecher mit! So hören alle entspannt die Geschichten und ihr könnt gemeinsam rätseln.',
   guideLocation:'\ud83d\udcf1 <strong>Standort erlauben</strong> \u2013 Die App braucht Zugriff auf deinen Standort, damit die Karte funktioniert. Wenn dein Browser fragt, tippe auf \u201eErlauben\u201c.',
   guideLocationSub:'Falls du die Berechtigung verweigert hast:<br><strong>iPhone:</strong> Einstellungen \u2192 Safari \u2192 Standort \u2192 Erlauben (oder suche: <em>\u201eiPhone Safari Standort erlauben\u201c</em>)<br><strong>Android:</strong> Einstellungen \u2192 Apps \u2192 Chrome \u2192 Berechtigungen \u2192 Standort (oder suche: <em>\u201eAndroid Chrome Standort Berechtigung\u201c</em>)',
-  guideOffline:'\ud83d\udcf6 <strong>Offline unterwegs?</strong> Lade die Tour vorab herunter \u2013 dann funktioniert alles auch ohne Internet.',
+  guideOffline:'\ud83d\udcf6 <strong>Offline unterwegs?</strong> Lade die Tour vorab herunter \u2013 dann laufen Geschichten, R\u00e4tsel und Karte auch ohne Internet (nur Trace braucht Netz).',
   guideSave:'\ud83d\udd04 <strong>Fortschritt wird automatisch gespeichert.</strong> Du kannst jederzeit pausieren und später weitermachen.',
   btnStartMission:'Mission starten',
   prologueTitle:'Die Formel des',prologueTitleAccent:'Forschers',
@@ -912,7 +913,7 @@ en:{
   guideGroup:'\ud83d\udd0a <strong>In a group?</strong> \u2014 Bring a Bluetooth speaker! That way everyone can comfortably listen to the stories and puzzle together.',
   guideLocation:'\ud83d\udcf1 <strong>Allow location access</strong> \u2014 The app needs access to your location for the map to work. When your browser asks, tap "Allow."',
   guideLocationSub:'If you denied the permission:<br><strong>iPhone:</strong> Settings \u2192 Safari \u2192 Location \u2192 Allow (or search: <em>"iPhone Safari allow location"</em>)<br><strong>Android:</strong> Settings \u2192 Apps \u2192 Chrome \u2192 Permissions \u2192 Location (or search: <em>"Android Chrome location permission"</em>)',
-  guideOffline:'\ud83d\udcf6 <strong>Going offline?</strong> Download the tour in advance \u2014 then everything works without internet too.',
+  guideOffline:'\ud83d\udcf6 <strong>Going offline?</strong> Download the tour in advance \u2014 stories, puzzles and the map then work without internet (only Trace needs a connection).',
   guideSave:'\ud83d\udd04 <strong>Progress is saved automatically.</strong> You can pause anytime and continue later.',
   btnStartMission:'Start mission',
   prologueTitle:'The Researcher\'s',prologueTitleAccent:'Formula',
@@ -1763,6 +1764,12 @@ function backToMenu(){
 }
 
 // ====== MAP ======
+// Eigene Kartenkacheln (Protomaps/OSM, map/v1) – laufen nach dem Download auch offline
+function addBaseMap(map,lang){
+  map.setMinZoom(12);map.setMaxBounds([[48.47,8.97],[48.57,9.13]]);
+  if(typeof protomapsL!=='undefined'){protomapsL.leafletLayer({url:'map/v1/tiles/{z}/{x}/{y}.mvt',flavor:'light',lang:lang,maxDataZoom:15,maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · Protomaps'}).addTo(map);return}
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+}
 let mapInitStarted=false;
 function initMap(){
   if(mapInitStarted)return;mapInitStarted=true;
@@ -1770,7 +1777,7 @@ function initMap(){
     try{
       map=L.map('map',{zoomControl:false,attributionControl:true}).setView([48.5215,9.0540],15);
       map.attributionControl.setPrefix(false);
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+      addBaseMap(map,lang==='en'?'en':'de');
       stations.forEach((s,i)=>{
         const visible=i<=maxUnlockedStation;
         const m=L.circleMarker([s.lat,s.lng],{radius:i===0?10:6,color:'#f3632d',fillColor:i===0?'#f3632d':'#4a5d73',fillOpacity:visible?(i===0?1:.5):0,weight:visible?2:0,opacity:visible?1:0}).addTo(map);
@@ -1815,23 +1822,13 @@ function updateDistanceBar(){
   bar.hidden=false;
 }
 
-// ====== WALKING ROUTE (OSRM) ======
+// ====== WALKING ROUTE ======
 async function fetchWalkingRoute(){
+  // Fußweg-Route liegt fest vorberechnet im Projekt (OSRM foot, map/v1) – kein Routing-Server nötig, offline dabei
   try{
-    // Use OSRM foot profile via Valhalla/ORS or fallback
-    // Try OpenRouteService first (foot-walking), then OSRM driving as fallback
-    const coords=stations.map(s=>[s.lng,s.lat]);
-    const orsCoords=coords.map(c=>c.join(',')).join('|');
-    // Use OSRM with foot profile (public demo server)
-    const osrmCoords=stations.map(s=>s.lng+','+s.lat).join(';');
-    const url='https://routing.openstreetmap.de/routed-foot/route/v1/foot/'+osrmCoords+'?overview=full&geometries=geojson';
-    const resp=await fetch(url);
-    const data=await resp.json();
-    if(data.routes&&data.routes[0]){
-      fullRouteCoords=data.routes[0].geometry.coordinates.map(c=>[c[1],c[0]]);
-      updateRouteDisplay();
-      return;
-    }
+    const resp=await fetch('map/v1/route_krimi.json');
+    const pts=await resp.json();
+    if(Array.isArray(pts)&&pts.length>1){fullRouteCoords=pts;updateRouteDisplay();return}
   }catch(e){}
   console.warn('Route fallback to straight lines');
   fullRouteCoords=null;
