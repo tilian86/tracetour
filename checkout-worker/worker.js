@@ -158,7 +158,7 @@ async function sendCodeMail(env, { to, name, code, tour }) {
     <li>Gib den Code ein${kids ? ' und euren Drachenkind-Namen' : ' und wähle deinen Ermittler-Namen'}</li>
     <li>${startHint}</li>
   </ol>
-  <p style="font-size:.85rem;color:#64748b">Tipp: Lade die Tour vorher im WLAN für unterwegs herunter. Kopfhörer oder Lautsprecher nicht vergessen!</p>
+  <p style="font-size:.85rem;color:#64748b">Tipp: Lade die Tour am Tag eurer Tour vorher im WLAN herunter (dann startet auch die 48-Stunden-Zeit). Kopfhörer oder Lautsprecher nicht vergessen!</p>
   <p style="font-size:.8rem;color:#94a3b8">Gut zu wissen: Ab dem ersten Start hast du 48 Stunden Zeit für die Tour – aktiviere den Code also erst, wenn du wirklich losgehst. Einlösbar bis 12 Monate nach Kauf.</p>
   <p style="font-size:.85rem;color:#64748b">Fragen? Antworte einfach auf diese E-Mail.<br>TraceTour – by Florian S. Thiel · <a href="https://tracetour.de">tracetour.de</a></p>
 </div>`,

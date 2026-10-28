@@ -401,7 +401,7 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <h1>Willkommen in<br><span>Tübingen</span></h1>
 <p>Du bist Teil einer Geschichte geworden. Löse Rätsel vor Ort, entdecke verborgene Winkel, höre die Stimmen der Vergangenheit – und sammle Erfahrungspunkte.</p>
 </div>
-<div class="tour-card" role="button" tabindex="0" onclick="showScreen('prologue')">
+<div class="tour-card" role="button" tabindex="0" onclick="openTourCard()">
 <img class="tour-card-img" src="images/city_tuebingen2.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
 <div class="tour-card-body">
 <span class="badge badge-live">Verfügbar</span>
@@ -766,6 +766,7 @@ de:{
   btnNextStation:'Weiter: {name} \u2192',btnCloseCase:'Fall abschließen \u2192',btnCloseCaseAlt:'Fall abschließen',
   factReminder:'Tipp: Hör dir den freigeschalteten Fakten-Track an \u2013 da stecken spannende Bonus-Infos drin!',btnAnywayNext:'Trotzdem weiter \u2192',
   toastSaved:'Fortschritt gespeichert',toastDeleted:'Fortschritt gelöscht',toastImage:'Bild gespeichert!',
+  confirmRestart:'Du hast schon einen Spielstand (Station {x}, {xp} Traces). Wirklich von vorn beginnen? Dein Fortschritt wird überschrieben.\n\nAbbrechen = dort weiterspielen.',
   confirmReset1:'Wirklich alles löschen? Dein gesamter Fortschritt (gelöste Rätsel, Punkte, freigeschaltete Stationen) geht unwiderruflich verloren!',
   confirmReset2:'Bist du sicher? Das kann nicht rückgängig gemacht werden.',
   confirmSkip:'Möchtest du das Rätsel wirklich überspringen? Du bekommst keine Traces dafür \u2013 aber die Lösung und den Fakten-Track.',
@@ -878,6 +879,7 @@ en:{
   btnNextStation:'Next: {name} \u2192',btnCloseCase:'Close the case \u2192',btnCloseCaseAlt:'Close the case',
   factReminder:'Tip: Listen to the unlocked facts track \u2014 it contains exciting bonus info!',btnAnywayNext:'Continue anyway \u2192',
   toastSaved:'Progress saved',toastDeleted:'Progress deleted',toastImage:'Image saved!',
+  confirmRestart:'You already have a saved game (station {x}, {xp} Traces). Really start over? Your progress will be overwritten.\n\nCancel = continue where you left off.',
   confirmReset1:'Really delete everything? All your progress (solved puzzles, points, unlocked stations) will be permanently lost!',
   confirmReset2:'Are you sure? This cannot be undone.',
   confirmSkip:'Do you really want to skip this puzzle? You will not earn Traces for it \u2014 but you will get the answer and the facts track.',
@@ -1734,7 +1736,20 @@ document.getElementById('loginName').addEventListener('keydown',e=>{if(e.key==='
 // Nach Kauf (Danke-Seite) oder Weiterleitung aus der Kindertour: Code vorbefüllen
 try{const pc=sessionStorage.getItem('tracetour_code_for_adult')||localStorage.getItem('tracetour_purchased_code');if(pc&&!document.getElementById('loginCode').value)document.getElementById('loginCode').value=pc;}catch(e){}
 
+// Spielstand mit echtem Fortschritt (nicht nur Name nach dem Login) – den nie stillschweigend überschreiben
+function savedProgress(){
+  try{
+    const d=JSON.parse(localStorage.getItem(SAVE_KEY));
+    if(d&&d.userName&&((d.currentStation||0)>0||(d.totalXp||0)>0||(d.solvedStations||[]).some(Boolean)))return d;
+  }catch(e){}
+  return null;
+}
+function openTourCard(){
+  if(savedProgress())continueTour();else showScreen('prologue');
+}
 function startTour(){
+  const sp=savedProgress();
+  if(sp&&!confirm(t('confirmRestart').replace('{x}',(sp.currentStation||0)+1).replace('{xp}',sp.totalXp||0))){continueTour();return}
   currentStation=0;maxUnlockedStation=0;totalXp=0;aiQuestionsLeft=MAX_AI_QUESTIONS;
   solvedStations=stations.map(()=>false);bonusSolved={};bonusAttempts={};
   Object.keys(usedHintIndices).forEach(k=>delete usedHintIndices[k]);
