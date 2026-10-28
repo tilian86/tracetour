@@ -844,6 +844,7 @@ SPECIAL_AUDIO = {
     },
     "thanks": {
         "voice": "cgSgspJ2msm6clMCkdW9",  # Jessica - warm, persönlich
+        "model": "eleven_v4",  # 28.10.2026 mit v4 neu vertont (Florian fand es deutlich besser)
         "text": (
             "Von uns für dich.\n\n"
             "Vielen herzlichen Dank, dass du mit uns unterwegs warst. Wir sind ein kleines, "
@@ -856,6 +857,7 @@ SPECIAL_AUDIO = {
     },
     "epilog": {
         "voice": "cgSgspJ2msm6clMCkdW9",  # Jessica - Playful, Bright, Warm
+        "model": "eleven_v4",
         "text": (
             "Unglaublich, Ermittler! Du hast es tatsächlich geschafft – siebzehn Stationen, "
             "acht Rätsel, und Heinrichs Geheimnis nach über hundertfünfzig Jahren gelüftet. "
@@ -880,7 +882,7 @@ SPECIAL_AUDIO = {
 # AUDIO-GENERIERUNG
 # ============================================================
 
-def generate_audio(client, text, voice_id, output_path):
+def generate_audio(client, text, voice_id, output_path, model_id=MODEL_ID):
     """Generiert eine MP3-Datei aus Text via ElevenLabs REST API."""
     print(f"  Generiere: {output_path.name} ({len(text)} Zeichen)...", end=" ", flush=True)
 
@@ -895,7 +897,7 @@ def generate_audio(client, text, voice_id, output_path):
             },
             json={
                 "text": text,
-                "model_id": MODEL_ID,
+                "model_id": model_id,
                 "voice_settings": {"stability": 0.5, "similarity_boost": 0.75},
             },
             stream=True,
@@ -1010,7 +1012,7 @@ def main():
         filename = f"{stype}.mp3"
         output_path = OUTPUT_DIR / filename
         print(f"\nSpezial: {stype}")
-        success = generate_audio(client, spec["text"], spec["voice"], output_path)
+        success = generate_audio(client, spec["text"], spec["voice"], output_path, spec.get("model", MODEL_ID))
         done += 1
         if not success:
             errors += 1
