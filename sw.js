@@ -5,7 +5,7 @@
 //  - MEDIA: Audios und Bilder (groß, ändern sich selten). Bleibt über Code-Updates erhalten,
 //           damit ein Update niemandem mitten in der Tour die Offline-Audios löscht.
 //           Einzelne neu vertonte Dateien stattdessen in MEDIA_REFRESH eintragen.
-const CORE_CACHE = 'tracetour-core-v10';
+const CORE_CACHE = 'tracetour-core-v11';
 const MEDIA_CACHE = 'tracetour-media-v1';
 const ASSET_V = '20261026'; // muss zu den ?v=-Parametern in den HTML-Dateien passen
 const NET_TIMEOUT = 4000;   // ms: danach liefern Seiten bei schlechtem Netz die gespeicherte Version
@@ -28,6 +28,8 @@ const MEDIA_REFRESH = [
   'images/kinder/station_0.jpg', 'images/kinder/station_1.jpg', 'images/kinder/station_1b.jpg',
   'images/kinder/station_2.jpg', 'images/kinder/station_3.jpg', 'images/kinder/station_4.jpg',
   'images/kinder/station_5.jpg', 'images/kinder/station_6.jpg', 'images/kinder/station_7.jpg',
+  // 29.10. Nonnenhaus-Standort korrigiert → Fußwege neu
+  'map/v1/route_krimi.json', 'map/v1/route_kinder.json',
 ];
 
 const CORE_FILES = [
