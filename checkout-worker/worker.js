@@ -56,10 +56,12 @@ export default {
 
 // ---------- Stripe-Signatur (HMAC-SHA256, v1-Schema) ----------
 async function verifyStripeSignature(payload, sigHeader, secret) {
-  if (!sigHeader) return false;
-  const parts = Object.fromEntries(sigHeader.split(',').map(p => p.split('=')));
-  const t = parts.t, v1 = parts.v1;
-  if (!t || !v1) return false;
+  if (!sigHeader || !secret) return false; // ohne Secret nie annehmen (sonst fälschbar)
+  const pairs = sigHeader.split(',').map(p => p.split('='));
+  const t = (pairs.find(([k]) => k === 't') || [])[1];
+  // Bei Secret-Wechsel schickt Stripe mehrere v1-Signaturen → jede prüfen
+  const sigs = pairs.filter(([k]) => k === 'v1').map(([, v]) => v || '');
+  if (!t || !sigs.length) return false;
   // Toleranz: 5 Minuten gegen Replay
   if (Math.abs(Date.now() / 1000 - Number(t)) > 300) return false;
   const enc = new TextEncoder();
@@ -67,10 +69,12 @@ async function verifyStripeSignature(payload, sigHeader, secret) {
   const mac = await crypto.subtle.sign('HMAC', key, enc.encode(`${t}.${payload}`));
   const expected = [...new Uint8Array(mac)].map(b => b.toString(16).padStart(2, '0')).join('');
   // Konstantzeit-Vergleich
-  if (expected.length !== v1.length) return false;
-  let diff = 0;
-  for (let i = 0; i < expected.length; i++) diff |= expected.charCodeAt(i) ^ v1.charCodeAt(i);
-  return diff === 0;
+  return sigs.some(v1 => {
+    if (expected.length !== v1.length) return false;
+    let diff = 0;
+    for (let i = 0; i < expected.length; i++) diff |= expected.charCodeAt(i) ^ v1.charCodeAt(i);
+    return diff === 0;
+  });
 }
 
 // ---------- Webhook ----------
@@ -99,16 +103,29 @@ async function handleWebhook(request, env) {
   const cap = parseInt(session.metadata?.devices, 10) || null;
 
   // Idempotenz: gibt es für diese Session schon einen Code?
-  const existing = await env.CODES.get(`session:${sessionId}`);
+  const existingRaw = await env.CODES.get(`session:${sessionId}`);
+  const existing = existingRaw ? JSON.parse(existingRaw) : null;
+  // Schon gemailt (Stripe-Wiederholung) → nichts doppelt schicken
+  if (existing?.mailed) {
+    return new Response(JSON.stringify({ received: true, duplicate: true }), { headers: JSON_HEADERS });
+  }
   let code;
   if (existing) {
-    code = JSON.parse(existing).code;
+    code = existing.code;
   } else {
     code = await assignCode(env, { sessionId, email, name, tour, cap });
     if (!code) {
       console.error('CODE POOL EMPTY!');
+      await sendAlert(env, 'TraceTour: Code-Vorrat LEER', `Ein Kauf (Session ${sessionId}) wartet auf einen Code. Bitte sofort Codes nachfüllen – Stripe wiederholt den Webhook noch einige Tage.`);
       return new Response('No codes left', { status: 500 }); // Stripe retried -> Zeit zum Nachfüllen
     }
+  }
+
+  // Ohne E-Mail-Adresse (sollte bei Payment Links nie vorkommen): Code steht auf der Danke-Seite,
+  // Wiederholungen würden nichts ändern → sauber beenden statt endlos 500
+  if (!email) {
+    console.warn(`Keine E-Mail für ${sessionId} — Code nur über Danke-Seite`);
+    return new Response(JSON.stringify({ received: true, no_email: true }), { headers: JSON_HEADERS });
   }
 
   // Mail senden (nicht fatal wenn's fehlschlägt: /code-Fallback existiert,
@@ -118,7 +135,25 @@ async function handleWebhook(request, env) {
     console.warn(`Mail fehlgeschlagen für ${sessionId} (Code ${code}) — Stripe wird retryn`);
     return new Response('Mail failed, will retry', { status: 500 });
   }
+  const entry = JSON.parse((await env.CODES.get(`session:${sessionId}`)) || '{}');
+  await env.CODES.put(`session:${sessionId}`, JSON.stringify({ ...entry, code, tour, mailed: true }));
   return new Response(JSON.stringify({ received: true }), { headers: JSON_HEADERS });
+}
+
+// Warnmail an Florian (höchstens einmal pro Tag je Betreff)
+async function sendAlert(env, subject, text) {
+  const to = env.ALERT_EMAIL || 'info@tracetour.de';
+  if (!env.RESEND_API_KEY) return;
+  const flag = `meta:alert:${subject}`;
+  if (await env.CODES.get(flag)) return;
+  try {
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from: env.FROM_EMAIL, to, subject, text }),
+    });
+    await env.CODES.put(flag, '1', { expirationTtl: 86400 });
+  } catch (e) { console.error('Alert-Mail fehlgeschlagen', e); }
 }
 
 async function assignCode(env, meta) {
@@ -136,6 +171,10 @@ async function assignCode(env, meta) {
     }));
     await env.CODES.put(`session:${meta.sessionId}`, JSON.stringify({ code, tour: meta.tour, ts: Date.now() }));
     await env.CODES.put('meta:counter', String(counter + 1));
+    // Frühwarnung: weniger als 50 Codes übrig
+    if (!(await env.CODES.get(`idx:${counter + 50}`))) {
+      await sendAlert(env, 'TraceTour: Code-Vorrat fast leer', `Nach Code Nr. ${counter + 1} sind weniger als 50 Codes übrig. Bitte nachfüllen.`);
+    }
     return code;
   }
   return null;
@@ -259,6 +298,10 @@ async function handleValidate(request, env) {
   const DEVICE_CAP = parseInt(state.cap, 10) || parseInt(env.DEVICE_CAP || '4', 10);
   const WINDOW_MS = parseInt(env.ACTIVATION_HOURS || '48', 10) * 3600 * 1000;
   const device = String(body.device || '').slice(0, 64);
+  // Ohne Geräte-Kennung würde das Limit nicht greifen (alle Seiten schicken sie mit)
+  if (!device) {
+    return new Response(JSON.stringify({ valid: false, reason: 'format' }), { headers: { ...JSON_HEADERS, ...cors(env) } });
+  }
   const now = Date.now();
   state.devices = Array.isArray(state.devices) ? state.devices : [];
   const known = device && state.devices.includes(device);
