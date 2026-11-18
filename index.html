@@ -599,7 +599,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
           <span class="font-headline text-5xl font-black text-on-surface">9,99</span>
           <span class="text-slate-400 font-body text-lg">&euro;</span>
         </div>
-        <p class="text-slate-400 text-sm mt-2" data-t="price-kids-per">pro Familie (1 Gerät)</p>
+        <p class="text-slate-400 text-sm mt-2" data-t="price-kids-per">pro Familie (bis 2 Handys)</p>
       </div>
       <ul class="space-y-3 mb-8 flex-1">
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
@@ -681,7 +681,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span aria-hidden="true" class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          <span data-t="price-class-f2">Bis zu 30 Schüler mit einem Code</span>
+          <span data-t="price-class-f2">Bis zu 30 Schüler, in Gruppen auf bis zu 10 Handys</span>
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span aria-hidden="true" class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
@@ -759,7 +759,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
       </details>
       <details class="faq-item">
         <summary><span data-t="faq-q5">Funktioniert die Tour auch offline?</span><span aria-hidden="true" class="faq-chevron material-symbols-outlined">expand_more</span></summary>
-        <p data-t="faq-a5">Ja. Lade die Tour vorab im WLAN herunter (Krimi ca. 50 MB, Kindertour ca. 11 MB), dann laufen Texte, Audios und Rätsel auch ohne Internet. Nur die einmalige Code-Aktivierung braucht kurz Netz – und der Kartenhintergrund lädt online nach.</p>
+        <p data-t="faq-a5">Ja. Lade die Tour vorab im WLAN herunter (Krimi ca. 50 MB, Kindertour ca. 11 MB), dann laufen Texte, Audios und Rätsel auch ohne Internet. Nur die einmalige Code-Aktivierung braucht kurz Netz – die Karte ist im Download schon dabei.</p>
       </details>
       <details class="faq-item">
         <summary><span data-t="faq-q6">Kann ich die Tour unterbrechen?</span><span aria-hidden="true" class="faq-chevron material-symbols-outlined">expand_more</span></summary>
@@ -852,6 +852,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
       <a class="font-body text-xs tracking-widest uppercase text-slate-300 hover:text-orange-300 transition-colors" href="impressum.html" data-t="footer-imprint">Impressum</a>
       <a class="font-body text-xs tracking-widest uppercase text-slate-300 hover:text-orange-300 transition-colors" href="datenschutz.html" data-t="footer-privacy">Datenschutz</a>
       <a class="font-body text-xs tracking-widest uppercase text-slate-300 hover:text-orange-300 transition-colors" href="agb.html" data-t="footer-terms">AGB</a>
+      <a class="font-body text-xs tracking-widest uppercase text-slate-300 hover:text-orange-300 transition-colors" href="widerruf.html" data-t="footer-withdrawal">Widerruf</a>
       <a class="font-body text-xs tracking-widest uppercase text-slate-300 hover:text-orange-300 transition-colors" href="code.html" data-t="footer-app">Code einlösen</a>
     </div>
   </div>
@@ -968,7 +969,7 @@ const translations = {
   'price-solo-cta': ['BALD BUCHBAR · ERINNERE MICH 🔔', 'COMING SOON · REMIND ME 🔔'],
   'price-kids-badge': ['Für Familien', 'For Families'],
   'price-kids-name': ['Kindertour mit Tübi 🐉', 'Kids Tour with Tübi 🐉'],
-  'price-kids-per': ['pro Familie (1 Gerät)', 'per family (1 device)'],
+  'price-kids-per': ['pro Familie (bis 2 Handys)', 'per family (up to 2 phones)'],
   'price-kids-f1': ['8 Stationen mit Drache Tübi (60–90 Min)', '8 stations with Tübi the dragon (60–90 min)'],
   'price-kids-f2': ['Kindgerechte Audio-Story (5–10 Jahre)', 'Kid-friendly audio story in German (ages 5–10)'],
   'price-kids-f3': ['Rätsel, Funken sammeln & Mitmach-Aufgaben', 'Riddles, spark collecting & hands-on tasks'],
@@ -987,7 +988,7 @@ const translations = {
   'price-class-name': ['Schulklasse', 'School Class'],
   'price-class-per': ['pauschal · bis 30 Personen', 'flat rate · up to 30 people'],
   'price-class-f1': ['Alles aus dem Solo-Ticket', 'Everything from the Solo ticket'],
-  'price-class-f2': ['Bis zu 30 Schüler mit einem Code', 'Up to 30 students with one code'],
+  'price-class-f2': ['Bis zu 30 Schüler, in Gruppen auf bis zu 10 Handys', 'Up to 30 students, in groups on up to 10 phones'],
   'price-class-f3': ['Bildungsplanbezug: Stadtgeschichte erleben', 'Curriculum-linked: experience city history'],
   'price-class-f4': ['Ab 2,67 € pro Schüler', 'From €2.67 per student'],
   'price-class-f5': ['Perfekt für Wandertag oder Projekttag', 'Perfect for field trips or project days'],
@@ -1021,7 +1022,7 @@ const translations = {
   'faq-q14': ['Wie anstrengend ist der Weg? Geht das mit Kinderwagen?', 'How demanding is the route? Can I bring a stroller?'],
   'faq-a14': ['Tübingens Altstadt ist hügelig und hat viel Kopfsteinpflaster – bequeme Schuhe helfen. Der Krimi führt vom Schloss überwiegend bergab. Wo die Route eine Abkürzung über Treppen nimmt, nennt die App einen Weg ohne Stufen, zum Beispiel für Kinderwagen.', 'Tübingen’s old town is hilly with plenty of cobblestones – comfortable shoes help. The mystery mostly runs downhill from the castle. Where the route takes a shortcut via stairs, the app names a step-free alternative, e.g. for strollers.'],
   'faq-q5': ['Funktioniert die Tour auch offline?', 'Does the tour work offline?'],
-  'faq-a5': ['Ja. Lade die Tour vorab im WLAN herunter (Krimi ca. 50 MB, Kindertour ca. 11 MB), dann laufen Texte, Audios und Rätsel auch ohne Internet. Nur die einmalige Code-Aktivierung braucht kurz Netz – und der Kartenhintergrund lädt online nach.', 'Yes. Download the tour in advance on Wi-Fi (mystery approx. 50 MB, kids tour approx. 11 MB) and texts, audio and puzzles work without internet. Only the one-time code activation briefly needs a connection – and the map background loads online.'],
+  'faq-a5': ['Ja. Lade die Tour vorab im WLAN herunter (Krimi ca. 50 MB, Kindertour ca. 11 MB), dann laufen Texte, Audios und Rätsel auch ohne Internet. Nur die einmalige Code-Aktivierung braucht kurz Netz – die Karte ist im Download schon dabei.', 'Yes. Download the tour in advance on Wi-Fi (mystery approx. 50 MB, kids tour approx. 11 MB) and texts, audio and puzzles work without internet. Only the one-time code activation briefly needs a connection – the map is already included in the download.'],
   'faq-q6': ['Kann ich die Tour unterbrechen?', 'Can I pause the tour?'],
   'faq-a6': ['Jederzeit. Dein Spielstand wird automatisch gespeichert – mach eine Pause im Café und spiel innerhalb deines 48-Stunden-Fensters genau dort weiter, wo du warst.', 'Anytime. Your progress is saved automatically – take a break at a café and continue exactly where you left off within your 48-hour window.'],
   'faq-q15': ['Was ist echt, was erfunden?', 'What’s real and what’s made up?'],
@@ -1046,6 +1047,7 @@ const translations = {
   'footer-imprint': ['Impressum', 'Imprint'],
   'footer-privacy': ['Datenschutz', 'Privacy'],
   'footer-terms': ['AGB', 'Terms'],
+  'footer-withdrawal': ['Widerruf', 'Withdrawal'],
   'footer-app': ['Code einlösen', 'Redeem code'],
 };
 

@@ -343,7 +343,7 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 <label for="loginGroup" class="sr-only" id="loginGroupLbl">Teamname (optional)</label>
 <input type="text" id="loginGroup" placeholder="Teamname (optional)" autocomplete="off" autocapitalize="words" maxlength="30">
 <button class="btn-primary" id="loginBtn" onclick="doLogin()">Einloggen</button>
-<div class="login-hint" id="loginHint">Dein Zugangscode ist persönlich und an ein Gerät gebunden.<br>Er wird beim ersten Login aktiviert.<br>Noch keinen Code? Alle Infos auf <a href="index.html#pricing" style="color:var(--accent);text-decoration:none;font-weight:600">tracetour.de</a></div>
+<div class="login-hint" id="loginHint">Dein Zugangscode wird beim ersten Login aktiviert.<br>Er gilt für so viele Handys, wie dein Ticket umfasst.<br>Noch keinen Code? Alle Infos auf <a href="index.html#pricing" style="color:var(--accent);text-decoration:none;font-weight:600">tracetour.de</a></div>
 <div class="lang-toggle">
   <button class="lang-btn active" onclick="setLang('de')">DE</button>
   <button class="lang-btn" onclick="setLang('en')">EN</button>
@@ -726,7 +726,7 @@ function getAudioBase(){return lang==='en'?'audio/en/':'audio/';}
 const T={
 de:{
   loginPlaceholder:'Dein Ermittlername',codePlaceholder:'Zugangscode',groupPlaceholder:'Teamname (optional)',
-  btnLogin:'Einloggen',loginError:'Ungültiger Zugangscode. Bitte prüfe deinen Code.',loginHint:'Dein Zugangscode ist persönlich und an ein Gerät gebunden.\nEr wird beim ersten Login aktiviert.\nNoch keinen Code? Alle Infos auf <a href="index.html#pricing" style="color:var(--accent);text-decoration:none;font-weight:600">tracetour.de</a>',
+  btnLogin:'Einloggen',loginError:'Ungültiger Zugangscode. Bitte prüfe deinen Code.',loginHint:'Dein Zugangscode wird beim ersten Login aktiviert.\nEr gilt für so viele Handys, wie dein Ticket umfasst.\nNoch keinen Code? Alle Infos auf <a href="index.html#pricing" style="color:var(--accent);text-decoration:none;font-weight:600">tracetour.de</a>',
   backLink:'\u2190 Zurück zur Startseite',
   loginNameMissing:'Bitte gib zuerst deinen Ermittlernamen ein \u2013 er steht später auf deiner Urkunde.',loginNoNet:'Keine oder zu langsame Verbindung \u2013 die Code-Prüfung braucht einmalig Internet. Bitte gleich nochmal versuchen.',
   loginWrongTour:'Dieser Code gehört zur Kindertour! \ud83d\udc09',loginWrongTourLink:'Zur Kindertour \u2192',loginDeviceLimit:'Dieser Code wurde bereits auf zu vielen Geräten benutzt. Schreib uns an info@tracetour.de, wir helfen dir.',loginExpired:'Dieser Code ist abgelaufen \u2013 das 48-Stunden-Fenster nach dem ersten Start ist vorbei.',
@@ -839,7 +839,7 @@ de:{
 },
 en:{
   loginPlaceholder:'Your investigator name',codePlaceholder:'Access code',groupPlaceholder:'Team name (optional)',
-  btnLogin:'Log in',loginError:'Invalid access code. Please check your code.',loginHint:'Your access code is personal and tied to one device.\nIt is activated on first login.\nNo code yet? Find all info at <a href="index.html#pricing" style="color:var(--accent);text-decoration:none;font-weight:600">tracetour.de</a>',
+  btnLogin:'Log in',loginError:'Invalid access code. Please check your code.',loginHint:'Your access code is activated on first login.\nIt works on as many phones as your ticket covers.\nNo code yet? Find all info at <a href="index.html#pricing" style="color:var(--accent);text-decoration:none;font-weight:600">tracetour.de</a>',
   backLink:'\u2190 Back to homepage',
   loginNameMissing:'Please enter your investigator name first \u2013 it will appear on your certificate.',loginNoNet:'No or too slow connection \u2013 the code check needs internet once. Please try again in a moment.',
   loginWrongTour:'This code belongs to the kids tour! \ud83d\udc09',loginWrongTourLink:'Go to the kids tour \u2192',loginDeviceLimit:'This code has already been used on too many devices. Write to info@tracetour.de and we will help.',loginExpired:'This code has expired \u2013 the 48-hour window after the first start is over.',

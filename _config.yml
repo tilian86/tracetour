@@ -1,0 +1,18 @@
+# GitHub Pages (Jekyll): interne Dateien nicht auf tracetour.de ausliefern.
+# Das Repo selbst bleibt öffentlich – hier also nie Geheimnisse ablegen.
+exclude:
+  - CLAUDE.md
+  - BERICHT-CLOUD.md
+  - CHANGELOG_AUDIO.md
+  - translations-en.md
+  - checkout-worker
+  - worker.js
+  - cloudflare-worker-www.js
+  - generate_audio.py
+  - generate_audio_en.py
+  - generate_audio_kinder.py
+  - mix_atmo.py
+  - mix_atmo_en.py
+  - tools
+  - tailwind-input.css
+  - tailwind.config.js

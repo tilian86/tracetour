@@ -130,7 +130,7 @@ async function handleWebhook(request, env) {
 
   // Mail senden (nicht fatal wenn's fehlschlägt: /code-Fallback existiert,
   // aber 500 zurückgeben, damit Stripe es erneut versucht, solange Resend fehlt)
-  const mailed = await sendCodeMail(env, { to: email, name, code, tour, cap: cap || parseInt(env.DEVICE_CAP || '4', 10) });
+  const mailed = await sendCodeMail(env, { to: email, name, code, tour, cap: cap || parseInt(env.DEVICE_CAP || '4', 10), session });
   if (!mailed) {
     console.warn(`Mail fehlgeschlagen für ${sessionId} (Code ${code}) — Stripe wird retryn`);
     return new Response('Mail failed, will retry', { status: 500 });
@@ -180,7 +180,56 @@ async function assignCode(env, meta) {
   return null;
 }
 
-async function sendCodeMail(env, { to, name, code, tour, cap }) {
+// Rechtstexte als PDF-Anhang (Vertragsbestätigung nach § 312f BGB). Bei neuer AGB-Fassung:
+// neue PDFs mit neuem Datum in /rechtstexte/ ablegen und hier eintragen (alte bleiben liegen).
+const LEGAL_PDFS = [
+  { filename: 'TraceTour-AGB.pdf', url: 'https://tracetour.de/rechtstexte/agb-2026-11-18.pdf' },
+  { filename: 'TraceTour-Widerrufsbelehrung.pdf', url: 'https://tracetour.de/rechtstexte/widerruf-2026-11-18.pdf' },
+];
+
+const TICKETS = {
+  solo: 'Solo-Ermittler (1 Person, bis 2 Handys)',
+  kids: 'Kindertour mit Tübi (1 Familie, bis 2 Handys)',
+  team: 'Ermittler-Team (bis 5 Personen, bis 5 Handys)',
+  class: 'Schulklasse (bis 30 Schüler/innen plus Begleitung, bis 10 Handys)',
+};
+
+function ticketLabel(session, tour, cap) {
+  const t = String(session?.metadata?.ticket || '').toLowerCase();
+  if (TICKETS[t]) return TICKETS[t];
+  if (tour === 'kids') return TICKETS.kids;
+  if (cap >= 10) return TICKETS.class;
+  if (cap >= 5) return TICKETS.team;
+  return TICKETS.solo;
+}
+
+function euro(cents) {
+  return (cents / 100).toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
+}
+
+function toBase64(buf) {
+  const bytes = new Uint8Array(buf);
+  let bin = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+  return btoa(bin);
+}
+
+async function legalAttachments(env) {
+  try {
+    const files = await Promise.all(LEGAL_PDFS.map(async f => {
+      const r = await fetch(f.url, { cf: { cacheTtl: 3600 } });
+      if (!r.ok) throw new Error(`${f.url} → ${r.status}`);
+      return { filename: f.filename, content: toBase64(await r.arrayBuffer()) };
+    }));
+    return files;
+  } catch (e) {
+    console.error('Rechtstexte-PDF fehlt:', e);
+    await sendAlert(env, 'TraceTour: AGB-PDF für Kauf-Mail fehlt', `Die Kauf-Mail ging ohne PDF-Anhang raus (${e.message}). Bitte /rechtstexte/ prüfen.`);
+    return [];
+  }
+}
+
+async function sendCodeMail(env, { to, name, code, tour, cap, session }) {
   if (!env.RESEND_API_KEY || !to) return false;
   const first = (name || '').split(' ')[0] || 'Entdecker/in';
   const kids = tour === 'kids';
@@ -189,9 +238,20 @@ async function sendCodeMail(env, { to, name, code, tour, cap }) {
   const startHint = kids
     ? 'Startet am Marktplatz beim Rathaus – Tübi wartet schon! 🐉'
     : 'Starte am Schloss Hohentübingen – und folge Heinrichs Spur 🔍';
+  const ticket = ticketLabel(session, tour, cap);
+  const total = Number.isFinite(session?.amount_total) ? session.amount_total : null;
+  const discount = session?.total_details?.amount_discount || 0;
+  const priceText = total === null ? '–' : `${euro(total)}${discount > 0 ? ` (Gutschein: −${euro(discount)})` : ''}`;
+  const orderDate = new Date((session?.created || Date.now() / 1000) * 1000)
+    .toLocaleString('de-DE', { timeZone: 'Europe/Berlin', dateStyle: 'long', timeStyle: 'short' });
+  const orderNo = String(session?.id || '').slice(-10).toUpperCase();
+  const attachments = await legalAttachments(env);
+  const td = 'style="padding:2px 12px 2px 0;vertical-align:top;color:#64748b"';
   const body = {
     from: env.FROM_EMAIL,
     to: [to],
+    reply_to: 'info@tracetour.de',
+    ...(attachments.length ? { attachments } : {}),
     subject: `Dein Zugangscode für ${tourName}: ${code}`,
     html: `
 <div style="font-family:-apple-system,Segoe UI,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#1e293b">
@@ -205,9 +265,20 @@ async function sendCodeMail(env, { to, name, code, tour, cap }) {
     <li>${startHint}</li>
   </ol>
   <p style="font-size:.85rem;color:#64748b">Tipp: Lade die Tour am Tag eurer Tour vorher im WLAN herunter (dann startet auch die 48-Stunden-Zeit). Kopfhörer oder Lautsprecher nicht vergessen!</p>
-  <p style="font-size:.8rem;color:#94a3b8">Gut zu wissen: ${cap >= 3 ? `Ihr könnt den Code auf bis zu ${cap} Handys nutzen – weitere Handys lassen sich in den ersten 48 Stunden ab dem ersten Start dazunehmen.` : 'Ab dem ersten Start hast du 48 Stunden Zeit für die Tour.'} Aktiviere den Code also erst, wenn ihr wirklich losgeht. Einlösbar bis 12 Monate nach Kauf.</p>
-  <p style="font-size:.8rem;color:#94a3b8">Bestätigung zu deinem Kauf: Du hast beim Kauf ausdrücklich zugestimmt, dass wir sofort mit der Bereitstellung der digitalen Inhalte beginnen, und bestätigt, dass dein Widerrufsrecht damit erlischt. Unsere AGB: <a href="https://tracetour.de/agb.html" style="color:#94a3b8">tracetour.de/agb.html</a></p>
-  <p style="font-size:.85rem;color:#64748b">Fragen? Antworte einfach auf diese E-Mail.<br>TraceTour – by Florian S. Thiel · <a href="https://tracetour.de">tracetour.de</a></p>
+  <p style="font-size:.8rem;color:#94a3b8">Gut zu wissen: Der Code läuft auf bis zu ${cap} Handys. Ab dem ersten Start habt ihr 48 Stunden Zeit, weitere Handys dazuzunehmen und die Tour so oft zu spielen, wie ihr wollt. Aktiviere den Code also erst, wenn ihr wirklich losgeht. Einlösbar bis 12 Monate nach Kauf.</p>
+  <p style="font-size:.85rem;color:#64748b">Fragen? Antworte einfach auf diese E-Mail.</p>
+  <h2 style="font-size:1rem;margin:28px 0 8px">Deine Bestellung</h2>
+  <table style="font-size:.85rem;color:#1e293b;border-collapse:collapse">
+    <tr><td ${td}>Ticket</td><td>${ticket}</td></tr>
+    <tr><td ${td}>Tour</td><td>${tourName}</td></tr>
+    <tr><td ${td}>Bezahlt</td><td>${priceText}</td></tr>
+    <tr><td ${td}>Bestellt am</td><td>${orderDate} Uhr</td></tr>
+    <tr><td ${td}>Bestellnummer</td><td>${orderNo}</td></tr>
+  </table>
+  <p style="font-size:.8rem;color:#64748b">Alle Preise sind Endpreise. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</p>
+  <p style="font-size:.8rem;color:#64748b"><strong>Bestätigung zum Widerrufsrecht:</strong> Du hast beim Kauf ausdrücklich zugestimmt, dass wir vor Ablauf der Widerrufsfrist mit der Bereitstellung der digitalen Inhalte beginnen, und bestätigt, dass dein Widerrufsrecht damit erlischt. Mit dieser E-Mail und dem Zugangscode haben wir begonnen.</p>
+  <p style="font-size:.8rem;color:#64748b">Unsere AGB und die Widerrufsbelehrung ${attachments.length ? 'hängen als PDF an dieser E-Mail und stehen auch' : 'stehen'} unter <a href="https://tracetour.de/agb.html" style="color:#64748b">tracetour.de/agb.html</a> und <a href="https://tracetour.de/widerruf.html" style="color:#64748b">tracetour.de/widerruf.html</a>.</p>
+  <p style="font-size:.75rem;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:12px;margin-top:20px">Anbieter: Florian S. Thiel – TraceTour · Sonnenhalde 72 · 72829 Engstingen · Telefon +49 1525 9295405 · <a href="mailto:info@tracetour.de" style="color:#94a3b8">info@tracetour.de</a> · <a href="https://tracetour.de" style="color:#94a3b8">tracetour.de</a></p>
 </div>`,
   };
   try {
