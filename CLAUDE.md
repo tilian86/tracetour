@@ -1,6 +1,6 @@
 # TraceTour — Projekt-Memory
 
-## AKTUELLER STAND (27.10.2026, nachmittags) — zuerst lesen
+## AKTUELLER STAND (18.11.2026) — zuerst lesen
 **Zusammenarbeit (rechte Hand / linke Hand):** Es arbeiten zwei Claude-Sessions an TraceTour: eine Cloud-Session (kein Mac-Zugriff, keine Keys) und eine am Mac (ElevenLabs-Key in `.env`, wrangler-Login). Regeln, damit nichts Verbessertes verloren geht:
 1. Vor jeder Arbeit `git fetch` und auf dem aktuellen Stand aufsetzen; nie alte Dateiversionen über neue kopieren.
 2. Solange PR #1 offen ist, Inhalte (Texte, Audios, Bilder) gern auf `main`, Code-Umbauten auf dem PR-Branch. Wer den anderen Zweig einmergt, behält bei Konflikten **Inhalte aus main** und **Code aus dem Branch** – und prüft danach per Test.
@@ -27,6 +27,14 @@
 ### Offen / widersprüchlich (Florian entscheidet)
 - **Hirsch-Wappen:** April-Stadtgang notiert „Hirsch ist das größte Tier auf dem Wappen ✓“ (Krimi-Rätsel Station 0, Antwort „hirsch“). Die Mac-Session hat das Wappen am 27.10. für die Kindertour als „unbelegt“ ersetzt. Beides passt nicht zusammen → vor Ort klären, ggf. Krimi-Rätsel Station 0 anpassen (gesprochener Text + Audio riddle_0).
 - Froschkönig: Krimi sagt „Sie bestellte sofort einen neuen. Schau mal, ob er schon wieder da ist!“ – passt zur Kindertour; Status vor Ort prüfen.
+
+### Verkaufsfertig-Check 18.11.2026 (Commits 0ec5713, dfd1475)
+- **Stripe:** öffentlicher Name „TraceTour“; Produktbeschreibungen (Stationen, Dauer, Sprache, Handys, 12 Monate) für alle 4 Produkte gesetzt – Beschreibungen per „Produkt bearbeiten“ sind ungefährlich. **Payment Links NIE im Dashboard speichern** – sie tragen `custom_text` (AGB-/Erlöschen-Häkchen), das nur per API gesetzt wurde und beim Speichern verloren gehen kann. Test-Gutschein 100 %: `TTTESTHLP5C` (nach Testkauf deaktivieren, Links nicht anfassen).
+- **Rechtstexte live:** `widerruf.html` (amtl. Muster inkl. Telefon + Erlöschen § 356 Abs. 5 + Formular), `agb.html` komplett neu (12 Ziffern, Rechnung nur auf Wunsch), Impressum/Datenschutz (Anthropic für Trace-Chat, eigene Kartenkacheln) angepasst. Geschäftsnummer **+49 1525 9295405** (Zweitnummer) überall; Hauptnummer nie.
+- **Kauf-Mail (Worker 26cc6793…):** vollständige Bestätigung § 312f: Ticket, Tour, Preis/Gutschein, Datum, Bestellnummer, Erlöschen-Bestätigung, § 19-Hinweis, reply_to info@, Anhänge `rechtstexte/agb-2026-11-18.pdf` + `widerruf-2026-11-18.pdf` (bei AGB-Änderung neues PDF mit neuem Datum erzeugen und `LEGAL_PDFS` im Worker anpassen; Erzeugen: Chrome `--headless=new --no-pdf-header-footer --print-to-pdf`).
+- **`_config.yml`:** Jekyll-exclude – CLAUDE.md, Berichte, Worker-Code, Skripte werden nicht mehr ausgeliefert (Repo selbst bleibt öffentlich!).
+- **Trace-Chat:** Anthropic-Guthaben leer → feste Hinweise greifen; Florian entscheidet, ob aufladen.
+- **Noch offen:** Testkauf mit Gutschein (prüft Mail + PDFs), Florians eigene Prüfung, dann Go-live: `CHECKOUT_LINKS` in index.html füllen + `noindex` nur dort entfernen. Später: Rate-Limit `/validate`, Erstattung sperrt Code nicht automatisch, Manifest fehlt.
 
 ### Vor dem Verkaufsstart (offen)
 - **Widerrufsrecht:** Florian will nach Code-Einlösung keinen Widerruf. Lösung: korrektes vorzeitiges Erlöschen bei digitalen Inhalten (§ 356 BGB): eigene Pflicht-Checkbox im Stripe-Checkout (ausdrückliche Zustimmung zum sofortigen Beginn + Kenntnis vom Verlust des Widerrufsrechts) UND Bestätigung dieser Zustimmung in der Code-Mail (§ 312f BGB). Ist das sauber umgesetzt, ist laut IT-Recht Kanzlei (16.06.2026) kein Widerrufsbutton (§ 356a BGB) nötig. Fehlt einer der Bausteine: Widerruf bis 12 Monate + 14 Tage möglich. Mail-Satz-Vorschlag steht in BERICHT-CLOUD.md.
