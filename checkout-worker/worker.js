@@ -80,16 +80,23 @@ async function handleWebhook(request, env) {
   if (!ok) return new Response('Bad signature', { status: 400 });
 
   const event = JSON.parse(payload);
-  if (event.type !== 'checkout.session.completed') {
+  // completed = Kauf abgeschlossen; async_payment_succeeded = verspätete Zahlung (z. B. Lastschrift) ist angekommen
+  if (event.type !== 'checkout.session.completed' && event.type !== 'checkout.session.async_payment_succeeded') {
     return new Response(JSON.stringify({ received: true, ignored: event.type }), { headers: JSON_HEADERS });
   }
 
   const session = event.data.object;
+  // Noch nicht bezahlt (verzögerte Zahlungsart) → Code erst bei async_payment_succeeded vergeben
+  if (session.payment_status === 'unpaid') {
+    return new Response(JSON.stringify({ received: true, pending: true }), { headers: JSON_HEADERS });
+  }
   const sessionId = session.id;
   const email = session.customer_details?.email || session.customer_email || '';
   const name = session.customer_details?.name || '';
   // Tour-Bindung: Payment-Link-Metadata wird von Stripe in die Session kopiert
   const tour = session.metadata?.tour === 'kids' ? 'kids' : 'adult';
+  // Geräte-Limit pro Ticket (Payment-Link-Metadatum `devices`); fehlt es, gilt DEVICE_CAP
+  const cap = parseInt(session.metadata?.devices, 10) || null;
 
   // Idempotenz: gibt es für diese Session schon einen Code?
   const existing = await env.CODES.get(`session:${sessionId}`);
@@ -97,7 +104,7 @@ async function handleWebhook(request, env) {
   if (existing) {
     code = JSON.parse(existing).code;
   } else {
-    code = await assignCode(env, { sessionId, email, name, tour });
+    code = await assignCode(env, { sessionId, email, name, tour, cap });
     if (!code) {
       console.error('CODE POOL EMPTY!');
       return new Response('No codes left', { status: 500 }); // Stripe retried -> Zeit zum Nachfüllen
@@ -106,7 +113,7 @@ async function handleWebhook(request, env) {
 
   // Mail senden (nicht fatal wenn's fehlschlägt: /code-Fallback existiert,
   // aber 500 zurückgeben, damit Stripe es erneut versucht, solange Resend fehlt)
-  const mailed = await sendCodeMail(env, { to: email, name, code, tour });
+  const mailed = await sendCodeMail(env, { to: email, name, code, tour, cap: cap || parseInt(env.DEVICE_CAP || '4', 10) });
   if (!mailed) {
     console.warn(`Mail fehlgeschlagen für ${sessionId} (Code ${code}) — Stripe wird retryn`);
     return new Response('Mail failed, will retry', { status: 500 });
@@ -125,7 +132,7 @@ async function assignCode(env, meta) {
     const state = JSON.parse((await env.CODES.get(`code:${code}`)) || '{}');
     if (state.status !== 'unused') continue;
     await env.CODES.put(`code:${code}`, JSON.stringify({
-      status: 'assigned', tour: meta.tour, session: meta.sessionId, email: meta.email, name: meta.name, ts: Date.now(),
+      status: 'assigned', tour: meta.tour, cap: meta.cap || undefined, session: meta.sessionId, email: meta.email, name: meta.name, ts: Date.now(),
     }));
     await env.CODES.put(`session:${meta.sessionId}`, JSON.stringify({ code, tour: meta.tour, ts: Date.now() }));
     await env.CODES.put('meta:counter', String(counter + 1));
@@ -134,7 +141,7 @@ async function assignCode(env, meta) {
   return null;
 }
 
-async function sendCodeMail(env, { to, name, code, tour }) {
+async function sendCodeMail(env, { to, name, code, tour, cap }) {
   if (!env.RESEND_API_KEY || !to) return false;
   const first = (name || '').split(' ')[0] || 'Entdecker/in';
   const kids = tour === 'kids';
@@ -159,7 +166,8 @@ async function sendCodeMail(env, { to, name, code, tour }) {
     <li>${startHint}</li>
   </ol>
   <p style="font-size:.85rem;color:#64748b">Tipp: Lade die Tour am Tag eurer Tour vorher im WLAN herunter (dann startet auch die 48-Stunden-Zeit). Kopfhörer oder Lautsprecher nicht vergessen!</p>
-  <p style="font-size:.8rem;color:#94a3b8">Gut zu wissen: Ab dem ersten Start hast du 48 Stunden Zeit für die Tour – aktiviere den Code also erst, wenn du wirklich losgehst. Einlösbar bis 12 Monate nach Kauf.</p>
+  <p style="font-size:.8rem;color:#94a3b8">Gut zu wissen: ${cap >= 3 ? `Ihr könnt den Code auf bis zu ${cap} Handys nutzen – weitere Handys lassen sich in den ersten 48 Stunden ab dem ersten Start dazunehmen.` : 'Ab dem ersten Start hast du 48 Stunden Zeit für die Tour.'} Aktiviere den Code also erst, wenn ihr wirklich losgeht. Einlösbar bis 12 Monate nach Kauf.</p>
+  <p style="font-size:.8rem;color:#94a3b8">Bestätigung zu deinem Kauf: Du hast beim Kauf ausdrücklich zugestimmt, dass wir sofort mit der Bereitstellung der digitalen Inhalte beginnen, und bestätigt, dass dein Widerrufsrecht damit erlischt. Unsere AGB: <a href="https://tracetour.de/agb.html" style="color:#94a3b8">tracetour.de/agb.html</a></p>
   <p style="font-size:.85rem;color:#64748b">Fragen? Antworte einfach auf diese E-Mail.<br>TraceTour – by Florian S. Thiel · <a href="https://tracetour.de">tracetour.de</a></p>
 </div>`,
   };
@@ -247,7 +255,8 @@ async function handleValidate(request, env) {
   // Bereits aktivierte (bekannte) Geräte bleiben IMMER gültig — kein Rauswurf mitten in der Tour,
   // auch offline. Nur NEUE Geräte unterliegen Fenster + Limit. So wird das Durchschleusen
   // (Code an Freunde weitergeben) gestoppt, ohne den ehrlichen Käufer zu behindern.
-  const DEVICE_CAP = parseInt(env.DEVICE_CAP || '4', 10);
+  // Limit pro Code (beim Kauf aus dem Payment Link übernommen), sonst global
+  const DEVICE_CAP = parseInt(state.cap, 10) || parseInt(env.DEVICE_CAP || '4', 10);
   const WINDOW_MS = parseInt(env.ACTIVATION_HOURS || '48', 10) * 3600 * 1000;
   const device = String(body.device || '').slice(0, 64);
   const now = Date.now();

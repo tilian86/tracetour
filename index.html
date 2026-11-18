@@ -159,7 +159,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
       "itinerary": {"@type": "Place", "name": "Altstadt Tübingen", "address": {"@type": "PostalAddress", "addressLocality": "Tübingen", "addressCountry": "DE"}},
       "offers": [
         {"@type": "Offer", "name": "Solo-Ermittler", "price": "9.99", "priceCurrency": "EUR"},
-        {"@type": "Offer", "name": "Ermittler-Team (3–7 Personen, Preis pro Person)", "price": "7.99", "priceCurrency": "EUR"},
+        {"@type": "Offer", "name": "Ermittler-Team (bis 5 Personen, pauschal)", "price": "24.99", "priceCurrency": "EUR"},
         {"@type": "Offer", "name": "Schulklasse (bis 30 Personen, pauschal)", "price": "79.99", "priceCurrency": "EUR"}
       ]
     },
@@ -242,7 +242,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
     <ul class="flex flex-wrap justify-center gap-2 mb-10" aria-label="Die Touren im Überblick">
       <li class="hero-chip"><span aria-hidden="true">🔍</span><span data-t="hero-chip-adult">Krimi ab 10 Jahren</span></li>
       <li class="hero-chip"><span aria-hidden="true">🐉</span><span data-t="hero-chip-kids">Drachenabenteuer für Kinder</span></li>
-      <li class="hero-chip"><span aria-hidden="true">🎟️</span><span data-t="hero-chip-price">ab 7,99 € · kein Abo</span></li>
+      <li class="hero-chip"><span aria-hidden="true">🎟️</span><span data-t="hero-chip-price">ab 9,99 € · kein Abo</span></li>
     </ul>
     <div class="flex flex-col md:flex-row items-center justify-center gap-4">
       <a href="#featured" class="bg-cta text-white px-10 py-5 rounded-xl font-brand font-black text-lg tracking-widest hover:bg-cta-hover hover:-translate-y-1 transition-all shadow-lg shadow-primary-container/25" data-t="hero-cta-start">
@@ -293,7 +293,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
       <li class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
         <span aria-hidden="true" class="material-symbols-outlined text-primary-container text-2xl">sell</span>
         <div>
-          <div class="text-2xl font-black font-headline text-on-surface leading-none whitespace-nowrap" data-t="stat-price-num">ab 7,99 €</div>
+          <div class="text-2xl font-black font-headline text-on-surface leading-none whitespace-nowrap" data-t="stat-price-num">ab 9,99 €</div>
           <div class="text-xs uppercase tracking-widest text-slate-300 mt-1" data-t="stat-price">einmalig, kein Abo</div>
         </div>
       </li>
@@ -633,10 +633,10 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
       <div class="mb-6">
         <h3 class="font-brand font-bold text-primary uppercase text-xs tracking-widest mb-2" data-t="price-team-name">Ermittler-Team</h3>
         <div class="flex items-baseline gap-1">
-          <span class="font-headline text-5xl font-black text-on-surface">7,99</span>
+          <span class="font-headline text-5xl font-black text-on-surface">24,99</span>
           <span class="text-slate-400 font-body text-lg">&euro;</span>
         </div>
-        <p class="text-slate-400 text-sm mt-2" data-t="price-team-per">pro Person &middot; 3–7 Personen</p>
+        <p class="text-slate-400 text-sm mt-2" data-t="price-team-per">pauschal &middot; bis 5 Personen</p>
       </div>
       <ul class="space-y-3 mb-8 flex-1">
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
@@ -653,7 +653,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span aria-hidden="true" class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
-          <span data-t="price-team-f4">20% Ersparnis pro Person</span>
+          <span data-t="price-team-f4">Nur 5,00 € pro Person</span>
         </li>
         <li class="flex items-center gap-3 font-body text-sm text-slate-300">
           <span aria-hidden="true" class="material-symbols-outlined text-primary-container text-lg">check_circle</span>
@@ -739,7 +739,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #ff
       </details>
       <details class="faq-item">
         <summary><span data-t="faq-q11">Wir sind eine Gruppe – wie funktioniert das?</span><span aria-hidden="true" class="faq-chevron material-symbols-outlined">expand_more</span></summary>
-        <p data-t="faq-a11">Bucht das Team-Ticket für eure Gruppengröße (3–7 Personen). Ihr bekommt einen gemeinsamen Code. Am schönsten spielt ihr mit einem Handy und einem kleinen Bluetooth-Lautsprecher, dann hören alle mit und rätseln zusammen. Der Code lässt sich aber auch auf mehreren Handys öffnen (bis zu 4).</p>
+        <p data-t="faq-a11">Bucht das Team-Ticket: ein Preis für bis zu 5 Personen. Ihr bekommt einen gemeinsamen Code. Am schönsten spielt ihr mit einem Handy und einem kleinen Bluetooth-Lautsprecher, dann hören alle mit und rätseln zusammen. Der Code lässt sich aber auch auf mehreren Handys öffnen (bis zu 5).</p>
       </details>
       <details class="faq-item">
         <summary><span data-t="faq-q12">Kann ich die Tour verschenken?</span><span aria-hidden="true" class="faq-chevron material-symbols-outlined">expand_more</span></summary>
@@ -881,7 +881,7 @@ const translations = {
   'hero-subtitle': ['Ein Stadtspiel zum Mitlaufen: Du folgst einer Spur durch die Altstadt, löst Rätsel an echten Orten und hörst die Geschichte direkt im Ohr. Läuft im Handy-Browser – ohne App, ohne Termin.', 'A city game you play on foot: follow a trail through the old town, solve puzzles at real places and hear the story right in your ears. Runs in your phone’s browser – no app, no booking slot.'],
   'hero-chip-adult': ['Krimi ab 10 Jahren', 'Mystery for ages 10+'],
   'hero-chip-kids': ['Drachenabenteuer für Kinder', 'Dragon adventure for kids'],
-  'hero-chip-price': ['ab 7,99 € · kein Abo', 'from €7.99 · no subscription'],
+  'hero-chip-price': ['ab 9,99 € · kein Abo', 'from €9.99 · no subscription'],
   'hero-cta-start': ['TOUREN ANSEHEN', 'SEE THE TOURS'],
   'hero-cta-how': ['CODE EINLÖSEN', 'REDEEM CODE'],
 
@@ -889,7 +889,7 @@ const translations = {
   'stat-tours': ['Touren: Krimi & Kinder', 'Tours: mystery & kids'],
   'stat-playtime': ['Minuten zu Fuß', 'minutes on foot'],
   'stat-apps': ['Apps zu installieren', 'apps to install'],
-  'stat-price-num': ['ab 7,99 €', 'from €7.99'],
+  'stat-price-num': ['ab 9,99 €', 'from €9.99'],
   'stat-price': ['einmalig, kein Abo', 'one-off, no subscription'],
 
   // Featured tour
@@ -977,11 +977,11 @@ const translations = {
   'price-kids-cta': ['BALD BUCHBAR · ERINNERE MICH 🔔', 'COMING SOON · REMIND ME 🔔'],
   'price-team-badge': ['Spartipp', 'Best value'],
   'price-team-name': ['Ermittler-Team', 'Investigation Team'],
-  'price-team-per': ['pro Person · 3–7 Personen', 'per person · 3–7 people'],
+  'price-team-per': ['pauschal · bis 5 Personen', 'flat rate · up to 5 people'],
   'price-team-f1': ['Alles aus dem Solo-Ticket', 'Everything from the Solo ticket'],
   'price-team-f2': ['Gemeinsam rätseln, zusammen punkten', 'Solve puzzles together, score together'],
   'price-team-f3': ['Perfekt für Paare, Familien & Freunde', 'Perfect for couples, families & friends'],
-  'price-team-f4': ['20% Ersparnis pro Person', '20% savings per person'],
+  'price-team-f4': ['Nur 5,00 € pro Person', 'Just €5.00 per person'],
   'price-team-f5': ['Ideal als Geschenk oder Teambuilding', 'Ideal as a gift or team building'],
   'price-team-cta': ['BALD BUCHBAR · ERINNERE MICH 🔔', 'COMING SOON · REMIND ME 🔔'],
   'price-class-name': ['Schulklasse', 'School Class'],
@@ -1011,7 +1011,7 @@ const translations = {
   'faq-q10': ['Und wenn es regnet?', 'What if it rains?'],
   'faq-a10': ['Dann wartest du einfach auf einen schöneren Tag: Die 48 Stunden laufen erst ab dem ersten Start, und einlösbar ist der Code ein ganzes Jahr. Fängt es unterwegs an zu regnen, ist dein Spielstand gespeichert – ihr macht später einfach weiter.', 'Then just wait for a nicer day: the 48 hours only start with your first start, and the code can be redeemed for a whole year. If it starts raining on the way, your progress is saved – just carry on later.'],
   'faq-q11': ['Wir sind eine Gruppe – wie funktioniert das?', 'We’re a group – how does that work?'],
-  'faq-a11': ['Bucht das Team-Ticket für eure Gruppengröße (3–7 Personen). Ihr bekommt einen gemeinsamen Code. Am schönsten spielt ihr mit einem Handy und einem kleinen Bluetooth-Lautsprecher, dann hören alle mit und rätseln zusammen. Der Code lässt sich aber auch auf mehreren Handys öffnen (bis zu 4).', 'Book the team ticket for your group size (3–7 people). You get one shared code. It’s most fun with one phone and a small Bluetooth speaker, so everyone listens and puzzles together. The code also works on several phones (up to 4).'],
+  'faq-a11': ['Bucht das Team-Ticket: ein Preis für bis zu 5 Personen. Ihr bekommt einen gemeinsamen Code. Am schönsten spielt ihr mit einem Handy und einem kleinen Bluetooth-Lautsprecher, dann hören alle mit und rätseln zusammen. Der Code lässt sich aber auch auf mehreren Handys öffnen (bis zu 5).', 'Book the team ticket: one price for up to 5 people. You get one shared code. It’s most fun with one phone and a small Bluetooth speaker, so everyone listens and puzzles together. The code also works on several phones (up to 5).'],
   'faq-q12': ['Kann ich die Tour verschenken?', 'Can I give the tour as a gift?'],
   'faq-a12': ['Ja, gern sogar. Der Code ist 12 Monate einlösbar – leite die Mail einfach weiter oder schreib den Code auf eine Karte. Die 48 Stunden beginnen erst, wenn die Beschenkten wirklich losgehen.', 'Yes, please do. The code can be redeemed for 12 months – just forward the email or write the code on a card. The 48 hours only begin when the lucky recipients actually set off.'],
   'faq-q7': ['Für wen ist die Kindertour geeignet?', 'Who is the kids tour for?'],
