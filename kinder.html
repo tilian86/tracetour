@@ -202,8 +202,9 @@ input{font-family:inherit;color:inherit}
 .quiz-done-btn.show{display:block}
 
 /* ======================== CERT ======================== */
-#certificate{background:linear-gradient(160deg,#006a2d 0%,#00a843 50%,#ffca51 100%);align-items:center;justify-content:center;text-align:center;padding:1.5rem;min-height:100%;padding-top:calc(1.5rem + var(--safe-top));padding-bottom:calc(1.5rem + var(--safe-bottom))}
-.cert-card{background:rgba(255,255,255,.95);border-radius:var(--r-lg);padding:1.8rem 1.3rem;max-width:360px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.2);border:3px solid var(--yellow)}
+#certificate{background:linear-gradient(160deg,#006a2d 0%,#00a843 50%,#ffca51 100%);align-items:center;justify-content:flex-start;text-align:center;padding:1.5rem;min-height:100%;padding-top:calc(1.5rem + var(--safe-top));padding-bottom:calc(1.5rem + var(--safe-bottom))}
+/* margin:auto statt justify-content:center – sonst ist auf kleinen Handys der obere Teil der Urkunde abgeschnitten und nicht erreichbar */
+.cert-card{margin:auto;flex-shrink:0;background:rgba(255,255,255,.95);border-radius:var(--r-lg);padding:1.8rem 1.3rem;max-width:360px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.2);border:3px solid var(--yellow)}
 .cert-dragon{font-size:3.5rem;margin-bottom:.3rem}
 .cert-flame{font-size:2rem;margin-bottom:.5rem;animation:flameGlow 1s infinite alternate}
 @keyframes flameGlow{0%{filter:brightness(1) drop-shadow(0 0 4px #ff6600)}100%{filter:brightness(1.3) drop-shadow(0 0 12px #ff6600)}}
@@ -472,7 +473,7 @@ input{font-family:inherit;color:inherit}
 <script>
 const STATIONS=[
 {id:0,emoji:'⏰',title:'Wo alles begann',chapter:'Kapitel 1',place:'Marktplatz · Rathaus',lat:48.520261,lng:9.053388,image:'images/kinder/station_0.jpg',
-story:`Hier wohne ich – direkt <strong>hinter der großen Uhr</strong> am Rathaus! Siehst du den Drachen auf dem Ziffernblatt? Das bin ich! Seit über <strong>500 Jahren</strong> drehe ich mich da oben und <strong>schnappe mir Sonne und Mond</strong>. Die Tübinger nennen mich den „Drachenzeiger".\n\nDie Uhr ist eine <strong>astronomische Uhr</strong> – sie zeigt nicht nur die Zeit, sondern auch Sternzeichen und Mondphasen. Professor Stoeffler hat sie 1511 gebaut – und sie läuft seit über 500 Jahren <strong>ganz ohne Batterie</strong>!\n\nLetzte Nacht saß ich auf meinem Ziffernblatt, als mir eine Feder in die Nase kitzelte. Ich musste <strong>so doll niesen</strong>, dass meine Drachenflamme aus dem Fenster flog! 😱 Sie zerplatzte in 8 Funken, die über die ganze Stadt flogen.\n\nAber <strong>ein Funke</strong> ist hier geblieben – direkt am Rathaus!`,
+story:`Hier wohne ich – direkt <strong>hinter der großen Uhr</strong> am Rathaus! Siehst du den Drachen auf dem Ziffernblatt? Das bin ich! Seit über <strong>500 Jahren</strong> drehe ich mich da oben und <strong>schnappe mir Sonne und Mond</strong>. Die Tübinger nennen mich den „Drachenzeiger".\n\nDie Uhr ist eine <strong>astronomische Uhr</strong> – sie zeigt nicht nur die Zeit, sondern auch Sternzeichen und Mondphasen. Professor Stöffler hat sie 1511 gebaut – und sie läuft seit über 500 Jahren <strong>ganz ohne Batterie</strong>!\n\nLetzte Nacht saß ich auf meinem Ziffernblatt, als mir eine Feder in die Nase kitzelte. Ich musste <strong>so doll niesen</strong>, dass meine Drachenflamme aus dem Fenster flog! 😱 Sie zerplatzte in 8 Funken, die über die ganze Stadt flogen.\n\nAber <strong>ein Funke</strong> ist hier geblieben – direkt am Rathaus!`,
 tubiSays:`Wenn du ganz leise bist, siehst du, wie ich auf der Uhr die Sonne schnappe! Die Touristen denken, ich wäre nur aus Metall. Wenn die wüssten... 🤫`,
 question:'Tübi „schnappt“ sich Sonne und Mond. Was passiert dann wohl am Himmel?',
 options:[{text:'Ein Regenbogen 🌈',correct:false},{text:'Eine Sternschnuppe 🌠',correct:false},{text:'Eine Sonnen- oder Mondfinsternis 🌑',correct:true},{text:'Ein Gewitter ⛈️',correct:false}],

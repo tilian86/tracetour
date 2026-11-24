@@ -43,6 +43,8 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 .glass{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-border)}
 .screen{position:fixed;inset:0;display:none;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .screen.active{display:flex}
+/* Scroll-Screens: Kinder dürfen nicht schrumpfen, sonst quetscht Flexbox Karten mit overflow:hidden (Titel/Text abgeschnitten) */
+#prologue>*,#tourSelect>*{flex-shrink:0}
 
 /* SPLASH */
 #splash{align-items:center;justify-content:center;text-align:center;padding:2rem;background:radial-gradient(ellipse at 50% 30%,rgba(243,99,45,.06) 0%,transparent 70%),#1e293b}
@@ -71,6 +73,9 @@ input{font-family:inherit;color:inherit;color-scheme:dark;background:transparent
 .tour-logo{font-family:var(--font-brand);font-size:1.3rem;font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
 .tour-logo span{color:var(--accent)}
 .tour-user{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--text-2)}
+/* Lange Namen/schmale Handys: Name kürzen statt die Kopfzeile aus dem Bild zu schieben */
+#userNameDisplay{max-width:calc(100vw - 332px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:379px){#userNameDisplay{display:none}}
 .tour-avatar{width:32px;height:32px;border-radius:50%;background:var(--accent-strong);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;color:#fff}
 .tour-hero h1{font-family:var(--font-h);font-size:2.2rem;font-weight:900;line-height:1.1;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:-.02em}
 .tour-hero h1 span{color:var(--accent)}
@@ -135,6 +140,7 @@ body.mobile-sim .ai-overlay .ai-content,body.mobile-sim .bottom-nav-row{max-widt
 .nav-arrow:active{transform:scale(.9)}
 .nav-arrow:disabled{opacity:.2;pointer-events:none}
 .game-title{font-family:var(--font-h);font-size:.9rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase;letter-spacing:.02em}
+@media(max-width:479px){.xp-track{display:none}.game-title{font-size:.78rem}.station-nav{gap:2px;margin:0 4px}}
 .game-xp{display:flex;align-items:center;gap:6px;font-size:.7rem;color:var(--accent);font-weight:700;flex-shrink:0;font-family:var(--font-m)}
 .xp-track{width:48px;height:4px;background:var(--bg-card);border-radius:2px;overflow:hidden}
 .xp-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .6s ease}
@@ -444,7 +450,7 @@ Dein Feedback ist uns sehr wichtig — schreib uns gerne an <a href="mailto:info
 <span class="badge" style="background:rgba(0,158,68,.15);color:#00a843;border:1px solid rgba(0,158,68,.3)" data-t="kidsBadge">🐉 Kids 5–10</span>
 <h3 data-t="kidsTitle">Tübis Geheimnisse</h3>
 <p data-t="kidsDesc">Tübi der Drache hat seine Flamme verloren! 8 Funken quer durch Tübingen — hilf ihm, sie wiederzufinden!</p>
-<div class="tour-card-meta"><span>📍 8 Stops</span><span>⏱ ca. 60 Min</span><span>🐉 Tübi erzählt</span><span>🔥 Drachenfunken</span></div>
+<div class="tour-card-meta" id="kidsMeta"><span>📍 8 Stops</span><span>⏱ ca. 60 Min</span><span>🐉 Tübi erzählt</span><span>🔥 Drachenfunken</span></div>
 </div>
 </div>
 <div class="tour-card" aria-disabled="true" style="opacity:.55;pointer-events:none">
@@ -743,8 +749,8 @@ de:{
   badgeLive:'Verfügbar',tourTitle:'Die Formel des Forschers',
   tourDesc:'1869 \u2013 Ein brillanter Wissenschaftler flieht vor dem Königlichen Ministerium. Vom Schloss bergab durch die Gassen der Altstadt bis zum Neckar. Folge seiner Spur, entschlüssle seine Hinweise.',
   tourMeta:'\ud83d\udccd 17 Stops \u00b7 \u23f1 ca. 120 Min \u00b7 \ud83c\udfa7 Audio \u00b7 \ud83c\udfc6 1790 Traces',
-  btnContinue:'Fortsetzen',continueFormat:'Fortsetzen \u2013 Stop {x}',btnRestart:'Neu starten',btnReset:'\ud83d\uddd1\ufe0f Fortschritt komplett löschen',
-  kidsBadge:'🐉 Kids 5–10',kidsTitle:'Tübis Geheimnisse',kidsDesc:'Tübi der Drache hat seine Flamme verloren! 8 Funken quer durch Tübingen — hilf ihm, sie wiederzufinden!',
+  btnContinue:'Fortsetzen',continueFormat:'Fortsetzen \u2013 Stop {x}',continueFinale:'Fortsetzen \u2013 Finale',btnRestart:'Neu starten',btnReset:'\ud83d\uddd1\ufe0f Fortschritt komplett löschen',
+  kidsMeta:'📍 8 Stops \u00b7 ⏱ ca. 60 Min \u00b7 🐉 Tübi erzählt \u00b7 🔥 Drachenfunken',kidsBadge:'🐉 Kids 5–10',kidsTitle:'Tübis Geheimnisse',kidsDesc:'Tübi der Drache hat seine Flamme verloren! 8 Funken quer durch Tübingen — hilf ihm, sie wiederzufinden!',
   badgeSoon:'Bald verfügbar',tour2Title:'Schatten über dem Schloss',tour2Desc:'Ein mysteriöser Diebstahl im Hohentübingen. Wer hat das Manuskript gestohlen?',
   tour2Meta:'\ud83d\udccd 6 Stationen \u00b7 \u23f1 ca. 120 Min \u00b7 \ud83c\udfc6 650 Traces',
   fabMap:'Karte',fabStation:'Station',
@@ -856,8 +862,8 @@ en:{
   badgeLive:'Available',tourTitle:'The Researcher\'s Formula',
   tourDesc:'1869 \u2014 A brilliant scientist flees the Royal Ministry. From the castle downhill through the alleys of the old town to the Neckar river. Follow his trail, decipher his clues.',
   tourMeta:'\ud83d\udccd 17 Stops \u00b7 \u23f1 approx. 120 min \u00b7 \ud83c\udfa7 Audio \u00b7 \ud83c\udfc6 1790 Traces',
-  btnContinue:'Continue',continueFormat:'Continue \u2014 Stop {x}',btnRestart:'Start over',btnReset:'\ud83d\uddd1\ufe0f Delete all progress',
-  kidsBadge:'\ud83d\udc09 Kids 5\u201310',kidsTitle:'T\u00fcbi\u2019s Secrets',kidsDesc:'T\u00fcbi the dragon lost his flame! 8 sparks scattered across T\u00fcbingen \u2014 help him find them all!',
+  btnContinue:'Continue',continueFormat:'Continue \u2014 Stop {x}',continueFinale:'Continue \u2014 Finale',btnRestart:'Start over',btnReset:'\ud83d\uddd1\ufe0f Delete all progress',
+  kidsMeta:'📍 8 Stops \u00b7 ⏱ approx. 60 min \u00b7 🇩🇪 German only',kidsBadge:'\ud83d\udc09 Kids 5\u201310',kidsTitle:'T\u00fcbi\u2019s Secrets',kidsDesc:'T\u00fcbi the dragon lost his flame! 8 sparks scattered across T\u00fcbingen \u2014 help him find them all!',
   badgeSoon:'Coming soon',tour2Title:'Shadows over the Castle',tour2Desc:'A mysterious theft at Hohentuebingen. Who stole the manuscript?',
   tour2Meta:'\ud83d\udccd 6 Stations \u00b7 \u23f1 approx. 120 min \u00b7 \ud83c\udfc6 650 Traces',
   fabMap:'Map',fabStation:'Station',
@@ -941,7 +947,7 @@ en:{
   thankLabel:'From us to you',thankP1:'Thank you so much for joining us on this journey. We are a small, passionate team \u2014 and every single tour means the world to us. If this experience gave you something, we would love it if you spread the word.',
   thankP2:'We wish you much joy in Tuebingen \u2014 and who knows: perhaps we will see each other again on a new tour soon.',
   nextLabel:'What\'s next?',nextP1:'New tours and cities are being added continuously. Today Tuebingen, tomorrow Stuttgart, Munich \u2014 and who knows where the journey will lead.',
-  nextP2:'We would be delighted to cross paths with you again somewhere in the world while exploring. Until then \u2014 fare well, Investigator.',
+  nextP2:'We would be delighted to cross paths with you again somewhere in the world while exploring. Until then \u2014 farewell, Investigator.',
   btnShareCert:'Share certificate',btnSaveCert:'Save certificate',btnFeedback:'Send feedback',btnBackOverview:'Back to overview',
   shareText:'Case solved! \ud83c\udfc6 #TraceTourTuebingen',
   bonusLabel:'Bonus Question \u00b7 {x} Traces',bonusRemember:'Do you remember {name}?',
@@ -1005,16 +1011,19 @@ function applyLangStaticScreens(){
   badgeSoon.forEach(b=>b.textContent=t('badgeSoon'));
   const tourCards=document.querySelectorAll('.tour-card-body h3');
   if(tourCards[0])tourCards[0].textContent=t('tourTitle');
-  if(tourCards[1])tourCards[1].textContent=t('tour2Title');
   const tourDescs=document.querySelectorAll('.tour-card-body p');
   if(tourDescs[0])tourDescs[0].textContent=t('tourDesc');
-  if(tourDescs[1])tourDescs[1].textContent=t('tour2Desc');
+  // Kinder- und „Bald verfügbar“-Karte: Texte über data-t, nie über die Reihenfolge der Karten
+  document.querySelectorAll('#tourSelect [data-t]').forEach(el=>{el.textContent=t(el.dataset.t)});
   const tourMetas=document.querySelectorAll('.tour-card-meta');
   if(tourMetas[0])tourMetas[0].innerHTML=t('tourMeta').split('\u00b7').map(s=>'<span>'+s.trim()+'</span>').join('');
-  if(tourMetas[1])tourMetas[1].innerHTML=t('tour2Meta').split('\u00b7').map(s=>'<span>'+s.trim()+'</span>').join('');
+  const kidsMeta=document.getElementById('kidsMeta');
+  if(kidsMeta)kidsMeta.innerHTML=t('kidsMeta').split('\u00b7').map(s=>'<span>'+s.trim()+'</span>').join('');
+  const soonMeta=document.querySelector('.tour-card[aria-disabled] .tour-card-meta');
+  if(soonMeta)soonMeta.innerHTML=t('tour2Meta').split('\u00b7').map(s=>'<span>'+s.trim()+'</span>').join('');
   // Continue/restart buttons
   const contBtn=document.getElementById('continueBtn');
-  if(contBtn&&!contBtn.textContent.includes('Stop'))contBtn.textContent=t('btnContinue');
+  if(contBtn&&!/Stop|Finale/.test(contBtn.textContent))contBtn.textContent=t('btnContinue');
   const restartBtns=document.querySelectorAll('#continueBox .btn-secondary');
   if(restartBtns[0])restartBtns[0].textContent=t('btnRestart');
   const resetBtn=document.getElementById('resetBtn');
@@ -1160,7 +1169,7 @@ function applyLangStaticScreens(){
 const QUIZ_QUESTIONS_EN=[
   {q:'What was discovered in 1869 in the laboratory of Castle Hohentübingen?',
    opts:['Penicillin','DNA','X-rays','Vitamin C','Nuclear fission','Insulin'],correct:1},
-  {q:'What did astronomer Stoeffler predict for February 20, 1524?',
+  {q:'What did astronomer Stöffler predict for February 20, 1524?',
    opts:['A solar eclipse','A comet impact','A great flood','The end of the world','A volcanic eruption','A lunar eclipse'],correct:2},
   {q:'What was the Neptune figure on the Marktplatz cast from?',
    opts:['Church bells','Melted-down Wehrmacht weapons','Roman coins','Swabian iron ore','Old castle cannons','Recycled printing type'],correct:1},
@@ -1177,7 +1186,7 @@ const QUIZ_QUESTIONS_EN=[
 // English bonus questions
 const BONUS_QUESTIONS_EN={
   8:{source:4,q:'What was the name of the last tower warden of the Stiftskirche?',
-    opts:['Friedrich Baumann','Fritz von Graevenitz','Philipp Hornung','Peter Hemmel','Georg Stoeffler','Wilhelm Bautmann'],correct:0,xp:75},
+    opts:['Friedrich Baumann','Fritz von Graevenitz','Philipp Hornung','Peter Hemmel','Georg Stöffler','Wilhelm Bautmann'],correct:0,xp:75},
   13:{source:11,q:'Which figure sits enthroned as an artwork at the Affenfelsen?',
     opts:['The Cycling King','The Frog King','A climbing monkey','The Ammer Neptune','A stone dragon','The tower watchman'],correct:0,xp:75},
   16:{source:15,q:'Which monument stands at the western end of the Platanenallee?',
@@ -1305,7 +1314,7 @@ const stations=[
 {
   lat:48.519513,lng:9.051072,name:'Schloss Hohentübingen',ambientIdx:0,xp:150,
   fragment:'WÄCHST',
-  answer:['hirsch','hirsche','deer','stag'],
+  answer:['hirsch','hirsche','deer','stag','buck','hart'],
   story:'Das Schloss Hohentübingen – dein Ausgangspunkt, hoch auf einem Bergrücken über der Altstadt. Von hier oben überblickst du das Neckartal und die Gassen unter dir. Es ist November 1869, kurz vor Einbruch der Nacht.\n\nDas Schloss wurde erstmals 1078 als „castrum Tuibingensis" erwähnt, als Truppen König Heinrichs IV. es vergeblich belagerten. Im 16. Jahrhundert ließ Herzog Ulrich die mittelalterliche Burg zu einem Renaissanceschloss umbauen. Das prachtvolle Untere Tor von 1607 – entworfen von Baumeister Heinrich Schickhardt – ist als Triumphbogen gestaltet. Im Dreißigjährigen Krieg sprengten französische Belagerer 1647 den südöstlichen Eckturm. Er wurde nie wieder aufgebaut – stattdessen entstand 1667 der niedrigere Fünfeckturm.\n\nSeit 1816 gehört das Schloss der Universität. In den Kellergewölben hatte Professor Heinrich von Calw sein Labor – genau dort, wo 1869 Friedrich Miescher tatsächlich die DNA entdeckte. Heinrich forschte drei Jahre lang offiziell an „chemischen Grundlagen" für das Königliche Ministerium. In Wahrheit arbeitete er an einer Formel, die alles verändern könnte.\n\nVor einer Stunde erreichte ihn ein Telegramm: „Gendarmen unterwegs. Verlassen Sie das Labor. Sofort." Heinrich zündete seine Notizen an, stopfte das Manuskript in seinen Mantel und floh – nicht über die breite Burgsteige, sondern durch einen engen Schleichweg: eine schmale Gasse mit steilen Steintreppen zwischen den Häusern, die bei Hausnummer 3 in der Münzgasse herauskommt. Diese verwinkelte Passage ist typisch für die Tübinger Altstadt, wo sich jahrhundertealte Treppenwege wie Adern durch das Häusergewirr ziehen. Du stehst jetzt dort, wo alles begann.\n\nTipp: Folge Heinrichs Fluchtweg durch den Schleichweg hinab zur Münzgasse – oder nimm den breiteren Hauptweg über die Burgsteige, wenn du nicht so gut zu Fuß bist oder einen Kinderwagen dabei hast.',
   diary:'Dies ist mein letzter Eintrag in diesem Labor. Der Geruch verbrannten Papiers hängt noch in der Luft. Drei Jahre Forschung – und alles, was bleibt, ist ein einziges Manuskript unter meinem Mantel.\n\nDas Ministerium will meine Formel für Waffen. Ich habe drei Jahre gelogen, verzögert, abgelenkt. Jetzt ist die Zeit abgelaufen. Die Gendarmen sind unterwegs. Ich werde Fragmente meiner Forschung an verschiedenen Orten der Stadt verstecken – für den Fall, dass jemand Würdiges sie findet. Der erste Hinweis bleibt hier, am Tor.',
   riddle:'Am Eingangstor des Schlosses siehst du das württembergische Wappen in Stein gemeißelt. Welches Tier ist das größte und auffälligste auf dem Wappen? (Ein Wort)',
@@ -1397,8 +1406,8 @@ const stations=[
   diary_en:'The Marktplatz was still bustling. Too bustling. I ducked behind the Neptune Fountain and waited until a group of students had passed. My heart was pounding in my throat.\n\nI hid the fragment in a wall niche beneath the Town Hall. My hands were trembling. How much time do I have left? The gendarmes cannot be far. I must reach the Neckar before they seal off the Marktplatz.',
   riddle_en:'Stand in front of the Town Hall facade and count the painted names of famous figures. How many are there? Tip: One is hiding near the very top \u2014 easy to miss!',
   hint_en:'Count all names on the painted facade. Most are at eye level, but one is at the very top near the gable.',
-  fact_en:'The astronomical clock was designed in 1511 by the astronomer Johannes Stoeffler \u2014 a masterpiece that calculates moon phases, zodiac signs, and eclipses. The "dragon hand" marks the lunar nodes and predicts solar and lunar eclipses. Stoeffler took his work so seriously that from 1522 to 1530 he lived with his students in the "Zur Krone" inn directly opposite the town hall (today Kronenstrasse 11, Cafe Ranitzky) \u2014 just so he could observe and recalibrate the mechanism in any weather.\n\nHis most famous blunder: he predicted a great flood for February 1524. All of Europe panicked, people built arks. It rained a little. Yet Stoeffler was a highly respected scholar \u2014 his proposals for calendar reform anticipated parts of the later Gregorian reform. He died in 1531 of the plague, not a flood.\n\nThe Cafe Ranitzky on the square looks like old half-timbering \u2014 but it is entirely a modern reconstruction. The original Cafe Pfuderer burned down in the 1970s and was rebuilt in the same style.\n\nThe Mayer\'sche Apotheke at the market (number 13) was founded in 1569 \u2014 one of the oldest pharmacies in Wuerttemberg. It closed at the end of 2017 after nearly 450 years.',
-  factBullets_en:['Astronomical clock from 1511 \u2014 Stoeffler predicted a great flood','Neptune Fountain 1617 by Schickhardt \u2014 modeled after Bologna','Neptune figure cast by WMF from melted-down Wehrmacht weapons (1947/48)','Porsche tested the VW prototype at the Neptune Fountain in 1936','Ranitzky: modern reconstruction after fire, only the timber-frame is "old"','Fires of 1476 and 1540 \u2014 the square grew larger each time'],
+  fact_en:'The astronomical clock was designed in 1511 by the astronomer Johannes Stöffler \u2014 a masterpiece that calculates moon phases, zodiac signs, and eclipses. The "dragon hand" marks the lunar nodes and predicts solar and lunar eclipses. Stöffler took his work so seriously that from 1522 to 1530 he lived with his students in the "Zur Krone" inn directly opposite the town hall (today Kronenstrasse 11, Cafe Ranitzky) \u2014 just so he could observe and recalibrate the mechanism in any weather.\n\nHis most famous blunder: he predicted a great flood for February 1524. All of Europe panicked, people built arks. It rained a little. Yet Stöffler was a highly respected scholar \u2014 his proposals for calendar reform anticipated parts of the later Gregorian reform. He died in 1531 of the plague, not a flood.\n\nThe Cafe Ranitzky on the square looks like old half-timbering \u2014 but it is entirely a modern reconstruction. The original Cafe Pfuderer burned down in the 1970s and was rebuilt in the same style.\n\nThe Mayer\'sche Apotheke at the market (number 13) was founded in 1569 \u2014 one of the oldest pharmacies in Wuerttemberg. It closed at the end of 2017 after nearly 450 years.',
+  factBullets_en:['Astronomical clock from 1511 \u2014 Stöffler predicted a great flood','Neptune Fountain 1617 by Schickhardt \u2014 modeled after Bologna','Neptune figure cast by WMF from melted-down Wehrmacht weapons (1947/48)','Porsche tested the VW prototype at the Neptune Fountain in 1936','Ranitzky: modern reconstruction after fire, only the timber-frame is "old"','Fires of 1476 and 1540 \u2014 the square grew larger each time'],
   aiHints_en:['Count the names on the painted facade carefully.','Most are easy to find \u2014 but one is hiding up near the gable.','There are more than 6 \u2014 look all the way to the top!']
 },
 {
@@ -1442,7 +1451,7 @@ const stations=[
 {
   lat:48.521978,lng:9.056889,name:'Affenfelsen',ambientIdx:11,xp:90,
   fragment:'IST',
-  answer:['radfahrerkönig','radfahrerkonig','radfahrer könig','radfahrer-könig','fahrradkönig','fahrradkonig','fahrrad könig','fahrrad-könig','radfahrer','cycling king','bicycle king','cyclist king'],
+  answer:['radfahrerkönig','radfahrerkonig','radfahrer könig','radfahrer-könig','fahrradkönig','fahrradkonig','fahrrad könig','fahrrad-könig','radfahrer','cycling king','bicycle king','cyclist king','bike king','biking king','cycle king','king of cyclists','king of the cyclists'],
   story:'Vom Haagtorplatz ging Heinrich weiter zum Affenfelsen – einem Stadtmauerrest am Rand der Altstadt, wo der Ammerkanal durch ein Tor unter der alten Mauer hindurchfließt.\n\nDer Name klingt seltsam: „Affenfelsen". Er kommt wahrscheinlich daher, dass Kinder auf den Mauerresten herumkletterten und im Sommer junge Leute hier herumsaßen.\n\nAm Affenfelsen passiert etwas Besonderes: Der Ammerkanal verzweigt sich. Ein Teil fließt eingedolt unter der Mühlstraße zum Neckar – auf dieser Gefällstrecke trieb er früher die Mühlen an. Der andere Teil fließt unter dem Alten Botanischen Garten zurück zur Ammer. Eine noch vorhandene Schleuse regelt bei Hochwasser den Wasserfluss. Mittelalterliches Wassermanagement, das noch heute funktioniert.\n\nIm Sommer verwandelt sich der Platz am Affenfelsen in eine lebendige Caféterrasse – San Marco, Tre Pi und das Piccolo Sole d\'Oro in der Metzgergasse laden zum Verweilen ein.\n\nHeinrich beobachtete das Wasser und überlegte kurz, ob er dem Kanal folgen sollte. Aber nein – sein Weg führte weiter.',
   diary:'Am Affenfelsen. Das Wasser der Ammer fließt unter der alten Mauer hindurch – ruhig, gleichmäßig, ohne sich um Gendarmen oder Formeln zu scheren. An der Schleuse teilt sich der Kanal in zwei Arme. Ich wünschte, ich könnte mich auch teilen – ein Heinrich, der flieht, und einer, der bleibt.',
   riddle:'Beim Affenfelsen steht ein Kunstwerk einer Tübinger Künstlerin. Es zeigt eine Figur auf einem besonderen Gefährt. Was für ein „König" ist es? (Ein Wort mit Gefährt)',
@@ -1462,7 +1471,7 @@ const stations=[
 {
   lat:48.522908,lng:9.057404,name:'Alter Botanischer Garten',ambientIdx:12,xp:25,anecdote:true,
   name_en:'Old Botanical Garden',
-  story_en:'Heinrich made a detour eastward and cut through the Old Botanical Garden \u2014 the "Bota," as the locals call it. Laid out between 1805 and 1809, it is today a popular park. From its original use, rare exotic trees still stand \u2014 including mature ginkgos that are protected as natural monuments.\n\nWhat most people do not know: Before the garden, this was a university sports field \u2014 with a crossbow shooting range and tournament ground. And the area north of the Ammer was a cemetery until 1829, the Ammerkirchof. After its dissolution around 1850, the grounds became an arboretum.\n\nHeinrich paused briefly. In the eastern part of the garden stood a marble monument \u2014 Friedrich Hoelderlin, in a Hellenically idealized pose, erected in 1881 by the sculptor Emmerich Andresen. Heinrich knew Hoelderlin\'s verses by heart. On this night, they held a special meaning for him. He lowered his head and walked on.\n\nUntil 1970, a beautiful palm house in the Neo-Renaissance style stood at the northern edge \u2014 a jewel of cast iron and glass, built in 1886. It was demolished despite fierce citizen protests when the Botanical Garden moved to the Morgenstelle. The cast-iron door wings were saved and are to be re-erected one day.\n\nHeinrich crossed the garden and emerged at Wilhelmstrasse \u2014 directly opposite the New Aula.',
+  story_en:'Heinrich made a detour eastward and cut through the Old Botanical Garden \u2014 the "Bota," as the locals call it. Laid out between 1805 and 1809, it is today a popular park. From its original use, rare exotic trees still stand \u2014 including mature ginkgos that are protected as natural monuments.\n\nWhat most people do not know: Before the garden, this was a university sports field \u2014 with a crossbow shooting range and tournament ground. And the area north of the Ammer was a cemetery until 1829, the Ammerkirchhof. After its dissolution around 1850, the grounds became an arboretum.\n\nHeinrich paused briefly. In the eastern part of the garden stood a marble monument \u2014 Friedrich Hoelderlin, in a Hellenically idealized pose, erected in 1881 by the sculptor Emmerich Andresen. Heinrich knew Hoelderlin\'s verses by heart. On this night, they held a special meaning for him. He lowered his head and walked on.\n\nUntil 1970, a beautiful palm house in the Neo-Renaissance style stood at the northern edge \u2014 a jewel of cast iron and glass, built in 1886. It was demolished despite fierce citizen protests when the Botanical Garden moved to the Morgenstelle. The cast-iron door wings were saved and are to be re-erected one day.\n\nHeinrich crossed the garden and emerged at Wilhelmstrasse \u2014 directly opposite the New Aula.',
   story:'Heinrich schlug einen Bogen nach Osten und schnitt durch den Alten Botanischen Garten – den „Bota", wie die Tübinger sagen. Angelegt zwischen 1805 und 1809, ist er heute ein beliebter Park. Aus der ursprünglichen Nutzung stehen noch seltene, exotische Bäume – darunter ausgewachsene Ginkgos, die als Naturdenkmäler geschützt sind.\n\nWas die wenigsten wissen: Vor dem Garten war hier ein Universitäts-Sportplatz – mit Armbrust-Schießplatz und Turnierplatz. Und die Fläche nördlich der Ammer war bis 1829 ein Friedhof, der Ammerkirchhof. Nach seiner Auflösung um 1850 wurde das Gelände zum Arboretum.\n\nHeinrich blieb kurz stehen. Im östlichen Teil des Gartens stand ein Marmordenkmal – Friedrich Hölderlin, in hellenisch idealisierter Pose, errichtet 1881 vom Bildhauer Emmerich Andresen. Heinrich kannte Hölderlins Verse auswendig. In dieser Nacht hatten sie eine besondere Bedeutung für ihn. Er senkte den Kopf und ging weiter.\n\nBis 1970 stand am nördlichen Rand ein wunderschönes Palmenhaus im Stil der Neorenaissance – ein Juwel aus Gusseisen und Glas, erbaut 1886. Es wurde trotz heftiger Bürgerproteste abgerissen, als der Botanische Garten auf die Morgenstelle umzog. Die gusseisernen Türflügel wurden gerettet und sollen eines Tages wieder aufgestellt werden.\n\nHeinrich durchquerte den Garten und kam an der Wilhelmstraße heraus – direkt gegenüber der Neuen Aula.'
 },
 {
@@ -1474,7 +1483,7 @@ const stations=[
 {
   lat:48.521875,lng:9.055904,name:'Nonnenhaus',ambientIdx:14,xp:100,
   fragment:'ABER',
-  answer:['abort','plumpsklo','klo','toilette','klosett','toilet','privy','latrine','outhouse','loo'],
+  answer:['abort','plumpsklo','klo','toilette','klosett','toilet','privy','privies','latrine','outhouse','loo','lavatory','bathroom','restroom','garderobe'],
   story:'Das Nonnenhaus – mit 30 Metern Länge eines der größten Fachwerkhäuser der Tübinger Altstadt, erbaut 1488. Der Name täuscht: Hier lebten zunächst Dominikanerinnen, dann Beginen – Frauen einer christlichen Laiengemeinschaft ohne Klostergelübde. Nach der Reformation 1534 wurde das Kloster aufgelöst.\n\nDanach zog der Medizinprofessor und Botaniker Leonhard Fuchs (1501–1566) ein – mit seiner Frau und 10 Kindern! Er legte neben dem Haus einen der ältesten botanischen Gärten Europas an und schrieb hier 1543 sein berühmtes „New Kreüterbuch". Die Fuchsie wurde nach ihm benannt, obwohl er die Pflanze nie gesehen hat. Vor dem Haus gibt es heute einen kleinen Erinnerungsgarten mit Pflanzen aus seinem Buch.\n\nHeinrich versteckte sein vorletztes Fragment im Nonnenhaus – in einem Hohlraum hinter der alten Holzverkleidung.\n\nUnd dann ist da die Rückseite des Hauses. Im ersten Stock ragt ein hölzerner Vorbau – das „Sprachhaus" – weit über den Ammerkanal hinaus. Warum dieser aufwändige Bau direkt übers Wasser? Die Antwort ist praktisch, mittelalterlich effizient – und ziemlich lustig.',
   diary:'Das Nonnenhaus. 1488. Die Balken knarren unter meinen Schritten, als wollten sie protestieren. Ich habe mein vorletztes Fragment hier versteckt – dort, wo die Beginen einst ihre irdischen Bedürfnisse direkt dem Wasser überantworteten. Niemand sucht an solchen Orten.',
   riddle:'Schau dir die Rückseite des Nonnenhauses an. Im ersten Stock ragt ein hölzerner Erker über die Gasse hinweg bis über den Ammerkanal. Warum wurde er so weit übers Wasser gebaut? Was war seine Funktion? (Ein Wort)',
@@ -1640,7 +1649,8 @@ function checkSavedGame(){
         const solved=d.solvedStations?d.solvedStations.filter(Boolean).length:0;
         document.getElementById('saveInfoText').textContent=t('saveInfoFormat').replace('{name}',d.userName).replace('{solved}',solved).replace('{total}',stations.length).replace('{xp}',d.totalXp);
         info.classList.add('visible');box.style.display='block';
-        document.getElementById('continueBtn').textContent=t('continueFormat').replace('{x}',(d.currentStation||0)+1);
+        const cs=d.currentStation||0; // nach der letzten Station nicht „Stop 18“ anzeigen
+        document.getElementById('continueBtn').textContent=cs>=stations.length?t('continueFinale'):t('continueFormat').replace('{x}',cs+1);
         const rb=document.getElementById('resetBtn');if(rb)rb.style.display='block'; // Löschen für alle (Datenschutz)
         return;
       }
@@ -1888,7 +1898,8 @@ function renderStation(){
     showScreen('formulaPuzzle');initPuzzle();return;
   }
   const s=stations[currentStation],el=document.getElementById('stationContent');
-  document.getElementById('topTitle').textContent=stationField(s,'name');
+  // Schmale Handys: der Stationsname passt nicht in die Kopfzeile (wurde zu „SC…“) – dort kurz „Stop 7/17“, der Name steht groß im Panel
+  document.getElementById('topTitle').textContent=window.innerWidth<480?(window.innerWidth<350?'':'Stop ')+(currentStation+1)+'/'+stations.length:stationField(s,'name');
   document.getElementById('navPrev').disabled=false;
   document.getElementById('navNext').disabled=(!debugMode&&currentStation>=maxUnlockedStation);
 
@@ -2396,7 +2407,7 @@ function renderFormulaBar(){
 }
 function updateXp(){
   const max=getMaxTraces();
-  document.getElementById('xpLabel').textContent=totalXp+' Traces';
+  document.getElementById('xpLabel').textContent=totalXp+(window.innerWidth<350?'':' Traces'); // sehr schmale Handys: nur die Zahl
   document.getElementById('xpFill').style.width=Math.round((totalXp/max)*100)+'%';
 }
 function confirmSkip(){
