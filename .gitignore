@@ -10,3 +10,4 @@ checkout-worker/codes_backup.json
 checkout-worker/kv_bulk.json
 checkout-worker/.wrangler/
 .wrangler/
+Sprechtexte-Freigabe.md
