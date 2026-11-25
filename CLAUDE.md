@@ -1,6 +1,6 @@
 # TraceTour — Projekt-Memory
 
-## AKTUELLER STAND (18.11.2026) — zuerst lesen
+## AKTUELLER STAND (25.11.2026) — zuerst lesen
 **Zusammenarbeit (rechte Hand / linke Hand):** Es arbeiten zwei Claude-Sessions an TraceTour: eine Cloud-Session (kein Mac-Zugriff, keine Keys) und eine am Mac (ElevenLabs-Key in `.env`, wrangler-Login). Regeln, damit nichts Verbessertes verloren geht:
 1. Vor jeder Arbeit `git fetch` und auf dem aktuellen Stand aufsetzen; nie alte Dateiversionen über neue kopieren.
 2. Solange PR #1 offen ist, Inhalte (Texte, Audios, Bilder) gern auf `main`, Code-Umbauten auf dem PR-Branch. Wer den anderen Zweig einmergt, behält bei Konflikten **Inhalte aus main** und **Code aus dem Branch** – und prüft danach per Test.
@@ -27,6 +27,15 @@
 ### Offen / widersprüchlich (Florian entscheidet)
 - **Hirsch-Wappen:** April-Stadtgang notiert „Hirsch ist das größte Tier auf dem Wappen ✓“ (Krimi-Rätsel Station 0, Antwort „hirsch“). Die Mac-Session hat das Wappen am 27.10. für die Kindertour als „unbelegt“ ersetzt. Beides passt nicht zusammen → vor Ort klären, ggf. Krimi-Rätsel Station 0 anpassen (gesprochener Text + Audio riddle_0).
 - Froschkönig: Krimi sagt „Sie bestellte sofort einen neuen. Schau mal, ob er schon wieder da ist!“ – passt zur Kindertour; Status vor Ort prüfen.
+
+### Prüfrunde 24./25.11.2026 (Mac-Session) – Aufnahmen, Atmo, Cache v13
+- **Neu vertont (Text war seit dem Faktencheck neuer als die Aufnahme):** DE `story_0, fact_0, anecdote_1, fact_2, story_4, diary_4, anecdote_5, fact_6, anecdote_8, anecdote_12`; EN `story_0, fact_0, fact_2, story_4, diary_4, fact_4, anecdote_5, fact_6, anecdote_12`. Alle per Abschrift (Whisper) gegen das Skript geprüft. Modell bewusst weiter `eleven_multilingual_v2`, damit sie zu den Nachbar-Aufnahmen passen.
+- **Kleine Textkorrekturen (Text + Aufnahme):** Station 13 Hölderlin-Denkmal „steht heute … errichtet 1881 … zwölf Jahre nach Heinrichs Flucht“ (Geschichte spielt 1869); Station 5 „Beichtstuhl“ → „Chorgestühl“ (Stiftskirche ist evangelisch); Station 9 „ein Viertele“. Nur Bildschirm: Schlusstexte (`epilogP2–P4`: „Forschung“ statt „Formel“ veröffentlicht, „am Polytechnikum, der heutigen ETH“), EN-Anzeigetexte an EN-Skript/-Aufnahme angeglichen (Fakten Station 1, 3, 10; Geschichte Station 2 und 7).
+- **Atmo neu aufgebaut:** Der alte Ordner `~/Downloads/Atmo` ist weg. Neue Klangbetten liegen in `atmo/` (ElevenLabs „Sound Effects“, je 30 s Schleife: altstadt, schloss, markt, wirtshaus, park, fluss, nacht). `mix_atmo.py` ist NEU geschrieben (ersetzt auch `mix_atmo_en.py`): mischt aus dem sauberen Original in `audio_roh/` (nur lokal am Mac, `.gitignore`) nach `audio/`, erkennt Neuaufnahmen selbst, Lautstärke per `--lauter N --alles` änderbar. Atmo liegt ca. 29–31 dB unter der Sprache. 95 Dateien gemischt (Krimi DE+EN inkl. Rätsel/Bonus/Prolog/Schluss, Kindertour); 12 alte Dateien mit bereits hörbarer Atmo blieben unberührt.
+- **Nach jeder Neuaufnahme:** `python3 mix_atmo.py` laufen lassen, Datei in `MEDIA_REFRESH` eintragen, `CORE_CACHE` hochzählen (jetzt `v13`).
+- **Kindertour-Stimme fehlt:** Tübis Stimme (`TUBI_VOICE` in `generate_audio_kinder.py`) ist nicht mehr im ElevenLabs-Konto (HTTP 404 voice_not_found). Kinder-Aufnahmen können derzeit NICHT neu erzeugt werden; geplante Korrektur Nonnenhaus („Siehst du den Anbau direkt über dem Wasser?“ statt „Früher gab es einen Anbau …“) deshalb zurückgestellt. Die Originale ohne Atmo liegen in `audio_roh/kinder/` und in der Git-Historie.
+- **Mobil-Anzeige** (kleine Handys, Finale) am 24.11. korrigiert (Commit 36f6bb3). Zusätzliche Rätsel-Antworten akzeptiert (Hirsch/stag, Radlerkönig-Varianten, Klo-Varianten).
+- **Offen (kein Blamier-Risiko):** DE-Schlusswort sagt „fare well, Ermittler“; Rätsel-Gegenstände Station 10/12/15 vor Ort ungeprüft; Kindertour „Wie viele Stocherkähne siehst du gerade?“ (Winter), Froschkönig „2025 gestohlen“ ungeprüft; Weinfass Krimi „rund 85.000“ vs. Kindertour „84.000 Liter“.
 
 ### Verkaufsfertig-Check 18.11.2026 (Commits 0ec5713, dfd1475)
 - **Stripe:** öffentlicher Name „TraceTour“; Produktbeschreibungen (Stationen, Dauer, Sprache, Handys, 12 Monate) für alle 4 Produkte gesetzt – Beschreibungen per „Produkt bearbeiten“ sind ungefährlich. **Payment Links NIE im Dashboard speichern** – sie tragen `custom_text` (AGB-/Erlöschen-Häkchen), das nur per API gesetzt wurde und beim Speichern verloren gehen kann. Test-Gutschein 100 %: `TTTESTHLP5C` (nach Testkauf deaktivieren, Links nicht anfassen).

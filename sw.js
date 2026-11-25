@@ -5,7 +5,7 @@
 //  - MEDIA: Audios und Bilder (groß, ändern sich selten). Bleibt über Code-Updates erhalten,
 //           damit ein Update niemandem mitten in der Tour die Offline-Audios löscht.
 //           Einzelne neu vertonte Dateien stattdessen in MEDIA_REFRESH eintragen.
-const CORE_CACHE = 'tracetour-core-v12';
+const CORE_CACHE = 'tracetour-core-v13';
 const MEDIA_CACHE = 'tracetour-media-v1';
 const ASSET_V = '20261026'; // muss zu den ?v=-Parametern in den HTML-Dateien passen
 const NET_TIMEOUT = 4000;   // ms: danach liefern Seiten bei schlechtem Netz die gespeicherte Version
@@ -16,15 +16,34 @@ const NET_TIMEOUT = 4000;   // ms: danach liefern Seiten bei schlechtem Netz die
 // Ablauf: neue MP3 committen, Pfad hier eintragen, CORE_CACHE hochzählen.
 // Einträge können nach einigen Wochen wieder raus (bis dahin wird nur je Update einmal neu geladen).
 const MEDIA_REFRESH = [
-  // Oktober 2026 neu vertont (Erwachsenen-Tour; 28.10. Jessica-Teile mit Eleven v4)
-  'audio/thanks.mp3', 'audio/epilog.mp3',
-  'audio/anecdote_7.mp3', 'audio/bonus_13.mp3', 'audio/bonus_16.mp3',
-  'audio/en/anecdote_7.mp3', 'audio/en/bonus_13.mp3', 'audio/en/bonus_16.mp3',
-  // Oktober 2026 neu vertont bzw. neue Bilder (Kindertour, Fakten korrigiert; 28.10. komplett mit Eleven v4)
-  'audio/kinder/prolog.mp3', 'audio/kinder/story_0.mp3',
-  'audio/kinder/story_1.mp3', 'audio/kinder/story_2.mp3', 'audio/kinder/story_3.mp3',
-  'audio/kinder/story_4.mp3', 'audio/kinder/story_5.mp3', 'audio/kinder/story_6.mp3',
-  'audio/kinder/story_7.mp3',
+  // 25.11.2026: 19 Aufnahmen neu vertont (Text war neuer als die Aufnahme) und leise Atmo unter
+  // alle Aufnahmen gemischt, die noch keine hatten (Krimi DE+EN, Kindertour) – siehe mix_atmo.py
+  'audio/anecdote_1.mp3', 'audio/anecdote_3.mp3', 'audio/anecdote_5.mp3', 'audio/anecdote_7.mp3',
+  'audio/anecdote_8.mp3', 'audio/anecdote_10.mp3', 'audio/anecdote_12.mp3', 'audio/anecdote_13.mp3',
+  'audio/anecdote_15.mp3', 'audio/bonus_8.mp3', 'audio/bonus_13.mp3', 'audio/bonus_16.mp3',
+  'audio/diary_2.mp3', 'audio/diary_4.mp3', 'audio/diary_6.mp3', 'audio/diary_9.mp3',
+  'audio/diary_11.mp3', 'audio/diary_14.mp3', 'audio/diary_16.mp3', 'audio/epilog.mp3',
+  'audio/fact_0.mp3', 'audio/fact_2.mp3', 'audio/fact_4.mp3', 'audio/fact_6.mp3', 'audio/fact_9.mp3',
+  'audio/fact_11.mp3', 'audio/fact_14.mp3', 'audio/fact_16.mp3', 'audio/formula.mp3',
+  'audio/guide.mp3', 'audio/riddle_2.mp3', 'audio/riddle_6.mp3', 'audio/riddle_9.mp3',
+  'audio/riddle_11.mp3', 'audio/riddle_14.mp3', 'audio/riddle_16.mp3', 'audio/story_0.mp3',
+  'audio/story_2.mp3', 'audio/story_4.mp3', 'audio/story_6.mp3', 'audio/story_9.mp3',
+  'audio/story_11.mp3', 'audio/story_14.mp3', 'audio/story_16.mp3', 'audio/thanks.mp3',
+  'audio/en/anecdote_3.mp3', 'audio/en/anecdote_5.mp3', 'audio/en/anecdote_7.mp3',
+  'audio/en/anecdote_8.mp3', 'audio/en/anecdote_10.mp3', 'audio/en/anecdote_12.mp3',
+  'audio/en/anecdote_13.mp3', 'audio/en/anecdote_15.mp3', 'audio/en/bonus_13.mp3',
+  'audio/en/bonus_16.mp3', 'audio/en/diary_2.mp3', 'audio/en/diary_4.mp3', 'audio/en/diary_6.mp3',
+  'audio/en/diary_9.mp3', 'audio/en/diary_11.mp3', 'audio/en/diary_14.mp3', 'audio/en/diary_16.mp3',
+  'audio/en/epilog.mp3', 'audio/en/fact_0.mp3', 'audio/en/fact_2.mp3', 'audio/en/fact_4.mp3',
+  'audio/en/fact_6.mp3', 'audio/en/fact_9.mp3', 'audio/en/fact_11.mp3', 'audio/en/fact_14.mp3',
+  'audio/en/fact_16.mp3', 'audio/en/formula.mp3', 'audio/en/guide.mp3', 'audio/en/prologue.mp3',
+  'audio/en/riddle_6.mp3', 'audio/en/riddle_9.mp3', 'audio/en/riddle_11.mp3', 'audio/en/riddle_16.mp3',
+  'audio/en/story_0.mp3', 'audio/en/story_2.mp3', 'audio/en/story_4.mp3', 'audio/en/story_9.mp3',
+  'audio/en/story_11.mp3', 'audio/en/story_14.mp3', 'audio/en/story_16.mp3', 'audio/en/thanks.mp3',
+  'audio/kinder/prolog.mp3', 'audio/kinder/story_0.mp3', 'audio/kinder/story_1.mp3',
+  'audio/kinder/story_2.mp3', 'audio/kinder/story_3.mp3', 'audio/kinder/story_4.mp3',
+  'audio/kinder/story_5.mp3', 'audio/kinder/story_6.mp3', 'audio/kinder/story_7.mp3',
+  // Oktober 2026: neue Bilder Kindertour
   'images/kinder/station_0.jpg', 'images/kinder/station_1.jpg', 'images/kinder/station_1b.jpg',
   'images/kinder/station_2.jpg', 'images/kinder/station_3.jpg', 'images/kinder/station_4.jpg',
   'images/kinder/station_5.jpg', 'images/kinder/station_6.jpg', 'images/kinder/station_7.jpg',

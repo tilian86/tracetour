@@ -245,7 +245,7 @@ STATIONS = [
             "Die Stiftskirche Sankt Georg - das spirituelle Herz der Altstadt. Heinrich erreichte "
             "die Kirche atemlos. Der alte Mesner, ein Freund seiner Studentenzeit, ließ ihn durch "
             "den Seiteneingang.\n\n"
-            "'Fünf Minuten', flüsterte Heinrich. Der Mesner nickte. In einem Beichtstuhl in der "
+            "'Fünf Minuten', flüsterte Heinrich. Der Mesner nickte. Hinter dem Chorgestühl in der "
             "hinteren linken Ecke gibt es einen losen Stein. Heinrich schob das zweite Fragment "
             "dahinter.\n\n"
             "Die Stiftskirche mit ihrem markanten Kirchturm ist eines der bedeutendsten Bauwerke "
@@ -267,7 +267,7 @@ STATIONS = [
         ),
         "diary": (
             "Der Mesner hat mich erkannt und nichts gefragt. Es gibt noch gute Menschen in dieser "
-            "Stadt. Ich habe das Fragment hinter dem dritten Stein links im hinteren Beichtstuhl "
+            "Stadt. Ich habe das Fragment hinter dem dritten Stein links beim Chorgestühl "
             "versteckt. Möge es dort lange sicher sein."
         ),
         "fact": (
@@ -449,7 +449,7 @@ STATIONS = [
             "sein, um sich auszuruhen. Ob das stimmt? Die Kneipe behauptet es jedenfalls.\n\n"
             "Eine Besonderheit: Der Ammerschlag ist eine der wenigen Gaststätten in Deutschland, "
             "in der noch überall geraucht werden darf - komplett. Kein Nichtraucherbereich.\n\n"
-            "Heinrich bestellte einen Viertele Trollinger, trank ihn in einem Zug, legte zwei "
+            "Heinrich bestellte ein Viertele Trollinger, trank ihn in einem Zug, legte zwei "
             "Kreuzer auf den Tresen und verschwand durch die Hintertür. Der Wirt zuckte mit den "
             "Schultern. In dieser Kneipe stellte man keine Fragen.\n\n"
             "Geöffnet: Sonntag bis Donnerstag fünfzehn bis ein Uhr, Freitag und Samstag zehn bis drei Uhr."
@@ -579,9 +579,10 @@ STATIONS = [
             "Armbrust-Schießplatz und Turnierplatz. Und die Fläche nördlich der Ammer war bis "
             "achtzehnhundertneunundzwanzig ein Friedhof, der Ammerkirchhof. Nach seiner Auflösung "
             "um achtzehnhundertfünfzig wurde das Gelände zum Arboretum.\n\n"
-            "Heinrich blieb kurz stehen. Im östlichen Teil des Gartens stand ein Marmordenkmal - "
+            "Heinrich blieb kurz stehen. Im östlichen Teil des Gartens steht heute ein Marmordenkmal - "
             "Friedrich Hölderlin, in hellenisch idealisierter Pose, errichtet achtzehnhunderteinundachtzig "
-            "vom Bildhauer Emmerich Andresen. Heinrich kannte Hölderlins Verse auswendig. "
+            "vom Bildhauer Emmerich Andresen, zwölf Jahre nach Heinrichs Flucht. "
+            "Heinrich brauchte kein Denkmal - er kannte Hölderlins Verse auswendig. "
             "In dieser Nacht hatten sie eine besondere Bedeutung für ihn. Er senkte den Kopf "
             "und ging weiter.\n\n"
             "Bis neunzehnhundertsiebzig stand am nördlichen Rand ein wunderschönes Palmenhaus im Stil "

@@ -12,7 +12,8 @@ exclude:
   - generate_audio_en.py
   - generate_audio_kinder.py
   - mix_atmo.py
-  - mix_atmo_en.py
+  - atmo
+  - audio_roh
   - tools
   - tailwind-input.css
   - tailwind.config.js

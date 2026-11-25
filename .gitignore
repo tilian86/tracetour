@@ -11,3 +11,4 @@ checkout-worker/kv_bulk.json
 checkout-worker/.wrangler/
 .wrangler/
 Sprechtexte-Freigabe.md
+audio_roh/

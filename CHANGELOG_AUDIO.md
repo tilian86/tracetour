@@ -3,6 +3,8 @@
 Dieses File trackt welche Audio-Dateien neu generiert werden müssen.
 Status: ✅ = aktuell, 🔄 = Text geändert, muss neu generiert werden
 
+> **Stand 25.11.2026:** Alle Aufnahmen passen wieder zum Text (19 neu vertont, per Abschrift geprüft) – die 🔄-Einträge unten sind damit erledigt. Atmo: `python3 mix_atmo.py` (Originale in `audio_roh/`, Betten in `atmo/`). Einzige Ausnahme: Kindertour kann nicht neu vertont werden, solange Tübis Stimme im ElevenLabs-Konto fehlt. Details in CLAUDE.md.
+
 ## Station 0 - Schloss (Rätsel)
 - story_0.mp3: ✅
 - diary_0.mp3: ✅
